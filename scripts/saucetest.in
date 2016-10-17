@@ -1,0 +1,8 @@
+#!/bin/sh
+
+clear
+bin/django test --attr='sauce=1' \
+hkm --cover-package=hkm \
+--with-coverage --with-html \
+--settings=project.${saucetest:settings}
+ 

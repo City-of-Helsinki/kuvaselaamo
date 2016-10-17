@@ -1,0 +1,8 @@
+#!/bin/sh
+
+clear
+bin/django test \
+hkm --attr='!slow' --cover-package=hkm \
+--with-coverage --with-html \
+--settings=project.${test:settings}
+
