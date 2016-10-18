@@ -26,6 +26,7 @@ setup(
     zip_safe=False,
     keywords='hkm-kuvapalvelu',
     install_requires=[
+      'django-ordered-model==1.3.0',
     ],
 )
 
