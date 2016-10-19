@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  background-image: url('/static/hkm/img/city.jpg'); /* Placeholder */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+nav {
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: solid 1px $color-salmon;
+  color: white;
+}
+a {
+  font-family: $font-falkman;
+}
+
+/* Navigation */
+.nav-logo {
+  float: left;
+  text-align: center;
+}
+.nav-logo {
+  display: block;
+}
+.nav-logo a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+}
+.logo-img {
+  padding: 12px;
+  display: inline-block;
+  float: left;
+  height: 100%;
+}
+.logo-text {
+  display: inline-block;
+  float: left;
+  height: 60px;
+  line-height: 66px;
+}
+.nav-container {
+  float: right;
+}
+.nav-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-container li {
+  display: inline-block;
+  text-align: center;
+  padding: 0 16px;
+}
+.nav-container li a {
+  text-decoration: none;
+  color: white;
+  padding: 20px 0;
+  line-height: 60px;
+}
+
+/* Actions */
+.actions-container {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+}
+.actions-container ul {
+  margin: 0;
+}
+.actions-container.left-actions {
+  left: 0;
+}
+.actions-container.right-actions {
+  right: 0;
+}
+.action-btn {
+  height: 60px;
+  border: 0;
+  background: 0;
+}
+.action-btn:hover {
+  cursor: pointer;
+}

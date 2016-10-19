@@ -1,3 +1,16 @@
+{% extends '../base.html' %}
 
+{% block actions_footer %}
 
-<h1>Welcome to hkm app!</h1>
+  <div class="actions-container left-actions">
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/zoom_in.png"></img></button>
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/zoom_out.png"></img></button>
+  </div>
+  <div class="actions-container right-actions">
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/h_sydan_valk.png"></img></button>
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/info.png"></img></button>
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/karry.png"></img></button>
+    <button class="action-btn"><img class="logo-img" src="static/hkm/img/share.png"></img></button>
+  </div>
+
+{% endblock %}
