@@ -63,7 +63,7 @@ LOGGING = {
             'propagate': False,
             'level': 'ERROR',
         },
-        'foo': {
+        'hkm': {
             'handlers': ['console'],
             'propagate': False,
             'level': 'DEBUG',

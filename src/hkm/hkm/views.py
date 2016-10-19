@@ -3,6 +3,7 @@
 
 import logging
 from django.views.generic import TemplateView
+from finna import DEFAULT_CLIENT as FINNA
 
 LOG = logging.getLogger(__name__)
 
@@ -61,7 +62,19 @@ class ImageEditOrderView(BaseView):
 
 class SearchView(BaseView):
   template_name = 'hkm/views/search.html'
+  search_result = None
 
+  def get(self, request, *args, **kwargs):
+    search_term = request.GET.get('search', None)
+    page = request.GET.get('page', 1)
+    if search_term:
+      self.search_result = FINNA.search(search_term, page=page)
+    return super(SearchView, self).get(request, *args, **kwargs)
+
+  def get_context_data(self, **kwargs):
+    context = super(SearchView, self).get_context_data(**kwargs)
+    context['search_result'] = self.search_result
+    return context
 
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
