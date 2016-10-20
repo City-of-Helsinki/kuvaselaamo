@@ -3,7 +3,7 @@
 
 {% block main %}
 
-  <nav class="nav-collection">
+  <nav class="nav-viewer">
     <div class="nav-logo">
       <a href="{% url 'hkm_index' %}">
         <img class="logo-img" src="/static/hkm/img/h_sydan_valk.png"></img>
@@ -20,12 +20,10 @@
     </div>
   </nav>
 
-  <div class="image-block">
-    {% block image_block %}{% endblock %}
+  <div class="image-viewer">
+
   </div>
 
-  <div class="main-content">
-    {% block content %}{% endblock %}
-  </div>
+  {% block content %}{% endblock %}
 
 {% endblock %}

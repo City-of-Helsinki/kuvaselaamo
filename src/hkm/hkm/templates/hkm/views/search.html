@@ -1,56 +1,98 @@
 {% extends '../base_collection.html' %}
+{% load i18n %}
 {% load hkm_tags %}
 
 {% block image_block %}
 
   <div class="page-header">
     <div class="container">
-      <h1>KOKOELMA</h1>
+      <h1>{% trans 'KOKOELMA' %}</h1>
     </div>
   </div>
 
   <div class="container">
+
     <div class="form-group search-form">
       <form>
         <div class="input-group">
           <input class="form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+            <button class="btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
           </span>
         </div>
       </form>
     </div>
+
   </div>
 
-All facets : {{ facet_result.facets.keys }}
+{% endblock %}
 
-<ul>
-  <h2>Authors</h2><br>
-   <ul>
-     {% for author in facet_result.facets.author_facet %}
-     <li><a href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
-     {% endfor %}
-   </ul>
-   <br><br>
-  <h2>Dates</h2><br>
-   <ul>
-     {% for date_facet in facet_result.facets.main_date_str %}
-     <li><a href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
-     {% endfor %}
-   </ul>
+{% block content %}
 
-</ul>
+  <div class="container">
 
-<br><br><br><br><br><br><br>
 
-<h1>Search Results</h1>
-{{ search_result.page }}/{{ search_result.pages }} <br>
-{{ search_result.resultCount }}
-<br>
-<ul>
-  {% for record in search_result.records %}
-  <li>{{ record }}<img src="{% finna_image record.id %}" /></li>
-  {% endfor %}
-</ul>
+    <div class="search-sidebar">
+
+      <!-- All facets : {{ facet_result.facets.keys }} -->
+
+      <ul class="list-group list-group-root well" id="accordion">
+
+        <li class="list-group-item">
+          <span class="caret"></span>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">{% trans 'Tekijä' %}</a>
+          <ul id="collapseTwo" class="list-group panel-collapse collapse">
+            {% for author in facet_result.facets.author_facet %}
+              <li class="list-group-item"><a href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <span class="caret"></span>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{% trans 'Vuosi' %}</a>
+          <ul id="collapseOne" class="list-group panel-collapse collapse">
+            {% for date_facet in facet_result.facets.main_date_str %}
+              <li class="list-group-item"><a href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+
+      </ul>
+
+      <!-- <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Collapsible Group Item #1
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="card-block">
+              Anim pariatur cliche repr
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+    <div class="search-results">
+
+      <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1>
+
+      <ul class="list-unstyled">
+        {% for record in search_result.records %}
+          <li>
+            <!-- {{ record }} -->
+            <img src="{% finna_image record.id %}" /></li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+  </div> <!-- Container -->
 
 {% endblock %}
