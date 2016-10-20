@@ -1,0 +1,14 @@
+body.image-view {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/static/hkm/img/city.jpg');
+
+  nav {
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: solid 1px $color-salmon;
+  }
+  .nav-container li a {
+    color: $color-theme;
+  }
+
+}

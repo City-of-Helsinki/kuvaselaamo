@@ -1,18 +1,61 @@
 body {
   margin: 0;
-  background-image: url('/static/hkm/img/city.jpg'); /* Placeholder */
-  background-repeat: no-repeat;
-  background-position: center;
+  font-family: $font-signe;
 }
 nav {
   width: 100%;
   height: 60px;
-  background: rgba(0, 0, 0, 0.6);
-  border-bottom: solid 1px $color-salmon;
-  color: white;
 }
 a {
-  font-family: $font-falkman;
+  font-family: $font-signe;
+}
+img {
+  height: 100%;
+}
+
+/* Content */
+.image-block {
+  float: left;
+  background-image: url('/static/hkm/img/city.jpg');
+  width: 100%;
+  height: 340px;
+}
+.page-header {
+  display: block;
+  color: $color-strikemaster;
+  background: $color-theme;
+  margin: 30px 0 0 0;
+  padding-bottom: 0;
+}
+.page-header h1 {
+  display: block;
+  font-size: 40px;
+  margin-top: 18px;
+  line-height: 40px;
+}
+.search-form {
+  margin-top: 170px !important;
+
+  .form-control {
+    width: 100%;
+    height: 40px;
+    border: solid 1px $color-salmon;
+    border-radius: 20px;
+  }
+  .form-control:focus {
+    outline-color: #4D90FE;
+    outline-offset: -2px;
+    outline-style: auto;
+    outline-width: 5px;
+    border-right: 0;
+  }
+  .input-group-btn .btn {
+    height: 40px;
+    border: solid 1px  $color-salmon;
+    border-left: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
 }
 
 /* Navigation */
@@ -56,7 +99,6 @@ a {
 }
 .nav-container li a {
   text-decoration: none;
-  color: white;
   padding: 20px 0;
   line-height: 60px;
 }

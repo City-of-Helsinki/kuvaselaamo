@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
 </head>
-<body class="image-view">
+<body class="collection-view">
 
   <nav>
     <div class="nav-logo">
@@ -20,6 +20,10 @@
       </ul>
     </div>
   </nav>
+
+  <div class="image-block">
+    {% block image_block %}{% endblock %}
+  </div>
 
   {% block content %}{% endblock %}
 
