@@ -4,22 +4,35 @@
 import logging
 from django.views.generic import TemplateView, RedirectView
 from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.core.urlresolvers import reverse
 from finna import DEFAULT_CLIENT as FINNA
 
 LOG = logging.getLogger(__name__)
 
 
 class BaseView(TemplateView):
-  pass
+  url_name = None
+
+  def get_url(self):
+    if self.url_name == None:
+      raise Exception('Subview must define url_name or overwrire get_url method')
+    return reverse(self.url_name)
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseView, self).get_context_data(**kwargs)
+    context['language'] = self.request.session[LANGUAGE_SESSION_KEY]
+    context['current_url'] = self.get_url()
+    return context
 
 
 class IndexView(BaseView):
   template_name = 'hkm/views/index.html'
+  url_name = 'hkm_index'
 
 
 class InfoView(BaseView):
   template_name = 'hkm/views/info.html'
-
+  url_name = 'hkm_info'
 
 class BaseCollectionListView(BaseView):
   pass
@@ -27,10 +40,12 @@ class BaseCollectionListView(BaseView):
 
 class PublicCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/public_collections.html'
+  url_name = 'hkm_public_collections'
 
 
 class MyCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/my_collections.html'
+  url_name = 'hkm_my_collections'
 
 
 class CollectionDetailView(BaseView):
@@ -63,6 +78,7 @@ class ImageEditOrderView(BaseView):
 
 class SearchView(BaseView):
   template_name = 'hkm/views/search.html'
+  url_name = 'hkm_search'
 
   facet_result = None
   search_result = None
@@ -96,7 +112,7 @@ class SearchView(BaseView):
 
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
-
+  url_name = 'hkm_signup'
 
 class LanguageView(RedirectView):
   def get(self, request, *args, **kwargs):

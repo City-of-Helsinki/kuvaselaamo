@@ -14,7 +14,13 @@
     <div class="nav-container">
       <ul>
         <li><a href="{% url 'hkm_search' %}">Haku</a></li>
-        <li><a href="">In English</a> | <a href="">På svenska</a></li>
+        {% if language == 'fi' %}
+          <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">In English</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">På svenska</a></li>
+        {% elif language == 'en' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">Suomeksi</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">På svenska</a></li>
+        {% elif language == 'sv' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">Suomeksi</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">In english</a></li>
+        {% endif %}
         <li><a href="">Tiedot</a></li>
         <li><a href="">Kirjaudu sisään</a></li>
       </ul>
