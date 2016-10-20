@@ -1,8 +1,27 @@
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="static/hkm/css/main.css" />
 </head>
 <body>
-  
-  
+
+  <nav>
+    <div class="nav-logo">
+      <a href="">
+        <img class="logo-img" src="static/hkm/img/h_sydan_valk.png"></img>
+        <div class="logo-text">Kuvapalvelu</div>
+      </a>
+    </div>
+    <div class="nav-container">
+      <ul>
+        <li><a href="">Haku</a></li>
+        <li><a href="">In English</a> | <a href="">På svenska</a></li>
+        <li><a href="">Tiedot</a></li>
+        <li><a href="">Kirjaudu sisään</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% block actions_footer %}{% endblock %}
+
 </body>
 </html>

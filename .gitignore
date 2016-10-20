@@ -19,3 +19,4 @@ doc/build/
 .mr.developer.cfg
 *.orig
 staticroot
+node_modules
