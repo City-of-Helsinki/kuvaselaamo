@@ -1,13 +1,45 @@
+{% load hkm_tags %}
+
 <html>
 <head></head>
 <body>
 <form>
-  <input type="text" name="search" />
+  <input type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %}/>
   <input type="submit" />
 </form>
 <br>
 <br>
 <br>
-{{ search_result }}
+
+All facets : {{ facet_result.facets.keys }}
+
+<ul>
+  <h2>Authors</h2><br>
+   <ul>
+     {% for author in facet_result.facets.author_facet %}
+     <li><a href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+     {% endfor %}
+   </ul>
+   <br><br>
+  <h2>Dates</h2><br>
+   <ul>
+     {% for date_facet in facet_result.facets.main_date_str %}
+     <li><a href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+     {% endfor %}
+   </ul>
+
+</ul>
+
+<br><br><br><br><br><br><br>
+
+<h1>Search Results</h1>
+{{ search_result.page }}/{{ search_result.pages }} <br>
+{{ search_result.resultCount }}
+<br>
+<ul>
+  {% for record in search_result.records %}
+  <li>{{ record }}<img src="{% finna_image record.id %}" /></li>
+  {% endfor %}
+</ul>
 </body>
 </html>

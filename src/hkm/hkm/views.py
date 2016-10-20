@@ -62,18 +62,35 @@ class ImageEditOrderView(BaseView):
 
 class SearchView(BaseView):
   template_name = 'hkm/views/search.html'
+
+  facet_result = None
   search_result = None
+
+  search_term = None
+  facet_type = None
+  facet_value = None
 
   def get(self, request, *args, **kwargs):
     search_term = request.GET.get('search', None)
-    page = request.GET.get('page', 1)
     if search_term:
-      self.search_result = FINNA.search(search_term, page=page)
+      self.handle_search(request, search_term, *args, **kwargs)
     return super(SearchView, self).get(request, *args, **kwargs)
+
+  def handle_search(self, request, search_term, *args, **kwargs):
+    self.search_term = search_term
+    self.facet_type = request.GET.get('ft', None)
+    self.facet_value = request.GET.get('fv', None)
+    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
+      'facet_value': self.facet_value}})
+    self.facet_result = FINNA.get_facets(self.search_term)
+    self.search_result = FINNA.search(self.search_term, facet_type=self.facet_type,
+        facet_value=self.facet_value, page=1)
 
   def get_context_data(self, **kwargs):
     context = super(SearchView, self).get_context_data(**kwargs)
+    context['facet_result'] = self.facet_result
     context['search_result'] = self.search_result
+    context['search_term'] = self.search_term
     return context
 
 class SignUpView(BaseView):
