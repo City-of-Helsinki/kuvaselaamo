@@ -5,6 +5,8 @@ import logging
 from ordered_model.models import OrderedModel
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db import models
 
 LOG = logging.getLogger(__name__)
@@ -29,7 +31,7 @@ class UserProfile(BaseModel):
     (LANG_SV, _(u'Svedish')),
   )
 
-  user = models.OneToOneField(User, verbose_name=_(u'User'))
+  user = models.OneToOneField(User, verbose_name=_(u'User'), related_name='profile')
   is_admin = models.BooleanField(verbose_name=_(u'Is admin'), default=False)
   language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
       choices=LANGUAGE_CHOICES, max_length=4)
@@ -67,6 +69,13 @@ class Image(OrderedModel, BaseModel):
 
   class Meta(OrderedModel.Meta):
     pass
+
+
+@receiver(post_save, sender=User)
+def user_post_save(sender, instance, created, *args, **kwargs):
+  if created:
+    profile = UserProfile(user=instance)
+    profile.save()
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

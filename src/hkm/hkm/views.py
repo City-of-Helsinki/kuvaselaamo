@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
+from django.utils.translation import LANGUAGE_SESSION_KEY
 from finna import DEFAULT_CLIENT as FINNA
 
 LOG = logging.getLogger(__name__)
@@ -95,6 +96,25 @@ class SearchView(BaseView):
 
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
+
+
+class LanguageView(RedirectView):
+  def get(self, request, *args, **kwargs):
+    lang = request.GET.get('lang', 'fi')
+    if not lang in ('fi', 'en', 'sv'):
+      lang = 'fi'
+    if request.user.is_authenticated():
+      profile = request.user.profile
+      profile.language = lang
+      profile.save()
+      # LanguageMiddleware will automatically set the profile language for logged in users
+      # so no need to set session value here
+    else:
+      request.session[LANGUAGE_SESSION_KEY] = lang
+    return super(LanguageView, self).get(request, *args, **kwargs)
+
+  def get_redirect_url(self, *args, **kwargs):
+    return self.request.GET.get('next', '/')
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
