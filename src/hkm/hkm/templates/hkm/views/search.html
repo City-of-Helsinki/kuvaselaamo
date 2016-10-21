@@ -87,7 +87,9 @@
         {% for record in search_result.records %}
           <li>
             <!-- {{ record }} -->
-            <img src="{% finna_image record.id %}" /></li>
+            <img src="{% finna_image record.id %}" />
+            <a href="{% url hkm_image"
+          </li>
         {% endfor %}
       </ul>
 

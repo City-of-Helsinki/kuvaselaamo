@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from django import http
 from django.views.generic import TemplateView, RedirectView
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
@@ -12,6 +13,18 @@ LOG = logging.getLogger(__name__)
 
 class BaseView(TemplateView):
   url_name = None
+
+  def dispatch(self, request, *args, **kwargs):
+    result = self.setup(request, *args, **kwargs)
+    if result:
+      if isinstance(result, http.HttpResponse):
+        return result
+      else:
+        return super(BaseView, self).dispatch(request, *args, **kwargs)
+    return http.HttpResponseBadRequest()
+
+  def setup(self, request, *args, **kwargs):
+    return True
 
   def get_url(self):
     if self.url_name == None:
@@ -34,6 +47,7 @@ class InfoView(BaseView):
   template_name = 'hkm/views/info.html'
   url_name = 'hkm_info'
 
+
 class BaseCollectionListView(BaseView):
   pass
 
@@ -52,7 +66,18 @@ class CollectionDetailView(BaseView):
   template_name = 'hkm/views/collection.html'
 
 
-class ImageDetailView(BaseView):
+class BaseImageDetailView(BaseView):
+  image_finna_id = None
+
+  def get_url(self):
+    return reverse('hkm_image', kwargs={'finna_id': self.image_finna_id})
+
+  def setup(self, request, *args, **kwargs):
+    self.image_finna_id = kwargs['finna_id']
+    return True
+
+
+class ImageDetailView(BaseImageDetailView):
   template_name = 'hkm/views/image.html'
 
 
@@ -123,10 +148,7 @@ class LanguageView(RedirectView):
       profile = request.user.profile
       profile.language = lang
       profile.save()
-      # LanguageMiddleware will automatically set the profile language for logged in users
-      # so no need to set session value here
-    else:
-      request.session[LANGUAGE_SESSION_KEY] = lang
+    request.session[LANGUAGE_SESSION_KEY] = lang
     return super(LanguageView, self).get(request, *args, **kwargs)
 
   def get_redirect_url(self, *args, **kwargs):
