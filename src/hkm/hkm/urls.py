@@ -17,6 +17,8 @@ urlpatterns = [
   url(r'^image/(?P<finna_id>\d+)/edit/order/$', views.ImageEditOrderView.as_view(), name='hkm_image_edit_order'),
   url(r'^search/$', views.SearchView.as_view(), name='hkm_search'),
   url(r'^signup/$', views.SignUpView.as_view(), name='hkm_signup'),
+  url(r'^language/$', views.LanguageView.as_view(), name='hkm_language'),
+
 ]
 
 

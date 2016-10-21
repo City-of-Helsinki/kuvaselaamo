@@ -13,7 +13,13 @@
     <div class="nav-container">
       <ul class="list-inline">
         <li><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
-        <li><a href="">{% trans 'In English' %}</a> | <a href="">{% trans 'På svenska' %}</a></li>
+        {% if language == 'fi' %}
+          <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        {% elif language == 'en' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        {% elif language == 'sv' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+        {% endif %}
         <li><a href="">{% trans 'Tiedot' %}</a></li>
         <li><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
       </ul>
