@@ -79,6 +79,27 @@ class FinnaClient(object):
     result_data['page'] = page
     return result_data
 
+  def get_record(self, record_id):
+    url = FinnaClient.API_ENDPOINT + 'record'
+    payload = {
+      'id': record_id,
+    }
+    try:
+      r = requests.get(url, params=payload, timeout=self.timeout)
+      r.raise_for_status()
+    except requests.exceptions.RequestException:
+      LOG.error('Failed to communicate with Finna API', exc_info=True,
+          extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
+      return None
+
+    result_data = r.json()
+    if not 'status' in result_data or result_data['status'] != 'OK':
+      LOG.error('Finna query was not succesfull', extra={'data': {'result_data': repr(result_data)}})
+      return None
+
+    LOG.debug('Got result from Finna', extra={'data': {'result_data': repr(result_data)}})
+    return result_data
+
 
 DEFAULT_CLIENT = FinnaClient()
 

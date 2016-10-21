@@ -66,38 +66,48 @@ class CollectionDetailView(BaseView):
   template_name = 'hkm/views/collection.html'
 
 
-class BaseImageDetailView(BaseView):
-  image_finna_id = None
+class BaseFinnaRecordDetailView(BaseView):
+  record_finna_id = None
+  url_name = 'hkm_record'
+  record = None
 
   def get_url(self):
-    return reverse('hkm_image', kwargs={'finna_id': self.image_finna_id})
+    return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
 
   def setup(self, request, *args, **kwargs):
-    self.image_finna_id = kwargs['finna_id']
+    self.record_finna_id = kwargs['finna_id']
+    record_data = FINNA.get_record(self.record_finna_id)
+    if record_data:
+      self.record = record_data['records'][0]
     return True
 
+  def get_context_data(self, **kwargs):
+    context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
+    context['record'] = self.record
+    return context
 
-class ImageDetailView(BaseImageDetailView):
+
+class FinnaRecordDetailView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/image.html'
 
 
-class ImageFeedbackView(BaseView):
+class FinnaRecordFeedbackView(BaseView):
   template_name = 'hkm/views/image_feedback.html'
 
 
-class ImageEditBaseView(BaseView):
+class FinnaRecordEditBaseView(BaseView):
   pass
 
 
-class ImageEditAddToCollectionView(BaseView):
+class FinnaRecordEditAddToCollectionView(BaseView):
   template_name = 'hkm/views/image_edit_add_to_collection.html'
 
 
-class ImageEditDownloadView(BaseView):
+class FinnaRecordEditDownloadView(BaseView):
   template_name = 'hkm/views/image_edit_download.html'
 
 
-class ImageEditOrderView(BaseView):
+class FinnaRecordEditOrderView(BaseView):
   template_name = 'hkm/views/image_edit_order.html'
 
 
