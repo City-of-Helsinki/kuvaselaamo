@@ -6,7 +6,10 @@ from django import http
 from django.views.generic import TemplateView, RedirectView
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from finna import DEFAULT_CLIENT as FINNA
+from hkm.models import Collection, Record
+from hkm import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -33,7 +36,7 @@ class BaseView(TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super(BaseView, self).get_context_data(**kwargs)
-    context['language'] = self.request.session[LANGUAGE_SESSION_KEY]
+    context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
     context['current_url'] = self.get_url()
     return context
 
@@ -64,6 +67,39 @@ class MyCollectionsView(BaseCollectionListView):
 
 class CollectionDetailView(BaseView):
   template_name = 'hkm/views/collection.html'
+  url_name = 'hkm_collection'
+
+  collection = None
+  record = None
+
+  def get_url(self):
+    url = reverse(self.url_name, kwargs={'collection_id': self.collection.id})
+    if self.record:
+      url += '?rid=%s' % str(self.record.id)
+    return url
+
+  def setup(self, request, *args, **kwargs):
+    collection_id = kwargs['collection_id']
+    try:
+      self.collection = Collection.objects.user_can_view(request.user).get(id=collection_id)
+    except Collection.DoesNotExist:
+      LOG.warning('Collection does not exist or does not belong this user')
+      raise http.Http404()
+
+    record_id = request.GET.get('rid', None)
+    if record_id:
+      try:
+        self.record = self.collection.records.get(id=record_id)
+      except Record.DoesNotExist:
+        LOG.warning('Record does not exist or does not belong to this collection')
+
+    return True
+
+  def get_context_data(self, **kwargs):
+    context = super(CollectionDetailView, self).get_context_data(**kwargs)
+    context['collection'] = self.collection
+    context['record'] = self.record
+    return context
 
 
 class BaseFinnaRecordDetailView(BaseView):
@@ -88,11 +124,47 @@ class BaseFinnaRecordDetailView(BaseView):
 
 
 class FinnaRecordDetailView(BaseFinnaRecordDetailView):
-  template_name = 'hkm/views/image.html'
+  template_name = 'hkm/views/record.html'
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if request.user.is_authenticated():
+      if action == 'add-to-collection':
+        return self.handle_add_to_collection(request, *args, **kwargs)
+    LOG.error('Invalid POST request', extra={'data': {'POST': repr(request.POST)}})
+    return http.HttpResponseBadRequest()
+
+  def handle_add_to_collection(self, request, *args, **kwargs):
+    record_id = request.POST.get('record_id', None)
+    if not record_id:
+      LOG.warning('Record ID missing')
+      return http.HttpResponseBadRequest()
+
+    collection_id = request.POST.get('collection_id', None)
+    if collection_id:
+      try:
+        collection = request.user.collections.get(id=collection_id)
+      except Collection.DoesNotExist:
+        LOG.warning('Invalid collection id', extra={'data': {'collection_id': collection_id}})
+        return http.HttpResponseBadRequest()
+    else:
+      new_collection_name = request.POST.get('new_collection_name', None)
+      if not new_collection_name:
+        LOG.warning('New collection name missing')
+        return http.HttpResponseBadRequest()
+      collection = Collection(owner=request.user, title=new_collection_name)
+      collection.save()
+
+    record = Record(collection=collection, record_id=record_id, creator=request.user)
+    record.save()
+
+    url = reverse('hkm_collection', kwargs={'collection_id': collection.id})
+    url += '?rid=%s' % record.id
+    return redirect(url)
 
 
 class FinnaRecordFeedbackView(BaseView):
-  template_name = 'hkm/views/image_feedback.html'
+  template_name = 'hkm/views/record_feedback.html'
 
 
 class FinnaRecordEditBaseView(BaseView):
@@ -100,15 +172,15 @@ class FinnaRecordEditBaseView(BaseView):
 
 
 class FinnaRecordEditAddToCollectionView(BaseView):
-  template_name = 'hkm/views/image_edit_add_to_collection.html'
+  template_name = 'hkm/views/record_edit_add_to_collection.html'
 
 
 class FinnaRecordEditDownloadView(BaseView):
-  template_name = 'hkm/views/image_edit_download.html'
+  template_name = 'hkm/views/record_edit_download.html'
 
 
 class FinnaRecordEditOrderView(BaseView):
-  template_name = 'hkm/views/image_edit_order.html'
+  template_name = 'hkm/views/record_edit_order.html'
 
 
 class SearchView(BaseView):
@@ -148,6 +220,7 @@ class SearchView(BaseView):
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
   url_name = 'hkm_signup'
+
 
 class LanguageView(RedirectView):
   def get(self, request, *args, **kwargs):
