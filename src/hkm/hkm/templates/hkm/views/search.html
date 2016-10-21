@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load hkm_tags %}
 
-{% block image_block %}
+{% block banner %}
 
   <div class="page-header">
     <div class="container">
@@ -12,11 +12,11 @@
 
   <div class="container">
 
-    <div class="form-group search-form">
+    <div class="search-form">
       <form>
         <div class="input-group">
-          <input class="form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-          <span class="input-group-btn">
+          <input class="search-form__control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+          <span class="search-form__input-group-btn">
             <button class="btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
           </span>
         </div>
@@ -31,8 +31,7 @@
 
   <div class="container">
 
-
-    <div class="search-sidebar">
+    <div class="sidebar">
 
       <!-- All facets : {{ facet_result.facets.keys }} -->
 
@@ -61,7 +60,7 @@
 
     </div>
 
-    <div class="search-results">
+    <div class="article">
 
       <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 
@@ -70,19 +69,14 @@
           <div class="item">
             <div class="item-content">
               <!-- {{ record }} -->
-                <img src="{% finna_image record.id w=170 h=170 %}"></img>
-                <a href="{% url 'hkm_record' finna_id=record.id %}">LINKKI</a>
+              <a href="{% url 'hkm_record' finna_id=record.id %}">
+                <img src="{% finna_image record.id w=400 h=400 %}"></img>
+              </a>
+              <h4>{{ record.title }}</h4>
             </div>
           </div>
         {% endfor %}
       </div>
-
-      <script>
-        var grid = new Muuri({
-          container: document.getElementsByClassName('grid')[0],
-          items: document.getElementsByClassName('item')
-        });
-      </script>
 
     </div>
 

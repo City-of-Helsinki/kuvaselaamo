@@ -3,8 +3,10 @@
 {% block nav_class %}nav-collection{% endblock %}
 
 {% block main_content %}
-  <div class="image-block">
-    {% block image_block %}{% endblock %}
+  <div class="banner">
+    {% block banner %}{% endblock %}
   </div>
-  {% block content %}{% endblock %}
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
 {% endblock %}
