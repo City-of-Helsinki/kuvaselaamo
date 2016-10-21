@@ -70,18 +70,18 @@
           <div class="item">
             <div class="item-content">
               <!-- {{ record }} -->
-              <img src="{% finna_image record.id w=170 h=170 %}" />
+                <img src="{% finna_image record.id w=170 h=170 %}"></img>
             </div>
           </div>
         {% endfor %}
       </div>
 
-        <script>
-          var grid = new Muuri({
-            container: document.getElementsByClassName('grid')[0],
-            items: document.getElementsByClassName('item')
-          });
-        </script>
+      <script>
+        var grid = new Muuri({
+          container: document.getElementsByClassName('grid')[0],
+          items: document.getElementsByClassName('item')
+        });
+      </script>
 
     </div>
 

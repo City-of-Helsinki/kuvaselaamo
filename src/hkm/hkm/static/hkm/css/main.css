@@ -5872,10 +5872,11 @@ img {
   display: block;
   position: absolute;
   width: 170px;
-  height: 300px;
+  height: auto;
   margin: 5px;
   z-index: 1; }
   .item img {
+    float: left;
     width: 100%;
     height: auto; }
 
@@ -5889,7 +5890,7 @@ img {
 .item-content {
   position: relative;
   width: 100%;
-  height: 100%; }
+  height: auto; }
 
 /* Content */
 .image-viewer {
