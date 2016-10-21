@@ -83,6 +83,9 @@ class FinnaClient(object):
     url = FinnaClient.API_ENDPOINT + 'record'
     payload = {
       'id': record_id,
+      'field[]': ['id', 'authors','buildings', 'formats', 'genres', 'humanReadablePublicationDates',
+        'imageRights', 'images', 'institutions', 'languages', 'originalLanguages', 'presenters',
+        'publicationDates', 'rating', 'series', 'subjects', 'summary', 'title', 'year', 'rawData',],
     }
     try:
       r = requests.get(url, params=payload, timeout=self.timeout)
