@@ -1,4 +1,4 @@
-{% extends '../base_collection.html' %}
+{% extends 'hkm/base_collection.html' %}
 {% load i18n %}
 {% load hkm_tags %}
 
@@ -59,37 +59,29 @@
 
       </ul>
 
-      <!-- <div id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="card">
-          <div class="card-header" role="tab" id="headingOne">
-            <h5 class="mb-0">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Collapsible Group Item #1
-              </a>
-            </h5>
-          </div>
-
-          <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="card-block">
-              Anim pariatur cliche repr
-            </div>
-          </div>
-        </div>
-      </div> -->
-
     </div>
 
     <div class="search-results">
 
-      <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1>
+      <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 
-      <ul class="list-unstyled">
+      <div class="grid">
         {% for record in search_result.records %}
-          <li>
-            <!-- {{ record }} -->
-            <img src="{% finna_image record.id %}" /></li>
+          <div class="item">
+            <div class="item-content">
+              <!-- {{ record }} -->
+              <img src="{% finna_image record.id w=170 h=170 %}" />
+            </div>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
+
+        <script>
+          var grid = new Muuri({
+            container: document.getElementsByClassName('grid')[0],
+            items: document.getElementsByClassName('item')
+          });
+        </script>
 
     </div>
 

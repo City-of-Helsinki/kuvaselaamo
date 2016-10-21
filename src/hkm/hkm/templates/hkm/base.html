@@ -1,13 +1,43 @@
+{% load i18n %}
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
     <script src="/static/hkm/js/jquery-3.1.1.js"></script>
+    <script src="/static/hkm/js/velocity.js"></script>
+    <script src="/static/hkm/js/hammer.js"></script>
     <script src="/static/hkm/js/bootstrap.js"></script>
     <script src="/static/hkm/js/bootstrap/collapse.js"></script>
 </head>
 <body class="image-view">
 
-  {% block main %}{% endblock %}
+  <script src="/static/hkm/js/muuri.js"></script>
+
+  <nav class="{% block nav_class %}{% endblock %}">
+    <div class="nav-logo">
+      <a href="{% url 'hkm_index' %}">
+        <img class="logo-img" src="/static/hkm/img/h_sydan_valk.png"></img>
+        <div class="logo-text">{% trans 'Kuvapalvelu' %}</div>
+      </a>
+    </div>
+    <div class="nav-container">
+      <ul class="list-inline">
+        <li><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
+        {% if language == 'fi' %}
+          <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        {% elif language == 'en' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        {% elif language == 'sv' %}
+          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+        {% endif %}
+        <li><a href="">{% trans 'Tiedot' %}</a></li>
+        <li><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    {% block main_content %}{% endblock %}
+  </div>
 
 </body>
 </html>
