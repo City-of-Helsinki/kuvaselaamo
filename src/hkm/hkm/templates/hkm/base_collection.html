@@ -1,36 +1,10 @@
-{% extends './base.html' %}
-{% load i18n %}
+{% extends 'hkm/base.html' %}
 
-{% block main %}
+{% block nav_class %}nav-collection{% endblock %}
 
-  <nav class="nav-collection">
-    <div class="nav-logo">
-      <a href="{% url 'hkm_index' %}">
-        <img class="logo-img" src="/static/hkm/img/h_sydan_valk.png"></img>
-        <div class="logo-text">{% trans 'Kuvapalvelu' %}</div>
-      </a>
-    </div>
-    <div class="nav-container">
-      <ul class="list-inline">
-        <li><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
-        {% if language == 'fi' %}
-          <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
-        {% elif language == 'en' %}
-          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
-        {% elif language == 'sv' %}
-          <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
-        {% endif %}
-        <li><a href="">{% trans 'Tiedot' %}</a></li>
-        <li><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
-      </ul>
-    </div>
-
+{% block main_content %}
   <div class="image-block">
     {% block image_block %}{% endblock %}
   </div>
-
-  <div class="main-content">
-    {% block content %}{% endblock %}
-  </div>
-
+  {% block content %}{% endblock %}
 {% endblock %}

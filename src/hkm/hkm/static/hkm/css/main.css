@@ -5834,28 +5834,63 @@ img {
 
 /* Search */
 .search-sidebar {
+  margin-top: 50px;
   float: left;
-  width: 30%;
-  padding-right: 50px; }
+  width: 20%;
+  padding-right: 50px;
+  border: 0; }
+  .search-sidebar a {
+    color: #000; }
   .search-sidebar .list-group.list-group-root {
+    border: 0;
     padding: 0;
     overflow: hidden; }
   .search-sidebar .list-group.list-group-root .list-group {
     margin-bottom: 0; }
   .search-sidebar .list-group.list-group-root .list-group-item {
     border-radius: 0;
-    border-width: 1px 0 0 0; }
+    border: 0;
+    padding: 0; }
   .search-sidebar .list-group.list-group-root > .list-group-item:first-child {
-    border-top-width: 0; }
+    border: 0; }
   .search-sidebar .list-group.list-group-root > .list-group > .list-group-item {
     padding-left: 30px; }
   .search-sidebar .list-group.list-group-root > .list-group > .list-group > .list-group-item {
     padding-left: 45px; }
 
 .search-results {
+  margin-top: 50px;
   float: right;
-  width: 70%;
+  width: 80%;
   padding-bottom: 70px; }
+
+/* Muuri */
+.grid {
+  position: relative; }
+
+.item {
+  display: block;
+  position: absolute;
+  width: 170px;
+  height: auto;
+  margin: 5px;
+  z-index: 1; }
+  .item img {
+    float: left;
+    width: 100%;
+    height: auto; }
+
+.item.muuri-dragging,
+.item.muuri-releasing {
+  z-index: 2; }
+
+.item.muuri-hidden {
+  z-index: 0; }
+
+.item-content {
+  position: relative;
+  width: 100%;
+  height: auto; }
 
 /* Content */
 .image-viewer {
