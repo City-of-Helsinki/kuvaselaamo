@@ -40,10 +40,24 @@ class UserProfile(BaseModel):
     return self.user.username
 
 
+class CollectionQuerySet(models.QuerySet):
+  def user_can_edit(self, user):
+    return self.filter(owner=user)
+
+  def user_can_view(self, user):
+    is_own = models.Q(owner=user)
+    is_public = models.Q(public=True)
+    return self.filter(is_own|is_public)
+
+
 class Collection(BaseModel):
   owner = models.ForeignKey(User, verbose_name=_(u'Owner'))
   title = models.CharField(verbose_name=_(u'Title'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
+  public = models.BooleanField(verbose_name=_(u'Public'), default=False)
+  show_in_landing_page = models.BooleanField(verbose_name=_(u'Public'), default=False)
+
+  objects = CollectionQuerySet.as_manager()
 
   def __unicode__(self):
     return self.title
@@ -58,12 +72,12 @@ def get_image_upload_pathupload_to(instance, filename):
     }
 
 
-class Image(OrderedModel, BaseModel):
+class Record(OrderedModel, BaseModel):
   order_with_respect_to = 'collection'
 
   creator = models.ForeignKey(User, verbose_name=_(u'Creator'))
-  collection = models.ForeignKey(Collection, verbose_name=_(u'Collection'))
-  full_res_url = models.CharField(verbose_name=_(u'Full res URL'), max_length=1024)
+  collection = models.ForeignKey(Collection, verbose_name=_(u'Collection'), related_name='records')
+  record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
   edited_image = models.ImageField(verbose_name=_(u'Edited image'), null=True, blank=True,
       upload_to=get_image_upload_pathupload_to)
 

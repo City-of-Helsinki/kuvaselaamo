@@ -3,6 +3,7 @@
 
 import logging
 from django.utils.translation import LANGUAGE_SESSION_KEY
+from hkm import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -13,6 +14,8 @@ class LanguageMiddleware(object):
       if request.user.is_authenticated():
         language = request.user.profile.language
         request.session[LANGUAGE_SESSION_KEY] = language
+      else:
+        request.session[LANGUAGE_SESSION_KEY] = settings.DEFAULT_LANGUAGE
       return None
 
 

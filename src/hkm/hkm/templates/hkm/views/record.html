@@ -1,0 +1,17 @@
+{% load hkm_tags %}
+<br>
+{{ record }}
+<br>
+<img src="{% finna_image record.id %}" />
+
+<br><br>
+
+{% if user.is_authenticated %}
+<form method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="add-to-collection" />
+  <input type="hidden" name="record_id" value="{{ record.id }}" />
+  <input type="text" name="new_collection_name" value="New Collection" />
+  <input type="submit" value="Lisää uuteen kokoelmaan" />
+</form>
+{% endif %}
