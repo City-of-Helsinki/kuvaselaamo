@@ -1,11 +1,13 @@
 {% extends 'hkm/base.html' %}
 
-{% block nav_class %}nav-viewer{% endblock %}
+{% block nav_class %}nav_viewer{% endblock %}
 
 {% block main_content %}
 
-  <div class="image-viewer"></div>
+  {% block actions %}{% endblock %}
 
   {% block content %}{% endblock %}
+
+  {% block forms %}{% endblock %}
 
 {% endblock %}

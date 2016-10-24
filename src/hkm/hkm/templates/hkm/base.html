@@ -16,23 +16,23 @@
 
   <nav class="nav {% block nav_class %}{% endblock %}">
     <div class="logo">
-      <a class="logo__link" href="{% url 'hkm_index' %}">
-        <img class="logo__img" src="/static/hkm/img/h_sydan_valk.png"></img>
-        <div class="logo__text">{% trans 'Kuvapalvelu' %}</div>
+      <a class="logo-link" href="{% url 'hkm_index' %}">
+        <img class="logo-img" src="/static/hkm/img/h_sydan_valk.png"></img>
+        <div class="logo-text">{% trans 'KUVASELAAMO' %}</div>
       </a>
     </div>
     <div class="menu">
       <ul>
-        <li class="menu__item"><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
+        <li class="menu-item"><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
         {% if language == 'fi' %}
-          <li class="menu__item"><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+          <li class="menu-item"><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
         {% elif language == 'en' %}
-          <li class="menu__item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+          <li class="menu-item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
         {% elif language == 'sv' %}
-          <li class="menu__item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+          <li class="menu-item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
         {% endif %}
-        <li class="menu__item"><a href="">{% trans 'Tiedot' %}</a></li>
-        <li class="menu__item"><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
+        <li class="menu-item"><a href="">{% trans 'Tiedot' %}</a></li>
+        <li class="menu-item"><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
       </ul>
     </div>
   </nav>

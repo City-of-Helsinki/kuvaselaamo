@@ -12,8 +12,8 @@ palikka
 .define('app.muuri', ['jQuery', 'docReady'], function ($) {
 
   var grid = new Muuri({
-    container: document.getElementsByClassName('grid')[0],
-    items: document.getElementsByClassName('item')
+    container: document.getElementsByClassName('muuri-grid')[0],
+    items: document.getElementsByClassName('muuri-item')
   });
 
 });
