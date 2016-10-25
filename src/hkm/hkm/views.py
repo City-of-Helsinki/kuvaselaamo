@@ -63,6 +63,16 @@ class PublicCollectionsView(BaseCollectionListView):
 class MyCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/my_collections.html'
   url_name = 'hkm_my_collections'
+  my_collections = Collection.objects.none()
+
+  def setup(self, request, *args, **kwargs):
+    self.my_collections = Collection.objects.filter(owner=request.user)
+    return True
+
+  def get_context_data(self, **kwargs):
+    context = super(MyCollectionsView, self).get_context_data(**kwargs)
+    context['my_collections'] = self.my_collections
+    return context
 
 
 class CollectionDetailView(BaseView):
@@ -92,6 +102,8 @@ class CollectionDetailView(BaseView):
         self.record = self.collection.records.get(id=record_id)
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
+    if not self.record:
+      self.record = self.collection.records.first()
 
     return True
 
