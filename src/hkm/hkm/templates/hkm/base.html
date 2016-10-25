@@ -40,8 +40,12 @@
         {% elif language == 'sv' %}
           <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
         {% endif %}
-        <li><a href="">{% trans 'Tiedot' %}</a></li>
-        <li><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
+        <li><a href="{% url 'hkm_info' %}">{% trans 'Info' %}</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My Kuvaselaamo' %}</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}?next={{ current_url }}">{% trans 'Log in' %}</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>

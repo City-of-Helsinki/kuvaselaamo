@@ -1,0 +1,9 @@
+{% extends 'hkm/base.html' %}
+
+{% block main_content %}
+<ul>
+  {% for collection in my_collections %}
+  <li><a href="{% url 'hkm_collection' collection_id=collection.id %}">{{ collection }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
