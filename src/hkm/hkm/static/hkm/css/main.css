@@ -3099,23 +3099,23 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
 
-.fade {
+.fade, .record-title {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear; }
-  .fade.in {
+  .fade.in, .in.record-title, .flex-images .item:hover .record-title {
     opacity: 1; }
 
 .collapse {
   display: none; }
-  .collapse.in {
+  .collapse.in, .flex-images .item:hover .collapse.record-title {
     display: block; }
 
-tr.collapse.in {
+tr.collapse.in, .flex-images .item:hover tr.collapse.record-title {
   display: table-row; }
 
-tbody.collapse.in {
+tbody.collapse.in, .flex-images .item:hover tbody.collapse.record-title {
   display: table-row-group; }
 
 .collapsing {
@@ -3688,7 +3688,7 @@ tbody.collapse.in {
     display: table; }
   .navbar-collapse:after {
     clear: both; }
-  .navbar-collapse.in {
+  .navbar-collapse.in, .flex-images .item:hover .navbar-collapse.record-title {
     overflow-y: auto; }
   @media (min-width: 768px) {
     .navbar-collapse {
@@ -3700,7 +3700,7 @@ tbody.collapse.in {
         height: auto !important;
         padding-bottom: 0;
         overflow: visible !important; }
-      .navbar-collapse.in {
+      .navbar-collapse.in, .flex-images .item:hover .navbar-collapse.record-title {
         overflow-y: visible; }
       .navbar-fixed-top .navbar-collapse,
       .navbar-static-top .navbar-collapse,
@@ -5072,7 +5072,7 @@ button.close {
   z-index: 1050;
   -webkit-overflow-scrolling: touch;
   outline: 0; }
-  .modal.fade .modal-dialog {
+  .modal.fade .modal-dialog, .modal.record-title .modal-dialog {
     -webkit-transform: translate(0, -25%);
     -ms-transform: translate(0, -25%);
     -o-transform: translate(0, -25%);
@@ -5081,7 +5081,7 @@ button.close {
     -moz-transition: -moz-transform 0.3s ease-out;
     -o-transition: -o-transform 0.3s ease-out;
     transition: transform 0.3s ease-out; }
-  .modal.in .modal-dialog {
+  .modal.in .modal-dialog, .flex-images .item:hover .modal.record-title .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
@@ -5115,10 +5115,10 @@ button.close {
   left: 0;
   z-index: 1040;
   background-color: #000; }
-  .modal-backdrop.fade {
+  .modal-backdrop.fade, .modal-backdrop.record-title {
     opacity: 0;
     filter: alpha(opacity=0); }
-  .modal-backdrop.in {
+  .modal-backdrop.in, .flex-images .item:hover .modal-backdrop.record-title {
     opacity: 0.5;
     filter: alpha(opacity=50); }
 
@@ -5202,7 +5202,7 @@ button.close {
   font-size: 12px;
   opacity: 0;
   filter: alpha(opacity=0); }
-  .tooltip.in {
+  .tooltip.in, .flex-images .item:hover .tooltip.record-title {
     opacity: 0.9;
     filter: alpha(opacity=90); }
   .tooltip.top {
@@ -5853,9 +5853,53 @@ img {
   height: 100%; }
 
 /* Navigation */
-.nav {
-  width: 100%;
-  height: 60px; }
+.navbar {
+  margin: 0;
+  height: 60px;
+  border: 0;
+  border-radius: 0; }
+
+.navbar-nav {
+  float: right; }
+  .navbar-nav li {
+    display: inline-block;
+    padding: 0 16px; }
+    .navbar-nav li a {
+      padding: 0;
+      display: inline-block;
+      line-height: 60px; }
+  .navbar-nav li > a:hover, .navbar-nav li > a:focus {
+    background-color: transparent; }
+
+.navbar-collapse {
+  padding: 0; }
+
+.navbar-toggle {
+  padding: 0 18px;
+  margin: 0;
+  height: 100%;
+  width: 60px;
+  color: #fff;
+  border-radius: 0; }
+
+.navbar-toggle:hover {
+  background: rgba(0, 0, 0, 0.2); }
+
+.navbar-brand {
+  text-decoration: none;
+  font-size: 30px;
+  height: 100%;
+  padding: 0; }
+
+.brand-img {
+  float: left;
+  padding: 12px;
+  height: 100%; }
+
+.brand-text {
+  float: left;
+  height: 60px;
+  line-height: 64px; }
 
 .nav_viewer {
   background: rgba(0, 0, 0, 0.6);
@@ -5863,6 +5907,8 @@ img {
   color: #fff; }
   .nav_viewer a {
     color: #fff; }
+  .nav_viewer .navbar-toggle .icon-bar {
+    background: #fff; }
 
 .nav_collection {
   background: #fff;
@@ -5870,43 +5916,8 @@ img {
   color: #965479; }
   .nav_collection a {
     color: #965479; }
-
-.logo {
-  float: left;
-  text-align: center;
-  display: block; }
-
-.logo--link {
-  display: block;
-  text-decoration: none;
-  color: white;
-  font-size: 30px; }
-
-.logo-img {
-  padding: 12px;
-  display: inline-block;
-  float: left;
-  height: 100%; }
-
-.logo-text {
-  display: inline-block;
-  float: left;
-  height: 60px;
-  line-height: 64px; }
-
-.menu {
-  float: right; }
-  .menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0; }
-
-.menu-item {
-  display: inline-block;
-  padding: 0 16px; }
-  .menu-item a {
-    padding: 20px 0;
-    line-height: 60px; }
+  .nav_collection .navbar-toggle .icon-bar {
+    background: #965479; }
 
 /* Main */
 .image-viewer {
@@ -6007,6 +6018,37 @@ img {
   float: right;
   width: 80%; }
 
+/* Grid */
+.flex-images {
+  overflow: hidden; }
+
+.flex-images .item {
+  float: left;
+  margin: 4px;
+  border: 1px solid #eee;
+  box-sizing: content-box;
+  overflow: hidden;
+  position: relative; }
+
+.flex-images .item img {
+  display: block;
+  width: auto;
+  height: 100%; }
+
+.record-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  padding: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+  font-size: 12px;
+  font-family: 'goviniusbold';
+  background: rgba(0, 0, 0, 0.5); }
+
 /* Search */
 .search-form {
   margin-top: 170px; }
@@ -6031,37 +6073,3 @@ img {
 /* Dialogs */
 .modal-dialog {
   margin: 80px auto; }
-
-/* Muuri */
-.muuri-grid {
-  position: relative; }
-
-.muuri-item {
-  display: block;
-  position: absolute;
-  width: 170px;
-  height: auto;
-  margin: 5px;
-  z-index: 1;
-  font-size: 11px; }
-  .muuri-item .record-title {
-    font-size: 12px;
-    font-family: 'goviniusbold';
-    color: #000;
-    margin: 0; }
-
-.muuri-item.muuri-dragging,
-.muuri-item.muuri-releasing {
-  z-index: 2; }
-
-.muuri-item.muuri-hidden {
-  z-index: 0; }
-
-.muuri-item-content {
-  position: relative;
-  width: 100%;
-  height: 100%; }
-  .muuri-item-content img {
-    float: left;
-    width: 100%;
-    height: auto; }

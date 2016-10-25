@@ -130,7 +130,7 @@ COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_CSS_FILTERS = [
   'compressor.filters.css_default.CssAbsoluteFilter',
-  'hutils.compressor_filters.ScssFilter',
+  # 'hutils.compressor_filters.ScssFilter',
 ]
 
 # Workaround for pyScss problems
