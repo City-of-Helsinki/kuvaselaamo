@@ -8,6 +8,7 @@ from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from finna import DEFAULT_CLIENT as FINNA
+from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record
 from hkm import settings
 
@@ -127,6 +128,7 @@ class BaseFinnaRecordDetailView(BaseView):
     record_data = FINNA.get_record(self.record_finna_id)
     if record_data:
       self.record = record_data['records'][0]
+      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
     return True
 
   def get_context_data(self, **kwargs):
