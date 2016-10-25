@@ -9,11 +9,17 @@ palikka
   return palikka.defer($);
 
 })
-.define('app.muuri', ['jQuery', 'docReady'], function ($) {
+.define('app.grid', ['jQuery', 'docReady'], function ($) {
 
-  var grid = new Muuri({
-    container: document.getElementsByClassName('muuri-grid')[0],
-    items: document.getElementsByClassName('muuri-item')
+  $('.flex-images .item').each(function () {
+    var w = $(this).find('img').width();
+    var h = $(this).find('img').height();
+    $(this).attr('data-w', w);
+    $(this).attr('data-h', h);
+  });
+
+  $('.flex-images').flexImages({
+    rowHeight: 200
   });
 
 });

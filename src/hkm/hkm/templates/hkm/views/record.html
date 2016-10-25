@@ -36,7 +36,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{% trans 'Lisää uuteen kokoelmaan' %}</h4>
+            <h4 class="modal-title">{% trans 'Add to a new collection' %}</h4>
           </div>
           <div class="modal-body">
             {% csrf_token %}
@@ -45,8 +45,8 @@
             <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Sulje' %}</button>
-            <button type="submit" value="add-to-collection" class="btn btn-primary">{% trans 'Tallenna' %}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button type="submit" value="add-to-collection" class="btn btn-primary">{% trans 'Submit' %}</button>
           </div>
         </div>
       </div>
