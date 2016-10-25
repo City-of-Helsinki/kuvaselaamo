@@ -31,8 +31,8 @@
         {% elif language == 'sv' %}
           <li class="menu-item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
         {% endif %}
-        <li class="menu-item"><a href="">{% trans 'Tiedot' %}</a></li>
-        <li class="menu-item"><a href="">{% trans 'Kirjaudu sisään' %}</a></li>
+        <li class="menu-item"><a href="{% url 'hkm_info' %}">{% trans 'Tiedot' %}</a></li>
+        <li class="menu-item"><a href="{% url 'login' %}?next={{ current_url }}">{% trans 'Kirjaudu sisään' %}</a></li>
       </ul>
     </div>
   </nav>
