@@ -32,7 +32,11 @@
           <li class="menu-item"><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
         {% endif %}
         <li class="menu-item"><a href="{% url 'hkm_info' %}">{% trans 'Tiedot' %}</a></li>
-        <li class="menu-item"><a href="{% url 'login' %}?next={{ current_url }}">{% trans 'Kirjaudu sisään' %}</a></li>
+        {% if user.is_authenticated %}
+          <li class="menu-item"><a href="{% url 'hkm_my_collections' %}">{% trans 'My Kuvaselaamo' %}</a></li>
+        {% else %}
+          <li class="menu-item"><a href="{% url 'login' %}?next={{ current_url }}">{% trans 'Kirjaudu sisään' %}</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>
