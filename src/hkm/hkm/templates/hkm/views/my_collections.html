@@ -1,9 +1,11 @@
 {% extends 'hkm/base.html' %}
+{% load i18n %}
 
 {% block main_content %}
 <ul>
-  {% for collection in my_collections %}
+  {% for collection in collections %}
   <li><a href="{% url 'hkm_collection' collection_id=collection.id %}">{{ collection }}</a></li>
   {% endfor %}
 </ul>
+
 {% endblock %}

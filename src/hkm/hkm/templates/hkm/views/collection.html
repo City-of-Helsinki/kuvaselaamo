@@ -1,4 +1,5 @@
 {% extends 'hkm/base.html' %}
+{% load i18n %}
 
 {% block main_content %}
 
@@ -7,6 +8,14 @@
 <br><br>
 
 {{ record.record_id }}
-{% endblock %}
 
+<br><br>
+{% if previous_record %}
+  <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">{% trans 'Previous image' %}</a>
+{% endif %}
+{% if next_record %}
+  <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">{% trans 'Next image' %}</a>
+{% endif %}
+
+{% endblock %}
 
