@@ -4,6 +4,9 @@
 
 {% block actions %}
 
+  <button class="arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></button>
+  <button class="arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></button>
+
   <div class="actions actions_left">
     <button class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
     <button class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
@@ -21,7 +24,7 @@
 
 {% block content %}
 
-  <div class="image-viewer" style="background-image:url('{% finna_image record.id w=2000 h=2000 %}');"></div>
+  <div class="image-viewer"><img src="{% finna_image record.id w=2000 h=2000 %}"></img></div>
 
   <!-- {{ record }} -->
 

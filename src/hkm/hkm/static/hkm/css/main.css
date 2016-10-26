@@ -5921,7 +5921,7 @@ img {
 
 /* Main */
 .image-viewer {
-  background-image: url("/static/hkm/img/city.jpg");
+  background: #EFE9E5;
   z-index: -1;
   position: absolute;
   left: 0;
@@ -5934,6 +5934,16 @@ img {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+  .image-viewer img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%; }
 
 .banner {
   float: left;
@@ -5979,6 +5989,22 @@ img {
 
 .actions__btn:hover {
   cursor: pointer; }
+
+.arrow {
+  height: 150px;
+  padding: 12px;
+  border: 0;
+  background: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto; }
+
+.arrow-left {
+  left: 0; }
+
+.arrow-right {
+  right: 0; }
 
 /* Content */
 .content {
