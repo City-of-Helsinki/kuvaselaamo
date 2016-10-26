@@ -1,9 +1,38 @@
 {% extends 'hkm/base_collection.html' %}
+{% load i18n %}
 
-{% block main_content %}
-<ul>
-  {% for collection in my_collections %}
-  <li><a href="{% url 'hkm_collection' collection_id=collection.id %}">{{ collection }}</a></li>
-  {% endfor %}
-</ul>
+{% block banner %}
+
+  <div class="page-header">
+    <div class="container">
+      <h1>{% trans 'My collections' %}</h1>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
+
+    <div class="flex-images">
+      {% for collection in my_collections %}
+        <div class="item" data-w="550" data-h="400">
+          <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <span class="record-title">{{ collection }}</span>
+            <div class="flex-images flex-sub">
+              <div style="background:red;" class="item"></div>
+              <div style="background:blue;" class="item"></div>
+              <div style="background:yellow;" class="item"></div>
+            </div>
+            <!-- <img class="flex-img" src=""></img> -->
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div> <!-- Container -->
+
 {% endblock %}

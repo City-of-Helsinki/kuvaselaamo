@@ -53,8 +53,11 @@ img {
 }
 .brand-img {
   float: left;
-  padding: 12px;
   height: 100%;
+  width: 60px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+    background-position: center;
 }
 .brand-text {
   float: left;
@@ -71,6 +74,9 @@ img {
   .navbar-toggle .icon-bar {
     background: $color-theme;
   }
+  .brand-img {
+    background-image: url("/static/hkm/img/h_sydan_valk.png");
+  }
 }
 .nav_collection {
   background: $color-theme;
@@ -82,8 +88,10 @@ img {
   .navbar-toggle .icon-bar {
     background: $color-strikemaster;
   }
+  .brand-img {
+    background-image: url("/static/hkm/img/h_sydan_violetti.png");
+  }
 }
-
 /* Main */
 .image-viewer {
   background: #EFE9E5;
@@ -106,6 +114,7 @@ img {
     left: 0;
     right:0;
     margin: auto;
+    padding: 80px 90px;
     height: auto;
     max-width: 100%;
     max-height: 100%;
@@ -233,6 +242,28 @@ img {
   overflow: hidden;
   position: relative;
 }
+.flex-sub {
+  .item {
+    float: left;
+    margin: 0;
+    border: 0;
+    box-sizing: content-box;
+    overflow: hidden;
+    position: relative;
+  }
+  .item:nth-child(1) {
+    height: 100%;
+    width: 65%;
+  }
+  .item:nth-child(2) {
+    height: 50% !important;
+    width: 35%;
+  }
+  .item:nth-child(3) {
+    height: 50% !important;
+    width: 35%;
+  }
+}
 .flex-images .item img {
   display: block;
   width: auto;
@@ -240,6 +271,7 @@ img {
 }
 .record-title {
   @extend .fade;
+  z-index: 1;
   position: absolute;
   bottom: 0;
   width: 100%;

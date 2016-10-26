@@ -5893,8 +5893,11 @@ img {
 
 .brand-img {
   float: left;
-  padding: 12px;
-  height: 100%; }
+  height: 100%;
+  width: 60px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center; }
 
 .brand-text {
   float: left;
@@ -5909,6 +5912,8 @@ img {
     color: #fff; }
   .nav_viewer .navbar-toggle .icon-bar {
     background: #fff; }
+  .nav_viewer .brand-img {
+    background-image: url("/static/hkm/img/h_sydan_valk.png"); }
 
 .nav_collection {
   background: #fff;
@@ -5918,6 +5923,8 @@ img {
     color: #965479; }
   .nav_collection .navbar-toggle .icon-bar {
     background: #965479; }
+  .nav_collection .brand-img {
+    background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
 
 /* Main */
 .image-viewer {
@@ -5941,6 +5948,7 @@ img {
     left: 0;
     right: 0;
     margin: auto;
+    padding: 80px 90px;
     height: auto;
     max-width: 100%;
     max-height: 100%; }
@@ -6056,12 +6064,33 @@ img {
   overflow: hidden;
   position: relative; }
 
+.flex-sub .item {
+  float: left;
+  margin: 0;
+  border: 0;
+  box-sizing: content-box;
+  overflow: hidden;
+  position: relative; }
+
+.flex-sub .item:nth-child(1) {
+  height: 100%;
+  width: 65%; }
+
+.flex-sub .item:nth-child(2) {
+  height: 50% !important;
+  width: 35%; }
+
+.flex-sub .item:nth-child(3) {
+  height: 50% !important;
+  width: 35%; }
+
 .flex-images .item img {
   display: block;
   width: auto;
   height: 100%; }
 
 .record-title {
+  z-index: 1;
   position: absolute;
   bottom: 0;
   width: 100%;

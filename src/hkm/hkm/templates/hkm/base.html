@@ -1,18 +1,65 @@
 {% load compress %}
 {% load i18n %}
+
 <html>
 <head>
 
+  <!-- Character encoding. Use utf-8. -->
+  <meta charset="utf-8">
+
+  <!--
+    IE browser mode.
+    http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e.
+  -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--
+    Control the device's viewport handling.
+    https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Page title & description (important for SEO). -->
+  <title></title>
+  <meta name="description" content="I am description.">
+
+  <!-- Window Phone - Better font rendering with cleartpye activated. -->
+  <!--[if IEMobile]><meta http-equiv="cleartype" content="on" /><![endif]-->
+
+  <!-- Windows Phone - Tile icon & background color. -->
+  <meta name="msapplication-TileImage" content="wp-app-icon-144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+
+  <!-- Windows Phone - Turn off tap highlight on windows 8 IE. -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!--
+    Format detection for mobile devices.
+    https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html#//apple_ref/doc/uid/TP40008193-SW5
+  -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="email=no">
+
+  <!-- iOS web app: makes the web page run in full screen mode when launched from the home screen icon. -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- iOS web app: styles the bar at the top of the browser. -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- iOS web app: Specifies a splash image to use when the page is loading. -->
+  <link rel="apple-touch-startup-image" href="ios-splash.png">
+
+  <!-- iOS web app: icons. -->
+  <link rel="apple-touch-icon-precomposed" href="ios-app-icon-57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ios-app-icon-72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ios-app-icon-114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ios-app-icon-144.png">
+
+  <!-- Favicon, optionally place favicon.ico in the root of website. -->
+  <link rel="shortcut icon" href="favicon.ico">
+
   <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
 
-  <script src="/static/hkm/js/jquery-3.1.1.js"></script>
-  <script src="/static/hkm/js/velocity.js"></script>
-  <script src="/static/hkm/js/hammer.js"></script>
-  <script src="/static/hkm/js/bootstrap.js"></script>
-  <script src="/static/hkm/js/bootstrap/collapse.js"></script>
-  <script src="/static/hkm/js/palikka.js"></script>
-  <script src="/static/hkm/js/flex-images.js"></script>
-  <script src="/static/hkm/js/hkm.js"></script>
 
 </head>
 <body class="image-view">
@@ -26,7 +73,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{% url 'hkm_index' %}">
-        <img class="brand-img" src="/static/hkm/img/h_sydan_valk.png"></img>
+        <div class="brand-img"></div>
         <div class="brand-text">{% trans 'KUVASELAAMO' %}</div>
       </a>
     </div>
@@ -51,6 +98,17 @@
   </nav>
 
   {% block main_content %}{% endblock %}
+
+  {% block js %}
+    <script src="/static/hkm/js/jquery-3.1.1.js"></script>
+    <script src="/static/hkm/js/velocity.js"></script>
+    <script src="/static/hkm/js/hammer.js"></script>
+    <script src="/static/hkm/js/bootstrap.js"></script>
+    <script src="/static/hkm/js/bootstrap/collapse.js"></script>
+    <script src="/static/hkm/js/palikka.js"></script>
+    <script src="/static/hkm/js/flex-images.js"></script>
+    <script src="/static/hkm/js/hkm.js"></script>
+  {% endblock %}
 
 </body>
 </html>
