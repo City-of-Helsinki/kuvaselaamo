@@ -62,6 +62,18 @@ class Collection(BaseModel):
   def __unicode__(self):
     return self.title
 
+  def get_next_record(self, record):
+    records = self.records.filter(order__gt=record.order)
+    if records.exists():
+      return records[0]
+    return None
+
+  def get_previous_record(self, record):
+    records = self.records.filter(order__lt=record.order)
+    if records.exists():
+      return records.reverse()[0]
+    return None
+
 
 def get_image_upload_pathupload_to(instance, filename):
   return 'images/%(username)s/%(collection_title)s_%(collection_id)d/%(filename)s' % {

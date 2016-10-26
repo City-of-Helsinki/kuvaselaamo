@@ -53,27 +53,35 @@ class InfoView(BaseView):
 
 
 class BaseCollectionListView(BaseView):
-  pass
+  collection_qs = Collection.objects.none()
+
+  def setup(self, request, *args, **kwargs):
+    self.collection_qs = self.get_collection_qs(request, *args, **kwargs)
+    return True
+
+  def get_collection_qs(self, request, *args, **kwargs):
+    raise NotImplementedError('Subclasses must implement this method')
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseCollectionListView, self).get_context_data(**kwargs)
+    context['collections'] = self.collection_qs
+    return context
 
 
 class PublicCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/public_collections.html'
   url_name = 'hkm_public_collections'
 
+  def get_collection_qs(self, request, *args, **kwargs):
+    return Collection.objects.filter(is_public=True)
+
 
 class MyCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/my_collections.html'
   url_name = 'hkm_my_collections'
-  my_collections = Collection.objects.none()
 
-  def setup(self, request, *args, **kwargs):
-    self.my_collections = Collection.objects.filter(owner=request.user)
-    return True
-
-  def get_context_data(self, **kwargs):
-    context = super(MyCollectionsView, self).get_context_data(**kwargs)
-    context['my_collections'] = self.my_collections
-    return context
+  def get_collection_qs(self, request, *args, **kwargs):
+    return Collection.objects.filter(owner=request.user)
 
 
 class CollectionDetailView(BaseView):
@@ -112,6 +120,8 @@ class CollectionDetailView(BaseView):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
     context['record'] = self.record
+    context['next_record'] = self.collection.get_next_record(self.record)
+    context['previous_record'] = self.collection.get_previous_record(self.record)
     return context
 
 

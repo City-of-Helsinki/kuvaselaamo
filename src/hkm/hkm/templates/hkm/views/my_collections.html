@@ -18,7 +18,7 @@
     <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 
     <div class="flex-images">
-      {% for collection in my_collections %}
+      {% for collection in collections %}
         <div class="item" data-w="550" data-h="400">
           <a href="{% url 'hkm_collection' collection_id=collection.id %}">
             <span class="record-title">{{ collection }}</span>
@@ -34,5 +34,5 @@
     </div>
 
   </div> <!-- Container -->
-
+  
 {% endblock %}
