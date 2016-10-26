@@ -21,7 +21,7 @@
 
 {% block content %}
   {% if record.full_res_url %}
-    <div class="image-viewer"></div>
+    <div class="image-viewer" style="background-image:url('{{ record.full_res_url }}');"></div>
   {% else %}
     <h1 style="color:#FF0000;">THIS IS LOW RESOLUTION IMAGE. CAN NOT ORDER PRINT PRODUCTS</h1>
     <div class="image-viewer" style="background-image:url('{% finna_image record.id w=2000 h=2000 %}');"></div>
