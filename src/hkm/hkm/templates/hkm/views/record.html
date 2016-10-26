@@ -24,7 +24,12 @@
 
 {% block content %}
 
-  <div class="image-viewer"><img src="{% finna_image record.id w=2000 h=2000 %}"></img></div>
+  {% if record.full_res_url %}
+    <div class="image-viewer"><img src="{{ record.full_res_url }}"></img></div>
+  {% else %}
+    <h1 style="color:#FF0000;">THIS IS LOW RESOLUTION IMAGE. CAN NOT ORDER PRINT PRODUCTS</h1>
+    <div class="image-viewer"><img src="{% finna_image record.id w=2000 h=2000 %}"></img></div>
+  {% endif %}
 
   <!-- {{ record }} -->
 
