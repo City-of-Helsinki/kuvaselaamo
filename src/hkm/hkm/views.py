@@ -228,15 +228,18 @@ class SearchView(BaseView):
     self.search_term = search_term
     self.facet_type = request.GET.get('ft', None)
     self.facet_value = request.GET.get('fv', None)
+    page = request.GET.get('page', 1)
     LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
-      'facet_value': self.facet_value}})
+      'facet_value': self.facet_value, 'page': page}})
     self.facet_result = FINNA.get_facets(self.search_term)
     self.search_result = FINNA.search(self.search_term, facet_type=self.facet_type,
-        facet_value=self.facet_value, page=1)
+        facet_value=self.facet_value, page=page)
 
   def get_context_data(self, **kwargs):
     context = super(SearchView, self).get_context_data(**kwargs)
     context['facet_result'] = self.facet_result
+    context['facet_type'] = self.facet_type
+    context['facet_value'] = self.facet_value
     context['search_result'] = self.search_result
     context['search_term'] = self.search_term
     return context
