@@ -66,13 +66,17 @@
 
       <div class="flex-images">
         {% for record in search_result.records %}
-          <div class="item" data-w="" data-h="">
+          <div class="item hidden" data-w="100" data-h="100">
             <a href="{% url 'hkm_record' finna_id=record.id %}">
               <span class="record-title">{{ record.title }}</span>
               <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}"></img>
             </a>
           </div>
         {% endfor %}
+      </div>
+
+      <div id="status">
+        <progress max="20" value="0"></progress>
       </div>
 
     </div>
