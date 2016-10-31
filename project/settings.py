@@ -137,6 +137,6 @@ COMPRESS_CSS_FILTERS = [
 # https://github.com/Kronuz/pyScss/issues/70
 logging.getLogger('scss').addHandler(logging.StreamHandler())
 
-
+HKM_MY_DOMAIN = 'http://localhost:8009'
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

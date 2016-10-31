@@ -5,6 +5,17 @@
 {% block actions %}
 
   <button class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></button>
+  {% if search_result.previous_page %}
+    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ search_result.previous_page }}">PREVIOUS PAGE</a>
+  {% else %}
+    <a href="">NO PREVIOUS PAGE</a>
+  {% endif %}
+  {% if search_result.next_page %}
+    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ search_result.next_page }}">NEXT PAGE</a>
+  {% else %}
+    <a href="">NO NEXT PAGE</a>
+  {% endif %}
+
   <button class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></button>
 
   <div class="actions actions_left">

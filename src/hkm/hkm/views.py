@@ -91,6 +91,12 @@ class CollectionDetailView(BaseView):
   collection = None
   record = None
 
+  def get_template_names(self):
+    if self.record:
+      return 'hkm/views/collection_record.html'
+    else:
+      return self.template_name
+
   def get_url(self):
     url = reverse(self.url_name, kwargs={'collection_id': self.collection.id})
     if self.record:
@@ -111,8 +117,6 @@ class CollectionDetailView(BaseView):
         self.record = self.collection.records.get(id=record_id)
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
-    if not self.record:
-      self.record = self.collection.records.first()
 
     return True
 
@@ -120,35 +124,77 @@ class CollectionDetailView(BaseView):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
     context['record'] = self.record
-    context['next_record'] = self.collection.get_next_record(self.record)
-    context['previous_record'] = self.collection.get_previous_record(self.record)
+    if self.record:
+      context['next_record'] = self.collection.get_next_record(self.record)
+      context['previous_record'] = self.collection.get_previous_record(self.record)
     return context
 
 
-class BaseFinnaRecordDetailView(BaseView):
-  record_finna_id = None
-  url_name = 'hkm_record'
-  record = None
+class SearchView(BaseView):
+  template_name = 'hkm/views/search.html'
+  url_name = 'hkm_search'
 
-  def get_url(self):
-    return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
+  page_size = 20
+  use_detailed_query = False
 
-  def setup(self, request, *args, **kwargs):
-    self.record_finna_id = kwargs['finna_id']
-    record_data = FINNA.get_record(self.record_finna_id)
-    if record_data:
-      self.record = record_data['records'][0]
-      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
-    return True
+  facet_result = None
+  search_result = None
+
+  search_term = None
+  facet_type = None
+  facet_value = None
+
+  def get(self, request, *args, **kwargs):
+    search_term = request.GET.get('search', None)
+    if search_term:
+      self.handle_search(request, search_term, *args, **kwargs)
+    return super(SearchView, self).get(request, *args, **kwargs)
+
+  def handle_search(self, request, search_term, *args, **kwargs):
+    self.search_term = search_term
+    self.facet_type = request.GET.get('ft', None)
+    self.facet_value = request.GET.get('fv', None)
+    page = int(request.GET.get('page', 1))
+    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
+      'facet_value': self.facet_value, 'page': page}})
+    self.facet_result = self.get_facet_result(self.search_term)
+    self.search_result = self.get_search_result(self.search_term, self.facet_type, self.facet_value,
+        page, self.page_size)
+
+    # calculate global index for the record, this is used to form links to search detail view
+    # which is technically same view as this, it only shows one image per page
+    i = 1 # record's index in current page
+    for record in self.search_result['records']:
+      p = self.search_result['page'] - 1 # zero indexed page
+      record['index'] = p * self.search_result['limit'] + i
+      i += 1
+
+  def get_facet_result(self, search_term):
+    return FINNA.get_facets(self.search_term)
+
+  def get_search_result(self, search_term, facet_type, facet_value, page, limit):
+    return FINNA.search(search_term, facet_type=facet_type,
+        facet_value=facet_value, page=page, limit=limit, detailed=self.use_detailed_query)
 
   def get_context_data(self, **kwargs):
-    context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
-    context['record'] = self.record
+    context = super(SearchView, self).get_context_data(**kwargs)
+    context['facet_result'] = self.facet_result
+    context['facet_type'] = self.facet_type
+    context['facet_value'] = self.facet_value
+    context['search_result'] = self.search_result
+    context['search_term'] = self.search_term
     return context
 
 
-class FinnaRecordDetailView(BaseFinnaRecordDetailView):
-  template_name = 'hkm/views/record.html'
+class SearchRecordDetailView(SearchView):
+  url_name = 'hkm_search_record'
+  template_name = 'hkm/views/search_record.html'
+
+  page_size = 1
+  use_detailed_query = True
+
+  def get_facet_result(self, search_term):
+    return None
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
@@ -186,6 +232,39 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
     url += '?rid=%s' % record.id
     return redirect(url)
 
+  def get_context_data(self, **kwargs):
+    context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
+    record = self.search_result['records'][0]
+    record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
+    context['record'] = record
+    return context
+
+
+class BaseFinnaRecordDetailView(BaseView):
+  record_finna_id = None
+  url_name = 'hkm_record'
+  record = None
+
+  def get_url(self):
+    return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
+
+  def setup(self, request, *args, **kwargs):
+    self.record_finna_id = kwargs['finna_id']
+    record_data = FINNA.get_record(self.record_finna_id)
+    if record_data:
+      self.record = record_data['records'][0]
+      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+    return True
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
+    context['record'] = self.record
+    return context
+
+
+class FinnaRecordDetailView(BaseFinnaRecordDetailView):
+  template_name = 'hkm/views/record.html'
+
 
 class FinnaRecordFeedbackView(BaseView):
   template_name = 'hkm/views/record_feedback.html'
@@ -206,43 +285,6 @@ class FinnaRecordEditDownloadView(BaseView):
 class FinnaRecordEditOrderView(BaseView):
   template_name = 'hkm/views/record_edit_order.html'
 
-
-class SearchView(BaseView):
-  template_name = 'hkm/views/search.html'
-  url_name = 'hkm_search'
-
-  facet_result = None
-  search_result = None
-
-  search_term = None
-  facet_type = None
-  facet_value = None
-
-  def get(self, request, *args, **kwargs):
-    search_term = request.GET.get('search', None)
-    if search_term:
-      self.handle_search(request, search_term, *args, **kwargs)
-    return super(SearchView, self).get(request, *args, **kwargs)
-
-  def handle_search(self, request, search_term, *args, **kwargs):
-    self.search_term = search_term
-    self.facet_type = request.GET.get('ft', None)
-    self.facet_value = request.GET.get('fv', None)
-    page = request.GET.get('page', 1)
-    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
-      'facet_value': self.facet_value, 'page': page}})
-    self.facet_result = FINNA.get_facets(self.search_term)
-    self.search_result = FINNA.search(self.search_term, facet_type=self.facet_type,
-        facet_value=self.facet_value, page=page)
-
-  def get_context_data(self, **kwargs):
-    context = super(SearchView, self).get_context_data(**kwargs)
-    context['facet_result'] = self.facet_result
-    context['facet_type'] = self.facet_type
-    context['facet_value'] = self.facet_value
-    context['search_result'] = self.search_result
-    context['search_term'] = self.search_term
-    return context
 
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
