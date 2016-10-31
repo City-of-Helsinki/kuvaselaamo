@@ -10,15 +10,7 @@
   <div class="content">
     {% block content %}{% endblock %}
   </div>
-
-<br><br>
-{{ collection.title }}
-
-<br><br>
-
-{{ record.record_id }}
-
-<br><br>
+  
 {% if previous_record %}
   <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">{% trans 'Previous image' %}</a>
 {% endif %}

@@ -1,5 +1,6 @@
 {% extends 'hkm/base_collection.html' %}
 {% load i18n %}
+{% load hkm_tags %}
 
 {% block banner %}
 
@@ -23,16 +24,15 @@
           <a href="{% url 'hkm_collection' collection_id=collection.id %}">
             <span class="record-title">{{ collection }}</span>
             <div class="flex-images flex-sub">
-              <div style="background:red;" class="item"></div>
-              <div style="background:blue;" class="item"></div>
-              <div style="background:yellow;" class="item"></div>
+              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
             </div>
-            <!-- <img class="flex-img" src=""></img> -->
           </a>
         </div>
       {% endfor %}
     </div>
 
   </div> <!-- Container -->
-  
+
 {% endblock %}

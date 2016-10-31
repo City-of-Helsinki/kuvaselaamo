@@ -57,7 +57,7 @@ img {
   width: 60px;
   background-size: 40px;
   background-repeat: no-repeat;
-    background-position: center;
+  background-position: center;
 }
 .brand-text {
   float: left;
@@ -166,7 +166,7 @@ img {
 .actions__btn:hover {
   cursor: pointer;
 }
-.arrow {
+.image-viewer-arrow {
   height: 150px;
   padding: 12px;
   border: 0;
@@ -176,10 +176,10 @@ img {
   bottom: 0;
   margin: auto;
 }
-.arrow-left {
+.image-viewer-arrow.arrow-left {
   left: 0;
 }
-.arrow-right {
+.image-viewer-arrow.arrow-right {
   right: 0;
 }
 
@@ -247,9 +247,14 @@ img {
     float: left;
     margin: 0;
     border: 0;
-    box-sizing: content-box;
     overflow: hidden;
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
   }
   .item:nth-child(1) {
     height: 100%;

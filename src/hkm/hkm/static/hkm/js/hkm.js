@@ -22,4 +22,9 @@ palikka
     rowHeight: 200
   });
 
+})
+.define('app.pop-over', ['jQuery', 'docReady'], function ($) {
+
+  $('[data-toggle="popover"]').popover();
+
 });
