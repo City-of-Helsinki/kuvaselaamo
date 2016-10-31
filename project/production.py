@@ -32,5 +32,8 @@ BROKER_HEARTBEAT = 0
 SENTRY_DSN = ''
 SENTRY_SITE = ''
 
+# TODO
+HKM_MY_DOMAIN = ''
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 

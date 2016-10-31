@@ -8,5 +8,7 @@ SAUCELABS_ACCESS_KEY = getattr(settings, 'SAUCELABS_ACCESS_KEY', '')
 
 DEFAULT_LANGUAGE = settings.LANGUAGE_CODE
 
+MY_DOMAIN = settings.HKM_MY_DOMAIN
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 

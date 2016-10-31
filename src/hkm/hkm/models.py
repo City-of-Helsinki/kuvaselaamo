@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
+from hkm.finna import DEFAULT_CLIENT as FINNA
+from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -42,12 +45,16 @@ class UserProfile(BaseModel):
 
 class CollectionQuerySet(models.QuerySet):
   def user_can_edit(self, user):
-    return self.filter(owner=user)
+    if user.is_authenticated():
+      return self.filter(owner=user)
+    return self.none()
 
   def user_can_view(self, user):
-    is_own = models.Q(owner=user)
     is_public = models.Q(public=True)
-    return self.filter(is_own|is_public)
+    if user.is_authenticated():
+      is_own = models.Q(owner=user)
+      return self.filter(is_own|is_public)
+    return self.filter(is_public)
 
 
 class Collection(BaseModel):
@@ -75,7 +82,7 @@ class Collection(BaseModel):
     return None
 
 
-def get_image_upload_pathupload_to(instance, filename):
+def get_image_upload_path(instance, filename):
   return 'images/%(username)s/%(collection_title)s_%(collection_id)d/%(filename)s' % {
       'username': instance.collection.owner.username,
       'collection_title': instance.collection.title,
@@ -91,10 +98,20 @@ class Record(OrderedModel, BaseModel):
   collection = models.ForeignKey(Collection, verbose_name=_(u'Collection'), related_name='records')
   record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
   edited_image = models.ImageField(verbose_name=_(u'Edited image'), null=True, blank=True,
-      upload_to=get_image_upload_pathupload_to)
+      upload_to=get_image_upload_path)
 
   class Meta(OrderedModel.Meta):
     pass
+
+  def get_details(self):
+    return FINNA.get_record(self.record_id)
+
+  def get_full_res_image_absolute_url(self):
+    if self.edited_image:
+      return u'%s/%s' % (settings.MY_DOMAIN, self.edited_image.url)
+    else:
+      record_data = self.get_details()
+      return HKM.get_full_res_image_url(record_data['records'][0]['rawData']['thumbnail'])
 
 
 @receiver(post_save, sender=User)

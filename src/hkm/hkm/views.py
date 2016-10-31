@@ -91,6 +91,12 @@ class CollectionDetailView(BaseView):
   collection = None
   record = None
 
+  def get_template_names(self):
+    if self.record:
+      return 'hkm/views/collection_record.html'
+    else:
+      return self.template_name
+
   def get_url(self):
     url = reverse(self.url_name, kwargs={'collection_id': self.collection.id})
     if self.record:
@@ -111,8 +117,6 @@ class CollectionDetailView(BaseView):
         self.record = self.collection.records.get(id=record_id)
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
-    if not self.record:
-      self.record = self.collection.records.first()
 
     return True
 
@@ -120,8 +124,9 @@ class CollectionDetailView(BaseView):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
     context['record'] = self.record
-    context['next_record'] = self.collection.get_next_record(self.record)
-    context['previous_record'] = self.collection.get_previous_record(self.record)
+    if self.record:
+      context['next_record'] = self.collection.get_next_record(self.record)
+      context['previous_record'] = self.collection.get_previous_record(self.record)
     return context
 
 
@@ -191,39 +196,6 @@ class SearchRecordDetailView(SearchView):
   def get_facet_result(self, search_term):
     return None
 
-  def get_context_data(self, **kwargs):
-    context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
-    record = self.search_result['records'][0]
-    record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
-    context['record'] = record
-    return context
-
-
-class BaseFinnaRecordDetailView(BaseView):
-  record_finna_id = None
-  url_name = 'hkm_record'
-  record = None
-
-  def get_url(self):
-    return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
-
-  def setup(self, request, *args, **kwargs):
-    self.record_finna_id = kwargs['finna_id']
-    record_data = FINNA.get_record(self.record_finna_id)
-    if record_data:
-      self.record = record_data['records'][0]
-      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
-    return True
-
-  def get_context_data(self, **kwargs):
-    context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
-    context['record'] = self.record
-    return context
-
-
-class FinnaRecordDetailView(BaseFinnaRecordDetailView):
-  template_name = 'hkm/views/record.html'
-
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
     if request.user.is_authenticated():
@@ -260,6 +232,39 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
     url += '?rid=%s' % record.id
     return redirect(url)
 
+  def get_context_data(self, **kwargs):
+    context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
+    record = self.search_result['records'][0]
+    record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
+    context['record'] = record
+    return context
+
+
+class BaseFinnaRecordDetailView(BaseView):
+  record_finna_id = None
+  url_name = 'hkm_record'
+  record = None
+
+  def get_url(self):
+    return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
+
+  def setup(self, request, *args, **kwargs):
+    self.record_finna_id = kwargs['finna_id']
+    record_data = FINNA.get_record(self.record_finna_id)
+    if record_data:
+      self.record = record_data['records'][0]
+      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+    return True
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
+    context['record'] = self.record
+    return context
+
+
+class FinnaRecordDetailView(BaseFinnaRecordDetailView):
+  template_name = 'hkm/views/record.html'
+
 
 class FinnaRecordFeedbackView(BaseView):
   template_name = 'hkm/views/record_feedback.html'
@@ -279,9 +284,6 @@ class FinnaRecordEditDownloadView(BaseView):
 
 class FinnaRecordEditOrderView(BaseView):
   template_name = 'hkm/views/record_edit_order.html'
-
-
-
 
 
 class SignUpView(BaseView):

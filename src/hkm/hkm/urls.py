@@ -7,9 +7,11 @@ from hkm import views
 urlpatterns = [
   url(r'^$', views.IndexView.as_view(), name='hkm_index'),
   url(r'^info/$', views.InfoView.as_view(), name='hkm_info'),
+
   url(r'^collection/public/$', views.PublicCollectionsView.as_view(), name='hkm_public_collections'),
   url(r'^collection/my/$', views.MyCollectionsView.as_view(), name='hkm_my_collections'),
   url(r'^collection/(?P<collection_id>\d+)/$', views.CollectionDetailView.as_view(), name='hkm_collection'),
+
   url(r'^record/(?P<finna_id>.+)/feedback/$', views.FinnaRecordFeedbackView.as_view(), name='hkm_record_feedback'),
   url(r'^record/(?P<finna_id>.+)/edit/add/$', views.FinnaRecordEditAddToCollectionView.as_view(), name='hkm_record_edit_add'),
   url(r'^record/(?P<finna_id>.+)/edit/download/$', views.FinnaRecordEditDownloadView.as_view(), name='hkm_record_edit_download'),
