@@ -43,18 +43,23 @@ class FinnaClient(object):
     LOG.debug('Got result from Finna', extra={'data': {'result_data': repr(result_data)}})
     return result_data
 
-  def search(self, search_term, facet_type=None, facet_value=None, page=1, limit=20, language='fi'):
+  def search(self, search_term, facet_type=None, facet_value=None, page=1, limit=20, language='fi',
+      detailed=False):
     url = FinnaClient.API_ENDPOINT + 'search'
     payload = {
       'lookfor': search_term,
       'filter[]': ['format:'+self.material_type, 'building:'+self.organisation, 'online_boolean:"1"',],
-      'page': page,
       'page': page,
       'limit': limit,
       'lng': language,
     }
     if facet_type and facet_value:
       payload['filter[]'].append(facet_type + ":" + facet_value)
+
+    if detailed:
+      payload['field[]'] = ['id', 'authors','buildings', 'formats', 'genres', 'humanReadablePublicationDates',
+        'imageRights', 'images', 'institutions', 'languages', 'originalLanguages', 'presenters',
+        'publicationDates', 'rating', 'series', 'subjects', 'summary', 'title', 'year', 'rawData',]
 
     try:
       r = requests.get(url, params=payload, timeout=self.timeout)
@@ -71,12 +76,20 @@ class FinnaClient(object):
 
     LOG.debug('Got result from Finna', extra={'data': {'result_data': repr(result_data)}})
     if limit > 0:
-      pages = math.ceil(result_data['resultCount'] / float(limit))
+      pages = int(math.ceil(result_data['resultCount'] / float(limit)))
     else:
       pages = 1
-    result_data['pages'] = int(pages)
+    result_data['pages'] = pages
     result_data['limit'] = limit
     result_data['page'] = page
+    if page > 1:
+      result_data['previous_page'] = page - 1
+    else:
+      result_data['previous_page'] = None
+    if page < pages:
+      result_data['next_page'] = page + 1
+    else:
+      result_data['next_page'] = None
     return result_data
 
   def get_record(self, record_id):

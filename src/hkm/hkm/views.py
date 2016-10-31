@@ -125,6 +125,80 @@ class CollectionDetailView(BaseView):
     return context
 
 
+class SearchView(BaseView):
+  template_name = 'hkm/views/search.html'
+  url_name = 'hkm_search'
+
+  page_size = 20
+  use_detailed_query = False
+
+  facet_result = None
+  search_result = None
+
+  search_term = None
+  facet_type = None
+  facet_value = None
+
+  def get(self, request, *args, **kwargs):
+    search_term = request.GET.get('search', None)
+    if search_term:
+      self.handle_search(request, search_term, *args, **kwargs)
+    return super(SearchView, self).get(request, *args, **kwargs)
+
+  def handle_search(self, request, search_term, *args, **kwargs):
+    self.search_term = search_term
+    self.facet_type = request.GET.get('ft', None)
+    self.facet_value = request.GET.get('fv', None)
+    page = int(request.GET.get('page', 1))
+    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
+      'facet_value': self.facet_value, 'page': page}})
+    self.facet_result = self.get_facet_result(self.search_term)
+    self.search_result = self.get_search_result(self.search_term, self.facet_type, self.facet_value,
+        page, self.page_size)
+
+    # calculate global index for the record, this is used to form links to search detail view
+    # which is technically same view as this, it only shows one image per page
+    i = 1 # record's index in current page
+    for record in self.search_result['records']:
+      p = self.search_result['page'] - 1 # zero indexed page
+      record['index'] = p * self.search_result['limit'] + i
+      i += 1
+
+  def get_facet_result(self, search_term):
+    return FINNA.get_facets(self.search_term)
+
+  def get_search_result(self, search_term, facet_type, facet_value, page, limit):
+    return FINNA.search(search_term, facet_type=facet_type,
+        facet_value=facet_value, page=page, limit=limit, detailed=self.use_detailed_query)
+
+  def get_context_data(self, **kwargs):
+    context = super(SearchView, self).get_context_data(**kwargs)
+    context['facet_result'] = self.facet_result
+    context['facet_type'] = self.facet_type
+    context['facet_value'] = self.facet_value
+    context['search_result'] = self.search_result
+    context['search_term'] = self.search_term
+    return context
+
+
+class SearchRecordDetailView(SearchView):
+  url_name = 'hkm_search_record'
+  template_name = 'hkm/views/search_record.html'
+
+  page_size = 1
+  use_detailed_query = True
+
+  def get_facet_result(self, search_term):
+    return None
+
+  def get_context_data(self, **kwargs):
+    context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
+    record = self.search_result['records'][0]
+    record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
+    context['record'] = record
+    return context
+
+
 class BaseFinnaRecordDetailView(BaseView):
   record_finna_id = None
   url_name = 'hkm_record'
@@ -207,42 +281,8 @@ class FinnaRecordEditOrderView(BaseView):
   template_name = 'hkm/views/record_edit_order.html'
 
 
-class SearchView(BaseView):
-  template_name = 'hkm/views/search.html'
-  url_name = 'hkm_search'
 
-  facet_result = None
-  search_result = None
 
-  search_term = None
-  facet_type = None
-  facet_value = None
-
-  def get(self, request, *args, **kwargs):
-    search_term = request.GET.get('search', None)
-    if search_term:
-      self.handle_search(request, search_term, *args, **kwargs)
-    return super(SearchView, self).get(request, *args, **kwargs)
-
-  def handle_search(self, request, search_term, *args, **kwargs):
-    self.search_term = search_term
-    self.facet_type = request.GET.get('ft', None)
-    self.facet_value = request.GET.get('fv', None)
-    page = request.GET.get('page', 1)
-    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
-      'facet_value': self.facet_value, 'page': page}})
-    self.facet_result = FINNA.get_facets(self.search_term)
-    self.search_result = FINNA.search(self.search_term, facet_type=self.facet_type,
-        facet_value=self.facet_value, page=page)
-
-  def get_context_data(self, **kwargs):
-    context = super(SearchView, self).get_context_data(**kwargs)
-    context['facet_result'] = self.facet_result
-    context['facet_type'] = self.facet_type
-    context['facet_value'] = self.facet_value
-    context['search_result'] = self.search_result
-    context['search_term'] = self.search_term
-    return context
 
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
