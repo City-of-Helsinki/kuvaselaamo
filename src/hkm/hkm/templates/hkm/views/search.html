@@ -12,11 +12,11 @@
 
   <div class="container">
 
-    <form class="form-group search-form">
-      <div class="input-group">
-        <input class="form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+    <form class="search-form form-group">
+      <div class="search-form__content input-group">
+        <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+        <span class="search-form__btn-container input-group-btn">
+          <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
         </span>
       </div>
     </form>
@@ -37,21 +37,21 @@
 
       <ul class="list-group list-group-root well" id="accordion">
 
-        <li class="list-group-item">
+        <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
-          <ul id="collapse-author" class="list-group panel-collapse collapse">
+          <ul id="collapse-author" class="list-group panel-collapse collapse {% if facet_type == 'author_facet' %}in{% endif %}">
             {% for author in facet_result.facets.author_facet %}
-              <li class="list-group-item"><a href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == author.value %}active{% endif %}" href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
             {% endfor %}
           </ul>
         </li>
-        <li class="list-group-item">
+        <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-year">{% trans 'Year' %}</a>
-          <ul id="collapse-year" class="list-group panel-collapse collapse">
+          <ul id="collapse-year" class="list-group panel-collapse collapse {% if facet_type == 'main_date_str' %}in{% endif %}">
             {% for date_facet in facet_result.facets.main_date_str %}
-              <li class="list-group-item"><a href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == date_facet.value %}active{% endif %}" href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -66,10 +66,6 @@
 
       <div class="flex-images">
         {% include 'hkm/snippets/search_records_grid.html' %}
-      </div>
-
-      <div id="status">
-        <progress max="20" value="0"></progress>
       </div>
 
     </div>

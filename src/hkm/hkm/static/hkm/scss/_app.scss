@@ -9,6 +9,32 @@ img {
   height: 100%;
 }
 
+/* Container */
+@media (min-width: 1200px) {
+  .container {
+    // width: 1170px;
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    // width: 970px;
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    // width: 750px;
+    width: 100%;
+  }
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 /* Navigation */
 .navbar {
   margin: 0;
@@ -66,7 +92,7 @@ img {
 }
 .nav_viewer {
   background: rgba(0, 0, 0, 0.6);
-  border-bottom: solid 1px $color-salmon;
+  border-bottom: solid 1px $color-bittersweet;
   color: $color-theme;
   a {
     color: $color-theme;
@@ -122,23 +148,25 @@ img {
 }
 .banner {
   float: left;
-  background-image: url('/static/hkm/img/city.jpg');
+  background-color: $color-bittersweet;
   width: 100%;
-  height: 340px;
+  min-height: 100px;
+  padding: 10px 0;
+  // height: 190px;
   margin-bottom: 30px;
 }
 .page-header {
   display: block;
-  color: $color-strikemaster;
-  background: $color-theme;
-  margin: 30px 0 0 0;
-  padding-bottom: 0;
+  color: $color-white;
+  border: 0;
+  margin: 0 0 0 0;
 }
 .page-header h1 {
   display: block;
   font-size: 40px;
   margin-top: 18px;
   line-height: 40px;
+  font-family: 'goviniusbold';
 }
 
 /* Actions */
@@ -207,10 +235,7 @@ img {
     padding-left: 20px;
     font-size: 12px;
   }
-  .list-group.list-group-root .list-group a {
-    color: #555555;
-  }
-  .list-group.list-group-root .list-group-item {
+  .list-group.list-group-root .list-group__item {
     border-radius: 0;
     border: 0;
     padding: 0;
@@ -223,6 +248,13 @@ img {
   }
   .list-group.list-group-root > .list-group > .list-group > .list-group-item {
     padding-left: 45px;
+  }
+  .list-group__link {
+    color: #555555;
+  }
+  .list-group__link.active {
+    color: $color-strikemaster;
+    text-decoration: underline;
   }
 }
 .article {
@@ -298,11 +330,10 @@ img {
 
 /* Search */
 .search-form {
-  margin-top: 170px;
-  .form-control {
+  .search-form__field {
     width: 100%;
     height: 40px;
-    border: solid 1px $color-salmon;
+    border: solid 1px $color-strikemaster;
     border-radius: 20px;
   }
   .form-control:focus {
@@ -310,11 +341,11 @@ img {
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
-    border: solid 1px $color-salmon;
+    border: solid 1px $color-strikemaster;
   }
-  .input-group-btn .btn {
+  .search-form__btn {
     height: 40px;
-    border: solid 1px  $color-salmon;
+    border: solid 1px  $color-strikemaster;
     border-left: 0;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
