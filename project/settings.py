@@ -110,6 +110,8 @@ STATICFILES_FINDERS = (
 INSTALLED_APPS = (
     'hkm',
 
+    'phonenumber_field',
+
     'djcelery',
     'compressor',
 

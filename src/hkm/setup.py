@@ -27,6 +27,7 @@ setup(
     keywords='hkm-kuvapalvelu',
     install_requires=[
       'django-ordered-model==1.3.0',
+      'django-phonenumber-field==1.1.0',
     ],
 )
 

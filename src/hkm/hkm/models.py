@@ -3,6 +3,9 @@
 
 import logging
 from ordered_model.models import OrderedModel
+from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
@@ -119,6 +122,70 @@ def user_post_save(sender, instance, created, *args, **kwargs):
   if created:
     profile = UserProfile(user=instance)
     profile.save()
+
+
+class Product(BaseModel):
+  name = models.CharField(verbose_name=_(u'Name'), max_length=255)
+  description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
+  prize = models.DecimalField(verbose_name=_(u'Prize'), decimal_places=2, max_digits=10)
+
+  class Meta:
+    abstract = True
+
+  def __unicode__(self):
+    return self.name
+
+
+class PrintProduct(Product):
+  width = models.IntegerField(verbose_name=_(u'Width'))
+  height = models.IntegerField(verbose_name=_(u'Height'))
+  paper_quality = models.CharField(verbose_name=_(u'Paper quality'), max_length=255)
+
+
+class ProductOrder(BaseModel):
+  # Anonymous users can order aswell, so we need contact and shipping information directly
+  # to order model
+  user = models.ForeignKey(User, verbose_name=_(u'User'), null=True, blank=True)
+  first_name = models.CharField(verbose_name=_(u'First name'), max_length=255)
+  last_name = models.CharField(verbose_name=_(u'Last name'), max_length=255)
+  email = models.EmailField(max_length=255, verbose_name=_(u'Email'))
+  phone = PhoneNumberField(verbose_name=_(u'Phone number'))
+  street_address = models.CharField(verbose_name=_(u'Street adress'), max_length=1024)
+  postal_code = models.IntegerField(verbose_name=_(u'Postal code'))
+  city = models.CharField(verbose_name=_(u'City'), max_length=255)
+
+  # generic relation to any product sub type. This is stored as a reference,
+  # but all information regarding the order MUST be stored in directly in this model
+  content_type = models.ForeignKey(ContentType, on_delete=models.SET_NULL, null=True, blank=True)
+  object_id = models.PositiveIntegerField()
+  content_object = GenericForeignKey('content_type', 'object_id')
+
+  # Order must always specify a URL where the orinting service can download the desired image
+  # This can be either as direct URL to HKM image server hoting the original image OR URL to
+  # kuvaselaamo server to the cropped image
+  image_url = models.CharField(verbose_name=_(u'Image URL'), max_length=2048)
+  # If this order is made from Record in collection, the Record is saved for statistics purposes
+  record = models.ForeignKey(Record, verbose_name=_(u'Record'), null=True, blank=True)
+
+  # Prize and amount information as they were at the time order was made
+  # NOTE: Product prizing might vary so these need to be freezed here
+  amount = models.IntegerField(verbose_name=_(u'Amount'), default=1)
+  unit_prize = models.DecimalField(verbose_name=_(u'Unit prize'), decimal_places=2, max_digits=10)
+  total_prize = models.DecimalField(verbose_name=_(u'Total prize'), decimal_places=2, max_digits=10)
+
+  # Timestamp for when users has confimed the order in kuvaselaamo
+  datetime_confirmed = models.DateTimeField(verbose_name=_(u'Confirmed'), null=True, blank=True)
+  # Timestamps and stateinformation about hte checkout and pyament flow
+  datetime_checkout_started = models.DateTimeField(verbose_name=_(u'Checkout started'), null=True, blank=True)
+  datetime_checkout_ended = models.DateTimeField(verbose_name=_(u'Checkout ended'), null=True, blank=True)
+  is_checkout_successful = models.NullBooleanField(verbose_name=_(u'Checkout succesful'), null=True, blank=True)
+  # Timestamps and state information about the actual product order from print
+  datetime_order_started = models.DateTimeField(verbose_name=_(u'Order started'), null=True, blank=True)
+  datetime_order_ended = models.DateTimeField(verbose_name=_(u'Order ended'), null=True, blank=True)
+  is_order_successful = models.NullBooleanField(verbose_name=_(u'Order succesful'), null=True, blank=True)
+
+  def __unicode__(self):
+    return 
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
