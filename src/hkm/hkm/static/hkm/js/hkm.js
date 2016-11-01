@@ -20,43 +20,14 @@ palikka
 
   var $window = $(window);
   var $container = $('.flex-images');
+  var $infiniteScroll = $('.flex-images.infinite-scroll');
   var $itemSlider = $('.item-slider');
   var $items = $('.flex-images .item');
-  var $status = $('#status');
-  var $progress = $('progress');
   var page = 1;
   var loadedImageCount = 0;
   var imageCount;
-  var supportsProgress = $progress[0] && $progress[0].toString().indexOf('Unknown') === -1;
 
   gridInit();
-
-  $window.scroll(function () {
-    if (window.innerHeight + document.body.scrollTop >= $window.height() &&  $(".infinite-scroll")[0]) {
-      ajaxGetPageImages();
-    }
-    else {
-      // gridInit();
-    }
-  });
-
-  function ajaxGetPageImages() {
-    page++;
-    $.ajax({
-      url: '',
-      method: 'GET',
-      data: 'page=' + page
-    })
-    .done(function(data) {
-      $container.append(data);
-      $container.imagesLoaded()
-        .progress(onProgress)
-        .always(onAlways);
-      // reset progress counter
-      imageCount = $container.find('img').length;
-      loadedImageCount = 0;
-    });
-  }
 
   function gridInit() {
     $('.item-slider').each(function () {
@@ -73,34 +44,32 @@ palikka
     });
   }
 
-  function updateProgress(value) {
-    if (supportsProgress) {
-      $progress.attr('value', value);
-    } else {
-      // if you don't support progress elem
-      $status.text(value + ' / ' + imageCount);
+  $window.scroll(function () {
+    if (window.innerHeight + document.body.scrollTop >= $window.height() && $infiniteScroll.length) {
+      ajaxGetPageImages();
     }
+  });
+
+  function ajaxGetPageImages() {
+    page++;
+    $.ajax({
+      url: '',
+      method: 'GET',
+      data: 'page=' + page
+    })
+    .done(function(data) {
+      $container.append(data);
+      $container.imagesLoaded().progress(onProgress);
+      imageCount = $container.find('img').length;
+      loadedImageCount = 0;
+    });
+  }
+
+  function onProgress(imgLoad, image) {
+    loadedImageCount++;
     if (loadedImageCount == imageCount) {
       gridInit();
     }
-  }
-
-  // triggered after each item is loaded
-  function onProgress(imgLoad, image) {
-    // change class if the image is loaded or broken
-    var $item = $(image.img).parent().parent();
-    $item.addClass('is-loading');
-    if (!image.isLoaded) {
-      $item.addClass('is-broken');
-    }
-    // update progress element
-    loadedImageCount++;
-    updateProgress(loadedImageCount);
-  }
-
-  // hide status when done
-  function onAlways() {
-    $status.css({ opacity: 0 });
   }
 
 })
