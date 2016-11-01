@@ -64,7 +64,9 @@
 
       <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 
-      {% include 'hkm/snippets/search_records_grid.html' %}
+      <div class="flex-images">
+        {% include 'hkm/snippets/search_records_grid.html' %}
+      </div>
 
       <div id="status">
         <progress max="20" value="0"></progress>

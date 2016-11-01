@@ -134,7 +134,7 @@ class SearchView(BaseView):
   template_name = 'hkm/views/search.html'
   url_name = 'hkm_search'
 
-  page_size = 20
+  page_size = 40
   use_detailed_query = False
 
   facet_result = None
@@ -149,6 +149,12 @@ class SearchView(BaseView):
     if search_term:
       self.handle_search(request, search_term, *args, **kwargs)
     return super(SearchView, self).get(request, *args, **kwargs)
+
+  def get_template_names(self):
+    if self.request.is_ajax():
+      return 'hkm/snippets/search_records_grid.html'
+    else:
+      return self.template_name
 
   def handle_search(self, request, search_term, *args, **kwargs):
     self.search_term = search_term
@@ -170,7 +176,10 @@ class SearchView(BaseView):
       i += 1
 
   def get_facet_result(self, search_term):
-    return FINNA.get_facets(self.search_term)
+    if self.request.is_ajax():
+      return None
+    else:
+      return FINNA.get_facets(self.search_term)
 
   def get_search_result(self, search_term, facet_type, facet_value, page, limit):
     return FINNA.search(search_term, facet_type=facet_type,
