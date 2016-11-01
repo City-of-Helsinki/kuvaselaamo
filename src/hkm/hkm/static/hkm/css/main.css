@@ -5852,6 +5852,25 @@ a {
 img {
   height: 100%; }
 
+/* Container */
+@media (min-width: 1200px) {
+  .container {
+    width: 100%; } }
+
+@media (min-width: 992px) {
+  .container {
+    width: 100%; } }
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%; } }
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px; }
+
 /* Navigation */
 .navbar {
   margin: 0;
@@ -5906,7 +5925,7 @@ img {
 
 .nav_viewer {
   background: rgba(0, 0, 0, 0.6);
-  border-bottom: solid 1px #f1856b;
+  border-bottom: solid 1px #ff7862;
   color: #fff; }
   .nav_viewer a {
     color: #fff; }
@@ -5955,23 +5974,24 @@ img {
 
 .banner {
   float: left;
-  background-image: url("/static/hkm/img/city.jpg");
+  background-color: #ff7862;
   width: 100%;
-  height: 340px;
+  min-height: 100px;
+  padding: 10px 0;
   margin-bottom: 30px; }
 
 .page-header {
   display: block;
-  color: #965479;
-  background: #fff;
-  margin: 30px 0 0 0;
-  padding-bottom: 0; }
+  color: #fff;
+  border: 0;
+  margin: 0 0 0 0; }
 
 .page-header h1 {
   display: block;
   font-size: 40px;
   margin-top: 18px;
-  line-height: 40px; }
+  line-height: 40px;
+  font-family: 'goviniusbold'; }
 
 /* Actions */
 .actions {
@@ -6035,9 +6055,7 @@ img {
     margin-bottom: 0;
     padding-left: 20px;
     font-size: 12px; }
-  .sidebar .list-group.list-group-root .list-group a {
-    color: #555555; }
-  .sidebar .list-group.list-group-root .list-group-item {
+  .sidebar .list-group.list-group-root .list-group__item {
     border-radius: 0;
     border: 0;
     padding: 0; }
@@ -6047,6 +6065,11 @@ img {
     padding-left: 30px; }
   .sidebar .list-group.list-group-root > .list-group > .list-group > .list-group-item {
     padding-left: 45px; }
+  .sidebar .list-group__link {
+    color: #555555; }
+  .sidebar .list-group__link.active {
+    color: #965479;
+    text-decoration: underline; }
 
 .article {
   float: right;
@@ -6110,25 +6133,25 @@ img {
   background: rgba(0, 0, 0, 0.5); }
 
 /* Search */
-.search-form {
-  margin-top: 170px; }
-  .search-form .form-control {
-    width: 100%;
-    height: 40px;
-    border: solid 1px #f1856b;
-    border-radius: 20px; }
-  .search-form .form-control:focus {
-    outline-color: #4D90FE;
-    outline-offset: -2px;
-    outline-style: auto;
-    outline-width: 5px;
-    border: solid 1px #f1856b; }
-  .search-form .input-group-btn .btn {
-    height: 40px;
-    border: solid 1px #f1856b;
-    border-left: 0;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px; }
+.search-form .search-form__field {
+  width: 100%;
+  height: 40px;
+  border: solid 1px #965479;
+  border-radius: 20px; }
+
+.search-form .form-control:focus {
+  outline-color: #4D90FE;
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+  border: solid 1px #965479; }
+
+.search-form .search-form__btn {
+  height: 40px;
+  border: solid 1px #965479;
+  border-left: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px; }
 
 /* Dialogs */
 .modal-dialog {

@@ -1,5 +1,5 @@
 {% load hkm_tags %}
-
+<div class="item-slider invisible">
 {% for record in search_result.records %}
   <div class="item" data-w="" data-h="">
     <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ record.index }}">
@@ -8,4 +8,4 @@
     </a>
   </div>
 {% endfor %}
-
+</div>

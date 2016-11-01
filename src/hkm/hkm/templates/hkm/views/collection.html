@@ -15,16 +15,17 @@
 {% block content %}
 
   <div class="container">
-
-    <div class="flex-images">
-      {% for record in collection.records.all %}
-        <div class="item" data-w="" data-h="">
-          <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ record.id }}">
-            <span class="record-title">{{ record }}</span>
-            <img class="flex-img" src="{% finna_image record.record_id w=400 h=400 %}"></img>
-          </a>
-        </div>
-      {% endfor %}
+    <div class="item-slider">
+      <div class="flex-images">
+        {% for record in collection.records.all %}
+          <div class="item" data-w="" data-h="">
+            <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ record.id }}">
+              <span class="record-title">{{ record }}</span>
+              <img class="flex-img" src="{% finna_image record.record_id w=400 h=400 %}"></img>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
   </div> <!-- Container -->
