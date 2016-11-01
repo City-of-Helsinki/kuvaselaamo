@@ -43,9 +43,8 @@ palikka
       method: 'GET',
       data: 'page=' + page
     })
-    .done(function(page) {
-      var images = $(page).find('.flex-images .item')
-      $container.append(images);
+    .done(function(data) {
+      $container.append(data);
       $container.imagesLoaded()
         .progress( onProgress )
         .always( onAlways );
@@ -57,11 +56,11 @@ palikka
 
   function gridInit() {
     $('.flex-images .item').each(function () {
-      $(this).removeClass('hidden');
       var w = $(this).find('img').width();
       var h = $(this).find('img').height();
       $(this).attr('data-w', w);
       $(this).attr('data-h', h);
+      $(this).removeClass('hidden');
     });
     $container.flexImages({
       rowHeight: 200
