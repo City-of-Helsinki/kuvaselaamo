@@ -143,11 +143,11 @@ class SearchView(BaseView):
   search_term = None
   facet_type = None
   facet_value = None
+  page = 1
 
   def get(self, request, *args, **kwargs):
-    search_term = request.GET.get('search', None)
-    if search_term:
-      self.handle_search(request, search_term, *args, **kwargs)
+    if self.search_term:
+      self.handle_search(request, *args, **kwargs)
     return super(SearchView, self).get(request, *args, **kwargs)
 
   def get_template_names(self):
@@ -156,16 +156,19 @@ class SearchView(BaseView):
     else:
       return self.template_name
 
-  def handle_search(self, request, search_term, *args, **kwargs):
-    self.search_term = search_term
+  def setup(self, request, *args, **kwargs):
+    self.search_term = request.GET.get('search', None)
     self.facet_type = request.GET.get('ft', None)
     self.facet_value = request.GET.get('fv', None)
-    page = int(request.GET.get('page', 1))
+    self.page = int(request.GET.get('page', 1))
+    return True
+
+  def handle_search(self, request, *args, **kwargs):
     LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
-      'facet_value': self.facet_value, 'page': page}})
+      'facet_value': self.facet_value, 'page': self.page}})
     self.facet_result = self.get_facet_result(self.search_term)
     self.search_result = self.get_search_result(self.search_term, self.facet_type, self.facet_value,
-        page, self.page_size)
+        self.page, self.page_size)
 
     # calculate global index for the record, this is used to form links to search detail view
     # which is technically same view as this, it only shows one image per page
@@ -190,7 +193,6 @@ class SearchView(BaseView):
     context['facet_result'] = self.facet_result
     context['facet_type'] = self.facet_type
     context['facet_value'] = self.facet_value
-    print context['facet_type']
     context['search_result'] = self.search_result
     context['search_term'] = self.search_term
     return context
@@ -238,8 +240,9 @@ class SearchRecordDetailView(SearchView):
     record = Record(collection=collection, record_id=record_id, creator=request.user)
     record.save()
 
-    url = reverse('hkm_collection', kwargs={'collection_id': collection.id})
-    url += '?rid=%s' % record.id
+    url = reverse('hkm_search_record')
+    url += '?search=%s&ft=%s&fv=%s&page=%d' % (self.search_term, self.facet_type, self.facet_value,
+        self.page)
     return redirect(url)
 
   def get_context_data(self, **kwargs):

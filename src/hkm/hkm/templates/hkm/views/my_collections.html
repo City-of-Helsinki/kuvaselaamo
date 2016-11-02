@@ -26,10 +26,10 @@
             <div class="flex-images flex-sub">
               {% with images=collection|display_images %}
                 {% if images|length == 1 %}
-                   <div class="item" style="background-image:url('{{ images.0 }}')"></div
+                <div class="item" style="background-image:url('{{ images.0 }}')"></div>
                 {% else %}
                   {% for image_url in images %}
-                  <div class="item" style="background-image:url('{{ image_url }}')"></div>
+                    <div class="item" style="background-image:url('{{ image_url }}')"></div>
                   {% endfor %}
                 {% endif %}
               {% endwith %}
