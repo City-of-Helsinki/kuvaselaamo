@@ -140,6 +140,14 @@ def user_post_save(sender, instance, created, *args, **kwargs):
     profile.save()
 
 
+class UserFavoriteRecord(BaseModel):
+  user = models.ForeignKey(User, verbose_name=_(u'User'))
+  record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
+
+  def __unicode__(self):
+    return u'%s / %s' % (self.user.username, self.record_id)
+
+
 class Product(BaseModel):
   name = models.CharField(verbose_name=_(u'Name'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
