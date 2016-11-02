@@ -10,7 +10,7 @@ LOG = logging.getLogger(__name__)
 
 
 class HKMClient(object):
-  timeout = 10
+  timeout = 3
 
   def get_full_res_image_url(self, preview_image_url):
     """
