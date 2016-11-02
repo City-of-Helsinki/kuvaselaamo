@@ -2,15 +2,19 @@
 {% load hkm_tags %}
 {% load i18n %}
 
-{% block content %}
+{% block viewer_arrows %}
 
-  {% if record.get_full_res_image_absolute_url %}
-    <div class="image-viewer"><img src="{{ record.get_full_res_image_absolute_url }}"></img></div>
-  {% else %}
-    <h1 style="color:#FF0000;">{% trans 'THIS IS LOW RESOLUTION IMAGE. CAN NOT ORDER PRINT PRODUCTS' %}</h1>
-    <div class="image-viewer"><img src="{% finna_image record.record_id w=2000 h=2000 %}"></img></div>
+  {% if previous_record %}
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+  {% endif %}
+  {% if next_record %}
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
   {% endif %}
 
-  <!-- {{ record }} -->
+{% endblock %}
+
+{% block content %}
+
+  <div class="image-viewer"><img src="{% finna_image record.record_id w=2000 h=2000 %}"></img></div>
 
 {% endblock %}

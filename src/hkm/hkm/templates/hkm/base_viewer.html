@@ -6,20 +6,9 @@
 
 {% block main_content %}
 
-  {% block actions %}
-    <button class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></button>
-    {% if previous_record %}
-      <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">PREVIOUS RECORD</a>
-    {% else %}
-      <a href="">NO PREVIOUS RECORDS</a>
-    {% endif %}
-    {% if next_record %}
-      <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">NEXT RECORD</a>
-    {% else %}
-      <a href="">NO NEXT RECORDS</a>
-    {% endif %}
+  {% block viewer_arrows %}{% endblock %}
 
-    <button class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></button>
+  {% block actions %}
 
     <div class="actions actions_left">
       <button class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
