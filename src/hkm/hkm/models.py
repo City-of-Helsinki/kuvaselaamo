@@ -11,12 +11,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
+from django.core.cache import caches
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
-
+DEFAULT_CACHE = caches['default']
 
 class BaseModel(models.Model):
   created = models.DateTimeField(verbose_name=_(u'Created'), auto_now_add=True)
@@ -107,14 +108,29 @@ class Record(OrderedModel, BaseModel):
     pass
 
   def get_details(self):
-    return FINNA.get_record(self.record_id)
+    cache_key = '%s-details' % self.record_id
+    data = DEFAULT_CACHE.get(cache_key, None)
+    if data == None:
+      data = FINNA.get_record(self.record_id)
+      DEFAULT_CACHE.set(cache_key, data, 60 * 15)
+    else:
+      LOG.debug('Got record details from cache', extra={'data': {'record_id': self.record_id}})
+    return data
 
   def get_full_res_image_absolute_url(self):
     if self.edited_image:
       return u'%s/%s' % (settings.MY_DOMAIN, self.edited_image.url)
     else:
       record_data = self.get_details()
-      return HKM.get_full_res_image_url(record_data['records'][0]['rawData']['thumbnail'])
+      record_url = record_data['records'][0]['rawData']['thumbnail']
+      cache_key = '%s-record-preview-url' % record_url
+      full_res_url = DEFAULT_CACHE.get(cache_key, None)
+      if full_res_url == None:
+        full_res_url = HKM.get_full_res_image_url(record_data['records'][0]['rawData']['thumbnail'])
+        DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
+      else:
+        LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
+      return full_res_url
 
 
 @receiver(post_save, sender=User)
