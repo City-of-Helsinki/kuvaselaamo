@@ -172,11 +172,12 @@ class SearchView(BaseView):
 
     # calculate global index for the record, this is used to form links to search detail view
     # which is technically same view as this, it only shows one image per page
-    i = 1 # record's index in current page
-    for record in self.search_result['records']:
-      p = self.search_result['page'] - 1 # zero indexed page
-      record['index'] = p * self.search_result['limit'] + i
-      i += 1
+    if not self.search_result['resultCount'] == 0:
+      i = 1 # record's index in current page
+      for record in self.search_result['records']:
+        p = self.search_result['page'] - 1 # zero indexed page
+        record['index'] = p * self.search_result['limit'] + i
+        i += 1
 
   def get_facet_result(self, search_term):
     if self.request.is_ajax():
