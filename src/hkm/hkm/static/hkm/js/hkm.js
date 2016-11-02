@@ -99,6 +99,18 @@ palikka
     }
   });
 
+  $("#popover-add").popover({
+    html: true,
+    toggle: 'popover',
+    container: 'body',
+    placement: 'top',
+    trigger: 'focus',
+    html: true,
+    content: function() {
+      return $('#popover-add-content').html();
+    }
+  });
+
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 

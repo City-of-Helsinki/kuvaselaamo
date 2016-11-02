@@ -2,41 +2,6 @@
 {% load hkm_tags %}
 {% load i18n %}
 
-{% block actions %}
-
-  <button class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></button>
-  {% if previous_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">PREVIOUS RECORD</a>
-  {% else %}
-    <a href="">NO PREVIOUS RECORDS</a>
-  {% endif %}
-  {% if next_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">NEXT RECORD</a>
-  {% else %}
-    <a href="">NO NEXT RECORDS</a>
-  {% endif %}
-
-  <button class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></button>
-
-  <div class="actions actions_left">
-    <button class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
-    <button class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
-  </div>
-  <div class="actions actions_right">
-    <button class="actions__btn" id="popover-cart">
-      <img src="/static/hkm/img/karry.png"></img>
-    </button>
-    <button class="actions__btn" id="popover-info" title="Image name">
-      <img src="/static/hkm/img/info.png"></img>
-    </button>
-    <button class="actions__btn"><img src="/static/hkm/img/share.png"></img></button>
-    {% if user.is_authenticated %}
-      <button class="actions__btn" data-toggle="modal" data-target="#add-to-collection"><img src="/static/hkm/img/h_sydan_valk.png"></img></button>
-    {% endif %}
-  </div>
-
-{% endblock %}
-
 {% block content %}
 
   {% if record.get_full_res_image_absolute_url %}
@@ -47,37 +12,5 @@
   {% endif %}
 
   <!-- {{ record }} -->
-
-{% endblock %}
-
-{% block hidden %}
-  {% include 'hkm/snippets/popover_cart.html' %}
-  {% include 'hkm/snippets/popover_info.html' %}
-{% endblock %}
-
-{% block modals %}
-
-  {% if user.is_authenticated %}
-    <form class="modal fade" id="add-to-collection" method="POST" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{% trans 'Add to a new collection' %}</h4>
-          </div>
-          <div class="modal-body">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="add-to-collection" />
-            <input type="hidden" name="record_id" value="{{ record.id }}" />
-            <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button type="submit" value="add-to-collection" class="btn btn-primary">{% trans 'Submit' %}</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  {% endif %}
 
 {% endblock %}
