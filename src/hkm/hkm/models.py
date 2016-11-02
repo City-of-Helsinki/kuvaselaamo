@@ -12,6 +12,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
 from django.core.cache import caches
+from django.core.exceptions import ValidationError
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm import settings
@@ -62,13 +63,32 @@ class CollectionQuerySet(models.QuerySet):
 
 
 class Collection(BaseModel):
+  TYPE_NORMAL = 'normal'
+  TYPE_FAVORITE = 'favorite'
+
+  TYPE_CHOICES = (
+    (TYPE_NORMAL, _(u'Normal')),
+    (TYPE_FAVORITE, _(u'Favorite')),
+  )
+
   owner = models.ForeignKey(User, verbose_name=_(u'Owner'))
   title = models.CharField(verbose_name=_(u'Title'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
   public = models.BooleanField(verbose_name=_(u'Public'), default=False)
   show_in_landing_page = models.BooleanField(verbose_name=_(u'Public'), default=False)
+  collection_type = models.CharField(verbose_name=_(u'Type'), max_length=255, choices=TYPE_CHOICES,
+    default=TYPE_NORMAL)
 
   objects = CollectionQuerySet.as_manager()
+
+  def clean(self):
+    if self.collection_type == Collection.TYPE_FAVORITE:
+      favorite_collections = Collection.objects.filter(owner=self.owner, collection_type=Collection.TYPE_FAVORITE)
+      if self.id:
+        favorite_collections.exclude(id=self.id)
+      if favorite_collections.exists():
+        raise ValidationError('Only one Favorite collection per user is allowed')
+
 
   def __unicode__(self):
     return self.title
