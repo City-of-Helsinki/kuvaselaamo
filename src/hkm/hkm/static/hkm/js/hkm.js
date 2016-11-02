@@ -75,7 +75,29 @@ palikka
 })
 .define('app.pop-over', ['jQuery', 'docReady'], function () {
 
-  $('[data-toggle="popover"]').popover();
+  $("#popover-cart").popover({
+    html: true,
+    toggle: 'popover',
+    container: 'body',
+    placement: 'top',
+    trigger: 'focus',
+    html: true,
+    content: function() {
+      return $('#popover-cart-content').html();
+    }
+  });
+
+  $("#popover-info").popover({
+    html: true,
+    toggle: 'popover',
+    container: 'body',
+    placement: 'top',
+    trigger: 'focus',
+    html: true,
+    content: function() {
+      return $('#popover-info-content').html();
+    }
+  });
 
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {

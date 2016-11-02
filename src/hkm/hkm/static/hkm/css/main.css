@@ -6184,3 +6184,36 @@ img {
 /* Dialogs */
 .modal-dialog {
   margin: 80px auto; }
+
+/* Popover */
+.popover-content {
+  padding: 0; }
+
+.popover-list {
+  padding: 0;
+  margin: 0; }
+
+.popover-article {
+  padding: 8px 14px; }
+
+.popover-list__item {
+  border-bottom: solid 1px #ffdbab;
+  list-style-type: none; }
+
+.popover-list__item:nth-child(3) {
+  border-bottom: solid 1px #90d5ad; }
+
+.popover-list__item:nth-child(4) {
+  border-bottom: 0; }
+
+.popover-list__item:hover {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.popover-list__btn {
+  border: 0;
+  background: transparent;
+  padding: 5px;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: left; }

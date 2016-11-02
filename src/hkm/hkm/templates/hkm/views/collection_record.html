@@ -23,10 +23,10 @@
     <button class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
   </div>
   <div class="actions actions_right">
-    <button class="actions__btn" {% include 'hkm/snippets/popover_karry.html' %}>
+    <button class="actions__btn" id="popover-cart">
       <img src="/static/hkm/img/karry.png"></img>
     </button>
-    <button class="actions__btn" {% include 'hkm/snippets/popover_info.html' %}>
+    <button class="actions__btn" id="popover-info" title="Image name">
       <img src="/static/hkm/img/info.png"></img>
     </button>
     <button class="actions__btn"><img src="/static/hkm/img/share.png"></img></button>
@@ -50,6 +50,10 @@
 
 {% endblock %}
 
+{% block hidden %}
+  {% include 'hkm/snippets/popover_cart.html' %}
+  {% include 'hkm/snippets/popover_info.html' %}
+{% endblock %}
 
 {% block modals %}
 
