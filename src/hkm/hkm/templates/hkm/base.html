@@ -58,7 +58,9 @@
   <!-- Favicon, optionally place favicon.ico in the root of website. -->
   <link rel="shortcut icon" href="/static/favicon.ico">
 
-  <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
+  {% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
+  {% endblock %}
 
 
 </head>

@@ -18,19 +18,24 @@
 
     <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 
-    <div class="flex-images">
-      {% for collection in collections %}
-        <div class="item" data-w="550" data-h="400">
-          <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-            <span class="record-title">{{ collection }}</span>
-            <div class="flex-images flex-sub">
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
+    <div class="grid flex-images">
+      <div class="grid__group item-slider invisible">
+        {% for collection in collections %}
+          <div class="grid__item item" data-w="550" data-h="400">
+            <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+              <div class="sub-grid flex-images">
+                <div class="grid__item item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+                <div class="grid__item item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+                <div class="grid__item item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+              </div>
+              <div class="grid__meta">
+                <span class="grid__meta--title">{{ collection.title }}</span>
+                <span class="grid__meta--other">{% if collection.description %}{{ collection.description }}{% else %}{% trans 'No description' %}{% endif %}</span>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
   </div> <!-- Container -->

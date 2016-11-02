@@ -190,7 +190,6 @@ class SearchView(BaseView):
     context['facet_result'] = self.facet_result
     context['facet_type'] = self.facet_type
     context['facet_value'] = self.facet_value
-    print context['facet_type']
     context['search_result'] = self.search_result
     context['search_term'] = self.search_term
     return context

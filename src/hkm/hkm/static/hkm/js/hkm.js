@@ -21,7 +21,7 @@ palikka
   var $window = $(window);
   var $container = $('.flex-images');
   var $infiniteScroll = $('.flex-images.infinite-scroll');
-  var $itemSlider = $('.item-slider');
+  var $itemGroup = $('.grid__group');
   var $items = $('.flex-images .item');
   var page = 1;
   var loadedImageCount = 0;
@@ -30,10 +30,10 @@ palikka
   gridInit();
 
   function gridInit() {
-    $('.item-slider').each(function () {
+    $('.grid__group').each(function () {
       $('.flex-images .item').each(function () {
-        var w = $(this).find('img').width();
-        var h = $(this).find('img').height();
+        var w = $(this).find('.flex-img').width();
+        var h = $(this).find('.flex-img').height();
         $(this).attr('data-w', w);
         $(this).attr('data-h', h);
       });
@@ -76,5 +76,16 @@ palikka
 .define('app.pop-over', ['jQuery', 'docReady'], function () {
 
   $('[data-toggle="popover"]').popover();
+
+})
+.define('app.fav', ['jQuery', 'docReady'], function () {
+
+  // $.ajax({
+  //   url: '',
+  //   method: 'GET',
+  //   data:
+  // })
+  // .done(function(data) {
+  // });
 
 });
