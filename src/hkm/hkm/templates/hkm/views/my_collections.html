@@ -24,9 +24,15 @@
           <a href="{% url 'hkm_collection' collection_id=collection.id %}">
             <span class="record-title">{{ collection }}</span>
             <div class="flex-images flex-sub">
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
-              <div class="item" style="background-image:url('{% finna_image collection.records.first.record_id w=400 h=400 %}')"></div>
+              {% with images=collection|display_images %}
+                {% if images|length == 1 %}
+                  DEFAULT IMAGE
+                {% else %}
+                  {% for image_url in images %}
+                  <div class="item" style="background-image:url('{{ image_url }}')"></div>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
             </div>
           </a>
         </div>
