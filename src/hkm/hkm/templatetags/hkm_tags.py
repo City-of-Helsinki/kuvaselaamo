@@ -22,7 +22,7 @@ def display_images(collection):
   image_urls = []
 
   if record_count == 0:
-    image_urls.append('/static/hkm/images/collection_default_image.png')
+    image_urls.append('/static/hkm/img/collection_default_image.png')
   elif record_count < 3:
     image_urls.append(finna_image(ids[0]))
   else:
