@@ -6157,7 +6157,7 @@ img {
   background-color: transparent;
   background-image: url("/static/hkm/img/sydan_valkoinen.png"); }
 
-.grid__fav:hover {
+.grid__fav:hover, .grid__fav.active {
   background-image: url("/static/hkm/img/sydan_oranssi.png"); }
 
 /* Search */

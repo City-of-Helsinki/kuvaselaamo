@@ -333,9 +333,10 @@ class LanguageView(RedirectView):
 class AjaxUserFavoriteRecordView(View):
   def post(self, request, *args, **kwargs):
     record_id = request.POST.get('record_id', None)
+    print record_id
     action = request.POST.get('action', 'add')
     favorites_collection, created = Collection.objects.get_or_create(owner=request.user, collection_type=Collection.TYPE_FAVORITE,
-        defaults={'name': _(u'Favorites'), 'description': _(u'Your favorite images are collected here')})
+        defaults={'title': _(u'Favorites'), 'description': _(u'Your favorite images are collected here')})
 
     if record_id:
       if action == 'add':

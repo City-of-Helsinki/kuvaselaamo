@@ -9,7 +9,7 @@
       </div>
       <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}"></img>
     </a>
-    <button class="grid__fav{% if record.is_favorite %} active{% endif %}"></button>
+    <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}"></button>
   </div>
 {% endfor %}
 </div>

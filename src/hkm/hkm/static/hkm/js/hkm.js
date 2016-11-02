@@ -114,12 +114,33 @@ palikka
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
-  // $.ajax({
-  //   url: '',
-  //   method: 'GET',
-  //   data:
-  // })
-  // .done(function(data) {
-  // });
+  $favBtn = $('.grid__fav');
+
+  $favBtn.on('click', function() {
+    var $this = $(this);
+    if (! $this.hasClass('active')) {
+      $.post('/ajax/record/fav/', {
+        action: 'add',
+        record_id: $this.attr('data-record-id')
+      })
+      .done(function(){
+        $this.addClass('active')
+      });
+    }
+    else {
+      $.post('/ajax/record/fav/', {
+        action: 'remove',
+        record_id: $this.attr('data-record-id')
+      })
+      .done(function(){
+        $this.removeClass('active')
+      });
+    }
+  });
+
+})
+.define('app.crop', ['jQuery', 'docReady'], function () {
+
+
 
 });
