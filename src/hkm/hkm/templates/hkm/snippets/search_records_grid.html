@@ -1,11 +1,15 @@
 {% load hkm_tags %}
-<div class="item-slider invisible">
+<div class="grid__group item-slider invisible">
 {% for record in search_result.records %}
-  <div class="item" data-w="" data-h="">
+  <div class="grid__item item" data-w="" data-h="">
     <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ record.index }}">
-      <span class="record-title">{{ record.title }} - {{ record.is_favorite|default:"False" }}</span>
+      <div class="grid__meta">
+        <span class="grid__meta--title">{{ record.title }}</span>
+        <span class="grid__meta--other"></span>
+      </div>
       <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}"></img>
     </a>
+    <button class="grid__fav{% if record.is_favorite %} active{% endif %}"></button>
   </div>
 {% endfor %}
 </div>
