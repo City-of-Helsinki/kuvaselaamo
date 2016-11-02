@@ -7,9 +7,10 @@ from django.views.generic import TemplateView, RedirectView, View
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.utils.translation import ugettext as _
 from finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, Record, UserFavoriteRecord
+from hkm.models import Collection, Record
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
@@ -178,11 +179,14 @@ class SearchView(BaseView):
         p = self.search_result['page'] - 1 # zero indexed page
         record['index'] = p * self.search_result['limit'] + i
         i += 1
-        # Check also if this is mask as favorite for the user
+        # Check also if this record is in user's favorite collection
         if request.user.is_authenticated():
-          fav_records = UserFavoriteRecord.objects.filter(user=request.user)
-          if fav_records.exists():
-            record['is_favorite'] = fav_records.filter(record_id=record['id']).exists()
+          try:
+            favorites_collection = Collection.objects.get(owner=request.user, collection_type=Collection.TYPE_FAVORITE)
+          except Collection.DoesNotExist:
+            pass
+          else:
+            record['is_favorite'] = favorites_collection.records.filter(record_id=record['id']).exists()
 
   def get_facet_result(self, search_term):
     if self.request.is_ajax():
@@ -330,13 +334,17 @@ class AjaxUserFavoriteRecordView(View):
   def post(self, request, *args, **kwargs):
     record_id = request.POST.get('record_id', None)
     action = request.POST.get('action', 'add')
+    favorites_collection, created = Collection.objects.get_or_create(owner=request.user, collection_type=Collection.TYPE_FAVORITE,
+        defaults={'name': _(u'Favorites'), 'description': _(u'Your favorite images are collected here')})
+
     if record_id:
       if action == 'add':
-        obj, created = UserFavoriteRecord.objects.get_or_create(user=request.user, record_id=record_id)
+        record = Record(creator=request.user, collection=favorites_collection, record_id=record_id)
+        record.save()
       elif action == 'remove':
         # There shouldn't be multiple rows for same record, but if there is, delete all
-        objs = UserFavoriteRecord.objects.filter(user=request.user, record_id=record_id)
-        objs.delete()
+        records = favorites_collection.records.filter(record_id=record_id)
+        records.delete()
       return http.HttpResponse()
     return http.HttpResponseBadRequest()
 
