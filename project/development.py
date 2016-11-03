@@ -61,7 +61,7 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'propagate': False,
-            'level': 'ERROR',
+            'level': 'INFO',
         },
         'hkm': {
             'handlers': ['console'],
