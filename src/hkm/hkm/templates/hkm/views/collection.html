@@ -19,6 +19,14 @@
     {{ permissions }}
     {{ collection.collection_type }}
 
+    <form method="POST">
+      {% csrf_token %}
+      {{ collection_form.as_p }}
+      <input type="hidden" name="action" value="edit" />
+      <input type="submit" value="Save"/>
+    </form>
+
+
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible">
         {% for record in collection.records.all %}

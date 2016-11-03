@@ -11,6 +11,7 @@ from django.utils.translation import ugettext as _
 from finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record
+from hkm import forms
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
@@ -18,6 +19,7 @@ LOG = logging.getLogger(__name__)
 
 class BaseView(TemplateView):
   url_name = None
+  permissions = {}
 
   def dispatch(self, request, *args, **kwargs):
     result = self.setup(request, *args, **kwargs)
@@ -35,6 +37,19 @@ class BaseView(TemplateView):
     if self.url_name == None:
       raise Exception('Subview must define url_name or overwrire get_url method')
     return reverse(self.url_name)
+
+  def handle_invalid_post_action(self, request, *args, **kwargs):
+    LOG.error('Invalid POST action', extra={'data': {'POST': repr(request.POST),
+      'permissions': self.permissions}})
+    return http.HttpResponseBadRequest()
+
+  def get_empty_forms(self, request):
+    return {}
+
+  def get(self, request, *args, **kwargs):
+    _kwargs = self.get_empty_forms(request)
+    _kwargs.update(kwargs)
+    return self.render_to_response(self.get_context_data(**_kwargs))
 
   def get_context_data(self, **kwargs):
     context = super(BaseView, self).get_context_data(**kwargs)
@@ -91,6 +106,9 @@ class CollectionDetailView(BaseView):
 
   collection = None
   record = None
+  permissions = {
+    'can_edit': False,
+  }
 
   def get_template_names(self):
     if self.record:
@@ -119,15 +137,37 @@ class CollectionDetailView(BaseView):
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
 
+    self.permissions = {
+      'can_edit': self.request.user == self.collection.owner or self.request.user.profile.is_admin
+    }
+
     return True
+
+  def get_empty_forms(self, request):
+    return {
+      'collection_form': forms.CollectionForm(prefix='collection-form', instance=self.collection),
+    }
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'edit':
+      if self.permissions['can_edit']:
+        return self.handle_edit(request, *args, **kwargs)
+    return self.handle_invalid_post_action(request, *args, **kwargs)
+
+  def handle_edit(self, request, *args, **kwargs):
+    form = forms.CollectionForm(request.POST, prefix='collection-form', instance=self.collection)
+    if form.is_valid():
+      form.save()
+      return redirect(self.get_url())
+    else:
+      kwargs['collection_form'] = form
+      return self.get(request, *args, **kwargs)
 
   def get_context_data(self, **kwargs):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
-    permissions = {
-      'can_edit': self.request.user == self.collection.owner or self.request.user.profile.is_admin
-    }
-    context['permissions'] = permissions
+    context['permissions'] = self.permissions
     context['record'] = self.record
     if self.record:
       context['next_record'] = self.collection.get_next_record(self.record)

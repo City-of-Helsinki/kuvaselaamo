@@ -82,10 +82,11 @@ class Collection(BaseModel):
   objects = CollectionQuerySet.as_manager()
 
   def clean(self):
+    print "----------------"
     if self.collection_type == Collection.TYPE_FAVORITE:
       favorite_collections = Collection.objects.filter(owner=self.owner, collection_type=Collection.TYPE_FAVORITE)
       if self.id:
-        favorite_collections.exclude(id=self.id)
+        favorite_collections = favorite_collections.exclude(id=self.id)
       if favorite_collections.exists():
         raise ValidationError('Only one Favorite collection per user is allowed')
 
