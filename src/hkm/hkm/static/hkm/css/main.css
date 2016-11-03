@@ -6161,6 +6161,22 @@ img {
   background-image: url("/static/hkm/img/sydan_oranssi.png"); }
 
 /* Search */
+.modal-search__dialog {
+  margin: auto 0;
+  position: absolute;
+  top: 50%;
+  width: 100%; }
+
+.modal-search__content {
+  border: 0;
+  border-radius: 0; }
+
+.modal-search__body--top {
+  background-color: #f1856b; }
+
+.modal-search__body--bottom {
+  background-color: #965479; }
+
 .search-form .search-form__field {
   width: 100%;
   height: 40px;
@@ -6180,10 +6196,6 @@ img {
   border-left: 0;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px; }
-
-/* Dialogs */
-.modal-dialog {
-  margin: 80px auto; }
 
 /* Popover */
 .popover-content {

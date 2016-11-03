@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block hidden %}
-  {% include 'hkm/snippets/popover_cart.html' %}
+  {% include 'hkm/snippets/popover_cart.html' with img_url=record.full_res_url %}
   {% include 'hkm/snippets/popover_info.html' %}
   {% include 'hkm/snippets/popover_add.html' %}
 {% endblock %}

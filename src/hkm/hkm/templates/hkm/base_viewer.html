@@ -45,7 +45,7 @@
             <h4 class="modal-title">{% trans 'Crop and download' %}</h4>
           </div>
           <div class="modal-body">
-            <img src="{{ record.full_res_url }}"></img>
+            <img id="highres-image" src=""></img>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
@@ -77,6 +77,20 @@
         </div>
       </form>
     {% endif %}
+
+    <!-- data-toggle="modal" data-target="#modal-search" -->
+    <div class="modal-search modal fade in" id="modal-search" tabindex="-1" role="dialog">
+      <div class="modal-search__dialog modal-dialog" role="document">
+        <div class="modal-search__content modal-content">
+          <div class="modal-search__body modal-search__body--top modal-body">
+            foo
+          </div>
+          <div class="modal-search__body modal-search__body--bottom modal-body">
+            foo
+          </div>
+        </div>
+      </div>
+    </div>
 
   {% endblock %}
 

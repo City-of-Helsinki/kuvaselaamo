@@ -34,8 +34,10 @@ palikka
       $('.flex-images .item').each(function () {
         var w = $(this).find('.flex-img').width();
         var h = $(this).find('.flex-img').height();
-        $(this).attr('data-w', w);
-        $(this).attr('data-h', h);
+        if (! $(this).attr('data-w')) {
+          $(this).attr('data-w', w);
+          $(this).attr('data-h', h);
+        }
       });
       $(this).removeClass('invisible');
     });
@@ -52,9 +54,8 @@ palikka
 
   function ajaxGetPageImages() {
     page++;
-    $.ajax({
+    $.get({
       url: '',
-      method: 'GET',
       data: 'page=' + page
     })
     .done(function(data) {
@@ -80,7 +81,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    // trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -114,10 +115,13 @@ palikka
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
-  $favBtn = $('.grid__fav');
+  $favBtn = $('button.grid__fav');
 
   $favBtn.on('click', function() {
-    var $this = $(this);
+    postFav($(this));
+  });
+
+  function postFav($this) {
     if (! $this.hasClass('active')) {
       $.post('/ajax/record/fav/', {
         action: 'add',
@@ -136,10 +140,19 @@ palikka
         $this.removeClass('active')
       });
     }
-  });
+  }
 
 })
 .define('app.crop', ['jQuery', 'docReady'], function () {
+
+  $btn = $('.popover-list__btn');
+  $cropImage = $('#highres-image');
+
+  $(document).on('click', '.popover-list__btn', function() {
+    var $this = $(this);
+    var $url = $this.attr('data-img-url');
+    $cropImage.attr('src', $url);
+  });
 
 
 

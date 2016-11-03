@@ -356,6 +356,25 @@ img {
 }
 
 /* Search */
+.modal-search__dialog {
+  margin: auto 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+.modal-search__content {
+  border: 0;
+  border-radius: 0;
+}
+.modal-search__body {
+
+}
+.modal-search__body--top {
+  background-color: $color-salmon;
+}
+.modal-search__body--bottom {
+  background-color: $color-strikemaster;
+}
 .search-form {
   .search-form__field {
     width: 100%;
@@ -377,11 +396,6 @@ img {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
-}
-
-/* Dialogs */
-.modal-dialog {
-  margin: 80px auto;
 }
 
 /* Popover */
