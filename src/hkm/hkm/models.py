@@ -82,7 +82,6 @@ class Collection(BaseModel):
   objects = CollectionQuerySet.as_manager()
 
   def clean(self):
-    print "----------------"
     if self.collection_type == Collection.TYPE_FAVORITE:
       favorite_collections = Collection.objects.filter(owner=self.owner, collection_type=Collection.TYPE_FAVORITE)
       if self.id:

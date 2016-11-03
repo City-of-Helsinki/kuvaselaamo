@@ -150,9 +150,11 @@ class CollectionDetailView(BaseView):
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
-    if action == 'edit':
-      if self.permissions['can_edit']:
+    if self.permissions['can_edit']:
+      if action == 'edit':
         return self.handle_edit(request, *args, **kwargs)
+      if action == 'remove-record':
+        return self.ajax_handle_remove_record(request, *args, **kwargs)
     return self.handle_invalid_post_action(request, *args, **kwargs)
 
   def handle_edit(self, request, *args, **kwargs):
@@ -163,6 +165,18 @@ class CollectionDetailView(BaseView):
     else:
       kwargs['collection_form'] = form
       return self.get(request, *args, **kwargs)
+
+  def ajax_handle_remove_record(self, request, *args, **kwargs):
+    record_id = request.POST.get('record_id', None)
+    if record_id:
+      try:
+        record = self.collection.records.get(id=record_id)
+      except Record.DoesNotExist:
+        return http.HttpResponseNotFound()
+      else:
+        record.delete()
+        return http.HttpResponse()
+    return http.HttpResponseBadRequest()
 
   def get_context_data(self, **kwargs):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
