@@ -32,4 +32,10 @@ def display_images(collection):
     return image_urls
   return image_urls
 
+
+@register.filter
+def is_favorite(record, user):
+  return record.is_favorite(user)
+
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
