@@ -124,6 +124,10 @@ class CollectionDetailView(BaseView):
   def get_context_data(self, **kwargs):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
+    permissions = {
+      'can_edit': self.request.user == self.collection.owner or self.request.user.profile.is_admin
+    }
+    context['permissions'] = permissions
     context['record'] = self.record
     if self.record:
       context['next_record'] = self.collection.get_next_record(self.record)
@@ -333,7 +337,6 @@ class LanguageView(RedirectView):
 class AjaxUserFavoriteRecordView(View):
   def post(self, request, *args, **kwargs):
     record_id = request.POST.get('record_id', None)
-    print record_id
     action = request.POST.get('action', 'add')
     favorites_collection, created = Collection.objects.get_or_create(owner=request.user, collection_type=Collection.TYPE_FAVORITE,
         defaults={'title': _(u'Favorites'), 'description': _(u'Your favorite images are collected here')})

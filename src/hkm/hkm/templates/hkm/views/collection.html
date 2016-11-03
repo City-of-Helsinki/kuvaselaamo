@@ -16,6 +16,9 @@
 
   <div class="container">
 
+    {{ permissions }}
+    {{ collection.collection_type }}
+
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible">
         {% for record in collection.records.all %}
