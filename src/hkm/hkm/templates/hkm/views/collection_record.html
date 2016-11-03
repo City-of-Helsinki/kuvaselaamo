@@ -15,6 +15,12 @@
 
 {% block content %}
 
-  <div class="image-viewer"><img src="{% finna_image record.record_id w=2000 h=2000 %}"></img></div>
+  <div class="image-viewer"><img src="{% finna_image record.record_id %}"></img></div>
 
+{% endblock %}
+
+{% block hidden %}
+  {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.get_full_res_image_absolute_url web_image_url=record.record_id|finna_default_image_url %}
+  {% include 'hkm/snippets/popover_info.html' %}
+  {% include 'hkm/snippets/popover_add.html' %}
 {% endblock %}
