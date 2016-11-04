@@ -66,6 +66,6 @@
 
 {% block hidden %}
   {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.get_full_res_image_absolute_url web_image_url=record.record_id|finna_default_image_url %}
-  {% include 'hkm/snippets/popover_info.html' %}
+  {% include 'hkm/snippets/popover_info.html' with finna_id=record.record_id %}
   {% include 'hkm/snippets/popover_add.html' with full_res_image_url=record.get_full_res_image_absolute_url %}
 {% endblock %}

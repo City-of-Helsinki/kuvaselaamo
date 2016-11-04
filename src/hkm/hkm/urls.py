@@ -13,10 +13,8 @@ urlpatterns = [
   url(r'^collection/my/$', login_required()(views.MyCollectionsView.as_view()), name='hkm_my_collections'),
   url(r'^collection/(?P<collection_id>\d+)/$', views.CollectionDetailView.as_view(), name='hkm_collection'),
 
+  url(r'^record/(?P<finna_id>.+)/$', views.FinnaRecordDetailView.as_view(), name='hkm_record'),
   url(r'^record/(?P<finna_id>.+)/feedback/$', views.FinnaRecordFeedbackView.as_view(), name='hkm_record_feedback'),
-  url(r'^record/(?P<finna_id>.+)/edit/add/$', views.FinnaRecordEditAddToCollectionView.as_view(), name='hkm_record_edit_add'),
-  url(r'^record/(?P<finna_id>.+)/edit/download/$', views.FinnaRecordEditDownloadView.as_view(), name='hkm_record_edit_download'),
-  url(r'^record/(?P<finna_id>.+)/edit/order/$', views.FinnaRecordEditOrderView.as_view(), name='hkm_record_edit_order'),
 
   url(r'^search/$', views.SearchView.as_view(), name='hkm_search'),
   url(r'^search/record/$', views.SearchRecordDetailView.as_view(), name='hkm_search_record'),

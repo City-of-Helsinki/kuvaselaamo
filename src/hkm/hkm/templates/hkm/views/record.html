@@ -1,0 +1,18 @@
+{% extends 'hkm/base.html' %}
+{% load i18n hkm_tags %}
+
+{% block main_content %}
+  RECORD DATA:<br>
+  {{ record }}
+
+  <br>
+  <br>
+
+  RELATED COLLECTIONS:<br>
+  {{ related_collections }}
+
+  <br>
+  <br>
+  LINK TO FEEDBACK VIEW: <br>
+  <a href="{% url 'hkm_record_feedback' finna_id=record.id %}">Feedback</a>
+{% endblock %}
