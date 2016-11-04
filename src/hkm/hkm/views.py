@@ -217,6 +217,7 @@ class CollectionDetailView(BaseView):
 class IndexView(CollectionDetailView):
   template_name = 'hkm/views/index.html'
   url_name = 'hkm_index'
+  open_popup = True
 
   def get_template_names(self):
     return self.template_name
@@ -246,6 +247,13 @@ class IndexView(CollectionDetailView):
 
     return True
 
+  def get_context_data(self, **kwargs):
+    context = super(IndexView, self).get_context_data(**kwargs)
+    if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
+      self.open_popup = False
+    context['open_popup'] = self.open_popup
+    return context
+
 
 class SearchView(BaseView):
   template_name = 'hkm/views/search.html'
@@ -263,8 +271,7 @@ class SearchView(BaseView):
   page = 1
 
   def get(self, request, *args, **kwargs):
-    if self.search_term:
-      self.handle_search(request, *args, **kwargs)
+    self.handle_search(request, *args, **kwargs)
     return super(SearchView, self).get(request, *args, **kwargs)
 
   def get_template_names(self):
@@ -274,7 +281,7 @@ class SearchView(BaseView):
       return self.template_name
 
   def setup(self, request, *args, **kwargs):
-    self.search_term = request.GET.get('search', None)
+    self.search_term = request.GET.get('search', '')
     self.facet_type = request.GET.get('ft', None)
     self.facet_value = request.GET.get('fv', None)
     self.page = int(request.GET.get('page', 1))
