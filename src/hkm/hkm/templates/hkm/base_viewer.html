@@ -78,31 +78,6 @@
       </form>
     {% endif %}
 
-    <!-- data-toggle="modal" data-target="#modal-search" -->
-    <div class="modal-search modal fade" id="modal-search" tabindex="-1" role="dialog">
-      <div class="modal-search__dialog modal-dialog" role="document">
-        <div class="modal-search__content modal-content">
-          <div class="modal-search__body modal-search__body--top modal-body">
-            <div class="container">
-              <form class="search-form form-group">
-                <div class="search-form__content input-group">
-                  <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-                  <span class="search-form__btn-container input-group-btn">
-                    <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
-                  </span>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="modal-search__body modal-search__body--bottom modal-body">
-            <div class="container">
-              <h1 class="explore__h1"><a href="{% url 'hkm_public_collections' %}">{% trans 'Explore' %}</a></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   {% endblock %}
 
 {% endblock %}
