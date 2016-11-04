@@ -89,6 +89,10 @@ class Collection(BaseModel):
       if favorite_collections.exists():
         raise ValidationError('Only one Favorite collection per user is allowed')
 
+  def save(self, *args, **kwargs):
+    if self.show_in_landing_page:
+      self.public = True
+    return super(Collection, self).save(*args, **kwargs)
 
   def __unicode__(self):
     return self.title
