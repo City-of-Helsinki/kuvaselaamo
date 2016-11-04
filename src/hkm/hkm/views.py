@@ -381,7 +381,6 @@ class SearchRecordDetailView(SearchView):
 
 class BaseFinnaRecordDetailView(BaseView):
   record_finna_id = None
-  url_name = 'hkm_record'
   record = None
 
   def get_url(self):
@@ -416,7 +415,7 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
 
 class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record_feedback.html'
-  url_name = 'hkm_record' # automatically redirect back to detail view after post
+  url_name = 'hkm_record_feedback' # automatically redirect back to detail view after post
 
   def get_empty_forms(self, request):
     if request.user.is_authenticated():
@@ -440,11 +439,12 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
       user = None
     form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
     if form.is_valid():
-      feedback = form.save()
+      feedback = form.save(commit=False)
       feedback.record_id = self.record['id']
+      feedback.save()
       tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
       # TODO: redirect to success page?
-      return redirect(self.url_name)
+      return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
     kwargs['feedback_form'] = form
     return self.get(request, *args, **kwargs)
 
