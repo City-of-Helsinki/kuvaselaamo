@@ -9,10 +9,10 @@
 
 {% block modals %}
 
-  <div class="modal-search modal fade" id="modal-search" tabindex="-1" role="dialog">
-    <div class="modal-search__dialog modal-dialog" role="document">
-      <div class="modal-search__content modal-content">
-        <div class="modal-search__body modal-search__body--top modal-body">
+  <div class="search-modal modal fade" id="search-modal" tabindex="-1" role="dialog">
+    <div class="search-modal__dialog modal-dialog" role="document">
+      <div class="search-modal__content modal-content">
+        <div class="search-modal__body search-modal__body--top modal-body">
           <div class="container">
             <form class="search-form form-group" action="{% url 'hkm_search' %}">
               <div class="search-form__content input-group">
@@ -24,7 +24,7 @@
             </form>
           </div>
         </div>
-        <div class="modal-search__body modal-search__body--bottom modal-body">
+        <div class="search-modal__body search-modal__body--bottom modal-body">
           <div class="container">
             <h1 class="explore__h1"><a href="{% url 'hkm_public_collections' %}">{% trans 'Explore' %}</a></h1>
           </div>
@@ -39,7 +39,7 @@
   {{ block.super }}
   <script>
     palikka.define('app.searchModal', ['jQuery', 'docReady'], function () {
-      $('#modal-search').modal('show');
+      $('#search-modal').modal('show');
     });
   </script>
 {% endblock %}

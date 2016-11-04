@@ -6194,24 +6194,24 @@ img {
   background-image: url("/static/hkm/img/sydan_oranssi.png"); }
 
 /* Search */
-.modal-search__dialog {
+.search-modal__dialog {
   margin: auto 0;
   top: 40%;
   position: absolute;
   margin: auto;
   width: 100%; }
 
-.modal-search__content {
+.search-modal__content {
   border: 0;
   border-radius: 0; }
 
-.modal-search__body {
+.search-modal__body {
   height: 70px; }
 
-.modal-search__body--top {
+.search-modal__body--top {
   background-color: #f1856b; }
 
-.modal-search__body--bottom {
+.search-modal__body--bottom {
   background-color: #965479; }
 
 .explore__h1 {
