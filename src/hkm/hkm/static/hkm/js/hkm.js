@@ -81,7 +81,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    // trigger: 'focus',
+    trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -115,9 +115,9 @@ palikka
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
-  $favBtn = $('button.grid__fav');
+  favBtn = 'button.grid__fav';
 
-  $favBtn.on('click', function() {
+  $(document).on('click', favBtn, function() {
     postFav($(this));
   });
 

@@ -6272,6 +6272,8 @@ img {
   background-color: rgba(0, 0, 0, 0.1); }
 
 .popover-list__btn {
+  color: #000;
+  font-family: 'Arial';
   border: 0;
   background: transparent;
   padding: 5px;
@@ -6279,3 +6281,12 @@ img {
   height: 100%;
   width: 100%;
   text-align: left; }
+
+.popover-list__btn:hover {
+  color: #000;
+  text-decoration: none; }
+
+/* Crop */
+@media (min-width: 1200px) {
+  .my-modal__dialog--crop-lg {
+    width: 1200px; } }
