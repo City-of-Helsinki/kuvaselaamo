@@ -16,6 +16,9 @@ palikka
   });
 
 })
+.define('app.searchModal', ['jQuery', 'docReady'], function () {
+  $('#modal-search').modal('show');
+})
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
   var $window = $(window);
@@ -34,8 +37,10 @@ palikka
       $('.flex-images .item').each(function () {
         var w = $(this).find('.flex-img').width();
         var h = $(this).find('.flex-img').height();
-        $(this).attr('data-w', w);
-        $(this).attr('data-h', h);
+        if (! $(this).attr('data-w')) {
+          $(this).attr('data-w', w);
+          $(this).attr('data-h', h);
+        }
       });
       $(this).removeClass('invisible');
     });
@@ -52,9 +57,8 @@ palikka
 
   function ajaxGetPageImages() {
     page++;
-    $.ajax({
+    $.get({
       url: '',
-      method: 'GET',
       data: 'page=' + page
     })
     .done(function(data) {
@@ -80,7 +84,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    // trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -114,10 +118,13 @@ palikka
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
-  $favBtn = $('.grid__fav');
+  $favBtn = $('button.grid__fav');
 
   $favBtn.on('click', function() {
-    var $this = $(this);
+    postFav($(this));
+  });
+
+  function postFav($this) {
     if (! $this.hasClass('active')) {
       $.post('/ajax/record/fav/', {
         action: 'add',
@@ -136,11 +143,30 @@ palikka
         $this.removeClass('active')
       });
     }
-  });
+  }
 
 })
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
+  $btn = $('.popover-list__btn');
+  $cropImage = $('#highres-image');
 
+  $(document).on('click', '.popover-list__btn', function() {
+    var $this = $(this);
+    var $url = $this.attr('data-img-url');
+    $cropImage.attr('src', $url);
+  });
+
+})
+.define('app.editTitle', ['jQuery', 'docReady'], function () {
+
+  $editBtn = $('#edit-title-btn');
+  $title = $('.banner__title');
+  $titleForm = $('.banner__title-form');
+
+  $editBtn.on('click', function() {
+    $title.toggle();
+    $titleForm.toggle();
+  });
 
 });

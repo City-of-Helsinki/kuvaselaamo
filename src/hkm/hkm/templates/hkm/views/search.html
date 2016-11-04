@@ -5,13 +5,14 @@
 {% block banner %}
 
   <div class="page-header">
-    <div class="container">
-      <h1>{% trans 'COLLECTION' %} / {{ search_result.resultCount }} {% trans 'RECORDS' %}</h1>
+    <div class="banner__container fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1">{% trans 'COLLECTION' %} / {{ search_result.resultCount }} {% trans 'RECORDS' %}</h1>
+      </div>
     </div>
   </div>
 
-  <div class="container">
-
+  <div class="fullsize-container container">
     <form class="search-form form-group">
       <div class="search-form__content input-group">
         <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
@@ -20,14 +21,13 @@
         </span>
       </div>
     </form>
-
   </div>
 
 {% endblock %}
 
 {% block content %}
 
-  <div class="container">
+  <div class="fullsize-container container">
 
     {% if search_result.records %}
 
@@ -72,6 +72,6 @@
 
     {% endif %}
 
-  </div> <!-- Container -->
+  </div> <!-- fullsize-container -->
 
 {% endblock %}
