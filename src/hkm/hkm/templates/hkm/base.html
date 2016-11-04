@@ -81,7 +81,7 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'hkm_search' %}">{% trans 'Haku' %}</a></li>
+        <li><a href="{% url 'hkm_index' %}">{% trans 'Haku' %}</a></li>
         {% if language == 'fi' %}
           <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
         {% elif language == 'en' %}

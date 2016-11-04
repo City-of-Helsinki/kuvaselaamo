@@ -16,9 +16,6 @@ palikka
   });
 
 })
-.define('app.searchModal', ['jQuery', 'docReady'], function () {
-  $('#modal-search').modal('show');
-})
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
   var $window = $(window);
