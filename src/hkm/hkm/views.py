@@ -218,6 +218,9 @@ class IndexView(CollectionDetailView):
   template_name = 'hkm/views/index.html'
   url_name = 'hkm_index'
 
+  def get_template_names(self):
+    return self.template_name
+
   def get_url(self):
     return reverse(self.url_name)
 
@@ -401,28 +404,49 @@ class BaseFinnaRecordDetailView(BaseView):
 
 class FinnaRecordDetailView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record.html'
+  url_name = 'hkm_record'
+
+  def get_context_data(self, **kwargs):
+    context = super(FinnaRecordDetailView, self).get_context_data(**kwargs)
+    related_collections_ids = Record.objects.filter(record_id=self.record['id']).values_list('collection', flat=True)
+    related_collections = Collection.objects.user_can_view(self.request.user).filter(id__in=related_collections_ids).distinct()
+    context['related_collections'] = related_collections
+    return context
 
 
 class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record_feedback.html'
+  url_name = 'hkm_record' # automatically redirect back to detail view after post
 
+  def get_empty_forms(self, request):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    return {
+      'feedback_form': forms.FeedbackForm(prefix='feedback-form', user=user)
+    }
 
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
+    return self.handle_invalid_post_action(request, *args, **kwargs)
 
-
-class FinnaRecordEditBaseView(BaseView):
-  pass
-
-
-class FinnaRecordEditAddToCollectionView(BaseView):
-  template_name = 'hkm/views/record_edit_add_to_collection.html'
-
-
-class FinnaRecordEditDownloadView(BaseView):
-  template_name = 'hkm/views/record_edit_download.html'
-
-
-class FinnaRecordEditOrderView(BaseView):
-  template_name = 'hkm/views/record_edit_order.html'
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      feedback = form.save()
+      feedback.record_id = self.record['id']
+      tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+      # TODO: redirect to success page?
+      return redirect(self.url_name)
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
 
 
 class SignUpView(BaseView):
