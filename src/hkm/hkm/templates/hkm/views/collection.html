@@ -5,8 +5,23 @@
 {% block banner %}
 
   <div class="page-header">
-    <div class="container">
-      <h1>{{ collection.title }}</h1>
+    <div class="banner__container fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1">{{ collection.title }}</h1>
+      </div>
+      <form class="banner__title-form" method="POST">
+        <h1 class="banner__h1">{{ collection_form.title }}</h1>
+        {% csrf_token %}
+        <input type="hidden" name="action" value="edit" />
+        <button class="banner__title-form__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
+        <button class="banner__title-form__btn btn btn-default" type="button">{% trans 'Cancel' %}</button>
+      </form>
+      <div class="header-actions">
+        {% if permissions.can_edit %}
+          <button id="edit-title-btn" class="header-actions__btn"><img src="/static/hkm/img/share.png"></img></button>
+        {% endif %}
+          <button class="header-actions__btn"><img src="/static/hkm/img/share.png"></img></button>
+      </div>
     </div>
   </div>
 
@@ -14,18 +29,7 @@
 
 {% block content %}
 
-  <div class="container">
-
-    {{ permissions }}
-    {{ collection.collection_type }}
-
-    <form method="POST">
-      {% csrf_token %}
-      {{ collection_form.as_p }}
-      <input type="hidden" name="action" value="edit" />
-      <input type="submit" value="Save"/>
-    </form>
-
+  <div class="fullsize-container container">
 
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible">
@@ -38,7 +42,11 @@
               </div>
               <img class="flex-img" src="{% finna_image record.record_id w=400 h=400 %}"></img>
             </a>
-            <div class="grid__fav {% if record.is_favorite %}active{% endif %}"></div>
+            {% if collection.collection_type == 'favorite' %}
+              <div class="grid__fav active"></div>
+            {% else %}
+              <button class="grid__fav {% if record|is_favorite:user %}active{% endif %}" data-record-id="{{ record.record_id }}"></button>
+            {% endif %}
           </div>
         {% endfor %}
       </div>

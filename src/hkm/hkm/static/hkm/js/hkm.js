@@ -16,6 +16,9 @@ palikka
   });
 
 })
+.define('app.searchModal', ['jQuery', 'docReady'], function () {
+  $('#modal-search').modal('show');
+})
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
   var $window = $(window);
@@ -154,6 +157,16 @@ palikka
     $cropImage.attr('src', $url);
   });
 
+})
+.define('app.editTitle', ['jQuery', 'docReady'], function () {
 
+  $editBtn = $('#edit-title-btn');
+  $title = $('.banner__title');
+  $titleForm = $('.banner__title-form');
+
+  $editBtn.on('click', function() {
+    $title.toggle();
+    $titleForm.toggle();
+  });
 
 });
