@@ -59,11 +59,6 @@ class BaseView(TemplateView):
     return context
 
 
-class IndexView(BaseView):
-  template_name = 'hkm/views/index.html'
-  url_name = 'hkm_index'
-
-
 class InfoView(BaseView):
   template_name = 'hkm/views/info.html'
   url_name = 'hkm_info'
@@ -217,6 +212,36 @@ class CollectionDetailView(BaseView):
       context['next_record'] = self.collection.get_next_record(self.record)
       context['previous_record'] = self.collection.get_previous_record(self.record)
     return context
+
+
+class IndexView(CollectionDetailView):
+  template_name = 'hkm/views/index.html'
+  url_name = 'hkm_index'
+
+  def get_url(self):
+    return reverse(self.url_name)
+
+  def setup(self, request, *args, **kwargs):
+    collections = Collection.objects.filter(show_in_landing_page=True)
+    if collections.exists():
+      self.collection = collections[0]
+    else:
+      LOG.warning('Co collections to show in landing page')
+
+    record_id = request.GET.get('rid', None)
+    if record_id:
+      try:
+        self.record = self.collection.records.get(id=record_id)
+      except Record.DoesNotExist:
+        LOG.warning('Record does not exist or does not belong to this collection')
+    if not self.record and self.collection:
+      self.record = self.collection.records.first()
+
+    self.permissions = {
+      'can_edit': False
+    }
+
+    return True
 
 
 class SearchView(BaseView):
