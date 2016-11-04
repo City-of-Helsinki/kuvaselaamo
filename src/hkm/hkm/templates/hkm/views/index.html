@@ -1,13 +1,70 @@
 {% extends 'hkm/base_viewer.html' %}
+{% load hkm_tags %}
 {% load i18n %}
+
+{% block viewer_arrows %}
+
+  {% if previous_record %}
+    <a href="{% url 'hkm_index' %}?rid={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+  {% endif %}
+  {% if next_record %}
+    <a href="{% url 'hkm_index' %}?rid={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
+  {% endif %}
+
+{% endblock %}
 
 {% block content %}
 
-  <div class="image-viewer" style="background-image:url('/static/hkm/img/city.jpg');"></div>
+  {% if collection.show_in_landing_page %}
+    <div class="image-viewer"><img src="{% finna_image record.record_id %}"></img></div>
+  {% else %}
+    <div class="image-viewer" style="background-image:url('/static/hkm/img/city.jpg');"></div>
+  {% endif %}
 
 {% endblock %}
 
 {% block modals %}
+
+  <div class="my-modal base-modal--crop modal fade" id="crop-image" tabindex="-1" role="dialog">
+    <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{% trans 'Crop and download' %}</h4>
+        </div>
+        <div class="modal-body">
+          <img id="highres-image" src=""></img>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+          <button type="submit" value="add-to-collection" class="btn btn-primary">{% trans 'Submit' %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+    <form class="modal fade" id="add-to-collection" method="POST" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{% trans 'Add to a new collection' %}</h4>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add-to-collection" />
+            <input type="hidden" name="record_id" value="{{ record.id }}" />
+            <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="btn btn-primary" type="submit" value="add-to-collection">{% trans 'Submit' %}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  {% endif %}
 
   <div class="search-modal modal fade" id="search-modal" tabindex="-1" role="dialog">
     <div class="search-modal__dialog modal-dialog" role="document">
@@ -35,11 +92,19 @@
 
 {% endblock %}
 
+{% block hidden %}
+  {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.get_full_res_image_absolute_url web_image_url=record.record_id|finna_default_image_url %}
+  {% include 'hkm/snippets/popover_info.html' with finna_id=record.record_id %}
+  {% include 'hkm/snippets/popover_add.html' with full_res_image_url=record.get_full_res_image_absolute_url %}
+{% endblock %}
+
 {% block js %}
   {{ block.super }}
   <script>
     palikka.define('app.searchModal', ['jQuery', 'docReady'], function () {
-      $('#search-modal').modal('show');
+      if (window.location.search.indexOf('search=true') > -1) {
+        $('#search-modal').modal('show');
+      }
     });
   </script>
 {% endblock %}
