@@ -271,8 +271,7 @@ class SearchView(BaseView):
   page = 1
 
   def get(self, request, *args, **kwargs):
-    if self.search_term:
-      self.handle_search(request, *args, **kwargs)
+    self.handle_search(request, *args, **kwargs)
     return super(SearchView, self).get(request, *args, **kwargs)
 
   def get_template_names(self):
@@ -282,7 +281,7 @@ class SearchView(BaseView):
       return self.template_name
 
   def setup(self, request, *args, **kwargs):
-    self.search_term = request.GET.get('search', None)
+    self.search_term = request.GET.get('search', '')
     self.facet_type = request.GET.get('ft', None)
     self.facet_value = request.GET.get('fv', None)
     self.page = int(request.GET.get('page', 1))
