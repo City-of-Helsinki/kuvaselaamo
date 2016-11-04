@@ -139,6 +139,13 @@ COMPRESS_CSS_FILTERS = [
 # https://github.com/Kronuz/pyScss/issues/70
 logging.getLogger('scss').addHandler(logging.StreamHandler())
 
+# Django
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 HKM_MY_DOMAIN = 'http://localhost:8009'
+HKM_FEEDBACK_NOTIFICATION_EMAILS = [
+    'dummy.address@tld.fi',
+]
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

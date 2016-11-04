@@ -32,8 +32,15 @@ BROKER_HEARTBEAT = 0
 SENTRY_DSN = ''
 SENTRY_SITE = ''
 
+# Django
+#TODO Email abckend settings
+
 # TODO
 HKM_MY_DOMAIN = ''
+HKM_FEEDBACK_NOTIFICATION_EMAILS = [
+    '',
+]
+
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
