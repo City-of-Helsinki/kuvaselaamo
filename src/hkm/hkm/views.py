@@ -217,6 +217,7 @@ class CollectionDetailView(BaseView):
 class IndexView(CollectionDetailView):
   template_name = 'hkm/views/index.html'
   url_name = 'hkm_index'
+  open_popup = True
 
   def get_template_names(self):
     return self.template_name
@@ -245,6 +246,13 @@ class IndexView(CollectionDetailView):
     }
 
     return True
+
+  def get_context_data(self, **kwargs):
+    context = super(IndexView, self).get_context_data(**kwargs)
+    if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
+      self.open_popup = False
+    context['open_popup'] = self.open_popup
+    return context
 
 
 class SearchView(BaseView):
