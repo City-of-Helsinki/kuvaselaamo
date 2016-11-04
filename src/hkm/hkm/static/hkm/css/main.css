@@ -6195,11 +6195,10 @@ img {
 
 /* Search */
 .search-modal__dialog {
-  margin: auto 0;
-  top: 40%;
   position: absolute;
-  margin: auto;
-  width: 100%; }
+  top: 50%;
+  width: 100%;
+  margin: -70px 0 0 0; }
 
 .search-modal__content {
   border: 0;
@@ -6290,3 +6289,11 @@ img {
 @media (min-width: 1200px) {
   .my-modal__dialog--crop-lg {
     width: 1200px; } }
+
+.crop__container {
+  height: 750px;
+  width: 750px; }
+
+.crop__image {
+  height: 100%;
+  max-width: 100%; }
