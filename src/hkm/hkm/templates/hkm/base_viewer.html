@@ -84,7 +84,7 @@
         <div class="modal-search__content modal-content">
           <div class="modal-search__body modal-search__body--top modal-body">
             <div class="container">
-              <form class="search-form form-group">
+              <form class="search-form form-group" action="{% url 'hkm_search' %}">
                 <div class="search-form__content input-group">
                   <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
                   <span class="search-form__btn-container input-group-btn">

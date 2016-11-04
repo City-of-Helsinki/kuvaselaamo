@@ -55,7 +55,7 @@ class CollectionQuerySet(models.QuerySet):
     return self.none()
 
   def user_can_view(self, user):
-    is_public = models.Q(public=True)
+    is_public = models.Q(is_public=True)
     if user.is_authenticated():
       is_own = models.Q(owner=user)
       return self.filter(is_own|is_public)
@@ -74,8 +74,8 @@ class Collection(BaseModel):
   owner = models.ForeignKey(User, verbose_name=_(u'Owner'))
   title = models.CharField(verbose_name=_(u'Title'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
-  public = models.BooleanField(verbose_name=_(u'Public'), default=False)
-  show_in_landing_page = models.BooleanField(verbose_name=_(u'Public'), default=False)
+  is_public = models.BooleanField(verbose_name=_(u'Public'), default=False)
+  show_in_landing_page = models.BooleanField(verbose_name=_(u'Show in landing page'), default=False)
   collection_type = models.CharField(verbose_name=_(u'Type'), max_length=255, choices=TYPE_CHOICES,
     default=TYPE_NORMAL)
 
