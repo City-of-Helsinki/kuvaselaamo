@@ -11,9 +11,18 @@ register = template.Library()
 
 
 @register.simple_tag
-def finna_image(img_id, w=400, h=400):
-  url = 'https://finna.fi/Cover/Show?id=%s&w=%d&h=%d' % (img_id, w, h)
+def finna_image(img_id, w=0, h=0):
+  if w != 0 and h != 0:
+    url = 'https://finna.fi/Cover/Show?id=%s&w=%d&h=%d' % (img_id, w, h)
+  else:
+    url = 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % img_id
   return url
+
+
+@register.filter
+def finna_default_image_url(img_id):
+  return 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % img_id
+
 
 @register.filter
 def display_images(collection):

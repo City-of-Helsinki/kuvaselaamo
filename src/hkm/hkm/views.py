@@ -12,6 +12,7 @@ from finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record
 from hkm import forms
+from hkm import tasks
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
@@ -66,6 +67,35 @@ class IndexView(BaseView):
 class InfoView(BaseView):
   template_name = 'hkm/views/info.html'
   url_name = 'hkm_info'
+
+  def get_empty_forms(self, request):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    return {
+      'feedback_form': forms.FeedbackForm(prefix='feedback-form', user=user)
+    }
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
+    return self.handle_invalid_post_action(request, *args, **kwargs)
+
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      feedback = form.save()
+      tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+      # TODO: redirect to success page?
+      return redirect(self.url_name)
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
 
 
 class BaseCollectionListView(BaseView):
@@ -330,11 +360,12 @@ class BaseFinnaRecordDetailView(BaseView):
     return reverse(self.url_name, kwargs={'finna_id': self.record_finna_id})
 
   def setup(self, request, *args, **kwargs):
-    self.record_finna_id = kwargs['finna_id']
-    record_data = FINNA.get_record(self.record_finna_id)
-    if record_data:
-      self.record = record_data['records'][0]
-      self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+    self.record_finna_id = kwargs.get('finna_id', None)
+    if self.record_finna_id:
+      record_data = FINNA.get_record(self.record_finna_id)
+      if record_data:
+        self.record = record_data['records'][0]
+        self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
     return True
 
   def get_context_data(self, **kwargs):
@@ -347,8 +378,10 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record.html'
 
 
-class FinnaRecordFeedbackView(BaseView):
+class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record_feedback.html'
+
+
 
 
 class FinnaRecordEditBaseView(BaseView):

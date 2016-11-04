@@ -1,9 +1,19 @@
 {% load i18n %}
 <div id="popover-cart-content">
   <ul class="popover-list">
+<<<<<<< HEAD
     <li class="popover-list__item"><button class="popover-list__btn">{% trans 'Download printable image' %}</button></li>
     <li class="popover-list__item"><button class="popover-list__btn">{% trans 'Download web-image' %}</button></li>
     <li class="popover-list__item"><button class="popover-list__btn" data-img-url="{{ img_url }}" data-toggle="modal" data-target="#crop-image">{% trans 'Crop and download' %}</button></li>
+=======
+    {% if full_res_image_url %}
+      <li class="popover-list__item"><button class="popover-list__btn"><a href="{{ full_res_image_url }}">{% trans 'Download printable image' %}</a></button></li>
+    {% endif %}
+    {% if web_image_url %}
+    <li class="popover-list__item"><button class="popover-list__btn"><a href="{{ web_image_url }}">{% trans 'Download web-image' %}</a></button></li>
+    {% endif %}
+    <li class="popover-list__item"><button class="popover-list__btn" data-toggle="modal" data-target="#crop-image">{% trans 'Crop and download' %}</button></li>
+>>>>>>> cc6d6981736e8df0b2352651acafcf2a9f9b3ac9
     <li class="popover-list__item"><button class="popover-list__btn">{% trans 'Order a product of the image' %}</button></li>
   </ul>
 </div>
