@@ -180,8 +180,8 @@ palikka
       imageData = cropper.getImageData();
       boxData = cropper.getCropBoxData();
 
-      $.post('', {
-        action: 'crop',
+      $.post('/ajax/crop/', {
+        action: 'download',
         x: boxData.left,
         y: boxData.top,
         width: boxData.width,

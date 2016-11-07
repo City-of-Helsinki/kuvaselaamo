@@ -24,6 +24,9 @@ urlpatterns = [
 
   url(r'^ajax/record/fav/$', login_required()(views.AjaxUserFavoriteRecordView.as_view()),
     name='hkm_ajax_record_fav'),
+  url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),
+    name='hkm_ajax_crop'),
+
 
 ]
 

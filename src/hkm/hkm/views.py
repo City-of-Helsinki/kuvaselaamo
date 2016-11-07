@@ -512,16 +512,22 @@ class AjaxCropRecordView(View):
     try:
       self.action = request.POST['action']
       self.record_id = request.POST['record_id']
-      self.crop_x = request.POST['x']
-      self.crop_y = request.POST['y']
-      self.crop_width = request.POST['width']
-      self.crop_height = request.POST['height']
-      self.img_width = request.POST['original_width']
-      self.img_height = request.POST['original_height']
+      self.crop_x = float(request.POST['x'])
+      self.crop_y = float(request.POST['y'])
+      self.crop_width = float(request.POST['width'])
+      self.crop_height = float(request.POST['height'])
+      self.img_width = float(request.POST['original_width'])
+      self.img_height = float(request.POST['original_height'])
     except KeyError:
       LOG.error('Missing POST params', extra={'data': {'POST': repr(request.POST)}})
     else:
-      return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
+      record_data = FINNA.get_record(self.record_id)
+      if record_data:
+        self.record = record_data['records'][0]
+        self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+        return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
+      else:
+        LOG.error('Could not get record data')
     return http.HttpResponseBadRequest()
 
   def post(self, request, *args, **kwargs):
@@ -534,7 +540,32 @@ class AjaxCropRecordView(View):
     return http.HttpResponseBadRequest()
 
   def handle_download(self, request, *args, **kwargs):
-    pass
+    full_res_image = HKM.download_image(self.record['full_res_url'])
+    full_res_width, full_res_height = full_res_image.size
+    print "FULL RES:"
+    print full_res_width, full_res_height
+    print "UI IMG:"
+    print self.img_width, self.img_height
+    # Cropping is done from the preview image, thus posted parametes must be scaled
+    # to full res image for correct cropping
+    width_multiplier = full_res_width / self.img_width
+    height_multiplier = full_res_height / self.img_height
+    print "MULTIPLIERS:"
+    print width_multiplier, height_multiplier
+    print "CROP PARAMETERS:"
+    print self.crop_x, self.crop_y, self.crop_width, self.crop_height
+    full_res_crop_x = self.crop_x * width_multiplier
+    full_res_crop_y = self.crop_y * height_multiplier
+    full_res_crop_width = self.crop_width * width_multiplier
+    full_res_crop_height = self.crop_height * height_multiplier
+    print "SCALED CROP PARAMETERS:"
+    print full_res_crop_x, full_res_crop_y, full_res_crop_width, full_res_crop_height
+    cropped_image = full_res_image.crop((int(full_res_crop_x), int(full_res_crop_y),
+      int(full_res_crop_width), int(full_res_crop_height)))
+    print "CROPPED IMAGE:"
+    print cropped_image, cropped_image.size
+
+    return http.HttpResponse()
 
   def handle_add_to_collection(self, request, *args, **kwargs):
     pass
