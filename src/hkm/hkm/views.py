@@ -496,4 +496,51 @@ class AjaxUserFavoriteRecordView(View):
     return http.HttpResponseBadRequest()
 
 
+class AjaxCropRecordView(View):
+  record_id = None
+  action = None
+  crop_x = None
+  crop_y = None
+  crop_width = None
+  crop_height = None
+  img_width = None
+  img_height = None
+
+  record = None
+
+  def dispatch(self, request, *args, **kwargs):
+    try:
+      self.action = request.POST['action']
+      self.record_id = request.POST['record_id']
+      self.crop_x = request.POST['x']
+      self.crop_y = request.POST['y']
+      self.crop_width = request.POST['width']
+      self.crop_height = request.POST['height']
+      self.img_width = request.POST['original_width']
+      self.img_height = request.POST['original_height']
+    except KeyError:
+      LOG.error('Missing POST params', extra={'data': {'POST': repr(request.POST)}})
+    else:
+      return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
+    return http.HttpResponseBadRequest()
+
+  def post(self, request, *args, **kwargs):
+    if self.action == 'download':
+      return self.handle_download(request, *args, **kwargs)
+    elif self.action == 'add':
+      return self.handle_add_to_collection(request, *args, **kwargs)
+    elif self.action == 'add-create-collection':
+      return self.handle_add_to_new_collection(request, *args, **kwargs)
+    return http.HttpResponseBadRequest()
+
+  def handle_download(self, request, *args, **kwargs):
+    pass
+
+  def handle_add_to_collection(self, request, *args, **kwargs):
+    pass
+
+  def handle_add_to_new_collection(self, request, *args, **kwargs):
+    pass
+
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
