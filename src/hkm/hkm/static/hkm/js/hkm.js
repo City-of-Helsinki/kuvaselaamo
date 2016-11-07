@@ -146,29 +146,53 @@ palikka
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   $btn = $('.popover-list__btn');
-  $cropImage = $('#highres-image');
+  $cropImage = $('#cropper-image');
+  $submit = $('#submit-crop');
 
   $(document).on('click', '.popover-list__btn', function() {
-    var $this = $(this);
-    var $url = $this.attr('data-img-url');
+    var $url = $(this).attr('data-img-url');
     $cropImage.attr('src', $url);
     cropperInit();
   });
 
+
+
   function cropperInit() {
-    var image = document.getElementById('highres-image');
+    var image = document.getElementById('cropper-image');
+    var imageContainer = document.getElementById('cropper-container');
     var Cropper = window.Cropper;
     var cropper = new Cropper(image, {
       // aspectRatio: 16 / 9,
+      checkCrossOrigin: false,
+      checkOrientation: false,
       crop: function(e) {
-        console.log(e.detail.x);
-        console.log(e.detail.y);
-        console.log(e.detail.width);
-        console.log(e.detail.height);
-        console.log(e.detail.rotate);
-        console.log(e.detail.scaleX);
-        console.log(e.detail.scaleY);
+        // console.log(e.detail.x);
+        // console.log(e.detail.y);
+        // console.log(e.detail.width);
+        // console.log(e.detail.height);
+        // console.log(e.detail.rotate);
+        // console.log(e.detail.scaleX);
+        // console.log(e.detail.scaleY);
       }
+    });
+
+    $submit.on('click', function() {
+      imageData = cropper.getImageData();
+      boxData = cropper.getCropBoxData();
+
+      $.post('', {
+        action: 'crop',
+        x: boxData.left,
+        y: boxData.top,
+        width: boxData.width,
+        height: boxData.height,
+        original_width: imageData.width,
+        original_height: imageData.height,
+        record_id: $(image).attr('data-record-id')
+      })
+      .done(function(){
+        alert('Image cropped!');
+      });
     });
   }
 })
