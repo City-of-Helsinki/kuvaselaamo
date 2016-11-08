@@ -116,6 +116,13 @@ class FinnaClient(object):
     LOG.debug('Got result from Finna', extra={'data': {'result_data': repr(result_data)}})
     return result_data
 
+  def get_image_url(self, record_id, w=0, h=0):
+    if w != 0 and h != 0:
+      url = 'https://finna.fi/Cover/Show?id=%s&w=%d&h=%d' % (record_id, w, h)
+    else:
+      url = 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % record_id
+    return url
+
 
 DEFAULT_CLIENT = FinnaClient()
 

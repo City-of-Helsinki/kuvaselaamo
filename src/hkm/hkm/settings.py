@@ -10,5 +10,8 @@ DEFAULT_LANGUAGE = settings.LANGUAGE_CODE
 
 MY_DOMAIN = settings.HKM_MY_DOMAIN
 
+CROPPED_IMAGES_DOWNLOAD_PATH = settings.HKM_CROPPED_IMAGES_DOWNLOAD_PATH
+
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 

@@ -4,6 +4,8 @@
 import logging
 import urlparse
 import urllib
+from PIL import Image
+from StringIO import StringIO
 import requests
 
 LOG = logging.getLogger(__name__)
@@ -41,6 +43,16 @@ class HKMClient(object):
     except KeyError:
       pass
 
+    return None
+
+  def download_image(self, full_res_url):
+    r = requests.get(full_res_url, stream=True)
+    try:
+      r.raise_for_status()
+    except requests.exceptions.RequestException:
+      LOG.error('Could not download a full res url', extra={'data': {'img_url': full_res_url}})
+    else:
+      return Image.open(StringIO(r.content))
     return None
 
 

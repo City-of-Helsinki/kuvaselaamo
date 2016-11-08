@@ -2,15 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import StringIO
 from django import http
 from django.views.generic import TemplateView, RedirectView, View
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, Record
+from hkm.models import Collection, Record, TmpImage
 from hkm import forms
 from hkm import tasks
 from hkm import settings
@@ -494,6 +496,92 @@ class AjaxUserFavoriteRecordView(View):
         records.delete()
       return http.HttpResponse()
     return http.HttpResponseBadRequest()
+
+
+class AjaxCropRecordView(View):
+  record_id = None
+  action = None
+  crop_x = None
+  crop_y = None
+  crop_width = None
+  crop_height = None
+  img_width = None
+  img_height = None
+
+  record = None
+
+  def dispatch(self, request, *args, **kwargs):
+    try:
+      self.action = request.POST['action']
+      self.record_id = request.POST['record_id']
+      self.crop_x = float(request.POST['x'])
+      self.crop_y = float(request.POST['y'])
+      self.crop_width = float(request.POST['width'])
+      self.crop_height = float(request.POST['height'])
+      self.img_width = float(request.POST['original_width'])
+      self.img_height = float(request.POST['original_height'])
+    except KeyError:
+      LOG.error('Missing POST params', extra={'data': {'POST': repr(request.POST)}})
+    else:
+      record_data = FINNA.get_record(self.record_id)
+      if record_data:
+        self.record = record_data['records'][0]
+        self.record['full_res_url'] = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+        return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
+      else:
+        LOG.error('Could not get record data')
+    return http.HttpResponseBadRequest()
+
+  def post(self, request, *args, **kwargs):
+    if self.action == 'download':
+      return self.handle_download(request, *args, **kwargs)
+    elif self.action == 'add':
+      return self.handle_add_to_collection(request, *args, **kwargs)
+    elif self.action == 'add-create-collection':
+      return self.handle_add_to_new_collection(request, *args, **kwargs)
+    return http.HttpResponseBadRequest()
+
+  def handle_download(self, request, *args, **kwargs):
+    full_res_image = HKM.download_image(self.record['full_res_url'])
+    full_res_width, full_res_height = full_res_image.size
+    # Cropping is done from the preview image, thus posted parametes must be scaled
+    # to full res image for correct cropping
+    width_multiplier = full_res_width / self.img_width
+    height_multiplier = full_res_height / self.img_height
+    full_res_crop_x = self.crop_x * width_multiplier
+    full_res_crop_y = self.crop_y * height_multiplier
+    full_res_crop_width = self.crop_width * width_multiplier
+    full_res_crop_height = self.crop_height * height_multiplier
+    LOG.debug('Crop image', extra={'data': {
+        'full_res_image': str(full_res_width) + ', ' + str(full_res_height) + ', ' + full_res_image.format,
+        'preview_image': str(self.img_width) + ', ' + str(self.img_height),
+        'scaling_multipliers': str(width_multiplier) + ', ' + str(height_multiplier),
+        'crop_options': str(self.crop_x) + ', ' + str(self.crop_y) + ', ' + str(self.crop_width) + ', ' + str(self.crop_height),
+        'scaled_crop_options': str(full_res_crop_x) + ', ' + str(full_res_crop_y) + ', ' + str(full_res_crop_width) + ', ' + str(full_res_crop_height),
+      }})
+    cropped_image = full_res_image.crop((int(full_res_crop_x), int(full_res_crop_y),
+      int(full_res_crop_width), int(full_res_crop_height)))
+    crop_io = StringIO.StringIO()
+    cropped_image.save(crop_io, format=full_res_image.format)
+    filename = u'%s.%s' % (self.record['title'], full_res_image.format.lower())
+    crop_file = InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
+        crop_io.len, None)
+
+    tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'],
+      edited_image=crop_file)
+    if request.user.is_authenticated():
+      tmp_image.creator = request.user
+    tmp_image.save()
+
+    LOG.debug('Cropped image', extra={'data': {'size': repr(cropped_image.size),
+      'url': tmp_image.edited_image.url}})
+    return http.HttpResponse({'url': tmp_image.edited_image.url})
+
+  def handle_add_to_collection(self, request, *args, **kwargs):
+    pass
+
+  def handle_add_to_new_collection(self, request, *args, **kwargs):
+    pass
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

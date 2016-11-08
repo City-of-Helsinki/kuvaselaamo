@@ -110,8 +110,8 @@ class Collection(BaseModel):
     return None
 
 
-def get_image_upload_path(instance, filename):
-  return 'images/%(username)s/%(collection_title)s_%(collection_id)d/%(filename)s' % {
+def get_collection_upload_path(instance, filename):
+  return '%(username)s/%(collection_title)s_%(collection_id)d/%(filename)s' % {
       'username': instance.collection.owner.username,
       'collection_title': instance.collection.title,
       'collection_id': instance.collection.id,
@@ -126,7 +126,7 @@ class Record(OrderedModel, BaseModel):
   collection = models.ForeignKey(Collection, verbose_name=_(u'Collection'), related_name='records')
   record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
   edited_image = models.ImageField(verbose_name=_(u'Edited image'), null=True, blank=True,
-      upload_to=get_image_upload_path)
+      upload_to=get_collection_upload_path)
 
   class Meta(OrderedModel.Meta):
     pass
@@ -245,6 +245,19 @@ class Feedback(BaseModel):
   email = models.EmailField(max_length=255, verbose_name=_(u'Email'), null=True, blank=True)
   content = models.TextField(verbose_name=_(u'Content'))
   is_notification_sent = models.BooleanField(verbose_name=_(u'Notification sent'), default=False)
+
+
+def get_tmp_upload_path(instance, filename):
+  return 'tmp/%s' % filename
+
+class TmpImage(BaseModel):
+  creator = models.ForeignKey(User, verbose_name=_(u'Creator'), blank=True, null=True)
+  record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
+  record_title = models.CharField(verbose_name=_(u'Title'), max_length=1024)
+  edited_image = models.ImageField(verbose_name=_(u'Edited image'), upload_to=get_tmp_upload_path)
+
+  def __unicode__(self):
+    return self.record_title
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
