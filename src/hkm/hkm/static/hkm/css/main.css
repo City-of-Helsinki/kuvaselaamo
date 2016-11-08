@@ -6291,5 +6291,10 @@ img {
     width: 1200px; } }
 
 .crop__container {
-  height: 750px;
-  width: 750px; }
+  float: right;
+  max-width: 100%;
+  display: inline-block; }
+
+.crop__image {
+  max-width: 100%;
+  height: auto; }

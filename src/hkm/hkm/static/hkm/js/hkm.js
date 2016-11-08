@@ -146,25 +146,29 @@ palikka
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   $btn = $('.popover-list__btn');
-  $cropImage = $('#cropper-image');
-  $submit = $('#submit-crop');
+  var submit;
 
   $(document).on('click', '.popover-list__btn', function() {
-    var $url = $(this).attr('data-img-url');
-    $cropImage.attr('src', $url);
-    cropperInit();
+    var target = document.getElementById(this.getAttribute('data-target').substring(1));
+    var url = this.getAttribute('data-img-url');
+    var image = target.getElementsByClassName('crop__image')[0];
+    var imageContainer = target.getElementsByClassName('crop__container')[0];
+    submit = target.getElementsByClassName('crop__submit')[0];
+    image.src = url;
+    setTimeout(function() {
+      cropperInit(image, imageContainer);
+    }, 200);
   });
 
-
-
-  function cropperInit() {
-    var image = document.getElementById('cropper-image');
-    var imageContainer = document.getElementById('cropper-container');
+  function cropperInit(image, imageContainer) {
     var Cropper = window.Cropper;
     var cropper = new Cropper(image, {
       // aspectRatio: 16 / 9,
       checkCrossOrigin: false,
       checkOrientation: false,
+      // viewMode: 3,
+      dragMode: 'move',
+      autoCropArea: 1,
       crop: function(e) {
         // console.log(e.detail.x);
         // console.log(e.detail.y);
@@ -175,11 +179,12 @@ palikka
         // console.log(e.detail.scaleY);
       }
     });
+  }
 
-    $submit.on('click', function() {
+    $(submit).on('click', function() {
+      alert();
       imageData = cropper.getImageData();
       boxData = cropper.getCropBoxData();
-
       $.post('', {
         action: 'crop',
         x: boxData.left,
@@ -194,7 +199,9 @@ palikka
         alert('Image cropped!');
       });
     });
-  }
+
+
+
 })
 .define('app.editTitle', ['jQuery', 'docReady'], function () {
 

@@ -7,7 +7,7 @@
     {% if web_image_url %}
     <li class="popover-list__item"><a class="popover-list__btn" href="{{ web_image_url }}">{% trans 'Download web-image' %}</a></li>
     {% endif %}
-    <li class="popover-list__item"><button class="popover-list__btn" data-img-url="{{ full_res_image_url }}" data-toggle="modal" data-target="#crop-image">{% trans 'Crop and download' %}</button></li>
+    <li class="popover-list__item"><button class="popover-list__btn" data-img-url="{{ web_image_url }}" data-toggle="modal" data-target="#crop-and-download">{% trans 'Crop and download' %}</button></li>
     <li class="popover-list__item"><button class="popover-list__btn">{% trans 'Order a product of the image' %}</button></li>
   </ul>
 </div>
