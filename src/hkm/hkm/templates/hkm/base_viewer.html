@@ -35,6 +35,106 @@
     {% endif %}
   {% endblock %}
 
-  {% block modals %}{% endblock %}
+  {% block modals %}
+
+    <div class="my-modal my-modal--crop modal fade" id="crop-and-order" tabindex="-1" role="dialog">
+      <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{% trans 'Crop and order' %}</h4>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-4">
+              <!-- <div class="image-templates">
+                <button class="image-templates__template" data-aspect-ratio="2/3">A4</button>
+                <button class="image-templates__template" data-aspect-ratio="3/2">A4 ({% trans 'horizontal' %})</button>
+                <button class="image-templates__template" data-aspect-ratio="3/3"></button>
+                <div class="btn-group docs-aspect-ratios" data-toggle="buttons">
+              </div> -->
+              <div class="image-templates docs-toggles" data-toggle="buttons">
+                <button class="image-templates__template btn btn-primary">
+                  <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 2 / 3">
+                    A4 (2:3)
+                  </span>
+                </button>
+                <button class="image-templates__template btn btn-primary">
+                  <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="1.5">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 3 / 2">
+                    A4 (3:2)
+                  </span>
+                </button>
+              </div>
+
+            </div>
+            <div class="col-md-8">
+              <div class="crop__container">
+                <img class="crop__image"></img>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-modal my-modal--crop modal fade" id="crop-and-download" tabindex="-1" role="dialog">
+      <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{% trans 'Crop and download' %}</h4>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-12">
+              <div class="crop__container">
+                <img class="crop__image"></img>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
+      <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{% trans 'Crop and add to collection' %}</h4>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-4">
+              <form id="add-to-collection" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add-to-collection" />
+                <input type="hidden" name="record_id" value="{{ record.id }}" />
+                <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
+                <button class="btn btn-primary" type="submit" value="add-to-collection">{% trans 'Submit' %}</button>
+              </form>
+            </div>
+            <div class="col-md-8">
+              <div class="crop__container">
+                <img class="crop__image"></img>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="crop__submit btn btn-primary" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% endblock %}
 
 {% endblock %}
