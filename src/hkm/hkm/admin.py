@@ -13,6 +13,7 @@ admin.site.register(User)
 admin.site.register(models.PrintProduct)
 admin.site.register(models.ProductOrder)
 admin.site.register(models.Feedback)
+admin.site.register(models.TmpImage)
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

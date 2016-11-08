@@ -20,3 +20,4 @@ doc/build/
 *.orig
 staticroot
 node_modules
+mediaroot
