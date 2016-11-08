@@ -6291,10 +6291,19 @@ img {
     width: 1200px; } }
 
 .crop__container {
-  float: right;
-  max-width: 100%;
-  display: inline-block; }
+  display: table;
+  margin: 0 auto;
+  max-width: 100%; }
 
 .crop__image {
   max-width: 100%;
   height: auto; }
+
+.image-templates {
+  margin: 0 auto;
+  width: 150px; }
+
+.image-templates__template {
+  padding: 10px;
+  width: 150px;
+  height: 150px; }

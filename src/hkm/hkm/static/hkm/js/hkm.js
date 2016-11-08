@@ -145,60 +145,102 @@ palikka
 })
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
-  $btn = $('.popover-list__btn');
+  var $btn = $('.popover-list__btn');
+  var Cropper = window.Cropper;
   var submit;
+  var target;
+  var image;
+  var cropper;
+  var aspectRatio;
+  var recordId;
+  var options = {
+    aspectRatio: '',
+    checkCrossOrigin: false,
+    checkOrientation: false,
+    movable: false,
+    rotatable: false,
+    scalable: false,
+    zoomable: false,
+    autoCropArea: 1
+  }
 
   $(document).on('click', '.popover-list__btn', function() {
-    var target = document.getElementById(this.getAttribute('data-target').substring(1));
+    target = document.getElementById(this.getAttribute('data-target').substring(1));
     var url = this.getAttribute('data-img-url');
-    var image = target.getElementsByClassName('crop__image')[0];
-    submit = target.getElementsByClassName('crop__submit')[0];
+    recordId = this.getAttribute('data-record-id')
+    image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
     setTimeout(function() {
-      cropperInit(image);
+      cropperInit();
     }, 200);
   });
 
-  function cropperInit(image) {
-    var Cropper = window.Cropper;
-    var cropper = new Cropper(image, {
-      // aspectRatio: 16 / 9,
-      checkCrossOrigin: false,
-      checkOrientation: false,
-      dragMode: 'move',
-      autoCropArea: 1,
-      crop: function(e) {
-        // console.log(e.detail.x);
-        // console.log(e.detail.y);
-        // console.log(e.detail.width);
-        // console.log(e.detail.height);
-        // console.log(e.detail.rotate);
-        // console.log(e.detail.scaleX);
-        // console.log(e.detail.scaleY);
-      }
-    });
+  $('.my-modal--crop').on('hidden.bs.modal', function() {
+    cropper.destroy();
+  });
 
-    $(submit).on('click', function() {
-      imageData = cropper.getImageData();
-      boxData = cropper.getCropBoxData();
-      $.post('/ajax/crop/', {
-        action: 'download',
-        x: boxData.left,
-        y: boxData.top,
-        width: boxData.width,
-        height: boxData.height,
-        original_width: imageData.width,
-        original_height: imageData.height,
-        record_id: $(image).attr('data-record-id')
-      })
-      .done(function(){
-        alert('Image cropped!');
-      });
-    });
-
+  function cropperInit() {
+    options[aspectRatio] = '';
+    cropper = new Cropper(image, options);
   }
 
+  $('.crop__submit').on('click', function() {
+    imageData = cropper.getImageData();
+    boxData = cropper.getCropBoxData();
+    $.post('/ajax/crop/', {
+      action: 'download',
+      x: boxData.left,
+      y: boxData.top,
+      width: boxData.width,
+      height: boxData.height,
+      original_width: imageData.width,
+      original_height: imageData.height,
+      record_id: recordId
+    })
+    .done(function(){
+      alert('Image cropped!');
+    });
+  });
 
+  $(document).on('change', '.docs-toggles', function(event) {
+    var e = event || window.event;
+    var target = e.target || e.srcElement;
+    var cropBoxData;
+    var canvasData;
+    var isCheckbox;
+    var isRadio;
+
+    if (!cropper) {
+      return;
+    }
+
+    if (target.tagName.toLowerCase() === 'label') {
+      target = target.querySelector('input');
+    }
+
+    isCheckbox = target.type === 'checkbox';
+    isRadio = target.type === 'radio';
+
+    if (isCheckbox || isRadio) {
+      if (isCheckbox) {
+        options[target.name] = target.checked;
+        cropBoxData = cropper.getCropBoxData();
+        canvasData = cropper.getCanvasData();
+
+        options.ready = function () {
+          cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+        };
+      } else {
+        options[target.name] = target.value;
+        options.ready = function () {
+        };
+      }
+
+      // Restart
+      cropper.destroy();
+      cropper = new Cropper(image, options);
+    }
+  });
 
 
 

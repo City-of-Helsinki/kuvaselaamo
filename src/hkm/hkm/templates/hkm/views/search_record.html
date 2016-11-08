@@ -19,53 +19,8 @@
 
 {% endblock %}
 
-{% block modals %}
-
-  <div class="my-modal base-modal--crop modal fade" id="crop-image" tabindex="-1" role="dialog">
-    <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">{% trans 'Crop and download' %}</h4>
-        </div>
-        <div class="modal-body">
-          <img id="highres-image" src=""></img>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-          <button type="submit" value="add-to-collection" class="btn btn-primary">{% trans 'Submit' %}</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% if user.is_authenticated %}
-    <form class="modal fade" id="add-to-collection" method="POST" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{% trans 'Add to a new collection' %}</h4>
-          </div>
-          <div class="modal-body">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="add-to-collection" />
-            <input type="hidden" name="record_id" value="{{ record.id }}" />
-            <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="btn btn-primary" type="submit" value="add-to-collection">{% trans 'Submit' %}</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  {% endif %}
-
-{% endblock %}
-
 {% block hidden %}
   {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
   {% include 'hkm/snippets/popover_info.html' with finna_id=record.id %}
-  {% include 'hkm/snippets/popover_add.html' %}
+  {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
 {% endblock %}
