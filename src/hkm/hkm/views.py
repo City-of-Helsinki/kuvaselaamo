@@ -12,7 +12,7 @@ from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, Record, TmpImage
+from hkm.models import Collection, Record, TmpImage, ProductOrder
 from hkm import forms
 from hkm import tasks
 from hkm import settings
@@ -461,6 +461,60 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
 class SignUpView(BaseView):
   template_name = 'hkm/views/signup.html'
   url_name = 'hkm_signup'
+
+
+class CreateOrderView(BaseFinnaRecordDetailView):
+  template_name = ''
+  url_name = 'hkm_order_create'
+
+  def get(self, request, *args, **kwargs):
+    LOG.error('GET request to CreateOrderView')
+    return http.HttpResponseNotAllowed(['POST'])
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'order':
+      return self.handle_order(request, *args, **kwargs)
+    return self.handle_invalid_post_action(request, *args, **kwargs)
+
+  def handle_order(self, request, *args, **kwargs):
+    order = ProductOrder(session_key=request.session.session_key, record_finna_id=self.record['id'])
+    if request.user.is_authenticated():
+      order.user = request.user
+    order.save()
+    return redirect('hkm_order_product', kwargs={'order_id': order.id})
+
+
+class BaseOrderView(BaseView):
+  order = None
+
+  def setup(self, request, *arg, **kwargs):
+    try:
+      self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(kwargs['order_id'])
+    except ProductOrder.DoesNotExist:
+      LOG.error('Product order does not exist for user')
+      raise http.Http404()
+    else:
+      return True
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseOrderView, self).get_context_data(**kwargs)
+    context['order'] = self.order
+    return context
+
+
+class OrderProductView(BaseOrderView):
+  template_name = 'hkm/views/order_product.html'
+  url_name = 'hkm_order_product'
+
+
+
+class OrderContactInformationView(BaseOrderView):
+  pass
+
+
+class OrderSummaryView(BaseOrderView):
+  pass
 
 
 class LanguageView(RedirectView):
