@@ -15,6 +15,7 @@ from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record, TmpImage, ProductOrder
 from hkm import forms
 from hkm import tasks
+from hkm import image_utils
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
@@ -467,30 +468,35 @@ class CreateOrderView(BaseFinnaRecordDetailView):
   template_name = ''
   url_name = 'hkm_order_create'
 
-  def get(self, request, *args, **kwargs):
-    LOG.error('GET request to CreateOrderView')
-    return http.HttpResponseNotAllowed(['POST'])
+#TODO disable get, enable post
+#  def get(self, request, *args, **kwargs):
+#    LOG.error('GET request to CreateOrderView')
+#    return http.HttpResponseNotAllowed(['POST'])
 
-  def post(self, request, *args, **kwargs):
-    action = request.POST.get('action', None)
-    if action == 'order':
+  def get(self, request, *args, **kwargs):
+    #action = request.POST.get('action', None)
+    #if action == 'order':
       return self.handle_order(request, *args, **kwargs)
-    return self.handle_invalid_post_action(request, *args, **kwargs)
+    #return self.handle_invalid_post_action(request, *args, **kwargs)
 
   def handle_order(self, request, *args, **kwargs):
-    order = ProductOrder(session_key=request.session.session_key, record_finna_id=self.record['id'])
+    order = ProductOrder(session=request.session.session_key, record_finna_id=self.record['id'])
     if request.user.is_authenticated():
       order.user = request.user
     order.save()
-    return redirect('hkm_order_product', kwargs={'order_id': order.id})
+    return redirect(reverse('hkm_order_product', kwargs={'order_id': order.id}))
 
 
 class BaseOrderView(BaseView):
   order = None
+  url_name = None
+
+  def get_url(self):
+    return reverse(self.url_name, kwargs={'order_id': self.order.id})
 
   def setup(self, request, *arg, **kwargs):
     try:
-      self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(kwargs['order_id'])
+      self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(id=kwargs['order_id'])
     except ProductOrder.DoesNotExist:
       LOG.error('Product order does not exist for user')
       raise http.Http404()
@@ -508,13 +514,14 @@ class OrderProductView(BaseOrderView):
   url_name = 'hkm_order_product'
 
 
-
 class OrderContactInformationView(BaseOrderView):
-  pass
+  template_name = 'hkm/views/order_contact_information.html'
+  url_name = 'hkm_order_contact_information'
 
 
 class OrderSummaryView(BaseOrderView):
-  pass
+  template_name = 'hkm/views/order_summary.html'
+  url_name = 'hkm_order_summary'
 
 
 class LanguageView(RedirectView):
@@ -597,24 +604,7 @@ class AjaxCropRecordView(View):
 
   def handle_download(self, request, *args, **kwargs):
     full_res_image = HKM.download_image(self.record['full_res_url'])
-    full_res_width, full_res_height = full_res_image.size
-    # Cropping is done from the preview image, thus posted parametes must be scaled
-    # to full res image for correct cropping
-    width_multiplier = full_res_width / self.img_width
-    height_multiplier = full_res_height / self.img_height
-    full_res_crop_x = self.crop_x * width_multiplier
-    full_res_crop_y = self.crop_y * height_multiplier
-    full_res_crop_width = self.crop_width * width_multiplier
-    full_res_crop_height = self.crop_height * height_multiplier
-    LOG.debug('Crop image', extra={'data': {
-        'full_res_image': str(full_res_width) + ', ' + str(full_res_height) + ', ' + full_res_image.format,
-        'preview_image': str(self.img_width) + ', ' + str(self.img_height),
-        'scaling_multipliers': str(width_multiplier) + ', ' + str(height_multiplier),
-        'crop_options': str(self.crop_x) + ', ' + str(self.crop_y) + ', ' + str(self.crop_width) + ', ' + str(self.crop_height),
-        'scaled_crop_options': str(full_res_crop_x) + ', ' + str(full_res_crop_y) + ', ' + str(full_res_crop_width) + ', ' + str(full_res_crop_height),
-      }})
-    cropped_image = full_res_image.crop((int(full_res_crop_x), int(full_res_crop_y),
-      int(full_res_crop_width), int(full_res_crop_height)))
+    cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y, self.crop_width, self.crop_height, self.img_width, self.img_height)
     crop_io = StringIO.StringIO()
     cropped_image.save(crop_io, format=full_res_image.format)
     filename = u'%s.%s' % (self.record['title'], full_res_image.format.lower())

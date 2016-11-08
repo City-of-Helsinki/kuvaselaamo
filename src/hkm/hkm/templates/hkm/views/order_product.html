@@ -1,2 +1,9 @@
 
+
+<ul>
+  <li><a href="{% url 'hkm_order_product' order_id=order.id %}">Product tab</a>
+  <li><a href="{% url 'hkm_order_contact_information' order_id=order.id %}">Contact info tab</a>
+  <li><a href="{% url 'hkm_order_summary' order_id=order.id %}">Summary tab</a>
+</ul>
+
 {{ order }}

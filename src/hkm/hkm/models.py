@@ -195,9 +195,9 @@ class PrintProduct(Product):
 class ProductOrderQuerySet(models.QuerySet):
   def for_user(self, user, session_key):
     if user.is_authenticated():
-      return self.filter(user=user)
+      return self.filter(models.Q(user=user)|models.Q(session=session_key))
     else:
-      return self.filter(session_key=session_key)
+      return self.filter(session=session_key)
 
 class ProductOrder(BaseModel):
   # Anonymous users can order aswell, so we need contact and shipping information directly
@@ -215,7 +215,7 @@ class ProductOrder(BaseModel):
   # generic relation to any product sub type. This is stored as a reference,
   # but all information regarding the order MUST be stored in directly in this model
   content_type = models.ForeignKey(ContentType, on_delete=models.SET_NULL, null=True, blank=True)
-  object_id = models.PositiveIntegerField()
+  object_id = models.PositiveIntegerField(null=True, blank=True)
   content_object = GenericForeignKey('content_type', 'object_id')
 
   # Image is cropped just in time order is confirmed, until then crop options are stored here
@@ -254,7 +254,7 @@ class ProductOrder(BaseModel):
   objects = ProductOrderQuerySet.as_manager()
 
   def __unicode__(self):
-    return 
+    return self.session
 
 
 class Feedback(BaseModel):
