@@ -255,6 +255,8 @@ class IndexView(CollectionDetailView):
     if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
       self.open_popup = False
     context['open_popup'] = self.open_popup
+    print "--------------------------------------------------------------"
+    print self.record.get_details()['title']
     return context
 
 

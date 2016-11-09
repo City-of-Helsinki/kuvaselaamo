@@ -136,7 +136,9 @@ class Record(OrderedModel, BaseModel):
     data = DEFAULT_CACHE.get(cache_key, None)
     if data == None:
       data = FINNA.get_record(self.record_id)
-      DEFAULT_CACHE.set(cache_key, data, 60 * 15)
+      if data:
+        data = data['records'][0]
+        DEFAULT_CACHE.set(cache_key, data, 60 * 15)
     else:
       LOG.debug('Got record details from cache', extra={'data': {'record_id': self.record_id}})
     return data
@@ -146,11 +148,11 @@ class Record(OrderedModel, BaseModel):
       return u'%s/%s' % (settings.MY_DOMAIN, self.edited_image.url)
     else:
       record_data = self.get_details()
-      record_url = record_data['records'][0]['rawData']['thumbnail']
+      record_url = record_data['rawData']['thumbnail']
       cache_key = '%s-record-preview-url' % record_url
       full_res_url = DEFAULT_CACHE.get(cache_key, None)
       if full_res_url == None:
-        full_res_url = HKM.get_full_res_image_url(record_data['records'][0]['rawData']['thumbnail'])
+        full_res_url = HKM.get_full_res_image_url(record_data['rawData']['thumbnail'])
         DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
       else:
         LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
