@@ -93,7 +93,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    // trigger: 'focus',
+    trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-info-content').html();
@@ -149,6 +149,7 @@ palikka
   var Cropper = window.Cropper;
   var submit;
   var target;
+  var url;
   var image;
   var cropper;
   var aspectRatio;
@@ -166,7 +167,7 @@ palikka
 
   $(document).on('click', '.popover-list__btn', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
-    var url = this.getAttribute('data-img-url');
+    url = this.getAttribute('data-img-url');
     recordId = this.getAttribute('data-record-id')
     image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
@@ -185,20 +186,24 @@ palikka
   }
 
   $('.crop__submit').on('click', function() {
+    $action = $(this).val();
     imageData = cropper.getImageData();
     boxData = cropper.getCropBoxData();
     $.post('/ajax/crop/', {
-      action: 'download',
+      action: $action,
       x: boxData.left,
       y: boxData.top,
       width: boxData.width,
       height: boxData.height,
       original_width: imageData.width,
       original_height: imageData.height,
-      record_id: recordId
+      record_id: recordId,
     })
-    .done(function(){
-      alert('Image cropped!');
+    .done(function(data){
+      window.open(data.url);
+    })
+    .fail(function(data){
+      alert('Crop failed.');
     });
   });
 

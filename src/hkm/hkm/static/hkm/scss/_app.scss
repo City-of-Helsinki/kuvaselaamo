@@ -476,10 +476,21 @@ img {
 }
 
 /* Popover */
+.popover {
+  max-width: 800px;
+  margin-right: 10px;
+}
+.popover__link {
+  font-family: 'goviniusbold';
+  color: $color-silvertree;
+}
+.popover__link:hover {
+  color: $color-silvertree;
+}
 .popover__title {
   margin: 0;
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: 18px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
   border-radius: 5px 5px 0 0;
@@ -493,15 +504,22 @@ img {
 }
 .popover__article {
   padding: 8px 14px;
+  font-size: 16px;
+  font-family: 'Signe';
+}
+.popover__description {
+  font-size: 15px;
+  font-size: 14px;
 }
 .popover-list__item {
   border-bottom: solid 1px $color-caramel;
   list-style-type: none;
+  white-space: nowrap;
 }
 .popover-list__item:nth-child(3) {
   border-bottom: solid 1px $color-vistablue;
 }
-.popover-list__item:nth-child(4) {
+.popover-list__item:last-child {
   border-bottom: 0;
 }
 .popover-list__item:hover {

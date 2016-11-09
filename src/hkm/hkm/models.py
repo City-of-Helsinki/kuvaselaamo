@@ -136,7 +136,9 @@ class Record(OrderedModel, BaseModel):
     data = DEFAULT_CACHE.get(cache_key, None)
     if data == None:
       data = FINNA.get_record(self.record_id)
-      DEFAULT_CACHE.set(cache_key, data, 60 * 15)
+      if data:
+        data = data['records'][0]
+        DEFAULT_CACHE.set(cache_key, data, 60 * 15)
     else:
       LOG.debug('Got record details from cache', extra={'data': {'record_id': self.record_id}})
     return data
@@ -146,11 +148,11 @@ class Record(OrderedModel, BaseModel):
       return u'%s/%s' % (settings.MY_DOMAIN, self.edited_image.url)
     else:
       record_data = self.get_details()
-      record_url = record_data['records'][0]['rawData']['thumbnail']
+      record_url = record_data['rawData']['thumbnail']
       cache_key = '%s-record-preview-url' % record_url
       full_res_url = DEFAULT_CACHE.get(cache_key, None)
       if full_res_url == None:
-        full_res_url = HKM.get_full_res_image_url(record_data['records'][0]['rawData']['thumbnail'])
+        full_res_url = HKM.get_full_res_image_url(record_data['rawData']['thumbnail'])
         DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
       else:
         LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
@@ -192,36 +194,53 @@ class PrintProduct(Product):
   paper_quality = models.CharField(verbose_name=_(u'Paper quality'), max_length=255)
 
 
+class ProductOrderQuerySet(models.QuerySet):
+  def for_user(self, user, session_key):
+    if user.is_authenticated():
+      return self.filter(models.Q(user=user)|models.Q(session=session_key))
+    else:
+      return self.filter(session=session_key)
+
 class ProductOrder(BaseModel):
   # Anonymous users can order aswell, so we need contact and shipping information directly
-  # to order model
+  # to order model. Orders are associated to anynymous users via session
   user = models.ForeignKey(User, verbose_name=_(u'User'), null=True, blank=True)
-  first_name = models.CharField(verbose_name=_(u'First name'), max_length=255)
-  last_name = models.CharField(verbose_name=_(u'Last name'), max_length=255)
-  email = models.EmailField(max_length=255, verbose_name=_(u'Email'))
-  phone = PhoneNumberField(verbose_name=_(u'Phone number'))
-  street_address = models.CharField(verbose_name=_(u'Street adress'), max_length=1024)
-  postal_code = models.IntegerField(verbose_name=_(u'Postal code'))
-  city = models.CharField(verbose_name=_(u'City'), max_length=255)
+  session = models.CharField(verbose_name=_(u'Session'), max_length=255)
+  first_name = models.CharField(verbose_name=_(u'First name'), max_length=255, null=True, blank=True)
+  last_name = models.CharField(verbose_name=_(u'Last name'), max_length=255, null=True, blank=True)
+  email = models.EmailField(max_length=255, verbose_name=_(u'Email'), null=True, blank=True)
+  phone = PhoneNumberField(verbose_name=_(u'Phone number'), null=True, blank=True)
+  street_address = models.CharField(verbose_name=_(u'Street adress'), max_length=1024, null=True, blank=True)
+  postal_code = models.IntegerField(verbose_name=_(u'Postal code'), null=True, blank=True)
+  city = models.CharField(verbose_name=_(u'City'), max_length=255, null=True, blank=True)
 
   # generic relation to any product sub type. This is stored as a reference,
   # but all information regarding the order MUST be stored in directly in this model
   content_type = models.ForeignKey(ContentType, on_delete=models.SET_NULL, null=True, blank=True)
-  object_id = models.PositiveIntegerField()
+  object_id = models.PositiveIntegerField(null=True, blank=True)
   content_object = GenericForeignKey('content_type', 'object_id')
 
-  # Order must always specify a URL where the orinting service can download the desired image
-  # This can be either as direct URL to HKM image server hoting the original image OR URL to
+  # Image is cropped just in time order is confirmed, until then crop options are stored here
+  record_finna_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024, null=True, blank=True)
+  crop_x = models.IntegerField(verbose_name=_('Crop x'), null=True, blank=True)
+  crop_y = models.IntegerField(verbose_name=_('Crop y'), null=True, blank=True)
+  crop_width = models.IntegerField(verbose_name=_('Crop width'), null=True, blank=True)
+  crop_height = models.IntegerField(verbose_name=_('Crop height'), null=True, blank=True)
+  crop_image_width = models.IntegerField(verbose_name=_('Crop image width'), null=True, blank=True)
+  crop_image_height = models.IntegerField(verbose_name=_('Crop image height'), null=True, blank=True)
+
+  # Order must always specify a URL where the printing service can download the desired image
+  # This can be either as direct URL to HKM image server holding the original image OR URL to
   # kuvaselaamo server to the cropped image
-  image_url = models.CharField(verbose_name=_(u'Image URL'), max_length=2048)
+  image_url = models.CharField(verbose_name=_(u'Image URL'), max_length=2048, null=True, blank=True)
   # If this order is made from Record in collection, the Record is saved for statistics purposes
   record = models.ForeignKey(Record, verbose_name=_(u'Record'), null=True, blank=True)
 
   # Prize and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here
   amount = models.IntegerField(verbose_name=_(u'Amount'), default=1)
-  unit_prize = models.DecimalField(verbose_name=_(u'Unit prize'), decimal_places=2, max_digits=10)
-  total_prize = models.DecimalField(verbose_name=_(u'Total prize'), decimal_places=2, max_digits=10)
+  unit_prize = models.DecimalField(verbose_name=_(u'Unit prize'), decimal_places=2, max_digits=10, null=True, blank=True)
+  total_prize = models.DecimalField(verbose_name=_(u'Total prize'), decimal_places=2, max_digits=10, null=True, blank=True)
 
   # Timestamp for when users has confimed the order in kuvaselaamo
   datetime_confirmed = models.DateTimeField(verbose_name=_(u'Confirmed'), null=True, blank=True)
@@ -234,8 +253,10 @@ class ProductOrder(BaseModel):
   datetime_order_ended = models.DateTimeField(verbose_name=_(u'Order ended'), null=True, blank=True)
   is_order_successful = models.NullBooleanField(verbose_name=_(u'Order succesful'), null=True, blank=True)
 
+  objects = ProductOrderQuerySet.as_manager()
+
   def __unicode__(self):
-    return 
+    return self.session
 
 
 class Feedback(BaseModel):

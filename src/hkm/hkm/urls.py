@@ -22,6 +22,11 @@ urlpatterns = [
   url(r'^signup/$', views.SignUpView.as_view(), name='hkm_signup'),
   url(r'^language/$', views.LanguageView.as_view(), name='hkm_language'),
 
+  url(r'^order/(?P<finna_id>[a-zA-Z0-9:.]+)/$', views.CreateOrderView.as_view(), name='hkm_order_create'),
+  url(r'^order/(?P<order_id>\d+)/product/$', views.OrderProductView.as_view(), name='hkm_order_product'),
+  url(r'^order/(?P<order_id>\d+)/contact/$', views.OrderContactInformationView.as_view(), name='hkm_order_contact_information'),
+  url(r'^order/(?P<order_id>\d+)/summary/$', views.OrderSummaryView.as_view(), name='hkm_order_summary'),
+
   url(r'^ajax/record/fav/$', login_required()(views.AjaxUserFavoriteRecordView.as_view()),
     name='hkm_ajax_record_fav'),
   url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),

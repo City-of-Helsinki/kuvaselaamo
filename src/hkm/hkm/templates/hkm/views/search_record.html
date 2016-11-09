@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block hidden %}
-  {% include 'hkm/snippets/popover_cart.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
-  {% include 'hkm/snippets/popover_info.html' with finna_id=record.id %}
+  {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
+  {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
   {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
 {% endblock %}
