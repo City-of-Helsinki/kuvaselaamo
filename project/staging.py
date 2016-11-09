@@ -10,8 +10,9 @@ from project.production import *
 # TODO
 HKM_MY_DOMAIN = ''
 HKM_FEEDBACK_NOTIFICATION_EMAILS = [
-  'santtu.suominen@haltu.fi',
+  'info@haltu.fi',
 ]
+HKM_FEEDBACK_FROM_EMAIL = ''
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

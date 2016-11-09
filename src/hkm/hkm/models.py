@@ -91,7 +91,10 @@ class Collection(BaseModel):
 
   def save(self, *args, **kwargs):
     if self.show_in_landing_page:
-      self.public = True
+      # Only one collection is shown in landing page
+      # Automatically make it also public
+      Collection.objects.filter(show_in_landing_page=True).update(show_in_landing_page=False)
+      self.is_public = True
     return super(Collection, self).save(*args, **kwargs)
 
   def __unicode__(self):
