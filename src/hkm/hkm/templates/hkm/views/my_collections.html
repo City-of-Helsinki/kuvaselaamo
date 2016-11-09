@@ -25,17 +25,17 @@
         {% for collection in collections %}
           <div class="grid__item item" data-w="550" data-h="400">
             <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-              <div class="sub-grid flex-images">
-                {% with images=collection|display_images %}
-                  {% if images|length == 1 %}
-                    <div class="grid__item item" style="background-image:url('{{ images.0 }}')"></div>
-                  {% else %}
+              {% with images=collection|display_images %}
+                {% if images|length == 1 %}
+                  <div class="grid__item grid__item--collection item" style="background-image:url('{{ images.0 }}')"></div>
+                {% else %}
+                  <div class="sub-grid flex-images">
                     {% for image_url in images %}
-                      <div class="grid__item item" style="background-image:url('{{ image_url }}')"></div>
+                      <div class="sub-grid__item item" style="background-image:url('{{ image_url }}')"></div>
                     {% endfor %}
-                  {% endif %}
-                {% endwith %}
-              </div>
+                  </div>
+                {% endif %}
+              {% endwith %}
               <div class="grid__meta">
                 <span class="grid__meta--title">{{ collection.title }}</span>
                 <span class="grid__meta--other">{% if collection.description %}{{ collection.description }}{% else %}{% trans 'No description' %}{% endif %}</span>

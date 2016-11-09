@@ -93,7 +93,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    // trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-info-content').html();

@@ -1,8 +1,8 @@
 {% load i18n %}
 <div id="popover-info-content">
-  <div class="popover-article">
+  <h3 class="popover__title"><a href="{% url 'hkm_record' finna_id=finna_id %}">{{ record_title }}</a></h3>
+  <div class="popover__article">
     <p>{% trans 'Author' %}</p>
     <p>Short description</p>
-    <p><a href="{% url 'hkm_record' finna_id=finna_id %}">Info</a></p>
   </div>
 </div>
