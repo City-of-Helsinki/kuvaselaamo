@@ -147,6 +147,7 @@ HKM_MY_DOMAIN = 'http://localhost:8009'
 HKM_FEEDBACK_NOTIFICATION_EMAILS = [
     'dummy.address@tld.fi',
 ]
+HKM_FEEDBACK_FROM_EMAIL = 'system@localhost'
 HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
 
 
