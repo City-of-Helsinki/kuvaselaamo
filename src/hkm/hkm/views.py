@@ -117,7 +117,7 @@ class PublicCollectionsView(BaseCollectionListView):
   url_name = 'hkm_public_collections'
 
   def get_collection_qs(self, request, *args, **kwargs):
-    return Collection.objects.filter(is_public=True)
+    return Collection.objects.filter(is_public=True).order_by('created')
 
 
 class MyCollectionsView(BaseCollectionListView):
