@@ -173,7 +173,7 @@ class CollectionDetailView(BaseView):
 
   def get_empty_forms(self, request):
     return {
-      'collection_form': forms.CollectionForm(prefix='collection-form', instance=self.collection),
+      'collection_form': forms.CollectionForm(prefix='collection-form', instance=self.collection, user=request.user),
     }
 
   def post(self, request, *args, **kwargs):
@@ -186,7 +186,8 @@ class CollectionDetailView(BaseView):
     return self.handle_invalid_post_action(request, *args, **kwargs)
 
   def handle_edit(self, request, *args, **kwargs):
-    form = forms.CollectionForm(request.POST, prefix='collection-form', instance=self.collection)
+    form = forms.CollectionForm(request.POST, prefix='collection-form', instance=self.collection, user=request.user)
+    print form.fields
     if form.is_valid():
       form.save()
       return redirect(self.get_url())

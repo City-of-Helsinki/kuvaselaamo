@@ -9,9 +9,15 @@ LOG = logging.getLogger(__name__)
 
 
 class CollectionForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    self.user = kwargs.pop('user')
+    super(CollectionForm, self).__init__(*args, **kwargs)
+    if not self.user.is_authenticated() or not self.user.profile.is_admin:
+      del self.fields['show_in_landing_page']
+
   class Meta:
     model = Collection
-    fields = ['title', 'description']
+    fields = ['title', 'description', 'is_public', 'show_in_landing_page']
 
 
 class FeedbackForm(forms.ModelForm):
