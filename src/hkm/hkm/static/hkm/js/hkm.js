@@ -146,12 +146,13 @@ palikka
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   var $btn = $('.popover-list__btn');
+  var $action;
+  var $collection;
   var Cropper = window.Cropper;
   var submit;
   var target;
   var url;
   var image;
-  var collection;
   var cropper;
   var aspectRatio;
   var recordId;
@@ -166,6 +167,10 @@ palikka
     autoCropArea: 1
   }
 
+  function cropperInit() {
+    cropper = new Cropper(image, options);
+  }
+
   $(document).on('click', '.popover-list__btn', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
@@ -177,37 +182,44 @@ palikka
     }, 200);
   });
 
+  $(document).on('click', '.crop-settings__toggle', function() {
+    $('.crop-settings__form').collapse('toggle');
+    if ($('#crop-add-submit').val() == 'add') {
+      $('#crop-add-submit').val('add-create-collection');
+    }
+    else if ($('#crop-add-submit').val() == 'add-create-collection') {
+      $('#crop-add-submit').val('add');
+    }
+  });
+
   $('.my-modal--crop').on('hidden.bs.modal', function() {
     cropper.destroy();
   });
 
-  function cropperInit() {
-    cropper = new Cropper(image, options);
-  }
-
   $('.crop__submit').on('click', function() {
     $action = $(this).val();
-    collection = $('input[name=collection]:checked').val();
-    console.log(collection);
-    // imageData = cropper.getImageData();
-    // boxData = cropper.getCropBoxData();
-    // $.post('/ajax/crop/', {
-    //   action: $action,
-    //   x: boxData.left,
-    //   y: boxData.top,
-    //   width: boxData.width,
-    //   height: boxData.height,
-    //   original_width: imageData.width,
-    //   original_height: imageData.height,
-    //   collection: collection,
-    //   record_id: recordId,
-    // })
-    // .done(function(data){
-    //   window.open(data.url);
-    // })
-    // .fail(function(data){
-    //   alert('Crop failed.');
-    // });
+    $collectionId = $('input[name=collection]:checked').val();
+    $collectionTitle = $('#add-collection-input').val();
+    imageData = cropper.getImageData();
+    boxData = cropper.getCropBoxData();
+    $.post('/ajax/crop/', {
+      action: $action,
+      x: boxData.left,
+      y: boxData.top,
+      width: boxData.width,
+      height: boxData.height,
+      original_width: imageData.width,
+      original_height: imageData.height,
+      collection_id: $collectionId,
+      collection_title: $collectionTitle,
+      record_id: recordId,
+    })
+    .done(function(data){
+      window.open(data.url);
+    })
+    .fail(function(data){
+      alert('Crop failed.');
+    });
   });
 
   $(document).on('change', '.docs-toggles', function(event) {
