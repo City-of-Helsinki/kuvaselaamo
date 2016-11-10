@@ -40,7 +40,7 @@
                 <span class="grid__meta--title">{{ record }}</span>
                 <span class="grid__meta--other"></span>
               </div>
-              <img class="flex-img" src="{% finna_image record.record_id w=400 h=400 %}"></img>
+              <img class="flex-img" src="{{ record.get_preview_image_absolute_url }}"></img>
             </a>
             {% if collection.collection_type == 'favorite' %}
               <div class="grid__fav active"></div>
