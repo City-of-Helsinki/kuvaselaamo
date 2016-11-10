@@ -612,7 +612,7 @@ class AjaxCropRecordView(View):
         return self.handle_add_to_new_collection(request, *args, **kwargs)
     return http.HttpResponseBadRequest()
 
-  def _get_cropped_file(self):
+  def _get_cropped_full_res_file(self):
     full_res_image = HKM.download_image(self.record['full_res_url'])
     cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y, self.crop_width, self.crop_height, self.img_width, self.img_height)
     crop_io = StringIO.StringIO()
@@ -622,8 +622,18 @@ class AjaxCropRecordView(View):
     return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
         crop_io.len, None)
 
+  def _get_cropped_preview_file(self):
+    full_res_image = FINNA.download_image(self.record['id'])
+    cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y, self.crop_width, self.crop_height, self.img_width, self.img_height)
+    crop_io = StringIO.StringIO()
+    cropped_image.save(crop_io, format=full_res_image.format)
+    filename = u'%s.%s' % (self.record['title'], full_res_image.format.lower())
+    LOG.debug('Cropped image', extra={'data': {'size': repr(cropped_image.size)}})
+    return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
+        crop_io.len, None)
+
   def handle_download(self, request, *args, **kwargs):
-    crop_file = self._get_cropped_file()
+    crop_file = self._get_cropped_full_res_file()
     tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'],
       edited_image=crop_file)
     if request.user.is_authenticated():
@@ -638,9 +648,10 @@ class AjaxCropRecordView(View):
     except KeyError, Collection.DoesNotExist:
       LOG.error('Couldn not get collection')
     else:
-      crop_file = self._get_cropped_file()
+      cropped_full_res_file = self._get_cropped_full_res_file()
+      cropped_preview_file = self._get_cropped_preview_file()
       record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-          edited_image=crop_file)
+          edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
       record.save()
       return http.HttpResponse()
     return http.HttpResponseBadRequest()
@@ -648,9 +659,10 @@ class AjaxCropRecordView(View):
   def handle_add_to_new_collection(self, request, *args, **kwargs):
     collection = Collection(owner=request.user, title=request.POST['collection_title'])
     collection.save()
-    crop_file = self._get_cropped_file()
+    cropped_full_res_file = self._get_cropped_full_res_file()
+    cropped_preview_file = self._get_cropped_preview_file()
     record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-        edited_image=crop_file)
+        edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
     record.save()
     return http.HttpResponse()
 

@@ -15,7 +15,7 @@
 
 {% block content %}
 
-  <div class="image-viewer"><img src="{% finna_image record.record_id %}"></img></div>
+  <div class="image-viewer"><img src="{{ record.get_preview_image_absolute_url }}"></img></div>
 
 {% endblock %}
 

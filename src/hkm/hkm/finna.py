@@ -4,6 +4,9 @@
 import math
 import logging
 import requests
+from PIL import Image
+from StringIO import StringIO
+
 
 LOG = logging.getLogger(__name__)
 
@@ -123,6 +126,15 @@ class FinnaClient(object):
       url = 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % record_id
     return url
 
+  def download_image(self, record_id):
+    r = requests.get(self.get_image_url(record_id), stream=True)
+    try:
+      r.raise_for_status()
+    except requests.exceptions.RequestException:
+      LOG.error('Could not download a full res url', extra={'data': {'record_id': record_id}})
+    else:
+      return Image.open(StringIO(r.content))
+    return None
 
 DEFAULT_CLIENT = FinnaClient()
 

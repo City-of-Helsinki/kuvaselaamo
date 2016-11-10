@@ -128,7 +128,9 @@ class Record(OrderedModel, BaseModel):
   creator = models.ForeignKey(User, verbose_name=_(u'Creator'))
   collection = models.ForeignKey(Collection, verbose_name=_(u'Collection'), related_name='records')
   record_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024)
-  edited_image = models.ImageField(verbose_name=_(u'Edited image'), null=True, blank=True,
+  edited_full_res_image = models.ImageField(verbose_name=_(u'Edited full resolution image'), null=True, blank=True,
+      upload_to=get_collection_upload_path)
+  edited_preview_image = models.ImageField(verbose_name=_(u'Edited preview image'), null=True, blank=True,
       upload_to=get_collection_upload_path)
 
   class Meta(OrderedModel.Meta):
@@ -147,8 +149,8 @@ class Record(OrderedModel, BaseModel):
     return data
 
   def get_full_res_image_absolute_url(self):
-    if self.edited_image:
-      return u'%s/%s' % (settings.MY_DOMAIN, self.edited_image.url)
+    if self.edited_full_res_image:
+      return u'%s%s' % (settings.MY_DOMAIN, self.edited_full_res_image.url)
     else:
       record_data = self.get_details()
       record_url = record_data['rawData']['thumbnail']
@@ -160,6 +162,12 @@ class Record(OrderedModel, BaseModel):
       else:
         LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
       return full_res_url
+
+  def get_preview_image_absolute_url(self):
+    if self.edited_preview_image:
+      return u'%s%s' % (settings.MY_DOMAIN, self.edited_preview_image.url)
+    else:
+      return FINNA.get_image_url(self.record_id)
 
   def is_favorite(self, user):
     if user.is_authenticated():

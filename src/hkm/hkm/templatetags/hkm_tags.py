@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import random
 from django import template
 from hkm.finna import DEFAULT_CLIENT as FINNA
 
@@ -23,18 +22,18 @@ def finna_default_image_url(img_id):
 
 @register.filter
 def display_images(collection):
-  ids = list(collection.records.all().values_list('record_id', flat=True))
-  record_count = len(ids)
+  records = collection.records.all()
+  record_count = records.count()
   image_urls = []
 
   if record_count == 0:
     image_urls.append('/static/hkm/img/collection_default_image.png')
   elif record_count < 3:
-    image_urls.append(finna_image(ids[0]))
+    image_urls.append(records[0].get_preview_image_absolute_url())
   else:
     image_urls = []
-    for record_id in random.sample(ids, 3):
-      image_urls.append(finna_image(record_id))
+    for record in records[3]:
+      image_urls.append(record.get_preview_image_absolute_urli())
     return image_urls
   return image_urls
 
