@@ -215,6 +215,10 @@ class CollectionDetailView(BaseView):
     if self.record:
       context['next_record'] = self.collection.get_next_record(self.record)
       context['previous_record'] = self.collection.get_previous_record(self.record)
+    if self.request.user.is_authenticated():
+      context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
+    else:
+      context['my_collections'] = Collection.objects.none()
     return context
 
 
@@ -256,8 +260,6 @@ class IndexView(CollectionDetailView):
     if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
       self.open_popup = False
     context['open_popup'] = self.open_popup
-    print "--------------------------------------------------------------"
-    print self.record.get_details()['title']
     return context
 
 
@@ -389,6 +391,10 @@ class SearchRecordDetailView(SearchView):
     record = self.search_result['records'][0]
     record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
     context['record'] = record
+    if self.request.user.is_authenticated():
+      context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
+    else:
+      context['my_collections'] = Collection.objects.none()
     return context
 
 
