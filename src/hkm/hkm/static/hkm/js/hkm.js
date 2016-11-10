@@ -215,7 +215,12 @@ palikka
       record_id: recordId,
     })
     .done(function(data){
-      window.open(data.url);
+      if (data.url) {
+        window.open(data.url);
+      }
+      else {
+        location.reload();
+      }
     })
     .fail(function(data){
       alert('Crop failed.');
@@ -261,8 +266,6 @@ palikka
       cropper = new Cropper(image, options);
     }
   });
-
-
 
 })
 .define('app.editTitle', ['jQuery', 'docReady'], function () {

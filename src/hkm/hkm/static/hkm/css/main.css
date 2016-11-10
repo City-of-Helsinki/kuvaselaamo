@@ -5852,6 +5852,10 @@ a {
 img {
   height: 100%; }
 
+.record-meta__image {
+  height: auto;
+  width: 100%; }
+
 /* Container */
 @media (min-width: 1200px) {
   .fullsize-container {

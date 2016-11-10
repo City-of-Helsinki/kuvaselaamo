@@ -1,12 +1,40 @@
-{% extends 'hkm/base.html' %}
+{% extends 'hkm/base_collection.html' %}
 {% load i18n hkm_tags %}
 
-{% block main_content %}
-  RECORD DATA:<br>
-  {{ record }}
+{% block banner %}
 
-  <br>
-  <br>
+  <div class="page-header">
+    <div class="banner__container fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1">{% trans 'Image details' %}</h1>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="fullsize-container">
+    <div class="record-meta">
+      <div class="record-meta__col record-meta__col--left col-md-4">
+        <img class="record-meta__image" src="{% finna_image record.id %}"></img>
+      </div>
+      <div class="record-meta__col record-meta__col--right col-md-8">
+        <h1 class="record-meta__title">{{ record.title }}</h1>
+        <h3 class="record-meta__copyright">{{ record.imageRights.copyright }}</h3>
+        <h2 class="record-meta__sub-header">{% trans 'Identification information' %}</h2>
+        <p class="record-meta__paragraph">{% trans 'Image type:' %} {% for type in record.rawData.format %}{{ type.translated }}, {% endfor %}</p>
+        <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
+        <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
+        <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
+        <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
+        <p class="record-meta__paragraph">{% trans 'Kuvanottovuosi:' %} {{ record.year }}</p>
+        <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
+        <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
+      </div>
+    </div>
+  </div>
 
   RELATED COLLECTIONS:<br>
   {{ related_collections }}
