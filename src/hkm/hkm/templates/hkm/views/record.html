@@ -19,6 +19,7 @@
     <div class="record-meta">
       <div class="record-meta__col record-meta__col--left col-md-4">
         <img class="record-meta__image" src="{% finna_image record.id %}"></img>
+        <h2 class="record-meta__sub-header"><a href="{% url 'hkm_record_feedback' finna_id=record.id %}">{% trans 'Send feedback' %}</a></h2>
       </div>
       <div class="record-meta__col record-meta__col--right col-md-8">
         <h1 class="record-meta__title">{{ record.title }}</h1>
@@ -32,15 +33,39 @@
         <p class="record-meta__paragraph">{% trans 'Kuvanottovuosi:' %} {{ record.year }}</p>
         <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
         <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
+
+        <h2 class="record-meta__sub-header">{% trans 'Related collections' %}</h2>
+        <div class="grid flex-images">
+          <div class="grid__group item-slider invisible">
+            {% for collection in related_collections %}
+              <div class="grid__item item" data-w="550" data-h="400">
+                <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+                  {% with images=collection|display_images %}
+                    {% if images|length == 1 %}
+                      <div class="grid__item grid__item--collection item" style="background-image:url('{{ images.0 }}')"></div>
+                    {% else %}
+                      <div class="sub-grid flex-images">
+                        {% for image_url in images %}
+                          <div class="sub-grid__item item" style="background-image:url('{{ image_url }}')"></div>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% endwith %}
+                  <div class="grid__meta">
+                    <span class="grid__meta--title">{{ collection.title }}</span>
+                    <span class="grid__meta--other">{% if collection.description %}{{ collection.description }}{% else %}{% trans 'No description' %}{% endif %}</span>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+
+        </div>
+
+
+
       </div>
     </div>
   </div>
-
-  RELATED COLLECTIONS:<br>
-  {{ related_collections }}
-
-  <br>
-  <br>
-  LINK TO FEEDBACK VIEW: <br>
-  <a href="{% url 'hkm_record_feedback' finna_id=record.id %}">Feedback</a>
+  
 {% endblock %}

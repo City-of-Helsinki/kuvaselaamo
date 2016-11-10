@@ -5981,7 +5981,7 @@ img {
   background-color: #ff7862;
   width: 100%;
   min-height: 100px;
-  padding: 10px 0;
+  padding: 0;
   margin-bottom: 30px; }
 
 .page-header {
@@ -5989,10 +5989,11 @@ img {
   color: #fff;
   border: 0;
   margin: 0 0 0 0;
-  padding: 0; }
+  padding: 30px 0; }
 
 .banner__container {
-  padding-top: 18px; }
+  padding-top: 18px;
+  padding-bottom: 18px; }
 
 .banner__title {
   float: left; }
@@ -6114,7 +6115,8 @@ img {
 
 /* Grid */
 .grid {
-  overflow: hidden; }
+  overflow: hidden;
+  width: 100%; }
 
 .grid__item {
   float: left;
@@ -6246,6 +6248,9 @@ img {
 
 .search-form {
   margin: 0; }
+
+.search-form--banner {
+  margin: 15px 0; }
 
 .search-form__field {
   width: 100%;
