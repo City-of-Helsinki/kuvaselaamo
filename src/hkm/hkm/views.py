@@ -628,7 +628,7 @@ class AjaxCropRecordView(View):
 
     LOG.debug('Cropped image', extra={'data': {'size': repr(cropped_image.size),
       'url': tmp_image.edited_image.url}})
-    return http.HttpResponse({'url': tmp_image.edited_image.url})
+    return http.JsonResponse({'url': tmp_image.edited_image.url})
 
   def handle_add_to_collection(self, request, *args, **kwargs):
     pass

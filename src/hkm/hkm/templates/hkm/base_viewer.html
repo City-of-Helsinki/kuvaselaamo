@@ -24,7 +24,7 @@
         <button class="actions__btn" id="popover-cart">
           <img src="/static/hkm/img/karry.png"></img>
         </button>
-        <button class="actions__btn" id="popover-info" title="Image name">
+        <button class="actions__btn" id="popover-info">
           <img src="/static/hkm/img/info.png"></img>
         </button>
         <button class="actions__btn"><img src="/static/hkm/img/share.png"></img></button>
@@ -46,12 +46,6 @@
           </div>
           <div class="modal-body row">
             <div class="col-md-4">
-              <!-- <div class="image-templates">
-                <button class="image-templates__template" data-aspect-ratio="2/3">A4</button>
-                <button class="image-templates__template" data-aspect-ratio="3/2">A4 ({% trans 'horizontal' %})</button>
-                <button class="image-templates__template" data-aspect-ratio="3/3"></button>
-                <div class="btn-group docs-aspect-ratios" data-toggle="buttons">
-              </div> -->
               <div class="image-templates docs-toggles" data-toggle="buttons">
                 <button class="image-templates__template btn btn-primary">
                   <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">
@@ -66,7 +60,6 @@
                   </span>
                 </button>
               </div>
-
             </div>
             <div class="col-md-8">
               <div class="crop__container">
@@ -76,7 +69,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="order">{% trans 'Submit' %}</button>
           </div>
         </div>
       </div>
@@ -98,13 +91,13 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="download">{% trans 'Download' %}</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
+    <form method="POST" class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -113,13 +106,17 @@
           </div>
           <div class="modal-body row">
             <div class="col-md-4">
-              <form id="add-to-collection" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="action" value="add-to-collection" />
                 <input type="hidden" name="record_id" value="{{ record.id }}" />
-                <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
+
+                <div class="" data-toggle="buttons">
+                  <label class="btn btn-default"><input class="sr-only" type="radio" name="collection"><span>Suosikit</span></label>
+                  <label class="btn btn-default"><input class="sr-only" type="radio" name="collection"><span>Mannerheim</span></label>
+                </div>
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#new-collection-input">{% trans '+' %}</button>
+                <input class="form-control collapse" id="new-collection-input" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
                 <button class="btn btn-primary" type="submit" value="add-to-collection">{% trans 'Submit' %}</button>
-              </form>
             </div>
             <div class="col-md-8">
               <div class="crop__container">
@@ -129,11 +126,11 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" type="button" value="add-to-collection">{% trans 'Submit' %}</button>
+            <button class="crop__submit btn btn-primary" type="button" value="add">{% trans 'Add to collection' %}</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
   {% endblock %}
 
