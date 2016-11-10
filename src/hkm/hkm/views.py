@@ -605,36 +605,54 @@ class AjaxCropRecordView(View):
   def post(self, request, *args, **kwargs):
     if self.action == 'download':
       return self.handle_download(request, *args, **kwargs)
-    elif self.action == 'add':
-      return self.handle_add_to_collection(request, *args, **kwargs)
-    elif self.action == 'add-create-collection':
-      return self.handle_add_to_new_collection(request, *args, **kwargs)
+    if request.user.is_authenticated():
+      if self.action == 'add':
+        return self.handle_add_to_collection(request, *args, **kwargs)
+      elif self.action == 'add-create-collection':
+        return self.handle_add_to_new_collection(request, *args, **kwargs)
     return http.HttpResponseBadRequest()
 
-  def handle_download(self, request, *args, **kwargs):
+  def _get_cropped_file(self):
     full_res_image = HKM.download_image(self.record['full_res_url'])
     cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y, self.crop_width, self.crop_height, self.img_width, self.img_height)
     crop_io = StringIO.StringIO()
     cropped_image.save(crop_io, format=full_res_image.format)
     filename = u'%s.%s' % (self.record['title'], full_res_image.format.lower())
-    crop_file = InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
+    LOG.debug('Cropped image', extra={'data': {'size': repr(cropped_image.size)}})
+    return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
         crop_io.len, None)
 
+  def handle_download(self, request, *args, **kwargs):
+    crop_file = self._get_cropped_file()
     tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'],
       edited_image=crop_file)
     if request.user.is_authenticated():
       tmp_image.creator = request.user
     tmp_image.save()
-
-    LOG.debug('Cropped image', extra={'data': {'size': repr(cropped_image.size),
-      'url': tmp_image.edited_image.url}})
+    LOG.debug('Cropped image', extra={'data': {'url': tmp_image.edited_image.url}})
     return http.JsonResponse({'url': tmp_image.edited_image.url})
 
   def handle_add_to_collection(self, request, *args, **kwargs):
-    pass
+    try:
+      collection = Collection.objects.filter(owner=request.user).get(id=request.POST['collection_id'])
+    except KeyError, Collection.DoesNotExist:
+      LOG.error('Couldn not get collection')
+    else:
+      crop_file = self._get_cropped_file()
+      record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
+          edited_image=crop_file)
+      record.save()
+      return http.HttpResponse()
+    return http.HttpResponseBadRequest()
 
   def handle_add_to_new_collection(self, request, *args, **kwargs):
-    pass
+    collection = Collection(owner=request.user, title=request.POST['collection_title'])
+    collection.save()
+    crop_file = self._get_cropped_file()
+    record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
+        edited_image=crop_file)
+    record.save()
+    return http.HttpResponse()
 
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
