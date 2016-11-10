@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <form method="POST" class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
+    <div class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -111,7 +111,7 @@
                 <input type="hidden" name="record_id" value="{{ record.id }}" />
 
                 <div class="" data-toggle="buttons">
-                  <label class="btn btn-default"><input class="sr-only" type="radio" name="collection"><span>Suosikit</span></label>
+                  <label class="btn btn-default"><input class="sr-only" type="radio" name="collection" value="foo"><span>Suosikit</span></label>
                   <label class="btn btn-default"><input class="sr-only" type="radio" name="collection"><span>Mannerheim</span></label>
                 </div>
                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#new-collection-input">{% trans '+' %}</button>
@@ -127,10 +127,11 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
             <button class="crop__submit btn btn-primary" type="button" value="add">{% trans 'Add to collection' %}</button>
+            <button class="crop__submit btn btn-primary" type="button" value="add-create-collection">{% trans 'Add collection' %}</button>
           </div>
         </div>
       </div>
-    </form>
+    </div>
 
   {% endblock %}
 

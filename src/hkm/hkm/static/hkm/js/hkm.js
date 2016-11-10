@@ -151,6 +151,7 @@ palikka
   var target;
   var url;
   var image;
+  var collection;
   var cropper;
   var aspectRatio;
   var recordId;
@@ -181,30 +182,32 @@ palikka
   });
 
   function cropperInit() {
-    options[aspectRatio] = '';
     cropper = new Cropper(image, options);
   }
 
   $('.crop__submit').on('click', function() {
     $action = $(this).val();
-    imageData = cropper.getImageData();
-    boxData = cropper.getCropBoxData();
-    $.post('/ajax/crop/', {
-      action: $action,
-      x: boxData.left,
-      y: boxData.top,
-      width: boxData.width,
-      height: boxData.height,
-      original_width: imageData.width,
-      original_height: imageData.height,
-      record_id: recordId,
-    })
-    .done(function(data){
-      window.open(data.url);
-    })
-    .fail(function(data){
-      alert('Crop failed.');
-    });
+    collection = $('input[name=collection]:checked').val();
+    console.log(collection);
+    // imageData = cropper.getImageData();
+    // boxData = cropper.getCropBoxData();
+    // $.post('/ajax/crop/', {
+    //   action: $action,
+    //   x: boxData.left,
+    //   y: boxData.top,
+    //   width: boxData.width,
+    //   height: boxData.height,
+    //   original_width: imageData.width,
+    //   original_height: imageData.height,
+    //   collection: collection,
+    //   record_id: recordId,
+    // })
+    // .done(function(data){
+    //   window.open(data.url);
+    // })
+    // .fail(function(data){
+    //   alert('Crop failed.');
+    // });
   });
 
   $(document).on('change', '.docs-toggles', function(event) {
