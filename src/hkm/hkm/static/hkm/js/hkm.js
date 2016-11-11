@@ -271,8 +271,26 @@ palikka
 .define('app.editTitle', ['jQuery', 'docReady'], function () {
 
   $editBtn = $('#edit-title-btn');
+  $editCancel = $('#edit-title-cancel');
+  $removeItem = $('.grid__item-remove');
   $title = $('.banner__title');
   $titleForm = $('.banner__title-form');
+
+  $removeItem.on('click', function() {
+    $recordId = $(this).attr('data-record-id');
+    $.post('', {
+      action: 'remove-record',
+      record_id: $recordId
+    })
+    .done(function() {
+      location.reload();
+    });
+  });
+
+  $editCancel.on('click', function() {
+    $title.toggle();
+    $titleForm.toggle();
+  });
 
   $editBtn.on('click', function() {
     $title.toggle();

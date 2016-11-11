@@ -109,6 +109,7 @@ STATICFILES_FINDERS = (
 
 INSTALLED_APPS = (
     'hkm',
+    'widget_tweaks',
 
     'phonenumber_field',
 

@@ -1,0 +1,56 @@
+{% load i18n widget_tweaks %}
+
+{% for field in form %}
+  {% if field.is_hidden %}
+    <div style="display:none;">{{ field }}</div>
+  {% else %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+
+      {% if field|widget_type == 'checkboxinput' %}
+        <div class="checkbox">
+            <label for="{{ field.id_for_label }}">{{ field }}{{ field.label }}</label>
+        </div>
+      {% elif field|widget_type == 'radioselect' %}
+        {% for radio in field %}
+          <div class="radio">
+            {% if not hide_labels %}
+              <label for="{{ radio.id_for_label }}">{{ radio.tag }}{{ radio.choice_label }}</label>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% elif field|widget_type == 'checkboxselectmultiple' %}
+        {% for checkbox in field %}
+          <div class="checbox">
+            {% if not hide_labels %}
+              <label for="{{ checkbox.id_for_label }}">{{ checkbox.tag }}{{ checkbox.choice_label }}</label>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% if not hide_labels %}
+          <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
+          {% if field.field.required %}
+          <span class="required">*</span>
+          {% endif %}
+          {% if field.name == 'custom_response_time' %}
+          <span class="response_time">(h)</span>
+          {% endif %}
+        {% endif %}
+      {{ field|add_class:"form-control"}}
+          {% if field.name == 'description' %}
+            <span id="edit-ticket-now" style="display:none;">{% now "SHORT_DATETIME_FORMAT" %}</span>
+            <span id="edit-ticket-user" style="display:none;"> {{ user.first_name }}, {{ user.last_name }}</span>
+          {% endif %}
+      {% endif %}
+
+      {% if field.errors %}
+        <div class="help-block error">{% for error in field.errors %}{{ error }}{% endfor %}</div>
+      {% endif %}
+
+      {% if field.help_text %}
+        <div class="help-block">{{ field.help_text }}</div>
+      {% endif %}
+
+    </div>
+  {% endif %}
+{% endfor %}

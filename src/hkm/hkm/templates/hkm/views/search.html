@@ -5,14 +5,10 @@
 {% block banner %}
 
   <div class="page-header">
-    <div class="banner__container fullsize-container container">
+    <div class="fullsize-container container">
       <div class="banner__title">
         <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'RECORDS' %}</h1>
       </div>
-    </div>
-  </div>
-
-  <div class="fullsize-container container">
     <form class="search-form search-form--banner form-group">
       <div class="search-form__content input-group">
         <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
@@ -21,6 +17,7 @@
         </span>
       </div>
     </form>
+  </div>
   </div>
 
 {% endblock %}
@@ -31,7 +28,7 @@
 
     {% if search_result.records %}
 
-    <div class="sidebar">
+    <div class="sidebar col-md-2">
 
       <!-- All facets : {{ facet_result.facets.keys }} -->
 
@@ -60,7 +57,7 @@
 
     </div>
 
-    <div class="article">
+    <div class="article col-md-10">
 
       <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
 

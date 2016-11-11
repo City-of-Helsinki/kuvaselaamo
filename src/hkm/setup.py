@@ -28,6 +28,7 @@ setup(
     install_requires=[
       'django-ordered-model==1.3.0',
       'django-phonenumber-field==1.1.0',
+      'django-widget-tweaks==1.3.0',
     ],
 )
 

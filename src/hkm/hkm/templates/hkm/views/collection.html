@@ -9,12 +9,14 @@
       <div class="banner__title">
         <h1 class="banner__h1">{{ collection.title }}</h1>
       </div>
-      <form class="banner__title-form" method="POST">
-        <h1 class="banner__h1">{{ collection_form.title }}</h1>
+      <form class="banner__title-form form-inline" method="POST">
+        <div class="form-group">
+          <h1 class="banner__h1">{{ collection_form.title }}</h1>
+        </div>
         {% csrf_token %}
         <input type="hidden" name="action" value="edit" />
-        <button class="banner__title-form__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
-        <button class="banner__title-form__btn btn btn-default" type="button">{% trans 'Cancel' %}</button>
+        <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
+        <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
       </form>
       <div class="header-actions">
         {% if permissions.can_edit %}
@@ -37,11 +39,12 @@
           <div class="grid__item item" data-w="" data-h="">
             <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ record.id }}">
               <div class="grid__meta">
-                <span class="grid__meta--title">{{ record }}</span>
+                <span class="grid__meta--title">{{ record.get_details.title }}</span>
                 <span class="grid__meta--other"></span>
               </div>
               <img class="flex-img" src="{{ record.get_preview_image_absolute_url }}"></img>
             </a>
+            <button class="grid__item-remove" data-record-id="{{ record.id }}">X</button>
             {% if collection.collection_type == 'favorite' %}
               <div class="grid__fav active"></div>
             {% else %}

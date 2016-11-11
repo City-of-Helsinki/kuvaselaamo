@@ -1,13 +1,30 @@
-{% extends 'hkm/base.html' %}
+{% extends 'hkm/base_collection.html' %}
 {% load i18n %}
 
-{% block main_content %}
+{% block banner %}
 
-<form method="POST">
-  {% csrf_token %}
-  {{ feedback_form.as_p }}
-  <input type="hidden" name="action" value="feedback" />
-  <input type="submit" value="Submit" />
-</form>
+  <div class="page-header">
+    <div class="fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1">{% trans 'Info' %}</h1>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="container-small container">
+
+    <form method="POST">
+      <h1>{% trans 'Feedback' %}</h1>
+      {% csrf_token %}
+      {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
+      <input type="hidden" name="action" value="feedback" />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div> <!-- Container -->
 
 {% endblock %}

@@ -71,10 +71,10 @@
     <div class="search-modal__dialog modal-dialog" role="document">
       <div class="search-modal__content modal-content">
         <div class="search-modal__body search-modal__body--top modal-body">
-          <div class="container">
+          <div class="search-modal__container container">
             <form class="search-form form-group" action="{% url 'hkm_search' %}">
               <div class="search-form__content input-group">
-                <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+                <input class="search-form__field form-control" placeholder="{% trans 'Search images' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
                 <span class="search-form__btn-container input-group-btn">
                   <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
                 </span>
@@ -83,7 +83,7 @@
           </div>
         </div>
         <div class="search-modal__body search-modal__body--bottom modal-body">
-          <div class="container">
+          <div class="search-modal__container container">
             <h1 class="explore__h1"><a href="{% url 'hkm_public_collections' %}">{% trans 'Explore' %}</a></h1>
           </div>
         </div>
