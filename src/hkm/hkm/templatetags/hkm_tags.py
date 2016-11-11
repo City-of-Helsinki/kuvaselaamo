@@ -32,8 +32,8 @@ def display_images(collection):
     image_urls.append(records[0].get_preview_image_absolute_url())
   else:
     image_urls = []
-    for record in records[3]:
-      image_urls.append(record.get_preview_image_absolute_urli())
+    for record in records[:3]:
+      image_urls.append(record.get_preview_image_absolute_url())
     return image_urls
   return image_urls
 
