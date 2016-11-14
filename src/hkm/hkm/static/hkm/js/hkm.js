@@ -23,6 +23,7 @@ palikka
   var $infiniteScroll = $('.flex-images.infinite-scroll');
   var $itemGroup = $('.grid__group');
   var $items = $('.flex-images .item');
+  var $maxPages = $('.record-grid').attr('data-pages');
   var page = 1;
   var loadedImageCount = 0;
   var imageCount;
@@ -47,7 +48,7 @@ palikka
   }
 
   $window.scroll(function () {
-    if (window.innerHeight + document.body.scrollTop >= $window.height() && $infiniteScroll.length) {
+    if (window.innerHeight + document.body.scrollTop >= $window.height() && $infiniteScroll.length && page < $maxPages) {
       ajaxGetPageImages();
     }
   });
@@ -274,17 +275,20 @@ palikka
   $editCancel = $('#edit-title-cancel');
   $removeItem = $('.grid__item-remove');
   $title = $('.banner__title');
-  $titleForm = $('.banner__title-form');
+  $titleForm = $('.banner__form');
 
   $removeItem.on('click', function() {
-    $recordId = $(this).attr('data-record-id');
-    $.post('', {
-      action: 'remove-record',
-      record_id: $recordId
-    })
-    .done(function() {
-      location.reload();
-    });
+    var confirmRemove = confirm($(this).attr('data-confirm'));
+    var $recordId = $(this).attr('data-record-id');
+    if (confirmRemove) {
+      $.post('', {
+        action: 'remove-record',
+        record_id: $recordId
+      })
+      .done(function() {
+        location.reload();
+      });
+    }
   });
 
   $editCancel.on('click', function() {

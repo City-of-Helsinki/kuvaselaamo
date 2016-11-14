@@ -59,13 +59,24 @@
 
     <div class="article col-md-10">
 
-      <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
-
-      <div class="record-grid flex-images infinite-scroll">
+      <div class="record-grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
         {% include 'hkm/snippets/search_records_grid.html' %}
       </div>
 
     </div>
+
+    {% else %}
+
+      <div class="no-results">
+        <img class="no-results__image" src="/static/hkm/img/no-results-image.jpg"></img>
+        <h1 class="no-results__title">{% trans 'This image is probably not what you are looking for' %}</h1>
+        <ul class="no-results__list">
+          <li>{% trans "It's possible, that something has been happening in the service." %}</li>
+          <li>{% trans "You might have written the address wrong." %}</li>
+          <li>{% trans "Or the stars are just misordered." %}</li>
+        </ul>
+        <p class="no-results__paragraph">{% trans 'Hopefully a new search will fix the situation.' %}</p>
+      </div>
 
     {% endif %}
 
