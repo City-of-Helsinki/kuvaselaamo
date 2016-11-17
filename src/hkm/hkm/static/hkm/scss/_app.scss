@@ -80,7 +80,23 @@ img {
   }
   li > a:hover, li > a:focus {
     background-color: transparent;
+    text-decoration: underline;
   }
+}
+@media (max-width: 768px) {
+
+  .navbar-nav {
+    text-align: center;
+    background: #000;
+    float: left;
+    width: 100%;
+    margin: 0;
+    li {
+      display: block;
+      width: 100%;
+    }
+  }
+
 }
 .navbar-collapse {
   padding: 0;
@@ -116,7 +132,7 @@ img {
   line-height: 64px;
 }
 .nav_viewer {
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(33, 33, 33, 0.8);
   border-bottom: solid 1px $color-bittersweet;
   color: $color-theme;
   a {
@@ -300,7 +316,7 @@ img {
 /* Actions */
 .actions {
   display: inline-block;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(33, 33, 33, 0.8);
   position: absolute;
   bottom: 0;
 }
@@ -708,4 +724,7 @@ img {
   padding: 10px;
   width: 150px;
   height: 150px;
+}
+.crop-settings__collection {
+  margin: 0 0 10px 0;
 }

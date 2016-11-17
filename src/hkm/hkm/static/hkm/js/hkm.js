@@ -147,7 +147,6 @@ palikka
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   var $btn = $('.popover-list__btn');
-  var $action;
   var $collection;
   var Cropper = window.Cropper;
   var submit;
@@ -183,14 +182,8 @@ palikka
     }, 200);
   });
 
-  $(document).on('click', '.crop-settings__toggle', function() {
-    $('.crop-settings__form').collapse('toggle');
-    if ($('#crop-add-submit').val() == 'add') {
-      $('#crop-add-submit').val('add-create-collection');
-    }
-    else if ($('#crop-add-submit').val() == 'add-create-collection') {
-      $('#crop-add-submit').val('add');
-    }
+  $('.modal').on('shown.bs.modal', function() {
+    $(this).find('[autofocus]').focus();
   });
 
   $('.my-modal--crop').on('hidden.bs.modal', function() {
@@ -198,11 +191,11 @@ palikka
   });
 
   $('.crop__submit').on('click', function() {
-    $action = $(this).val();
-    $collectionId = $('input[name=collection]:checked').val();
-    $collectionTitle = $('#add-collection-input').val();
-    imageData = cropper.getImageData();
-    boxData = cropper.getCropBoxData();
+    var $action = $('input[name=collection]:checked').attr('data-action');
+    var $collectionTitle = $('#add-collection-input').val();
+    var $collectionId = $('input[name=collection]:checked').val();
+    var imageData = cropper.getImageData();
+    var boxData = cropper.getCropBoxData();
     $.post('/ajax/crop/', {
       action: $action,
       x: boxData.left,

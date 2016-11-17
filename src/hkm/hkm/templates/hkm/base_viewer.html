@@ -106,18 +106,21 @@
           </div>
           <div class="modal-body row">
             <div class="col-md-4">
-              <div class="crop-settings crop-settings--crop-add">
-                <button type="button" class="crop-settings__toggle btn btn-default">{% trans 'Add to a new collection' %}</button>
-                <div class="crop-settings__form collapse">
-                  <input type="hidden" type="radio" name="action" value="add-create-collection">
-                  <input class="crop-settings__input form-control" id="add-collection-input" type="text" value="{% trans 'Uusi kokoelma' %}"></input>
+              <div class="crop-settings crop-settings--select-collection">
+                <div class="crop-settings__collection input-group">
+                  <span class="input-group-addon">
+                    <input type="radio" checked="checked" name="collection" data-action="add-create-collection">
+                  </span>
+                  <input type="text" class="form-control" id="add-collection-input" autofocus value="{% trans 'New collection' %}">
                 </div>
-                <div class="crop-settings__form collapse in" data-toggle="buttons">
-                  <input type="hidden" type="radio" name="action" value="add">
-                  {% for collection in my_collections %}
-                    <label class="btn btn-default"><input class="sr-only" type="radio" name="collection" value="{{ collection.pk }}"><span>{{ collection }}</span></label>
-                  {% endfor %}
-                </div>
+                {% for collection in my_collections %}
+                  <div class="crop-settings__collection input-group">
+                    <span class="input-group-addon">
+                      <input type="radio" name="collection" data-action="add" value="{{ collection.id }}">
+                    </span>
+                    <div type="text" class="form-control">{{ collection }}</div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
             <div class="col-md-8">
