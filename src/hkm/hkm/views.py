@@ -4,6 +4,7 @@
 import logging
 import StringIO
 from django import http
+from django.contrib.auth import forms as django_forms
 from django.views.generic import TemplateView, RedirectView, View
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
@@ -17,6 +18,8 @@ from hkm import forms
 from hkm import tasks
 from hkm import image_utils
 from hkm import settings
+
+
 
 LOG = logging.getLogger(__name__)
 
@@ -59,6 +62,7 @@ class BaseView(TemplateView):
     context = super(BaseView, self).get_context_data(**kwargs)
     context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
     context['current_url'] = self.get_url()
+    context['login_form'] = django_forms.AuthenticationForm()
     return context
 
 

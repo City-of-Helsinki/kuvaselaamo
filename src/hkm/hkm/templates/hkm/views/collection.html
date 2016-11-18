@@ -13,11 +13,13 @@
           <h1 class="banner__h1">{{ collection_form.title }}</h1>
         </div>
         <div class="banner__form-wrapper form-group">
-          <div class="checkbox checkbox--show-in-landing-page">
-            <label>{% trans 'Show in landing page' %}</label>
-            {% render_field collection_form.show_in_landing_page type+="checkbox" %}
-          </div>
           {% csrf_token %}
+          {% if user.profile.is_admin %}
+            <div class="checkbox checkbox--show-in-landing-page">
+              <label>{% trans 'Show in landing page' %}</label>
+              {% render_field collection_form.show_in_landing_page type+="checkbox" %}
+            </div>
+          {% endif %}
           <input type="hidden" name="action" value="edit" />
           <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
           <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>

@@ -33,6 +33,19 @@ static_urls += staticfiles_urlpatterns()
 
 urlpatterns = admin_urls + app_urls + static_urls + auth_urls
 
+if settings.DEBUG:
+  from django.views.generic import TemplateView
+  
+  class ServerError(TemplateView):
+    template_name = '500.html'
+
+  class PageNotFoundError(TemplateView):
+    template_name = '404.html'
+
+  urlpatterns += [
+    url(r'^500/$', ServerError.as_view()),
+    url(r'^404/$', PageNotFoundError.as_view()),
+  ]
+
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
-

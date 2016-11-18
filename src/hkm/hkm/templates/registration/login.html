@@ -1,8 +1,7 @@
+{% load i18n %}
 
-
-<form method="POST" >
+<form action="/login/?next={{ current_url }}&search={{ search_term }}&page={{ page }}" method="POST" >
   {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Login" />
+  {% include 'hkm/snippets/form_fields.html' with form=login_form %}
+  <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
 </form>
-

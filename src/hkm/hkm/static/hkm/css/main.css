@@ -5912,6 +5912,16 @@ img {
   .navbar-nav li > a:hover, .navbar-nav li > a:focus {
     background-color: transparent;
     text-decoration: underline; }
+  .navbar-nav .dropdown-menu {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    min-width: 0; }
+    .navbar-nav .dropdown-menu a, .navbar-nav .dropdown-menu a:hover {
+      color: #fff; }
+  .navbar-nav a, .navbar-nav .nav .open > a:hover, .navbar-nav .nav .open > a:focus {
+    background-color: transparent !important;
+    border-color: transparent; }
 
 @media (max-width: 768px) {
   .navbar-nav {
@@ -5967,6 +5977,10 @@ img {
     background: #fff; }
   .nav_viewer .brand-img {
     background-image: url("/static/hkm/img/h_sydan_valk.png"); }
+  .nav_viewer .dropdown-menu {
+    background-color: rgba(33, 33, 33, 0.8); }
+    .nav_viewer .dropdown-menu a, .nav_viewer .dropdown-menu a:hover {
+      color: #fff; }
 
 .nav_collection {
   background: #fff;
@@ -5978,6 +5992,21 @@ img {
     background: #965479; }
   .nav_collection .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
+  .nav_collection .dropdown-menu {
+    background-color: #fff; }
+    .nav_collection .dropdown-menu a, .nav_collection .dropdown-menu a:hover {
+      color: #965479; }
+
+/* Login */
+.login-modal__dialog {
+  margin: 15% auto; }
+
+.login-modal__body {
+  padding: 15 25px; }
+  .login-modal__body .login-modal__btn {
+    margin: 0 0 15px 0; }
+  .login-modal__body .btn {
+    width: 100%; }
 
 /* Main */
 .image-viewer {
@@ -6089,8 +6118,7 @@ img {
     width: 40px;
     text-align: center; }
   .form-inline .checkbox--show-in-landing-page input[type=checkbox]:hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.2); }
+    cursor: pointer; }
   .form-inline .checkbox--show-in-landing-page input[type=checkbox]:checked:after {
     content: '✔';
     font-size: 35px; }
@@ -6099,7 +6127,7 @@ img {
   vertical-align: top;
   margin: 0;
   display: inline-block;
-  background: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
   border: solid 1px #fff;
   color: #fff;
   height: 40px;
