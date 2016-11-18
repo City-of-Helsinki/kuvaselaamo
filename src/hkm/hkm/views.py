@@ -170,7 +170,8 @@ class CollectionDetailView(BaseView):
         LOG.warning('Record does not exist or does not belong to this collection')
 
     self.permissions = {
-      'can_edit': self.request.user == self.collection.owner or self.request.user.profile.is_admin
+      'can_edit': self.request.user.is_authenticated() and
+          (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
     }
 
     return True
