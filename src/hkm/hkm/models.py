@@ -75,6 +75,7 @@ class Collection(BaseModel):
   title = models.CharField(verbose_name=_(u'Title'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
   is_public = models.BooleanField(verbose_name=_(u'Public'), default=False)
+  is_featured = models.BooleanField(verbose_name=_(u'Featured'), default=False)
   show_in_landing_page = models.BooleanField(verbose_name=_(u'Show in landing page'), default=False)
   collection_type = models.CharField(verbose_name=_(u'Type'), max_length=255, choices=TYPE_CHOICES,
     default=TYPE_NORMAL)
@@ -90,10 +91,11 @@ class Collection(BaseModel):
         raise ValidationError('Only one Favorite collection per user is allowed')
 
   def save(self, *args, **kwargs):
-    if self.show_in_landing_page:
-      # Only one collection is shown in landing page
-      # Automatically make it also public
-      Collection.objects.filter(show_in_landing_page=True).update(show_in_landing_page=False)
+    if self.show_in_landing_page or self.is_featured:
+      # If collection is shown in landing page or set as featured, it must also be public
+      if self.show_in_landing_page:
+        # Only one collection in landing page at the time
+        Collection.objects.filter(show_in_landing_page=True).update(show_in_landing_page=False)
       self.is_public = True
     return super(Collection, self).save(*args, **kwargs)
 

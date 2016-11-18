@@ -29,7 +29,7 @@ setup(
       'django-ordered-model==1.3.0',
       'django-phonenumber-field==1.1.0',
       'django-widget-tweaks==1.3.0',
-    ],
+    ]
 )
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

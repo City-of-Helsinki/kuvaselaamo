@@ -14,10 +14,11 @@ class CollectionForm(forms.ModelForm):
     super(CollectionForm, self).__init__(*args, **kwargs)
     if not self.user.is_authenticated() or not self.user.profile.is_admin:
       del self.fields['show_in_landing_page']
+      del self.fields['is_featured']
 
   class Meta:
     model = Collection
-    fields = ['title', 'description', 'is_public', 'show_in_landing_page']
+    fields = ['title', 'description', 'is_public', 'show_in_landing_page', 'is_featured']
 
 
 class FeedbackForm(forms.ModelForm):
