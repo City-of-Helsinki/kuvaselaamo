@@ -17,8 +17,8 @@
   {% block actions %}
     {% if record %}
       <div class="actions actions_left">
-        <button class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
-        <button class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
+        <button id="zoom-in-btn" class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
+        <button id="zoom-out-btn" class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
       </div>
       <div class="actions actions_right">
         <button class="actions__btn" id="popover-cart">
@@ -107,18 +107,20 @@
           <div class="modal-body row">
             <div class="col-md-4">
               <div class="crop-settings crop-settings--select-collection">
+                <h5 class="crop-settings__title">{% trans 'Create a new collection' %}</h5>
                 <div class="crop-settings__collection input-group">
                   <span class="input-group-addon">
                     <input type="radio" checked="checked" name="collection" data-action="add-create-collection">
                   </span>
                   <input type="text" class="form-control" id="add-collection-input" autofocus value="{% trans 'New collection' %}">
                 </div>
+                <h5 class="crop-settings__title">{% trans 'Add to an existing collection' %}</h5>
                 {% for collection in my_collections %}
-                  <div class="crop-settings__collection input-group">
-                    <span class="input-group-addon">
+                  <div class="crop-settings__existing-collection radio radio-info">
                       <input type="radio" name="collection" data-action="add" value="{{ collection.id }}">
-                    </span>
-                    <div type="text" class="form-control">{{ collection }}</div>
+                    <label>
+                      {{ collection }}
+                    </label>
                   </div>
                 {% endfor %}
               </div>

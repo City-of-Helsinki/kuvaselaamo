@@ -379,6 +379,11 @@ img {
   cursor: pointer;
 }
 
+/* Leaflet overrides */
+.leaflet-control-container {
+  display: none;
+}
+
 /* Actions */
 .actions {
   z-index: 500;
@@ -795,4 +800,13 @@ img {
 }
 .crop-settings__collection {
   margin: 0 0 10px 0;
+}
+.crop-settings__existing-collection {
+  margin-left: 13px;
+  input {
+    margin-left: 0 !important;
+  }
+  label {
+    padding-left: 40px;
+  }
 }

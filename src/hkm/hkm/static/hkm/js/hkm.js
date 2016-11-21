@@ -16,6 +16,13 @@ palikka
   });
 
 })
+.define('app.bootstrap', ['jQuery', 'docReady', 'winReady'], function () {
+
+  $('.modal').on('shown.bs.modal', function() {
+    $(this).find('[autofocus]').focus();
+  });
+
+})
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
   var $window = $(window);
@@ -23,7 +30,7 @@ palikka
   var $infiniteScroll = $('.flex-images.infinite-scroll');
   var $itemGroup = $('.grid__group');
   var $items = $('.flex-images .item');
-  var $maxPages = $('.record-grid').attr('data-pages');
+  var $maxPages = $('.grid').attr('data-pages');
   var page = 1;
   var loadedImageCount = 0;
   var imageCount;
@@ -171,29 +178,31 @@ palikka
     cropper = new Cropper(image, options);
   }
 
+  $('.my-modal--crop').on('shown.bs.modal', function() {
+    if (image.complete && image.naturalHeight !== 0) {
+      cropperInit();
+    }
+    else {
+      image.addEventListener('load', cropperInit);
+    }
+  });
+  $('.my-modal--crop').on('hidden.bs.modal', function() {
+    cropper.destroy();
+  });
+
   $(document).on('click', '.popover-list__btn', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
     recordId = this.getAttribute('data-record-id')
     image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
-    $('.modal').on('shown.bs.modal', function() {
-      $(this).find('[autofocus]').focus();
-      if (image.complete && image.naturalHeight !== 0) {
-        cropperInit();
-      }
-      else {
-        image.addEventListener('load', cropperInit);
-      }
-    });
-  });
-
-  $('.my-modal--crop').on('hidden.bs.modal', function() {
-    cropper.destroy();
   });
 
   $('.crop__submit').on('click', function() {
-    var $action = $('input[name=collection]:checked').attr('data-action');
+    var $action = $(this).val();
+    if ($action == 'add') {
+      $action = $('input[name=collection]:checked').attr('data-action');
+    }
     var $collectionTitle = $('#add-collection-input').val();
     var $collectionId = $('input[name=collection]:checked').val();
     var imageData = cropper.getImageData();
@@ -333,6 +342,8 @@ palikka
     var bounds = new L.LatLngBounds(bottomLeft, topRight);
     var imagelayer = L.imageOverlay(url, bounds).addTo(imageContainer);
     var fullResLoaded = false;
+    var $zoomInBtn = $('#zoom-in-btn');
+    var $zoomOutBtn = $('#zoom-out-btn');
     imageContainer.setMaxBounds(bounds);
 
     imageContainer.on('zoomstart', function() {
@@ -345,6 +356,13 @@ palikka
           fullResLoaded = true;
         }, 300);
       }
+    });
+
+    $zoomInBtn.on('click', function() {
+      imageContainer.zoomIn();
+    });
+    $zoomOutBtn.on('click', function() {
+      imageContainer.zoomOut();
     });
 
   }
