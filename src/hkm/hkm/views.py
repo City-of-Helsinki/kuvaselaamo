@@ -11,14 +11,14 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from finna import DEFAULT_CLIENT as FINNA
+from django.contrib.auth import login as auth_login
+from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record, TmpImage, ProductOrder
 from hkm import forms
 from hkm import tasks
 from hkm import image_utils
 from hkm import settings
-
 
 
 LOG = logging.getLogger(__name__)
@@ -51,7 +51,9 @@ class BaseView(TemplateView):
     return http.HttpResponseBadRequest()
 
   def get_empty_forms(self, request):
-    return {}
+    return {
+      'login_form': django_forms.AuthenticationForm(),
+    }
 
   def get(self, request, *args, **kwargs):
     _kwargs = self.get_empty_forms(request)
@@ -62,8 +64,23 @@ class BaseView(TemplateView):
     context = super(BaseView, self).get_context_data(**kwargs)
     context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
     context['current_url'] = self.get_url()
-    context['login_form'] = django_forms.AuthenticationForm()
     return context
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'login':
+      return self.handle_login(request, *args, **kwargs)
+    return self.handle_invalid_post_action(request, *args, **kwargs)
+
+  def handle_login(self, request, *args, **kwargs):
+    form = django_forms.AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+      auth_login(request, form.get_user())
+      # TODO migth wanna do a PRG pattern here also. Returning the rendered template directly
+      # is to keep the query string values in place, which otherwise would be lost in redirect phase
+      return self.get(request, *args, **kwargs)
+    kwargs['login_form'] = form
+    return self.get(request, *args, **kwargs)
 
 
 class InfoView(BaseView):
@@ -71,19 +88,19 @@ class InfoView(BaseView):
   url_name = 'hkm_info'
 
   def get_empty_forms(self, request):
+    context_forms = super(InfoView, self).get_empty_forms(request)
     if request.user.is_authenticated():
       user = request.user
     else:
       user = None
-    return {
-      'feedback_form': forms.FeedbackForm(prefix='feedback-form', user=user)
-    }
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
+    return context_forms
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
     if action == 'feedback':
       return self.handle_feedback(request, *args, **kwargs)
-    return self.handle_invalid_post_action(request, *args, **kwargs)
+    return super(InfoView, self).post(request, *args, **kwargs)
 
   def handle_feedback(self, request, *args, **kwargs):
     if request.user.is_authenticated():
@@ -170,15 +187,16 @@ class CollectionDetailView(BaseView):
         LOG.warning('Record does not exist or does not belong to this collection')
 
     self.permissions = {
-      'can_edit': self.request.user == self.collection.owner or self.request.user.profile.is_admin
+      'can_edit': self.request.user.is_authenticated() and
+          (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
     }
 
     return True
 
   def get_empty_forms(self, request):
-    return {
-      'collection_form': forms.CollectionForm(prefix='collection-form', instance=self.collection, user=request.user),
-    }
+    context_forms = super(CollectionDetailView, self).get_empty_forms(request)
+    context_forms['collection_form'] = forms.CollectionForm(prefix='collection-form', instance=self.collection, user=request.user)
+    return context_forms
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
@@ -187,7 +205,7 @@ class CollectionDetailView(BaseView):
         return self.handle_edit(request, *args, **kwargs)
       if action == 'remove-record':
         return self.ajax_handle_remove_record(request, *args, **kwargs)
-    return self.handle_invalid_post_action(request, *args, **kwargs)
+    return super(CollectionDetailView, self).post(request, *args, **kwargs)
 
   def handle_edit(self, request, *args, **kwargs):
     form = forms.CollectionForm(request.POST, prefix='collection-form', instance=self.collection, user=request.user)
@@ -358,8 +376,7 @@ class SearchRecordDetailView(SearchView):
     if request.user.is_authenticated():
       if action == 'add-to-collection':
         return self.handle_add_to_collection(request, *args, **kwargs)
-    LOG.error('Invalid POST request', extra={'data': {'POST': repr(request.POST)}})
-    return http.HttpResponseBadRequest()
+    return super(SearchRecordDetailView, self).post(request, *args, **kwargs)
 
   def handle_add_to_collection(self, request, *args, **kwargs):
     record_id = request.POST.get('record_id', None)
@@ -441,19 +458,19 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
   url_name = 'hkm_record_feedback' # automatically redirect back to detail view after post
 
   def get_empty_forms(self, request):
+    context_forms = super(FinnaRecordDetailView, self).get_empty_forms(request)
     if request.user.is_authenticated():
       user = request.user
     else:
       user = None
-    return {
-      'feedback_form': forms.FeedbackForm(prefix='feedback-form', user=user)
-    }
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
+    return context_forms
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
     if action == 'feedback':
       return self.handle_feedback(request, *args, **kwargs)
-    return self.handle_invalid_post_action(request, *args, **kwargs)
+    return super(FinnaRecordFeedbackView, self).post(request, *args, **kwargs)
 
   def handle_feedback(self, request, *args, **kwargs):
     if request.user.is_authenticated():

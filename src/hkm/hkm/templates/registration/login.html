@@ -1,7 +1,15 @@
 {% load i18n %}
 
-<form action="/login/?next={{ current_url }}&search={{ search_term }}&page={{ page }}" method="POST" >
+<form method="POST" >
+  {% if login_form.non_field_errors %}
+    <ul>
+      {% for error in login_form.non_field_errors %}
+       <li>{{ error }}<li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   {% csrf_token %}
   {% include 'hkm/snippets/form_fields.html' with form=login_form %}
+  <input type="hidden" name="action" value="login" />
   <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
 </form>
