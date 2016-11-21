@@ -177,13 +177,15 @@ palikka
     recordId = this.getAttribute('data-record-id')
     image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
-    setTimeout(function() {
-      cropperInit();
-    }, 200);
-  });
-
-  $('.modal').on('shown.bs.modal', function() {
-    $(this).find('[autofocus]').focus();
+    $('.modal').on('shown.bs.modal', function() {
+      $(this).find('[autofocus]').focus();
+      if (image.complete && image.naturalHeight !== 0) {
+        cropperInit();
+      }
+      else {
+        image.addEventListener('load', cropperInit);
+      }
+    });
   });
 
   $('.my-modal--crop').on('hidden.bs.modal', function() {
@@ -293,5 +295,59 @@ palikka
     $title.toggle();
     $titleForm.toggle();
   });
+
+})
+.define('app.zoom', ['jQuery', 'docReady'], function () {
+
+  var img = document.getElementById('zoomable-image');
+
+  if (!img) {
+    return
+  }
+
+  if (img.complete && img.naturalHeight !== 0) {
+    handleImageLoaded.call(img);
+  }
+  else {
+    img.addEventListener('load', handleImageLoaded);
+  }
+
+  function handleImageLoaded() {
+    var w = this.naturalWidth;
+    var h = this.naturalHeight;
+    var url = this.src;
+    var fullResUrl = this.getAttribute('data-full-res-url');
+    zoomInit(w, h, url, fullResUrl);
+  }
+
+  function zoomInit(w, h, url, fullResUrl) {
+
+    var imageContainer = L.map('zoomable-image-container', {
+      minZoom: 4,
+      maxZoom: 6,
+      center: [0, 0],
+      zoom: 5,
+    });
+    var bottomLeft = imageContainer.unproject([0, h], imageContainer.getMaxZoom()-1);
+    var topRight = imageContainer.unproject([w, 0], imageContainer.getMaxZoom()-1);
+    var bounds = new L.LatLngBounds(bottomLeft, topRight);
+    var imagelayer = L.imageOverlay(url, bounds).addTo(imageContainer);
+    var fullResLoaded = false;
+    imageContainer.setMaxBounds(bounds);
+
+    imageContainer.on('zoomstart', function() {
+      if (!fullResLoaded) {
+        setTimeout(function() {
+          L.imageOverlay(fullResUrl, bounds).addTo(imageContainer);
+          img.addEventListener('load', function() {
+            imagelayer.remove();
+          });
+          fullResLoaded = true;
+        }, 300);
+      }
+    });
+
+  }
+
 
 });

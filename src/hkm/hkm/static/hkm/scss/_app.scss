@@ -62,6 +62,7 @@ img {
 
 /* Navigation */
 .navbar {
+  z-index: 500;
   margin: 0;
   height: 60px;
   border: 0;
@@ -104,9 +105,21 @@ img {
     float: left;
     width: 100%;
     margin: 0;
+    position: relative;
+    z-index: 10;
     li {
       display: block;
       width: 100%;
+    }
+  }
+  .nav_viewer {
+    .navbar-nav {
+      background-color: $color-viewer-theme;
+    }
+  }
+  .nav_collection {
+    .navbar-nav {
+      background-color: $color-theme;
     }
   }
 
@@ -145,7 +158,7 @@ img {
   line-height: 64px;
 }
 .nav_viewer {
-  background-color: rgba(33, 33, 33, 0.8);
+  background-color: $color-viewer-theme;
   border-bottom: solid 1px $color-bittersweet;
   color: $color-theme;
   a {
@@ -158,7 +171,7 @@ img {
     background-image: url("/static/hkm/img/h_sydan_valk.png");
   }
   .dropdown-menu {
-    background-color: rgba(33, 33, 33, 0.8);
+    background-color: $color-viewer-theme;
     a, a:hover {
       color: $color-white;
     }
@@ -187,7 +200,10 @@ img {
 
 /* Login */
 .login-modal__dialog {
-  margin: 15% auto;
+  margin: -179px auto auto -149px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 .login-modal__body {
   padding: 15 25px;
@@ -201,8 +217,7 @@ img {
 
 /* Main */
 .image-viewer {
-  background: $color-shark;
-  z-index: -1;
+  background-color: $color-shark !important;
   position: absolute;
   left: 0;
   top: 0;
@@ -214,18 +229,30 @@ img {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  img {
-    position: absolute;
-    top: 0;
-    bottom:0;
-    left: 0;
-    right:0;
-    margin: auto;
-    padding: 80px 90px;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-  }
+}
+.image-viewer__container {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.image-viewer__image {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 .banner {
   float: left;
@@ -354,8 +381,9 @@ img {
 
 /* Actions */
 .actions {
+  z-index: 500;
   display: inline-block;
-  background-color: rgba(33, 33, 33, 0.8);
+  background-color: $color-viewer-theme;
   position: absolute;
   bottom: 0;
 }
@@ -378,6 +406,7 @@ img {
   cursor: pointer;
 }
 .image-viewer-arrow {
+  z-index: 500;
   height: 150px;
   padding: 12px;
   border: 0;

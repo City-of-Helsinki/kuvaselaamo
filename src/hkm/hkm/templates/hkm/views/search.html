@@ -30,10 +30,7 @@
 
     <div class="sidebar col-md-2">
 
-      <!-- All facets : {{ facet_result.facets.keys }} -->
-
       <ul class="list-group list-group-root well" id="accordion">
-
         <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
@@ -52,14 +49,13 @@
             {% endfor %}
           </ul>
         </li>
-
       </ul>
 
     </div>
 
     <div class="article col-md-10">
 
-      <div class="record-grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
+      <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
         {% include 'hkm/snippets/search_records_grid.html' %}
       </div>
 
