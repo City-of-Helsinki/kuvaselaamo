@@ -458,7 +458,7 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
   url_name = 'hkm_record_feedback' # automatically redirect back to detail view after post
 
   def get_empty_forms(self, request):
-    context_forms = super(FinnaRecordDetailView, self).get_empty_forms(request)
+    context_forms = super(FinnaRecordFeedbackView, self).get_empty_forms(request)
     if request.user.is_authenticated():
       user = request.user
     else:
