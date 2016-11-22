@@ -108,6 +108,19 @@ palikka
     }
   });
 
+  var clipboard = new Clipboard('.popover-list__btn--share');
+  $("#popover-share").popover({
+    html: true,
+    toggle: 'popover',
+    container: 'body',
+    placement: 'top',
+    trigger: 'focus',
+    html: true,
+    content: function() {
+      return $('#popover-share-content').html();
+    }
+  });
+
   $("#popover-add").popover({
     html: true,
     toggle: 'popover',
@@ -190,7 +203,7 @@ palikka
     cropper.destroy();
   });
 
-  $(document).on('click', '.popover-list__btn', function() {
+  $(document).on('click', '.popover-list__btn--crop', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
     recordId = this.getAttribute('data-record-id')

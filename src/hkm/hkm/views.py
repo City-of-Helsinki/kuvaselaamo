@@ -19,6 +19,7 @@ from hkm import forms
 from hkm import tasks
 from hkm import image_utils
 from hkm import settings
+from hkm import context_processors
 
 
 LOG = logging.getLogger(__name__)
@@ -63,6 +64,7 @@ class BaseView(TemplateView):
   def get_context_data(self, **kwargs):
     context = super(BaseView, self).get_context_data(**kwargs)
     context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+    context['my_domain_url'] = context_processors.MY_DOMAIN
     context['current_url'] = self.get_url()
     return context
 

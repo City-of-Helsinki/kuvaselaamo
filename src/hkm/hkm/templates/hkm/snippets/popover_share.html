@@ -1,0 +1,6 @@
+{% load i18n %}
+<div id="popover-share-content">
+  <ul class="popover-list">
+    <li class="popover-list__item"><button class="popover-list__btn popover-list__btn--share" data-clipboard-text="{{ my_domain_url }}{% url 'hkm_record' finna_id=finna_id %}">{% trans 'Copy share url to clipboard' %}</button></li>
+  </ul>
+</div>
