@@ -21,3 +21,4 @@ doc/build/
 staticroot
 node_modules
 mediaroot
+*.swo

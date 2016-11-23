@@ -142,6 +142,11 @@ class PublicCollectionsView(BaseCollectionListView):
   def get_collection_qs(self, request, *args, **kwargs):
     return Collection.objects.filter(is_public=True).order_by('created')
 
+  def get_context_data(self, **kwargs):
+    context = super(PublicCollectionsView, self).get_context_data(**kwargs)
+    context['featured_collections'] = self.collection_qs.filter(is_featured=True)
+    return context
+
 
 class MyCollectionsView(BaseCollectionListView):
   template_name = 'hkm/views/my_collections.html'
