@@ -11,7 +11,7 @@
       </div>
       <div class="grid flex-images">
         <div class="grid__group item-slider invisible">
-          {% for collection in collections %}
+          {% for collection in featured_collections %}
             <div class="grid__item item" data-w="550" data-h="400">
               <a href="{% url 'hkm_collection' collection_id=collection.id %}">
                 {% with images=collection|display_images %}
