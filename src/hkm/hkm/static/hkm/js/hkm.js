@@ -357,6 +357,7 @@ palikka
     var fullResLoaded = false;
     var $zoomInBtn = $('#zoom-in-btn');
     var $zoomOutBtn = $('#zoom-out-btn');
+    
     imageContainer.setMaxBounds(bounds);
 
     imageContainer.on('zoomstart', function() {

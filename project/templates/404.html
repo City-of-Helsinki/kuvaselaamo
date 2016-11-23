@@ -1,1 +1,18 @@
-404
+{% load i18n %}
+
+<html>
+<head>
+  {% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
+  {% endblock %}
+</head>
+<body>
+
+  <div class="status-page">
+    <img class="status-page__image" src="/static/hkm/img/no-results-image.jpg"></img>
+    <h1 class="status-page__title">{% trans '#error-404-title' %}</h1>
+    <p class="status-page__paragraph">{% trans '#error-404-paragraph' %}</p>
+  </div>
+
+</body>
+</html>

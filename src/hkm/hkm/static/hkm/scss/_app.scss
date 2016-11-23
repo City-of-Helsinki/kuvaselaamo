@@ -689,21 +689,22 @@ img {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
-.no-results {
+.status-page {
+  margin-top: 30px;
 }
-.no-results__image {
+.status-page__image {
   height: auto;
   max-height: 450px;
   max-width: 100%;
   display: block;
   margin: 0 auto;
 }
-.no-results__title {
+.status-page__title {
   text-align: center;
 }
-.no-results__list,
-.no-results__paragraph {
-  width: 40%;
+.status-page__list,
+.status-page__paragraph {
+  width: 30%;
   display: block;
   margin: 0 auto 10px auto;
 }
