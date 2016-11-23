@@ -14,10 +14,18 @@
         </div>
         <div class="banner__form-wrapper form-group">
           {% csrf_token %}
+          <div class="banner__checkbox checkbox">
+            <label>{% trans 'Set to public' %}</label>
+            {% render_field collection_form.is_public type+="checkbox" %}
+          </div>
           {% if user.profile.is_admin %}
-            <div class="checkbox checkbox--show-in-landing-page">
+            <div class="banner__checkbox checkbox">
               <label>{% trans 'Show in landing page' %}</label>
               {% render_field collection_form.show_in_landing_page type+="checkbox" %}
+            </div>
+            <div class="banner__checkbox checkbox">
+              <label>{% trans 'Set to featured' %}</label>
+              {% render_field collection_form.is_featured type+="checkbox" %}
             </div>
           {% endif %}
           <input type="hidden" name="action" value="edit" />
