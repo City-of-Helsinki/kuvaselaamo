@@ -234,7 +234,7 @@ palikka
     })
     .done(function(data){
       if (data.url) {
-        window.open(data.url);
+        window.open(data.url, '_self');
       }
       else {
         location.reload();
@@ -311,11 +311,13 @@ palikka
   $editCancel.on('click', function() {
     $title.toggle();
     $titleForm.toggle();
+    $removeItem.toggle();
   });
 
   $editBtn.on('click', function() {
     $title.toggle();
     $titleForm.toggle();
+    $removeItem.toggle();
   });
 
 })
@@ -357,7 +359,7 @@ palikka
     var fullResLoaded = false;
     var $zoomInBtn = $('#zoom-in-btn');
     var $zoomOutBtn = $('#zoom-out-btn');
-    
+
     imageContainer.setMaxBounds(bounds);
 
     imageContainer.on('zoomstart', function() {

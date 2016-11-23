@@ -35,9 +35,21 @@
       </form>
       <div class="banner-actions">
         {% if permissions.can_edit %}
-          <button id="edit-title-btn" class="banner-actions__btn"><img src="/static/hkm/img/share.png"></img></button>
+          <button id="edit-title-btn" class="banner-actions__btn">
+            <i class="banner-actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use>
+              </svg>
+            </i>
+          </button>
         {% endif %}
-          <button class="banner-actions__btn"><img src="/static/hkm/img/share.png"></img></button>
+          <button class="banner-actions__btn">
+            <i class="banner-actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
+              </svg>
+            </i>
+          </button>
       </div>
     </div>
   </div>

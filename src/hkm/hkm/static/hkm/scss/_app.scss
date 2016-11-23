@@ -9,6 +9,14 @@ img {
   height: 100%;
 }
 
+/* Svg icons */
+.svg-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
 /* Container */
 @media (min-width: 1200px) {
   .fullsize-container {
@@ -368,15 +376,22 @@ img {
 }
 .banner-actions {
   float: right;
+  height: 40px;
 }
 .banner-actions__btn {
   height: 40px;
-  padding: 0 6px;
+  width: 40px;
+  padding: 4px;
   border: 0;
   background: 0;
 }
 .banner-actions__btn:hover {
   cursor: pointer;
+}
+.banner-actions__icon {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 /* Leaflet overrides */
@@ -567,6 +582,7 @@ img {
   }
 }
 .grid__item-remove {
+  display: none;
   position: absolute;
   border: 0;
   color: $color-white;
