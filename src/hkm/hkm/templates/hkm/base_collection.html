@@ -1,22 +1,23 @@
 {% extends 'hkm/base.html' %}
 {% load i18n %}
 
+{% block body_class %}browse-view{% endblock %}
 {% block nav_class %}nav_collection{% endblock %}
 
 {% block main_content %}
+
   <div class="banner">
     {% block banner %}{% endblock %}
   </div>
   <div class="content">
     {% block content %}{% endblock %}
   </div>
-  
-{% if previous_record %}
-  <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">{% trans 'Previous image' %}</a>
-{% endif %}
-{% if next_record %}
-  <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">{% trans 'Next image' %}</a>
-{% endif %}
 
+  {% if previous_record %}
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}">{% trans 'Previous image' %}</a>
+  {% endif %}
+  {% if next_record %}
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">{% trans 'Next image' %}</a>
+  {% endif %}
 
 {% endblock %}

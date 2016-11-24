@@ -9,11 +9,11 @@
         <h1 class="banner__h1">{{ collection.title }}</h1>
       </div>
       <form class="banner__form form-inline" method="POST">
+        {% csrf_token %}
         <div class="banner__form-title">
           <h1 class="banner__h1">{{ collection_form.title }}</h1>
         </div>
-        <div class="banner__form-wrapper form-group">
-          {% csrf_token %}
+        <!-- <div class="banner__form-wrapper form-group"> -->
           <div class="banner__checkbox checkbox">
             <label>{% trans 'Set to public' %}</label>
             {% render_field collection_form.is_public type+="checkbox" %}
@@ -31,11 +31,11 @@
           <input type="hidden" name="action" value="edit" />
           <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
           <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
-        </div>
+        <!-- </div> -->
       </form>
       <div class="banner-actions">
         {% if permissions.can_edit %}
-          <button id="edit-title-btn" class="banner-actions__btn">
+          <button class="banner-actions__btn" id="edit-title-btn">
             <i class="banner-actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use>

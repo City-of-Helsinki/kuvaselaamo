@@ -2,12 +2,19 @@ body {
   margin: 0;
   font-family: $font-signe;
 }
+body.viewer-view {
+  background-color: $color-shark;
+}
+body.browse-view {
+  background-color: $color-theme;
+}
 a {
   font-family: $font-signe;
 }
 img {
   height: 100%;
 }
+
 
 /* Svg icons */
 .svg-icon {
@@ -296,8 +303,8 @@ img {
 .banner__form {
   float: left;
   display: none;
-  margin: 0;
-  height: 40px;
+  margin: 0 100px 0 0;
+  // height: 40px;
   input {
     background-color: transparent;
     padding: 0;
@@ -311,21 +318,30 @@ img {
 .banner__form-title {
   display: inline-block;
 }
-@media (max-width: 865px) {
+@media (max-width: 1347px) {
   .banner__form-title {
     margin: 0 0 10px 0;
   }
 }
+@media (max-width: 1176px) {
+  .banner__form-title, .banner__h1,
+  .form-inline .banner__checkbox {
+    width: 100% !important;
+  }
+  .form-inline .banner__checkbox label {
+    width: calc(100% - 40px) !important;
+  }
+  .banner__checkbox input {
+    float: right;
+  }
+}
 .banner__form-wrapper {
   vertical-align: top !important;
-  margin: 0;
-  display: inline-block;
-  height: 40px;
 }
 .form-inline .banner__checkbox {
   display: inline-block;
   vertical-align: top;
-  margin: 0;
+  margin: 0 0 10px 0;
   label {
     margin: 0;
     width: auto;
@@ -377,6 +393,8 @@ img {
 .banner-actions {
   float: right;
   height: 40px;
+  position: absolute;
+  right: 15px;
 }
 .banner-actions__btn {
   height: 40px;
@@ -825,5 +843,25 @@ img {
   }
   label {
     padding-left: 40px;
+  }
+}
+
+
+
+
+
+
+
+
+
+@media (min-width: 1200px) {
+
+}
+@media (min-width: 992px) {
+
+}
+@media (max-width: 768px) {
+  .image-viewer-arrow {
+    height: 80px;
   }
 }

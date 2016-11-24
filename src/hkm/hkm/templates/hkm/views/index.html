@@ -60,7 +60,7 @@
             {% csrf_token %}
             <input type="hidden" name="action" value="add-to-collection" />
             <input type="hidden" name="record_id" value="{{ record.id }}" />
-            <input class="form-control" type="text" name="new_collection_name" value="{% trans 'Uusi kokoelma' %}"></input>
+            <input class="form-control" type="text" name="new_collection_name" value="{% trans 'New collection' %}"></input>
           </div>
           <div class="modal-footer">
             <button class="btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>

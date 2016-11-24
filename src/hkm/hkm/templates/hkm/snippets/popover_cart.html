@@ -8,10 +8,10 @@
     <li class="popover-list__item"><a class="popover-list__btn" href="{{ web_image_url }}">{% trans 'Download web-image' %}</a></li>
     {% endif %}
     <li class="popover-list__item"><button class="popover-list__btn popover-list__btn--crop" data-img-url="{{ web_image_url }}" data-record-id="{{ finna_id }}" data-toggle="modal" data-target="#crop-and-download">{% trans 'Crop and download' %}</button></li>
-    {% if full_res_image_url %}
+    <!-- {% if full_res_image_url %}
       <li class="popover-list__item"><a class="popover-list__btn" href="{% url 'hkm_order_create' finna_id=finna_id %}">{% trans 'Order a product of the image' %}</a></li>
     {% else %}
       <li class="popover-list__item">{% trans 'This is a low resolution image, product orders are not available' %}</li>
-    {% endif %}
+    {% endif %} -->
   </ul>
 </div>
