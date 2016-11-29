@@ -93,7 +93,7 @@
         {% elif language == 'sv' %}
           <li><a href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> | <a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
         {% endif %}
-        <li><a href="{% url 'hkm_info' %}">{% trans 'Info' %}</a></li>
+        <li><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></li>
         {% if user.is_authenticated %}
           <li>
             <a href="#" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Account' %}</a>
@@ -109,7 +109,7 @@
     </div>
   </nav>
 
-  <div class="login-modal modal fade" id="login" tabindex="-1" role="dialog">
+  <div class="login-modal modal fade {% if login_form.errors %}error{% endif %}" id="login" tabindex="-1" role="dialog">
     <div class="login-modal__dialog modal-dialog modal-sm" role="document">
       <div class="login-modal__content modal-content">
         <div class="login-modal__body modal-body">

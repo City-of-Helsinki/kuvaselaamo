@@ -4,20 +4,20 @@
 
 {% block banner %}
 
-  <div class="page-header">
+  <div class="page-header bittersweet">
     <div class="fullsize-container container">
       <div class="banner__title">
-        <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'RECORDS' %}</h1>
+        <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'Records' %}</h1>
       </div>
-    <form class="search-form search-form--banner form-group">
-      <div class="search-form__content input-group">
-        <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-        <span class="search-form__btn-container input-group-btn">
-          <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
-        </span>
-      </div>
-    </form>
-  </div>
+      <form class="search-form search-form--banner form-group">
+        <div class="search-form__content input-group">
+          <input class="search-form__field form-control" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+          <span class="search-form__btn-container input-group-btn">
+            <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+          </span>
+        </div>
+      </form>
+    </div>
   </div>
 
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 14:42+0200\n"
+"POT-Creation-Date: 2016-11-29 15:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -309,19 +309,19 @@ msgstr "Edellinen kuva"
 msgid "Next image"
 msgstr "Seuraava kuva"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:61
+#: hkm/hkm/templates/hkm/base_viewer.html:44
 msgid "Crop and order"
 msgstr "Leikkaa ja tilaa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:87
-#: hkm/hkm/templates/hkm/base_viewer.html:109
-#: hkm/hkm/templates/hkm/base_viewer.html:149
+#: hkm/hkm/templates/hkm/base_viewer.html:70
+#: hkm/hkm/templates/hkm/base_viewer.html:92
+#: hkm/hkm/templates/hkm/base_viewer.html:132
 #: hkm/hkm/templates/hkm/views/index.html:44
 #: hkm/hkm/templates/hkm/views/index.html:66
 msgid "Close"
 msgstr "Sulje"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:88
+#: hkm/hkm/templates/hkm/base_viewer.html:71
 #: hkm/hkm/templates/hkm/views/index.html:45
 #: hkm/hkm/templates/hkm/views/index.html:67
 #: hkm/hkm/templates/hkm/views/info.html:25
@@ -329,34 +329,34 @@ msgstr "Sulje"
 msgid "Submit"
 msgstr "Lähetä"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:99
+#: hkm/hkm/templates/hkm/base_viewer.html:82
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:10
 #: hkm/hkm/templates/hkm/views/index.html:38
 msgid "Crop and download"
 msgstr "Leikkaa ja lataa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:110
+#: hkm/hkm/templates/hkm/base_viewer.html:93
 msgid "Download"
 msgstr "Lataa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:121
+#: hkm/hkm/templates/hkm/base_viewer.html:104
 msgid "Crop and add to collection"
 msgstr "Leikkaa ja lisää kokoelmaan"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:126
+#: hkm/hkm/templates/hkm/base_viewer.html:109
 msgid "Add to an existing collection"
 msgstr "Lisää olemassa olevaan kokoelmaan"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:133
+#: hkm/hkm/templates/hkm/base_viewer.html:116
 msgid "Create a new collection"
 msgstr "Luo uusi kokoelma"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:138
+#: hkm/hkm/templates/hkm/base_viewer.html:121
 #: hkm/hkm/templates/hkm/views/index.html:63
 msgid "New collection"
 msgstr "Uusi kokoelma"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:150
+#: hkm/hkm/templates/hkm/base_viewer.html:133
 #: hkm/hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
 msgstr "Lisää kokoelmaan"
@@ -409,11 +409,11 @@ msgstr "Oletko varma, että haluat poistaa tämän?"
 msgid "Add to a new collection"
 msgstr "Lisää uuteen kokoelmaan"
 
-#: hkm/hkm/templates/hkm/views/index.html:81
+#: hkm/hkm/templates/hkm/views/index.html:84
 msgid "Search images"
 msgstr "Hae kuvia"
 
-#: hkm/hkm/templates/hkm/views/index.html:91
+#: hkm/hkm/templates/hkm/views/index.html:103
 msgid "Explore"
 msgstr "Tee tutkimusmatka"
 
@@ -483,8 +483,8 @@ msgid "Related collections"
 msgstr "Kuvaan liittyvät kokoelmat"
 
 #: hkm/hkm/templates/hkm/views/search.html:10
-msgid "RECORDS"
-msgstr "TIETUEET"
+msgid "Records"
+msgstr "Tietuetta"
 
 #: hkm/hkm/templates/hkm/views/search.html:36
 msgid "Author"
@@ -518,10 +518,13 @@ msgstr "Toivottavasti uusi haku korjaa tilanteen."
 msgid "Login"
 msgstr "Kirjautuminen"
 
-#: hkm/hkm/views.py:585
+#: hkm/hkm/views.py:590
 msgid "Favorites"
 msgstr "Suosikit"
 
-#: hkm/hkm/views.py:585
+#: hkm/hkm/views.py:590
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
+
+#~ msgid "RECORDS"
+#~ msgstr "Tietuetta"

@@ -24,6 +24,11 @@ from hkm import context_processors
 
 LOG = logging.getLogger(__name__)
 
+class AuthForm(django_forms.AuthenticationForm):
+    username = django_forms.UsernameField(
+        max_length=254,
+        widget=django_forms.forms.TextInput,
+    )
 
 class BaseView(TemplateView):
   url_name = None
@@ -53,7 +58,7 @@ class BaseView(TemplateView):
 
   def get_empty_forms(self, request):
     return {
-      'login_form': django_forms.AuthenticationForm(),
+      'login_form': AuthForm(),
     }
 
   def get(self, request, *args, **kwargs):

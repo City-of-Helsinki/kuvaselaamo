@@ -5927,7 +5927,7 @@ img {
 
 .browse-view .navbar-nav .open .dropdown-menu li a,
 .browse-view .navbar-nav .open .dropdown-menu li a:hover {
-  color: #fff; }
+  color: #965479; }
 
 .navbar-nav {
   float: right; }
@@ -6066,7 +6066,7 @@ img {
 @media (max-width: 400px) {
   .login-modal__dialog {
     left: 0;
-    margin: -179px auto auto 0; }
+    margin: -179px 15px auto 15px; }
   .login-modal {
     width: 100%; } }
 
@@ -6111,7 +6111,6 @@ img {
 
 .banner {
   float: left;
-  background-color: #ff7862;
   width: 100%;
   min-height: 100px;
   padding: 0;
@@ -6155,21 +6154,23 @@ img {
     width: 100%; }
 
 .banner__form-title {
-  display: inline-block;
+  display: block;
   margin: 0 0 10px 0 !important; }
   .banner__form-title input {
-    width: 737px; }
+    width: 450px; }
 
 .banner__form-description {
   margin: 0 0 10px 0 !important; }
   .banner__form-description textarea {
     background-color: transparent;
     border: solid 1px #fff;
-    width: 737px; }
+    width: 450px; }
 
-@media (max-width: 773px) {
-  .banner__form-title input {
-    width: calc(100% - 50px); }
+@media (max-width: 544px) {
+  .banner__form-title .banner__h1 {
+    width: calc(100% - 50px); } }
+
+@media (max-width: 490px) {
   .banner__form-title, .banner__h1,
   .form-inline .banner__checkbox {
     width: 100% !important; }
@@ -6187,30 +6188,28 @@ img {
   vertical-align: top;
   margin: 0; }
   .form-inline .banner__checkbox label {
-    margin: 0;
+    margin: 0 5px;
     width: auto;
     float: left;
-    padding: 6px 12px;
-    text-align: center;
-    line-height: 26px;
-    border: solid 1px #fff;
-    height: 40px;
+    color: #000;
+    line-height: 22px;
+    height: 20px;
     background-color: transparent; }
   .form-inline .banner__checkbox input[type=checkbox] {
     position: static;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -o-appearance: none;
     border-left: 0;
     margin: 0;
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
+    float: left;
     text-align: center; }
   .form-inline .banner__checkbox input[type=checkbox]:hover {
     cursor: pointer; }
   .form-inline .banner__checkbox input[type=checkbox]:checked:after {
-    content: '✔';
     font-size: 35px; }
+
+.checkbox label {
+  padding: 0; }
 
 .banner__btn {
   vertical-align: top;
@@ -6250,6 +6249,16 @@ img {
   display: block;
   height: 100%;
   width: 100%; }
+
+.page-header--my-collection {
+  color: #0055ae; }
+  .page-header--my-collection .banner__description {
+    color: #000; }
+  .page-header--my-collection .banner__form input {
+    border: solid 1px #0055ae; }
+  .page-header--my-collection .banner__form-description textarea {
+    border: solid 1px #0055ae;
+    color: #000; }
 
 /* Leaflet overrides */
 .leaflet-control-container {
@@ -6531,6 +6540,22 @@ img {
   min-width: 0;
   width: 1px; }
 
+.search-modal__close,
+.search-modal__close:hover,
+.search-modal__close:active,
+.search-modal__close:hover:active {
+  color: #fff;
+  position: absolute;
+  right: 0;
+  height: 35px;
+  width: 35px;
+  padding: 5px;
+  background-color: transparent;
+  border: 0; }
+
+.search-modal__close:hover {
+  color: #212121; }
+
 .explore__icon {
   display: inline-block;
   height: 70px;
@@ -6759,3 +6784,10 @@ img {
 .hkm-btn--submit:hover {
   background-color: #0055ae;
   color: #ffdbab; }
+
+/* Colors */
+.bittersweet {
+  background-color: #ff7862; }
+
+.strikemaster {
+  background-color: #965479; }

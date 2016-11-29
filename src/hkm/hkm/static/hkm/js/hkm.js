@@ -16,11 +16,17 @@ palikka
   });
 
 })
-.define('app.bootstrap', ['jQuery', 'docReady', 'winReady'], function () {
+.define('app.bootstrap', ['jQuery', 'docReady'], function () {
 
-  // $('.modal').on('shown.bs.modal', function() {
-  //   $(this).find('[autofocus]').focus();
-  // });
+  $('.modal').on('shown.bs.modal', function() {
+    $(this).find('[autofocus]').focus();
+  });
+
+  $('.modal.fade').each(function() {
+    if ($(this).hasClass('error')) {
+      $(this).modal('show');
+    }
+  });
 
 })
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
@@ -49,9 +55,21 @@ palikka
       });
       $(this).removeClass('invisible');
     });
-    $container.flexImages({
-      rowHeight: 200
-    });
+    if ($itemGroup.attr('data-grid-type') == 'collection') {
+      $container.flexImages({
+        rowHeight: 222
+      });
+    }
+    else if ($window.width() < 450) {
+      $container.flexImages({
+        rowHeight: 180
+      });
+    }
+    else {
+      $container.flexImages({
+        rowHeight: 310
+      });
+    }
   }
 
   $window.scroll(function () {

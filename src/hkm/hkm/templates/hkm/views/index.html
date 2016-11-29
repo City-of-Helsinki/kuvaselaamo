@@ -75,6 +75,13 @@
     <div class="search-modal__dialog modal-dialog" role="document">
       <div class="search-modal__content modal-content">
         <div class="search-modal__body modal-body">
+          <button class="search-modal__close btn btn-default" type="button" data-dismiss="modal">
+            <i class="close__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+              </svg>
+            </i>
+          </button>
           <table class="search-modal__table">
             <tr class="search-modal__row search-modal__row--top">
               <td class="search-modal__cell"></td>
@@ -128,7 +135,9 @@
   <script>
     palikka.define('app.searchModal', ['jQuery', 'docReady'], function () {
       if (window.location.search.indexOf('search=true') > -1 || $('#search-modal').attr('data-open-popup') == 'True') {
-        $('#search-modal').modal('show');
+        if (!'{{ login_form.errors }}') {
+          $('#search-modal').modal('show');
+        }
       }
     });
   </script>

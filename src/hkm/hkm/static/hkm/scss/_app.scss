@@ -92,7 +92,7 @@ img {
 .browse-view {
   .navbar-nav .open .dropdown-menu li a,
   .navbar-nav .open .dropdown-menu li a:hover {
-    color: $color-white;
+    color: $color-strikemaster;
   }
 }
 .navbar-nav {
@@ -266,7 +266,7 @@ img {
 @media (max-width: 400px) {
   .login-modal__dialog {
     left: 0;
-    margin: -179px auto auto 0;
+    margin: -179px 15px auto 15px;
   }
   .login-modal {
     width: 100%;
@@ -314,7 +314,7 @@ img {
 }
 .banner {
   float: left;
-  background-color: $color-bittersweet;
+  // background-color: $color-bittersweet;
   width: 100%;
   min-height: 100px;
   padding: 0;
@@ -359,10 +359,10 @@ img {
   }
 }
 .banner__form-title {
-  display: inline-block;
+  display: block;
   margin: 0 0 10px 0 !important;
   input {
-    width: 737px;
+    width: 450px;
   }
 }
 .banner__form-description {
@@ -370,16 +370,17 @@ img {
   textarea {
     background-color: transparent;
     border: solid 1px $color-white;
-    width: 737px;
+    width: 450px;
   }
-
 }
-@media (max-width: 773px) {
+@media (max-width: 544px) {
   .banner__form-title {
-    input {
+    .banner__h1 {
       width: calc(100% - 50px);
     }
   }
+}
+@media (max-width: 490px) {
   .banner__form-title, .banner__h1,
   .form-inline .banner__checkbox {
     width: 100% !important;
@@ -402,34 +403,32 @@ img {
   vertical-align: top;
   margin: 0;
   label {
-    margin: 0;
+    margin: 0 5px;
     width: auto;
     float: left;
-    padding: 6px 12px;
-    text-align: center;
-    line-height: 26px;
-    border: solid 1px $color-white;
-    height: 40px;
+    color: #000;
+    line-height: 22px;
+    height: 20px;
     background-color: transparent;
   }
   input[type=checkbox] {
     position: static;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -o-appearance: none;
     border-left: 0;
     margin: 0;
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
+    float: left;
     text-align: center;
   }
   input[type=checkbox]:hover {
     cursor: pointer;
   }
   input[type=checkbox]:checked:after {
-    content: '✔';
     font-size: 35px;
   }
+}
+.checkbox label {
+  padding: 0;
 }
 .banner__btn {
   vertical-align: top;
@@ -469,6 +468,19 @@ img {
   display: block;
   height: 100%;
   width: 100%;
+}
+.page-header--my-collection {
+  color: $color-endeavour;
+  .banner__description {
+    color: #000;
+  }
+  .banner__form input {
+    border: solid 1px $color-endeavour;
+  }
+  .banner__form-description textarea {
+    border: solid 1px $color-endeavour;
+    color: #000;
+  }
 }
 
 /* Leaflet overrides */
@@ -784,6 +796,22 @@ img {
   min-width: 0;
   width: 1px;
 }
+.search-modal__close,
+.search-modal__close:hover,
+.search-modal__close:active,
+.search-modal__close:hover:active {
+  color: $color-white;
+  position: absolute;
+  right: 0;
+  height: 35px;
+  width: 35px;
+  padding: 5px;
+  background-color: transparent;
+  border: 0;
+}
+.search-modal__close:hover {
+  color: $color-shark;
+}
 .explore__icon {
   display: inline-block;
   height: 70px;
@@ -1036,4 +1064,12 @@ img {
 .hkm-btn--submit:hover {
   background-color: $color-endeavour;
   color: $color-caramel;
+}
+
+/* Colors */
+.bittersweet {
+  background-color: $color-bittersweet;
+}
+.strikemaster {
+  background-color: $color-strikemaster;
 }
