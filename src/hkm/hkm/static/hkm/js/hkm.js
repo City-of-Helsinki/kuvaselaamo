@@ -18,9 +18,9 @@ palikka
 })
 .define('app.bootstrap', ['jQuery', 'docReady', 'winReady'], function () {
 
-  $('.modal').on('shown.bs.modal', function() {
-    $(this).find('[autofocus]').focus();
-  });
+  // $('.modal').on('shown.bs.modal', function() {
+  //   $(this).find('[autofocus]').focus();
+  // });
 
 })
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
@@ -292,7 +292,8 @@ palikka
   $editCancel = $('#edit-title-cancel');
   $removeItem = $('.grid__item-remove');
   $title = $('.banner__title');
-  $titleForm = $('.banner__form');
+  $description = $('.banner__description');
+  $collectionForm = $('.banner__form');
 
   $removeItem.on('click', function() {
     var confirmRemove = confirm($(this).attr('data-confirm'));
@@ -310,13 +311,15 @@ palikka
 
   $editCancel.on('click', function() {
     $title.toggle();
-    $titleForm.toggle();
+    $description.toggle();
+    $collectionForm.toggle();
     $removeItem.toggle();
   });
 
   $editBtn.on('click', function() {
     $title.toggle();
-    $titleForm.toggle();
+    $description.toggle();
+    $collectionForm.toggle();
     $removeItem.toggle();
   });
 

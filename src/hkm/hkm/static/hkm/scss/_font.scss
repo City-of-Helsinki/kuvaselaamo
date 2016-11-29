@@ -42,3 +42,14 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'brownlight';
+  src: url('/static/hkm/font/Brown/lineto-brown-light.eot');
+  src: url('/static/hkm/font/Brown/lineto-brown-light.eot?#iefix') format('embedded-opentype'),
+      //  url('/static/hkm/font/Brown/lineto-brown-light.woff2') format('woff2'),
+       url('/static/hkm/font/Brown/lineto-brown-light.woff') format('woff');
+      //  url('/static/hkm/font/Brown/lineto-brown-light.ttf') format('truetype'),
+      //  url('/static/hkm/font/Brown/lineto-brown-light.svg#signeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

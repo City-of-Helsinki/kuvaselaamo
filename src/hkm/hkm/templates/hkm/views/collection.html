@@ -1,4 +1,4 @@
-{% extends 'hkm/base_collection.html' %}
+{% extends 'hkm/base_browse.html' %}
 {% load i18n hkm_tags widget_tweaks %}
 
 {% block banner %}
@@ -8,30 +8,31 @@
       <div class="banner__title">
         <h1 class="banner__h1">{{ collection.title }}</h1>
       </div>
+      <div class="banner__description">{{ collection.description }}</div>
       <form class="banner__form form-inline" method="POST">
         {% csrf_token %}
         <div class="banner__form-title">
           <h1 class="banner__h1">{{ collection_form.title }}</h1>
         </div>
-        <!-- <div class="banner__form-wrapper form-group"> -->
+        <div class="banner__form-description">{{ collection_form.description }}
+        </div>
+        <div class="banner__checkbox checkbox">
+          <label>{% trans 'Set to public' %}</label>
+          {% render_field collection_form.is_public type+="checkbox" %}
+        </div>
+        {% if user.profile.is_admin %}
           <div class="banner__checkbox checkbox">
-            <label>{% trans 'Set to public' %}</label>
-            {% render_field collection_form.is_public type+="checkbox" %}
+            <label>{% trans 'Show in landing page' %}</label>
+            {% render_field collection_form.show_in_landing_page type+="checkbox" %}
           </div>
-          {% if user.profile.is_admin %}
-            <div class="banner__checkbox checkbox">
-              <label>{% trans 'Show in landing page' %}</label>
-              {% render_field collection_form.show_in_landing_page type+="checkbox" %}
-            </div>
-            <div class="banner__checkbox checkbox">
-              <label>{% trans 'Set to featured' %}</label>
-              {% render_field collection_form.is_featured type+="checkbox" %}
-            </div>
-          {% endif %}
-          <input type="hidden" name="action" value="edit" />
-          <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
-          <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
-        <!-- </div> -->
+          <div class="banner__checkbox checkbox">
+            <label>{% trans 'Set to featured' %}</label>
+            {% render_field collection_form.is_featured type+="checkbox" %}
+          </div>
+        {% endif %}
+        <input type="hidden" name="action" value="edit" />
+        <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
+        <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
       </form>
       <div class="banner-actions">
         {% if permissions.can_edit %}
@@ -43,13 +44,6 @@
             </i>
           </button>
         {% endif %}
-          <button class="banner-actions__btn">
-            <i class="banner-actions__icon">
-              <svg class="svg-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
-              </svg>
-            </i>
-          </button>
       </div>
     </div>
   </div>

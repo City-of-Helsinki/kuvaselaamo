@@ -17,21 +17,19 @@
 
   {% block actions %}
     {% if record %}
-      <div class="actions actions_left">
-        <button id="zoom-in-btn" class="actions__btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
-        <button id="zoom-out-btn" class="actions__btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
-      </div>
-      <div class="actions actions_right">
-        <button class="actions__btn" id="popover-cart">
-          <img src="/static/hkm/img/karry.png"></img>
-        </button>
-        <button class="actions__btn" id="popover-info">
+      <div class="actions">
+        <button class="actions__btn actions__btn--left" id="zoom-in-btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
+        <button class="actions__btn actions__btn--left" id="zoom-out-btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
+        {% if user.is_authenticated %}
+          <button class="actions__btn actions__btn--right" id="popover-add"><img src="/static/hkm/img/h_sydan_valk.png"></img></button>
+        {% endif %}
+        <button class="actions__btn actions__btn--right" id="popover-share"><img src="/static/hkm/img/share.png"></img></button>
+        <button class="actions__btn actions__btn--right" id="popover-info">
           <img src="/static/hkm/img/info.png"></img>
         </button>
-        <button class="actions__btn" id="popover-share"><img src="/static/hkm/img/share.png"></img></button>
-        {% if user.is_authenticated %}
-          <button class="actions__btn" id="popover-add"><img src="/static/hkm/img/h_sydan_valk.png"></img></button>
-        {% endif %}
+        <button class="actions__btn actions__btn--right" id="popover-cart">
+          <img src="/static/hkm/img/karry.png"></img>
+        </button>
       </div>
     {% endif %}
   {% endblock %}
@@ -40,12 +38,12 @@
 
     <div class="my-modal my-modal--crop modal fade" id="crop-and-order" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="my-modal__content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">{% trans 'Crop and order' %}</h4>
           </div>
-          <div class="modal-body row">
+          <div class="my-modal__body modal-body row">
             <div class="col-md-4">
               <div class="image-templates docs-toggles" data-toggle="buttons">
                 <button class="image-templates__template btn btn-primary">
@@ -69,8 +67,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="order">{% trans 'Submit' %}</button>
+            <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" id="submit-crop" type="button" value="order">{% trans 'Submit' %}</button>
           </div>
         </div>
       </div>
@@ -78,12 +76,12 @@
 
     <div class="my-modal my-modal--crop modal fade" id="crop-and-download" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="my-modal__content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">{% trans 'Crop and download' %}</h4>
           </div>
-          <div class="modal-body row">
+          <div class="my-modal__body modal-body row">
             <div class="col-md-12">
               <div class="crop__container">
                 <img class="crop__image"></img>
@@ -91,8 +89,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" id="submit-crop" type="button" value="download">{% trans 'Download' %}</button>
+            <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" id="submit-crop" type="button" value="download">{% trans 'Download' %}</button>
           </div>
         </div>
       </div>
@@ -100,12 +98,12 @@
 
     <div class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="my-modal__content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">{% trans 'Crop and add to collection' %}</h4>
           </div>
-          <div class="modal-body row">
+          <div class="my-modal__body modal-body row">
             <div class="col-md-4">
               <div class="crop-settings crop-settings--select-collection">
                 <h5 class="crop-settings__title">{% trans 'Add to an existing collection' %}</h5>
@@ -131,8 +129,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="crop__submit btn btn-primary" type="button" id="crop-add-submit" value="add">{% trans 'Add to collection' %}</button>
+            <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
+            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" type="button" id="crop-add-submit" value="add">{% trans 'Add to collection' %}</button>
           </div>
         </div>
       </div>
