@@ -900,6 +900,31 @@ div.grid__fav.active {
 .search-modal__close:hover {
   color: $color-shark;
 }
+.search-filter {
+  padding: 4px;
+  width: 100%;
+}
+.search-filter__item {
+  display: inline-block;
+  border: solid 1px $color-bittersweet;
+  padding: 6px 8px;
+  background-color: $color-white;
+  font-family: $font-falkmanbold;
+}
+.search-filter__text {
+  float: left;
+
+}
+.search-filter__delete {
+  float: left;
+  padding: 0;
+  background-color: transparent;
+  margin: 0 0 0 8px;
+  color: $color-bittersweet;
+  border: 0;
+  height: 19px;
+  width: 19px;
+}
 .explore__icon {
   display: inline-block;
   height: 70px;

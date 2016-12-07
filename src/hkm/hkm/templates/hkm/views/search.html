@@ -55,6 +55,19 @@
 
     <div class="article col-md-10">
 
+      <div class="search-filter">
+        <div class="search-filter__item">
+          <span class="search-filter__text">{{ search_term }}</span>
+          <a href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}" class="search-filter__delete">
+            <i class="search-filter__delete-icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+              </svg>
+            </i>
+        </a>
+        </div>
+      </div>
+
       <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
         {% include 'hkm/snippets/search_records_grid.html' %}
       </div>

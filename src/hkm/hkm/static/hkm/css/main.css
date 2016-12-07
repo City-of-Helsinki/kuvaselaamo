@@ -6647,6 +6647,30 @@ div.grid__fav.active {
 .search-modal__close:hover {
   color: #212121; }
 
+.search-filter {
+  padding: 4px;
+  width: 100%; }
+
+.search-filter__item {
+  display: inline-block;
+  border: solid 1px #ff7862;
+  padding: 6px 8px;
+  background-color: #fff;
+  font-family: "falkmanbold", sans-serif; }
+
+.search-filter__text {
+  float: left; }
+
+.search-filter__delete {
+  float: left;
+  padding: 0;
+  background-color: transparent;
+  margin: 0 0 0 8px;
+  color: #ff7862;
+  border: 0;
+  height: 19px;
+  width: 19px; }
+
 .explore__icon {
   display: inline-block;
   height: 70px;
