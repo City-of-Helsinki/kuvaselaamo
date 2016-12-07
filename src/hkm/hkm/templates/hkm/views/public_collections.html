@@ -10,17 +10,17 @@
         <h1 class="banner__h1">{% trans 'Featured collections' %}</h1>
       </div>
       <div class="grid flex-images">
-        <div class="grid__group item-slider invisible">
+        <div class="grid__group item-slider invisible" data-grid-type="collection">
           {% for collection in featured_collections %}
             <div class="grid__item item" data-w="550" data-h="400">
               <a href="{% url 'hkm_collection' collection_id=collection.id %}">
                 {% with images=collection|display_images %}
                   {% if images|length == 1 %}
-                    <div class="grid__item grid__item--collection item" style="background-image:url('{{ images.0 }}')"></div>
+                    <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
                   {% else %}
-                    <div class="sub-grid flex-images">
+                    <div class="sub-grid">
                       {% for image_url in images %}
-                        <div class="sub-grid__item item" style="background-image:url('{{ image_url }}')"></div>
+                        <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
                       {% endfor %}
                     </div>
                   {% endif %}
@@ -43,8 +43,6 @@
 
   <div class="fullsize-container container">
 
-    <!-- <h1>Search Results {{ search_result.page }}/{{ search_result.pages }} {{ search_result.resultCount }}</h1> -->
-
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible">
         {% for collection in collections %}
@@ -52,11 +50,11 @@
             <a href="{% url 'hkm_collection' collection_id=collection.id %}">
               {% with images=collection|display_images %}
                 {% if images|length == 1 %}
-                  <div class="grid__item grid__item--collection item" style="background-image:url('{{ images.0 }}')"></div>
+                  <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
                 {% else %}
-                  <div class="sub-grid flex-images">
+                  <div class="sub-grid">
                     {% for image_url in images %}
-                      <div class="sub-grid__item item" style="background-image:url('{{ image_url }}')"></div>
+                      <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
                     {% endfor %}
                   </div>
                 {% endif %}

@@ -14,7 +14,74 @@ a {
 img {
   height: 100%;
 }
+.form-control, .input-group-addon {
+  border-radius: 0;
+}
 
+.back-to {
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 500;
+  padding: 10px;
+  a {
+    color: $color-white;
+  }
+}
+
+/* Colors */
+.bittersweet {
+  background-color: $color-bittersweet;
+}
+.strikemaster {
+  background-color: $color-strikemaster;
+}
+.silvertree {
+  background-color: $color-silvertree;
+}
+.white {
+  background-color: $color-white;
+  * {
+    color: $color-funblue;
+  }
+}
+
+/* Buttons */
+.btn {
+  border-radius: 0;
+}
+.hkm-btn {
+  font-family: $font-brownbold;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: 0;
+  padding: 6px 36px;
+  outline: 0;
+}
+.hkm-btn:active,
+.hkm-btn:focus,
+.hkm-btn:active:focus {
+  background: rgba(0, 0, 0, 0.2);
+  color: $color-theme;
+  outline: 0;
+}
+.hkm-btn--default {
+  background-color: $color-funblue;
+  color: $color-caramel;
+}
+.hkm-btn--default:hover {
+  background-color: $color-silvertree;
+  color: $color-caramel;
+}
+.hkm-btn--cancel {
+  background-color: $color-peach;
+  color: $color-funblue;
+}
+.hkm-btn--cancel:hover {
+  background-color: $color-silvertree;
+  color: $color-funblue;
+}
 
 /* Svg icons */
 .svg-icon {
@@ -314,7 +381,6 @@ img {
 }
 .banner {
   float: left;
-  // background-color: $color-bittersweet;
   width: 100%;
   min-height: 100px;
   padding: 0;
@@ -352,7 +418,7 @@ img {
     background-color: transparent;
     padding: 0;
     margin-left: -1px;
-    border: solid 1px $color-theme;
+    border: solid 1px $color-funblue;
     outline: 0;
     height: 40px;
     width: 100%;
@@ -362,14 +428,14 @@ img {
   display: block;
   margin: 0 0 10px 0 !important;
   input {
-    width: 450px;
+    max-width: 450px;
   }
 }
 .banner__form-description {
   margin: 0 0 10px 0 !important;
   textarea {
     background-color: transparent;
-    border: solid 1px $color-white;
+    border: solid 1px $color-funblue;
     width: 450px;
   }
 }
@@ -381,7 +447,7 @@ img {
   }
 }
 @media (max-width: 490px) {
-  .banner__form-title, .banner__h1,
+  .banner__form-title,
   .form-inline .banner__checkbox {
     width: 100% !important;
   }
@@ -434,19 +500,8 @@ img {
   vertical-align: top;
   margin: 0;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: solid 1px $color-theme;
-  color: $color-theme;
   height: 40px;
   border-radius: 0;
-}
-.banner__btn:hover,
-.banner__btn:active,
-.banner__btn:focus,
-.banner__btn:active:focus {
-  background: rgba(0, 0, 0, 0.2);
-  border: solid 1px $color-theme;
-  color: $color-theme;
 }
 .banner-actions {
   float: right;
@@ -460,6 +515,7 @@ img {
   padding: 4px;
   border: 0;
   background: 0;
+  outline: 0;
 }
 .banner-actions__btn:hover {
   cursor: pointer;
@@ -470,15 +526,15 @@ img {
   width: 100%;
 }
 .page-header--my-collection {
-  color: $color-endeavour;
+  color: $color-funblue;
   .banner__description {
     color: #000;
   }
   .banner__form input {
-    border: solid 1px $color-endeavour;
+    border: solid 1px $color-funblue;
   }
   .banner__form-description textarea {
-    border: solid 1px $color-endeavour;
+    border: solid 1px $color-funblue;
     color: #000;
   }
 }
@@ -508,14 +564,25 @@ img {
   height: 60px;
   padding: 12px;
   border: 0;
-  background-color: $color-viewer-theme;
   float: right;
+  outline: 0;
+  background-color: $color-viewer-theme;
+  color: $color-white;
+}
+.actions__btn:active,
+.actions__btn:focus {
+  color: $color-silvertree;
 }
 .actions__btn--left {
   float: left;
 }
 .actions__btn:hover {
   cursor: pointer;
+}
+.actions__icon {
+  display: block;
+  width: 36px;
+  height: 100%;
 }
 .actions {
   width: 100%;
@@ -528,6 +595,9 @@ img {
   .actions__btn {
     height: 100%;
     background: 0;
+  }
+  .actions__icon {
+    width: 100%;
   }
   .actions__btn {
     width: calc(100% / 6);
@@ -586,6 +656,9 @@ img {
   .list-group.list-group-root > .list-group-item:first-child {
     border: 0;
   }
+  .list-group.panel-collapse.collapse.in {
+    margin: 0 0 10px 0;
+  }
   .list-group.list-group-root > .list-group > .list-group-item {
     padding-left: 30px;
   }
@@ -594,6 +667,8 @@ img {
   }
   .list-group__link {
     color: #555555;
+    font-family: $font-brownlight;
+    font-size: 13px;
   }
   .list-group__link.active {
     color: $color-strikemaster;
@@ -684,25 +759,25 @@ img {
   width: auto;
   height: 100%;
 }
-.grid__meta, .grid__fav {
+.grid__meta {
   @extend .fade;
 }
 .grid__item:hover {
-  .grid__meta, .grid__fav {
+  .grid__meta {
     @extend .in;
   }
 }
 .grid__item-remove {
   display: none;
   position: absolute;
+  padding: 8;
   border: 0;
   color: $color-white;
-  top: 2;
-  right: 2;
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
-  background: #000;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: transparent;
 }
 .grid__meta {
   position: absolute;
@@ -710,7 +785,7 @@ img {
   width: 100%;
   height: 40px;
   padding: 4px 40px 4px 4px;
-  background: $color-padua;
+  background: $color-white;
 }
 .grid__meta--title,
 .grid__meta--other {
@@ -720,14 +795,17 @@ img {
   display: block;
 }
 .grid__meta--title {
-  color: $color-mariner;
-  font-size: 12px;
-  font-family: 'goviniusbold';
+  color: $color-strikemaster;
+  line-height: 18px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: $font-brownbold;
 }
 .grid__meta--other {
-  color: $color-white;
-  font-size: 10px;
-  font-family: 'falkmanbold';
+  color: $color-silvertree;
+  font-size: 11px;
+  font-family: $font-brownbold;
+  font-weight: bold;
 }
 .grid__fav {
   display: block;
@@ -744,16 +822,26 @@ img {
   background-color: rgba(0, 0, 0, 0);
   background-image: url('/static/hkm/img/sydan_valkoinen.png');
 }
-.grid__fav:hover, .grid__fav.active {
+div.grid__fav {
+  display: none;
+}
+div.grid__fav.active {
+  display: block;
+}
+.grid__fav:hover, .grid__fav.active, div.grid__fav {
   background-image: url('/static/hkm/img/sydan_oranssi.png');
 }
 
 /* Search */
+.search-modal,
+.search-modal.in ~ .modal-backdrop.in {
+  top: 60px;
+}
 .search-modal__dialog {
   position: absolute;
   top: 50%;
   width: 100%;
-  margin: -70px 0 0 0;
+  margin: -90px 0 0 0;
 }
 .search-modal__content {
   border: 0;
@@ -835,7 +923,10 @@ img {
 .explore__link:hover {
   text-decoration: none;
 }
-@media (max-width: 510px) {
+@media (max-width: 566px) {
+  .search-modal__close {
+    display: none;
+  }
   .search-modal__cell--middle {
     padding: 0 10px;
     width: 100%;
@@ -1032,44 +1123,4 @@ img {
   .my-modal__dialog {
     margin: 0;
   }
-}
-
-/* Buttons */
-.hkm-btn {
-  font-family: $font-falkmanbold;
-  border-radius: 0;
-  border: 0;
-  padding: 6px 36px;
-}
-.hkm-btn--default {
-  color: $color-caramel;
-  background-color: $color-indigo;
-}
-.hkm-btn--default:hover {
-  background-color: $color-emerald;
-  color: $color-caramel;
-}
-.hkm-btn--cancel {
-  background-color: $color-peach;
-  color: $color-endeavour;
-}
-.hkm-btn--cancel:hover {
-  background-color: $color-peach;
-  color: $color-endeavour;
-}
-.hkm-btn--submit {
-  background-color: $color-endeavour;
-  color: $color-caramel;
-}
-.hkm-btn--submit:hover {
-  background-color: $color-endeavour;
-  color: $color-caramel;
-}
-
-/* Colors */
-.bittersweet {
-  background-color: $color-bittersweet;
-}
-.strikemaster {
-  background-color: $color-strikemaster;
 }

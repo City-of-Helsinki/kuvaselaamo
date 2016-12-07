@@ -3,15 +3,18 @@
 {% for record in search_result.records %}
   <div class="grid__item item" data-w="" data-h="">
     <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ record.index }}">
-      <div class="grid__meta">
-        <span class="grid__meta--title">{{ record.title }}</span>
-        <span class="grid__meta--other"></span>
-      </div>
+      {% if user.is_authenticated %}
+        <div class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}"></div>
+      {% endif %}
       <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}"></img>
     </a>
-    {% if user.is_authenticated %}
-      <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}"></button>
-    {% endif %}
+    <div class="grid__meta">
+      <span class="grid__meta--title">{{ record.title }}</span>
+      <span class="grid__meta--other">{{ record.nonPresenterAuthors.0.name }}</span>
+      {% if user.is_authenticated %}
+        <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}"></button>
+      {% endif %}
+    </div>
   </div>
 {% endfor %}
 </div>

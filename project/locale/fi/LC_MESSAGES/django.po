@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 15:14+0200\n"
+"POT-Creation-Date: 2016-12-07 16:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgstr "Julkinen"
 msgid "Featured"
 msgstr "Ajankohtainen"
 
-#: hkm/hkm/models.py:79 hkm/hkm/templates/hkm/views/collection.html:25
+#: hkm/hkm/models.py:79 hkm/hkm/templates/hkm/views/collection.html:24
 msgid "Show in landing page"
 msgstr "Näytä etusivulla"
 
@@ -253,51 +253,53 @@ msgstr ""
 msgid "KUVASELAAMO"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/base.html:88
+#: hkm/hkm/templates/hkm/base.html:88 hkm/hkm/templates/hkm/base.html:89
 msgid "Search"
 msgstr "Haku"
 
-#: hkm/hkm/templates/hkm/base.html:90 hkm/hkm/templates/hkm/base.html:94
+#: hkm/hkm/templates/hkm/base.html:91 hkm/hkm/templates/hkm/base.html:95
 msgid "In English"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/base.html:90 hkm/hkm/templates/hkm/base.html:92
+#: hkm/hkm/templates/hkm/base.html:91 hkm/hkm/templates/hkm/base.html:93
 msgid "På svenska"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/base.html:92 hkm/hkm/templates/hkm/base.html:94
+#: hkm/hkm/templates/hkm/base.html:93 hkm/hkm/templates/hkm/base.html:95
 msgid "Suomeksi"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/base.html:96 hkm/hkm/templates/hkm/views/info.html:9
-msgid "Info"
-msgstr "Tiedot"
+#: hkm/hkm/templates/hkm/base.html:97 hkm/hkm/templates/hkm/views/info.html:9
+#: hkm/hkm/templates/hkm/views/record_feedback.html:24
+msgid "Feedback"
+msgstr "Palaute"
 
-#: hkm/hkm/templates/hkm/base.html:99
+#: hkm/hkm/templates/hkm/base.html:100
 msgid "Account"
 msgstr "Käyttäjä"
 
-#: hkm/hkm/templates/hkm/base.html:101
+#: hkm/hkm/templates/hkm/base.html:102
 msgid "My Kuvaselaamo"
 msgstr "Minun Kuvaselaamo"
 
-#: hkm/hkm/templates/hkm/base.html:102
+#: hkm/hkm/templates/hkm/base.html:103
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: hkm/hkm/templates/hkm/base.html:106
+#: hkm/hkm/templates/hkm/base.html:107
+#: hkm/hkm/templates/registration/login.html:14
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
-#: hkm/hkm/templates/hkm/base.html:116
+#: hkm/hkm/templates/hkm/base.html:117
 msgid "Facebook login"
 msgstr "Facebook kirjautuminen"
 
-#: hkm/hkm/templates/hkm/base.html:117
+#: hkm/hkm/templates/hkm/base.html:118
 msgid "Google login"
 msgstr "Google kirjautuminen"
 
-#: hkm/hkm/templates/hkm/base.html:118
+#: hkm/hkm/templates/hkm/base.html:119
 msgid "Login with credentials"
 msgstr "Kirjaudu sisään tunnuksilla"
 
@@ -309,54 +311,58 @@ msgstr "Edellinen kuva"
 msgid "Next image"
 msgstr "Seuraava kuva"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:44
+#: hkm/hkm/templates/hkm/base_viewer.html:10
+msgid "Back to list view"
+msgstr "Takaisin listanäkymään"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:78
 msgid "Crop and order"
 msgstr "Leikkaa ja tilaa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:70
-#: hkm/hkm/templates/hkm/base_viewer.html:92
-#: hkm/hkm/templates/hkm/base_viewer.html:132
+#: hkm/hkm/templates/hkm/base_viewer.html:104
+#: hkm/hkm/templates/hkm/base_viewer.html:126
+#: hkm/hkm/templates/hkm/base_viewer.html:166
 #: hkm/hkm/templates/hkm/views/index.html:44
 #: hkm/hkm/templates/hkm/views/index.html:66
 msgid "Close"
 msgstr "Sulje"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:71
+#: hkm/hkm/templates/hkm/base_viewer.html:105
 #: hkm/hkm/templates/hkm/views/index.html:45
 #: hkm/hkm/templates/hkm/views/index.html:67
-#: hkm/hkm/templates/hkm/views/info.html:25
+#: hkm/hkm/templates/hkm/views/info.html:24
 #: hkm/hkm/templates/hkm/views/record_feedback.html:28
 msgid "Submit"
 msgstr "Lähetä"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:82
+#: hkm/hkm/templates/hkm/base_viewer.html:116
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:10
 #: hkm/hkm/templates/hkm/views/index.html:38
 msgid "Crop and download"
 msgstr "Leikkaa ja lataa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:93
+#: hkm/hkm/templates/hkm/base_viewer.html:127
 msgid "Download"
 msgstr "Lataa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:104
+#: hkm/hkm/templates/hkm/base_viewer.html:138
 msgid "Crop and add to collection"
 msgstr "Leikkaa ja lisää kokoelmaan"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:109
+#: hkm/hkm/templates/hkm/base_viewer.html:143
 msgid "Add to an existing collection"
 msgstr "Lisää olemassa olevaan kokoelmaan"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:116
+#: hkm/hkm/templates/hkm/base_viewer.html:150
 msgid "Create a new collection"
 msgstr "Luo uusi kokoelma"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:121
+#: hkm/hkm/templates/hkm/base_viewer.html:155
 #: hkm/hkm/templates/hkm/views/index.html:63
 msgid "New collection"
 msgstr "Uusi kokoelma"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:133
+#: hkm/hkm/templates/hkm/base_viewer.html:167
 #: hkm/hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
 msgstr "Lisää kokoelmaan"
@@ -385,11 +391,11 @@ msgstr "Tämä on pieniresoluutioinen kuva. Tuotetilaukset eivät ole käytöss�
 msgid "Copy share url to clipboard"
 msgstr "Kopioi kuvan jako-osoite leikepöydälle"
 
-#: hkm/hkm/templates/hkm/views/collection.html:20
+#: hkm/hkm/templates/hkm/views/collection.html:19
 msgid "Set to public"
 msgstr "Aseta julkiseksi"
 
-#: hkm/hkm/templates/hkm/views/collection.html:29
+#: hkm/hkm/templates/hkm/views/collection.html:28
 msgid "Set to featured"
 msgstr "Aseta ajankohtaiseksi"
 
@@ -409,33 +415,26 @@ msgstr "Oletko varma, että haluat poistaa tämän?"
 msgid "Add to a new collection"
 msgstr "Lisää uuteen kokoelmaan"
 
-#: hkm/hkm/templates/hkm/views/index.html:84
+#: hkm/hkm/templates/hkm/views/index.html:91
 msgid "Search images"
 msgstr "Hae kuvia"
 
-#: hkm/hkm/templates/hkm/views/index.html:103
+#: hkm/hkm/templates/hkm/views/index.html:110
 msgid "Explore"
 msgstr "Tee tutkimusmatka"
-
-#: hkm/hkm/templates/hkm/views/info.html:21
-#: hkm/hkm/templates/hkm/views/record_feedback.html:24
-msgid "Feedback"
-msgstr "Palaute"
 
 #: hkm/hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
 msgstr "Kokoelmani"
 
-#: hkm/hkm/templates/hkm/views/my_collections.html:39
-#: hkm/hkm/templates/hkm/views/public_collections.html:30
-#: hkm/hkm/templates/hkm/views/public_collections.html:66
-#: hkm/hkm/templates/hkm/views/record.html:57
-msgid "No description"
-msgstr "Ei kuvausta"
-
 #: hkm/hkm/templates/hkm/views/public_collections.html:10
 msgid "Featured collections"
 msgstr "Ajankohtaiset kokoelmat"
+
+#: hkm/hkm/templates/hkm/views/public_collections.html:64
+#: hkm/hkm/templates/hkm/views/record.html:59
+msgid "No description"
+msgstr "Ei kuvausta"
 
 #: hkm/hkm/templates/hkm/views/record.html:9
 msgid "Image details"
@@ -478,7 +477,11 @@ msgstr "Kohdetiedot"
 msgid "Measurements:"
 msgstr "Mitat:"
 
-#: hkm/hkm/templates/hkm/views/record.html:38
+#: hkm/hkm/templates/hkm/views/record.html:36
+msgid "License information"
+msgstr "Lisenssitiedot"
+
+#: hkm/hkm/templates/hkm/views/record.html:40
 msgid "Related collections"
 msgstr "Kuvaan liittyvät kokoelmat"
 
@@ -514,10 +517,6 @@ msgstr "Tai tähdet ovat vain väärässä asennossa."
 msgid "Hopefully a new search will fix the situation."
 msgstr "Toivottavasti uusi haku korjaa tilanteen."
 
-#: hkm/hkm/templates/registration/login.html:14
-msgid "Login"
-msgstr "Kirjautuminen"
-
 #: hkm/hkm/views.py:590
 msgid "Favorites"
 msgstr "Suosikit"
@@ -525,6 +524,12 @@ msgstr "Suosikit"
 #: hkm/hkm/views.py:590
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
+
+#~ msgid "Info"
+#~ msgstr "Tiedot"
+
+#~ msgid "Login"
+#~ msgstr "Kirjautuminen"
 
 #~ msgid "RECORDS"
 #~ msgstr "Tietuetta"

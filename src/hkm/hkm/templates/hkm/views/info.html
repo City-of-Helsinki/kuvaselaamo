@@ -3,10 +3,10 @@
 
 {% block banner %}
 
-  <div class="page-header">
+  <div class="page-header silvertree">
     <div class="fullsize-container container">
       <div class="banner__title">
-        <h1 class="banner__h1">{% trans 'Info' %}</h1>
+        <h1 class="banner__h1">{% trans 'Feedback' %}</h1>
       </div>
     </div>
   </div>
@@ -18,11 +18,10 @@
   <div class="container-small container">
 
     <form method="POST">
-      <h1>{% trans 'Feedback' %}</h1>
       {% csrf_token %}
       {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
       <input type="hidden" name="action" value="feedback" />
-      <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+      <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Submit' %}</button>
     </form>
 
   </div>

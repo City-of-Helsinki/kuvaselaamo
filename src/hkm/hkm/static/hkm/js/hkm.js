@@ -18,6 +18,18 @@ palikka
 })
 .define('app.bootstrap', ['jQuery', 'docReady'], function () {
 
+  $('#login-btn').on('click', hideModal);
+  $('#account-dropdown').on('click', hideModal);
+  $('#nav-collapse-btn').on('click', hideModal);
+
+  function hideModal() {
+    $('.modal').each(function() {
+      if ($(this).hasClass('in')) {
+        $(this).modal('hide');
+      }
+    });
+  }
+
   $('.modal').on('shown.bs.modal', function() {
     $(this).find('[autofocus]').focus();
   });
@@ -154,7 +166,7 @@ palikka
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
-  favBtn = 'button.grid__fav';
+  favBtn = '.grid__fav';
 
   $(document).on('click', favBtn, function() {
     postFav($(this));
@@ -167,7 +179,7 @@ palikka
         record_id: $this.attr('data-record-id')
       })
       .done(function(){
-        $this.addClass('active')
+        $('.grid__fav[data-record-id="' + $this.attr('data-record-id') + '"]').addClass('active');
       });
     }
     else {
@@ -176,7 +188,7 @@ palikka
         record_id: $this.attr('data-record-id')
       })
       .done(function(){
-        $this.removeClass('active')
+        $('.grid__fav[data-record-id="' + $this.attr('data-record-id') + '"]').removeClass('active');
       });
     }
   }

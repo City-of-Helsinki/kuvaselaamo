@@ -7,6 +7,8 @@
 
 {% block main_content %}
 
+  <!-- <div class="back-to"><a href=""><---{% trans 'Back to list view' %}</a></div> -->
+
   {% block viewer_arrows %}{% endblock %}
 
   {% block content %}{% endblock %}
@@ -18,17 +20,49 @@
   {% block actions %}
     {% if record %}
       <div class="actions">
-        <button class="actions__btn actions__btn--left" id="zoom-in-btn"><img src="/static/hkm/img/zoom_in.png"></img></button>
-        <button class="actions__btn actions__btn--left" id="zoom-out-btn"><img src="/static/hkm/img/zoom_out.png"></img></button>
+        <button class="actions__btn actions__btn--left" id="zoom-in-btn">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-in"></use>
+            </svg>
+          </i>
+        </button>
+        <button class="actions__btn actions__btn--left" id="zoom-out-btn">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-out"></use>
+            </svg>
+          </i>
+        </button>
         {% if user.is_authenticated %}
-          <button class="actions__btn actions__btn--right" id="popover-add"><img src="/static/hkm/img/h_sydan_valk.png"></img></button>
+          <button class="actions__btn actions__btn--right" id="popover-add">
+            <i class="actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo"></use>
+              </svg>
+            </i>
+          </button>
         {% endif %}
-        <button class="actions__btn actions__btn--right" id="popover-share"><img src="/static/hkm/img/share.png"></img></button>
+        <button class="actions__btn actions__btn--right" id="popover-share">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
+            </svg>
+          </i>
+        </button>
         <button class="actions__btn actions__btn--right" id="popover-info">
-          <img src="/static/hkm/img/info.png"></img>
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
+            </svg>
+          </i>
         </button>
         <button class="actions__btn actions__btn--right" id="popover-cart">
-          <img src="/static/hkm/img/karry.png"></img>
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+            </svg>
+          </i>
         </button>
       </div>
     {% endif %}
@@ -68,7 +102,7 @@
           </div>
           <div class="modal-footer">
             <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" id="submit-crop" type="button" value="order">{% trans 'Submit' %}</button>
+            <button class="hkm-btn hkm-btn--default crop__submit btn btn-primary" id="submit-crop" type="button" value="order">{% trans 'Submit' %}</button>
           </div>
         </div>
       </div>
@@ -90,7 +124,7 @@
           </div>
           <div class="modal-footer">
             <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" id="submit-crop" type="button" value="download">{% trans 'Download' %}</button>
+            <button class="hkm-btn hkm-btn--default crop__submit btn btn-primary" id="submit-crop" type="button" value="download">{% trans 'Download' %}</button>
           </div>
         </div>
       </div>
@@ -130,7 +164,7 @@
           </div>
           <div class="modal-footer">
             <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="hkm-btn hkm-btn--submit crop__submit btn btn-primary" type="button" id="crop-add-submit" value="add">{% trans 'Add to collection' %}</button>
+            <button class="hkm-btn hkm-btn--default crop__submit btn btn-primary" type="button" id="crop-add-submit" value="add">{% trans 'Add to collection' %}</button>
           </div>
         </div>
       </div>

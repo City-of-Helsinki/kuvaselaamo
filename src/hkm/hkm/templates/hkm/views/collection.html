@@ -3,7 +3,7 @@
 
 {% block banner %}
 
-  <div class="page-header page-header--my-collection">
+  <div class="page-header white">
     <div class="fullsize-container container">
       <div class="banner__title">
         <h1 class="banner__h1">{{ collection.title }}</h1>
@@ -31,8 +31,8 @@
         <div class="banner__form-description">{{ collection_form.description }}
         </div>
         <input type="hidden" name="action" value="edit" />
-        <button class="banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
-        <button class="banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
+        <button class="hkm-btn hkm-btn--default banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
+        <button class="hkm-btn hkm-btn--cancel banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
       </form>
       <div class="banner-actions">
         {% if permissions.can_edit %}
@@ -65,7 +65,13 @@
               </div>
               <img class="flex-img" src="{{ record.get_preview_image_absolute_url }}"></img>
             </a>
-            <button class="grid__item-remove" data-record-id="{{ record.id }}" data-confirm="{% trans 'Are you sure you want to delete this item?' %}">X</button>
+            <button class="grid__item-remove" data-record-id="{{ record.id }}" data-confirm="{% trans 'Are you sure you want to delete this item?' %}">
+              <i class="grid__icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-remove"></use>
+                </svg>
+              </i>
+            </button>
             {% if collection.collection_type == 'favorite' %}
               <div class="grid__fav active"></div>
             {% else %}

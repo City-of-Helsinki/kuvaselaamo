@@ -30,13 +30,13 @@
 
     <div class="sidebar col-md-2">
 
-      <ul class="list-group list-group-root well" id="accordion">
+      <ul class="list-group list-group-root" id="accordion">
         <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
           <ul id="collapse-author" class="list-group panel-collapse collapse {% if facet_type == 'author_facet' %}in{% endif %}">
             {% for author in facet_result.facets.author_facet %}
-              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == author.value %}active{% endif %}" href="?search={{ search_term }}&ft=author_facet&fv={{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == author.value %}active{% endif %}" href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -45,7 +45,7 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-year">{% trans 'Year' %}</a>
           <ul id="collapse-year" class="list-group panel-collapse collapse {% if facet_type == 'main_date_str' %}in{% endif %}">
             {% for date_facet in facet_result.facets.main_date_str %}
-              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == date_facet.value %}active{% endif %}" href="?search={{ search_term }}&ft=main_date_str&fv={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == date_facet.value %}active{% endif %}" href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
             {% endfor %}
           </ul>
         </li>

@@ -4,7 +4,7 @@
 
 {% block banner %}
 
-  <div class="page-header bittersweet">
+  <div class="page-header white">
     <div class="fullsize-container container">
       <div class="banner__title">
         <h1 class="banner__h1">{% trans 'My collections' %}</h1>
@@ -25,11 +25,11 @@
             <a href="{% url 'hkm_collection' collection_id=collection.id %}">
               {% with images=collection|display_images %}
                 {% if images|length == 1 %}
-                  <div class="grid__item grid__item--collection item" style="background-image:url('{{ images.0 }}')"></div>
+                  <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
                 {% else %}
-                  <div class="sub-grid flex-images">
+                  <div class="sub-grid">
                     {% for image_url in images %}
-                      <div class="sub-grid__item item" style="background-image:url('{{ image_url }}')"></div>
+                      <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
                     {% endfor %}
                   </div>
                 {% endif %}
