@@ -308,8 +308,8 @@ class SearchView(BaseView):
   search_result = None
 
   search_term = None
-  facet_type = None
-  facet_value = None
+  author_facets = None
+  date_facets = None
   page = 1
 
   def get(self, request, *args, **kwargs):
@@ -324,16 +324,21 @@ class SearchView(BaseView):
 
   def setup(self, request, *args, **kwargs):
     self.search_term = request.GET.get('search', '')
-    self.facet_type = request.GET.get('ft', None)
-    self.facet_value = request.GET.get('fv', None)
+    self.author_facets = filter(None, request.GET.getlist('author[]', None))
+    self.date_facets = filter(None, request.GET.getlist('main_date_str[]', None))
     self.page = int(request.GET.get('page', 1))
     return True
 
   def handle_search(self, request, *args, **kwargs):
-    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'facet_type': self.facet_type,
-      'facet_value': self.facet_value, 'page': self.page}})
+    LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'author_facets': repr(self.author_facets),
+      'date_facets': repr(self.date_facets), 'page': self.page}})
     self.facet_result = self.get_facet_result(self.search_term)
-    self.search_result = self.get_search_result(self.search_term, self.facet_type, self.facet_value,
+    facets = {}
+    if self.author_facets:
+      facets['author_facet'] = self.author_facets
+    if self.date_facets:
+      facets['main_date_str'] = self.date_facets
+    self.search_result = self.get_search_result(self.search_term, facets,
         self.page, self.page_size)
 
     # calculate global index for the record, this is used to form links to search detail view
@@ -359,15 +364,14 @@ class SearchView(BaseView):
     else:
       return FINNA.get_facets(self.search_term)
 
-  def get_search_result(self, search_term, facet_type, facet_value, page, limit):
-    return FINNA.search(search_term, facet_type=facet_type,
-        facet_value=facet_value, page=page, limit=limit, detailed=self.use_detailed_query)
+  def get_search_result(self, search_term, facets, page, limit):
+    return FINNA.search(search_term, facets=facets, page=page, limit=limit, detailed=self.use_detailed_query)
 
   def get_context_data(self, **kwargs):
     context = super(SearchView, self).get_context_data(**kwargs)
     context['facet_result'] = self.facet_result
-    context['facet_type'] = self.facet_type
-    context['facet_value'] = self.facet_value
+    context['author_facets'] = self.author_facets
+    context['date_facets'] = self.date_facets
     context['search_result'] = self.search_result
     context['search_term'] = self.search_term
     return context

@@ -56,16 +56,31 @@
     <div class="article col-md-10">
 
       <div class="search-filter">
-        <div class="search-filter__item">
-          <span class="search-filter__text">{{ search_term }}</span>
-          <a href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}" class="search-filter__delete">
-            <i class="search-filter__delete-icon">
-              <svg class="svg-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
-              </svg>
-            </i>
-        </a>
-        </div>
+        {% for facet in author_facets %}
+          <div class="search-filter__item" data-facet-type="author">
+            <span class="search-filter__text">{{ facet }}</span>
+            <a href="" class="search-filter__delete">
+              <i class="search-filter__delete-icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+                </svg>
+              </i>
+          </a>
+          </div>
+        {% endfor %}
+        {% for facet in date_facets %}
+          <div class="search-filter__item" data-facet-type="date">
+            <span class="search-filter__text">{{ facet }}</span>
+            <a href="" class="search-filter__delete">
+              <i class="search-filter__delete-icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+                </svg>
+              </i>
+          </a>
+          </div>
+        {% endfor %}
+
       </div>
 
       <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">

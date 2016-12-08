@@ -46,7 +46,7 @@ class FinnaClient(object):
     LOG.debug('Got result from Finna', extra={'data': {'result_data': repr(result_data)}})
     return result_data
 
-  def search(self, search_term, facet_type=None, facet_value=None, page=1, limit=20, language='fi',
+  def search(self, search_term, facets=None, page=1, limit=20, language='fi',
       detailed=False):
     url = FinnaClient.API_ENDPOINT + 'search'
     payload = {
@@ -56,8 +56,9 @@ class FinnaClient(object):
       'limit': limit,
       'lng': language,
     }
-    if facet_type and facet_value:
-      payload['filter[]'].append(facet_type + ":" + facet_value)
+    if facets:
+      print facets
+      #payload['filter[]'].append(facet_type + ":" + facet_value)
 
     if detailed:
       payload['field[]'] = ['id', 'authors','buildings', 'formats', 'genres', 'humanReadablePublicationDates',
