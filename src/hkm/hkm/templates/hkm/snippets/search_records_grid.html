@@ -2,7 +2,7 @@
 <div class="grid__group item-slider invisible">
 {% for record in search_result.records %}
   <div class="grid__item item" data-w="" data-h="">
-    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}&ft={{ facet_type|default:"" }}&fv={{ facet_value|default:"" }}&page={{ record.index }}">
+    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}{% for facet in author_facets %}&author[]={{ facet }}{% endfor %}{% for facet in date_facets %}&main_date_str[]={{ facet }}{% endfor %}&page={{ record.index }}">
       {% if user.is_authenticated %}
         <div class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}"></div>
       {% endif %}
