@@ -302,7 +302,7 @@ class SearchView(BaseView):
   url_name = 'hkm_search'
 
   page_size = 40
-  use_detailed_query = False
+  use_detailed_query = True
 
   facet_result = None
   search_result = None

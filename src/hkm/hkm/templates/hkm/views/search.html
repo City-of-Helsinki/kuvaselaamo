@@ -30,22 +30,24 @@
 
     <div class="sidebar col-md-2">
 
-      <ul class="list-group list-group-root" id="accordion">
+      <ul class="list-group list-group-root" id="accordion" data-search="{{ search_term }}" data-author-facets="{{ author_facets }}" data-date-facets="{{ date_facets }}">
         <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
-          <ul id="collapse-author" class="list-group panel-collapse collapse {% if facet_type == 'author_facet' %}in{% endif %}">
+          <ul id="collapse-author" class="list-group panel-collapse collapse {% if author_facets %}in{% endif %}">
             {% for author in facet_result.facets.author_facet %}
-              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == author.value %}active{% endif %}" href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+              <li class="list-group__item list-group-item"><a href="#" class="list-group__link" data-author-value="{{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
+               <!-- href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}" -->
             {% endfor %}
           </ul>
         </li>
         <li class="list-group__item list-group-item">
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-year">{% trans 'Year' %}</a>
-          <ul id="collapse-year" class="list-group panel-collapse collapse {% if facet_type == 'main_date_str' %}in{% endif %}">
+          <ul id="collapse-year" class="list-group panel-collapse collapse {% if date_facets %}in{% endif %}">
             {% for date_facet in facet_result.facets.main_date_str %}
-              <li class="list-group__item list-group-item"><a class="list-group__link {% if facet_value == date_facet.value %}active{% endif %}" href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+              <li class="list-group__item list-group-item"><a href="#" class="list-group__link" data-date-value="{{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
+               <!-- href="?search={{ search_term }}&author[]={{ author.value }}&main_date_str[]={{ date_facet.value }}" -->
             {% endfor %}
           </ul>
         </li>
@@ -58,29 +60,28 @@
       <div class="search-filter">
         {% for facet in author_facets %}
           <div class="search-filter__item" data-facet-type="author">
-            <span class="search-filter__text">{{ facet }}</span>
-            <a href="" class="search-filter__delete">
+            <span class="search-filter__text" data-author-facet="{{ facet }}">{{ facet }}</span>
+            <a href="#" class="search-filter__delete" data-author-facet="{{ facet }}">
               <i class="search-filter__delete-icon">
                 <svg class="svg-icon">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
                 </svg>
               </i>
-          </a>
+            </a>
           </div>
         {% endfor %}
         {% for facet in date_facets %}
           <div class="search-filter__item" data-facet-type="date">
-            <span class="search-filter__text">{{ facet }}</span>
-            <a href="" class="search-filter__delete">
+            <span class="search-filter__text" data-date-facet="{{ facet }}">{{ facet }}</span>
+            <a href="#" class="search-filter__delete" data-date-facet="{{ facet }}">
               <i class="search-filter__delete-icon">
                 <svg class="svg-icon">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
                 </svg>
               </i>
-          </a>
+            </a>
           </div>
         {% endfor %}
-
       </div>
 
       <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
