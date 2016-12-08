@@ -57,8 +57,12 @@ class FinnaClient(object):
       'lng': language,
     }
     if facets:
-      print facets
-      #payload['filter[]'].append(facet_type + ":" + facet_value)
+      # Idea is to OR parameters within facet scope and AND facet filters with each other
+      # Like this: (Authors A OR B) AND year 1920
+      # However this code uses OR in all facets and this seems to work in desired way
+      for facet_type, facet_values in facets.iteritems():
+        for facet_value in facet_values:
+          payload['filter[]'].append('~' + facet_type + ":" + facet_value)
 
     if detailed:
       payload['field[]'] = ['id', 'authors','buildings', 'formats', 'genres', 'humanReadablePublicationDates',
