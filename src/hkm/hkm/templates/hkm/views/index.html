@@ -135,7 +135,7 @@
   <script>
     palikka.define('app.searchModal', ['jQuery', 'docReady'], function () {
       if (window.location.search.indexOf('search=true') > -1 || $('#search-modal').attr('data-open-popup') == 'True') {
-        if (!'{{ login_form.errors }}') {
+        if (!'{{ login_form.errors }}' && !'{{ sign_up_form.errors }}') {
           $('#search-modal').modal('show');
         }
       }

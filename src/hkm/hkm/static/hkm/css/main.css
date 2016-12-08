@@ -5875,6 +5875,9 @@ img {
 .form-control, .input-group-addon {
   border-radius: 0; }
 
+.form-control:focus {
+  border-color: #975379; }
+
 .back-to {
   display: block;
   position: absolute;
@@ -6122,6 +6125,9 @@ img {
 .login-modal__content {
   border-radius: 0; }
 
+.login-modal__signup-link {
+  font-family: "brownbold", sans-serif; }
+
 .login-modal__body {
   padding: 15 25px; }
   .login-modal__body .login-modal__btn {
@@ -6218,7 +6224,7 @@ img {
     background-color: transparent;
     padding: 0;
     margin-left: -1px;
-    border: solid 1px #005cab;
+    border: solid 1px #ccc;
     outline: 0;
     height: 40px;
     width: 100%; }
@@ -6233,8 +6239,9 @@ img {
   margin: 0 0 10px 0 !important; }
   .banner__form-description textarea {
     background-color: transparent;
-    border: solid 1px #005cab;
-    width: 450px; }
+    border: solid 1px #ccc;
+    width: 450px;
+    outline: 0; }
 
 @media (max-width: 544px) {
   .banner__form-title .banner__h1 {

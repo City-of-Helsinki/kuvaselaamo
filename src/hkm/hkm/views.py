@@ -59,6 +59,7 @@ class BaseView(TemplateView):
   def get_empty_forms(self, request):
     return {
       'login_form': AuthForm(),
+      'sign_up_form': django_forms.UserCreationForm(),
     }
 
   def get(self, request, *args, **kwargs):
@@ -77,6 +78,8 @@ class BaseView(TemplateView):
     action = request.POST.get('action', None)
     if action == 'login':
       return self.handle_login(request, *args, **kwargs)
+    if action == 'signup':
+      return self.handle_signup(request, *args, **kwargs)
     return self.handle_invalid_post_action(request, *args, **kwargs)
 
   def handle_login(self, request, *args, **kwargs):
@@ -87,6 +90,16 @@ class BaseView(TemplateView):
       # is to keep the query string values in place, which otherwise would be lost in redirect phase
       return self.get(request, *args, **kwargs)
     kwargs['login_form'] = form
+    return self.get(request, *args, **kwargs)
+
+  def handle_signup(self, request, *args, **kwargs):
+    form = django_forms.UserCreationForm(request.POST)
+    if form.is_valid():
+      auth_login(request, form.save())
+      # TODO migth wanna do a PRG pattern here also. Returning the rendered template directly
+      # is to keep the query string values in place, which otherwise would be lost in redirect phase
+      return self.get(request, *args, **kwargs)
+    kwargs['sign_up_form'] = form
     return self.get(request, *args, **kwargs)
 
 

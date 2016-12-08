@@ -19,6 +19,7 @@ palikka
 .define('app.bootstrap', ['jQuery', 'docReady'], function () {
 
   $('#login-btn').on('click', hideModal);
+  $('#signup-btn').on('click', hideModal);
   $('#account-dropdown').on('click', hideModal);
   $('#nav-collapse-btn').on('click', hideModal);
 

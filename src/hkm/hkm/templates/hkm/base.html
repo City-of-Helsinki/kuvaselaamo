@@ -117,7 +117,19 @@
           <button class="hkm-btn hkm-btn--default login-modal__btn btn btn-default">{% trans 'Facebook login' %}</button>
           <button class="hkm-btn hkm-btn--default login-modal__btn btn btn-default">{% trans 'Google login' %}</button>
           <h4>{% trans 'Login with credentials' %}</h4>
-          {% include 'registration/login.html' %}
+          {% include 'hkm/snippets/login.html' %}
+          <a href="#" id="signup-btn" class="login-modal__signup-link" data-toggle="modal" data-target="#sign-up">{% trans 'Sign up' %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-modal modal fade {% if sign_up_form.errors %}error{% endif %}" id="sign-up" tabindex="-1" role="dialog">
+    <div class="login-modal__dialog modal-dialog modal-sm" role="document">
+      <div class="login-modal__content modal-content">
+        <div class="login-modal__body modal-body">
+          <h4>{% trans 'Sign up' %}</h4>
+          {% include 'hkm/snippets/signup.html' %}
         </div>
       </div>
     </div>

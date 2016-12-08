@@ -17,6 +17,9 @@ img {
 .form-control, .input-group-addon {
   border-radius: 0;
 }
+.form-control:focus {
+  border-color: $color-strikemaster;
+}
 
 .back-to {
   display: block;
@@ -316,6 +319,9 @@ img {
 .login-modal__content {
   border-radius: 0;
 }
+.login-modal__signup-link {
+  font-family: $font-brownbold;
+}
 .login-modal__body {
   padding: 15 25px;
   .login-modal__btn {
@@ -418,7 +424,7 @@ img {
     background-color: transparent;
     padding: 0;
     margin-left: -1px;
-    border: solid 1px $color-funblue;
+    border: solid 1px #ccc;
     outline: 0;
     height: 40px;
     width: 100%;
@@ -435,8 +441,9 @@ img {
   margin: 0 0 10px 0 !important;
   textarea {
     background-color: transparent;
-    border: solid 1px $color-funblue;
+    border: solid 1px #ccc;
     width: 450px;
+    outline: 0;
   }
 }
 @media (max-width: 544px) {

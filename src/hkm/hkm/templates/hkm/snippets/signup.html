@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<form method="POST">
+  {% if sign_up_form.non_field_errors %}
+    <ul>
+      {% for error in sign_up_form.non_field_errors %}
+       <li>{{ error }}<li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% csrf_token %}
+  {% include 'hkm/snippets/form_fields.html' with form=sign_up_form %}
+  <input type="hidden" name="action" value="signup" />
+  <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Sign up' %}</button>
+</form>
