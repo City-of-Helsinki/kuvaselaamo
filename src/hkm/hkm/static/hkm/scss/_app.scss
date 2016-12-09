@@ -23,14 +23,27 @@ img {
 
 .back-to {
   display: block;
+  float: left;
   position: absolute;
   top: 60px;
   left: 0;
   z-index: 500;
-  padding: 10px;
+  padding: 10px 6px;
   a {
     color: $color-white;
   }
+}
+.back-to__text {
+  display: block;
+  float: left;
+  margin-left: 5px;
+}
+.back-to__icon {
+  color: $color-white;
+  display: block;
+  float: left;
+  height: 17px;
+  width: 17px;
 }
 
 /* Colors */
@@ -321,6 +334,7 @@ img {
 }
 .login-modal__signup-link {
   font-family: $font-brownbold;
+  color: $color-funblue;
 }
 .login-modal__body {
   padding: 15 25px;
@@ -410,7 +424,7 @@ img {
 }
 .banner__h1 {
   display: block;
-  font-size: 40px;
+  font-size: 3em;
   line-height: 40px;
   margin: 0;
   font-family: 'goviniusbold';
@@ -446,7 +460,10 @@ img {
     outline: 0;
   }
 }
-@media (max-width: 544px) {
+@media (max-width: 400px) {
+  .banner__h1 {
+    font-size: 10vw;
+  }
   .banner__form-title {
     .banner__h1 {
       width: calc(100% - 50px);
@@ -1090,7 +1107,7 @@ div.grid__fav.active {
   padding: 5px;
   display: block;
   height: 100%;
-  width: 100%;
+  // width: 100%;
   text-align: left;
 }
 .popover-list__btn:hover {

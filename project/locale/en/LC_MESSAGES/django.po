@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-07 16:35+0200\n"
+"POT-Creation-Date: 2016-12-09 09:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,7 +286,7 @@ msgid "Logout"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:107
-#: hkm/hkm/templates/registration/login.html:14
+#: hkm/hkm/templates/hkm/snippets/login.html:14
 msgid "Log in"
 msgstr ""
 
@@ -300,6 +300,11 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:119
 msgid "Login with credentials"
+msgstr ""
+
+#: hkm/hkm/templates/hkm/base.html:121 hkm/hkm/templates/hkm/base.html:131
+#: hkm/hkm/templates/hkm/snippets/signup.html:14
+msgid "Sign up"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/base_browse.html:17
@@ -419,7 +424,7 @@ msgid "Search images"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:110
-msgid "Explore"
+msgid "Explore collections"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/my_collections.html:10
@@ -430,58 +435,57 @@ msgstr ""
 msgid "Featured collections"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/public_collections.html:64
-#: hkm/hkm/templates/hkm/views/record.html:59
-msgid "No description"
-msgstr ""
-
 #: hkm/hkm/templates/hkm/views/record.html:9
 msgid "Image details"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:22
+#: hkm/hkm/templates/hkm/views/record.html:21
 #: hkm/hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:27
+#: hkm/hkm/templates/hkm/views/record.html:26
 msgid "Identification information"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:28
+#: hkm/hkm/templates/hkm/views/record.html:27
 msgid "Image type:"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:29
+#: hkm/hkm/templates/hkm/views/record.html:28
 msgid "Image ID:"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:31
+#: hkm/hkm/templates/hkm/views/record.html:30
 msgid "Creation information"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:32
+#: hkm/hkm/templates/hkm/views/record.html:31
 msgid "Photographer:"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:33
+#: hkm/hkm/templates/hkm/views/record.html:32
 msgid "Image pick-up year:"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:34
+#: hkm/hkm/templates/hkm/views/record.html:33
 msgid "Property information"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:35
+#: hkm/hkm/templates/hkm/views/record.html:34
 msgid "Measurements:"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:36
+#: hkm/hkm/templates/hkm/views/record.html:35
 msgid "License information"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/record.html:40
+#: hkm/hkm/templates/hkm/views/record.html:39
 msgid "Related collections"
+msgstr ""
+
+#: hkm/hkm/templates/hkm/views/record.html:58
+msgid "No description"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/search.html:10
@@ -496,30 +500,30 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/search.html:68
+#: hkm/hkm/templates/hkm/views/search.html:95
 msgid "This image is probably not what you are looking for"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/search.html:70
+#: hkm/hkm/templates/hkm/views/search.html:97
 msgid "It's possible, that something has been happening in the service."
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/search.html:71
+#: hkm/hkm/templates/hkm/views/search.html:98
 msgid "You might have written the address wrong."
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/search.html:72
+#: hkm/hkm/templates/hkm/views/search.html:99
 msgid "Or the stars are just misordered."
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/search.html:74
+#: hkm/hkm/templates/hkm/views/search.html:101
 msgid "Hopefully a new search will fix the situation."
 msgstr ""
 
-#: hkm/hkm/views.py:590
+#: hkm/hkm/views.py:607
 msgid "Favorites"
 msgstr ""
 
-#: hkm/hkm/views.py:590
+#: hkm/hkm/views.py:607
 msgid "Your favorite images are collected here"
 msgstr ""

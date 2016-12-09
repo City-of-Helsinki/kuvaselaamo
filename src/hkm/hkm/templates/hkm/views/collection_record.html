@@ -15,6 +15,17 @@
 
 {% block content %}
 
+  <div class="back-to">
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+      <i class="back-to__icon">
+        <svg class="svg-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
+        </svg>
+      </i>
+      <span class="back-to__text">{% trans 'Back to list view' %}</span>
+    </a>
+  </div>
+
   <div class="image-viewer">
     <div id="zoomable-image-container" class="image-viewer__container">
       <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.get_full_res_image_absolute_url }}" src="{{ record.get_preview_image_absolute_url }}"></img>
