@@ -840,11 +840,8 @@ img {
   width: 40px;
   height: 40px;
   border: 0;
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
+  color: $color-white;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url('/static/hkm/img/sydan_valkoinen.png');
 }
 div.grid__fav {
   display: none;
@@ -853,7 +850,7 @@ div.grid__fav.active {
   display: block;
 }
 .grid__fav:hover, .grid__fav.active, div.grid__fav {
-  background-image: url('/static/hkm/img/sydan_oranssi.png');
+  color: $color-bittersweet;
 }
 
 /* Search */
