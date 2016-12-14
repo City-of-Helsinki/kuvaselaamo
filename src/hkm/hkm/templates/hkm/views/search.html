@@ -90,16 +90,7 @@
 
     {% else %}
 
-      <div class="status-page">
-        <img class="status-page__image" src="/static/hkm/img/no-results-image.jpg"></img>
-        <h1 class="status-page__title">{% trans 'This image is probably not what you are looking for' %}</h1>
-        <ul class="status-page__list">
-          <li>{% trans "It's possible, that something has been happening in the service." %}</li>
-          <li>{% trans "You might have written the address wrong." %}</li>
-          <li>{% trans "Or the stars are just misordered." %}</li>
-        </ul>
-        <p class="status-page__paragraph">{% trans 'Hopefully a new search will fix the situation.' %}</p>
-      </div>
+      {% include 'hkm/snippets/not_responding.html' %}
 
     {% endif %}
 

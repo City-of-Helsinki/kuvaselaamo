@@ -155,15 +155,18 @@ class Record(OrderedModel, BaseModel):
       return u'%s%s' % (settings.MY_DOMAIN, self.edited_full_res_image.url)
     else:
       record_data = self.get_details()
-      record_url = record_data['rawData']['thumbnail']
-      cache_key = '%s-record-preview-url' % record_url
-      full_res_url = DEFAULT_CACHE.get(cache_key, None)
-      if full_res_url == None:
-        full_res_url = HKM.get_full_res_image_url(record_data['rawData']['thumbnail'])
-        DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
+      if record_data:
+        record_url = record_data['rawData']['thumbnail']
+        cache_key = '%s-record-preview-url' % record_url
+        full_res_url = DEFAULT_CACHE.get(cache_key, None)
+        if full_res_url == None:
+          full_res_url = HKM.get_full_res_image_url(record_data['rawData']['thumbnail'])
+          DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
+        else:
+          LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
+        return full_res_url
       else:
-        LOG.debug('Got record full res url from cache', extra={'data': {'full_res_url': repr(full_res_url)}})
-      return full_res_url
+        LOG.debug('Could not get image from Finna API')
 
   def get_preview_image_absolute_url(self):
     if self.edited_preview_image:

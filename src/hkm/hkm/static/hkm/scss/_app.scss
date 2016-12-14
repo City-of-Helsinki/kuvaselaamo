@@ -734,6 +734,9 @@ img {
   overflow: hidden;
   position: relative;
 }
+.grid__item--featured {
+  height: 0px;
+}
 .grid__item--collection {
   float: left;
   margin: 0;

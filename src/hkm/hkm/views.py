@@ -356,20 +356,21 @@ class SearchView(BaseView):
 
     # calculate global index for the record, this is used to form links to search detail view
     # which is technically same view as this, it only shows one image per page
-    if not self.search_result['resultCount'] == 0:
-      i = 1 # record's index in current page
-      for record in self.search_result['records']:
-        p = self.search_result['page'] - 1 # zero indexed page
-        record['index'] = p * self.search_result['limit'] + i
-        i += 1
-        # Check also if this record is in user's favorite collection
-        if request.user.is_authenticated():
-          try:
-            favorites_collection = Collection.objects.get(owner=request.user, collection_type=Collection.TYPE_FAVORITE)
-          except Collection.DoesNotExist:
-            pass
-          else:
-            record['is_favorite'] = favorites_collection.records.filter(record_id=record['id']).exists()
+    if self.search_result:
+      if not self.search_result['resultCount'] == 0:
+        i = 1 # record's index in current page
+        for record in self.search_result['records']:
+          p = self.search_result['page'] - 1 # zero indexed page
+          record['index'] = p * self.search_result['limit'] + i
+          i += 1
+          # Check also if this record is in user's favorite collection
+          if request.user.is_authenticated():
+            try:
+              favorites_collection = Collection.objects.get(owner=request.user, collection_type=Collection.TYPE_FAVORITE)
+            except Collection.DoesNotExist:
+              pass
+            else:
+              record['is_favorite'] = favorites_collection.records.filter(record_id=record['id']).exists()
 
   def get_facet_result(self, search_term):
     if self.request.is_ajax():
@@ -438,9 +439,10 @@ class SearchRecordDetailView(SearchView):
 
   def get_context_data(self, **kwargs):
     context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
-    record = self.search_result['records'][0]
-    record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
-    context['record'] = record
+    if self.search_result:
+      record = self.search_result['records'][0]
+      record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
+      context['record'] = record
     if self.request.user.is_authenticated():
       context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
     else:
@@ -474,8 +476,15 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
   template_name = 'hkm/views/record.html'
   url_name = 'hkm_record'
 
+  # def get(self, request, *args, **kwargs):
+  #   if not self.record:
+  #     return http.HttpResponse()
+  #   return super(FinnaRecordDetailView, self).get(request, *args, **kwargs)
+
   def get_context_data(self, **kwargs):
     context = super(FinnaRecordDetailView, self).get_context_data(**kwargs)
+    if not self.record:
+      return context
     related_collections_ids = Record.objects.filter(record_id=self.record['id']).values_list('collection', flat=True)
     related_collections = Collection.objects.user_can_view(self.request.user).filter(id__in=related_collections_ids).distinct()
     context['related_collections'] = related_collections

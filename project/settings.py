@@ -145,6 +145,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 HKM_MY_DOMAIN = 'http://localhost:8009'
+HKM_MY_DOMAIN = 'http://10.0.1.201:8009'
 HKM_FEEDBACK_NOTIFICATION_EMAILS = [
     'dummy.address@tld.fi',
 ]
