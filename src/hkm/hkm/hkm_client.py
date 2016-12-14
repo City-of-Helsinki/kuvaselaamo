@@ -29,10 +29,17 @@ class HKMClient(object):
     url = urlparse.urlunparse(url_components)
     try:
       r = requests.head(url, timeout=self.timeout)
-      r.raise_for_status()
     except requests.exceptions.RequestException:
-      LOG.exception('Failed to communicate with HKM image server')
+      LOG.error('Failed to communicate with HKM image server', exc_info=True)
       return None
+    else:
+      try:
+        r.raise_for_status()
+        # raise requests.exceptions.HTTPError()
+      except requests.exceptions.HTTPError:
+        LOG.error('Failed to communicate with HKM image server', exc_info=True,
+            extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
+        return None
 
     LOG.debug('Got result from HKM image server',
         extra={'data': {'url': url, 'result_headers': repr(r.headers)}})

@@ -5878,29 +5878,6 @@ img {
 .form-control:focus {
   border-color: #975379; }
 
-.back-to {
-  display: block;
-  float: left;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  z-index: 500;
-  padding: 10px 6px; }
-  .back-to a {
-    color: #fff; }
-
-.back-to__text {
-  display: block;
-  float: left;
-  margin-left: 5px; }
-
-.back-to__icon {
-  color: #fff;
-  display: block;
-  float: left;
-  height: 17px;
-  width: 17px; }
-
 /* Colors */
 .bittersweet {
   background-color: #ff7862; }
@@ -6001,7 +5978,7 @@ img {
 
 /* Navigation */
 .navbar {
-  z-index: 500;
+  z-index: 600;
   margin: 0;
   height: 60px;
   border: 0;
@@ -6052,13 +6029,13 @@ img {
     width: 100%;
     margin: 0;
     position: relative;
-    z-index: 10; }
+    z-index: 600; }
     .navbar-nav li {
       display: block;
       width: 100%; }
   .viewer-view .navbar-nav {
     background-color: rgba(33, 33, 33, 0.8); }
-  .nav_collection .navbar-nav {
+  .browse-view .navbar-nav {
     background-color: #fff; } }
 
 .navbar-collapse {
@@ -6127,6 +6104,29 @@ img {
     background-color: #fff; }
     .nav_collection .dropdown-menu a, .nav_collection .dropdown-menu a:hover {
       color: #975379; }
+
+.back-to {
+  display: block;
+  float: left;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 500;
+  padding: 10px 6px; }
+  .back-to a {
+    color: #fff; }
+
+.back-to__text {
+  display: block;
+  float: left;
+  margin-left: 5px; }
+
+.back-to__icon {
+  color: #fff;
+  display: block;
+  float: left;
+  height: 17px;
+  width: 17px; }
 
 /* Login */
 .login-modal__dialog {
@@ -6600,7 +6600,7 @@ div.grid__fav {
 div.grid__fav.active {
   display: block; }
 
-.grid__fav:hover, .grid__fav.active, div.grid__fav {
+.grid__fav.active, div.grid__fav {
   color: #ff7862; }
 
 /* Search */

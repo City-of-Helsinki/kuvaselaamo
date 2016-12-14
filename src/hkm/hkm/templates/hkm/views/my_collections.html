@@ -18,6 +18,10 @@
 
   <div class="fullsize-container container">
 
+    {% if not collections %}
+      <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add images' %}</a>
+    {% endif %}
+
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible" data-grid-type="collection">
         {% for collection in collections %}
@@ -36,7 +40,7 @@
               {% endwith %}
               <div class="grid__meta">
                 <span class="grid__meta--title">{{ collection.title }}</span>
-                <span class="grid__meta--other">{{ collection.description }}</span>
+                <span class="grid__meta--other">{{ collection.description|default:"" }}</span>
               </div>
             </a>
           </div>

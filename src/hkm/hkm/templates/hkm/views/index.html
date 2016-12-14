@@ -15,15 +15,11 @@
 
 {% block content %}
 
-  {% if collection.show_in_landing_page %}
-    <div class="image-viewer">
-      <div id="zoomable-image-container" class="image-viewer__container">
-        <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.get_full_res_image_absolute_url }}" src="{{ record.get_preview_image_absolute_url }}"></img>
-      </div>
+  <div class="image-viewer">
+    <div id="zoomable-image-container" class="image-viewer__container">
+      <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.get_full_res_image_absolute_url }}" src="{{ record.get_preview_image_absolute_url }}"></img>
     </div>
-  {% else %}
-    <div class="image-viewer" style="background-image:url('/static/hkm/img/city.jpg');"></div>
-  {% endif %}
+  </div>
 
 {% endblock %}
 

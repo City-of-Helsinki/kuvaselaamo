@@ -186,7 +186,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    // trigger: 'focus',
+    trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-info-content').html();
@@ -211,7 +211,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    // trigger: 'focus',
+    trigger: 'focus',
     html: true,
     content: function() {
       return $('#popover-add-content').html();
@@ -427,18 +427,34 @@ palikka
   function handleImageLoaded() {
     var w = this.naturalWidth;
     var h = this.naturalHeight;
+    var ar = w / h;
     var url = this.src;
     var fullResUrl = this.getAttribute('data-full-res-url');
+
+    if ($(window).width() >= 1024) {
+      h += $(window).height() * 2;
+      w = h * ar;
+    }
+    else if (w > h) {
+      w += $(window).width() * 1.862;
+      h = w / ar;
+    }
+    else {
+      h += $(window).height();
+      w = h * ar;
+    }
+
     zoomInit(w, h, url, fullResUrl);
   }
 
   function zoomInit(w, h, url, fullResUrl) {
 
     var imageContainer = L.map('zoomable-image-container', {
-      minZoom: 4,
-      maxZoom: 6,
-      center: [0, 0],
-      zoom: 5,
+      center: [500, 500],
+      minZoom: 1,
+      maxZoom: 5,
+      zoom: 2,
+      crs: L.CRS.Simple,
     });
     var bottomLeft = imageContainer.unproject([0, h], imageContainer.getMaxZoom()-1);
     var topRight = imageContainer.unproject([w, 0], imageContainer.getMaxZoom()-1);

@@ -46,25 +46,27 @@
     <div class="grid flex-images">
       <div class="grid__group item-slider invisible">
         {% for collection in collections %}
-          <div class="grid__item item" data-w="550" data-h="400">
-            <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-              {% with images=collection|display_images %}
-                {% if images|length == 1 %}
-                  <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
-                {% else %}
-                  <div class="sub-grid">
-                    {% for image_url in images %}
-                      <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              {% endwith %}
-              <div class="grid__meta">
-                <span class="grid__meta--title">{{ collection.title }}</span>
-                <span class="grid__meta--other">{{ collection.description }}</span>
-              </div>
-            </a>
-          </div>
+          {% if collection.records.all %}
+            <div class="grid__item item" data-w="550" data-h="400">
+              <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+                {% with images=collection|display_images %}
+                  {% if images|length == 1 %}
+                    <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
+                  {% else %}
+                    <div class="sub-grid">
+                      {% for image_url in images %}
+                        <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+                <div class="grid__meta">
+                  <span class="grid__meta--title">{{ collection.title }}</span>
+                  <span class="grid__meta--other">{{ collection.description }}</span>
+                </div>
+              </a>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
