@@ -36,7 +36,7 @@ SENTRY_SITE = ''
 #TODO Email abckend settings
 
 # TODO
-HKM_MY_DOMAIN = ''
+HKM_MY_DOMAIN = 'http://kuvaselaamo.haltudemo.fi/'
 HKM_FEEDBACK_NOTIFICATION_EMAILS = [
     '',
 ]
