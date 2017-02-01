@@ -5861,7 +5861,7 @@ body {
   font-family: "brownlight", sans-serif; }
 
 body.viewer-view {
-  background-color: #fff; }
+  background-color: #212121; }
 
 body.browse-view {
   background-color: #fff; }
@@ -5880,7 +5880,7 @@ img {
 
 /* Colors */
 .bittersweet {
-  background-color: #fff; }
+  background-color: #ff7862; }
 
 .strikemaster {
   background-color: #975379; }
@@ -5891,7 +5891,7 @@ img {
 .white {
   background-color: #fff; }
   .white * {
-    color: #F6A04D; }
+    color: #005cab; }
 
 /* Buttons */
 .btn {
@@ -6000,8 +6000,7 @@ img {
     .navbar-nav li a {
       padding: 0;
       display: inline-block;
-      line-height: 60px;
-      font-family: "brownbold", sans-serif !important; }
+      line-height: 60px; }
   .navbar-nav li > a:hover, .navbar-nav li > a:focus {
     background-color: transparent;
     text-decoration: underline; }
@@ -6022,13 +6021,10 @@ img {
     background-color: transparent !important;
     border-color: transparent; }
 
-.icon-bar {
-  background-color: #00C281 !important; }
-
 @media (max-width: 767px) {
   .navbar-nav {
     text-align: center;
-    background: #00C281;
+    background: #000;
     float: left;
     width: 100%;
     margin: 0;
@@ -6038,9 +6034,7 @@ img {
       display: block;
       width: 100%; }
   .viewer-view .navbar-nav {
-    background-color: #00C281; }
-  .viewer-view .navbar-nav li a {
-    color: #fff; }
+    background-color: rgba(33, 33, 33, 0.8); }
   .browse-view .navbar-nav {
     background-color: #fff; } }
 
@@ -6082,34 +6076,34 @@ img {
   line-height: 64px; }
 
 .nav_viewer {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: solid 1px #00C281;
-  color: #00C281; }
+  background-color: rgba(33, 33, 33, 0.8);
+  border-bottom: solid 1px #ff7862;
+  color: #fff; }
   .nav_viewer a {
-    color: #00C281; }
+    color: #fff; }
   .nav_viewer .navbar-toggle .icon-bar {
     background: #fff; }
   .nav_viewer .brand-img {
     background-image: url("/static/hkm/img/h_sydan_valk.png"); }
   .nav_viewer .dropdown-menu {
-    background-color: #00C281; }
+    background-color: rgba(33, 33, 33, 0.8); }
     .nav_viewer .dropdown-menu a, .nav_viewer .dropdown-menu a:hover {
       color: #fff; }
 
 .nav_collection {
   background: #fff;
-  border-bottom: solid 1px #00C281;
-  color: #00C281; }
+  border-bottom: solid 1px #975379;
+  color: #975379; }
   .nav_collection a {
-    color: #00C281; }
+    color: #975379; }
   .nav_collection .navbar-toggle .icon-bar {
-    background: #00C281; }
+    background: #975379; }
   .nav_collection .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
   .nav_collection .dropdown-menu {
-    background-color: #00C281; }
+    background-color: #fff; }
     .nav_collection .dropdown-menu a, .nav_collection .dropdown-menu a:hover {
-      color: #fff !important; }
+      color: #975379; }
 
 .back-to {
   display: block;
@@ -6168,7 +6162,7 @@ img {
 
 /* Main */
 .image-viewer {
-  background-color: #fff !important;
+  background-color: #212121 !important;
   position: absolute;
   left: 0;
   top: 0;
@@ -6214,7 +6208,7 @@ img {
 
 .page-header {
   display: block;
-  color: #F6A04D;
+  color: #fff;
   border: 0;
   margin: 0 0 0 0;
   padding: 30px 0; }
@@ -6465,7 +6459,7 @@ img {
     font-family: "brownlight", sans-serif;
     font-size: 13px; }
   .sidebar .list-group__link.active {
-    color: #00C281;
+    color: #975379;
     text-decoration: underline; }
 
 .article {
@@ -6487,11 +6481,6 @@ img {
 
 .record-meta__paragraph {
   font-size: 17px; }
-
-#order-preview__image {
-  height: auto;
-  width: 100%;
-  padding: 0; }
 
 /* Grid */
 .grid {
@@ -6615,7 +6604,7 @@ div.grid__fav.active {
   display: block; }
 
 .grid__fav.active, div.grid__fav {
-  color: #F6A04D; }
+  color: #ff7862; }
 
 /* Search */
 .search-modal,
@@ -6625,7 +6614,7 @@ div.grid__fav.active {
 
 .search-modal__dialog {
   position: absolute;
-  bottom: 0%;
+  top: 50%;
   width: 100%;
   margin: -90px 0 0 0; }
 
@@ -6641,9 +6630,6 @@ div.grid__fav.active {
   height: 140px;
   padding: 0; }
 
-.modal-backdrop {
-  background-color: #fff !important; }
-
 .search-modal__table {
   width: 100%; }
 
@@ -6651,10 +6637,10 @@ div.grid__fav.active {
   white-space: nowrap; }
 
 .search-modal__row--top .search-modal__cell {
-  background-color: #fff; }
+  background-color: #f1856b; }
 
 .search-modal__row--bottom .search-modal__cell {
-  background-color: #00C281; }
+  background-color: #975379; }
 
 .search-modal__cell {
   white-space: nowrap;
@@ -6672,7 +6658,7 @@ div.grid__fav.active {
 .search-modal__close:hover,
 .search-modal__close:active,
 .search-modal__close:hover:active {
-  color: #F6A04D;
+  color: #fff;
   position: absolute;
   right: 0;
   height: 35px;
@@ -6682,7 +6668,7 @@ div.grid__fav.active {
   border: 0; }
 
 .search-modal__close:hover {
-  color: #F5C7B8; }
+  color: #212121; }
 
 .search-filter {
   padding: 4px;
@@ -6690,7 +6676,7 @@ div.grid__fav.active {
 
 .search-filter__item {
   display: inline-block;
-  border: solid 1px #F6A04D;
+  border: solid 1px #ff7862;
   padding: 6px 8px;
   background-color: #fff;
   font-family: "falkmanbold", sans-serif; }
@@ -6703,7 +6689,7 @@ div.grid__fav.active {
   padding: 0;
   background-color: transparent;
   margin: 0 0 0 8px;
-  color: #F6A04D;
+  color: #ff7862;
   border: 0;
   height: 19px;
   width: 19px; }
@@ -6758,25 +6744,25 @@ div.grid__fav.active {
   width: 100%; }
 
 .search-form__field {
-  font-family: "brownbold", sans-serif;
-  font-size: 18px;
-  color: #F6A04D !important;
+  font-family: "falkmanbold", sans-serif;
   padding: 0 15px;
   width: 100%;
   height: 40px;
-  border: solid 2px #F6A04D;
+  border: solid 1px #975379;
   border-radius: 20px; }
 
 .search-form__field:focus {
-  background-color: #F6A04D;
-  border: solid 1px #F6A04D;
-  color: #fff !important; }
+  outline-color: #4D90FE;
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+  border: solid 1px #975379; }
 
 .search-form__btn,
 .search-form__btn:hover {
   background-color: #fff;
   height: 40px;
-  border: solid 2px #F6A04D;
+  border: solid 1px #975379;
   border-left: 0;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px; }

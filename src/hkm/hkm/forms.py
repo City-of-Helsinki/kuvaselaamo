@@ -3,7 +3,7 @@
 
 import logging
 from django import forms
-from hkm.models import Collection, Feedback
+from hkm.models import Collection, Feedback, ProductOrder
 
 LOG = logging.getLogger(__name__)
 
@@ -38,5 +38,17 @@ class FeedbackForm(forms.ModelForm):
   class Meta:
     model = Feedback
     fields = ['content', 'full_name', 'email']
+
+
+class OrderProductForm(forms.ModelForm):
+  class Meta:
+    model = ProductOrder
+    fields = ['amount']
+
+
+class OrderContactInformationForm(forms.ModelForm):
+  class Meta:
+    model = ProductOrder
+    fields = ['first_name', 'last_name', 'email', 'phone', 'street_address', 'postal_code', 'city']
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

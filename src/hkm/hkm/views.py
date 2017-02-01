@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib.auth import login as auth_login
+from django.forms.models import model_to_dict
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, Record, TmpImage, ProductOrder
@@ -578,18 +579,84 @@ class BaseOrderView(BaseView):
 
 
 class OrderProductView(BaseOrderView):
-  template_name = 'hkm/views/order_product.html'
+  template_name = 'hkm/views/order.html'
   url_name = 'hkm_order_product'
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'order-product':
+      return self.handle_order_product(request, *args, **kwargs)
+    return super(OrderProductView, self).post(request, *args, **kwargs)
+
+  def handle_order_product(self, request, *args, **kwargs):
+    form = forms.OrderProductForm(request.POST, prefix='order-product-form', instance=self.order)
+    if form.is_valid():
+      order = form.save()
+      return redirect(reverse('hkm_order_contact_information', kwargs={'order_id': self.order.id}))
+    kwargs['order_product_form'] = form
+    return self.get(request, *args, **kwargs)
+
+  def get_empty_forms(self, request):
+    context_forms = super(OrderProductView, self).get_empty_forms(request)
+    context_forms['order_product_form'] = forms.OrderProductForm(prefix='order-product-form', instance=self.order)
+    return context_forms
+
+  def get_context_data(self, **kwargs):
+    context = super(OrderProductView, self).get_context_data(**kwargs)
+    if self.order.record_finna_id:
+      record_data = FINNA.get_record(self.order.record_finna_id)
+      if record_data:
+        context['record'] = record_data['records'][0]
+        context['record']['full_res_url'] = HKM.get_full_res_image_url(context['record']['rawData']['thumbnail'])
+    return context
 
 
 class OrderContactInformationView(BaseOrderView):
   template_name = 'hkm/views/order_contact_information.html'
   url_name = 'hkm_order_contact_information'
+  
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'order-contact-info':
+      return self.handle_order_contact_info(request, *args, **kwargs)
+    return super(OrderContactInformationView, self).post(request, *args, **kwargs)
+
+  def handle_order_contact_info(self, request, *args, **kwargs):
+    form = forms.OrderContactInformationForm(request.POST, prefix='order-contact-information-form', instance=self.order)
+    if form.is_valid():
+      order = form.save()
+      return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.id}))
+    kwargs['order_contact_information_form'] = form
+    return self.get(request, *args, **kwargs)
+
+  def get_empty_forms(self, request):
+    context_forms = super(OrderContactInformationView, self).get_empty_forms(request)
+    context_forms['order_contact_information_form'] = forms.OrderContactInformationForm(prefix='order-contact-form', instance=self.order)
+    return context_forms
+
+  def get_context_data(self, **kwargs):
+    context = super(OrderContactInformationView, self).get_context_data(**kwargs)
+    if self.order.record_finna_id:
+      record_data = FINNA.get_record(self.order.record_finna_id)
+      if record_data:
+        context['record'] = record_data['records'][0]
+        context['record']['full_res_url'] = HKM.get_full_res_image_url(context['record']['rawData']['thumbnail'])
+    return context
 
 
 class OrderSummaryView(BaseOrderView):
   template_name = 'hkm/views/order_summary.html'
   url_name = 'hkm_order_summary'
+
+  def get_context_data(self, **kwargs):
+    context = super(OrderSummaryView, self).get_context_data(**kwargs)
+    if self.order.record_finna_id:
+      record_data = FINNA.get_record(self.order.record_finna_id)
+      if record_data:
+        context['record'] = record_data['records'][0]
+        context['record']['full_res_url'] = HKM.get_full_res_image_url(context['record']['rawData']['thumbnail'])
+        context['orderSummary'] = model_to_dict(self.order)
+    return context
 
 
 class LanguageView(RedirectView):

@@ -276,6 +276,39 @@ palikka
     cropper = new Cropper(image, options);
   }
 
+  // if order preview image found in document, initialize a cropper
+  var orderPreviewImage = document.getElementById('order-preview__image');
+  if (orderPreviewImage) {
+    url = orderPreviewImage.getAttribute('data-img-url');
+    image = orderPreviewImage;
+    image.src=url;
+    var aspectLandscape = 1.414;
+    var aspectPortrait = 0.707;
+    options.aspectRatio = aspectLandscape;
+    cropperInit();
+
+    $('#paper-landscape').click(()=>{
+      if (options.aspectRatio !== aspectLandscape) {
+        options.aspectRatio = aspectLandscape;
+        console.log('aspect ratio changed to landscape');
+        // Restart
+        cropper.destroy();
+        cropper = new Cropper(image, options);
+      }
+    }); 
+    $('#paper-portrait').click(()=>{
+      if (options.aspectRatio !== aspectPortrait) {
+        options.aspectRatio = aspectPortrait;
+        console.log('aspect ratio changed to portrait');
+        // Restart
+        cropper.destroy();
+        cropper = new Cropper(image, options);
+      }
+    }); 
+  }
+
+
+  // modal related cropper stuff begins here
   $('.my-modal--crop').on('shown.bs.modal', function() {
     if (image.complete && image.naturalHeight !== 0) {
       cropperInit();
