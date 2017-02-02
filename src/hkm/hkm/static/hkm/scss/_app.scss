@@ -220,7 +220,10 @@ img {
   }
   .browse-view {
     .navbar-nav {
-      background-color: $color-theme;
+      background-color: $color-hkm-green;
+    }
+    .navbar-nav li a {
+      color: $color-white;
     }
   }
 
@@ -264,19 +267,20 @@ img {
   float: left;
   height: 60px;
   line-height: 64px;
+  color: $color-hkm-green !important;
 }
 .nav_viewer {
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom: solid 1px $color-hkm-green;
   color: $color-hkm-green;
   a {
-    color: $color-hkm-green;
+    color: $color-hkm-blue;
   }
   .navbar-toggle .icon-bar {
-    background: $color-theme;
+    background: $color-hkm-green;
   }
   .brand-img {
-    background-image: url("/static/hkm/img/h_sydan_valk.png");
+    background-image: url("/static/hkm/img/h_sydan_violetti.png");
   }
   .dropdown-menu {
     background-color: $color-hkm-green;
@@ -290,7 +294,7 @@ img {
   border-bottom: solid 1px $color-hkm-green;
   color: $color-hkm-green;
   a {
-    color: $color-hkm-green;
+    color: $color-hkm-blue;
   }
   .navbar-toggle .icon-bar {
     background: $color-hkm-green;
@@ -599,7 +603,7 @@ img {
   border: 0;
   float: right;
   outline: 0;
-  background-color: $color-viewer-theme;
+  background-color: $color-hkm-blue;
   color: $color-white;
 }
 .actions__btn:active,

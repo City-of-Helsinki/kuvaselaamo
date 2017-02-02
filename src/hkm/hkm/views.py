@@ -631,7 +631,7 @@ class OrderContactInformationView(BaseOrderView):
 
   def get_empty_forms(self, request):
     context_forms = super(OrderContactInformationView, self).get_empty_forms(request)
-    context_forms['order_contact_information_form'] = forms.OrderContactInformationForm(prefix='order-contact-form', instance=self.order)
+    context_forms['order_contact_information_form'] = forms.OrderContactInformationForm(prefix='order-contact-information-form', instance=self.order)
     return context_forms
 
   def get_context_data(self, **kwargs):

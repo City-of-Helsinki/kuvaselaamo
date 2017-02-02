@@ -5891,7 +5891,7 @@ img {
 .white {
   background-color: #fff; }
   .white * {
-    color: #F6A04D; }
+    color: #FF7865; }
 
 /* Buttons */
 .btn {
@@ -6042,7 +6042,9 @@ img {
   .viewer-view .navbar-nav li a {
     color: #fff; }
   .browse-view .navbar-nav {
-    background-color: #fff; } }
+    background-color: #00C281; }
+  .browse-view .navbar-nav li a {
+    color: #fff; } }
 
 .navbar-collapse {
   padding: 0; }
@@ -6079,18 +6081,19 @@ img {
 .brand-text {
   float: left;
   height: 60px;
-  line-height: 64px; }
+  line-height: 64px;
+  color: #00C281 !important; }
 
 .nav_viewer {
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom: solid 1px #00C281;
   color: #00C281; }
   .nav_viewer a {
-    color: #00C281; }
+    color: #5268C2; }
   .nav_viewer .navbar-toggle .icon-bar {
-    background: #fff; }
+    background: #00C281; }
   .nav_viewer .brand-img {
-    background-image: url("/static/hkm/img/h_sydan_valk.png"); }
+    background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
   .nav_viewer .dropdown-menu {
     background-color: #00C281; }
     .nav_viewer .dropdown-menu a, .nav_viewer .dropdown-menu a:hover {
@@ -6101,7 +6104,7 @@ img {
   border-bottom: solid 1px #00C281;
   color: #00C281; }
   .nav_collection a {
-    color: #00C281; }
+    color: #5268C2; }
   .nav_collection .navbar-toggle .icon-bar {
     background: #00C281; }
   .nav_collection .brand-img {
@@ -6214,7 +6217,7 @@ img {
 
 .page-header {
   display: block;
-  color: #F6A04D;
+  color: #FF7865;
   border: 0;
   margin: 0 0 0 0;
   padding: 30px 0; }
@@ -6375,7 +6378,7 @@ img {
   border: 0;
   float: right;
   outline: 0;
-  background-color: rgba(33, 33, 33, 0.8);
+  background-color: #5268C2;
   color: #fff; }
 
 .actions__btn:active,
@@ -6615,7 +6618,7 @@ div.grid__fav.active {
   display: block; }
 
 .grid__fav.active, div.grid__fav {
-  color: #F6A04D; }
+  color: #FF7865; }
 
 /* Search */
 .search-modal,
@@ -6672,7 +6675,7 @@ div.grid__fav.active {
 .search-modal__close:hover,
 .search-modal__close:active,
 .search-modal__close:hover:active {
-  color: #F6A04D;
+  color: #FF7865;
   position: absolute;
   right: 0;
   height: 35px;
@@ -6690,7 +6693,7 @@ div.grid__fav.active {
 
 .search-filter__item {
   display: inline-block;
-  border: solid 1px #F6A04D;
+  border: solid 1px #FF7865;
   padding: 6px 8px;
   background-color: #fff;
   font-family: "falkmanbold", sans-serif; }
@@ -6703,7 +6706,7 @@ div.grid__fav.active {
   padding: 0;
   background-color: transparent;
   margin: 0 0 0 8px;
-  color: #F6A04D;
+  color: #FF7865;
   border: 0;
   height: 19px;
   width: 19px; }
@@ -6760,23 +6763,23 @@ div.grid__fav.active {
 .search-form__field {
   font-family: "brownbold", sans-serif;
   font-size: 18px;
-  color: #F6A04D !important;
+  color: #FF7865 !important;
   padding: 0 15px;
   width: 100%;
   height: 40px;
-  border: solid 2px #F6A04D;
+  border: solid 2px #FF7865;
   border-radius: 20px; }
 
 .search-form__field:focus {
-  background-color: #F6A04D;
-  border: solid 1px #F6A04D;
+  background-color: #FF7865;
+  border: solid 1px #FF7865;
   color: #fff !important; }
 
 .search-form__btn,
 .search-form__btn:hover {
   background-color: #fff;
   height: 40px;
-  border: solid 2px #F6A04D;
+  border: solid 2px #FF7865;
   border-left: 0;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px; }
