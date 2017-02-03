@@ -26,6 +26,7 @@ urlpatterns = [
   url(r'^order/(?P<order_id>\d+)/product/$', views.OrderProductView.as_view(), name='hkm_order_product'),
   url(r'^order/(?P<order_id>\d+)/contact/$', views.OrderContactInformationView.as_view(), name='hkm_order_contact_information'),
   url(r'^order/(?P<order_id>\d+)/summary/$', views.OrderSummaryView.as_view(), name='hkm_order_summary'),
+  url(r'^order/(?P<order_id>\d+)/confirmation/$', views.OrderConfirmationView.as_view(), name='hkm_order_confirmation'),
 
   url(r'^ajax/record/fav/$', login_required()(views.AjaxUserFavoriteRecordView.as_view()),
     name='hkm_ajax_record_fav'),

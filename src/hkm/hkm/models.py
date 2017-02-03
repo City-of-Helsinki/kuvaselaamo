@@ -195,7 +195,7 @@ def user_post_save(sender, instance, created, *args, **kwargs):
 class Product(BaseModel):
   name = models.CharField(verbose_name=_(u'Name'), max_length=255)
   description = models.TextField(verbose_name=_(u'Description'), null=True, blank=True)
-  prize = models.DecimalField(verbose_name=_(u'Prize'), decimal_places=2, max_digits=10)
+  price = models.DecimalField(verbose_name=_(u'Price'), decimal_places=2, max_digits=10, default=1)
 
   class Meta:
     abstract = True
@@ -252,22 +252,29 @@ class ProductOrder(BaseModel):
   # If this order is made from Record in collection, the Record is saved for statistics purposes
   record = models.ForeignKey(Record, verbose_name=_(u'Record'), null=True, blank=True)
 
-  # Prize and amount information as they were at the time order was made
+  product_name = models.CharField(verbose_name=_(u'Product Name'), max_length=1024, null=True, blank=True)
+  # Price and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here
   amount = models.IntegerField(verbose_name=_(u'Amount'), default=1)
-  unit_prize = models.DecimalField(verbose_name=_(u'Unit prize'), decimal_places=2, max_digits=10, null=True, blank=True)
-  total_prize = models.DecimalField(verbose_name=_(u'Total prize'), decimal_places=2, max_digits=10, null=True, blank=True)
+  unit_price = models.DecimalField(verbose_name=_(u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
+  total_price = models.DecimalField(verbose_name=_(u'Total price'), decimal_places=2, max_digits=10, null=True, blank=True)
 
   # Timestamp for when users has confimed the order in kuvaselaamo
   datetime_confirmed = models.DateTimeField(verbose_name=_(u'Confirmed'), null=True, blank=True)
-  # Timestamps and stateinformation about hte checkout and pyament flow
+  
+  # Timestamps and state information about payment and checkout
   datetime_checkout_started = models.DateTimeField(verbose_name=_(u'Checkout started'), null=True, blank=True)
   datetime_checkout_ended = models.DateTimeField(verbose_name=_(u'Checkout ended'), null=True, blank=True)
-  is_checkout_successful = models.NullBooleanField(verbose_name=_(u'Checkout succesful'), null=True, blank=True)
+  is_checkout_successful = models.NullBooleanField(verbose_name=_(u'Checkout successful'), null=True, blank=True)
+  
+  # Timestamps and state information about payment actually being processed
+  datetime_payment_processed = models.DateTimeField(verbose_name=_(u'Payment processed at'), null=True, blank=True)
+  is_payment_successful = models.NullBooleanField(verbose_name=_(u'Payment successful'), null=True, blank=True)
+  
   # Timestamps and state information about the actual product order from print
   datetime_order_started = models.DateTimeField(verbose_name=_(u'Order started'), null=True, blank=True)
   datetime_order_ended = models.DateTimeField(verbose_name=_(u'Order ended'), null=True, blank=True)
-  is_order_successful = models.NullBooleanField(verbose_name=_(u'Order succesful'), null=True, blank=True)
+  is_order_successful = models.NullBooleanField(verbose_name=_(u'Order successful'), null=True, blank=True)
 
   objects = ProductOrderQuerySet.as_manager()
 

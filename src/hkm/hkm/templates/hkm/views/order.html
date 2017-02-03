@@ -25,12 +25,12 @@
       </div>
       <div class="record-meta__col record-meta__col--right col-md-6">
         <h1 class="record-meta__title">{{ record.title }}</h1>
-        <p>{{ order.id }}</p>
-        <p>{{ record.full_res_url }}</p>
+        <p>Order ID: {{ order.id }}</p>
         <form method="POST">
           {% csrf_token %}
-          <input id="paper-landscape" type="radio" name="orientation" value="landscape" checked> A3 Vaaka</br>
-          <input id="paper-portrait" type="radio" name="orientation" value="portrait"> A3 Pysty</br>
+          {% for product in product_types %}
+            <input type="radio" name="product" {% if product.id == 1 %} checked {% endif %} value="{{ product.id }}"> {{ product.name }}</br>
+          {% endfor %}
           {% include 'hkm/snippets/form_fields.html' with form=order_product_form %}
           <input type="hidden" name="action" value="order-product" />
           <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Submit' %}</button>

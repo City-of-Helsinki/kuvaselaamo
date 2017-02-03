@@ -3,6 +3,8 @@
 
 import logging
 import StringIO
+import datetime
+
 from django import http
 from django.contrib.auth import forms as django_forms
 from django.views.generic import TemplateView, RedirectView, View
@@ -15,7 +17,8 @@ from django.contrib.auth import login as auth_login
 from django.forms.models import model_to_dict
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, Record, TmpImage, ProductOrder
+from hkm.paybyway_client import client as PBW
+from hkm.models import Collection, Record, TmpImage, ProductOrder, PrintProduct
 from hkm import forms
 from hkm import tasks
 from hkm import image_utils
@@ -533,6 +536,8 @@ class SignUpView(BaseView):
   url_name = 'hkm_signup'
 
 
+### BEGIN VIEWS RELATED TO ORDERING PRODUCTS ###
+
 class CreateOrderView(BaseFinnaRecordDetailView):
   template_name = ''
   url_name = 'hkm_order_create'
@@ -592,6 +597,15 @@ class OrderProductView(BaseOrderView):
     form = forms.OrderProductForm(request.POST, prefix='order-product-form', instance=self.order)
     if form.is_valid():
       order = form.save()
+      # RATHER DO THIS WITH productorder->printproduct FOREIGN KEY ... temporary dumb solution.
+      print_product_id = request.POST.get('product', None)
+      if print_product_id:
+        print_product = PrintProduct.objects.get(id=int(print_product_id))
+        order.product_name = print_product.name
+        order.crop_width = print_product.width
+        order.crop_height = print_product.height
+        order.save()
+
       return redirect(reverse('hkm_order_contact_information', kwargs={'order_id': self.order.id}))
     kwargs['order_product_form'] = form
     return self.get(request, *args, **kwargs)
@@ -603,11 +617,14 @@ class OrderProductView(BaseOrderView):
 
   def get_context_data(self, **kwargs):
     context = super(OrderProductView, self).get_context_data(**kwargs)
+    print_product_types = PrintProduct.objects.all()
+
     if self.order.record_finna_id:
       record_data = FINNA.get_record(self.order.record_finna_id)
       if record_data:
         context['record'] = record_data['records'][0]
         context['record']['full_res_url'] = HKM.get_full_res_image_url(context['record']['rawData']['thumbnail'])
+        context['product_types'] = print_product_types
     return context
 
 
@@ -625,6 +642,8 @@ class OrderContactInformationView(BaseOrderView):
     form = forms.OrderContactInformationForm(request.POST, prefix='order-contact-information-form', instance=self.order)
     if form.is_valid():
       order = form.save()
+      # testing paybyway api here... placeholder
+      # print PBW.post(order.id, order.amount)
       return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.id}))
     kwargs['order_contact_information_form'] = form
     return self.get(request, *args, **kwargs)
@@ -648,6 +667,17 @@ class OrderSummaryView(BaseOrderView):
   template_name = 'hkm/views/order_summary.html'
   url_name = 'hkm_order_summary'
 
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'order-submit':
+      try_submit = PBW.post(self.order.id, self.order.amount)
+      token = try_submit.get('token', None)
+      if token:
+        redirect_url = 'https://dev.paybyway.com/pbwapi/token/%s' % token
+        return redirect(redirect_url)
+      return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.id}))
+    return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.id}))
+
   def get_context_data(self, **kwargs):
     context = super(OrderSummaryView, self).get_context_data(**kwargs)
     if self.order.record_finna_id:
@@ -657,6 +687,41 @@ class OrderSummaryView(BaseOrderView):
         context['record']['full_res_url'] = HKM.get_full_res_image_url(context['record']['rawData']['thumbnail'])
         context['orderSummary'] = model_to_dict(self.order)
     return context
+
+class OrderConfirmationView(BaseOrderView):
+  template_name = 'hkm/views/order_confirmation.html'
+  url_name = 'hkm_order_confirmation'
+  order_result = {}
+
+  def get(self, request, *args, **kwargs):
+    self.order_result['authcode'] = request.GET.get('AUTHCODE', None)  
+    self.order_result['return_code'] = request.GET.get('RETURN_CODE', None)
+    self.order_result['order_number'] = request.GET.get('ORDER_NUMBER', None)
+    self.order_result['settled'] = request.GET.get('SETTLED', None)
+
+    order = ProductOrder.objects.get(id=int(self.order_result['order_number']))
+
+    order.datetime_checkout_ended = datetime.datetime.now()
+    if self.order_result['return_code'] == '0':
+      order.is_checkout_successful = True
+    else:
+      order.is_checkout_successful = False
+
+    order.save()
+    
+    #for key, value in self.order_result.iteritems():
+    #  if value:
+    #    print '%s: %s ' % (key, value)
+    
+    return redirect('/')
+    #return self.render_to_response(self.get_context_data(**kwargs))
+
+  def get_context_data(self, **kwargs):
+    context = super(OrderConfirmationView, self).get_context_data(**kwargs)
+    context['order_result'] = self.order_result
+    return context
+
+### END VIEWS RELATED TO ORDERING PRODUCTS ###
 
 
 class LanguageView(RedirectView):

@@ -22,3 +22,4 @@ staticroot
 node_modules
 mediaroot
 *.swo
+local_settings.py
