@@ -18,7 +18,8 @@ project/database.db
 doc/build/
 .mr.developer.cfg
 *.orig
-staticroot
+staticroot/*
 node_modules
-mediaroot
+mediaroot/*
 *.swo
+local_settings.py

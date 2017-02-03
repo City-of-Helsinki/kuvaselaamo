@@ -17,10 +17,6 @@ from project.settings import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-INSTALLED_APPS += (
-  'raven.contrib.django.raven_compat',
-  )
-
 # Compress
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
@@ -28,12 +24,8 @@ COMPRESS_HTML = True
 # Address celery problems (task #5540)
 BROKER_HEARTBEAT = 0
 
-# Sentry
-SENTRY_DSN = ''
-SENTRY_SITE = ''
-
 # Django
-#TODO Email abckend settings
+#TODO Email backend settings
 
 # TODO
 HKM_MY_DOMAIN = 'http://kuvaselaamo.haltudemo.fi/'
