@@ -238,20 +238,24 @@ class ProductOrder(BaseModel):
 
   # Image is cropped just in time order is confirmed, until then crop options are stored here
   record_finna_id = models.CharField(verbose_name=_(u'Finna record ID'), max_length=1024, null=True, blank=True)
-  crop_x = models.IntegerField(verbose_name=_('Crop x'), null=True, blank=True)
-  crop_y = models.IntegerField(verbose_name=_('Crop y'), null=True, blank=True)
-  crop_width = models.IntegerField(verbose_name=_('Crop width'), null=True, blank=True)
-  crop_height = models.IntegerField(verbose_name=_('Crop height'), null=True, blank=True)
-  crop_image_width = models.IntegerField(verbose_name=_('Crop image width'), null=True, blank=True)
-  crop_image_height = models.IntegerField(verbose_name=_('Crop image height'), null=True, blank=True)
+  crop_x = models.FloatField(verbose_name=_('Crop x coordinate from left'), null=True, blank=True)
+  crop_y = models.FloatField(verbose_name=_('Crop y coordinate from top'), null=True, blank=True)
+  crop_width = models.FloatField(verbose_name=_('Crop width'), null=True, blank=True)
+  crop_height = models.FloatField(verbose_name=_('Crop height'), null=True, blank=True)
+  original_width = models.FloatField(verbose_name=_('Original image width'), null=True, blank=True)
+  original_height = models.FloatField(verbose_name=_('Original image height'), null=True, blank=True)
 
   # Order must always specify a URL where the printing service can download the desired image
   # This can be either as direct URL to HKM image server holding the original image OR URL to
   # kuvaselaamo server to the cropped image
   image_url = models.CharField(verbose_name=_(u'Image URL'), max_length=2048, null=True, blank=True)
+  crop_image_url = models.CharField(verbose_name=_(u'Cropped Image URL'), max_length=2048, null=True, blank=True)
   # If this order is made from Record in collection, the Record is saved for statistics purposes
   record = models.ForeignKey(Record, verbose_name=_(u'Record'), null=True, blank=True)
 
+  form_phase = models.IntegerField(verbose_name=_(u'Order form phase'), default=1)
+  order_hash = models.CharField(verbose_name=_(u'Randomized order identifier phrase'), max_length=1024, null=True, blank=True)
+  product_type = models.ForeignKey(PrintProduct, verbose_name=_(u'Product type'), default=1, blank=True)
   product_name = models.CharField(verbose_name=_(u'Product Name'), max_length=1024, null=True, blank=True)
   # Price and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here

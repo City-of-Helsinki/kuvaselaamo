@@ -269,11 +269,31 @@ palikka
     rotatable: false,
     scalable: false,
     zoomable: false,
-    autoCropArea: 1
+    autoCropArea: 1,
+    viewMode: 1
   }
 
   function cropperInit() {
     cropper = new Cropper(image, options);
+  }
+
+  function productSettingsExistInForm () {
+    if ($("input[name='crop_x']").val() === "None") return false;
+    if ($("input[name='crop_y']").val() === "None") return false;
+    if ($("input[name='crop_width']").val() === "None") return false;
+    if ($("input[name='crop_height']").val() === "None") return false;
+    return true;
+  } 
+
+  function setCropCoordinatesToFormFields () {
+    var imageData = cropper.getImageData();
+    var boxData = cropper.getCropBoxData();
+    $("input[name='crop_x']").val(boxData.left);
+    $("input[name='crop_y']").val(boxData.top);
+    $("input[name='crop_width']").val(boxData.width);
+    $("input[name='crop_height']").val(boxData.height);
+    $("input[name='original_width']").val(imageData.width);
+    $("input[name='original_height']").val(imageData.height);
   }
 
   // if order preview image found in document, initialize a cropper
@@ -284,31 +304,64 @@ palikka
     image.src=url;
     var aspectLandscape = 1.414;
     var aspectPortrait = 0.707;
-    options.aspectRatio = aspectLandscape;
+
+    var savedAspectRatio = $("input[name='crop_width']").val() / 
+      $("input[name='crop_height']").val();
+    options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
     cropperInit();
 
-    $('#paper-landscape').click(()=>{
-      if (options.aspectRatio !== aspectLandscape) {
-        options.aspectRatio = aspectLandscape;
-        console.log('aspect ratio changed to landscape');
+
+    if (productSettingsExistInForm()) {
+      console.log('settings exist');
+      cropper.setData({
+        x: parseInt($("input[name='crop_x']").val()),
+        y: parseInt($("input[name='crop_y']").val()),
+        width: parseInt($("input[name='crop_width']").val()),
+        height: parseInt($("input[name='crop_height']").val()),
+      });
+    } 
+    if (!productSettingsExistInForm()) {
+      console.log('settings dont exist');
+      setCropCoordinatesToFormFields();
+    }
+
+    // whenever print product type is reselected, change form values and show in UI
+    $('.ordertype').click(function() {
+        console.log(this);
+        options.aspectRatio = this.getAttribute('data-xsize') / this.getAttribute('data-ysize');
+        console.log('aspect ratio changed');
         // Restart
         cropper.destroy();
         cropper = new Cropper(image, options);
-      }
+
+        setCropCoordinatesToFormFields();
     }); 
-    $('#paper-portrait').click(()=>{
-      if (options.aspectRatio !== aspectPortrait) {
-        options.aspectRatio = aspectPortrait;
-        console.log('aspect ratio changed to portrait');
-        // Restart
-        cropper.destroy();
-        cropper = new Cropper(image, options);
-      }
+
+   $(document).on('cropend', function (e) {
+      console.log('crop ended');
+      setCropCoordinatesToFormFields();
+
+      /* Prevent to start cropping, moving, etc if necessary
+      if (e.action === 'crop') {
+        e.preventDefault();
+      }  */
     }); 
+
+    window.onresize = function () {
+      console.log('canvas area resizing...');
+      var imageData = cropper.getImageData();
+      var boxData = cropper.getCropBoxData();  
+      setCropCoordinatesToFormFields();
+      /* Prevent to start cropping, moving, etc if necessary
+      if (e.action === 'crop') {
+        e.preventDefault();
+      } */
+    };
   }
 
 
   // modal related cropper stuff begins here
+
   $('.my-modal--crop').on('shown.bs.modal', function() {
     if (image.complete && image.naturalHeight !== 0) {
       cropperInit();

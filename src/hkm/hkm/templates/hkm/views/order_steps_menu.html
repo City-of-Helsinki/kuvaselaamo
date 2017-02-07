@@ -1,7 +1,27 @@
-<div class="container">
-  <div class="row">
-	  <div class="col-md-offset-3 col-md-2 col-xs-4"><a href="{% url 'hkm_order_product' order_id=order.id %}">Tuotevalinnat</a></div>
-	  <div class="col-md-2 col-xs-4"><a href="{% url 'hkm_order_contact_information' order_id=order.id %}">Tilaajan tiedot</a></div>
-	  <div class="col-md-2 col-xs-4"><a href="{% url 'hkm_order_summary' order_id=order.id %}">Yhteenveto</a></div>
-  </div>
+<div class="order-steps">
+			<table class="order-steps-table">
+			<tr>
+			<td>
+		  <span class="order-step {% if form_page == 1 %} order-step-current {% endif %}"><a href="{% url 'hkm_order_product' order_id=order.order_hash %}">1. Tuotevalinnat</a></span>
+		  </td>
+		  <td>
+		  <span class="order-step {% if form_page == 2 %} order-step-current {% endif %}">
+		  {% if order.form_phase >= 2 %}
+		  	<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">2. Tilaajan tiedot</a>
+		  {% else %}
+		  	2. Tilaajan tiedot
+		  {% endif %}
+		  </span>
+		  </td>
+		  <td>
+		  <span class="order-step {% if form_page == 3 %} order-step-current {% endif %}">
+		  {% if order.form_phase >= 3 %}
+		  <a href="{% url 'hkm_order_summary' order_id=order.order_hash %}">3. Yhteenveto</a>
+		  {% else %}
+		  	3. Yhteenveto
+		  {% endif %}
+		  </span>
+		  </td>
+		  </tr>
+		  </table>
 </div>

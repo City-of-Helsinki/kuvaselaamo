@@ -6025,6 +6025,29 @@ img {
 .icon-bar {
   background-color: #00C281 !important; }
 
+.order-step {
+  position: relative;
+  width: 33%;
+  font-size: 80%; }
+
+.order-step-current {
+  font-weight: bold;
+  font-size: 100%; }
+
+.order-steps {
+  position: relative;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-left: 0; }
+
+.order-steps-table {
+  border: 0;
+  margin: 0;
+  width: 100%; }
+
+.order-steps-banner {
+  margin-top: 30px; }
+
 @media (max-width: 767px) {
   .navbar-nav {
     text-align: center;
@@ -6495,6 +6518,32 @@ img {
   height: auto;
   width: 100%;
   padding: 0; }
+
+.order-options {
+  margin-top: 0px;
+  padding-bottom: 15px; }
+
+.order-product__name {
+  margin-right: 10px; }
+
+.order-meta__title {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-family: 'goviniusbold';
+  color: #63c29d; }
+
+.order-meta__title-small {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-family: 'goviniusbold';
+  font-size: 18px !important;
+  color: #63c29d; }
+
+.order-preview__text {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-family: 'goviniusbold';
+  color: #FF7865; }
 
 /* Grid */
 .grid {

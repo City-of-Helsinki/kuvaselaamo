@@ -20,18 +20,17 @@ class PaybywayClient(object):
 	# change dev to www when final -- this is a testing api
 	timeout = 10
 
-	def post(self, order_id, amount):
+	def post(self, order_hash, price):
 		url = PaybywayClient.API_ENDPOINT
-		order_number = '%d' % order_id
-		msg = '%s|%s' % (PaybywayClient.API_KEY, order_number)
+		msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
 		authcode = hmac.new(PaybywayClient.SECRET_KEY, msg, hashlib.sha256).hexdigest().upper()
-		return_url = 'http://127.0.0.1:3333/order/%d/confirmation/' % order_id
+		return_url = 'http://127.0.0.1:3333/order/%s/confirmation/' % order_hash
 
 		payload = {
 			'version': 'w3.1',
 			'api_key': PaybywayClient.API_KEY,
-			'order_number': order_number,
-			'amount': amount, #THIS SHOULD BE PRICE IN **CENTS**!! for testing reasons I am sending the no. of units ordered
+			'order_number': order_hash,
+			'amount': price, #THIS SHOULD BE PRICE IN **CENTS**!! for testing reasons I am sending the no. of units ordered
 			'currency': 'EUR',
 			'payment_method': {
 				'type': 'e-payment',

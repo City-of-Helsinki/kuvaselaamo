@@ -3,40 +3,40 @@
 
 {% block banner %}
 
-  <div class="page-header bittersweet">
-    <div class="fullsize-container container">
-      <div class="banner__title">
-        <h1 class="banner__h1">Kuvan tilaus</h1>
-      </div>
-    </div>
-  </div>
-
 {% endblock %}
 
 {% block content %}
 
   <div class="record-meta">
 
-    {% include 'hkm/views/order_steps_menu.html' %}
     {% if order %}
 
-      <div class="record-meta__col record-meta__col--left col-md-6">
-        <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{% finna_image order.record_finna_id %}"></img></div>
-      </div>
-      <div class="record-meta__col record-meta__col--right col-md-6">
-        <h1 class="record-meta__title">{{ record.title }}</h1>
-        {% for field, value in orderSummary.iteritems %}
-          {% if value %}
-            <p>{{ field }}: {{ value }}</p>
-          {% endif %}
-        {% endfor %}
+      
+      <div class="record-meta__col record-meta__col--left col-md-5">
+        <h1 class="order-preview__text">Kuvan tilaus</h1>
+        <h1 class="order-meta__title-small">{{ record.title }}</h1>
+        <div class="order-steps-banner">
+            {% include 'hkm/views/order_steps_menu.html' %}
+        </div>
+        <p>Tarkista alta, että antamasi tiedot ovat oikein. Tämän jälkeen painamalla Lähetä-nappia siirryt maksusivulle.</p>
+        <p>Yhteystiedot:</p>
+        <p>Nimi: {{ order.first_name }} {{ order.last_name }}</p>
+        <p>Sähköposti: {{ order.email }}</p>
+        <p>Puhelin: {{ order.phone }}</p>
+        <p>Osoite: {{ order.street_address }}, {{ order.postal_code }} {{ order.city }}</p>
+        <p>Tilauksen tiedot:</p>
+        <p>Tuote: {{ order.product_name }}</p>
+        <p>Kappalemäärä: {{ order.amount }}</p>
+        <p>Hinta: {{ order.total_price }} € sis. ALV{% if order.amount > 1 %} (á {{ order.unit_price }}€){% endif %}
         <form method="POST">
           {% csrf_token %}
           <input type="hidden" name="action" value="order-submit" />
           <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Submit' %}</button>
         </form>
       </div>
-     
+      <div class="record-meta__col record-meta__col--right col-md-7">
+        <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>
+      </div>
   </div>
 
     {% else %}

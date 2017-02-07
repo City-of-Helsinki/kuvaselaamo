@@ -1,0 +1,35 @@
+{% extends 'hkm/base_browse.html' %}
+{% load i18n hkm_tags %}
+
+{% block banner %}
+
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="record-meta">
+
+    {% if order %}
+
+      <div class="record-meta__col record-meta__col--left col-md-5">
+        <h1 class="order-preview__text">Kuvan tilaus</h1>
+        <h1 class="order-meta__title-small">{{ record.title }}</h1>
+        <p>{% if order.is_checkout_successful %}Tilaus onnistui, {% else %}Pieleen meni, {% endif %}{{ order.first_name }}</p>
+        <p>Saat sähköpostina vahvistuksen, kun maksun prosessointi on valmis. Tai jotaki.</p>
+      </div>
+      <div class="record-meta__col record-meta__col--right col-md-7">
+        <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>
+      </div>
+     
+  </div>
+
+    {% else %}
+
+      {% include 'hkm/snippets/not_responding.html' %}
+
+    {% endif %}
+
+  </div>
+
+{% endblock %}
