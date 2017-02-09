@@ -62,6 +62,15 @@
             </svg>
           </i>
         </button>
+        <a href="{% url 'hkm_order_create' finna_id=record.id %}">
+        <button class="actions__btn actions__btn--right" id="popover-buy">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+            </svg>
+          </i>
+        </button>
+        </a>
       </div>
     {% endif %}
   {% endblock %}

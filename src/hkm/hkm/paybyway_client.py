@@ -24,7 +24,7 @@ class PaybywayClient(object):
 		url = PaybywayClient.API_ENDPOINT
 		msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
 		authcode = hmac.new(PaybywayClient.SECRET_KEY, msg, hashlib.sha256).hexdigest().upper()
-		return_url = 'http://127.0.0.1:3333/order/%s/confirmation/' % order_hash
+		return_url = '%s/order/%s/confirmation/' % (settings.MY_DOMAIN, order_hash)
 
 		payload = {
 			'version': 'w3.1',

@@ -559,6 +559,14 @@ class CreateOrderView(BaseFinnaRecordDetailView):
   def handle_order(self, request, *args, **kwargs):
     order = ProductOrder(session=request.session.session_key, record_finna_id=self.record['id'],
       order_hash=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20)))
+    order.total_price = order.amount * order.product_type.price
+
+    full_res_url = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
+    full_res_image = HKM.download_image(full_res_url)
+    width, height = full_res_image.size
+    order.fullimg_original_width = width
+    order.fullimg_original_height = height
+
     if request.user.is_authenticated():
       order.user = request.user
     order.save()
@@ -570,11 +578,12 @@ class BaseOrderView(BaseView):
   url_name = None
 
   def get_url(self):
-    return reverse(self.url_name, kwargs={'order_id': self.order.id})
+    return reverse(self.url_name, kwargs={'order_id': self.order.order_hash})
 
   def setup(self, request, *arg, **kwargs):
     try:
-      self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
+      #self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
+      self.order = ProductOrder.objects.get(order_hash=kwargs['order_id'])
     except ProductOrder.DoesNotExist:
       LOG.error('Product order does not exist for user')
       raise http.Http404()
@@ -729,6 +738,7 @@ class OrderConfirmation(BaseOrderView):
   order_result = {}
 
   def get(self, request, *args, **kwargs):
+
     self.order_result['authcode'] = request.GET.get('AUTHCODE', None)  
     self.order_result['return_code'] = request.GET.get('RETURN_CODE', None)
     self.order_result['order_hash'] = request.GET.get('ORDER_NUMBER', None)

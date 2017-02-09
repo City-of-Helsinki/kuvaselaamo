@@ -13,6 +13,7 @@ from django.dispatch import receiver
 from django.db import models
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm import settings
@@ -222,13 +223,13 @@ class ProductOrder(BaseModel):
   # to order model. Orders are associated to anynymous users via session
   user = models.ForeignKey(User, verbose_name=_(u'User'), null=True, blank=True)
   session = models.CharField(verbose_name=_(u'Session'), max_length=255)
-  first_name = models.CharField(verbose_name=_(u'First name'), max_length=255, null=True, blank=True)
-  last_name = models.CharField(verbose_name=_(u'Last name'), max_length=255, null=True, blank=True)
-  email = models.EmailField(max_length=255, verbose_name=_(u'Email'), null=True, blank=True)
-  phone = PhoneNumberField(verbose_name=_(u'Phone number'), null=True, blank=True)
-  street_address = models.CharField(verbose_name=_(u'Street adress'), max_length=1024, null=True, blank=True)
-  postal_code = models.IntegerField(verbose_name=_(u'Postal code'), null=True, blank=True)
-  city = models.CharField(verbose_name=_(u'City'), max_length=255, null=True, blank=True)
+  first_name = models.CharField(verbose_name=_(u'First name'), max_length=255, null=True, blank=False)
+  last_name = models.CharField(verbose_name=_(u'Last name'), max_length=255, null=True, blank=False)
+  email = models.EmailField(max_length=255, verbose_name=_(u'Email'), null=True, blank=False)
+  phone = PhoneNumberField(verbose_name=_(u'Phone number'), null=True, blank=False)
+  street_address = models.CharField(verbose_name=_(u'Street adress'), max_length=1024, null=True, blank=False)
+  postal_code = models.IntegerField(verbose_name=_(u'Postal code'), null=True, blank=False)
+  city = models.CharField(verbose_name=_(u'City'), max_length=255, null=True, blank=False)
 
   # generic relation to any product sub type. This is stored as a reference,
   # but all information regarding the order MUST be stored in directly in this model
@@ -244,6 +245,8 @@ class ProductOrder(BaseModel):
   crop_height = models.FloatField(verbose_name=_('Crop height'), null=True, blank=True)
   original_width = models.FloatField(verbose_name=_('Original image width'), null=True, blank=True)
   original_height = models.FloatField(verbose_name=_('Original image height'), null=True, blank=True)
+  fullimg_original_width = models.FloatField(verbose_name=_('Full res original image width'), null=True, blank=True)
+  fullimg_original_height = models.FloatField(verbose_name=_('Full res original image height'), null=True, blank=True)
 
   # Order must always specify a URL where the printing service can download the desired image
   # This can be either as direct URL to HKM image server holding the original image OR URL to
@@ -259,7 +262,7 @@ class ProductOrder(BaseModel):
   product_name = models.CharField(verbose_name=_(u'Product Name'), max_length=1024, null=True, blank=True)
   # Price and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here
-  amount = models.IntegerField(verbose_name=_(u'Amount'), default=1)
+  amount = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
   unit_price = models.DecimalField(verbose_name=_(u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
   total_price = models.DecimalField(verbose_name=_(u'Total price'), decimal_places=2, max_digits=10, null=True, blank=True)
 
