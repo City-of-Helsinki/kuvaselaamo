@@ -311,6 +311,8 @@ class IndexView(CollectionDetailView):
 
   def get_context_data(self, **kwargs):
     context = super(IndexView, self).get_context_data(**kwargs)
+    if self.record:
+      context['hkm_id'] = self.record.record_id
     if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
       self.open_popup = False
     context['open_popup'] = self.open_popup
@@ -450,6 +452,7 @@ class SearchRecordDetailView(SearchView):
       record = self.search_result['records'][0]
       record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
       context['record'] = record
+      context['hkm_id'] = record['id']
     if self.request.user.is_authenticated():
       context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
     else:
