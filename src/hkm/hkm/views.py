@@ -269,6 +269,7 @@ class CollectionDetailView(BaseView):
     context['permissions'] = self.permissions
     context['record'] = self.record
     if self.record:
+      context['hkm_id'] = self.record.record_id
       context['next_record'] = self.collection.get_next_record(self.record)
       context['previous_record'] = self.collection.get_previous_record(self.record)
     if self.request.user.is_authenticated():

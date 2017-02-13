@@ -407,23 +407,24 @@ palikka
       // need to wait until cropper is completely built to calculate PPI value and set cropper coordinates
       // to match order specs
       $(document).on('ready', function(e) {
-        calculatePPI();  
 
         if (productSettingsExistInForm()) {
-        console.log('settings exist');
-        cropper.setCropBoxData({
-          left: parseInt($("input[name='crop_x']").val()),
-          top: parseInt($("input[name='crop_y']").val()),
-          width: parseInt($("input[name='crop_width']").val()),
-          height: parseInt($("input[name='crop_height']").val()),
-        });
-        console.log(cropper.getCropBoxData());
-      } 
-      if (!productSettingsExistInForm()) {
-        console.log('settings dont exist');
-        setCropCoordinatesToFormFields();
-      }
-      })
+          console.log('settings exist');
+          cropper.setCropBoxData({
+            left: parseInt($("input[name='crop_x']").val()),
+            top: parseInt($("input[name='crop_y']").val()),
+            width: parseInt($("input[name='crop_width']").val()),
+            height: parseInt($("input[name='crop_height']").val()),
+          });
+          console.log(cropper.getCropBoxData());
+        } 
+        if (!productSettingsExistInForm()) {
+          console.log('settings dont exist');
+          setCropCoordinatesToFormFields();
+        }
+
+        calculatePPI();  
+      });
       
     }
   });
