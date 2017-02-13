@@ -21,6 +21,8 @@ from django.forms.models import model_to_dict
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.paybyway_client import client as PBW
+from hkm.printmotor_client import client as PRINTMOTOR
+
 from hkm.models import Collection, Record, TmpImage, ProductOrder, PrintProduct
 from hkm import forms
 from hkm import tasks

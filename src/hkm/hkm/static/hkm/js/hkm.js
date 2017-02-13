@@ -277,141 +277,157 @@ palikka
     cropper = new Cropper(image, options);
   }
 
+  $(document).ready(function() {
 
-  // if order preview image found in document, initialize a cropper
-  var orderPreviewImage = document.getElementById('order-preview__image');
-  if (orderPreviewImage) {
+    // if order preview image found in document, initialize a cropper
+    var orderPreviewImage = document.getElementById('order-preview__image');
+    if (orderPreviewImage) {
 
-    function productSettingsExistInForm () {
-      if ($("input[name='crop_x']").val() === "None") return false;
-      if ($("input[name='crop_y']").val() === "None") return false;
-      if ($("input[name='crop_width']").val() === "None") return false;
-      if ($("input[name='crop_height']").val() === "None") return false;
-      return true;
-    } 
+      function productSettingsExistInForm () {
+        if ($("input[name='crop_x']").val() === "None") return false;
+        if ($("input[name='crop_y']").val() === "None") return false;
+        if ($("input[name='crop_width']").val() === "None") return false;
+        if ($("input[name='crop_height']").val() === "None") return false;
+        return true;
+      } 
 
-    function setCropCoordinatesToFormFields () {
-      var imageData = cropper.getImageData();
-      var boxData = cropper.getCropBoxData();
-      $("input[name='crop_x']").val(boxData.left);
-      $("input[name='crop_y']").val(boxData.top);
-      $("input[name='crop_width']").val(boxData.width);
-      $("input[name='crop_height']").val(boxData.height);
-      $("input[name='original_width']").val(imageData.width);
-      $("input[name='original_height']").val(imageData.height);
-    }
-
-    function calculateNewPrice () {
-      var amount = $('input[id="id_order-product-form-amount"]').val();
-      var unitPrice = $('input[name=product]:checked').attr('data-price');
-      var newPrice = parseInt(unitPrice) * parseInt(amount);
-      $('#price-indicator').text(typeof newPrice !== 'number' || isNaN(newPrice) ? '?' : newPrice.toFixed(2));
-      console.log('calculate new price for UI');
-    }
-
-    function calculatePPI () {
-      var $ppiIndicator = $('#ppi-indicator');
-      var fullX = $ppiIndicator.attr('data-full-x');
-      var fullY = $ppiIndicator.attr('data-full-y');
-      var $inputChecked = $('input[name=product]:checked');
-      var xInches = parseInt($inputChecked.attr('data-xsize')) / 25.4; // mm to in
-      var yInches = parseInt($inputChecked.attr('data-ysize')) / 25.4;
-
-      var imageArea = cropper.getImageData();
-      var cropArea = cropper.getCropBoxData();
-      console.log(imageArea);
-      console.log(imageArea.width);
-      var widthMultiplier = parseFloat(fullX) / imageArea.width;
-      console.log(widthMultiplier);
-      var heightMultiplier = parseFloat(fullY) / imageArea.height;
-
-      var finalWidth = cropArea.width * widthMultiplier;
-      var finalHeight = cropArea.height * heightMultiplier;
-
-      var $PPIBox = $('#ppi-box');
-      var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) / 
-        Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
-
-    
-      if (isNaN(PPI)) {
-        $('#ppi-indicator').text('?');
-      } else {
-        if (PPI < 200 && !$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
-        if (PPI >= 200 && $PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
-        $('#ppi-indicator').text(Math.round(PPI));
+      function setCropCoordinatesToFormFields () {
+        var imageData = cropper.getImageData();
+        var boxData = cropper.getCropBoxData();
+        $("input[name='crop_x']").val(boxData.left);
+        $("input[name='crop_y']").val(boxData.top);
+        $("input[name='crop_width']").val(boxData.width);
+        $("input[name='crop_height']").val(boxData.height);
+        $("input[name='original_width']").val(imageData.width);
+        $("input[name='original_height']").val(imageData.height);
       }
 
-    }
+      function calculateNewPrice () {
+        var amount = $('input[id="id_order-product-form-amount"]').val();
+        var unitPrice = $('input[name=product]:checked').attr('data-price');
+        var newPrice = parseInt(unitPrice) * parseInt(amount);
+        $('#price-indicator').text(typeof newPrice !== 'number' || isNaN(newPrice) ? '?' : newPrice.toFixed(2));
+        console.log('calculate new price for UI');
+      }
 
-    url = orderPreviewImage.getAttribute('data-img-url');
-    image = orderPreviewImage;
-    image.src=url;
-    var aspectLandscape = 1.414;
-    var aspectPortrait = 0.707;
+      function isEmpty(obj) {
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) return false;
+        }
+        return true;
+      }
+
+      function calculatePPI () {
+        var $ppiIndicator = $('#ppi-indicator');
+        var fullX = $ppiIndicator.attr('data-full-x');
+        var fullY = $ppiIndicator.attr('data-full-y');
+        var $inputChecked = $('input[name=product]:checked');
+        var xInches = parseInt($inputChecked.attr('data-xsize')) / 25.4; // mm to in
+        var yInches = parseInt($inputChecked.attr('data-ysize')) / 25.4;
+
+        var imageArea = cropper.getImageData();
+        console.log(imageArea)
+        var cropArea = cropper.getCropBoxData();
+        console.log(cropArea)
+        var widthMultiplier = parseFloat(fullX) / imageArea.width;
+        var heightMultiplier = parseFloat(fullY) / imageArea.height;
+
+        var finalWidth = cropArea.width * widthMultiplier;
+        var finalHeight = cropArea.height * heightMultiplier;
+
+        var $PPIBox = $('#ppi-box');
+        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) / 
+          Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
+
+      
+        if (isNaN(PPI)) {
+          $('#ppi-indicator').text('?');
+        } else {
+          if (PPI < 200 && !$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
+          if (PPI >= 200 && $PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
+          $('#ppi-indicator').text(Math.round(PPI));
+        }
+
+      }
+
+      url = orderPreviewImage.getAttribute('data-img-url');
+      image = orderPreviewImage;
+      image.src=url;
+      var aspectLandscape = 1.414;
+      var aspectPortrait = 0.707;
 
 
-    var savedAspectRatio = $("input[name='crop_width']").val() / 
-      $("input[name='crop_height']").val();
-    options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
-    cropperInit();
-    calculatePPI();
+      var savedAspectRatio = $("input[name='crop_width']").val() / 
+        $("input[name='crop_height']").val();
+      options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
+      cropperInit();
+     
 
-    if (productSettingsExistInForm()) {
-      console.log('settings exist');
-      cropper.setData({
-        x: parseInt($("input[name='crop_x']").val()),
-        y: parseInt($("input[name='crop_y']").val()),
-        width: parseInt($("input[name='crop_width']").val()),
-        height: parseInt($("input[name='crop_height']").val()),
-      });
-    } 
-    if (!productSettingsExistInForm()) {
-      console.log('settings dont exist');
-      setCropCoordinatesToFormFields();
-    }
+      // whenever print product type is reselected, change form values and show in UI
+      $('.ordertype').click(function() {
+          console.log(this);
+          options.aspectRatio = this.getAttribute('data-xsize') / this.getAttribute('data-ysize');
+          console.log('aspect ratio changed');
+          // Restart
+          cropper.destroy();
+          cropper = new Cropper(image, options);
 
-    // whenever print product type is reselected, change form values and show in UI
-    $('.ordertype').click(function() {
-        console.log(this);
-        options.aspectRatio = this.getAttribute('data-xsize') / this.getAttribute('data-ysize');
-        console.log('aspect ratio changed');
-        // Restart
-        cropper.destroy();
-        cropper = new Cropper(image, options);
+          calculateNewPrice();
+          calculatePPI();
+          setCropCoordinatesToFormFields();
+      }); 
 
+      // why not work LöL
+      var amountField = document.querySelector('#id_order-product-form-amount');
+      amountField.addEventListener('input', function() {
         calculateNewPrice();
-        calculatePPI();
+      });
+
+     $(document).on('cropmove', function (e) {
+        console.log('cropping');
         setCropCoordinatesToFormFields();
-    }); 
+        calculatePPI();
+        /* Prevent to start cropping, moving, etc if necessary
+        if (e.action === 'crop') {
+          e.preventDefault();
+        }  */
+      }); 
 
-    // why not work LöL
-    var amountField = document.querySelector('#id_order-product-form-amount');
-    amountField.addEventListener('input', function() {
-      calculateNewPrice();
-    });
+      window.onresize = function () {
+        console.log('canvas area resizing...');
+        var imageData = cropper.getImageData();
+        var boxData = cropper.getCropBoxData();  
+        setCropCoordinatesToFormFields();
+        /* Prevent to start cropping, moving, etc if necessary
+        if (e.action === 'crop') {
+          e.preventDefault();
+        } */
+      };
 
-   $(document).on('cropmove', function (e) {
-      console.log('cropping');
-      setCropCoordinatesToFormFields();
-      calculatePPI();
-      /* Prevent to start cropping, moving, etc if necessary
-      if (e.action === 'crop') {
-        e.preventDefault();
-      }  */
-    }); 
+      // need to wait until cropper is completely built to calculate PPI value and set cropper coordinates
+      // to match order specs
+      $(document).on('ready', function(e) {
+        calculatePPI();  
 
-    window.onresize = function () {
-      console.log('canvas area resizing...');
-      var imageData = cropper.getImageData();
-      var boxData = cropper.getCropBoxData();  
-      setCropCoordinatesToFormFields();
-      /* Prevent to start cropping, moving, etc if necessary
-      if (e.action === 'crop') {
-        e.preventDefault();
-      } */
-    };
-  }
-
+        if (productSettingsExistInForm()) {
+        console.log('settings exist');
+        cropper.setCropBoxData({
+          left: parseInt($("input[name='crop_x']").val()),
+          top: parseInt($("input[name='crop_y']").val()),
+          width: parseInt($("input[name='crop_width']").val()),
+          height: parseInt($("input[name='crop_height']").val()),
+        });
+        console.log(cropper.getCropBoxData());
+      } 
+      if (!productSettingsExistInForm()) {
+        console.log('settings dont exist');
+        setCropCoordinatesToFormFields();
+      }
+      })
+      
+    }
+  });
+  
 
   // modal related cropper stuff begins here
 

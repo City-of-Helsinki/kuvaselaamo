@@ -158,4 +158,9 @@ HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
 HKM_PBW_API_KEY = ''
 HKM_PBW_SECRET_KEY = ''
 
+# Printmotor
+
+HKM_PRINTMOTOR_USERNAME = ''
+HKM_PRINTMOTOR_PASSWORD = ''
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

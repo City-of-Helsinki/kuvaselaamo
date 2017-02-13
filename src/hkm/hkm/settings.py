@@ -21,5 +21,9 @@ MY_DOMAIN = settings.HKM_MY_DOMAIN
 PBW_API_KEY = settings.HKM_PBW_API_KEY
 PBW_SECRET_KEY = settings.HKM_PBW_SECRET_KEY
 
+#Printmotor
+PRINTMOTOR_USERNAME = settings.HKM_PRINTMOTOR_USERNAME
+PRINTMOTOR_PASSWORD = settings.HKM_PRINTMOTOR_PASSWORD
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
