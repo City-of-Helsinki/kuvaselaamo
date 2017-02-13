@@ -16,6 +16,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.mail import send_mail
 from django.contrib.auth import login as auth_login
 from django.forms.models import model_to_dict
 from hkm.finna import DEFAULT_CLIENT as FINNA
@@ -758,6 +759,10 @@ class OrderConfirmation(BaseOrderView):
     else:
       order.is_checkout_successful = False
 
+    if self.order_result['settled'] == '1':
+      order.is_payment_successful = True
+      self.send_mail(order)
+
     order.save()
     
     #for key, value in self.order_result.iteritems():
@@ -766,6 +771,17 @@ class OrderConfirmation(BaseOrderView):
     
     return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
     #return self.render_to_response(self.get_context_data(**kwargs))
+
+  def send_mail(self, order):
+    if order:
+
+      msg = 'Tilauksesi onnistui (%s, %d kpl, %d EUR)' % (order.product_name, order.amount, order.total_price)
+      send_mail(
+        'Tilausvahvistus',
+        msg,
+        'donotreply@helsinkikuvia.fi',
+        [order.email]
+      )
 
   def get_context_data(self, **kwargs):
     context = super(OrderConfirmationView, self).get_context_data(**kwargs)
@@ -802,6 +818,7 @@ class OrderPBWNotify(BaseOrderView):
       order.datetime_payment_processed = datetime.datetime.now()
       if self.order_result['return_code'] == '0' and self.order_result['settled'] == '1':
         order.is_payment_successful = True
+        self.send_mail(order)
       else:
         order.is_payment_successful = False
 
@@ -810,6 +827,17 @@ class OrderPBWNotify(BaseOrderView):
       LOG.Error(Error)
     
     return http.HttpResponse()
+
+  def send_mail(self, order):
+    if order:
+
+      msg = 'Tilauksesi onnistui (%s, %d kpl, %d EUR)' % (order.product_name, order.amount, order.total_price)
+      send_mail(
+        'Tilausvahvistus',
+        msg,
+        'donotreply@helsinkikuvia.fi',
+        [order.email]
+      )
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
 
