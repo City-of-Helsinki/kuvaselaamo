@@ -86,11 +86,18 @@
         <div class="brand-text">{% trans 'KUVASELAAMO' %}</div>
       </a>
     </div>
-    
+    <div class="nav-search__form--largescreen">
+        <form action="/search/" id="nav-search" class="form-inline ">
+          <input class="nav-search__field" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+          <button class="btn btn-primary" type="submit">Pikahaku</button>
+        </form>
+    </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <!-- <li><a href="{% url 'hkm_index' %}?search=true{% if record.collection.show_in_landing_page %}&rid={{ record.id }}{% endif %}">{% trans 'Search' %}</a></li> -->
-        <li><a href="{% url 'hkm_search' %}">{% trans 'Search' %}</a></li>
+        <li>
+        <a href="{% url 'hkm_search' %}">{% trans 'Search' %}</a>
+        </li>
         {% if language == 'fi' %}
           <li><a href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> | <a href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
         {% elif language == 'en' %}

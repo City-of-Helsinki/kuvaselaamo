@@ -6150,9 +6150,11 @@ img {
   top: 60px;
   left: 0;
   z-index: 500;
-  padding: 10px 6px; }
+  padding: 10px 6px;
+  color: #5268C2;
+  font-family: "Signe", sans-serif; }
   .back-to a {
-    color: #fff; }
+    color: #5268C2; }
 
 .back-to__text {
   display: block;
@@ -6160,7 +6162,7 @@ img {
   margin-left: 5px; }
 
 .back-to__icon {
-  color: #fff;
+  color: #5268C2;
   display: block;
   float: left;
   height: 17px;
@@ -6201,17 +6203,21 @@ img {
 /* Main */
 .image-viewer {
   background-color: #fff !important;
-  position: absolute;
+  position: relative;
   left: 0;
-  top: 0;
+  bottom: 0px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 120px);
   background-repeat: no-repeat;
   background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+
+@media (max-width: 375px) {
+  .image-viewer {
+    height: calc(100% - 110px); } }
 
 .image-viewer__container {
   background-color: transparent !important;
@@ -6387,10 +6393,11 @@ img {
 
 /* Actions */
 .actions {
-  z-index: 500;
+  z-index: 9999;
   display: inline-block;
-  position: absolute;
-  bottom: 0; }
+  position: relative;
+  bottom: 0;
+  background-color: #5268C2; }
 
 .actions ul {
   margin: 0; }
@@ -6806,18 +6813,29 @@ div.grid__fav.active {
     width: 40px;
     width: 7.5vw; } }
 
-.nav-search-form {
-  width: 25% !important; }
+.nav-search__form--largescreen {
+  display: block;
+  float: right;
+  height: 100%;
+  font-family: "Signe", sans-serif !important;
+  font-size: 14px !important;
+  margin-left: 25px;
+  margin-right: 15px; }
+  .nav-search__form--largescreen .btn {
+    background: #FF7865 !important;
+    font-size: 10px !important; }
 
-.nav-search-form__field {
-  font-family: "brownbold", sans-serif;
-  font-size: 18px;
-  color: #FF7865 !important;
-  padding: 0 15px;
-  width: 100%;
-  height: 40px;
-  border: solid 2px #FF7865;
-  border-radius: 20px; }
+@media (max-width: 926px) {
+  .nav-search__form--largescreen {
+    display: none; } }
+
+.nav-search__field {
+  padding-left: 5px;
+  color: #FF7865 !important; }
+
+#nav-search {
+  position: relative;
+  top: 16px; }
 
 .search-form {
   width: 100%;

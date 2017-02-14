@@ -16,13 +16,14 @@
 {% block content %}
 
   <div class="back-to">
+    <p>Kokoelma: {{ collection.title }} (Kuva {{ current_record_order_number }}/{{ collection_record_count }})</p>
     <a href="{% url 'hkm_collection' collection_id=collection.id %}">
       <i class="back-to__icon">
         <svg class="svg-icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
         </svg>
       </i>
-      <span class="back-to__text">{% trans 'Back to list view' %}</span>
+      <span class="back-to__text">Takaisin kokoelmaan {{ collection.title }}</span>
     </a>
   </div>
 
@@ -31,7 +32,6 @@
       <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.get_full_res_image_absolute_url }}" src="{{ record.get_preview_image_absolute_url }}"></img>
     </div>
   </div>
-
 {% endblock %}
 
 {% block hidden %}

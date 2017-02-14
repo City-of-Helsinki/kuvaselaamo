@@ -588,14 +588,14 @@ palikka
     var fullResUrl = this.getAttribute('data-full-res-url');
 
     if ($(window).width() >= 1024) {
-      h += $(window).height() * 2;
+      h += $(window).height() * 2; // Picture initial size if scr width >=1024 px
       w = h * ar;
     }
     else if (w > h) {
-      w += $(window).width() * 1.862;
+      w += $(window).width() * 1.862; // Picture initial size if scr width < 1024 px & img width > img height
       h = w / ar;
     }
-    else {
+    else { // Picture initial size if scr width < 1024 px & img width <= img height
       h += $(window).height();
       w = h * ar;
     }
@@ -611,6 +611,8 @@ palikka
       maxZoom: 5,
       zoom: 2,
       crs: L.CRS.Simple,
+      maxBoundsViscosity: 1,
+      scrollWheelZoom: false
     });
     var bottomLeft = imageContainer.unproject([0, h], imageContainer.getMaxZoom()-1);
     var topRight = imageContainer.unproject([w, 0], imageContainer.getMaxZoom()-1);

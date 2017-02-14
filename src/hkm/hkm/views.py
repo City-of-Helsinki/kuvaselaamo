@@ -267,10 +267,12 @@ class CollectionDetailView(BaseView):
   def get_context_data(self, **kwargs):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
     context['collection'] = self.collection
+    context['collection_record_count'] = self.collection.records.all().count()
     context['permissions'] = self.permissions
     context['record'] = self.record
     if self.record:
       context['hkm_id'] = self.record.record_id
+      context['current_record_order_number'] = self.record.order + 1
       context['next_record'] = self.collection.get_next_record(self.record)
       context['previous_record'] = self.collection.get_previous_record(self.record)
     if self.request.user.is_authenticated():
@@ -401,6 +403,7 @@ class SearchView(BaseView):
     context['date_facets'] = self.date_facets
     context['search_result'] = self.search_result
     context['search_term'] = self.search_term
+    context['current_page'] = self.page
     return context
 
 
