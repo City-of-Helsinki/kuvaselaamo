@@ -587,6 +587,7 @@ palikka
     var url = this.src;
     var fullResUrl = this.getAttribute('data-full-res-url');
 
+
     if ($(window).width() >= 1024) {
       h += $(window).height() * 2; // Picture initial size if scr width >=1024 px
       w = h * ar;
@@ -604,6 +605,8 @@ palikka
   }
 
   function zoomInit(w, h, url, fullResUrl) {
+    // debugger;
+    
 
     var imageContainer = L.map('zoomable-image-container', {
       center: [500, 500],

@@ -6397,7 +6397,8 @@ img {
   display: inline-block;
   position: relative;
   bottom: 0;
-  background-color: #5268C2; }
+  background-color: #5268C2;
+  margin-bottom: 20px; }
 
 .actions ul {
   margin: 0; }
@@ -6858,9 +6859,7 @@ div.grid__fav.active {
   border-radius: 20px; }
 
 .search-form__field:focus {
-  background-color: #FF7865;
-  border: solid 1px #FF7865;
-  color: #fff !important; }
+  border: solid 2px #FF7865; }
 
 .search-form__btn,
 .search-form__btn:hover {

@@ -21,7 +21,7 @@ img {
   border-color: $color-strikemaster;
 }
 
-/* Colors */
+/* Colors */ 
 .bittersweet {
   background-color: #fff; // changed from $color-bittersweet (orange)
 }
@@ -633,6 +633,7 @@ img {
   position: relative;
   bottom: 0;
   background-color: $color-hkm-blue;
+  margin-bottom: 20px;
 }
 .actions ul {
   margin: 0;
@@ -1154,9 +1155,7 @@ div.grid__fav.active {
   border-radius: 20px;
 }
 .search-form__field:focus {
-  background-color: $color-hkm-orange;
-  border: solid 1px $color-hkm-orange;
-  color: $color-white !important;
+  border: solid 2px $color-hkm-orange;
 }
 .search-form__btn,
 .search-form__btn:hover {

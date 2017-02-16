@@ -184,26 +184,29 @@ class MyCollectionsView(BaseCollectionListView):
     return Collection.objects.filter(owner=request.user)
 
 
+# CODEBASE HAD TWO DIFFERENT USES FOR SAME VARIABLE 'record', RENAMED THEM IN THIS CONTEXT SO THAT
+# collection_record REFERS TO RECORD IN A COLLECTION, record TO A RECORD IN FINNA/HKM DATABASE
+# STILL NEED TO DO SOME FURTHER RENAMING IN FUTURE TO CLEAR CONFUSION
 class CollectionDetailView(BaseView):
   template_name = 'hkm/views/collection.html'
   url_name = 'hkm_collection'
 
   collection = None
-  record = None
+  collection_record = None
   permissions = {
     'can_edit': False,
   }
 
   def get_template_names(self):
-    if self.record:
+    if self.collection_record:
       return 'hkm/views/collection_record.html'
     else:
       return self.template_name
 
   def get_url(self):
     url = reverse(self.url_name, kwargs={'collection_id': self.collection.id})
-    if self.record:
-      url += '?rid=%s' % str(self.record.id)
+    if self.collection_record:
+      url += '?rid=%s' % str(self.collection_record.id)
     return url
 
   def setup(self, request, *args, **kwargs):
@@ -214,10 +217,10 @@ class CollectionDetailView(BaseView):
       LOG.warning('Collection does not exist or does not belong this user')
       raise http.Http404()
 
-    record_id = request.GET.get('rid', None)
-    if record_id:
+    collection_record_id = request.GET.get('rid', None)
+    if collection_record_id:
       try:
-        self.record = self.collection.records.get(id=record_id)
+        self.collection_record = self.collection.records.get(id=collection_record_id)
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
 
@@ -253,10 +256,10 @@ class CollectionDetailView(BaseView):
       return self.get(request, *args, **kwargs)
 
   def ajax_handle_remove_record(self, request, *args, **kwargs):
-    record_id = request.POST.get('record_id', None)
-    if record_id:
+    collection_record_id = request.POST.get('record_id', None)
+    if collection_record_id:
       try:
-        record = self.collection.records.get(id=record_id)
+        collection_record = self.collection.records.get(id=collection_record_id)
       except Record.DoesNotExist:
         return http.HttpResponseNotFound()
       else:
@@ -269,19 +272,29 @@ class CollectionDetailView(BaseView):
     context['collection'] = self.collection
     context['collection_record_count'] = self.collection.records.all().count()
     context['permissions'] = self.permissions
-    context['record'] = self.record
-    if self.record:
-      context['hkm_id'] = self.record.record_id
-      context['current_record_order_number'] = self.record.order + 1
-      context['next_record'] = self.collection.get_next_record(self.record)
-      context['previous_record'] = self.collection.get_previous_record(self.record)
+
+    context['collection_record'] = self.collection_record
+    if self.collection_record:
+      context['hkm_id'] = self.collection_record.record_id
+      context['current_record_order_number'] = self.collection_record.order + 1
+      context['next_record'] = self.collection.get_next_record(self.collection_record)
+      context['previous_record'] = self.collection.get_previous_record(self.collection_record)
+
+      finnaRecord = FINNA.get_record(self.collection_record.record_id)
+      if finnaRecord:
+        context['record'] = finnaRecord['records'][0]
+
+      related_collections_ids = Record.objects.filter(record_id=self.collection_record.record_id).values_list('collection', flat=True)
+      related_collections = Collection.objects.user_can_view(self.request.user).filter(id__in=related_collections_ids).distinct()
+      context['related_collections'] = related_collections
+    
     if self.request.user.is_authenticated():
       context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
     else:
       context['my_collections'] = Collection.objects.none()
     return context
 
-
+# using collection_record here also instead of record (see CollectionDetailView naming confusion)
 class IndexView(CollectionDetailView):
   template_name = 'hkm/views/index.html'
   url_name = 'hkm_index'
@@ -303,11 +316,11 @@ class IndexView(CollectionDetailView):
     record_id = request.GET.get('rid', None)
     if record_id:
       try:
-        self.record = self.collection.records.get(id=record_id)
+        self.collection_record = self.collection.records.get(id=record_id)
       except Record.DoesNotExist:
         LOG.warning('Record does not exist or does not belong to this collection')
-    if not self.record and self.collection:
-      self.record = self.collection.records.first()
+    if not self.collection_record and self.collection:
+      self.collection_record = self.collection.records.first()
 
     self.permissions = {
       'can_edit': False
@@ -317,8 +330,8 @@ class IndexView(CollectionDetailView):
 
   def get_context_data(self, **kwargs):
     context = super(IndexView, self).get_context_data(**kwargs)
-    if self.record:
-      context['hkm_id'] = self.record.record_id
+    if self.collection_record:
+      context['hkm_id'] = self.collection_record.record_id
     if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
       self.open_popup = False
     context['open_popup'] = self.open_popup
@@ -455,11 +468,17 @@ class SearchRecordDetailView(SearchView):
 
   def get_context_data(self, **kwargs):
     context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
+
     if self.search_result:
       record = self.search_result['records'][0]
       record['full_res_url'] = HKM.get_full_res_image_url(record['rawData']['thumbnail'])
+      related_collections_ids = Record.objects.filter(record_id=record['id']).values_list('collection', flat=True)
+      related_collections = Collection.objects.user_can_view(self.request.user).filter(id__in=related_collections_ids).distinct()
+      
+      context['related_collections'] = related_collections
       context['record'] = record
       context['hkm_id'] = record['id']
+
     if self.request.user.is_authenticated():
       context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
     else:
