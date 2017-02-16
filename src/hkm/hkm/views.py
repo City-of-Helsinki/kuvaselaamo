@@ -755,14 +755,29 @@ class OrderConfirmation(BaseOrderView):
     order.datetime_checkout_ended = datetime.datetime.now()
     if self.order_result['return_code'] == '0':
       order.is_checkout_successful = True
+      if self.order_result['settled'] == '1':
+        order.is_payment_successful = True
+        LOG.debug('sending to Printmotor')
+        order.datetime_order_started = datetime.datetime.now()
+        printOrder = PRINTMOTOR.post(order)
+        order.datetime_order_ended = datetime.datetime.now()
+        if printOrder:
+          if printOrder == 200:
+            LOG.debug('Successfully sent order to printmotor')
+            order.is_order_successful = True
+          elif printOrder == 400:
+            LOG.debug('Bad request to Printmotor, check payload')
+            order.is_order_successful = False
+          elif printOrder == 401:
+            LOG.debug('Unauthorized @ Printmotor, check headers')
+            order.is_order_successful = False
+        else:
+          LOG.debug('Failed to communicate with Printmotor API')
+          order.is_order_successful = False
     else:
       order.is_checkout_successful = False
 
     order.save()
-    
-    #for key, value in self.order_result.iteritems():
-    #  if value:
-    #    print '%s: %s ' % (key, value)
     
     return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
     #return self.render_to_response(self.get_context_data(**kwargs))

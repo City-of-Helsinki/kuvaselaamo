@@ -162,5 +162,6 @@ HKM_PBW_SECRET_KEY = ''
 
 HKM_PRINTMOTOR_USERNAME = ''
 HKM_PRINTMOTOR_PASSWORD = ''
+HKM_PRINTMOTOR_API_KEY = ''
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
