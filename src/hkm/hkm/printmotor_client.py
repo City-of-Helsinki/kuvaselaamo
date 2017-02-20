@@ -38,7 +38,7 @@ class PrintmotorClient(object):
         'firstName' : order['first_name'],
         'lastName' : order['last_name'],
         'emailAddress' : order['email'],
-        'phone' : '0404040400',
+        'phone' : '0404040400', #THIS IS STILL UNFIXED!!!!!!!!!!!!!
       },
       'address': {
         'address' : order['street_address'],
@@ -53,7 +53,7 @@ class PrintmotorClient(object):
                 'customization' : [ 
                 {
                   'fieldName' : "image",
-                  'value' : 'https://i.ytimg.com/vi/te0l_hwq6aE/maxresdefault.jpg' #order['crop_image_url'], 
+                  'value' : order['crop_image_url'], 
                 } 
             ],
             'endUserPrice' : { 
