@@ -181,7 +181,7 @@ palikka
     }
   });
 
-  $("#popover-info").popover({
+  /*$("#popover-info").popover({
     html: true,
     toggle: 'popover',
     container: 'body',
@@ -191,7 +191,14 @@ palikka
     content: function() {
       return $('#popover-info-content').html();
     }
-  });
+  });*/
+
+  // scroll down to detail section when info button clicked
+  $("#popover-info").click(function(){
+    $("html, body").animate({
+      scrollTop: $("#detail-section").offset().top
+    }, 500);
+  })
 
   var clipboard = new Clipboard('.popover-list__btn--share');
   $("#popover-share").popover({

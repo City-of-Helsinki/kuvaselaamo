@@ -11,6 +11,7 @@
   </div>
   <div class="content">
     {% block content %}{% endblock %}
+    
   </div>
 
   {% if previous_record %}
@@ -20,4 +21,7 @@
     <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}">{% trans 'Next image' %}</a>
   {% endif %}
 
+
+
 {% endblock %}
+

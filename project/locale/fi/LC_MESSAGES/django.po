@@ -97,7 +97,7 @@ msgstr "Kokoelma"
 #: hkm/hkm/models.py:132 hkm/hkm/models.py:240 hkm/hkm/models.py:291
 #: hkm/hkm/models.py:303
 msgid "Finna record ID"
-msgstr "Finna tietueen ID"
+msgstr "Finna-kuvan ID"
 
 #: hkm/hkm/models.py:133
 msgid "Edited full resolution image"
@@ -201,7 +201,7 @@ msgstr "Kuvan URL"
 
 #: hkm/hkm/models.py:254 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
-msgstr "Tietue"
+msgstr "Kuva"
 
 #: hkm/hkm/models.py:256
 msgid "Order form phase"
@@ -491,11 +491,11 @@ msgstr "Hae kuvia"
 
 #: hkm/hkm/templates/hkm/views/index.html:106
 msgid "Explore collections"
-msgstr "Tee tutkimusmatka"
+msgstr "Selaa kokoelmia"
 
 #: hkm/hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
-msgstr "Kokoelmani"
+msgstr "Omat kokoelmat"
 
 #: hkm/hkm/templates/hkm/views/public_collections.html:10
 msgid "Featured collections"
@@ -556,7 +556,7 @@ msgstr "Ei kuvausta"
 
 #: hkm/hkm/templates/hkm/views/search.html:10
 msgid "Records"
-msgstr "Tietuetta"
+msgstr "Kuvaa"
 
 #: hkm/hkm/templates/hkm/views/search.html:36
 msgid "Author"
@@ -624,4 +624,4 @@ msgstr ""
 #~ msgstr "Kirjautuminen"
 
 #~ msgid "RECORDS"
-#~ msgstr "Tietuetta"
+#~ msgstr "Kuvaa"

@@ -75,35 +75,40 @@
     {% endif %}
   {% endblock %}
   {% block detail %}
-  <div class="record-meta">
+  <div id="detail-section" class="container-fluid">
 
     {% if record %}
 
-      <div class="record-meta__col record-meta__col--left col-md-4">
-         <form method="POST">
-          <h1>{% trans 'Feedback' %}</h1>
-          {% csrf_token %}
-          {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
-          <input type="hidden" name="action" value="feedback" />
-          <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
-        </form>
-      </div>
-      <div class="record-meta__col record-meta__col--right col-md-8">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
         <h1 class="record-meta__title">{{ record.title }}</h1>
         <h3 class="record-meta__copyright">{{ record.imageRights.copyright }}</h3>
-        <h2 class="record-meta__sub-header">{% trans 'Identification information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Image type:' %} {% for type in record.rawData.format %}{{ type.translated }}, {% endfor %}</p>
-        <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
-        <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
-        <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
-        <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.year }}</p>
-        <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
-        <h2 class="record-meta__sub-header">{% trans 'License information' %}</h2>
-        <p class="record-meta__paragraph">{{ record.imageRights.description.0 }}</p>
+        </div>
+      </div><!-- endrow-->        
+        <div class="row">
+        <div class="col-md-offset-2 col-md-4 col-sm-6">
+          <h2 class="record-meta__sub-header">{% trans 'Identification information' %}</h2>
+          <p class="record-meta__paragraph">{% trans 'Image type:' %} {% for type in record.rawData.format %}{{ type.translated }}, {% endfor %}</p>
+          <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
+          <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
+           <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
+          <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
+          <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.year }}</p>
 
+          <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
+          <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
+        </div>
+        
+         
+
+        <div class="col-md-4 col-sm-6">
+          <h2 class="record-meta__sub-header">{% trans 'License information' %}</h2>
+          <p class="record-meta__paragraph">{{ record.imageRights.description.0 }}</p>
+        </div>  
+        </div><!-- endrow -->
         {% if related_collections %}
+        <div class="row">
+          <div class="col-sm-12">
           <h2 class="record-meta__sub-header">{% trans 'Related collections' %}</h2>
           <div class="grid flex-images">
             <div class="grid__group item-slider invisible" data-grid-type="collection">
@@ -129,16 +134,46 @@
                 </div>
               {% endfor %}
             </div>
+            </div>
           </div>
+          </div> <!-- endrow -->
         {% endif %}
-      </div>
 
+        <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+          <form method="POST">
+            <h1>Palaute kuvasta</h1>
+            {% csrf_token %}
+            {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
+            <input type="hidden" name="action" value="feedback" />
+            <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+          </form>
+        </div>
+        </div>
+      </div>
+      </div>
+      </div>
     {% else %}
 
       {% include 'hkm/snippets/not_responding.html' %}
 
     {% endif %}
 
+  </div>
+  {% endblock %}
+
+   {% block footer %}
+    <div class="site-footer">
+      <div class="row">
+        <div class="col-sm-offset-2 col-sm-4">
+          <h2>THIS IS A FOOTER</h2>
+          <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </p>
+        </div>
+        <div class="col-sm-4">
+          <h2>THIS IS A FOOTER</h2>
+          <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </p>
+        </div>
+      </div> <!--endrow-->
   </div>
   {% endblock %}
 

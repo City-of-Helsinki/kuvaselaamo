@@ -233,11 +233,18 @@ class CollectionDetailView(BaseView):
 
   def get_empty_forms(self, request):
     context_forms = super(CollectionDetailView, self).get_empty_forms(request)
-    context_forms['collection_form'] = forms.CollectionForm(prefix='collection-form', instance=self.collection, user=request.user)
+    if request.user.is_authenticated():
+      user = request.user
+      context_forms['collection_form'] = forms.CollectionForm(prefix='collection-form', instance=self.collection, user=user)
+    else:
+      user = None
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
     return context_forms
 
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
     if self.permissions['can_edit']:
       if action == 'edit':
         return self.handle_edit(request, *args, **kwargs)
@@ -250,7 +257,7 @@ class CollectionDetailView(BaseView):
     print form.fields
     if form.is_valid():
       form.save()
-      return redirect(self.get_url())
+      return redirect(reverse(self.url_name, kwargs={'collection_id': self.collection_record.id}))
     else:
       kwargs['collection_form'] = form
       return self.get(request, *args, **kwargs)
@@ -266,6 +273,31 @@ class CollectionDetailView(BaseView):
         record.delete()
         return http.HttpResponse()
     return http.HttpResponseBadRequest()
+
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      feedback = form.save(commit=False)
+      feedback.record_id = self.collection_record.record_id
+      feedback.save()
+      tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+      # TODO: redirect to success page?
+      return redirect(self.get_url())
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
+
+  def get_context_data(self, **kwargs):
+    context = super(IndexView, self).get_context_data(**kwargs)
+    if self.collection_record:
+      context['hkm_id'] = self.collection_record.record_id
+    if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
+      self.open_popup = False
+    context['open_popup'] = self.open_popup
+    return context
 
   def get_context_data(self, **kwargs):
     context = super(CollectionDetailView, self).get_context_data(**kwargs)
@@ -327,6 +359,37 @@ class IndexView(CollectionDetailView):
     }
 
     return True
+
+  def get_empty_forms(self, request):
+    context_forms = super(IndexView, self).get_empty_forms(request)
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
+    return context_forms
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
+    return super(IndexView, self).post(request, *args, **kwargs)
+
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      feedback = form.save(commit=False)
+      feedback.record_id = self.collection_record.record_id
+      feedback.save()
+      tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+      # TODO: redirect to success page?
+      return redirect(self.url_name)
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
 
   def get_context_data(self, **kwargs):
     context = super(IndexView, self).get_context_data(**kwargs)
@@ -484,6 +547,40 @@ class SearchRecordDetailView(SearchView):
     else:
       context['my_collections'] = Collection.objects.none()
     return context
+
+  def get_empty_forms(self, request):
+    context_forms = super(SearchRecordDetailView, self).get_empty_forms(request)
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
+    return context_forms
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
+    return super(SearchRecordDetailView, self).post(request, *args, **kwargs)
+
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      if self.search_result:
+        record = self.search_result['records'][0]
+        feedback = form.save(commit=False)
+        feedback.record_id = record['id']
+        feedback.save()
+        tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+        # TODO: redirect to success page?
+        return redirect(reverse('hkm_record', kwargs={'finna_id': record['id']}))
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
+
 
 
 class BaseFinnaRecordDetailView(BaseView):
