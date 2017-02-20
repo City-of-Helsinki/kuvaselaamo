@@ -18,7 +18,6 @@ class PaybywayClient(object):
 	API_KEY = settings.PBW_API_KEY
 	SECRET_KEY = settings.PBW_SECRET_KEY
 	# change dev to www when final -- this is a testing api
-	timeout = 10
 
 	def post(self, order_hash, price):
 		url = PaybywayClient.API_ENDPOINT
@@ -41,7 +40,7 @@ class PaybywayClient(object):
 		}
 
 		try: 
-			r = requests.post(url, json=payload)
+			r = requests.post(url, json=payload, timeout=10)
 			data = r.json()
 			return data
 		except requests.exceptions.RequestException:

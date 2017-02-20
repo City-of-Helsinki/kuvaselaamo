@@ -257,7 +257,7 @@ class CollectionDetailView(BaseView):
     print form.fields
     if form.is_valid():
       form.save()
-      return redirect(reverse(self.url_name, kwargs={'collection_id': self.collection_record.id}))
+      return redirect(reverse(self.url_name, kwargs={'collection_id': self.collection.id}))
     else:
       kwargs['collection_form'] = form
       return self.get(request, *args, **kwargs)
@@ -291,7 +291,7 @@ class CollectionDetailView(BaseView):
     return self.get(request, *args, **kwargs)
 
   def get_context_data(self, **kwargs):
-    context = super(IndexView, self).get_context_data(**kwargs)
+    context = super(CollectionDetailView, self).get_context_data(**kwargs)
     if self.collection_record:
       context['hkm_id'] = self.collection_record.record_id
     if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
@@ -891,6 +891,9 @@ class OrderConfirmation(BaseOrderView):
           elif printOrder == 401:
             LOG.debug('Unauthorized @ Printmotor, check headers')
             order.is_order_successful = False
+          elif printOrder == 500:
+            LOG.debug('Printmotor server error, maybe image URL is invalid')
+            order.is_order_successful = False
         else:
           LOG.debug('Failed to communicate with Printmotor API')
           order.is_order_successful = False
@@ -937,6 +940,26 @@ class OrderPBWNotify(BaseOrderView):
       order.datetime_payment_processed = datetime.datetime.now()
       if self.order_result['return_code'] == '0' and self.order_result['settled'] == '1':
         order.is_payment_successful = True
+        LOG.debug('sending to Printmotor')
+        order.datetime_order_started = datetime.datetime.now()
+        printOrder = PRINTMOTOR.post(order)
+        order.datetime_order_ended = datetime.datetime.now()
+        if printOrder:
+          if printOrder == 200:
+            LOG.debug('Successfully sent order to printmotor')
+            order.is_order_successful = True
+          elif printOrder == 400:
+            LOG.debug('Bad request to Printmotor, check payload')
+            order.is_order_successful = False
+          elif printOrder == 401:
+            LOG.debug('Unauthorized @ Printmotor, check headers')
+            order.is_order_successful = False
+          elif printOrder == 500:
+            LOG.debug('Printmotor server error, maybe image URL is invalid')
+            order.is_order_successful = False
+        else:
+          LOG.debug('Failed to communicate with Printmotor API')
+          order.is_order_successful = False
       else:
         order.is_payment_successful = False
 

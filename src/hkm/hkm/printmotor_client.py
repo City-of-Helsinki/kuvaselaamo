@@ -19,16 +19,16 @@ class PrintmotorClient(object):
 
 
   productNames = {
-    '40 x 30 cm': 'api-poster-40x30'
+    '40 x 30 cm': 'api-poster-40x30',
+    '30 x 40 cm': 'api-poster-30x40',
+    'A4 Vaaka': 'api-poster-a4',
+    'A4 Pysty': 'api-poster-a4',
   }
 
   def post(self, orderObject):
     LOG.debug(PrintmotorClient.API_KEY)
     url = PrintmotorClient.API_ENDPOINT
-    if PrintmotorClient.productNames[orderObject.product_name]:
-      layout = PrintmotorClient.productNames[orderObject.product_name]
-    else:
-      layout = 'unknown'
+    layout = self.productNames.get(orderObject.product_name, 'unknown')
 
     order = model_to_dict(orderObject)
     # order['phone'] = model_to_dict(order['phone'], ['national_number'])['national_number']
@@ -53,7 +53,7 @@ class PrintmotorClient(object):
                 'customization' : [ 
                 {
                   'fieldName' : "image",
-                  'value' : order['image_url'], 
+                  'value' : 'https://i.ytimg.com/vi/te0l_hwq6aE/maxresdefault.jpg' #order['crop_image_url'], 
                 } 
             ],
             'endUserPrice' : { 

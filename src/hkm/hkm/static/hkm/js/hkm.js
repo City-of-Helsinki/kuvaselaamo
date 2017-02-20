@@ -619,7 +619,7 @@ palikka
       center: [500, 500],
       minZoom: 1,
       maxZoom: 5,
-      zoom: 2,
+      zoom: 1,
       crs: L.CRS.Simple,
       maxBoundsViscosity: 1,
       scrollWheelZoom: false

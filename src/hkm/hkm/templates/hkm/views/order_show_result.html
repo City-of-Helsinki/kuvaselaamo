@@ -12,8 +12,53 @@
       <div class="record-meta__col record-meta__col--left col-md-5">
         <h1 class="order-preview__text">Kuvan tilaus</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
-        <p>{% if order.is_checkout_successful %}Tilaus onnistui, {% else %}Pieleen meni, {% endif %}{{ order.first_name }}</p>
-        <p>Saat sähköpostina vahvistuksen tilauksesta ja tietoa sen etenemisestä.</p>
+        {% if order.is_checkout_successful %}
+
+          {% if order.is_payment_successful %}
+            <div class="alert alert-success">Kiitos tilauksestasi - maksu on vahvistettu. Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen.</div>
+
+            {% if order.is_order_successful %}
+              <div class="alert alert-success">Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla tietoa toimituksen etenemisestä.</div>
+            {% else %}
+              <div class="alert alert-danger">Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe. Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään.</div>
+            {% endif %}
+
+          {% else %}
+            <div class="alert alert-success">Kiitos tilauksestasi. Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen, kun maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, kuitenkin maksimissaan puoli tuntia.</div>
+          {% endif %}
+
+        {% else %}
+          <div class="alert alert-danger">Maksun käsittelyssä tapahtui virhe. Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään.</div>
+        {% endif %}
+
+        <table class="table table-striped">
+        <caption>YHTEYSTIEDOT</caption>
+        <tr>
+        <td>Nimi: </td><td>{{ order.first_name }} {{ order.last_name }}</td>
+        </tr>
+        <tr>
+        <td>Sähköposti: </td><td>{{ order.email }}</td>
+        </tr>
+        <tr>
+        <td>Puhelin: </td><td>{{ order.phone }}</td>
+        </tr>
+        <tr>
+        <td>Osoite: </td><td>{{ order.street_address }}, {{ order.postal_code }} {{ order.city }}</td>
+        </tr>
+        </table>
+
+        <table class="table table-striped">
+        <caption>TILAUS</caption>
+        <tr>
+        <td>Tuote: </td><td>{{ order.product_name }}</td>
+        </tr>
+        <tr>
+        <td>Kappalemäärä: </td><td>{{ order.amount }}</td>
+        </tr>
+        <tr>
+        <td>Hinta: </td><td>{{ order.total_price }} € sis. ALV{% if order.amount > 1 %} (á {{ order.unit_price }}€){% endif %}</td>
+        </tr>
+        </table>
       </div>
       <div class="record-meta__col record-meta__col--right col-md-7">
         <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>

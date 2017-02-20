@@ -93,7 +93,7 @@
       <ul class="nav navbar-nav">
         <span class="nav-search-form__desktop">
           <form action="/search/" id="nav-search" class="form-inline ">
-            <input class="nav-search__field" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+            <input class="nav-search__field" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
             <button class="btn btn-primary nav-search__btn" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
           </form>
         </span>
@@ -104,8 +104,8 @@
         {% if user.is_authenticated %}
             <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My collections' %}</a></li>
         {% endif %}
-          <li class="nav-small-link"><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></li>
-        <li class="nav-small-link">
+          <li><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></li>
+        <li>
             <a href="#" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Language' %}</a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="language-dropdown">
               {% if language == 'fi' %}
@@ -121,9 +121,9 @@
             </ul>
           </li>
         {% if user.is_authenticated %}
-            <li class="nav-small-link"><a href="{% url 'logout' %}?next=/">{% trans 'Logout' %}</a></li>
+            <li><a href="{% url 'logout' %}?next=/">{% trans 'Logout' %}</a></li>
         {% else %}
-            <li class="nav-small-link"><a href="#" id="login-btn" data-toggle="modal" data-target="#login">{% trans 'Log in' %}</a></li>
+            <li><a href="#" id="login-btn" data-toggle="modal" data-target="#login">{% trans 'Log in' %}</a></li>
         {% endif %}
         
       </ul>
