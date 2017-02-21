@@ -328,7 +328,7 @@ palikka
         var $ppiIndicator = $('#ppi-indicator');
         var fullX = $ppiIndicator.attr('data-full-x');
         var fullY = $ppiIndicator.attr('data-full-y');
-        var $inputChecked = $('input[name=product]:checked');
+        $inputChecked = $('input[name=product]:checked');
         var xInches = parseInt($inputChecked.attr('data-xsize')) / 25.4; // mm to in
         var yInches = parseInt($inputChecked.attr('data-ysize')) / 25.4;
 
@@ -357,6 +357,7 @@ palikka
 
       }
 
+      var $inputChecked = $('input[name=product]:checked');
       url = orderPreviewImage.getAttribute('data-img-url');
       image = orderPreviewImage;
       image.src=url;
@@ -364,8 +365,7 @@ palikka
       var aspectPortrait = 0.707;
 
 
-      var savedAspectRatio = $("input[name='crop_width']").val() / 
-        $("input[name='crop_height']").val();
+      var savedAspectRatio = $inputChecked.attr('data-xsize') / $inputChecked.attr('data-ysize');
       options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
       cropperInit();
      

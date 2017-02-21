@@ -5860,7 +5860,8 @@ body {
   margin: 0;
   font-family: "brownlight", sans-serif;
   box-sizing: border-box;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  height: 100%; }
 
 body.viewer-view {
   background-color: #fff; }
@@ -6873,14 +6874,6 @@ div.grid__fav.active {
   .nav-search-form__desktop .btn:hover {
     border-color: #FF7865 !important; }
 
-@media (max-width: 1099px) {
-  .nav-search-form__desktop {
-    display: none !important; } }
-
-@media (min-width: 1100px) {
-  .nav-search-link__mobile {
-    display: none !important; } }
-
 .nav-search__field {
   padding-left: 10px;
   margin-right: 0px !important;
@@ -6893,15 +6886,27 @@ div.grid__fav.active {
   border-right: 0px;
   box-shadow: none !important;
   outline: none !important;
-  height: 30px; }
+  height: 30px;
+  vertical-align: middle; }
 
 .nav-search__btn {
-  max-height: 30px;
+  height: 30px;
+  width: 40px;
   margin-left: -5px;
   border-style: solid;
   border-radius: 0px 15px 15px 0px;
   border-width: 2px;
-  border-color: #FF7865; }
+  border-color: #FF7865;
+  padding: 5px;
+  vertical-align: middle; }
+
+@media (max-width: 1099px) {
+  .nav-search-form__desktop {
+    display: none !important; } }
+
+@media (min-width: 1100px) {
+  .nav-search-link__mobile {
+    display: none !important; } }
 
 /* SECONDARY MENU STYLING ON NON CELLPHONE SCREENS */
 @media (min-width: 900px) {

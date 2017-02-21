@@ -737,13 +737,13 @@ class OrderProductView(BaseOrderView):
     print request.POST
     if form.is_valid():
       order = form.save()
-      order.crop_x = float(request.POST.get('crop_x', None))
-      order.crop_y = float(request.POST.get('crop_y', None))
-      order.crop_width = float(request.POST.get('crop_width', None))
-      order.crop_height = float(request.POST.get('crop_height', None))
-      order.original_width = float(request.POST.get('original_width', None))
-      order.original_height = float(request.POST.get('original_height', None))
-      printproduct_type = PrintProduct.objects.get(id=int(request.POST.get('product', None)))
+      order.crop_x = float(request.POST.get('crop_x', 0))
+      order.crop_y = float(request.POST.get('crop_y', 0))
+      order.crop_width = float(request.POST.get('crop_width', 1))
+      order.crop_height = float(request.POST.get('crop_height', 1))
+      order.original_width = float(request.POST.get('original_width', 1))
+      order.original_height = float(request.POST.get('original_height', 1))
+      printproduct_type = PrintProduct.objects.get(id=int(request.POST.get('product', 6)))
       order.product_type = printproduct_type
       order.product_name = printproduct_type.name
       order.unit_price = printproduct_type.price
