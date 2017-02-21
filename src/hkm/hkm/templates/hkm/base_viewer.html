@@ -62,15 +62,17 @@
             </svg>
           </i>
         </button>
-        <a href="{% url 'hkm_order_create' finna_id=hkm_id %}">
-        <button class="actions__btn actions__btn--right" id="popover-buy">
-          <i class="actions__icon">
-            <svg class="svg-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-            </svg>
-          </i>
-        </button>
-        </a>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="order" />
+          <button type="submit" formaction="{% url 'hkm_order_create' finna_id=hkm_id %}" name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
+            <i class="actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+              </svg>
+            </i>
+          </button>
+        </form>
       </div>
     {% endif %}
   {% endblock %}

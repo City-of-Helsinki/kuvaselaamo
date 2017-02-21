@@ -671,19 +671,23 @@ class CreateOrderView(BaseFinnaRecordDetailView):
   template_name = ''
   url_name = 'hkm_order_create'
 
-#TODO disable get, enable post
-#  def get(self, request, *args, **kwargs):
-#    LOG.error('GET request to CreateOrderView')
-#    return http.HttpResponseNotAllowed(['POST'])
 
+  # disable GET requests when creating orders
   def get(self, request, *args, **kwargs):
-    #action = request.POST.get('action', None)
-    #if action == 'order':
+    LOG.debug('attempted GET request at createorderview')
+    return http.HttpResponseNotAllowed(['POST'])
+
+  # orders are only created from POST requests
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'order':
       return self.handle_order(request, *args, **kwargs)
-    #return self.handle_invalid_post_action(request, *args, **kwargs)
+    # other post requests return an error
+    return http.Http404()
 
   def handle_order(self, request, *args, **kwargs):
-    order = ProductOrder(session=request.session.session_key, record_finna_id=self.record['id'],
+    #session=request.session.session_key
+    order = ProductOrder(record_finna_id=self.record['id'],
       order_hash=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20)))
     order.total_price = order.amount * order.product_type.price
 
@@ -696,6 +700,12 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     if request.user.is_authenticated():
       order.user = request.user
     order.save()
+
+    # Save order identifier in session
+    request.session['order_hash'] = order.order_hash
+    if 'order_hash' in request.session:
+      LOG.debug(request.session['order_hash'])
+
     #return redirect(reverse('hkm_order_product', kwargs={'order_id': order.id}))
     return redirect(reverse('hkm_order_product', kwargs={'order_id': order.order_hash}))
 
@@ -710,10 +720,30 @@ class BaseOrderView(BaseView):
     try:
       #self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
       self.order = ProductOrder.objects.get(order_hash=kwargs['order_id'])
+
+      # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
+      # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN ORDER
+      if 'order_hash' in request.session:
+        # if order identifier in session does not match the order in the url, raise 404
+        if request.session['order_hash'] != self.order.order_hash:
+          LOG.error('Unauthorized')
+          raise http.Http404()
+      else:
+        # # if session does not have order identifier, raise 404
+        LOG.error('Product order does not exist for user')
+        raise http.Http404()
     except ProductOrder.DoesNotExist:
       LOG.error('Product order does not exist for user')
       raise http.Http404()
     else:
+      LOG.debug('User is authorized to access this order view')
+
+      # if user has successfully checked out the order, they will always be redirected to 
+      # order result page. This way user cant modify the same order retroactively
+      if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
+        LOG.debug('checkout is already done for this order, redirect user to result page')
+        return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
+      
       return True
 
   def get_context_data(self, **kwargs):
