@@ -181,7 +181,7 @@ palikka
     }
   });
 
-  /*$("#popover-info").popover({
+  /*$("#popover-favorite").popover({
     html: true,
     toggle: 'popover',
     container: 'body',
@@ -189,7 +189,7 @@ palikka
     trigger: 'focus',
     html: true,
     content: function() {
-      return $('#popover-info-content').html();
+      return $('#popover-favorite-content').html();
     }
   });*/
 
@@ -229,19 +229,24 @@ palikka
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
   favBtn = '.grid__fav';
+  navFavBtn = '.nav__fav';
 
   $(document).on('click', favBtn, function() {
-    postFav($(this));
+    postFav($(this), favBtn);
+  });
+  $(document).on('click', navFavBtn, function() {
+    console.log('nav fav button clicked');
+    postFav($(this), navFavBtn);
   });
 
-  function postFav($this) {
+  function postFav($this, favClass) {
     if (! $this.hasClass('active')) {
       $.post('/ajax/record/fav/', {
         action: 'add',
         record_id: $this.attr('data-record-id')
       })
       .done(function(){
-        $('.grid__fav[data-record-id="' + $this.attr('data-record-id') + '"]').addClass('active');
+        $(favClass + '[data-record-id="' + $this.attr('data-record-id') + '"]').addClass('active');
       });
     }
     else {
@@ -250,7 +255,7 @@ palikka
         record_id: $this.attr('data-record-id')
       })
       .done(function(){
-        $('.grid__fav[data-record-id="' + $this.attr('data-record-id') + '"]').removeClass('active');
+        $(favClass + '[data-record-id="' + $this.attr('data-record-id') + '"]').removeClass('active');
       });
     }
   }

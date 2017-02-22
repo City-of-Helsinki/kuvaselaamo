@@ -428,7 +428,7 @@ msgstr "Viesti"
 
 #: hkm/hkm/templates/hkm/snippets/not_responding.html:4
 msgid "Finnas material server is not responding"
-msgstr ""
+msgstr "Ei hakutuloksia, tai ongelma yhdistämisessä Finnan palvelimelle"
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:5
 msgid "Download printable image"

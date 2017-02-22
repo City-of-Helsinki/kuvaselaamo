@@ -33,6 +33,13 @@
           </i>
         </button>
         {% if user.is_authenticated %}
+          <button class="actions__btn actions__btn--right nav__fav" data-record-id="{{ hkm_id }}" id="popover-favorite">
+          <i class="actions__icon">
+              <svg class="svg-icon nav__fav--heart">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
+              </svg>
+          </i>
+          </button>
           <button class="actions__btn actions__btn--right" id="popover-add">
             <i class="actions__icon">
               <svg class="svg-icon">

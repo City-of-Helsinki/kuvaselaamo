@@ -905,6 +905,7 @@ class OrderConfirmation(BaseOrderView):
     order.datetime_checkout_ended = datetime.datetime.now()
     if self.order_result['return_code'] == '0':
       order.is_checkout_successful = True
+      self.handle_send_mail(order, 'pbw')
       if self.order_result['settled'] == '1':
         order.is_payment_successful = True
         LOG.debug('sending to Printmotor')
@@ -915,6 +916,7 @@ class OrderConfirmation(BaseOrderView):
           if printOrder == 200:
             LOG.debug('Successfully sent order to printmotor')
             order.is_order_successful = True
+            self.handle_send_mail(order, 'printmotor')
           elif printOrder == 400:
             LOG.debug('Bad request to Printmotor, check payload')
             order.is_order_successful = False
@@ -939,6 +941,21 @@ class OrderConfirmation(BaseOrderView):
     context = super(OrderConfirmationView, self).get_context_data(**kwargs)
     context['order_result'] = self.order_result
     return context
+
+  # sends mail to customer, first after successful checkout, then after order delivery to printmotor
+  def handle_send_mail(self, customer_order, phase):
+      if not customer_order or not phase:
+        return
+
+      order = model_to_dict(customer_order)
+      if phase == 'pbw':
+        subject = 'Helsinkikuvia.fi - tilausvahvistus'
+        message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.'
+      elif phase == 'printmotor':
+        subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
+        message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalolle.'
+
+      return send_mail(subject, message, 'foo@helsinkikuvia.fi', [order['email']])
 
 class OrderShowResultView(BaseOrderView):
   template_name = 'hkm/views/order_show_result.html'

@@ -6483,7 +6483,7 @@ input[type="text"]:-ms-input-placeholder {
   .actions__icon {
     width: 100%; }
   .actions__btn {
-    width: calc(100% / 7); }
+    width: calc(100% / 8); }
   .actions__btn:nth-child(n+3) {
     float: right; } }
 
@@ -6907,6 +6907,18 @@ div.grid__fav.active {
 @media (min-width: 1100px) {
   .nav-search-link__mobile {
     display: none !important; } }
+
+.nav__fav {
+  color: #5268C2 !important;
+  fill: #fff; }
+  .nav__fav svg {
+    fill: inherit; }
+
+.nav__fav.active {
+  color: #5268C2 !important;
+  fill: #FF7865; }
+  .nav__fav.active svg {
+    fill: inherit; }
 
 /* SECONDARY MENU STYLING ON NON CELLPHONE SCREENS */
 @media (min-width: 900px) {

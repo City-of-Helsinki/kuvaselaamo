@@ -737,7 +737,7 @@ color: $color-hkm-orange !important;
     width: 100%;
   }
   .actions__btn {
-    width: calc(100% / 7);
+    width: calc(100% / 8);
   }
   .actions__btn:nth-child(n+3) {
     float: right;
@@ -1238,6 +1238,24 @@ div.grid__fav.active {
 
 
 
+.nav__fav {
+  color: $color-hkm-blue !important;
+  fill: $color-white;
+  svg {
+    fill: inherit;  
+  }
+}
+
+.nav__fav.active {
+  
+  color: $color-hkm-blue !important;
+  fill: $color-hkm-orange;
+  
+  svg {
+    
+    fill: inherit;
+  }
+}
 
 
 
