@@ -6039,9 +6039,6 @@ input[type="text"]:-ms-input-placeholder {
     background-color: transparent !important;
     border-color: transparent; }
 
-.icon-bar {
-  background-color: #00C281 !important; }
-
 .order-step {
   position: relative;
   width: 33%;
@@ -6132,12 +6129,12 @@ input[type="text"]:-ms-input-placeholder {
 
 .nav_viewer {
   background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: solid 1px #00C281;
+  border-bottom: solid 1px #5268C2;
   color: #00C281; }
   .nav_viewer a {
     color: #5268C2; }
   .nav_viewer .navbar-toggle .icon-bar {
-    background: #00C281; }
+    background: #5268C2; }
   .nav_viewer .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
   .nav_viewer .dropdown-menu {
@@ -6152,7 +6149,7 @@ input[type="text"]:-ms-input-placeholder {
   .nav_collection a {
     color: #5268C2; }
   .nav_collection .navbar-toggle .icon-bar {
-    background: #00C281; }
+    background: #5268C2; }
   .nav_collection .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png"); }
   .nav_collection .dropdown-menu {
@@ -6743,7 +6740,7 @@ div.grid__fav.active {
 
 .search-modal__dialog {
   position: absolute;
-  bottom: 0%;
+  bottom: 60px;
   width: 100%;
   margin: -90px 0 0 0; }
 

@@ -211,9 +211,6 @@ color: #555 !important;
   }
 }
 
-.icon-bar {
-  background-color: $color-hkm-green !important;
-}
 
 .order-step {
   position: relative;
@@ -328,13 +325,13 @@ color: #555 !important;
 }
 .nav_viewer {
   background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: solid 1px $color-hkm-green;
+  border-bottom: solid 1px $color-hkm-blue;
   color: $color-hkm-green;
   a {
     color: $color-hkm-blue;
   }
   .navbar-toggle .icon-bar {
-    background: $color-hkm-green;
+    background: $color-hkm-blue;
   }
   .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png");
@@ -354,7 +351,7 @@ color: #555 !important;
     color: $color-hkm-blue;
   }
   .navbar-toggle .icon-bar {
-    background: $color-hkm-green;
+    background: $color-hkm-blue;
   }
   .brand-img {
     background-image: url("/static/hkm/img/h_sydan_violetti.png");
@@ -1039,7 +1036,7 @@ div.grid__fav.active {
 }
 .search-modal__dialog {
   position: absolute;
-  bottom: 0%;
+  bottom: 60px;
   width: 100%;
   margin: -90px 0 0 0;
 }
