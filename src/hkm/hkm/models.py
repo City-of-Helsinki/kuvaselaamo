@@ -258,7 +258,7 @@ class ProductOrder(BaseModel):
 
   form_phase = models.IntegerField(verbose_name=_(u'Order form phase'), default=1)
   order_hash = models.CharField(verbose_name=_(u'Randomized order identifier phrase'), max_length=1024, null=True, blank=True)
-  product_type = models.ForeignKey(PrintProduct, verbose_name=_(u'Product type'), default=1, blank=True)
+  product_type = models.ForeignKey(PrintProduct, verbose_name=_(u'Product type'), default=6, blank=True)
   product_name = models.CharField(verbose_name=_(u'Product Name'), max_length=1024, null=True, blank=True)
   # Price and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here

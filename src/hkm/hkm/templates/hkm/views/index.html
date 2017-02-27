@@ -67,7 +67,7 @@
     </form>
   {% endif %}
 
-  <!--<div class="search-modal modal fade" id="search-modal" tabindex="-1" role="dialog" data-open-popup="{{ open_popup }}">
+  <div class="search-modal modal fade" id="search-modal" tabindex="-1" role="dialog" data-open-popup="{{ open_popup }}">
     <div class="search-modal__dialog modal-dialog" role="document">
       <div class="search-modal__content modal-content">
         <div class="search-modal__body modal-body">
@@ -78,42 +78,22 @@
               </svg>
             </i>
           </button>
-          <table class="search-modal__table">
-            <tr class="search-modal__row search-modal__row--top">
-              <td class="search-modal__cell"></td>
-              <td class="search-modal__cell search-modal__cell--middle">
-                <form class="search-form form-group" action="{% url 'hkm_search' %}">
-                  <div class="search-form__content input-group">
-                    <input class="search-form__field form-control" placeholder="{% trans 'Search images' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-                    <span class="search-form__btn-container input-group-btn">
-                      <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+            <div class="search-modal__row search-modal__row--top">
+              <div class="search-modal__cell search-modal__cell--middle">
+                <form class="modal-search-form form-group" action="{% url 'hkm_search' %}">
+                  <div class="modal-search-form__content input-group">
+                    <input class="modal-search-form__field form-control" placeholder="{% trans 'Search for images from the museum archive' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+                    <span class="modal-search-form__btn-container input-group-btn">
+                      <button class="modal-search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
                     </span>
                   </div>
                 </form>
-              </td>
-              <td class="search-modal__cell"></td>
-            </tr>
-            <tr class="search-modal__row search-modal__row--bottom">
-              <td class="search-modal__cell"></td>
-              <td class="search-modal__cell search-modal__cell--middle">
-                <a class="explore__link" href="{% url 'hkm_public_collections' %}">
-                    <i class="explore__icon">
-                      <svg class="svg-icon">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-explore"></use>
-                      </svg>
-                    </i>
-                  <h1 class="explore__h1">
-                    {% trans 'Explore collections' %}
-                  </h1>
-                </a>
-              </td>
-              <td class="search-modal__cell"></td>
-            </tr>
-          </table>
+              </div>
+            </div>
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
 
 {% endblock %}
 

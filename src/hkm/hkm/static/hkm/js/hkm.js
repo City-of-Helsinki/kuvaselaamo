@@ -296,22 +296,22 @@ palikka
     if (orderPreviewImage) {
 
       function productSettingsExistInForm () {
-        if ($("input[name='crop_x']").val() === "None") return false;
-        if ($("input[name='crop_y']").val() === "None") return false;
-        if ($("input[name='crop_width']").val() === "None") return false;
-        if ($("input[name='crop_height']").val() === "None") return false;
+        if ($crop_x.val() === "None" || $crop_x.val() === "") return false;
+        if ($crop_y.val() === "None" || $crop_y.val() === "") return false;
+        if ($crop_width.val() === "None" || $crop_width.val() === "") return false;
+        if ($crop_height.val() === "None" || $crop_height.val() === "") return false;
         return true;
       } 
 
       function setCropCoordinatesToFormFields () {
         var imageData = cropper.getImageData();
         var boxData = cropper.getCropBoxData();
-        $("input[name='crop_x']").val(boxData.left);
-        $("input[name='crop_y']").val(boxData.top);
-        $("input[name='crop_width']").val(boxData.width);
-        $("input[name='crop_height']").val(boxData.height);
-        $("input[name='original_width']").val(imageData.width);
-        $("input[name='original_height']").val(imageData.height);
+        $crop_x.val(boxData.left);
+        $crop_y.val(boxData.top);
+        $crop_width.val(boxData.width);
+        $crop_height.val(boxData.height);
+        $original_width.val(imageData.width);
+        $original_height.val(imageData.height);
       }
 
       function calculateNewPrice () {
@@ -361,8 +361,14 @@ palikka
         }
 
       }
-
+      var $crop_x = $("input[name='crop_x']");
+      var $crop_y = $("input[name='crop_y']");
+      var $crop_width = $("input[name='crop_width']");
+      var $crop_height = $("input[name='crop_height']");
+      var $original_width = $("input[name='original_width']");
+      var $original_height = $("input[name='original_height']");
       var $inputChecked = $('input[name=product]:checked');
+
       url = orderPreviewImage.getAttribute('data-img-url');
       image = orderPreviewImage;
       image.src=url;
@@ -386,7 +392,7 @@ palikka
 
           calculateNewPrice();
           calculatePPI();
-          setCropCoordinatesToFormFields();
+          //setCropCoordinatesToFormFields();
       }); 
 
       // why not work LöL
@@ -423,12 +429,12 @@ palikka
         if (productSettingsExistInForm()) {
           console.log('settings exist');
           cropper.setCropBoxData({
-            left: parseInt($("input[name='crop_x']").val()),
-            top: parseInt($("input[name='crop_y']").val()),
-            width: parseInt($("input[name='crop_width']").val()),
-            height: parseInt($("input[name='crop_height']").val()),
+            left: parseInt($crop_x.val()),
+            top: parseInt($crop_y.val()),
+            width: parseInt($crop_width.val()),
+            height: parseInt($crop_height.val())
           });
-          console.log(cropper.getCropBoxData());
+          setCropCoordinatesToFormFields();
         } 
         if (!productSettingsExistInForm()) {
           console.log('settings dont exist');
@@ -636,6 +642,7 @@ palikka
     var fullResLoaded = false;
     var $zoomInBtn = $('#zoom-in-btn');
     var $zoomOutBtn = $('#zoom-out-btn');
+    var $image = $('#zoomable-image-container');
 
     imageContainer.setMaxBounds(bounds);
 
@@ -652,6 +659,9 @@ palikka
     });
 
     $zoomInBtn.on('click', function() {
+      imageContainer.zoomIn();
+    });
+    $image.on('click', function() {
       imageContainer.zoomIn();
     });
     $zoomOutBtn.on('click', function() {

@@ -26,19 +26,19 @@ img {
 }
 
 input[type="text"]::-webkit-input-placeholder {
-color: $color-hkm-orange !important;
+color: #555 !important;
 }
  
 input[type="text"]:-moz-placeholder { /* Firefox 18- */
-color: $color-hkm-orange  !important;  
+color: #555  !important;  
 }
  
 input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
-color: $color-hkm-orange !important;  
+color: #555 !important;  
 }
  
 input[type="text"]:-ms-input-placeholder {  
-color: $color-hkm-orange !important;  
+color: #555 !important;  
 }
 
 /* Colors */ 
@@ -324,7 +324,7 @@ color: $color-hkm-orange !important;
   float: left;
   height: 60px;
   line-height: 64px;
-  color: $color-hkm-green !important;
+  color: $color-hkm-blue !important;
 }
 .nav_viewer {
   background-color: rgba(255, 255, 255, 0.8);
@@ -496,6 +496,11 @@ color: $color-hkm-orange !important;
   max-width: 100%;
   max-height: 100%;
 }
+
+.image-viewer__container:hover {
+  cursor: zoom-in;
+}
+
 .image-viewer__image {
   visibility: hidden;
   position: absolute;
@@ -530,6 +535,7 @@ color: $color-hkm-orange !important;
   width: 100%;
   display: block;
   float: left;
+  color: $color-darktext !important;
 }
 .banner__h1 {
   display: block;
@@ -538,6 +544,7 @@ color: $color-hkm-orange !important;
   margin: 0;
   font-family: 'goviniusbold';
   display: inline-block;
+  color: $color-hkm-orange;
 }
 .banner__form {
   float: left;
@@ -1041,52 +1048,52 @@ div.grid__fav.active {
   border-radius: 0;
 }
 .search-modal__container {
-  width: 40%;
+  width: 100%;
   min-width: 300px;
 }
 .search-modal__body {
-  height: 140px;
+  height: 70px;
   padding: 0;
 }
 
 .modal-backdrop {
-  background-color: $color-white !important;
+  background-color: transparent !important;
 }
 
 .search-modal__table {
   width: 100%;
 }
 .search-modal__row {
-  white-space: nowrap;
+  white-space: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-hkm-blue;
 }
 .search-modal__row--top {
   .search-modal__cell {
-    background-color: $color-white;
   }
 }
 .search-modal__row--bottom {
   .search-modal__cell {
-    background-color: $color-hkm-green;
   }
 }
 .search-modal__cell {
   white-space: nowrap;
-  min-width: 50%;
+  width: auto;
+  max-width: 450px;
   height: 70px;
   max-height: 70px;
   vertical-align: middle;
 }
-.search-modal__cell--middle {
-  white-space: nowrap;
-  min-width: 0;
-  width: 1px;
-}
+
 .search-modal__close,
 .search-modal__close:hover,
 .search-modal__close:active,
 .search-modal__close:hover:active {
-  color: $color-hkm-orange;
+  color: $color-white;
   position: absolute;
+  top: 0;
   right: 0;
   height: 35px;
   width: 35px;
@@ -1128,15 +1135,15 @@ div.grid__fav.active {
   width: 50px;
   color: $color-theme;
 }
-.explore__h1 {
-  display: inline-block;
+.explore__text {
   vertical-align: top;
   height: 70px;
-  font-size: 40px;
-  line-height: 70px;
+  font-size: 20px;
+  line-height: normal;
   margin: 0 0 0 10px;
   color: $color-theme;
-  font-family: 'goviniusbold';
+  font-family: 'Signe', sans-serif;
+  white-space: normal;
 }
 .explore__link {
   display: block;
@@ -1145,13 +1152,22 @@ div.grid__fav.active {
 .explore__link:hover {
   text-decoration: none;
 }
+
+
 @media (max-width: 566px) {
   .search-modal__close {
     display: none;
   }
   .search-modal__cell--middle {
-    padding: 0 10px;
+    padding: 0 5px;
     width: 100%;
+  }
+  .search-modal__cell {
+    white-space: nowrap;
+    width: 100%;
+    height: 70px;
+    max-height: 70px;
+    vertical-align: middle;
   }
   .explore__link {
     text-align: center;
@@ -1166,6 +1182,48 @@ div.grid__fav.active {
     width: 7.5vw;
   }
 }
+
+.modal-search-form {
+  width: 100%;
+  margin: 0;
+  float: left;
+}
+
+.modal-search-form__content {
+  width: 100%;
+  margin: 0;
+  float: left;
+  padding-top: 15px;
+}
+
+.modal-search-form__field {
+  font-family: $font-brownlight;
+  color: $color-hkm-blue !important;
+  font-size: 16px;
+  padding: 0 15px;
+  width: 100%;
+  height: 40px;
+  border: solid 2px $color-hkm-blue;
+  border-radius: 20px;
+}
+.modal-search-form__field:focus {
+  border: solid 2px $color-hkm-blue;
+}
+.modal-search-form__btn,
+.modal-search-form__btn:hover {
+  background-color: $color-white;
+  height: 40px;
+  border: solid 2px  $color-hkm-blue;
+  border-left: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+@media (max-width: 566px) {
+  
+  .modal-search-form__field { font-size: 12px }
+}
+
 
 
 .nav-search-form__desktop {

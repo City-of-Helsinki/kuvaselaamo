@@ -14,10 +14,12 @@
         <div class="banner__form-title">
           <h1 class="banner__h1">{{ collection_form.title }}</h1>
         </div>
+        {% if collection.collection_type == 'normal' %}
         <div class="banner__checkbox checkbox">
           {% render_field collection_form.is_public type+="checkbox" %}
           <label>{% trans 'Set to public' %}</label>
         </div>
+        {% endif %}
         {% if user.profile.is_admin %}
           <div class="banner__checkbox checkbox">
             {% render_field collection_form.show_in_landing_page type+="checkbox" %}

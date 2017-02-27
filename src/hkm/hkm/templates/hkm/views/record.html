@@ -1,79 +1,96 @@
-{% extends 'hkm/base_browse.html' %}
-{% load i18n hkm_tags %}
+{% extends 'hkm/base_viewer.html' %}
+{% load hkm_tags %}
+{% load i18n %}
 
-{% block banner %}
-
-  <div class="page-header bittersweet">
-    <div class="fullsize-container container">
-      <div class="banner__title">
-        <h1 class="banner__h1">{% trans 'Image details' %}</h1>
+  {% block actions %}
+    {% if record %}
+      <div class="actions">
+        <button class="actions__btn actions__btn--left" id="zoom-in-btn">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-in"></use>
+            </svg>
+          </i>
+        </button>
+        <button class="actions__btn actions__btn--left" id="zoom-out-btn">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-out"></use>
+            </svg>
+          </i>
+        </button>
+        {% if user.is_authenticated %}
+          <button class="actions__btn actions__btn--right nav__fav" data-record-id="{{ hkm_id }}" id="popover-favorite">
+          <i class="actions__icon">
+              <svg class="svg-icon nav__fav--heart">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
+              </svg>
+          </i>
+          </button>
+          <button class="actions__btn actions__btn--right" id="popover-add">
+            <i class="actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo"></use>
+              </svg>
+            </i>
+          </button>
+        {% endif %}
+        <button class="actions__btn actions__btn--right" id="popover-share">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
+            </svg>
+          </i>
+        </button>
+        <button class="actions__btn actions__btn--right" id="popover-info">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
+            </svg>
+          </i>
+        </button>
+        <button class="actions__btn actions__btn--right" id="popover-cart">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-download"></use>
+            </svg>
+          </i>
+        </button>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="order" />
+          <button type="submit" formaction="{% url 'hkm_order_create' finna_id=record.id %}" name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
+            <i class="actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+              </svg>
+            </i>
+          </button>
+        </form>
       </div>
-    </div>
-  </div>
-
-{% endblock %}
+    {% endif %}
+  {% endblock %}
 
 {% block content %}
 
-  <div class="record-meta">
+  {% if record %}
 
-    {% if record %}
-
-      <div class="record-meta__col record-meta__col--left col-md-4">
-        <img class="record-meta__image" src="{% finna_image record.id %}"></img>
-        <h2 class="record-meta__sub-header"><a href="{% url 'hkm_record_feedback' finna_id=record.id %}">{% trans 'Send feedback' %}</a></h2>
+    <div class="image-viewer">
+      <div id="zoomable-image-container" class="image-viewer__container">
+        <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.full_res_url }}" src="{% finna_image record.id %}"></img>
       </div>
-      <div class="record-meta__col record-meta__col--right col-md-8">
-        <h1 class="record-meta__title">{{ record.title }}</h1>
-        <h3 class="record-meta__copyright">{{ record.imageRights.copyright }}</h3>
-        <h2 class="record-meta__sub-header">{% trans 'Identification information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Image type:' %} {% for type in record.rawData.format %}{{ type.translated }}, {% endfor %}</p>
-        <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
-        <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
-        <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
-        <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.year }}</p>
-        <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
-        <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
-        <h2 class="record-meta__sub-header">{% trans 'License information' %}</h2>
-        <p class="record-meta__paragraph">{{ record.imageRights.description.0 }}</p>
+    </div>
+  {% else %}
+    {% include 'hkm/snippets/not_responding.html' %}
+  {% endif %}
 
-        {% if related_collections %}
-          <h2 class="record-meta__sub-header">{% trans 'Related collections' %}</h2>
-          <div class="grid flex-images">
-            <div class="grid__group item-slider invisible" data-grid-type="collection">
-              {% for collection in related_collections %}
-                <div class="grid__item item" data-w="550" data-h="400">
-                  <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-                    {% with images=collection|display_images %}
-                      {% if images|length == 1 %}
-                        <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
-                      {% else %}
-                        <div class="sub-grid">
-                          {% for image_url in images %}
-                            <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
-                          {% endfor %}
-                        </div>
-                      {% endif %}
-                    {% endwith %}
-                    <div class="grid__meta">
-                      <span class="grid__meta--title">{{ collection.title }}</span>
-                      <span class="grid__meta--other">{% if collection.description %}{{ collection.description }}{% else %}{% trans 'No description' %}{% endif %}</span>
-                    </div>
-                  </a>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-      </div>
+{% endblock %}
 
-    {% else %}
-
-      {% include 'hkm/snippets/not_responding.html' %}
-
-    {% endif %}
-
-  </div>
-
+{% block hidden %}
+  {% if record %}
+    {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
+    {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
+    {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
+    {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
+  {% endif %}
 {% endblock %}

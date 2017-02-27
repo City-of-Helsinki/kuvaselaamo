@@ -602,6 +602,12 @@ class BaseFinnaRecordDetailView(BaseView):
   def get_context_data(self, **kwargs):
     context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
     context['record'] = self.record
+
+    if self.request.user.is_authenticated():
+      context['my_collections'] = Collection.objects.filter(owner=self.request.user).order_by('title')
+    else:
+      context['my_collections'] = Collection.objects.none()
+      
     return context
 
 
@@ -622,6 +628,37 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
     related_collections = Collection.objects.user_can_view(self.request.user).filter(id__in=related_collections_ids).distinct()
     context['related_collections'] = related_collections
     return context
+
+  def get_empty_forms(self, request):
+    context_forms = super(FinnaRecordDetailView, self).get_empty_forms(request)
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    context_forms['feedback_form'] = forms.FeedbackForm(prefix='feedback-form', user=user)
+    return context_forms
+
+  def post(self, request, *args, **kwargs):
+    action = request.POST.get('action', None)
+    if action == 'feedback':
+      return self.handle_feedback(request, *args, **kwargs)
+    return super(FinnaRecordDetailView, self).post(request, *args, **kwargs)
+
+  def handle_feedback(self, request, *args, **kwargs):
+    if request.user.is_authenticated():
+      user = request.user
+    else:
+      user = None
+    form = forms.FeedbackForm(request.POST, prefix='feedback-form', user=user)
+    if form.is_valid():
+      feedback = form.save(commit=False)
+      feedback.record_id = self.record['id']
+      feedback.save()
+      tasks.send_feedback_notification.apply_async(args=(feedback.id,), countdown=5)
+      # TODO: redirect to success page?
+      return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
+    kwargs['feedback_form'] = form
+    return self.get(request, *args, **kwargs)
 
 
 class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
