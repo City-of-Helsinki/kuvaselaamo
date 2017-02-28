@@ -12,7 +12,8 @@
   {% block content %}{% endblock %}
 
   <div class="hidden">
-    {% block hidden %}{% endblock %}
+    {% block hidden %}
+    {% endblock %}
   </div>
 
   {% block actions %}
@@ -69,10 +70,8 @@
             </svg>
           </i>
         </button>
-        <form method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="action" value="order" />
-          <button type="submit" formaction="{% url 'hkm_order_create' finna_id=hkm_id %}" name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
+      
+          <button name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
@@ -117,7 +116,7 @@
         </div><!-- endrow -->
         {% if related_collections %}
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-md-offset-2 col-md-8">
           <h2 class="record-meta__sub-header">{% trans 'Related collections' %}</h2>
           <div class="grid flex-images">
             <div class="grid__group item-slider invisible" data-grid-type="collection">
@@ -149,7 +148,7 @@
         {% endif %}
 
         <div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
+        <div class="col-md-offset-2 col-md-8">
           <form method="POST">
             <h1>Palaute kuvasta</h1>
             {% csrf_token %}

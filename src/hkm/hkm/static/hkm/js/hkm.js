@@ -181,6 +181,19 @@ palikka
     }
   });
 
+  $("#popover-buy").popover({
+    html: true,
+    toggle: 'popover',
+    container: 'body',
+    placement: 'top',
+    trigger: 'focus',
+    html: true,
+    content: function() {
+      return $('#popover-buy-content').html();
+    }
+  });
+
+
   /*$("#popover-favorite").popover({
     html: true,
     toggle: 'popover',
@@ -625,15 +638,17 @@ palikka
   function zoomInit(w, h, url, fullResUrl) {
     // debugger;
     
+    var initialZoom = 1;
 
     var imageContainer = L.map('zoomable-image-container', {
       center: [500, 500],
       minZoom: 1,
       maxZoom: 5,
-      zoom: 1,
+      zoom: initialZoom,
       crs: L.CRS.Simple,
       maxBoundsViscosity: 1,
-      scrollWheelZoom: false
+      scrollWheelZoom: false,
+      zoomControl: true
     });
     var bottomLeft = imageContainer.unproject([0, h], imageContainer.getMaxZoom()-1);
     var topRight = imageContainer.unproject([w, 0], imageContainer.getMaxZoom()-1);
@@ -643,6 +658,7 @@ palikka
     var $zoomInBtn = $('#zoom-in-btn');
     var $zoomOutBtn = $('#zoom-out-btn');
     var $image = $('#zoomable-image-container');
+    var zoomable = true;
 
     imageContainer.setMaxBounds(bounds);
 
@@ -658,15 +674,55 @@ palikka
       }
     });
 
+    // image can be zoomed with buttons and with left and right mouse clicks. image can be moved by click-dragginw with mouse
+    // zoom in and out buttons zoom
     $zoomInBtn.on('click', function() {
-      imageContainer.zoomIn();
-    });
-    $image.on('click', function() {
       imageContainer.zoomIn();
     });
     $zoomOutBtn.on('click', function() {
       imageContainer.zoomOut();
     });
+
+  
+    // when image starts moving, prevent zooming
+    imageContainer.on('movestart', function() {
+      zoomable = false;
+    });
+
+    // on mouseup, zoom if permitted
+    $image.on('mouseup', function(e) {
+
+      console.log(zoomable);
+      if (zoomable) {
+        switch(e.which) {
+          case 1:
+            console.log('left mouse button');
+            imageContainer.zoomIn();
+            break;
+          case 3:
+            imageContainer.zoomOut();
+            console.log('right mouse button');
+            break;
+          default:
+            break;
+        }
+      }
+      zoomable=true;   
+    });
+
+    // allow zooming again after image stops being dragged
+    imageContainer.on('moveend', function(e) {
+      console.log(e);
+      zoomable=true;
+    });
+
+
+    // prevent right click menu
+    $image.on('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    
+    
 
   }
 

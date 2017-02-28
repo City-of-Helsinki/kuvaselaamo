@@ -28,7 +28,7 @@
           <div class="row order-options">
           {% for product in product_types %}
             <div class="well well-sm col-xs-6 col-md-3">
-            <input type="radio" class="ordertype" name="product" {% if product.id == order.product_type_id %} checked {% endif %} value="{{ product.id }}" data-price="{{ product.price }}" data-xsize="{{ product.width }}" data-ysize="{{ product.height }}"> <span class="order-product__name">{{ product.name }} ({{product.price}}€)</span>
+            <input type="radio" class="ordertype" name="product" {% if forloop.first and not order.product_type %} checked {% elif product.id == order.product_type_id %} checked {% endif %} value="{{ product.id }}" data-price="{{ product.price }}" data-xsize="{{ product.width }}" data-ysize="{{ product.height }}"> <span class="order-product__name">{{ product.name }} ({{product.price}}€)</span>
             </div>
           {% endfor %}
           </div>
@@ -43,7 +43,17 @@
 
           <input type="hidden" name="action" value="order-product" />
           <div class="alert alert-success" id="ppi-box" role="alert">Valmiin tulosteen pikselitiheys: <span data-full-x="{{ order.fullimg_original_width}}" data-full-y="{{ order.fullimg_original_height}}" id="ppi-indicator">x</span> PPI</div>
-          <p> Hinta yht. <span id="price-indicator">{{ order.total_price }}</span> €</p>
+          <p> Hinta yht. <span id="price-indicator">
+          {% if order.total_price %}
+            {{ order.total_price }}
+          {% else %}
+            {% for product in product_types %}
+              {% if forloop.first %}
+                {{ product.price }}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          </span> €</p>
           <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">Jatka</button>
         </form>
       </div>

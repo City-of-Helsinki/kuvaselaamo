@@ -114,7 +114,7 @@ msgstr "Nimi"
 
 #: hkm/hkm/models.py:198
 msgid "Price"
-msgstr ""
+msgstr "Hinta"
 
 #: hkm/hkm/models.py:208
 msgid "Width"
@@ -130,7 +130,7 @@ msgstr "Paperin laatu"
 
 #: hkm/hkm/models.py:224
 msgid "Session"
-msgstr "Sessio"
+msgstr "Istunto"
 
 #: hkm/hkm/models.py:225
 msgid "First name"
@@ -163,19 +163,19 @@ msgstr "Kunta"
 
 #: hkm/hkm/models.py:241
 msgid "Crop x coordinate from left"
-msgstr ""
+msgstr "Rajauskoordinaatti vasemmalta"
 
 #: hkm/hkm/models.py:242
 msgid "Crop y coordinate from top"
-msgstr ""
+msgstr "Rajauskoordinaatti ylhäältä"
 
 #: hkm/hkm/models.py:243
 msgid "Crop width"
-msgstr "Leikkaus leveys"
+msgstr "Rajauksen leveys"
 
 #: hkm/hkm/models.py:244
 msgid "Crop height"
-msgstr "Leikkaus korkeus"
+msgstr "Rajauksen korkeus"
 
 #: hkm/hkm/models.py:245
 #, fuzzy
@@ -191,13 +191,13 @@ msgstr "Leikkaus kuva korkeus"
 
 #: hkm/hkm/models.py:251
 msgid "Image URL"
-msgstr "Kuvan URL"
+msgstr "Alkup kuvan URL"
 
 #: hkm/hkm/models.py:252
 #, fuzzy
 #| msgid "Image URL"
 msgid "Cropped Image URL"
-msgstr "Kuvan URL"
+msgstr "Rajatun kuvan URL"
 
 #: hkm/hkm/models.py:254 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
@@ -205,19 +205,19 @@ msgstr "Kuva"
 
 #: hkm/hkm/models.py:256
 msgid "Order form phase"
-msgstr ""
+msgstr "Tilauksen vaihe"
 
 #: hkm/hkm/models.py:257
 msgid "Randomized order identifier phrase"
-msgstr ""
+msgstr "Tilauksen satunnaistunniste"
 
 #: hkm/hkm/models.py:258
 msgid "Product type"
-msgstr ""
+msgstr "Tuotetyyppi"
 
 #: hkm/hkm/models.py:259
 msgid "Product Name"
-msgstr ""
+msgstr "Tuotteen nimi"
 
 #: hkm/hkm/models.py:262
 msgid "Amount"
@@ -305,7 +305,7 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:91 hkm/hkm/templates/hkm/base.html:92
 msgid "Search"
-msgstr "Haku"
+msgstr "Hae"
 
 #: hkm/hkm/templates/hkm/base.html:94 hkm/hkm/templates/hkm/base.html:98
 msgid "In English"
@@ -344,11 +344,11 @@ msgstr "Kirjaudu sisään"
 
 #: hkm/hkm/templates/hkm/base.html:120
 msgid "Facebook login"
-msgstr "Facebook kirjautuminen"
+msgstr "Facebook-kirjautuminen"
 
 #: hkm/hkm/templates/hkm/base.html:121
 msgid "Google login"
-msgstr "Google kirjautuminen"
+msgstr "Google-kirjautuminen"
 
 #: hkm/hkm/templates/hkm/base.html:122
 msgid "Login with credentials"
@@ -357,7 +357,7 @@ msgstr "Kirjaudu sisään tunnuksilla"
 #: hkm/hkm/templates/hkm/base.html:124 hkm/hkm/templates/hkm/base.html:134
 #: hkm/hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
-msgstr "Luo tunnus"
+msgstr "Rekisteröidy"
 
 #: hkm/hkm/templates/hkm/base_browse.html:17
 msgid "Previous image"
@@ -576,19 +576,19 @@ msgstr "Suosikkikuvasi on kerätty tänne"
 
 #: templates/404.html:13
 msgid "#error-404-title"
-msgstr ""
+msgstr "Ei löydy"
 
 #: templates/404.html:14
 msgid "#error-404-paragraph"
-msgstr ""
+msgstr "Hakemaasi sivua tai resurssia ei löydy."
 
 #: templates/500.html:13
 msgid "#error-500-title"
-msgstr ""
+msgstr "Palvelinvirhe"
 
 #: templates/500.html:14
 msgid "#error-500-paragraph"
-msgstr ""
+msgstr "Palvelimen sisäinen virhe. Pahoittelemme."
 
 #~ msgid "Prize"
 #~ msgstr "Hinta"
@@ -603,7 +603,7 @@ msgstr ""
 #~ msgstr "Tämä ei luultavasti ole se mitä etsit"
 
 #~ msgid "It's possible, that something has been happening in the service."
-#~ msgstr "On madollista, että palvelussa on tapahtunut jotain."
+#~ msgstr "On mahdollista, että palvelussa on tapahtunut jotain."
 
 #~ msgid "You might have written the address wrong."
 #~ msgstr "Saatoit kirjoittaa sivun osoitteen väärin."

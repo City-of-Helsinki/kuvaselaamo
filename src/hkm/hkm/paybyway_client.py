@@ -14,7 +14,7 @@ LOG = logging.getLogger(__name__)
 
 class PaybywayClient(object):
 
-	API_ENDPOINT = 'https://dev.paybyway.com/pbwapi/auth_payment'
+	API_ENDPOINT = 'https://dev.paybyway.com/pbwapi/auth_payment' #move to settings
 	API_KEY = settings.PBW_API_KEY
 	SECRET_KEY = settings.PBW_SECRET_KEY
 	# change dev to www when final -- this is a testing api
@@ -23,13 +23,13 @@ class PaybywayClient(object):
 		url = PaybywayClient.API_ENDPOINT
 		msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
 		authcode = hmac.new(PaybywayClient.SECRET_KEY, msg, hashlib.sha256).hexdigest().upper()
-		return_url = '%s/order/%s/confirmation/' % (settings.MY_DOMAIN, order_hash)
+		return_url = '%s/order/%s/confirmation/' % (settings.MY_DOMAIN, order_hash) #TODO refactor to reverse
 
 		payload = {
 			'version': 'w3.1',
 			'api_key': PaybywayClient.API_KEY,
 			'order_number': order_hash,
-			'amount': price, #THIS SHOULD BE PRICE IN **CENTS**!! for testing reasons I am sending the no. of units ordered
+			'amount': price, 
 			'currency': 'EUR',
 			'payment_method': {
 				'type': 'e-payment',

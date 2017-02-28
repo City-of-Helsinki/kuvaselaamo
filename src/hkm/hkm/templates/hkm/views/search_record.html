@@ -18,7 +18,8 @@
 
   {% if record %}
     <div class="back-to">
-      <p>Haku: {{ search_term }} ({{ current_page }}/{{search_result.resultCount}})</p>
+      <span class="back-to__title">{{ record.title }}</span><br>
+      <span>Haku: {{ search_term }} ({{ current_page }}/{{search_result.resultCount}})</span><br>
       <a href="{% url 'hkm_search' %}?search={{search_term}}">
         <i class="back-to__icon">
           <svg class="svg-icon">
@@ -29,7 +30,7 @@
       </a>
     </div>
 
-    <div class="image-viewer">
+    <div title="{% trans 'Left and right click to zoom.' %}" class="image-viewer">
       <div id="zoomable-image-container" class="image-viewer__container">
         <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ record.full_res_url }}" src="{% finna_image record.id %}"></img>
       </div>
@@ -39,12 +40,13 @@
   {% endif %}
 
 {% endblock %}
-
-{% block hidden %}
-  {% if record %}
-    {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
-    {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
-    {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
-    {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
-  {% endif %}
-{% endblock %}
+  
+  {% block hidden %}
+    {% if record %}
+      {% include 'hkm/snippets/popover_buy.html' with finna_id=record.id %}
+      {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
+      {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
+      {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
+      {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
+    {% endif %}
+  {% endblock %}

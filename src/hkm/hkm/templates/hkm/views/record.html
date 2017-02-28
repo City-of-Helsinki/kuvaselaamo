@@ -56,17 +56,13 @@
             </svg>
           </i>
         </button>
-        <form method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="action" value="order" />
-          <button type="submit" formaction="{% url 'hkm_order_create' finna_id=record.id %}" name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
+        <button name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
               </svg>
             </i>
           </button>
-        </form>
       </div>
     {% endif %}
   {% endblock %}
@@ -88,6 +84,7 @@
 
 {% block hidden %}
   {% if record %}
+    {% include 'hkm/snippets/popover_buy.html' with finna_id=record.id %}
     {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
     {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
     {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}

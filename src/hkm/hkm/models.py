@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import random
+import string
 from ordered_model.models import OrderedModel
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -212,11 +214,12 @@ class PrintProduct(Product):
 
 
 class ProductOrderQuerySet(models.QuerySet):
-  def for_user(self, user, session_key):
+  def for_user(self, user, session_orderid):
     if user.is_authenticated():
-      return self.filter(models.Q(user=user)|models.Q(session=session_key))
+      return self.filter(models.Q(user=user)|models.Q(order_hash=session_orderid))
     else:
-      return self.filter(session=session_key)
+      return self.filter(order_hash=session_orderid)
+
 
 class ProductOrder(BaseModel):
   # Anonymous users can order aswell, so we need contact and shipping information directly
@@ -257,8 +260,8 @@ class ProductOrder(BaseModel):
   record = models.ForeignKey(Record, verbose_name=_(u'Record'), null=True, blank=True)
 
   form_phase = models.IntegerField(verbose_name=_(u'Order form phase'), default=1)
-  order_hash = models.CharField(verbose_name=_(u'Randomized order identifier phrase'), max_length=1024, null=True, blank=True)
-  product_type = models.ForeignKey(PrintProduct, verbose_name=_(u'Product type'), default=6, blank=True)
+  order_hash = models.CharField(verbose_name=_(u'Randomized order identifier phrase'), max_length=1024, null=True, blank=True, unique=True)
+  product_type = models.ForeignKey(PrintProduct, verbose_name=_(u'Product type'), null=True, blank=True)
   product_name = models.CharField(verbose_name=_(u'Product Name'), max_length=1024, null=True, blank=True)
   # Price and amount information as they were at the time order was made
   # NOTE: Product prizing might vary so these need to be freezed here
@@ -285,8 +288,13 @@ class ProductOrder(BaseModel):
 
   objects = ProductOrderQuerySet.as_manager()
 
+  def save(self, *args, **kwargs):
+    if not self.id and not self.order_hash:
+      self.order_hash = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20))
+    return super(ProductOrder, self).save(*args, **kwargs)
+
   def __unicode__(self):
-    return self.session
+    return self.order_hash
 
 
 class Feedback(BaseModel):

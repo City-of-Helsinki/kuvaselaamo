@@ -720,13 +720,10 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     if action == 'order':
       return self.handle_order(request, *args, **kwargs)
     # other post requests return an error
-    return http.Http404()
+    return http.HttpResponseBadRequest()
 
   def handle_order(self, request, *args, **kwargs):
-    #session=request.session.session_key
-    order = ProductOrder(record_finna_id=self.record['id'],
-      order_hash=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20)))
-    order.total_price = order.amount * order.product_type.price
+    order = ProductOrder(record_finna_id=self.record['id'])
 
     full_res_url = HKM.get_full_res_image_url(self.record['rawData']['thumbnail'])
     full_res_image = HKM.download_image(full_res_url)
@@ -740,8 +737,6 @@ class CreateOrderView(BaseFinnaRecordDetailView):
 
     # Save order identifier in session
     request.session['order_hash'] = order.order_hash
-    if 'order_hash' in request.session:
-      LOG.debug(request.session['order_hash'])
 
     #return redirect(reverse('hkm_order_product', kwargs={'order_id': order.id}))
     return redirect(reverse('hkm_order_product', kwargs={'order_id': order.order_hash}))
@@ -757,31 +752,25 @@ class BaseOrderView(BaseView):
     try:
       #self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
       self.order = ProductOrder.objects.get(order_hash=kwargs['order_id'])
-
-      # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
-      # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN ORDER
-      if 'order_hash' in request.session:
-        # if order identifier in session does not match the order in the url, raise 404
-        if request.session['order_hash'] != self.order.order_hash:
-          LOG.error('Unauthorized')
-          raise http.Http404()
-      else:
-        # # if session does not have order identifier, raise 404
-        LOG.error('Product order does not exist for user')
-        raise http.Http404()
     except ProductOrder.DoesNotExist:
       LOG.error('Product order does not exist for user')
       raise http.Http404()
-    else:
-      LOG.debug('User is authorized to access this order view')
 
+
+    # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
+    # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN ORDER
+    if not 'order_hash' in request.session or request.session['order_hash'] != self.order.order_hash:
+      # if order identifier in session does not match the order in the url, raise 404
+      LOG.error('Unauthorized')
+      raise http.Http404()
+    else:
       # if user has successfully checked out the order, they will always be redirected to 
       # order result page. This way user cant modify the same order retroactively
       if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
         LOG.debug('checkout is already done for this order, redirect user to result page')
         return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
       
-      return True
+    return True
 
   def get_context_data(self, **kwargs):
     context = super(BaseOrderView, self).get_context_data(**kwargs)
@@ -804,18 +793,20 @@ class OrderProductView(BaseOrderView):
     print request.POST
     if form.is_valid():
       order = form.save()
+      #TODO maybe refactor to model form
       order.crop_x = float(request.POST.get('crop_x', 0))
       order.crop_y = float(request.POST.get('crop_y', 0))
       order.crop_width = float(request.POST.get('crop_width', 1))
       order.crop_height = float(request.POST.get('crop_height', 1))
       order.original_width = float(request.POST.get('original_width', 1))
       order.original_height = float(request.POST.get('original_height', 1))
-      printproduct_type = PrintProduct.objects.get(id=int(request.POST.get('product', 6)))
+      printproduct_type = PrintProduct.objects.get(id=int(request.POST['product']))
+
       order.product_type = printproduct_type
       order.product_name = printproduct_type.name
       order.unit_price = printproduct_type.price
       order.total_price = order.unit_price * order.amount
-      order.form_phase = 2;
+      order.form_phase = 2; #TODO make template render links based on order fields, not the other way around (as now)
       order.save()
 
       return redirect(reverse('hkm_order_contact_information', kwargs={'order_id': self.order.order_hash}))
@@ -906,12 +897,16 @@ class OrderSummaryView(BaseOrderView):
   def post(self, request, *args, **kwargs):
     action = request.POST.get('action', None)
     if action == 'order-submit':
+      self.order.datetime_checkout_started = datetime.datetime.now()
+      self.order.save()
       try_submit = PBW.post(self.order.order_hash, int(self.order.total_price * 100)) #api requires sum in cents
       token = try_submit.get('token', None)
+      # TODO better error logs && datetime_checkout_redirected if success
       if token:
         redirect_url = 'https://dev.paybyway.com/pbwapi/token/%s' % token
         return redirect(redirect_url)
-      return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
+
+    # TODO error messaging for user in UI
     return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
 
   def get_context_data(self, **kwargs):
@@ -932,6 +927,7 @@ class OrderConfirmation(BaseOrderView):
 
   def get(self, request, *args, **kwargs):
 
+    #move basically everything to model class
     self.order_result['authcode'] = request.GET.get('AUTHCODE', None)  
     self.order_result['return_code'] = request.GET.get('RETURN_CODE', None)
     self.order_result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
@@ -1021,9 +1017,10 @@ class OrderPBWNotify(BaseOrderView):
 
       order = ProductOrder.objects.get(order_hash=self.order_result['order_hash'])
 
-      order.datetime_payment_processed = datetime.datetime.now()
+      ## move to model
       if self.order_result['return_code'] == '0' and self.order_result['settled'] == '1':
         order.is_payment_successful = True
+        order.datetime_payment_processed = datetime.datetime.now()
         LOG.debug('sending to Printmotor')
         order.datetime_order_started = datetime.datetime.now()
         printOrder = PRINTMOTOR.post(order)

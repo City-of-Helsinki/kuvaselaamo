@@ -16,7 +16,8 @@
 {% block content %}
 
   <div class="back-to">
-    <p>Kokoelma: {{ collection.title }} (Kuva {{ current_record_order_number }}/{{ collection_record_count }})</p>
+    <span class="back-to__title">{{ record.title }}</span><br>
+    <span>Kokoelma: {{ collection.title }} (Kuva {{ current_record_order_number }}/{{ collection_record_count }})</span><br>
     <a href="{% url 'hkm_collection' collection_id=collection.id %}">
       <i class="back-to__icon">
         <svg class="svg-icon">
@@ -27,7 +28,7 @@
     </a>
   </div>
 
-  <div class="image-viewer">
+  <div title="{% trans 'Left and right click to zoom.' %}" class="image-viewer">
     <div id="zoomable-image-container" class="image-viewer__container">
       <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ collection_record.get_full_res_image_absolute_url }}" src="{{ collection_record.get_preview_image_absolute_url }}"></img>
     </div>
@@ -35,6 +36,7 @@
 {% endblock %}
 
 {% block hidden %}
+  {% include 'hkm/snippets/popover_buy.html' with finna_id=collection_record.record_id %}
   {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url cropped_web_image_url=collection_record.get_preview_image_absolute_url finna_id=collection_record.record_id %}
   {% include 'hkm/snippets/popover_info.html' with record_year=collection_record.get_details.year record_measures=collection_record.get_details.rawData.measurements record_geo=collection_record.get_details.rawData.geographic record_description=collection_record.get_details.rawData.description record_authors=collection_record.get_details.rawData.author record_title=collection_record.get_details.title finna_id=collection_record.record_id %}
   {% include 'hkm/snippets/popover_share.html' with finna_id=collection_record.record_id %}

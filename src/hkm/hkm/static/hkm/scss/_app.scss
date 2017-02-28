@@ -366,6 +366,7 @@ color: #555 !important;
 
 .back-to {
   display: block;
+  line-height: 1.3;
   float: left;
   position: absolute;
   bottom: 60px;
@@ -388,6 +389,9 @@ color: #555 !important;
     font-family: 'brownbold', sans-serif;
     color: $color-hkm-green;
   }
+}
+.back-to__title {
+  font-weight: bold;
 }
 .back-to__text {
   display: block;
@@ -1221,6 +1225,27 @@ div.grid__fav.active {
   .modal-search-form__field { font-size: 12px }
 }
 
+
+/* ZOOM INSTRUCTIONS OVERLAY */
+
+#zoomable-image-container:hover + .zoom-instructions {
+  display: none;
+}
+
+.zoom-instructions {
+  
+  display: block;
+  background: white;
+  border: 1px solid black;
+  z-index: 9999;
+  color: $color-darktext;
+  width: 200px;
+  text-align: center;
+  height: 40px;
+  position: absolute;
+  bottom: 120px;
+
+}
 
 
 .nav-search-form__desktop {
