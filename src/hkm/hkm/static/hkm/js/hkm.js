@@ -659,6 +659,7 @@ palikka
     var $zoomOutBtn = $('#zoom-out-btn');
     var $image = $('#zoomable-image-container');
     var zoomable = true;
+    var clickedAt;
 
     imageContainer.setMaxBounds(bounds);
 
@@ -675,7 +676,6 @@ palikka
     });
 
     // image can be zoomed with buttons and with left and right mouse clicks. image can be moved by click-dragginw with mouse
-    // zoom in and out buttons zoom
     $zoomInBtn.on('click', function() {
       imageContainer.zoomIn();
     });
@@ -684,16 +684,15 @@ palikka
     });
 
   
-    // when image starts moving, prevent zooming
-    imageContainer.on('movestart', function() {
-      zoomable = false;
+    $image.on('mousedown', function(e) {
+
+      clickedAt = new Date().getTime();
     });
-
     // on mouseup, zoom if permitted
-    $image.on('mouseup', function(e) {
+   $image.on('mouseup', function(e) {
 
-      console.log(zoomable);
-      if (zoomable) {
+      var mouseUpAt = new Date().getTime();
+      if (zoomable && mouseUpAt - clickedAt < 300) {
         switch(e.which) {
           case 1:
             console.log('left mouse button');
@@ -706,16 +705,15 @@ palikka
           default:
             break;
         }
-      }
-      zoomable=true;   
+      }  
     });
 
-    // allow zooming again after image stops being dragged
-    imageContainer.on('moveend', function(e) {
-      console.log(e);
-      zoomable=true;
-    });
-
+   imageContainer.on('movestart', function() {
+      zoomable = false;
+   });
+   imageContainer.on('moveend', function() {
+      zoomable = true;
+   });
 
     // prevent right click menu
     $image.on('contextmenu', function(e) {
