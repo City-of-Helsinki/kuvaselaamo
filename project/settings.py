@@ -140,9 +140,6 @@ COMPRESS_CSS_FILTERS = [
 # https://github.com/Kronuz/pyScss/issues/70
 logging.getLogger('scss').addHandler(logging.StreamHandler())
 
-# Django
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'FI'
 
