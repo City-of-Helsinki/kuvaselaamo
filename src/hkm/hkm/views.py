@@ -269,7 +269,7 @@ class CollectionDetailView(BaseView):
       except Record.DoesNotExist:
         return http.HttpResponseNotFound()
       else:
-        record.delete()
+        collection_record.delete()
         return http.HttpResponse()
     return http.HttpResponseBadRequest()
 
