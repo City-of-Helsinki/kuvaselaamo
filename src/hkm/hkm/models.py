@@ -4,6 +4,7 @@
 import logging
 import random
 import string
+import datetime
 from ordered_model.models import OrderedModel
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -16,8 +17,11 @@ from django.db import models
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
+from django.core.mail import send_mail
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm.paybyway_client import client as PBW
+from hkm.printmotor_client import client as PRINTMOTOR
 from hkm import settings
 
 LOG = logging.getLogger(__name__)
@@ -287,6 +291,72 @@ class ProductOrder(BaseModel):
   is_order_successful = models.NullBooleanField(verbose_name=_(u'Order successful'), null=True, blank=True)
 
   objects = ProductOrderQuerySet.as_manager()
+
+  def checkout(self):
+    checkout_request = PBW.post(self.order_hash, int(self.total_price * 100)) #api requires sum in cents
+    LOG.debug(checkout_request)
+    token = checkout_request.get('token', None)
+    # TODO better error logs && datetime_checkout_redirected if success
+    if token:
+      redirect_url = 'https://dev.paybyway.com/pbwapi/token/%s' % token
+      return redirect_url
+    return None
+
+  def handle_confirmation(self, result):
+    self.datetime_checkout_ended = datetime.datetime.now()
+    if result['return_code'] == '0':
+      LOG.debug('checkout successful')
+      self.is_checkout_successful = True
+      self.send_mail('checkout')
+
+      if result['settled'] == '1':
+        self.is_payment_successful = True
+        LOG.debug('Payment settled successfully')
+        LOG.debug('sending to Printmotor')
+
+        self.datetime_order_started = datetime.datetime.now()
+        printOrder = PRINTMOTOR.post(self)
+        self.datetime_order_ended = datetime.datetime.now()
+        
+        if printOrder:
+          if printOrder == 200:
+            LOG.debug('Successfully sent order to printmotor')
+            self.is_order_successful = True
+            self.send_mail('print')
+          elif printOrder == 400:
+            LOG.debug('Bad request to Printmotor, check payload')
+            self.is_order_successful = False
+          elif printOrder == 401:
+            LOG.debug('Unauthorized @ Printmotor, check headers')
+            self.is_order_successful = False
+          elif printOrder == 500:
+            LOG.debug('Printmotor server error, maybe image URL is invalid')
+            self.is_order_successful = False
+        else:
+          LOG.debug('Failed to communicate with Printmotor API')
+          self.is_order_successful = False
+    else:
+      self.is_checkout_successful = False
+
+    self.save()
+
+  def send_to_print(self):
+    return True
+
+  def send_mail(self, phase):
+    if not phase:
+      return False
+
+    if phase == 'checkout':
+      subject = 'Helsinkikuvia.fi - tilausvahvistus'
+      message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.'
+
+    elif phase == 'print':
+        subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
+        message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalolle.'
+
+    send_mail(subject, message, 'foo@helsinkikuvia.fi', [self.email])
+    return True
 
   def save(self, *args, **kwargs):
     if not self.id and not self.order_hash:

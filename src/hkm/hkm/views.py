@@ -16,7 +16,6 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.core.mail import send_mail
 from django.contrib.auth import login as auth_login
 from django.forms.models import model_to_dict
 from hkm.finna import DEFAULT_CLIENT as FINNA
@@ -899,11 +898,8 @@ class OrderSummaryView(BaseOrderView):
     if action == 'order-submit':
       self.order.datetime_checkout_started = datetime.datetime.now()
       self.order.save()
-      try_submit = PBW.post(self.order.order_hash, int(self.order.total_price * 100)) #api requires sum in cents
-      token = try_submit.get('token', None)
-      # TODO better error logs && datetime_checkout_redirected if success
-      if token:
-        redirect_url = 'https://dev.paybyway.com/pbwapi/token/%s' % token
+      redirect_url = self.order.checkout()
+      if redirect_url:
         return redirect(redirect_url)
 
     # TODO error messaging for user in UI
@@ -923,50 +919,18 @@ class OrderSummaryView(BaseOrderView):
 class OrderConfirmation(BaseOrderView):
   template_name = ''
   url_name = 'hkm_order_confirmation'
-  order_result = {}
+  result = {}
 
   def get(self, request, *args, **kwargs):
 
     #move basically everything to model class
-    self.order_result['authcode'] = request.GET.get('AUTHCODE', None)  
-    self.order_result['return_code'] = request.GET.get('RETURN_CODE', None)
-    self.order_result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-    self.order_result['settled'] = request.GET.get('SETTLED', None)
+    self.result['authcode'] = request.GET.get('AUTHCODE', None)  
+    self.result['return_code'] = request.GET.get('RETURN_CODE', None)
+    self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
+    self.result['settled'] = request.GET.get('SETTLED', None)
 
-    order = ProductOrder.objects.get(order_hash=self.order_result['order_hash'])
+    self.order.handle_confirmation(self.result)
 
-    order.datetime_checkout_ended = datetime.datetime.now()
-    if self.order_result['return_code'] == '0':
-      order.is_checkout_successful = True
-      self.handle_send_mail(order, 'pbw')
-      if self.order_result['settled'] == '1':
-        order.is_payment_successful = True
-        LOG.debug('sending to Printmotor')
-        order.datetime_order_started = datetime.datetime.now()
-        printOrder = PRINTMOTOR.post(order)
-        order.datetime_order_ended = datetime.datetime.now()
-        if printOrder:
-          if printOrder == 200:
-            LOG.debug('Successfully sent order to printmotor')
-            order.is_order_successful = True
-            self.handle_send_mail(order, 'printmotor')
-          elif printOrder == 400:
-            LOG.debug('Bad request to Printmotor, check payload')
-            order.is_order_successful = False
-          elif printOrder == 401:
-            LOG.debug('Unauthorized @ Printmotor, check headers')
-            order.is_order_successful = False
-          elif printOrder == 500:
-            LOG.debug('Printmotor server error, maybe image URL is invalid')
-            order.is_order_successful = False
-        else:
-          LOG.debug('Failed to communicate with Printmotor API')
-          order.is_order_successful = False
-    else:
-      order.is_checkout_successful = False
-
-    order.save()
-    
     return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
     #return self.render_to_response(self.get_context_data(**kwargs))
 
@@ -974,21 +938,6 @@ class OrderConfirmation(BaseOrderView):
     context = super(OrderConfirmationView, self).get_context_data(**kwargs)
     context['order_result'] = self.order_result
     return context
-
-  # sends mail to customer, first after successful checkout, then after order delivery to printmotor
-  def handle_send_mail(self, customer_order, phase):
-      if not customer_order or not phase:
-        return
-
-      order = model_to_dict(customer_order)
-      if phase == 'pbw':
-        subject = 'Helsinkikuvia.fi - tilausvahvistus'
-        message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.'
-      elif phase == 'printmotor':
-        subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
-        message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalolle.'
-
-      return send_mail(subject, message, 'foo@helsinkikuvia.fi', [order['email']])
 
 class OrderShowResultView(BaseOrderView):
   template_name = 'hkm/views/order_show_result.html'
@@ -1006,47 +955,16 @@ class OrderShowResultView(BaseOrderView):
 class OrderPBWNotify(BaseOrderView):
   template_name =''
   url_name = 'hkm_order_pbw_notify'
-  order_result = {}
+  result = {}
 
   def get(self, request, *args, **kwargs):
-    try:
-      self.order_result['authcode'] = request.GET.get('AUTHCODE', None)  
-      self.order_result['return_code'] = request.GET.get('RETURN_CODE', None)
-      self.order_result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-      self.order_result['settled'] = request.GET.get('SETTLED', None)
+    
+    self.result['authcode'] = request.GET.get('AUTHCODE', None)  
+    self.result['return_code'] = request.GET.get('RETURN_CODE', None)
+    self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
+    self.result['settled'] = request.GET.get('SETTLED', None)
 
-      order = ProductOrder.objects.get(order_hash=self.order_result['order_hash'])
-
-      ## move to model
-      if self.order_result['return_code'] == '0' and self.order_result['settled'] == '1':
-        order.is_payment_successful = True
-        order.datetime_payment_processed = datetime.datetime.now()
-        LOG.debug('sending to Printmotor')
-        order.datetime_order_started = datetime.datetime.now()
-        printOrder = PRINTMOTOR.post(order)
-        order.datetime_order_ended = datetime.datetime.now()
-        if printOrder:
-          if printOrder == 200:
-            LOG.debug('Successfully sent order to printmotor')
-            order.is_order_successful = True
-          elif printOrder == 400:
-            LOG.debug('Bad request to Printmotor, check payload')
-            order.is_order_successful = False
-          elif printOrder == 401:
-            LOG.debug('Unauthorized @ Printmotor, check headers')
-            order.is_order_successful = False
-          elif printOrder == 500:
-            LOG.debug('Printmotor server error, maybe image URL is invalid')
-            order.is_order_successful = False
-        else:
-          LOG.debug('Failed to communicate with Printmotor API')
-          order.is_order_successful = False
-      else:
-        order.is_payment_successful = False
-
-      order.save()
-    except Error:
-      LOG.Error(Error)
+    self.order.handle_confirmation(self.result)
     
     return http.HttpResponse()
 
