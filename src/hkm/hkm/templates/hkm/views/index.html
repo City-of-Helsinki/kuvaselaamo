@@ -67,11 +67,9 @@
     </form>
   {% endif %}
 
-  <div class="search-modal modal fade" id="search-modal" tabindex="-1" role="dialog" data-open-popup="{{ open_popup }}">
-    <div class="search-modal__dialog modal-dialog" role="document">
-      <div class="search-modal__content modal-content">
+      <div id="landing-search" class="search-modal search-modal__content modal-content">
         <div class="search-modal__body modal-body">
-          <button class="search-modal__close btn btn-default" type="button" data-dismiss="modal">
+          <button id="landing-search-close" class="search-modal__close btn btn-default" type="button" data-dismiss="modal">
             <i class="close__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
@@ -92,8 +90,6 @@
             </div>
         </div>
       </div>
-    </div>
-  </div>
 
 {% endblock %}
 

@@ -6740,7 +6740,11 @@ div.grid__fav.active {
 .search-modal,
 .search-modal.in ~ .modal-backdrop.in, .grid__item:hover .search-modal.grid__meta ~ .modal-backdrop.in, .grid__item:hover
 .search-modal.in ~ .modal-backdrop.grid__meta, .grid__item:hover .search-modal.grid__meta ~ .modal-backdrop.grid__meta {
-  top: 60px; }
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 60px;
+  z-index: 10000; }
 
 .search-modal__dialog {
   position: absolute;
@@ -6776,7 +6780,7 @@ div.grid__fav.active {
 .search-modal__cell {
   white-space: nowrap;
   width: auto;
-  max-width: 450px;
+  max-width: 600px;
   height: 70px;
   max-height: 70px;
   vertical-align: middle; }
@@ -6846,8 +6850,6 @@ div.grid__fav.active {
   text-decoration: none; }
 
 @media (max-width: 566px) {
-  .search-modal__close {
-    display: none; }
   .search-modal__cell--middle {
     padding: 0 5px;
     width: 100%; }
@@ -6868,8 +6870,9 @@ div.grid__fav.active {
     width: 7.5vw; } }
 
 .modal-search-form {
-  width: 100%;
+  width: 80%;
   margin: 0;
+  margin-left: 10%;
   float: left; }
 
 .modal-search-form__content {

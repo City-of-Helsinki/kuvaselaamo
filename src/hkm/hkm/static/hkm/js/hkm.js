@@ -23,6 +23,10 @@ palikka
   $('#account-dropdown').on('click', hideModal);
   $('#nav-collapse-btn').on('click', hideModal);
 
+  $('#landing-search-close').click(function() {
+    $('#landing-search').fadeOut();
+  });
+
   function hideModal() {
     $('.modal').each(function() {
       if ($(this).hasClass('in')) {
