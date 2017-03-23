@@ -8,112 +8,111 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 13:19+0200\n"
+"POT-Creation-Date: 2017-03-21 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
-"Language: fi\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: hkm/hkm/models.py:32
 msgid "Created"
-msgstr "Luotu"
+msgstr ""
 
 #: hkm/hkm/models.py:33
 msgid "Modified"
-msgstr "Muokattu"
+msgstr ""
 
 #: hkm/hkm/models.py:45
 msgid "Finnish"
-msgstr "suomi"
+msgstr ""
 
 #: hkm/hkm/models.py:46
 msgid "English"
-msgstr "englanti"
+msgstr ""
 
 #: hkm/hkm/models.py:47
 msgid "Svedish"
-msgstr "ruotsi"
+msgstr ""
 
 #: hkm/hkm/models.py:50 hkm/hkm/models.py:232 hkm/hkm/models.py:372
 msgid "User"
-msgstr "Käyttäjä"
+msgstr ""
 
 #: hkm/hkm/models.py:51
 msgid "Is admin"
-msgstr "Pääkäyttäjä"
+msgstr ""
 
 #: hkm/hkm/models.py:52 hkm/hkm/templates/hkm/base.html:109
 msgid "Language"
-msgstr "Kieli"
+msgstr ""
 
 #: hkm/hkm/models.py:78
 msgid "Normal"
-msgstr "Normaali"
+msgstr ""
 
 #: hkm/hkm/models.py:79
 msgid "Favorite"
-msgstr "Suosikki"
+msgstr ""
 
 #: hkm/hkm/models.py:82
 msgid "Owner"
-msgstr "Omistaja"
+msgstr ""
 
 #: hkm/hkm/models.py:83 hkm/hkm/models.py:386
 msgid "Title"
-msgstr "Otsikko"
+msgstr ""
 
 #: hkm/hkm/models.py:84 hkm/hkm/models.py:205
 msgid "Description"
-msgstr "Kuvaus"
+msgstr ""
 
 #: hkm/hkm/models.py:85
 msgid "Public"
-msgstr "Julkinen"
+msgstr ""
 
 #: hkm/hkm/models.py:86
 msgid "Featured"
-msgstr "Ajankohtainen"
+msgstr ""
 
 #: hkm/hkm/models.py:87 hkm/hkm/templates/hkm/views/collection.html:26
 msgid "Show in landing page"
-msgstr "Näytä etusivulla"
+msgstr ""
 
 #: hkm/hkm/models.py:88
 msgid "Type"
-msgstr "Tyyppi"
+msgstr ""
 
 #: hkm/hkm/models.py:138 hkm/hkm/models.py:384
 msgid "Creator"
-msgstr "Tekijä"
+msgstr ""
 
 #: hkm/hkm/models.py:139
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
-msgstr "Albumi"
+msgstr ""
 
 #: hkm/hkm/models.py:140 hkm/hkm/models.py:249 hkm/hkm/models.py:373
 #: hkm/hkm/models.py:385
 msgid "Finna record ID"
-msgstr "Finna-tietueen ID"
+msgstr ""
 
 #: hkm/hkm/models.py:141
 msgid "Edited full resolution image"
-msgstr "Editoi täysiresoluutioisen kuvan"
+msgstr ""
 
 #: hkm/hkm/models.py:143
 msgid "Edited preview image"
-msgstr "Editoi esikatselukuvan"
+msgstr ""
 
 #: hkm/hkm/models.py:204 hkm/hkm/models.py:374
 #: hkm/hkm/templates/hkm/emails/feedback.txt:2
 #: hkm/hkm/templates/hkm/views/order_show_result.html:37
 #: hkm/hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
-msgstr "Nimi"
+msgstr ""
 
 #: hkm/hkm/models.py:206
 #: hkm/hkm/templates/hkm/views/order_show_result.html:59
@@ -123,52 +122,52 @@ msgstr ""
 
 #: hkm/hkm/models.py:216
 msgid "Width"
-msgstr "Leveys"
+msgstr ""
 
 #: hkm/hkm/models.py:217
 msgid "Height"
-msgstr "Korkeus"
+msgstr ""
 
 #: hkm/hkm/models.py:218
 msgid "Paper quality"
-msgstr "Paperin laatu"
+msgstr ""
 
 #: hkm/hkm/models.py:233
 msgid "Session"
-msgstr "Sessio"
+msgstr ""
 
 #: hkm/hkm/models.py:234
 msgid "First name"
-msgstr "Etunimi"
+msgstr ""
 
 #: hkm/hkm/models.py:235
 msgid "Last name"
-msgstr "Sukunimi"
+msgstr ""
 
 #: hkm/hkm/models.py:236 hkm/hkm/models.py:375
 #: hkm/hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
-msgstr "Sähköposti"
+msgstr ""
 
 #: hkm/hkm/models.py:237
 #: hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
-msgstr "Puhelinnumero"
+msgstr ""
 
 #: hkm/hkm/models.py:238
 msgid "Street adress"
-msgstr "Katuosoite"
+msgstr ""
 
 #: hkm/hkm/models.py:239
 msgid "Postal code"
-msgstr "Postinumero"
+msgstr ""
 
 #: hkm/hkm/models.py:240
 msgid "City"
-msgstr "Postitoimipaikka"
+msgstr ""
 
 #: hkm/hkm/models.py:250
 msgid "Crop x coordinate from left"
@@ -180,49 +179,39 @@ msgstr ""
 
 #: hkm/hkm/models.py:252
 msgid "Crop width"
-msgstr "Rajauksen leveys"
+msgstr ""
 
 #: hkm/hkm/models.py:253
 msgid "Crop height"
-msgstr "Rajauksen korkeus"
+msgstr ""
 
 #: hkm/hkm/models.py:254
-#, fuzzy
-#| msgid "Crop image width"
 msgid "Original image width"
-msgstr "Rajatun kuvan leveys"
+msgstr ""
 
 #: hkm/hkm/models.py:255
-#, fuzzy
-#| msgid "Crop image height"
 msgid "Original image height"
-msgstr "Rajatun kuvan korkeus"
+msgstr ""
 
 #: hkm/hkm/models.py:256
-#, fuzzy
-#| msgid "Crop image width"
 msgid "Full res original image width"
-msgstr "Rajatun kuvan leveys"
+msgstr ""
 
 #: hkm/hkm/models.py:257
-#, fuzzy
-#| msgid "Crop image height"
 msgid "Full res original image height"
-msgstr "Rajatun kuvan korkeus"
+msgstr ""
 
 #: hkm/hkm/models.py:262
 msgid "Image URL"
-msgstr "Kuvan URL"
+msgstr ""
 
 #: hkm/hkm/models.py:263
-#, fuzzy
-#| msgid "Image URL"
 msgid "Cropped Image URL"
-msgstr "Kuvan URL"
+msgstr ""
 
 #: hkm/hkm/models.py:265 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
-msgstr "Kuva"
+msgstr ""
 
 #: hkm/hkm/models.py:267
 msgid "Order form phase"
@@ -244,23 +233,19 @@ msgstr ""
 #: hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
-msgstr "Määrä"
+msgstr ""
 
 #: hkm/hkm/models.py:274
-#, fuzzy
-#| msgid "Unit prize"
 msgid "Unit price"
-msgstr "Kappalehinta"
+msgstr ""
 
 #: hkm/hkm/models.py:275
-#, fuzzy
-#| msgid "Total prize"
 msgid "Total price"
-msgstr "Kokonaishinta"
+msgstr ""
 
 #: hkm/hkm/models.py:278
 msgid "Confirmed"
-msgstr "Vahvistettu"
+msgstr ""
 
 #: hkm/hkm/models.py:281
 msgid "Checkout started"
@@ -296,31 +281,27 @@ msgstr ""
 
 #: hkm/hkm/models.py:376
 msgid "Content"
-msgstr "Sisältö"
+msgstr ""
 
 #: hkm/hkm/models.py:377
 msgid "Notification sent"
-msgstr "Ilmoitus lähetetty"
+msgstr ""
 
 #: hkm/hkm/models.py:387
 msgid "Edited image"
-msgstr "Muokattu kuva"
+msgstr ""
 
 #: hkm/hkm/tasks.py:24
 msgid "Kuvaselaamopalaute"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:23
-#, fuzzy
-#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo"
-msgstr "Oma sivu"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:24
-#, fuzzy
-#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo demo."
-msgstr "Oma sivu"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:96 hkm/hkm/templates/hkm/base.html:100
 #: hkm/hkm/templates/hkm/base.html:101
@@ -328,124 +309,124 @@ msgstr "Oma sivu"
 #: hkm/hkm/templates/hkm/views/search.html:18
 #: hkm/hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
-msgstr "Haku"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:103
 msgid "Explore collections"
-msgstr "Selaa albumeita"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:105
 #: hkm/hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
-msgstr "Omat albumit"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:107
 #: hkm/hkm/templates/hkm/base_viewer.html:182
 #: hkm/hkm/templates/hkm/views/info.html:9
 #: hkm/hkm/templates/hkm/views/record_feedback.html:27
 msgid "Feedback"
-msgstr "Palaute"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:112 hkm/hkm/templates/hkm/base.html:119
 msgid "In English"
-msgstr "In English"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:113 hkm/hkm/templates/hkm/base.html:116
 msgid "På svenska"
-msgstr "På svenska"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:115 hkm/hkm/templates/hkm/base.html:118
 msgid "Suomeksi"
-msgstr "Suomeksi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:124
 msgid "Logout"
-msgstr "Kirjaudu ulos"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:126
 #: hkm/hkm/templates/hkm/snippets/login.html:14
 msgid "Log in"
-msgstr "Kirjaudu sisään"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:137
 msgid "Facebook login"
-msgstr "Facebook-kirjautuminen"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:138
 msgid "Google login"
-msgstr "Google-kirjautuminen"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:139
 msgid "Login with credentials"
-msgstr "Kirjaudu sisään tunnuksilla"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:141 hkm/hkm/templates/hkm/base.html:151
 #: hkm/hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
-msgstr "Luo tunnus"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
-msgstr "Edellinen kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_browse.html:22
 msgid "Next image"
-msgstr "Seuraava kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:98
 #: hkm/hkm/templates/hkm/views/record_OLD.html:29
 msgid "Identification information"
-msgstr "Kuvan tiedot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:99
 #: hkm/hkm/templates/hkm/views/record_OLD.html:30
 msgid "Image type:"
-msgstr "Kuvatyyppi:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:100
 #: hkm/hkm/templates/hkm/views/record_OLD.html:31
 msgid "Image ID:"
-msgstr "Kuvan tunniste:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:102
 #: hkm/hkm/templates/hkm/views/record_OLD.html:33
 msgid "Creation information"
-msgstr "Luontitiedot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:103
 #: hkm/hkm/templates/hkm/views/record_OLD.html:34
 msgid "Photographer:"
-msgstr "Tekijä:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:104
 #: hkm/hkm/templates/hkm/views/record_OLD.html:35
 msgid "Image pick-up year:"
-msgstr "Ajankohta:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:106
 #: hkm/hkm/templates/hkm/views/record_OLD.html:36
 msgid "Property information"
-msgstr "Kohdetiedot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:107
 #: hkm/hkm/templates/hkm/views/record_OLD.html:37
 msgid "Measurements:"
-msgstr "Mitat:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:113
 #: hkm/hkm/templates/hkm/views/record_OLD.html:38
 msgid "License information"
-msgstr "Lisenssi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:120
 #: hkm/hkm/templates/hkm/views/record_OLD.html:42
 msgid "Related collections"
-msgstr "Kuvaan liittyvät albumit"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:139
 #: hkm/hkm/templates/hkm/views/record_OLD.html:61
 msgid "No description"
-msgstr "Ei kuvausta"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:157
 #: hkm/hkm/templates/hkm/base_viewer.html:227
@@ -454,7 +435,7 @@ msgstr "Ei kuvausta"
 #: hkm/hkm/templates/hkm/views/info.html:24
 #: hkm/hkm/templates/hkm/views/record_feedback.html:31
 msgid "Submit"
-msgstr "Lähetä"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:178
 msgid "Information about the service"
@@ -482,7 +463,7 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:200
 msgid "Crop and order"
-msgstr "Rajaa ja tilaa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:226
 #: hkm/hkm/templates/hkm/base_viewer.html:248
@@ -490,43 +471,43 @@ msgstr "Rajaa ja tilaa"
 #: hkm/hkm/templates/hkm/views/index.html:40
 #: hkm/hkm/templates/hkm/views/index.html:62
 msgid "Close"
-msgstr "Sulje"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:238
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:10
 #: hkm/hkm/templates/hkm/views/index.html:34
 msgid "Crop and download"
-msgstr "Rajaa ja lataa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:249
 msgid "Download"
-msgstr "Lataa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:260
 msgid "Crop and add to collection"
-msgstr "Rajaa ja lisää albumiin"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:265
 msgid "Add to an existing collection"
-msgstr "Lisää olemassa olevaan albumiin"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:272
 msgid "Create a new collection"
-msgstr "Luo uusi albumi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:277
 #: hkm/hkm/templates/hkm/views/index.html:59
 msgid "New collection"
-msgstr "Uusi albumi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:289
 #: hkm/hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
-msgstr "Lisää albumiin"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/emails/feedback.txt:9
 msgid "Message"
-msgstr "Viesti"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/not_responding.html:4
 msgid "Finnas material server is not responding"
@@ -538,66 +519,60 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:5
 msgid "Download printable image"
-msgstr "Lataa painokelpoinen kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:8
 msgid "Download web-image"
-msgstr "Lataa web-kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:12
 msgid "Order a product of the image"
-msgstr "Tilaa kuvatuote"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:14
 msgid "This is a low resolution image, product orders are not available"
-msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_favorite.html:3
-#, fuzzy
-#| msgid "Favorites"
 msgid "Add to favorites"
-msgstr "Suosikit"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
-msgstr "Kopioi kuvan osoite leikepöydälle"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:20
 msgid "Set to public"
-msgstr "Aseta julkiseksi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:30
 msgid "Set to featured"
-msgstr "Aseta ajankohtaiseksi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:36
 msgid "Save"
-msgstr "Tallenna"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:37
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:60
 #: hkm/hkm/templates/hkm/views/my_collections.html:22
-#, fuzzy
-#| msgid "Edited image"
 msgid "Add images"
-msgstr "Muokattu kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection.html:92
 msgid "Are you sure you want to delete this item?"
-msgstr "Oletko varma, että haluat poistaa tämän kuvan albumista?"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Picture"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:27
-#, fuzzy
-#| msgid "Add to collection"
 msgid "Back to collection"
-msgstr "Lisää albumiin"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:31
 #: hkm/hkm/templates/hkm/views/index.html:18
@@ -607,7 +582,7 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:53
 msgid "Add to a new collection"
-msgstr "Lisää uuteen albumiin"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:83
 msgid "Search for images from the museum archive"
@@ -740,13 +715,11 @@ msgid "Maksun käsittelyssä tapahtui virhe."
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:11
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:13
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:12
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:14
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
-#, fuzzy
-#| msgid "Image details"
 msgid "Contact details"
-msgstr "Kuvatiedot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:46
 #: hkm/hkm/templates/hkm/views/order_summary.html:34
@@ -767,12 +740,12 @@ msgstr ""
 msgid "incl. VAT"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:6
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:7
 msgid "Product selection"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:20
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:22
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:21
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:23
 msgid "Summary"
 msgstr ""
 
@@ -799,42 +772,40 @@ msgstr ""
 
 #: hkm/hkm/templates/hkm/views/public_collections.html:10
 msgid "Featured collections"
-msgstr "Ajankohtaiset kokoelmat"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/record_OLD.html:9
 msgid "Image details"
-msgstr "Kuvatiedot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/record_OLD.html:24
 #: hkm/hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
-msgstr "Lähetä palautetta kuvasta"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/search.html:11
 msgid "Records"
-msgstr "Kuvaa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/search.html:40
 msgid "Author"
-msgstr "Tekijä"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/search.html:49
 msgid "Year"
-msgstr "Vuosi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/search_record.html:29
-#, fuzzy
-#| msgid "Back to list view"
 msgid "Back to search"
-msgstr "Takaisin listanäkymään"
+msgstr ""
 
 #: hkm/hkm/views.py:988
 msgid "Favorites"
-msgstr "Suosikit"
+msgstr ""
 
 #: hkm/hkm/views.py:988
 msgid "Your favorite images are collected here"
-msgstr "Suosikkikuvasi on kerätty tänne"
+msgstr ""
 
 #: templates/404.html:13
 msgid "#error-404-title"
@@ -851,33 +822,3 @@ msgstr ""
 #: templates/500.html:14
 msgid "#error-500-paragraph"
 msgstr ""
-
-#~ msgid "Prize"
-#~ msgstr "Hinta"
-
-#~ msgid "Crop x"
-#~ msgstr "Rajaa x"
-
-#~ msgid "Crop y"
-#~ msgstr "Rajaa y"
-
-#~ msgid "Account"
-#~ msgstr "Käyttäjä"
-
-#~ msgid "Search images"
-#~ msgstr "Hae kuvia"
-
-#~ msgid "This image is probably not what you are looking for"
-#~ msgstr "Tämä ei luultavasti ole se mitä etsit"
-
-#~ msgid "It's possible, that something has been happening in the service."
-#~ msgstr "On mahdollista, että palvelussa on tapahtunut virhe."
-
-#~ msgid "You might have written the address wrong."
-#~ msgstr "Saatoit kirjoittaa sivun osoitteen väärin."
-
-#~ msgid "Or the stars are just misordered."
-#~ msgstr "Tai tähdet ovat vain väärässä asennossa."
-
-#~ msgid "Hopefully a new search will fix the situation."
-#~ msgstr "Toivottavasti uusi haku korjaa tilanteen."

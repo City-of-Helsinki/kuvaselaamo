@@ -19,14 +19,14 @@
   {% if record %}
     <div class="back-to">
       <span class="back-to__title">{{ record.title }}</span><br>
-      <span>Haku: {{ search_term }} ({{ current_page }}/{{search_result.resultCount}})</span><br>
+      <span>{% trans 'Search' %}: {{ search_term }} ({{ current_page }}/{{search_result.resultCount}})</span><br>
       <a href="{% url 'hkm_search' %}?search={{search_term}}">
         <i class="back-to__icon">
           <svg class="svg-icon">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
           </svg>
         </i>
-        <span class="back-to__text">Takaisin hakuun</span>
+        <span class="back-to__text">{% trans 'Back to search' %}</span>
       </a>
     </div>
 
@@ -44,7 +44,7 @@
   {% block hidden %}
     {% if record %}
       {% include 'hkm/snippets/popover_buy.html' with finna_id=record.id %}
-      {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id %}
+      {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}
       {% include 'hkm/snippets/popover_info.html' with record_year=record.year record_measures=record.rawData.measurements record_geo=record.rawData.geographic record_description=record.rawData.description record_authors=record.rawData.author record_title=record.title finna_id=record.id %}
       {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
       {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}

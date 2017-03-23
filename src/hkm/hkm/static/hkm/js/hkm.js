@@ -26,6 +26,12 @@ palikka
   $('#landing-search-close').click(function() {
     $('#landing-search').fadeOut();
   });
+  $('.actions').click(function(){
+    $('#landing-search').fadeOut();
+  });
+  $('#zoomable-image-container').click(function(){
+    $('#landing-search').fadeOut();
+  });
 
   function hideModal() {
     $('.modal').each(function() {

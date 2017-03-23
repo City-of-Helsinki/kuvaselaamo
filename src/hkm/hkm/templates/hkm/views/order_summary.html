@@ -13,46 +13,46 @@
 
       
       <div class="record-meta__col record-meta__col--left col-md-5">
-        <h1 class="order-preview__text">Kuvan tilaus</h1>
+        <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
         <div class="order-steps-banner">
             {% include 'hkm/views/order_steps_menu.html' %}
         </div>
-        <p>Tarkista alta, että antamasi tiedot ovat oikein. Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle.</p>
+        <p>{% trans 'Tarkistathan, että tiedot ovat oikein.' %} {% trans 'Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle.' %}</p>
         <table class="table table-striped">
-        <caption>YHTEYSTIEDOT (<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">muuta</a>)</caption>
+        <caption>{% trans 'Contact details' %} (<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">{% trans 'Change' %}</a>)</caption>
         <tr>
-        <td>Nimi: </td><td>{{ order.first_name }} {{ order.last_name }}</td>
+        <td>{% trans 'Name' %}: </td><td>{{ order.first_name }} {{ order.last_name }}</td>
         </tr>
         <tr>
-        <td>Sähköposti: </td><td>{{ order.email }}</td>
+        <td>{% trans 'Email' %}: </td><td>{{ order.email }}</td>
         </tr>
         <tr>
-        <td>Puhelin: </td><td>{{ order.phone }}</td>
+        <td>{% trans 'Phone number' %}: </td><td>{{ order.phone }}</td>
         </tr>
         <tr>
-        <td>Osoite: </td><td>{{ order.street_address }}, {{ order.postal_code }} {{ order.city }}</td>
+        <td>{% trans 'Address' %}: </td><td>{{ order.street_address }}, {{ order.postal_code }} {{ order.city }}</td>
         </tr>
         </table>
 
         <table class="table table-striped">
-        <caption>TILAUS (<a href="{% url 'hkm_order_product' order_id=order.order_hash %}">muuta</a>)</caption>
+        <caption>{% trans 'Order (noun)' %} (<a href="{% url 'hkm_order_product' order_id=order.order_hash %}">{% trans 'Change' %}</a>)</caption>
         <tr>
-        <td>Tuote: </td><td>{{ order.product_name }}</td>
+        <td>{% trans 'Product' %}: </td><td>{{ order.product_name }}</td>
         </tr>
         <tr>
-        <td>Kappalemäärä: </td><td>{{ order.amount }}</td>
+        <td>{% trans 'Amount' %}: </td><td>{{ order.amount }}</td>
         </tr>
         <tr>
-        <td>Hinta: </td><td>{{ order.total_price }} € sis. ALV{% if order.amount > 1 %} (á {{ order.unit_price }}€){% endif %}</td>
+        <td>{% trans 'Price' %}a: </td><td>{{ order.total_price }} € {% trans 'Incl. VAT' %} {% if order.amount > 1 %} (á {{ order.unit_price }}€){% endif %}</td>
         </tr>
         </table>
         <form method="POST">
           {% csrf_token %}
           <input type="hidden" name="action" value="order-submit" />
-          <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">Tilaa</button>
+          <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Order (verb)' %}</button>
         </form>
-        <p>Painamalla 'Tilaa' siirryt Maksukaistan suojattuun maksupalveluun.</p>
+        <p>{% trans 'By pressing Order (verb) you will be redirected to Bambora\'s secure payment service.' %}</p>
       </div>
       <div class="record-meta__col record-meta__col--right col-md-7">
         <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>

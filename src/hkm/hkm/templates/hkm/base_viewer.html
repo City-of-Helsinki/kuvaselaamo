@@ -34,7 +34,11 @@
           </i>
         </button>
         {% if user.is_authenticated %}
-          <button class="actions__btn actions__btn--right nav__fav" data-record-id="{{ hkm_id }}" id="popover-favorite">
+          {% if collection_record %}
+          <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+          {% else %}
+          <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+          {% endif %}
           <i class="actions__icon">
               <svg class="svg-icon nav__fav--heart">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
@@ -167,21 +171,6 @@
 
     {% endif %}
 
-  </div>
-  {% endblock %}
-
-   {% block footer %}
-    <div class="site-footer">
-      <div class="row">
-        <div class="col-sm-offset-2 col-sm-4">
-          <h2>THIS IS A FOOTER</h2>
-          <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </p>
-        </div>
-        <div class="col-sm-4">
-          <h2>THIS IS A FOOTER</h2>
-          <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </p>
-        </div>
-      </div> <!--endrow-->
   </div>
   {% endblock %}
 

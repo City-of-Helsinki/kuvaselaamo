@@ -1,25 +1,26 @@
 <!-- maybe replace these styles with Bootstrap Breadcrumbs -->
+{% load i18n hkm_tags %}
 <div class="order-steps">
 			<table class="order-steps-table">
 			<tr>
 			<td>
-		  <span class="order-step {% if form_page == 1 %} order-step-current {% endif %}"><a href="{% url 'hkm_order_product' order_id=order.order_hash %}">1. Tuotevalinnat</a></span>
+		  <span class="order-step {% if form_page == 1 %} order-step-current {% endif %}"><a href="{% url 'hkm_order_product' order_id=order.order_hash %}">1. {% trans 'Product selection' %}</a></span>
 		  </td>
 		  <td>
 		  <span class="order-step {% if form_page == 2 %} order-step-current {% endif %}">
 		  {% if order.form_phase >= 2 %}
-		  	<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">2. Tilaajan tiedot</a>
+		  	<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">2. {% trans 'Contact details' %}</a>
 		  {% else %}
-		  	2. Tilaajan tiedot
+		  	2. {% trans 'Contact details' %}
 		  {% endif %}
 		  </span>
 		  </td>
 		  <td>
 		  <span class="order-step {% if form_page == 3 %} order-step-current {% endif %}">
 		  {% if order.form_phase >= 3 %}
-		  <a href="{% url 'hkm_order_summary' order_id=order.order_hash %}">3. Yhteenveto</a>
+		  <a href="{% url 'hkm_order_summary' order_id=order.order_hash %}">3. {% trans 'Summary' %}</a>
 		  {% else %}
-		  	3. Yhteenveto
+		  	3. {% trans 'Summary' %}
 		  {% endif %}
 		  </span>
 		  </td>

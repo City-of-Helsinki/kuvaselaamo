@@ -14,17 +14,17 @@
 
       
       <div class="record-meta__col record-meta__col--left col-md-5">
-        <h1 class="order-preview__text">Kuvan tilaus</h1>
+        <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
         <div class="order-steps-banner">
             {% include 'hkm/views/order_steps_menu.html' %}
         </div>
         
-        <p>Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä. Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon kokoa.</p>
-        <p>Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä. Emme suosittele alle 200 PPI:n pikselitiheyttä.</p>
+        <p>{% trans 'Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä.' %} {% trans 'Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon kokoa.' %}</p>
+        <p>{% trans 'Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä.' %} {% trans 'Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan.' %}</p>
         <form method="POST">
           {% csrf_token %}
-          <label for="product" class="control-label">Tuotetyyppi *</label>
+          <label for="product" class="control-label">{% trans 'Tuotetyyppi' %} *</label>
           <div class="row order-options">
           {% for product in product_types %}
             <div class="well well-sm col-xs-6 col-md-3">
@@ -42,8 +42,8 @@
           <input type="hidden" name="original_height" value="{{ order.original_height }}" />
 
           <input type="hidden" name="action" value="order-product" />
-          <div class="alert alert-success" id="ppi-box" role="alert">Valmiin tulosteen pikselitiheys: <span data-full-x="{{ order.fullimg_original_width}}" data-full-y="{{ order.fullimg_original_height}}" id="ppi-indicator">x</span> PPI</div>
-          <p> Hinta yht. <span id="price-indicator">
+          <div class="alert alert-success" id="ppi-box" role="alert">{% trans 'Valmiin tulosteen laatu:' %} <span data-full-x="{{ order.fullimg_original_width}}" data-full-y="{{ order.fullimg_original_height}}" id="ppi-indicator">x</span> PPI</div>
+          <p> {% trans 'Hinta yht.' %} <span id="price-indicator">
           {% if order.total_price %}
             {{ order.total_price }}
           {% else %}
@@ -54,7 +54,7 @@
             {% endfor %}
           {% endif %}
           </span> €</p>
-          <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">Jatka</button>
+          <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">{% trans 'Jatka' %}</button>
         </form>
       </div>
 

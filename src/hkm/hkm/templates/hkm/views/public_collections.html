@@ -6,6 +6,7 @@
 
   <div class="page-header">
     <div class="fullsize-container container">
+    <div class="public-collections-padding">
       <div class="banner__title">
        <!-- <h1 class="banner__h1">{% trans 'Featured collections' %}</h1> -->
       </div>
@@ -16,11 +17,12 @@
               <a href="{% url 'hkm_collection' collection_id=collection.id %}">
                 {% with images=collection|display_images %}
                   {% if images|length == 1 %}
-                    <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
+                    <span class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"><span class="hkm-created-icon" /></span>
                   {% else %}
-                    <div class="sub-grid">
+                    <span class="sub-grid">
                       {% for image_url in images %}
-                        <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
+                        <span class="sub-grid__item" style="background-image:url('{{ image_url }}')">
+                        <span class="hkm-created-icon" /></span>
                       {% endfor %}
                     </div>
                   {% endif %}
@@ -34,6 +36,7 @@
           {% endfor %}
         </div>
       </div>
+    </div>
     </div>
   </div>
 

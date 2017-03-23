@@ -42,6 +42,7 @@ LANGUAGE_CODE = 'fi'
 LANGUAGES = (
   ('fi', 'FI'),
   ('en', 'EN'),
+  ('sv', 'SV'),
 )
 
 LOCALE_PATHS = (
