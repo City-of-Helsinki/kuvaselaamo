@@ -142,7 +142,7 @@ COMPRESS_CSS_FILTERS = [
 logging.getLogger('scss').addHandler(logging.StreamHandler())
 
 # Django
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'FI'

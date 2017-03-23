@@ -24,3 +24,5 @@ mediaroot/*
 *.swo
 local_settings.py
 .transifexrc
+celerybeat-schedule
+celerybeat.pid
