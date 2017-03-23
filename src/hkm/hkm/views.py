@@ -331,6 +331,7 @@ class CollectionDetailView(BaseView):
 
 		return context
 
+
 # using collection_record here also instead of record (see CollectionDetailView naming confusion)
 class IndexView(CollectionDetailView):
 	template_name = 'hkm/views/index.html'

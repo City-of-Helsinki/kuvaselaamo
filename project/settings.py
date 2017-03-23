@@ -143,7 +143,6 @@ logging.getLogger('scss').addHandler(logging.StreamHandler())
 
 # Django
 
-
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'FI'
 
