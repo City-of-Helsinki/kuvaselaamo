@@ -374,13 +374,28 @@ palikka
         var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) / 
           Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
 
-      
+        var language = $ppiIndicator.attr('data-language');
+        var PPI_OK = 'OK'
+        var PPI_NOT_OK = {
+          'fi': 'Liian alhainen. Rajaa alue suuremmaksi!',
+          'en': 'Too low. Increase the crop area!',
+          'sv': 'För låg. Öka storleken på den beskärda bilden!'
+        }      
+
         if (isNaN(PPI)) {
           $('#ppi-indicator').text('?');
         } else {
-          if (PPI < 200 && !$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
-          if (PPI >= 200 && $PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
-          $('#ppi-indicator').text(Math.round(PPI));
+          if (PPI < 150) {
+            if (!$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
+
+            if (language && PPI_NOT_OK.hasOwnProperty(language)) $ppiIndicator.text(PPI_NOT_OK[language]);
+            else $('#ppi-indicator').text(PPI_NOT_OK['fi']);
+
+          }
+          if (PPI >= 150) {
+            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');  
+            $ppiIndicator.text(PPI_OK);
+          }
         }
 
       }

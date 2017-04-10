@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 13:17+0200\n"
+"POT-Creation-Date: 2017-03-21 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
+"Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: hkm/hkm/models.py:32
@@ -76,7 +76,7 @@ msgstr "Offentlig"
 
 #: hkm/hkm/models.py:86
 msgid "Featured"
-msgstr ""
+msgstr "Utställt"
 
 #: hkm/hkm/models.py:87 hkm/hkm/templates/hkm/views/collection.html:26
 msgid "Show in landing page"
@@ -90,8 +90,7 @@ msgstr "Typ"
 msgid "Creator"
 msgstr "Upphovsman"
 
-#: hkm/hkm/models.py:139
-#: hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/hkm/models.py:139 hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Album"
 
@@ -115,11 +114,10 @@ msgstr "Redigera bild i förhandsvisning"
 msgid "Name"
 msgstr "Namn"
 
-#: hkm/hkm/models.py:206
-#: hkm/hkm/templates/hkm/views/order_show_result.html:59
+#: hkm/hkm/models.py:206 hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
-msgstr ""
+msgstr "Pris"
 
 #: hkm/hkm/models.py:216
 msgid "Width"
@@ -152,8 +150,7 @@ msgstr "Efternamn"
 msgid "Email"
 msgstr "E-post"
 
-#: hkm/hkm/models.py:237
-#: hkm/hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/hkm/models.py:237 hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Telefonnummer"
@@ -172,11 +169,11 @@ msgstr "Postanstalt"
 
 #: hkm/hkm/models.py:250
 msgid "Crop x coordinate from left"
-msgstr ""
+msgstr "Beskär bilden genom att ändra på x-koordinaten i vänster kant"
 
 #: hkm/hkm/models.py:251
 msgid "Crop y coordinate from top"
-msgstr ""
+msgstr "Beskär bilden genom att ändra på y-koordinaten i övre kant"
 
 #: hkm/hkm/models.py:252
 msgid "Crop width"
@@ -187,38 +184,28 @@ msgid "Crop height"
 msgstr "Avgränsningens höjd"
 
 #: hkm/hkm/models.py:254
-#, fuzzy
-#| msgid "Crop image width"
 msgid "Original image width"
-msgstr "Den avgränsade bildens bredd"
+msgstr "Bildens ursprungliga bredd"
 
 #: hkm/hkm/models.py:255
-#, fuzzy
-#| msgid "Crop image height"
 msgid "Original image height"
-msgstr "Den avgränsade bildens höjd"
+msgstr "Bildens ursprungliga höjd"
 
 #: hkm/hkm/models.py:256
-#, fuzzy
-#| msgid "Crop image width"
 msgid "Full res original image width"
-msgstr "Den avgränsade bildens bredd"
+msgstr "Den högupplösta bildens ursprungliga bredd"
 
 #: hkm/hkm/models.py:257
-#, fuzzy
-#| msgid "Crop image height"
 msgid "Full res original image height"
-msgstr "Den avgränsade bildens höjd"
+msgstr "Den högupplösta bildens ursprungliga höjd"
 
 #: hkm/hkm/models.py:262
 msgid "Image URL"
 msgstr "Bildens URL"
 
 #: hkm/hkm/models.py:263
-#, fuzzy
-#| msgid "Image URL"
 msgid "Cropped Image URL"
-msgstr "Bildens URL"
+msgstr "Den beskurna bildens URL"
 
 #: hkm/hkm/models.py:265 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
@@ -226,35 +213,30 @@ msgstr "Bild"
 
 #: hkm/hkm/models.py:267
 msgid "Order form phase"
-msgstr ""
+msgstr "Beställningens status"
 
 #: hkm/hkm/models.py:268
 msgid "Randomized order identifier phrase"
-msgstr ""
+msgstr "Beställningens individuella, slumpmässiga kod"
 
 #: hkm/hkm/models.py:269
 msgid "Product type"
-msgstr ""
+msgstr "Produkttyp"
 
 #: hkm/hkm/models.py:270
 msgid "Product Name"
-msgstr ""
+msgstr "Produktnamn"
 
-#: hkm/hkm/models.py:273
-#: hkm/hkm/templates/hkm/views/order_show_result.html:56
+#: hkm/hkm/models.py:273 hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr "Antal"
 
 #: hkm/hkm/models.py:274
-#, fuzzy
-#| msgid "Unit prize"
 msgid "Unit price"
-msgstr "Styckepris"
+msgstr "Pris per styck"
 
 #: hkm/hkm/models.py:275
-#, fuzzy
-#| msgid "Total prize"
 msgid "Total price"
 msgstr "Totalpris"
 
@@ -264,35 +246,35 @@ msgstr "Bekräftat"
 
 #: hkm/hkm/models.py:281
 msgid "Checkout started"
-msgstr ""
+msgstr "Kassatransaktionen har påbörjats"
 
 #: hkm/hkm/models.py:282
 msgid "Checkout ended"
-msgstr ""
+msgstr "Kassatransaktionen har avslutats"
 
 #: hkm/hkm/models.py:283
 msgid "Checkout successful"
-msgstr ""
+msgstr "Kassatransaktionen lyckades"
 
 #: hkm/hkm/models.py:286
 msgid "Payment processed at"
-msgstr ""
+msgstr "Betalningen har behandlats"
 
 #: hkm/hkm/models.py:287
 msgid "Payment successful"
-msgstr ""
+msgstr "Betalningen lyckades"
 
 #: hkm/hkm/models.py:290
 msgid "Order started"
-msgstr ""
+msgstr "Beställningen har påbörjats"
 
 #: hkm/hkm/models.py:291
 msgid "Order ended"
-msgstr ""
+msgstr "Beställningen har avslutats"
 
 #: hkm/hkm/models.py:292
 msgid "Order successful"
-msgstr ""
+msgstr "Beställningen lyckades"
 
 #: hkm/hkm/models.py:376
 msgid "Content"
@@ -311,16 +293,12 @@ msgid "Kuvaselaamopalaute"
 msgstr "Bildapoteksrespons"
 
 #: hkm/hkm/templates/hkm/base.html:23
-#, fuzzy
-#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo"
-msgstr "Mina sidor"
+msgstr "Helsingforsbilder.fi"
 
 #: hkm/hkm/templates/hkm/base.html:24
-#, fuzzy
-#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo demo."
-msgstr "Mina sidor"
+msgstr "Helsingforsbilder.fi demo"
 
 #: hkm/hkm/templates/hkm/base.html:96 hkm/hkm/templates/hkm/base.html:100
 #: hkm/hkm/templates/hkm/base.html:101
@@ -410,7 +388,7 @@ msgstr "Bildens ID:"
 #: hkm/hkm/templates/hkm/base_viewer.html:102
 #: hkm/hkm/templates/hkm/views/record_OLD.html:33
 msgid "Creation information"
-msgstr ""
+msgstr "Information om bilden"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:103
 #: hkm/hkm/templates/hkm/views/record_OLD.html:34
@@ -425,7 +403,7 @@ msgstr "Tidpunkt:"
 #: hkm/hkm/templates/hkm/base_viewer.html:106
 #: hkm/hkm/templates/hkm/views/record_OLD.html:36
 msgid "Property information"
-msgstr ""
+msgstr "Bildens egenskaper"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:107
 #: hkm/hkm/templates/hkm/views/record_OLD.html:37
@@ -458,27 +436,27 @@ msgstr "Skicka"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:178
 msgid "Information about the service"
-msgstr ""
+msgstr "Information om tjänsten"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:179
 msgid "Frequently asked questions"
-msgstr ""
+msgstr "Frågor och svar"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:180
 msgid "Terms of use"
-msgstr ""
+msgstr "Användningsvillkor"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:181
 msgid "Privacy policy"
-msgstr ""
+msgstr "Dataskydd "
 
 #: hkm/hkm/templates/hkm/base_viewer.html:186
 msgid "This service is provided by"
-msgstr ""
+msgstr "Denna tjänst erbjuds av"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:187
 msgid "Kuvaselaamo of Helsinki City Museum"
-msgstr ""
+msgstr "Helsingfors stadsmuseums Bildapotek"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:200
 msgid "Crop and order"
@@ -530,11 +508,11 @@ msgstr "Meddelande"
 
 #: hkm/hkm/templates/hkm/snippets/not_responding.html:4
 msgid "Finnas material server is not responding"
-msgstr ""
+msgstr "Finnas materialserver svarar inte"
 
 #: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
 msgid "Buy this as a poster"
-msgstr ""
+msgstr "Köp denna bild som affisch"
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:5
 msgid "Download printable image"
@@ -553,10 +531,8 @@ msgid "This is a low resolution image, product orders are not available"
 msgstr "Detta är en bild med låg upplösning. Produkterna kan inte beställas."
 
 #: hkm/hkm/templates/hkm/snippets/popover_favorite.html:3
-#, fuzzy
-#| msgid "Favorites"
 msgid "Add to favorites"
-msgstr "Favoriter"
+msgstr "Lägg till i favoriter"
 
 #: hkm/hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
@@ -580,10 +556,8 @@ msgstr "Ångra"
 
 #: hkm/hkm/templates/hkm/views/collection.html:60
 #: hkm/hkm/templates/hkm/views/my_collections.html:22
-#, fuzzy
-#| msgid "Edited image"
 msgid "Add images"
-msgstr "Redigerad bild"
+msgstr "Lägg till bilderna"
 
 #: hkm/hkm/templates/hkm/views/collection.html:92
 msgid "Are you sure you want to delete this item?"
@@ -591,19 +565,17 @@ msgstr "Är du säker på att du vill ta bort den här bilden från albumet?"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Picture"
-msgstr ""
+msgstr "Bild"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:27
-#, fuzzy
-#| msgid "Add to collection"
 msgid "Back to collection"
-msgstr "Lägg till i albumet"
+msgstr "Tillbaka till albumet"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:31
 #: hkm/hkm/templates/hkm/views/index.html:18
 #: hkm/hkm/templates/hkm/views/search_record.html:33
 msgid "Left and right click to zoom."
-msgstr ""
+msgstr "Vänsterklicka och högerklicka för att zooma in och ut"
 
 #: hkm/hkm/templates/hkm/views/index.html:53
 msgid "Add to a new collection"
@@ -611,122 +583,138 @@ msgstr "Lägg till i nytt album"
 
 #: hkm/hkm/templates/hkm/views/index.html:83
 msgid "Search for images from the museum archive"
-msgstr ""
+msgstr "Sök bilder i museets arkiv"
 
 #: hkm/hkm/templates/hkm/views/index.html:122
 msgid ""
 "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
 "Valokuvat tarjoaa Helsingin kaupunginmuseo."
 msgstr ""
+"Välkommen! Du har anlänt till Helsingforsbildernas skattkammare. Bilderna "
+"erbjuds av Helsingfors stadsmuseum."
 
 #: hkm/hkm/templates/hkm/views/index.html:123
 msgid "Täällä voit"
-msgstr ""
+msgstr "Här kan du"
 
 #: hkm/hkm/templates/hkm/views/index.html:124
 msgid ""
-"Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
+"Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan "
+"joukosta"
 msgstr ""
+"- Bläddra bland över 40 000 foton eller söka efter foton med olika sökord"
 
 #: hkm/hkm/templates/hkm/views/index.html:125
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
+"- Gratis ladda ned både tryckbara och mindre bilder, som lämpar sig t.ex. "
+"för webbanvändning*"
 
 #: hkm/hkm/templates/hkm/views/index.html:126
 msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
-msgstr ""
+msgstr "- Bläddra i Helsingfors stadsmuseums album med olika teman"
 
 #: hkm/hkm/templates/hkm/views/index.html:127
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
-msgstr ""
+msgstr "- Skapa egna album och lägga till dina favoritbilder i dem "
 
 #: hkm/hkm/templates/hkm/views/index.html:128
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
-msgstr ""
+msgstr "- Beställa avgiftsbelagda bildprodukter såsom affischer och postkort."
 
 #: hkm/hkm/templates/hkm/views/index.html:130
 msgid ""
 "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
+"Du kan fritt använda de bilder du laddat ned, bara du kommer ihåg att nämna "
+"fotografens namn och Helsingfors stadsmuseum."
 
 #: hkm/hkm/templates/hkm/views/order.html:17
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:15
 #: hkm/hkm/templates/hkm/views/order_show_result.html:13
 #: hkm/hkm/templates/hkm/views/order_summary.html:16
 msgid "Kuvan tilaaminen"
-msgstr ""
+msgstr "Att beställa en bild"
 
 #: hkm/hkm/templates/hkm/views/order.html:23
 msgid ""
 "Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
 msgstr ""
+"Välj nedan bildproduktens typ och antal produkter som du vill beställa."
 
 #: hkm/hkm/templates/hkm/views/order.html:23
 msgid ""
 "Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon "
 "kokoa."
-msgstr ""
+msgstr "Beskär bilden genom att ändra på storleken på ramen ovanpå bilden."
 
 #: hkm/hkm/templates/hkm/views/order.html:24
 msgid "Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä."
-msgstr ""
+msgstr "Observera att beskärningen kan försämra bildkvaliteten."
 
 #: hkm/hkm/templates/hkm/views/order.html:24
 msgid "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
-msgstr ""
+msgstr "Tjänsten meddelar om bildkvaliteten är för låg."
 
 #: hkm/hkm/templates/hkm/views/order.html:27
 msgid "Tuotetyyppi"
-msgstr ""
+msgstr "Produkttyp"
 
 #: hkm/hkm/templates/hkm/views/order.html:45
 msgid "Valmiin tulosteen laatu:"
-msgstr ""
+msgstr "Kvaliteten på den färdiga utskriften:"
 
 #: hkm/hkm/templates/hkm/views/order.html:46
 msgid "Hinta yht."
-msgstr ""
+msgstr "Totalpris"
 
 #: hkm/hkm/templates/hkm/views/order.html:57
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:25
 msgid "Jatka"
-msgstr ""
+msgstr "Fortsätt"
 
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:20
 msgid "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
 msgstr ""
+"Skriv nedan ditt namn, din e-postadress, ditt telefonnummer och "
+"leveransadress."
 
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:20
 #: hkm/hkm/templates/hkm/views/order_summary.html:21
 msgid "Tarkistathan, että tiedot ovat oikein."
-msgstr ""
+msgstr "Kontrollera att uppgifterna är korrekta."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:18
 msgid "Kiitos tilauksestasi - maksu on vahvistettu."
-msgstr ""
+msgstr "Tack för beställningen. Betalningen har nu bekräftats."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:18
 msgid "Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen."
-msgstr ""
+msgstr "Du får en separat orderbekräftelse till din e-post."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
 "Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
 "tietoa toimituksen etenemisestä."
 msgstr ""
+"Beställningen har skickats till Printmotor. Printmotor informerar dig per "
+"e-post om status för beställningen."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
 msgstr ""
+"Det uppstod ett fel, och beställningen kunde inte skickas till Printmotor."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:23
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään."
 msgstr ""
+"Kontakta Helsingforsbilder.fi-webbplatsens administratör: "
+"kuvakokoelmat@hel.fi / +358 9 3103 6497"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid "Kiitos tilauksestasi."
-msgstr ""
+msgstr "Tack för beställningen."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid ""
@@ -734,72 +722,74 @@ msgid ""
 "maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, "
 "kuitenkin maksimissaan puoli tuntia."
 msgstr ""
+"Du får en separat orderbekräftelse per e-post när betalningstransaktionen "
+"har bekräftats. Detta tar vanligtvis några minuter, dock högst en halv "
+"timme."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Maksun käsittelyssä tapahtui virhe."
-msgstr ""
+msgstr "Det uppstod ett fel vid hanteringen av betalningen."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:11
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:13
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:12
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:14
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
-#, fuzzy
-#| msgid "Image details"
 msgid "Contact details"
-msgstr "Bildens uppgifter"
+msgstr "Kontaktuppgifter"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:46
 #: hkm/hkm/templates/hkm/views/order_summary.html:34
 msgid "Address"
-msgstr ""
+msgstr "Adress"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:51
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Order (noun)"
-msgstr ""
+msgstr "Beställning (noun)"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:53
 #: hkm/hkm/templates/hkm/views/order_summary.html:41
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:59
 msgid "incl. VAT"
-msgstr ""
+msgstr "inkl. moms"
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:6
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:7
 msgid "Product selection"
-msgstr ""
+msgstr "Produktsortiment"
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:20
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:22
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:21
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:23
 msgid "Summary"
-msgstr ""
+msgstr "Sammandrag"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:21
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
-msgstr ""
+msgstr "Gå till betalningssidan genom att klicka på Beställ."
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Change"
-msgstr ""
+msgstr "Ändra"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Incl. VAT"
-msgstr ""
+msgstr "Inkl. moms"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:53
 msgid "Order (verb)"
-msgstr ""
+msgstr "Beställ (verb)"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:55
 msgid "By pressing Order (verb) you will be redirected to Bambora"
 msgstr ""
+"Genom att klicka på Beställ (verb) går du till betalningstjänsten Bambora"
 
 #: hkm/hkm/templates/hkm/views/public_collections.html:10
 msgid "Featured collections"
-msgstr ""
+msgstr "Museets album "
 
 #: hkm/hkm/templates/hkm/views/record_OLD.html:9
 msgid "Image details"
@@ -823,10 +813,8 @@ msgid "Year"
 msgstr "År"
 
 #: hkm/hkm/templates/hkm/views/search_record.html:29
-#, fuzzy
-#| msgid "Back to list view"
 msgid "Back to search"
-msgstr "Tillbaka till albumet"
+msgstr "Tillbaka till sökningen"
 
 #: hkm/hkm/views.py:988
 msgid "Favorites"
@@ -851,33 +839,3 @@ msgstr ""
 #: templates/500.html:14
 msgid "#error-500-paragraph"
 msgstr ""
-
-#~ msgid "Prize"
-#~ msgstr "Pris"
-
-#~ msgid "Crop x"
-#~ msgstr "Avgränsa x "
-
-#~ msgid "Crop y"
-#~ msgstr "Avgränsa y"
-
-#~ msgid "Account"
-#~ msgstr "Användare"
-
-#~ msgid "Search images"
-#~ msgstr "Sök bilder"
-
-#~ msgid "This image is probably not what you are looking for"
-#~ msgstr "Det här är troligtvis inte det du söker"
-
-#~ msgid "It's possible, that something has been happening in the service."
-#~ msgstr "Det är möjligt att det har skett ett fel i tjänsten."
-
-#~ msgid "You might have written the address wrong."
-#~ msgstr "Du kanske skrev sidans adress fel."
-
-#~ msgid "Or the stars are just misordered."
-#~ msgstr "Kanske stjärnorna endast är i fel läge."
-
-#~ msgid "Hopefully a new search will fix the situation."
-#~ msgstr "Förhoppningsvis korrigeras situationen med en ny sökning."

@@ -6,6 +6,7 @@ from project.settings import *
 SECRET_KEY = 'foo'
 
 DEBUG = True
+
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -16,19 +16,12 @@ class PrintmotorClient(object):
   USERNAME = settings.PRINTMOTOR_USERNAME
   PASSWORD = settings.PRINTMOTOR_PASSWORD
   API_KEY = settings.PRINTMOTOR_API_KEY
-
-
-  productNames = {
-    '40 x 30 cm': 'api-poster-40x30',
-    '30 x 40 cm': 'api-poster-30x40',
-    'A4 Vaaka': 'api-poster-a4',
-    'A4 Pysty': 'api-poster-a4',
-  }
+  PRODUCT_NAMES = settings.PRINTMOTOR_PRODUCT_NAMES
 
   def post(self, order):
     LOG.debug(PrintmotorClient.API_KEY)
     url = PrintmotorClient.API_ENDPOINT
-    layout = self.productNames.get(order.product_name, 'unknown')
+    layout = self.PRODUCT_NAMES.get(order.product_name, 'unknown')
 
 
     # order['phone'] = model_to_dict(order['phone'], ['national_number'])['national_number']

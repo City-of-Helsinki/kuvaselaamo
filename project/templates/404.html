@@ -1,12 +1,7 @@
+{% extends 'hkm/base.html' %}
 {% load i18n %}
 
-<html>
-<head>
-  {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/hkm/css/main.css" />
-  {% endblock %}
-</head>
-<body>
+{% block main_content %}
 
   <div class="status-page">
     <img class="status-page__image" src="/static/hkm/img/no-results-image.jpg"></img>
@@ -14,5 +9,4 @@
     <p class="status-page__paragraph">{% trans '#error-404-paragraph' %}</p>
   </div>
 
-</body>
-</html>
+{% endblock }

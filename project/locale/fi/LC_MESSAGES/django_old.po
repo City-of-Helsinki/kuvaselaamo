@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 14:00+0200\n"
+"POT-Creation-Date: 2017-03-21 13:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: hkm/hkm/models.py:32
@@ -76,7 +76,7 @@ msgstr "Julkinen"
 
 #: hkm/hkm/models.py:86
 msgid "Featured"
-msgstr "Näytteillä"
+msgstr "Ajankohtainen"
 
 #: hkm/hkm/models.py:87 hkm/hkm/templates/hkm/views/collection.html:26
 msgid "Show in landing page"
@@ -90,7 +90,8 @@ msgstr "Tyyppi"
 msgid "Creator"
 msgstr "Tekijä"
 
-#: hkm/hkm/models.py:139 hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/hkm/models.py:139
+#: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Albumi"
 
@@ -114,10 +115,11 @@ msgstr "Editoi esikatselukuvan"
 msgid "Name"
 msgstr "Nimi"
 
-#: hkm/hkm/models.py:206 hkm/hkm/templates/hkm/views/order_show_result.html:59
+#: hkm/hkm/models.py:206
+#: hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
-msgstr "Hinta"
+msgstr ""
 
 #: hkm/hkm/models.py:216
 msgid "Width"
@@ -150,7 +152,8 @@ msgstr "Sukunimi"
 msgid "Email"
 msgstr "Sähköposti"
 
-#: hkm/hkm/models.py:237 hkm/hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/hkm/models.py:237
+#: hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Puhelinnumero"
@@ -169,11 +172,11 @@ msgstr "Postitoimipaikka"
 
 #: hkm/hkm/models.py:250
 msgid "Crop x coordinate from left"
-msgstr "Rajaa x-koordinaatti vasemmalta"
+msgstr ""
 
 #: hkm/hkm/models.py:251
 msgid "Crop y coordinate from top"
-msgstr "Rajaa y-koordinaatti ylhäältä"
+msgstr ""
 
 #: hkm/hkm/models.py:252
 msgid "Crop width"
@@ -184,28 +187,38 @@ msgid "Crop height"
 msgstr "Rajauksen korkeus"
 
 #: hkm/hkm/models.py:254
+#, fuzzy
+#| msgid "Crop image width"
 msgid "Original image width"
-msgstr "Kuvan alkuperäinen leveys"
+msgstr "Rajatun kuvan leveys"
 
 #: hkm/hkm/models.py:255
+#, fuzzy
+#| msgid "Crop image height"
 msgid "Original image height"
-msgstr "Kuvan alkuperäinen korkeus"
+msgstr "Rajatun kuvan korkeus"
 
 #: hkm/hkm/models.py:256
+#, fuzzy
+#| msgid "Crop image width"
 msgid "Full res original image width"
-msgstr "Kokoresoluutioisen kuvan alkuperäinen leveys"
+msgstr "Rajatun kuvan leveys"
 
 #: hkm/hkm/models.py:257
+#, fuzzy
+#| msgid "Crop image height"
 msgid "Full res original image height"
-msgstr "Kokoresoluutioisen kuvan alkuperäinen korkeus"
+msgstr "Rajatun kuvan korkeus"
 
 #: hkm/hkm/models.py:262
 msgid "Image URL"
 msgstr "Kuvan URL"
 
 #: hkm/hkm/models.py:263
+#, fuzzy
+#| msgid "Image URL"
 msgid "Cropped Image URL"
-msgstr "Rajatun kuvan URL"
+msgstr "Kuvan URL"
 
 #: hkm/hkm/models.py:265 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
@@ -213,30 +226,35 @@ msgstr "Kuva"
 
 #: hkm/hkm/models.py:267
 msgid "Order form phase"
-msgstr "Tilauksen vaihe"
+msgstr ""
 
 #: hkm/hkm/models.py:268
 msgid "Randomized order identifier phrase"
-msgstr "Tilauksen yksilöivä satunnainen tunniste"
+msgstr ""
 
 #: hkm/hkm/models.py:269
 msgid "Product type"
-msgstr "Tuotetyyppi"
+msgstr ""
 
 #: hkm/hkm/models.py:270
 msgid "Product Name"
-msgstr "Tuotteen nimi"
+msgstr ""
 
-#: hkm/hkm/models.py:273 hkm/hkm/templates/hkm/views/order_show_result.html:56
+#: hkm/hkm/models.py:273
+#: hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr "Määrä"
 
 #: hkm/hkm/models.py:274
+#, fuzzy
+#| msgid "Unit prize"
 msgid "Unit price"
-msgstr "Yksikköhinta"
+msgstr "Kappalehinta"
 
 #: hkm/hkm/models.py:275
+#, fuzzy
+#| msgid "Total prize"
 msgid "Total price"
 msgstr "Kokonaishinta"
 
@@ -246,35 +264,35 @@ msgstr "Vahvistettu"
 
 #: hkm/hkm/models.py:281
 msgid "Checkout started"
-msgstr "Kassatapahtuma aloitettu"
+msgstr ""
 
 #: hkm/hkm/models.py:282
 msgid "Checkout ended"
-msgstr "Kassatapahtuma päättynyt"
+msgstr ""
 
 #: hkm/hkm/models.py:283
 msgid "Checkout successful"
-msgstr "Kassatapahtuma onnistui"
+msgstr ""
 
 #: hkm/hkm/models.py:286
 msgid "Payment processed at"
-msgstr "Maksu käsitelty"
+msgstr ""
 
 #: hkm/hkm/models.py:287
 msgid "Payment successful"
-msgstr "Maksu onnistui"
+msgstr ""
 
 #: hkm/hkm/models.py:290
 msgid "Order started"
-msgstr "Tilaus aloitettu"
+msgstr ""
 
 #: hkm/hkm/models.py:291
 msgid "Order ended"
-msgstr "Tilaus päättynyt"
+msgstr ""
 
 #: hkm/hkm/models.py:292
 msgid "Order successful"
-msgstr "Tilaus onnistui"
+msgstr ""
 
 #: hkm/hkm/models.py:376
 msgid "Content"
@@ -293,12 +311,16 @@ msgid "Kuvaselaamopalaute"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/base.html:23
+#, fuzzy
+#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo"
-msgstr "Helsinkikuvia.fi"
+msgstr "Oma sivu"
 
 #: hkm/hkm/templates/hkm/base.html:24
+#, fuzzy
+#| msgid "My Kuvaselaamo"
 msgid "Kuvaselaamo demo."
-msgstr "Helsinkikuvia.fi-demo."
+msgstr "Oma sivu"
 
 #: hkm/hkm/templates/hkm/base.html:96 hkm/hkm/templates/hkm/base.html:100
 #: hkm/hkm/templates/hkm/base.html:101
@@ -388,7 +410,7 @@ msgstr "Kuvan tunniste:"
 #: hkm/hkm/templates/hkm/base_viewer.html:102
 #: hkm/hkm/templates/hkm/views/record_OLD.html:33
 msgid "Creation information"
-msgstr "Tekijätiedot"
+msgstr "Luontitiedot"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:103
 #: hkm/hkm/templates/hkm/views/record_OLD.html:34
@@ -403,7 +425,7 @@ msgstr "Ajankohta:"
 #: hkm/hkm/templates/hkm/base_viewer.html:106
 #: hkm/hkm/templates/hkm/views/record_OLD.html:36
 msgid "Property information"
-msgstr "Tallenteen tiedot"
+msgstr "Kohdetiedot"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:107
 #: hkm/hkm/templates/hkm/views/record_OLD.html:37
@@ -436,27 +458,27 @@ msgstr "Lähetä"
 
 #: hkm/hkm/templates/hkm/base_viewer.html:178
 msgid "Information about the service"
-msgstr "Tietoa palvelusta"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:179
 msgid "Frequently asked questions"
-msgstr "Kysymyksiä ja vastauksia"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:180
 msgid "Terms of use"
-msgstr "Käyttöehdot"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:181
 msgid "Privacy policy"
-msgstr "Tietosuoja"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:186
 msgid "This service is provided by"
-msgstr "Tämän palvelun tarjoaa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:187
 msgid "Kuvaselaamo of Helsinki City Museum"
-msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/base_viewer.html:200
 msgid "Crop and order"
@@ -508,11 +530,11 @@ msgstr "Viesti"
 
 #: hkm/hkm/templates/hkm/snippets/not_responding.html:4
 msgid "Finnas material server is not responding"
-msgstr "Finnan aineistopalvelin ei vastaa"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
 msgid "Buy this as a poster"
-msgstr "Osta tämä julisteena"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:5
 msgid "Download printable image"
@@ -531,8 +553,10 @@ msgid "This is a low resolution image, product orders are not available"
 msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
 
 #: hkm/hkm/templates/hkm/snippets/popover_favorite.html:3
+#, fuzzy
+#| msgid "Favorites"
 msgid "Add to favorites"
-msgstr "Lisää suosikkeihin"
+msgstr "Suosikit"
 
 #: hkm/hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
@@ -556,8 +580,10 @@ msgstr "Peruuta"
 
 #: hkm/hkm/templates/hkm/views/collection.html:60
 #: hkm/hkm/templates/hkm/views/my_collections.html:22
+#, fuzzy
+#| msgid "Edited image"
 msgid "Add images"
-msgstr "Lisää kuvat"
+msgstr "Muokattu kuva"
 
 #: hkm/hkm/templates/hkm/views/collection.html:92
 msgid "Are you sure you want to delete this item?"
@@ -565,17 +591,19 @@ msgstr "Oletko varma, että haluat poistaa tämän kuvan albumista?"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Picture"
-msgstr "Kuva"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:27
+#, fuzzy
+#| msgid "Add to collection"
 msgid "Back to collection"
-msgstr "Takaisin albumiin"
+msgstr "Lisää albumiin"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:31
 #: hkm/hkm/templates/hkm/views/index.html:18
 #: hkm/hkm/templates/hkm/views/search_record.html:33
 msgid "Left and right click to zoom."
-msgstr "Suurenna ja pienennä kuvaa hiiren painikkeilla"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:53
 msgid "Add to a new collection"
@@ -583,136 +611,122 @@ msgstr "Lisää uuteen albumiin"
 
 #: hkm/hkm/templates/hkm/views/index.html:83
 msgid "Search for images from the museum archive"
-msgstr "Etsi kuvia museon arkistosta"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:122
 msgid ""
 "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
 "Valokuvat tarjoaa Helsingin kaupunginmuseo."
 msgstr ""
-"Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
-"Valokuvat tarjoaa Helsingin kaupunginmuseo."
 
 #: hkm/hkm/templates/hkm/views/index.html:123
 msgid "Täällä voit"
-msgstr "Täällä voit"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:124
 msgid ""
-"Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan "
-"joukosta"
+"Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
 msgstr ""
-"- Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan "
-"joukosta"
 
 #: hkm/hkm/templates/hkm/views/index.html:125
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
-"- Ladata ilmaiseksi laitteellesi painokelpoisia tai pienempiä, "
-"verkkokäyttöön sopivia kuvia*"
 
 #: hkm/hkm/templates/hkm/views/index.html:126
 msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
-msgstr "- Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:127
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
-msgstr "- Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:128
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
-msgstr "- Tilata maksullisia kuvatuotteita, kuten julisteita"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/index.html:130
 msgid ""
 "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
-"*Voit käyttää lataamiasi kuvia haluamaasi tarkoitukseen, kunhan muistat "
-"mainita kuvan ottajan nimen ja Helsingin kaupunginmuseon."
 
 #: hkm/hkm/templates/hkm/views/order.html:17
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:15
 #: hkm/hkm/templates/hkm/views/order_show_result.html:13
 #: hkm/hkm/templates/hkm/views/order_summary.html:16
 msgid "Kuvan tilaaminen"
-msgstr "Kuvan tilaaminen"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:23
 msgid ""
 "Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
 msgstr ""
-"Valitse alta haluamasi kuvatuotetyyppi ja tilattavien tuotteiden lukumäärä."
 
 #: hkm/hkm/templates/hkm/views/order.html:23
 msgid ""
 "Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon "
 "kokoa."
-msgstr "Rajaa kuva muuttamalla kuvan päällä olevan kehikon kokoa."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:24
 msgid "Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä."
-msgstr "Huomaathan, että jos kuvaa rajataan, sen laatu voi kärsiä."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:24
 msgid "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
-msgstr "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:27
 msgid "Tuotetyyppi"
-msgstr "Tuotetyyppi"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:45
 msgid "Valmiin tulosteen laatu:"
-msgstr "Valmiin tulosteen laatu:"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:46
 msgid "Hinta yht."
-msgstr "Hinta yht."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order.html:57
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:25
 msgid "Jatka"
-msgstr "Jatka"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:20
 msgid "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
-msgstr "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:20
 #: hkm/hkm/templates/hkm/views/order_summary.html:21
 msgid "Tarkistathan, että tiedot ovat oikein."
-msgstr "Tarkistathan, että tiedot ovat oikein."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:18
 msgid "Kiitos tilauksestasi - maksu on vahvistettu."
-msgstr "Kiitos tilauksestasi – maksu on vahvistettu."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:18
 msgid "Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen."
-msgstr "Saat  vielä erillisen tilausvahvistuksen sähköpostitse."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
 "Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
 "tietoa toimituksen etenemisestä."
 msgstr ""
-"Tilauksesi on lähetetty Printmotorille. Saat Printmotorilta sähköpostia "
-"tilauksesi etenemisestä."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
-msgstr "Tilauksen lähettämisessä Printmotorille tapahtui virhe."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:23
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään."
 msgstr ""
-"Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään: kuvakokoelmat@hel.fi / "
-"puh. +358 9 3103 6497"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid "Kiitos tilauksestasi."
-msgstr "Kiitos tilauksestasi."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid ""
@@ -720,70 +734,68 @@ msgid ""
 "maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, "
 "kuitenkin maksimissaan puoli tuntia."
 msgstr ""
-"Saat vielä sähköpostitse erillisen tilausvahvistuksen, kun maksutapahtuma on"
-" vahvistettu. Tähän menee tyypillisesti muutama minuutti, kuitenkin "
-"maksimissaan puoli tuntia."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Maksun käsittelyssä tapahtui virhe."
-msgstr "Maksun käsittelyssä tapahtui virhe."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:12
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:14
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:11
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:13
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
+#, fuzzy
+#| msgid "Image details"
 msgid "Contact details"
-msgstr "Yhteystiedot"
+msgstr "Kuvatiedot"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:46
 #: hkm/hkm/templates/hkm/views/order_summary.html:34
 msgid "Address"
-msgstr "Osoite"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:51
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Order (noun)"
-msgstr "Tilaus (noun)"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:53
 #: hkm/hkm/templates/hkm/views/order_summary.html:41
 msgid "Product"
-msgstr "Tuote"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:59
 msgid "incl. VAT"
-msgstr "sis. ALV"
+msgstr ""
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:7
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:6
 msgid "Product selection"
-msgstr "Tuotevalikoima"
+msgstr ""
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:21
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:23
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:20
+#: hkm/hkm/templates/hkm/views/order_steps_menu.html:22
 msgid "Summary"
-msgstr "Yhteenveto"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:21
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
-msgstr "Siirry maksusivulle Tilaa-painikkeella."
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Change"
-msgstr "Vaihda"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Incl. VAT"
-msgstr "Sis. ALV"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:53
 msgid "Order (verb)"
-msgstr "Tilaa (verb)"
+msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:55
 msgid "By pressing Order (verb) you will be redirected to Bambora"
 msgstr ""
-"Painamalla Tilaa-painiketta (verb) siirryt Bamboran maksuvälityspalveluun."
 
 #: hkm/hkm/templates/hkm/views/public_collections.html:10
 msgid "Featured collections"
@@ -811,8 +823,10 @@ msgid "Year"
 msgstr "Vuosi"
 
 #: hkm/hkm/templates/hkm/views/search_record.html:29
+#, fuzzy
+#| msgid "Back to list view"
 msgid "Back to search"
-msgstr "Takaisin hakuun"
+msgstr "Takaisin listanäkymään"
 
 #: hkm/hkm/views.py:988
 msgid "Favorites"
@@ -837,3 +851,33 @@ msgstr ""
 #: templates/500.html:14
 msgid "#error-500-paragraph"
 msgstr ""
+
+#~ msgid "Prize"
+#~ msgstr "Hinta"
+
+#~ msgid "Crop x"
+#~ msgstr "Rajaa x"
+
+#~ msgid "Crop y"
+#~ msgstr "Rajaa y"
+
+#~ msgid "Account"
+#~ msgstr "Käyttäjä"
+
+#~ msgid "Search images"
+#~ msgstr "Hae kuvia"
+
+#~ msgid "This image is probably not what you are looking for"
+#~ msgstr "Tämä ei luultavasti ole se mitä etsit"
+
+#~ msgid "It's possible, that something has been happening in the service."
+#~ msgstr "On mahdollista, että palvelussa on tapahtunut virhe."
+
+#~ msgid "You might have written the address wrong."
+#~ msgstr "Saatoit kirjoittaa sivun osoitteen väärin."
+
+#~ msgid "Or the stars are just misordered."
+#~ msgstr "Tai tähdet ovat vain väärässä asennossa."
+
+#~ msgid "Hopefully a new search will fix the situation."
+#~ msgstr "Toivottavasti uusi haku korjaa tilanteen."

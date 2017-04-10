@@ -523,7 +523,7 @@ color: #555 !important;
 }
 
 .image-viewer__container:hover {
-  cursor: url("/static/hkm/img/mouse_zoom.png"), zoom-in;
+  cursor: url("/static/hkm/img/mouse_zoom.png") 32 32, zoom-in;
 }
 
 .image-viewer__image {

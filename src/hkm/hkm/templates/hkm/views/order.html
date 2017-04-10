@@ -42,7 +42,7 @@
           <input type="hidden" name="original_height" value="{{ order.original_height }}" />
 
           <input type="hidden" name="action" value="order-product" />
-          <div class="alert alert-success" id="ppi-box" role="alert">{% trans 'Valmiin tulosteen laatu:' %} <span data-full-x="{{ order.fullimg_original_width}}" data-full-y="{{ order.fullimg_original_height}}" id="ppi-indicator">x</span> PPI</div>
+          <div class="alert alert-success" id="ppi-box" role="alert">{% trans 'Valmiin tulosteen laatu:' %} <span data-full-x="{{ order.fullimg_original_width}}" data-full-y="{{ order.fullimg_original_height}}" id="ppi-indicator" data-language={{language}}>x</span></div>
           <p> {% trans 'Hinta yht.' %} <span id="price-indicator">
           {% if order.total_price %}
             {{ order.total_price }}

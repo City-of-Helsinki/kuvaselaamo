@@ -26,5 +26,12 @@ PRINTMOTOR_USERNAME = settings.HKM_PRINTMOTOR_USERNAME
 PRINTMOTOR_PASSWORD = settings.HKM_PRINTMOTOR_PASSWORD
 PRINTMOTOR_API_KEY = settings.HKM_PRINTMOTOR_API_KEY
 
+PRINTMOTOR_PRODUCT_NAMES = {
+  '50 x 70 cm': 'api-poster-50x70',
+  '70 x 50 cm': 'api-poster-70x50',
+  'A4 Vaaka': 'api-poster-a4',
+  'A4 Pysty': 'api-poster-a4',
+}
+
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
