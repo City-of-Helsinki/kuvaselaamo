@@ -1,0 +1,27 @@
+{% extends 'hkm/base_browse.html' %}
+{% load i18n %}
+
+{% block banner %}
+
+  <div class="page-header">
+    <div class="fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1">{% trans 'Terms of use' %}</h1>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="container-small container">
+
+    <p>{% trans 'The following terms and conditions apply to the use of material' %}:</p>
+    <p>{% trans 'Images'}: {% trans 'Terms of use paragraph images %}</p>
+    <p>{% trans 'Metadata'}: {% trans 'Terms of use paragraph metadata %}</p>
+    <p>{% trans 'Terms of use linked pages' %}:</p>
+
+  </div>
+
+{% endblock %}
