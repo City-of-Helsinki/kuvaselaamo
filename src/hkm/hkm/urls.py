@@ -9,6 +9,11 @@ urlpatterns = [
   url(r'^$', views.IndexView.as_view(), name='hkm_index'),
   url(r'^info/$', views.InfoView.as_view(), name='hkm_info'),
 
+  url(r'^about/$', views.SiteinfoAboutView.as_view(), name='hkm_siteinfo_about'),
+  url(r'^privacy/$', views.SiteinfoPrivacyView.as_view(), name='hkm_siteinfo_privacy'),
+  url(r'^QA/$', views.SiteinfoQAView.as_view(), name='hkm_siteinfo_QA'),
+  url(r'^terms/$', views.SiteinfoTermsView.as_view(), name='hkm_siteinfo_terms'),
+
   url(r'^collection/public/$', views.PublicCollectionsView.as_view(), name='hkm_public_collections'),
   url(r'^collection/my/$', login_required()(views.MyCollectionsView.as_view()), name='hkm_my_collections'),
   url(r'^collection/(?P<collection_id>\d+)/$', views.CollectionDetailView.as_view(), name='hkm_collection'),

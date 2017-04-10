@@ -162,10 +162,10 @@
       <div class="row">
         <div class="col-sm-offset-2 col-sm-4">
           <img src="/static/hkm/img/helsinkikuvia_logo.png" class="brand-img__footer">
-          <p>{% trans 'Information about the service' %}</p>
-          <p>{% trans 'Frequently asked questions' %}</p>
-          <p>{% trans 'Terms of use' %}</p>
-          <p>{% trans 'Privacy policy' %}</p>
+          <a href="{% url 'hkm_siteinfo_about' %}"><p>{% trans 'Information about the service' %}</p></a>
+          <a href="{% url 'hkm_siteinfo_QA' %}"><p>{% trans 'Frequently asked questions' %}</p></a>
+          <a href="{% url 'hkm_siteinfo_terms' %}"><p>{% trans 'Terms of use' %}</p></a>
+          <a href="{% url 'hkm_siteinfo_privacy' %}"><p>{% trans 'Privacy policy' %}</p></a>
           <p><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></p>
         </div>
         <div class="col-sm-4">

@@ -11,6 +11,7 @@ from django.views.generic import TemplateView, RedirectView, View
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib.auth import login as auth_login
@@ -1117,5 +1118,34 @@ class AjaxCropRecordView(View):
 		record.save()
 		return http.HttpResponse()
 
+
+# VIEWS THAT SITE FOOTER LINKS TO
+class SiteinfoAboutView(BaseView):
+	template_name = 'hkm/views/siteinfo_about.html'
+	url_name = 'hkm_siteinfo_about'
+
+	def get(self, request):
+		return render(request, self.template_name)
+
+class SiteinfoPrivacyView(BaseView):
+	template_name = 'hkm/views/siteinfo_privacy.html'
+	url_name = 'hkm_siteinfo_privacy'
+
+	def get(self, request):
+		return render(request, self.template_name)
+
+class SiteinfoQAView(BaseView):
+	template_name = 'hkm/views/siteinfo_QA.html'
+	url_name = 'hkm_siteinfo_QA'
+
+	def get(self, request):
+		return render(request, self.template_name)
+
+class SiteinfoTermsView(BaseView):
+	template_name = 'hkm/views/siteinfo_terms.html'
+	url_name = 'hkm_siteinfo_terms'
+
+	def get(self, request):
+		return render(request, self.template_name)
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
