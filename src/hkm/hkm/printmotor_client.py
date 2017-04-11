@@ -49,7 +49,7 @@ class PrintmotorClient(object):
                 } 
             ],
             'endUserPrice' : { 
-              'priceValue' : int(order.total_price), # int ??,
+              'priceValue' : float(order.total_price),
               'currencyIso4217' : "EUR",
             }
           } 

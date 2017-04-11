@@ -308,14 +308,14 @@ class ProductOrder(BaseModel):
 	is_order_successful = models.NullBooleanField(verbose_name=_(u'Order successful'), null=True, blank=True)
 
 	objects = ProductOrderQuerySet.as_manager()
-	
+
 	def checkout(self):
 		checkout_request = PBW.post(self.order_hash, int(self.total_price_with_postage * 100)) #api requires sum in cents
 		LOG.debug(checkout_request)
 		token = checkout_request.get('token', None)
 		# TODO better error logs && datetime_checkout_redirected if success
 		if token:
-			redirect_url = 'https://dev.paybyway.com/pbwapi/token/%s' % token
+			redirect_url = settings.PBW_API_ENDPOINT + '/token/%s' % token
 			return redirect_url
 		return None
 

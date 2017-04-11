@@ -17,13 +17,13 @@ class PaybywayClient(object):
 	API_ENDPOINT = settings.PBW_API_ENDPOINT
 	API_KEY = settings.PBW_API_KEY
 	SECRET_KEY = settings.PBW_SECRET_KEY
-	# change dev to www when final -- this is a testing api
 
 	def post(self, order_hash, price):
-		url = PaybywayClient.API_ENDPOINT
+		url = PaybywayClient.API_ENDPOINT + '/auth_payment'
 		msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
 		authcode = hmac.new(PaybywayClient.SECRET_KEY, msg, hashlib.sha256).hexdigest().upper()
 		return_url = '%s/order/%s/confirmation/' % (settings.MY_DOMAIN, order_hash) #TODO refactor to reverse
+		notify_url = '%s/order/%s/notify/' % (settings.MY_DOMAIN, order_hash) #TODO refactor to reverse
 
 		payload = {
 			'version': 'w3.1',
@@ -34,7 +34,7 @@ class PaybywayClient(object):
 			'payment_method': {
 				'type': 'e-payment',
 				'return_url': return_url,
-				'notify_url': 'https://bar.test.com',
+				'notify_url': notify_url,
 			},
 			'authcode': authcode
 		}
