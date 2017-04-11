@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 13:14+0300\n"
+"POT-Creation-Date: 2017-04-11 16:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,313 +18,314 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: hkm/hkm/models.py:32
+#: hkm/hkm/models.py:34
 msgid "Created"
 msgstr ""
 
-#: hkm/hkm/models.py:33
+#: hkm/hkm/models.py:35
 msgid "Modified"
 msgstr ""
 
-#: hkm/hkm/models.py:45
+#: hkm/hkm/models.py:47
 msgid "Finnish"
 msgstr ""
 
-#: hkm/hkm/models.py:46
+#: hkm/hkm/models.py:48
 msgid "English"
 msgstr ""
 
-#: hkm/hkm/models.py:47
+#: hkm/hkm/models.py:49
 msgid "Svedish"
 msgstr ""
 
-#: hkm/hkm/models.py:50 hkm/hkm/models.py:246 hkm/hkm/models.py:407
+#: hkm/hkm/models.py:53 hkm/hkm/models.py:269 hkm/hkm/models.py:487
 msgid "User"
 msgstr ""
 
-#: hkm/hkm/models.py:51
+#: hkm/hkm/models.py:54
 msgid "Is admin"
 msgstr ""
 
-#: hkm/hkm/models.py:52 hkm/hkm/templates/hkm/base.html:109
+#: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:109
 msgid "Language"
 msgstr ""
 
-#: hkm/hkm/models.py:78
+#: hkm/hkm/models.py:81
 msgid "Normal"
 msgstr ""
 
-#: hkm/hkm/models.py:79
+#: hkm/hkm/models.py:82
 msgid "Favorite"
 msgstr ""
 
-#: hkm/hkm/models.py:82
+#: hkm/hkm/models.py:85
 msgid "Owner"
 msgstr ""
 
-#: hkm/hkm/models.py:83 hkm/hkm/models.py:421
+#: hkm/hkm/models.py:86 hkm/hkm/models.py:508
 msgid "Title"
 msgstr ""
 
-#: hkm/hkm/models.py:84 hkm/hkm/models.py:207
+#: hkm/hkm/models.py:88 hkm/hkm/models.py:226
 msgid "Description"
 msgstr ""
 
-#: hkm/hkm/models.py:85
+#: hkm/hkm/models.py:89
 msgid "Public"
 msgstr ""
 
-#: hkm/hkm/models.py:86
+#: hkm/hkm/models.py:91
 msgid "Featured"
 msgstr ""
 
-#: hkm/hkm/models.py:87 hkm/hkm/templates/hkm/views/collection.html:26
+#: hkm/hkm/models.py:93 hkm/hkm/templates/hkm/views/collection.html:26
 msgid "Show in landing page"
 msgstr ""
 
-#: hkm/hkm/models.py:88
+#: hkm/hkm/models.py:94
 msgid "Type"
 msgstr ""
 
-#: hkm/hkm/models.py:138 hkm/hkm/models.py:419
+#: hkm/hkm/models.py:148 hkm/hkm/models.py:505
 msgid "Creator"
 msgstr ""
 
-#: hkm/hkm/models.py:139
+#: hkm/hkm/models.py:150
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr ""
 
-#: hkm/hkm/models.py:140 hkm/hkm/models.py:263 hkm/hkm/models.py:408
-#: hkm/hkm/models.py:420
+#: hkm/hkm/models.py:152 hkm/hkm/models.py:297 hkm/hkm/models.py:489
+#: hkm/hkm/models.py:507
 msgid "Finna record ID"
 msgstr ""
 
-#: hkm/hkm/models.py:141
+#: hkm/hkm/models.py:153
 msgid "Edited full resolution image"
 msgstr ""
 
-#: hkm/hkm/models.py:143
+#: hkm/hkm/models.py:155
 msgid "Edited preview image"
 msgstr ""
 
-#: hkm/hkm/models.py:206 hkm/hkm/models.py:228 hkm/hkm/models.py:409
+#: hkm/hkm/models.py:224 hkm/hkm/models.py:249 hkm/hkm/models.py:491
 #: hkm/hkm/templates/hkm/emails/feedback.txt:2
 #: hkm/hkm/templates/hkm/views/order_show_result.html:37
 #: hkm/hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
 msgstr ""
 
-#: hkm/hkm/models.py:208
+#: hkm/hkm/models.py:228
 #: hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
 msgstr ""
 
-#: hkm/hkm/models.py:220
-msgid "api-poster-30x40"
+#: hkm/hkm/models.py:240
+msgid "api-poster-gloss-30x40-horizontal"
 msgstr ""
 
-#: hkm/hkm/models.py:221
-msgid "api-poster-40x30"
+#: hkm/hkm/models.py:241
+msgid "api-poster-gloss-30x40-vertical"
 msgstr ""
 
-#: hkm/hkm/models.py:222
+#: hkm/hkm/models.py:242
 msgid "api-poster-50x70"
 msgstr ""
 
-#: hkm/hkm/models.py:223
+#: hkm/hkm/models.py:243
 msgid "api-poster-70x50"
 msgstr ""
 
-#: hkm/hkm/models.py:224
-msgid "api-poster-a4"
+#: hkm/hkm/models.py:244
+msgid "api-poster-gloss-A4-horizontal"
 msgstr ""
 
-#: hkm/hkm/models.py:225
-msgid "api-poster-a4-horizontal"
+#: hkm/hkm/models.py:245
+msgid "api-poster-gloss-A4-vertical"
 msgstr ""
 
-#: hkm/hkm/models.py:229
+#: hkm/hkm/models.py:250
 msgid "Width"
 msgstr ""
 
-#: hkm/hkm/models.py:230
+#: hkm/hkm/models.py:251
 msgid "Height"
 msgstr ""
 
-#: hkm/hkm/models.py:231
+#: hkm/hkm/models.py:253
 msgid "Paper quality"
 msgstr ""
 
-#: hkm/hkm/models.py:247
+#: hkm/hkm/models.py:270
 msgid "Session"
 msgstr ""
 
-#: hkm/hkm/models.py:248
+#: hkm/hkm/models.py:272
 msgid "First name"
 msgstr ""
 
-#: hkm/hkm/models.py:249
+#: hkm/hkm/models.py:274
 msgid "Last name"
 msgstr ""
 
-#: hkm/hkm/models.py:250 hkm/hkm/models.py:410
+#: hkm/hkm/models.py:276 hkm/hkm/models.py:493
 #: hkm/hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr ""
 
-#: hkm/hkm/models.py:251
+#: hkm/hkm/models.py:278
 #: hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr ""
 
-#: hkm/hkm/models.py:252
+#: hkm/hkm/models.py:280
 msgid "Street adress"
 msgstr ""
 
-#: hkm/hkm/models.py:253
+#: hkm/hkm/models.py:282
 msgid "Postal code"
 msgstr ""
 
-#: hkm/hkm/models.py:254
+#: hkm/hkm/models.py:284
 msgid "City"
 msgstr ""
 
-#: hkm/hkm/models.py:264
+#: hkm/hkm/models.py:299
 msgid "Crop x coordinate from left"
 msgstr ""
 
-#: hkm/hkm/models.py:265
+#: hkm/hkm/models.py:301
 msgid "Crop y coordinate from top"
 msgstr ""
 
-#: hkm/hkm/models.py:266
+#: hkm/hkm/models.py:303
 msgid "Crop width"
 msgstr ""
 
-#: hkm/hkm/models.py:267
+#: hkm/hkm/models.py:305
 msgid "Crop height"
 msgstr ""
 
-#: hkm/hkm/models.py:268
+#: hkm/hkm/models.py:307
 msgid "Original image width"
 msgstr ""
 
-#: hkm/hkm/models.py:269
+#: hkm/hkm/models.py:309
 msgid "Original image height"
 msgstr ""
 
-#: hkm/hkm/models.py:270
+#: hkm/hkm/models.py:311
 msgid "Full res original image width"
 msgstr ""
 
-#: hkm/hkm/models.py:271
+#: hkm/hkm/models.py:313
 msgid "Full res original image height"
 msgstr ""
 
-#: hkm/hkm/models.py:276
+#: hkm/hkm/models.py:319
 msgid "Image URL"
 msgstr ""
 
-#: hkm/hkm/models.py:277
+#: hkm/hkm/models.py:321
 msgid "Cropped Image URL"
 msgstr ""
 
-#: hkm/hkm/models.py:279 hkm/hkm/templates/hkm/emails/feedback.txt:6
+#: hkm/hkm/models.py:325 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr ""
 
-#: hkm/hkm/models.py:281
+#: hkm/hkm/models.py:328
 msgid "Order form phase"
 msgstr ""
 
-#: hkm/hkm/models.py:282
+#: hkm/hkm/models.py:330
 msgid "Randomized order identifier phrase"
 msgstr ""
 
-#: hkm/hkm/models.py:283
+#: hkm/hkm/models.py:332
 msgid "Product type"
 msgstr ""
 
-#: hkm/hkm/models.py:284
+#: hkm/hkm/models.py:334
 msgid "Product Name"
 msgstr ""
 
-#: hkm/hkm/models.py:287
+#: hkm/hkm/models.py:338
 #: hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr ""
 
-#: hkm/hkm/models.py:288 hkm/hkm/templates/hkm/views/order_summary.html:47
+#: hkm/hkm/models.py:340 hkm/hkm/templates/hkm/views/order.html:56
+#: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Postal fees"
 msgstr ""
 
-#: hkm/hkm/models.py:289
+#: hkm/hkm/models.py:342
 msgid "Unit price"
 msgstr ""
 
-#: hkm/hkm/models.py:290
+#: hkm/hkm/models.py:344
 msgid "Total price"
 msgstr ""
 
-#: hkm/hkm/models.py:291
+#: hkm/hkm/models.py:346
 msgid "Total price with postage"
 msgstr ""
 
-#: hkm/hkm/models.py:294
+#: hkm/hkm/models.py:350
 msgid "Confirmed"
 msgstr ""
 
-#: hkm/hkm/models.py:297
+#: hkm/hkm/models.py:354
 msgid "Checkout started"
 msgstr ""
 
-#: hkm/hkm/models.py:298
+#: hkm/hkm/models.py:356
 msgid "Checkout ended"
 msgstr ""
 
-#: hkm/hkm/models.py:299
+#: hkm/hkm/models.py:358
 msgid "Checkout successful"
 msgstr ""
 
-#: hkm/hkm/models.py:302
+#: hkm/hkm/models.py:362
 msgid "Payment processed at"
 msgstr ""
 
-#: hkm/hkm/models.py:303
+#: hkm/hkm/models.py:364
 msgid "Payment successful"
 msgstr ""
 
-#: hkm/hkm/models.py:306
+#: hkm/hkm/models.py:369
 msgid "Order started"
 msgstr ""
 
-#: hkm/hkm/models.py:307
+#: hkm/hkm/models.py:371
 msgid "Order ended"
 msgstr ""
 
-#: hkm/hkm/models.py:308
+#: hkm/hkm/models.py:373
 msgid "Order successful"
 msgstr ""
 
-#: hkm/hkm/models.py:411
+#: hkm/hkm/models.py:494
 msgid "Content"
 msgstr ""
 
-#: hkm/hkm/models.py:412
+#: hkm/hkm/models.py:496
 msgid "Notification sent"
 msgstr ""
 
-#: hkm/hkm/models.py:422
+#: hkm/hkm/models.py:510
 msgid "Edited image"
 msgstr ""
 
-#: hkm/hkm/tasks.py:24
+#: hkm/hkm/tasks.py:25
 msgid "Kuvaselaamopalaute"
 msgstr ""
 
@@ -717,6 +718,11 @@ msgstr ""
 msgid "Hinta yht."
 msgstr ""
 
+#: hkm/hkm/templates/hkm/views/order.html:56
+#: hkm/hkm/templates/hkm/views/order_summary.html:47
+msgid "Incl. VAT"
+msgstr ""
+
 #: hkm/hkm/templates/hkm/views/order.html:57
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:25
 msgid "Jatka"
@@ -811,10 +817,6 @@ msgstr ""
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Change"
-msgstr ""
-
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
-msgid "Incl. VAT"
 msgstr ""
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:53
@@ -1322,10 +1324,10 @@ msgstr ""
 msgid "Terms of use paragraph metadata"
 msgstr ""
 
-#: hkm/hkm/views.py:1012
+#: hkm/hkm/views.py:1110
 msgid "Favorites"
 msgstr ""
 
-#: hkm/hkm/views.py:1012
+#: hkm/hkm/views.py:1110
 msgid "Your favorite images are collected here"
 msgstr ""

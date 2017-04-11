@@ -28,7 +28,7 @@
           <div class="row order-options">
           {% for product in product_types %}
             <div class="well well-sm col-xs-6 col-sm-4">
-            <input type="radio" class="ordertype" name="product" {% if forloop.first and not order.product_type %} checked {% elif product.id == order.product_type_id %} checked {% endif %} value="{{ product.id }}" data-price="{{ product.price }}" data-xsize="{{ product.width }}" data-ysize="{{ product.height }}"> <span class="order-product__name">{% trans product.name %} ({{product.price}}€)</span>
+            <input type="radio" class="ordertype" name="product" {% if forloop.first and not order.product_type %} checked {% elif product.id == order.product_type_id %} checked {% endif %} value="{{ product.id }}" data-price="{{ product.price }}" data-xsize="{{ product.width }}" data-ysize="{{ product.height }}"> <span class="order-product__name">{% trans product.get_name_display %} ({{product.price}}€)</span>
             </div>
           {% endfor %}
           </div>

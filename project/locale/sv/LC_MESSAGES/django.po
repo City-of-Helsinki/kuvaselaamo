@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 13:11+0300\n"
+"POT-Creation-Date: 2017-04-11 16:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -18,315 +18,316 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: hkm/hkm/models.py:32
+#: hkm/hkm/models.py:34
 msgid "Created"
 msgstr "Skapad"
 
-#: hkm/hkm/models.py:33
+#: hkm/hkm/models.py:35
 msgid "Modified"
 msgstr "Redigerad"
 
-#: hkm/hkm/models.py:45
+#: hkm/hkm/models.py:47
 msgid "Finnish"
 msgstr "finska"
 
-#: hkm/hkm/models.py:46
+#: hkm/hkm/models.py:48
 msgid "English"
 msgstr "engelska"
 
-#: hkm/hkm/models.py:47
+#: hkm/hkm/models.py:49
 msgid "Svedish"
 msgstr "svenska"
 
-#: hkm/hkm/models.py:50 hkm/hkm/models.py:246 hkm/hkm/models.py:407
+#: hkm/hkm/models.py:53 hkm/hkm/models.py:269 hkm/hkm/models.py:487
 msgid "User"
 msgstr "Användare"
 
-#: hkm/hkm/models.py:51
+#: hkm/hkm/models.py:54
 msgid "Is admin"
 msgstr "Huvudanvändare"
 
-#: hkm/hkm/models.py:52 hkm/hkm/templates/hkm/base.html:109
+#: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:109
 msgid "Language"
 msgstr "Språk"
 
-#: hkm/hkm/models.py:78
+#: hkm/hkm/models.py:81
 msgid "Normal"
 msgstr "Normal"
 
-#: hkm/hkm/models.py:79
+#: hkm/hkm/models.py:82
 msgid "Favorite"
 msgstr "Favorit"
 
-#: hkm/hkm/models.py:82
+#: hkm/hkm/models.py:85
 msgid "Owner"
 msgstr "Ägare"
 
-#: hkm/hkm/models.py:83 hkm/hkm/models.py:421
+#: hkm/hkm/models.py:86 hkm/hkm/models.py:508
 msgid "Title"
 msgstr "Titel"
 
-#: hkm/hkm/models.py:84 hkm/hkm/models.py:207
+#: hkm/hkm/models.py:88 hkm/hkm/models.py:226
 msgid "Description"
 msgstr "Beskrivning"
 
-#: hkm/hkm/models.py:85
+#: hkm/hkm/models.py:89
 msgid "Public"
 msgstr "Offentlig"
 
-#: hkm/hkm/models.py:86
+#: hkm/hkm/models.py:91
 msgid "Featured"
 msgstr "Utställt"
 
-#: hkm/hkm/models.py:87 hkm/hkm/templates/hkm/views/collection.html:26
+#: hkm/hkm/models.py:93 hkm/hkm/templates/hkm/views/collection.html:26
 msgid "Show in landing page"
 msgstr "Visa på första sidan"
 
-#: hkm/hkm/models.py:88
+#: hkm/hkm/models.py:94
 msgid "Type"
 msgstr "Typ"
 
-#: hkm/hkm/models.py:138 hkm/hkm/models.py:419
+#: hkm/hkm/models.py:148 hkm/hkm/models.py:505
 msgid "Creator"
 msgstr "Upphovsman"
 
-#: hkm/hkm/models.py:139
+#: hkm/hkm/models.py:150
 #: hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Album"
 
-#: hkm/hkm/models.py:140 hkm/hkm/models.py:263 hkm/hkm/models.py:408
-#: hkm/hkm/models.py:420
+#: hkm/hkm/models.py:152 hkm/hkm/models.py:297 hkm/hkm/models.py:489
+#: hkm/hkm/models.py:507
 msgid "Finna record ID"
 msgstr "Finna-postens ID"
 
-#: hkm/hkm/models.py:141
+#: hkm/hkm/models.py:153
 msgid "Edited full resolution image"
 msgstr "Redigera bild med full upplösning"
 
-#: hkm/hkm/models.py:143
+#: hkm/hkm/models.py:155
 msgid "Edited preview image"
 msgstr "Redigera bild i förhandsvisning"
 
-#: hkm/hkm/models.py:206 hkm/hkm/models.py:228 hkm/hkm/models.py:409
+#: hkm/hkm/models.py:224 hkm/hkm/models.py:249 hkm/hkm/models.py:491
 #: hkm/hkm/templates/hkm/emails/feedback.txt:2
 #: hkm/hkm/templates/hkm/views/order_show_result.html:37
 #: hkm/hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
 msgstr "Namn"
 
-#: hkm/hkm/models.py:208
+#: hkm/hkm/models.py:228
 #: hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
 msgstr "Pris"
 
-#: hkm/hkm/models.py:220
-msgid "api-poster-30x40"
-msgstr "30x40 cm, Semi-Gloss 240g"
-
-#: hkm/hkm/models.py:221
-msgid "api-poster-40x30"
+#: hkm/hkm/models.py:240
+msgid "api-poster-gloss-30x40-horizontal"
 msgstr "40x30 cm, Semi-Gloss 240g"
 
-#: hkm/hkm/models.py:222
+#: hkm/hkm/models.py:241
+msgid "api-poster-gloss-30x40-vertical"
+msgstr "30x40 cm, Semi-Gloss 240g"
+
+#: hkm/hkm/models.py:242
 msgid "api-poster-50x70"
 msgstr "50x70 cm, Matt 180g"
 
-#: hkm/hkm/models.py:223
+#: hkm/hkm/models.py:243
 msgid "api-poster-70x50"
 msgstr "70x50 cm, Matt 180g"
 
-#: hkm/hkm/models.py:224
-msgid "api-poster-a4"
-msgstr "A4 Stående, Semi-Gloss 240g"
-
-#: hkm/hkm/models.py:225
-msgid "api-poster-a4-horizontal"
+#: hkm/hkm/models.py:244
+msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Liggande, Semi-Gloss 240g"
 
-#: hkm/hkm/models.py:229
+#: hkm/hkm/models.py:245
+msgid "api-poster-gloss-A4-vertical"
+msgstr "A4 Stående, Semi-Gloss 240g"
+
+#: hkm/hkm/models.py:250
 msgid "Width"
 msgstr "Bredd"
 
-#: hkm/hkm/models.py:230
+#: hkm/hkm/models.py:251
 msgid "Height"
 msgstr "Höjd"
 
-#: hkm/hkm/models.py:231
+#: hkm/hkm/models.py:253
 msgid "Paper quality"
 msgstr "Papperskvalitet"
 
-#: hkm/hkm/models.py:247
+#: hkm/hkm/models.py:270
 msgid "Session"
 msgstr "Session"
 
-#: hkm/hkm/models.py:248
+#: hkm/hkm/models.py:272
 msgid "First name"
 msgstr "Förnamn"
 
-#: hkm/hkm/models.py:249
+#: hkm/hkm/models.py:274
 msgid "Last name"
 msgstr "Efternamn"
 
-#: hkm/hkm/models.py:250 hkm/hkm/models.py:410
+#: hkm/hkm/models.py:276 hkm/hkm/models.py:493
 #: hkm/hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr "E-post"
 
-#: hkm/hkm/models.py:251
+#: hkm/hkm/models.py:278
 #: hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: hkm/hkm/models.py:252
+#: hkm/hkm/models.py:280
 msgid "Street adress"
 msgstr "Gatuadress"
 
-#: hkm/hkm/models.py:253
+#: hkm/hkm/models.py:282
 msgid "Postal code"
 msgstr "Postnummer"
 
-#: hkm/hkm/models.py:254
+#: hkm/hkm/models.py:284
 msgid "City"
 msgstr "Postanstalt"
 
-#: hkm/hkm/models.py:264
+#: hkm/hkm/models.py:299
 msgid "Crop x coordinate from left"
 msgstr "Beskär bilden genom att ändra på x-koordinaten i vänster kant"
 
-#: hkm/hkm/models.py:265
+#: hkm/hkm/models.py:301
 msgid "Crop y coordinate from top"
 msgstr "Beskär bilden genom att ändra på y-koordinaten i övre kant"
 
-#: hkm/hkm/models.py:266
+#: hkm/hkm/models.py:303
 msgid "Crop width"
 msgstr "Avgränsningens bredd"
 
-#: hkm/hkm/models.py:267
+#: hkm/hkm/models.py:305
 msgid "Crop height"
 msgstr "Avgränsningens höjd"
 
-#: hkm/hkm/models.py:268
+#: hkm/hkm/models.py:307
 msgid "Original image width"
 msgstr "Bildens ursprungliga bredd"
 
-#: hkm/hkm/models.py:269
+#: hkm/hkm/models.py:309
 msgid "Original image height"
 msgstr "Bildens ursprungliga höjd"
 
-#: hkm/hkm/models.py:270
+#: hkm/hkm/models.py:311
 msgid "Full res original image width"
 msgstr "Den högupplösta bildens ursprungliga bredd"
 
-#: hkm/hkm/models.py:271
+#: hkm/hkm/models.py:313
 msgid "Full res original image height"
 msgstr "Den högupplösta bildens ursprungliga höjd"
 
-#: hkm/hkm/models.py:276
+#: hkm/hkm/models.py:319
 msgid "Image URL"
 msgstr "Bildens URL"
 
-#: hkm/hkm/models.py:277
+#: hkm/hkm/models.py:321
 msgid "Cropped Image URL"
 msgstr "Den beskurna bildens URL"
 
-#: hkm/hkm/models.py:279 hkm/hkm/templates/hkm/emails/feedback.txt:6
+#: hkm/hkm/models.py:325 hkm/hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr "Bild"
 
-#: hkm/hkm/models.py:281
+#: hkm/hkm/models.py:328
 msgid "Order form phase"
 msgstr "Beställningens status"
 
-#: hkm/hkm/models.py:282
+#: hkm/hkm/models.py:330
 msgid "Randomized order identifier phrase"
 msgstr "Beställningens individuella, slumpmässiga kod"
 
-#: hkm/hkm/models.py:283
+#: hkm/hkm/models.py:332
 msgid "Product type"
 msgstr "Produkttyp"
 
-#: hkm/hkm/models.py:284
+#: hkm/hkm/models.py:334
 msgid "Product Name"
 msgstr "Produktnamn"
 
-#: hkm/hkm/models.py:287
+#: hkm/hkm/models.py:338
 #: hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr "Antal"
 
-#: hkm/hkm/models.py:288 hkm/hkm/templates/hkm/views/order_summary.html:47
+#: hkm/hkm/models.py:340 hkm/hkm/templates/hkm/views/order.html:56
+#: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Postal fees"
 msgstr "fraktkostnader"
 
-#: hkm/hkm/models.py:289
+#: hkm/hkm/models.py:342
 msgid "Unit price"
 msgstr "Pris per styck"
 
-#: hkm/hkm/models.py:290
+#: hkm/hkm/models.py:344
 msgid "Total price"
 msgstr "Totalpris"
 
-#: hkm/hkm/models.py:291
+#: hkm/hkm/models.py:346
 #, fuzzy
 #| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Totalpris"
 
-#: hkm/hkm/models.py:294
+#: hkm/hkm/models.py:350
 msgid "Confirmed"
 msgstr "Bekräftat"
 
-#: hkm/hkm/models.py:297
+#: hkm/hkm/models.py:354
 msgid "Checkout started"
 msgstr "Kassatransaktionen har påbörjats"
 
-#: hkm/hkm/models.py:298
+#: hkm/hkm/models.py:356
 msgid "Checkout ended"
 msgstr "Kassatransaktionen har avslutats"
 
-#: hkm/hkm/models.py:299
+#: hkm/hkm/models.py:358
 msgid "Checkout successful"
 msgstr "Kassatransaktionen lyckades"
 
-#: hkm/hkm/models.py:302
+#: hkm/hkm/models.py:362
 msgid "Payment processed at"
 msgstr "Betalningen har behandlats"
 
-#: hkm/hkm/models.py:303
+#: hkm/hkm/models.py:364
 msgid "Payment successful"
 msgstr "Betalningen lyckades"
 
-#: hkm/hkm/models.py:306
+#: hkm/hkm/models.py:369
 msgid "Order started"
 msgstr "Beställningen har påbörjats"
 
-#: hkm/hkm/models.py:307
+#: hkm/hkm/models.py:371
 msgid "Order ended"
 msgstr "Beställningen har avslutats"
 
-#: hkm/hkm/models.py:308
+#: hkm/hkm/models.py:373
 msgid "Order successful"
 msgstr "Beställningen lyckades"
 
-#: hkm/hkm/models.py:411
+#: hkm/hkm/models.py:494
 msgid "Content"
 msgstr "Innehåll"
 
-#: hkm/hkm/models.py:412
+#: hkm/hkm/models.py:496
 msgid "Notification sent"
 msgstr "Annonsen skickad"
 
-#: hkm/hkm/models.py:422
+#: hkm/hkm/models.py:510
 msgid "Edited image"
 msgstr "Redigerad bild"
 
-#: hkm/hkm/tasks.py:24
+#: hkm/hkm/tasks.py:25
 msgid "Kuvaselaamopalaute"
 msgstr "Bildapoteksrespons"
 
@@ -693,7 +694,7 @@ msgstr ""
 #: hkm/hkm/templates/hkm/views/order_show_result.html:13
 #: hkm/hkm/templates/hkm/views/order_summary.html:16
 msgid "Kuvan tilaaminen"
-msgstr "Att beställa en bild"
+msgstr "Bildbeställning"
 
 #: hkm/hkm/templates/hkm/views/order.html:23
 msgid ""
@@ -726,6 +727,11 @@ msgstr "Kvaliteten på den färdiga utskriften:"
 #: hkm/hkm/templates/hkm/views/order.html:46
 msgid "Hinta yht."
 msgstr "Totalpris"
+
+#: hkm/hkm/templates/hkm/views/order.html:56
+#: hkm/hkm/templates/hkm/views/order_summary.html:47
+msgid "Incl. VAT"
+msgstr "Inkl. moms"
 
 #: hkm/hkm/templates/hkm/views/order.html:57
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:25
@@ -831,10 +837,6 @@ msgstr "Gå till betalningssidan genom att klicka på Beställ."
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
 msgid "Change"
 msgstr "Ändra"
-
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
-msgid "Incl. VAT"
-msgstr "Inkl. moms"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:53
 msgid "Order (verb)"
@@ -1507,10 +1509,28 @@ msgstr ""
 "rättigheter som publicitet eller integritetslagstiftning kan begränsa hur du "
 "kan använda metadatan."
 
-#: hkm/hkm/views.py:1012
+#: hkm/hkm/views.py:1110
 msgid "Favorites"
 msgstr "Favoriter"
 
-#: hkm/hkm/views.py:1012
+#: hkm/hkm/views.py:1110
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
+
+#~ msgid "30x40 Semi-Gloss"
+#~ msgstr "30x40 cm, Semi-Gloss 240g"
+
+#~ msgid "40x30 Semi-Gloss"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "A4 Landscape Semi-Gloss"
+#~ msgstr "A4 Liggande, Semi-Gloss 240g"
+
+#~ msgid "A4 Portrait Semi-Gloss"
+#~ msgstr "A4 Stående, Semi-Gloss 240g"
+
+#~ msgid "api-poster-40x30"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "api-poster-a4"
+#~ msgstr "A4 Stående, Semi-Gloss 240g"
