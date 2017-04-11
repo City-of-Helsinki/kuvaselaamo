@@ -154,7 +154,7 @@
         <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <form method="POST">
-            <h1>Palaute kuvasta</h1>
+            <h1>{% trans 'Image feedback' %}</h1>
             {% csrf_token %}
             {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
             <input type="hidden" name="action" value="feedback" />

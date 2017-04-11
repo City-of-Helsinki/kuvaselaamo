@@ -14,7 +14,7 @@ LOG = logging.getLogger(__name__)
 
 class PaybywayClient(object):
 
-	API_ENDPOINT = 'https://dev.paybyway.com/pbwapi/auth_payment' #move to settings
+	API_ENDPOINT = settings.PBW_API_ENDPOINT
 	API_KEY = settings.PBW_API_KEY
 	SECRET_KEY = settings.PBW_SECRET_KEY
 	# change dev to www when final -- this is a testing api

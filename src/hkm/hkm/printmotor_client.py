@@ -12,16 +12,15 @@ LOG = logging.getLogger(__name__)
 
 class PrintmotorClient(object):
 
-  API_ENDPOINT = 'https://test.printmotor.io/api/v1/order' #move to settings
+  API_ENDPOINT = settings.PRINTMOTOR_API_ENDPOINT
   USERNAME = settings.PRINTMOTOR_USERNAME
   PASSWORD = settings.PRINTMOTOR_PASSWORD
   API_KEY = settings.PRINTMOTOR_API_KEY
-  PRODUCT_NAMES = settings.PRINTMOTOR_PRODUCT_NAMES
 
   def post(self, order):
     LOG.debug(PrintmotorClient.API_KEY)
     url = PrintmotorClient.API_ENDPOINT
-    layout = self.PRODUCT_NAMES.get(order.product_name, 'unknown')
+    layout = order.product_name
 
 
     # order['phone'] = model_to_dict(order['phone'], ['national_number'])['national_number']

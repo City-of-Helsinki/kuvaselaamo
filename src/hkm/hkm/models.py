@@ -215,6 +215,17 @@ class Product(BaseModel):
 
 
 class PrintProduct(Product):
+
+	PRODUCT_LAYOUTS_LIST = (
+		('api-poster-30x40', _(u'api-poster-30x40')),
+		('api-poster-40x30', _(u'api-poster-40x30')),
+		('api-poster-50x70', _(u'api-poster-50x70')),
+		('api-poster-70x50', _(u'api-poster-70x50')),
+		('api-poster-a4', _(u'api-poster-a4')),
+		('api-poster-a4-horizontal', _(u'api-poster-a4-horizontal')),
+	)
+
+	name = models.CharField(choices=PRODUCT_LAYOUTS_LIST, verbose_name=_(u'Name'), max_length=255)
 	width = models.IntegerField(verbose_name=_(u'Width'))
 	height = models.IntegerField(verbose_name=_(u'Height'))
 	paper_quality = models.CharField(verbose_name=_(u'Paper quality'), max_length=255)
@@ -229,6 +240,9 @@ class ProductOrderQuerySet(models.QuerySet):
 
 
 class ProductOrder(BaseModel):
+
+
+
 	# Anonymous users can order aswell, so we need contact and shipping information directly
 	# to order model. Orders are associated to anynymous users via session
 	user = models.ForeignKey(User, verbose_name=_(u'User'), null=True, blank=True)

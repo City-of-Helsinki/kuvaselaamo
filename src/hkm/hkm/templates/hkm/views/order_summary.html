@@ -38,7 +38,7 @@
         <table class="table table-striped">
         <caption>{% trans 'Order (noun)' %} (<a href="{% url 'hkm_order_product' order_id=order.order_hash %}">{% trans 'Change' %}</a>)</caption>
         <tr>
-        <td>{% trans 'Product' %}: </td><td>{{ order.product_name }}</td>
+        <td>{% trans 'Product' %}: </td><td>{% trans order.product_name %}</td>
         </tr>
         <tr>
         <td>{% trans 'Amount' %}: </td><td>{{ order.amount }}</td>
@@ -52,7 +52,7 @@
           <input type="hidden" name="action" value="order-submit" />
           <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Order (verb)' %}</button>
         </form>
-        <p>{% trans 'By pressing Order (verb) you will be redirected to Bambora\'s secure payment service.' %}</p>
+        <p>{% trans 'By pressing Order (verb) you will be redirected to the secure payment service.' %}</p>
       </div>
       <div class="record-meta__col record-meta__col--right col-md-7">
         <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>

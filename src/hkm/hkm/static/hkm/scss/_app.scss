@@ -41,6 +41,26 @@ input[type="text"]:-ms-input-placeholder {
 color: #555 !important;  
 }
 
+.centered-fullwidth {
+  width: 100%;
+  text-align: center;
+}
+
+.justified {
+  text-align: justify;
+}
+
+.section-title {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.question {
+  font-weight: bold;
+  margin-top: 30px;
+}
+
 /* Colors */ 
 .bittersweet {
   background-color: $color-white; // changed from $color-bittersweet (orange)
@@ -1564,4 +1584,33 @@ div.grid__fav.active {
   .my-modal__dialog {
     margin: 0;
   }
+}
+
+.privacy-table {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.privacy-table td {
+  padding-top: 20px;
+}
+
+.privacy-table .privacy-label {
+  font-weight: bold;
+}
+
+.client-register {
+  margin-top: 50px;
+}
+
+.privacy-bigtitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.privacy-smalltitle {
+  font-weight: bold;
+  margin-top: 30px;
 }

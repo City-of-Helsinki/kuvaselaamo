@@ -12,6 +12,8 @@ from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib.auth import login as auth_login
@@ -1124,28 +1126,45 @@ class SiteinfoAboutView(BaseView):
 	template_name = 'hkm/views/siteinfo_about.html'
 	url_name = 'hkm_siteinfo_about'
 
-	def get(self, request):
-		return render(request, self.template_name)
+	def get(self, request, *args, **kwargs):
+		return super(SiteinfoAboutView, self).get(request, *args, **kwargs)
 
 class SiteinfoPrivacyView(BaseView):
 	template_name = 'hkm/views/siteinfo_privacy.html'
 	url_name = 'hkm_siteinfo_privacy'
 
-	def get(self, request):
-		return render(request, self.template_name)
+	def get(self, request, *args, **kwargs):
+		return super(SiteinfoPrivacyView, self).get(request, *args, **kwargs)
 
 class SiteinfoQAView(BaseView):
 	template_name = 'hkm/views/siteinfo_QA.html'
 	url_name = 'hkm_siteinfo_QA'
 
-	def get(self, request):
-		return render(request, self.template_name)
+	def get(self, request, *args, **kwargs):
+		return super(SiteinfoQAView, self).get(request, *args, **kwargs)
 
 class SiteinfoTermsView(BaseView):
 	template_name = 'hkm/views/siteinfo_terms.html'
 	url_name = 'hkm_siteinfo_terms'
 
-	def get(self, request):
-		return render(request, self.template_name)
+	def get(self, request, *args, **kwargs):
+		return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
+
+
+# ERROR HANDLERS
+
+def handler404(request):
+		context = {}
+		context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+		response = render_to_response('hkm/views/404.html', context)
+		response.status_code = 404
+		return response
+
+def handler500(request):
+		context = {}
+		context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+		response = render_to_response('hkm/views/500.html', context)
+		response.status_code = 500
+		return response
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

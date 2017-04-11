@@ -6,7 +6,7 @@
   <div class="page-header">
     <div class="fullsize-container container">
       <div class="banner__title">
-        <h1 class="banner__h1">{% trans 'Handling customer data in' %} {% trans 'Kuvaselaamo' %}</h1>
+        <h1 class="banner__h1 centered-fullwidth">{% trans 'Handling customer data in' %} {% trans 'Kuvaselaamo' %}</h1>
       </div>
     </div>
   </div>
@@ -16,48 +16,60 @@
 {% block content %}
 
   <div class="container-small container">
-
+  <p class="privacy-bigtitle">{% trans 'Privacy' %}</p>
     <p>{% trans 'Privacy when logging in' %}</p>
-    <p>{% trans 'Information' %} {% trans 'Purpose' %}</p>
-    <p>{% trans 'Username' %}{% trans 'Password' %}{% trans 'User authentication' %}</p>
+    <table class="privacy-table">
+        <tr>
+            <td class="privacy-label">{% trans 'Information' %}</td>
+            <td class="privacy-label">{% trans 'Purpose' %}</td>
+        </tr>
+        <tr>
+            <td>{% trans 'Username' %}</td>
+            <td>{% trans 'User authentication' %}</td>
+        </tr>
+        <tr>
+            <td>{% trans 'Password' %}</td>
+            <td>{% trans 'User authentication' %}</td>
+        </tr>
+    </table>
     <p>{% trans 'Privacy in addition' %}</p>
     <p>{% trans 'Terms of use linked pages' %}</p>
+    <div class="client-register">
+        <p class="privacy-bigtitle">{% trans 'Description of the client register data file for Helsinkiphotos.fi service' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Data file controller' %}</p>
+        <p>{% trans 'Helsinki City Museum' %}</p>
+        <p>{% trans 'Aleksanterinkatu 16' %}</p>
+        <p>{% trans 'P.O. Box 4300' %}</p>
+        <p>{% trans '00099 CITY OF HELSINKI' %}</p>
+        <p>{% trans 'tel. 09 3103 6497' %}</p>
+        <p>{% trans 'kuvakokoelmat@hel.fi' %}</p>
 
-    <p>{% trans 'Privacy when logging in' %}</p>
-    <p>{% trans 'Description of the client register data file for Helsinkiphotos.fi service' %}</p>
-    <p>{% trans 'Data file controller' %}</p>
-    <p>{% trans 'Helsinki City Museum' %}</p>
-    <p>{% trans 'Aleksanterinkatu 16' %}</p>
-    <p>{% trans 'P.O. Box 4300' %}</p>
-    <p>{% trans '00099 CITY OF HELSINKI' %}</p>
-    <p>{% trans 'tel. 09 3103 6497' %}</p>
-    <p>{% trans 'kuvakokoelmat@hel.fi' %}</p>
-
-    <p>{% trans 'Regular sources of data' %}</p>
-    <p>{% trans 'The information is recorded by the user.' %}</p>
-    <p>{% trans 'Regular disclosure of information' %}</p>
-    <p>{% trans 'The information will not be disclosed to third parties.' %}</p>
-    <p>{% trans 'Name of data file' %}</p>
-    <p>{% trans 'Client register for Helsinkiphotos.fi service' %}</p>
-    <p>{% trans 'Reason for maintaining the data file' %}</p>
-    <p>{% trans 'This register has been established to maintain the unambiguity of client identities.' %}</p>
-    <p>{% trans 'Data file usage' %}</p>
-    <p>{% trans 'This register will be used to identify users in order to enable personalised services, such as creating albums and adding pictures in them.' %}</p>
-    <p>{% trans 'Data types included in the file' %}</p>
-    <p>{% trans 'Basic user information' %}</p>
-    <p>{% trans 'Username' %}{% trans 'Password' %}</p>
-    <p>{% trans 'Data collected for personalised services' %}</p>
-    <p>{% trans 'Favourites' %}</p>
-    <p>{% trans 'Own albums' %}</p>
-    <p>{% trans 'Principles of data security' %}</p>
-    <p>{% trans 'The information is recorded exclusively in an electronic format.' %}</p>
-    <p>{% trans 'Archiving period for personal information' %}</p>
-    <p>{% trans 'Personal information will be stored in the service until 12 months have passed from the last login.' %}</p>
-    <p>{% trans 'Right to inspect the data file' %}</p>
-    <p>{% trans 'Users may contact Helsinki City Museum’s Picture Archives to inspect their personal information stored on the server. See contact details above.' %}</p>
-    <p>{% trans 'Rectifying inaccurate information' %}</p>
-    <p>{% trans 'If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact details above.' %}</p>
-
+        <p class="privacy-smalltitle">{% trans 'Regular sources of data' %}</p>
+        <p>{% trans 'The information is recorded by the user.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Regular disclosure of information' %}</p>
+        <p>{% trans 'The information will not be disclosed to third parties.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Name of data file' %}</p>
+        <p>{% trans 'Client register for Helsinkiphotos.fi service' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Reason for maintaining the data file' %}</p>
+        <p>{% trans 'This register has been established to maintain the unambiguity of client identities.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Data file usage' %}</p>
+        <p>{% trans 'This register will be used to identify users in order to enable personalised services, such as creating albums and adding pictures in them.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Data types included in the file' %}</p>
+        <p>{% trans 'Basic user information' %}</p>
+        <p>- {% trans 'Username' %}</p>
+        <p>- {% trans 'Password' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Data collected for personalised services' %}</p>
+        <p>- {% trans 'Favourites' %}</p>
+        <p>- {% trans 'Own albums' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Principles of data security' %}</p>
+        <p>{% trans 'The information is recorded exclusively in an electronic format.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Archiving period for personal information' %}</p>
+        <p>{% trans 'Personal information will be stored in the service until 12 months have passed from the last login.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Right to inspect the data file' %}</p>
+        <p>{% trans 'Users may contact Helsinki City Museum’s Picture Archives to inspect their personal information stored on the server. See contact details above.' %}</p>
+        <p class="privacy-smalltitle">{% trans 'Rectifying inaccurate information' %}</p>
+        <p>{% trans 'If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact details above.' %}</p>
+    </div>
   </div>
 
 {% endblock %}
