@@ -25,7 +25,7 @@ COMPRESS_HTML = True
 BROKER_HEARTBEAT = 0
 
 # Django
-#TODO Email backend settings
+# TODO Email backend settings
 
 # TODO
 HKM_MY_DOMAIN = 'http://kuvaselaamo.haltudemo.fi/'

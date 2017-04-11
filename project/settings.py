@@ -18,16 +18,16 @@ MANAGERS = ADMINS
 INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASEDIR, 'database.db'),
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASEDIR, 'database.db'),
+    }
 }
 
 CACHES = {
-  'default': {
-    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-  }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
 }
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -40,20 +40,20 @@ TIME_ZONE = 'Europe/Helsinki'
 LANGUAGE_CODE = 'fi'
 
 LANGUAGES = (
-  ('fi', 'FI'),
-  ('en', 'EN'),
-  ('sv', 'SV'),
+    ('fi', 'FI'),
+    ('en', 'EN'),
+    ('sv', 'SV'),
 )
 
 LOCALE_PATHS = (
-  os.path.join(BASEDIR, 'locale'),
+    os.path.join(BASEDIR, 'locale'),
 )
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 STATICFILES_DIRS = (
-  os.path.join(BASEDIR, 'static'),
+    os.path.join(BASEDIR, 'static'),
 )
 
 STATIC_ROOT = os.path.join(BASEDIR, '..', 'staticroot')
@@ -73,39 +73,39 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'django.middleware.gzip.GZipMiddleware',
+    #    'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
-  {
-    'BACKEND':'django.template.backends.django.DjangoTemplates',
-    'DIRS': [os.path.join(BASEDIR, 'templates')],
-    'OPTIONS': {
-      'loaders': (
-        'apptemplates.Loader',
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-        'django.template.loaders.eggs.Loader',
-      ),
-      'context_processors': (
-          'django.contrib.auth.context_processors.auth',
-          'django.template.context_processors.debug',
-          'django.template.context_processors.i18n',
-          'django.template.context_processors.media',
-          'django.template.context_processors.static',
-          'django.contrib.messages.context_processors.messages',
-          'django.template.context_processors.request',
-      ),
-    }
-  },
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASEDIR, 'templates')],
+        'OPTIONS': {
+            'loaders': (
+                'apptemplates.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.eggs.Loader',
+            ),
+            'context_processors': (
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+            ),
+        }
+    },
 ]
 
 STATICFILES_FINDERS = (
-  'django.contrib.staticfiles.finders.FileSystemFinder',
-  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-  'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 INSTALLED_APPS = (
@@ -133,8 +133,8 @@ COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_CSS_FILTERS = [
-  'compressor.filters.css_default.CssAbsoluteFilter',
-  # 'hutils.compressor_filters.ScssFilter',
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    # 'hutils.compressor_filters.ScssFilter',
 ]
 
 # Workaround for pyScss problems

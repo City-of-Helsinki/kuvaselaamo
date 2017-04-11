@@ -11,7 +11,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#CACHES = {
+# CACHES = {
 #  'default': {
 #    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
 #    'LOCATION': 'herp-test-cache',
@@ -20,7 +20,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #  }
 #}
 
-#CACHES = {
+# CACHES = {
 #  'default': {
 #    'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
 #    'LOCATION': os.path.join(BASEDIR, '..', 'django_cache'),
@@ -38,17 +38,17 @@ LOGGING = {
         },
     },
     'filters': {
-      'default': {
-        '()': 'project.logging_helpers.Filter',
-      },
+        'default': {
+            '()': 'project.logging_helpers.Filter',
+        },
     },
     'handlers': {
         'null': {
-            'level':'ERROR',
-            'class':'logging.NullHandler',
+            'level': 'ERROR',
+            'class': 'logging.NullHandler',
         },
-        'console':{
-            'class':'logging.StreamHandler',
+        'console': {
+            'class': 'logging.StreamHandler',
             'formatter': 'normal',
             'filters': ['default'],
         },
@@ -73,7 +73,7 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
             'level': 'WARNING',
-            },
+        },
     }
 }
 

@@ -10,7 +10,7 @@ from project.production import *
 # TODO
 HKM_MY_DOMAIN = ''
 HKM_FEEDBACK_NOTIFICATION_EMAILS = [
-  'info@haltu.fi',
+    'info@haltu.fi',
 ]
 HKM_FEEDBACK_FROM_EMAIL = ''
 
