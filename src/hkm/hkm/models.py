@@ -241,8 +241,6 @@ class ProductOrderQuerySet(models.QuerySet):
 
 class ProductOrder(BaseModel):
 
-
-
 	# Anonymous users can order aswell, so we need contact and shipping information directly
 	# to order model. Orders are associated to anynymous users via session
 	user = models.ForeignKey(User, verbose_name=_(u'User'), null=True, blank=True)
@@ -287,8 +285,10 @@ class ProductOrder(BaseModel):
 	# Price and amount information as they were at the time order was made
 	# NOTE: Product prizing might vary so these need to be freezed here
 	amount = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
+	postal_fees = models.DecimalField(verbose_name=_(u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.POSTAL_FEES)
 	unit_price = models.DecimalField(verbose_name=_(u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
 	total_price = models.DecimalField(verbose_name=_(u'Total price'), decimal_places=2, max_digits=10, null=True, blank=True)
+	total_price_with_postage = models.DecimalField(verbose_name=_(u'Total price with postage'), decimal_places=2, max_digits=10, null=True, blank=True)
 
 	# Timestamp for when users has confimed the order in kuvaselaamo
 	datetime_confirmed = models.DateTimeField(verbose_name=_(u'Confirmed'), null=True, blank=True)
@@ -310,7 +310,7 @@ class ProductOrder(BaseModel):
 	objects = ProductOrderQuerySet.as_manager()
 
 	def checkout(self):
-		checkout_request = PBW.post(self.order_hash, int(self.total_price * 100)) #api requires sum in cents
+		checkout_request = PBW.post(self.order_hash, int(self.total_price_with_postage * 100)) #api requires sum in cents
 		LOG.debug(checkout_request)
 		token = checkout_request.get('token', None)
 		# TODO better error logs && datetime_checkout_redirected if success
@@ -359,20 +359,20 @@ class ProductOrder(BaseModel):
 							self.is_order_successful = True
 							self.send_mail('print')
 						elif printOrder == 400:
-							LOG.debug('Bad request to Printmotor, check payload')
+							LOG.error('Bad request to Printmotor, check payload')
 							self.is_order_successful = False
 						elif printOrder == 401:
-							LOG.debug('Unauthorized @ Printmotor, check headers')
+							LOG.error('Unauthorized @ Printmotor, check headers')
 							self.is_order_successful = False
 						elif printOrder == 500:
-							LOG.debug('Printmotor server error, maybe image URL is invalid')
+							LOG.error('Printmotor server error, maybe image URL is invalid')
 							self.is_order_successful = False
 					else:
 						LOG.debug('Failed to communicate with Printmotor API')
 						self.is_order_successful = False
 		else:
 			self.is_checkout_successful = False
-			LOG.debug('CHECKOUT _NOT_ SUCCESSFUL ', extra={'data': {'order_hash': self.order_hash}})
+			LOG.error('CHECKOUT _NOT_ SUCCESSFUL ', extra={'data': {'order_hash': self.order_hash}})
 
 		self.save()
 
@@ -385,13 +385,13 @@ class ProductOrder(BaseModel):
 
 		if phase == 'checkout':
 			subject = 'Helsinkikuvia.fi - tilausvahvistus'
-			message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.'
+			message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
 
 		elif phase == 'print':
 				subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
-				message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalolle.'
+				message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalo Printmotorille. Valmis tuote lähtee postiin viimeistään kolmantena arkipäivänä tästä päivästä lukien.\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
 
-		send_mail(subject, message, 'foo@helsinkikuvia.fi', [self.email])
+		send_mail(subject, message, settings.FEEDBACK_FROM_EMAIL, [self.email])
 		return True
 
 	def save(self, *args, **kwargs):

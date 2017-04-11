@@ -817,6 +817,7 @@ class OrderProductView(BaseOrderView):
 			order.product_name = printproduct_type.name
 			order.unit_price = printproduct_type.price
 			order.total_price = order.unit_price * order.amount
+			order.total_price_with_postage = order.total_price + order.postal_fees
 			order.form_phase = 2; #TODO make template render links based on order fields, not the other way around (as now)
 			order.save()
 
