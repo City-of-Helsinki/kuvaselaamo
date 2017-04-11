@@ -308,7 +308,7 @@ class ProductOrder(BaseModel):
 	is_order_successful = models.NullBooleanField(verbose_name=_(u'Order successful'), null=True, blank=True)
 
 	objects = ProductOrderQuerySet.as_manager()
-
+	
 	def checkout(self):
 		checkout_request = PBW.post(self.order_hash, int(self.total_price_with_postage * 100)) #api requires sum in cents
 		LOG.debug(checkout_request)

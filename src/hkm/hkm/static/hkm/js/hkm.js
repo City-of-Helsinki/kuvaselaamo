@@ -340,7 +340,7 @@ palikka
       function calculateNewPrice () {
         var amount = $('input[id="id_order-product-form-amount"]').val();
         var unitPrice = $('input[name=product]:checked').attr('data-price');
-        var newPrice = parseInt(unitPrice) * parseInt(amount);
+        var newPrice = parseFloat(unitPrice) * parseInt(amount);
         $('#price-indicator').text(typeof newPrice !== 'number' || isNaN(newPrice) ? '?' : newPrice.toFixed(2));
         console.log('calculate new price for UI');
       }

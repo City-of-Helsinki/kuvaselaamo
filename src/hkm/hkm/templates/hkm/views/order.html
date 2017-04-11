@@ -53,7 +53,7 @@
               {% endif %}
             {% endfor %}
           {% endif %}
-          </span> €</p>
+          </span> € + {% trans 'Postal fees' %} {{ order.postal_fees }} € {% trans 'Incl. VAT' %}</p>
           <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">{% trans 'Jatka' %}</button>
         </form>
       </div>
