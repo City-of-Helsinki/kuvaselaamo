@@ -6220,10 +6220,11 @@ input[type="text"]:-ms-input-placeholder {
   width: 17px; }
 
 .hkm-created-icon {
-  float: right;
+  position: absolute;
+  top: 5;
+  right: 5;
   width: 40px !important;
   height: 40px !important;
-  margin: 5px;
   background: url("/static/hkm/img/hattara.png");
   background-size: contain; }
 
@@ -6677,32 +6678,33 @@ input[type="text"]:-ms-input-placeholder {
   -moz-background-size: cover;
   -o-background-size: cover; }
 
-.sub-grid .sub-grid__item {
-  float: left;
-  margin: 0;
-  border: 0;
-  overflow: hidden;
-  position: relative;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover; }
-
-.sub-grid .sub-grid__item:nth-child(1) {
-  height: 100% !important;
-  width: 65%;
-  border-right: solid 2px #fff; }
-
-.sub-grid .sub-grid__item:nth-child(2) {
-  height: 50% !important;
-  width: 35%;
-  border-bottom: solid 2px #fff; }
-
-.sub-grid .sub-grid__item:nth-child(3) {
-  height: 50% !important;
-  width: 35%; }
+.sub-grid {
+  display: block;
+  width: 100%;
+  height: 100%; }
+  .sub-grid .sub-grid__item {
+    float: left;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover; }
+  .sub-grid .sub-grid__item:nth-child(1) {
+    height: 100% !important;
+    width: 65%;
+    border-right: solid 2px #fff; }
+  .sub-grid .sub-grid__item:nth-child(2) {
+    height: 50% !important;
+    width: 35%;
+    border-bottom: solid 2px #fff; }
+  .sub-grid .sub-grid__item:nth-child(3) {
+    height: 50% !important;
+    width: 35%; }
 
 .grid__item img {
   display: block;

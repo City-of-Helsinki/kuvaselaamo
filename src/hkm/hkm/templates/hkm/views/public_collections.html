@@ -17,20 +17,21 @@
               <a href="{% url 'hkm_collection' collection_id=collection.id %}">
                 {% with images=collection|display_images %}
                   {% if images|length == 1 %}
-                    <span class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"><span class="hkm-created-icon" /></span>
+                    <span class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></span>
                   {% else %}
                     <span class="sub-grid">
                       {% for image_url in images %}
                         <span class="sub-grid__item" style="background-image:url('{{ image_url }}')">
-                        <span class="hkm-created-icon" /></span>
+                        </span>
                       {% endfor %}
-                    </div>
+                    </span>
                   {% endif %}
                 {% endwith %}
                 <div class="grid__meta">
                   <span class="grid__meta--title">{{ collection.title }}</span>
                   <span class="grid__meta--other">{{ collection.description }}</span>
                 </div>
+                <span class="hkm-created-icon" />
               </a>
             </div>
           {% endfor %}
