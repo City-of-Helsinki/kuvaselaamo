@@ -442,9 +442,11 @@ class IndexView(CollectionDetailView):
         context = super(IndexView, self).get_context_data(**kwargs)
         if self.collection_record:
             context['hkm_id'] = self.collection_record.record_id
-        if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
-            self.open_popup = False
-        context['open_popup'] = self.open_popup
+        if 'seen_welcome_modal' in self.request.session:
+            context['open_popup'] = False
+        else:
+            self.request.session['seen_welcome_modal'] = True
+            context['open_popup'] = True
         return context
 
 

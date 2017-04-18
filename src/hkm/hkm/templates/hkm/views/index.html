@@ -25,6 +25,29 @@
 
 {% block modals %}
   {{ block.super }}
+  <div id="welcome-modal" data-open-popup="{{ open_popup }}" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="welcome-modal__title modal-title">{% trans 'Kuvaselaamo' %}</h2>
+        </div>
+        <div class="modal-body">
+          <h4 class="welcome-modal__biggertext">{% trans 'Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. Valokuvat tarjoaa Helsingin kaupunginmuseo.' %}</h4>
+          <h4 class="welcome-modal__biggertext">{% trans 'Täällä voit' %}:</h4>
+          <p>{% trans 'Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta' %}</p>
+          <p>{% trans 'Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia' %}</p>
+          <p>{% trans 'Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista' %}</p>
+          <p>{% trans 'Luoda omia albumeita ja lisätä niihin suosikkikuviasi' %}</p>
+          <p>{% trans 'Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja' %}</p>
+          <p class="welcome-modal__clarification">{% trans 'Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä.' %}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <div class="my-modal base-modal--crop modal fade" id="crop-image" tabindex="-1" role="dialog">
     <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
@@ -108,10 +131,10 @@
 {% block js %}
   {{ block.super }}
   <script>
-    palikka.define('app.searchModal', ['jQuery', 'docReady'], function () {
-      if (window.location.search.indexOf('search=true') > -1 || $('#search-modal').attr('data-open-popup') == 'True') {
+    palikka.define('app.welcomeModal', ['jQuery', 'docReady'], function () {
+      if ($('#welcome-modal').attr('data-open-popup') == 'True') {
         if (!'{{ login_form.errors }}' && !'{{ sign_up_form.errors }}') {
-          $('#search-modal').modal('show');
+          $('#welcome-modal').modal('show');
         }
       }
     });

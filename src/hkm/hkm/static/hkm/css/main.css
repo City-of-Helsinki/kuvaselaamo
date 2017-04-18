@@ -7215,3 +7215,48 @@ div.grid__fav.active {
 .privacy-smalltitle {
   font-weight: bold;
   margin-top: 30px; }
+
+/* Welcome Modal */
+#welcome-modal {
+  margin-top: 100px;
+  z-index: 999999; }
+  #welcome-modal .modal-header {
+    border-bottom: 0; }
+  #welcome-modal .modal-footer {
+    border-top: 0; }
+  #welcome-modal .close {
+    font-size: 30px; }
+
+.welcome-modal__title {
+  font-weight: bold;
+  font-family: "Signe", sans-serif;
+  color: #00C281;
+  text-transform: uppercase; }
+
+.welcome-modal__biggertext {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px; }
+
+.welcome-modal__clarification {
+  margin-top: 20px;
+  font-style: italic; }
+
+@media (max-width: 700px) {
+  #welcome-modal {
+    margin-top: 60px; }
+    #welcome-modal p {
+      font-size: 12px; }
+  .welcome-modal__title {
+    font-weight: bold;
+    font-family: "Signe", sans-serif;
+    color: #00C281;
+    text-transform: uppercase;
+    font-size: 24px; }
+  .welcome-modal__biggertext {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 16px; }
+  .welcome-modal__clarification {
+    margin-top: 20px;
+    font-style: italic; } }
