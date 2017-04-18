@@ -36,6 +36,8 @@
   <!-- Windows Phone - Turn off tap highlight on windows 8 IE. -->
   <meta name="msapplication-tap-highlight" content="no">
 
+  {% block facebook_meta_tags %}
+  {% endblock %}
   <!--
     Format detection for mobile devices.
     https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html#//apple_ref/doc/uid/TP40008193-SW5
@@ -171,7 +173,7 @@
         <div class="col-sm-4">
           <!-- <p>{% trans 'This service is provided by' %}</p> -->
           <a href="http://www.helsinginkaupunginmuseo.fi"><img src="/static/hkm/img/museum_logo.png" class="brand-img__footer"></a>
-          <p>{% trans 'Kuvaselaamo of Helsinki City Museum' %}</p>
+          <a href="http://www.helsinginkaupunginmuseo.fi/kuvia-esineita-helsinkia/kuva-arkisto/"><p>{% trans 'Kuvaselaamo of Helsinki City Museum' %}</p></a>
           <p><a href="https://www.facebook.com/helsinginkaupunginmuseo/">Facebook</a></p>
           <p><a href="https://twitter.com/kaupunginmuseo/">Twitter</a></p>
           <p><a href="https://www.instagram.com/helsinginkaupunginmuseo/">Instagram</a></p>

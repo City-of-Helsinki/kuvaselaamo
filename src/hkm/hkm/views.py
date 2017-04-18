@@ -4,6 +4,7 @@
 import logging
 import StringIO
 import datetime
+import random
 
 from django import http
 from django.contrib.auth import forms as django_forms
@@ -394,7 +395,8 @@ class IndexView(CollectionDetailView):
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
         if not self.collection_record and self.collection:
-            self.collection_record = self.collection.records.first()
+
+            self.collection_record = random.choice(self.collection.records.all())
 
         self.permissions = {
             'can_edit': False
@@ -802,9 +804,7 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     def handle_order(self, request, *args, **kwargs):
         order = ProductOrder(record_finna_id=self.record['id'])
 
-        full_res_url = HKM.get_full_res_image_url(
-            self.record['rawData']['thumbnail'])
-        full_res_image = HKM.download_image(full_res_url)
+        full_res_image = HKM.download_image(self.record['full_res_url'])
         width, height = full_res_image.size
         order.fullimg_original_width = width
         order.fullimg_original_height = height

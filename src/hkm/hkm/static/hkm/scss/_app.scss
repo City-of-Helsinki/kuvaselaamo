@@ -544,7 +544,7 @@ color: #555 !important;
 }
 
 .image-viewer__container:hover {
-  cursor: url("/static/hkm/img/mouse_zoom.png") 32 32, zoom-in;
+  cursor: url("/static/hkm/img/mouse_icon64x64.png") 32 32, zoom-in;
 }
 
 .image-viewer__image {
@@ -912,6 +912,10 @@ color: #555 !important;
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
+
+  .well {
+    min-height: 60px;
+  }
 }
 
 .ordertype {

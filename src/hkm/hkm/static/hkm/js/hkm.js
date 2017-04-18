@@ -385,14 +385,14 @@ palikka
         if (isNaN(PPI)) {
           $('#ppi-indicator').text('?');
         } else {
-          if (PPI < 150) {
+          if (PPI < 120) {
             if (!$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
 
             if (language && PPI_NOT_OK.hasOwnProperty(language)) $ppiIndicator.text(PPI_NOT_OK[language]);
             else $('#ppi-indicator').text(PPI_NOT_OK['fi']);
 
           }
-          if (PPI >= 150) {
+          if (PPI >= 120) {
             if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');  
             $ppiIndicator.text(PPI_OK);
           }
@@ -644,26 +644,25 @@ palikka
     var fullResUrl = this.getAttribute('data-full-res-url');
 
 
-    if ($(window).width() >= 1024) {
-      h += $(window).height() * 2; // Picture initial size if scr width >=1024 px
-      w = h * ar;
+    if (window.innerWidth > window.innerHeight) {
+      if (w > h) {
+        w = window.innerWidth * ar;
+        h = w / ar;
+      }
+      else {
+        h = window.innerHeight / ar * 1.2;
+        w = h * ar;
+      }
     }
-    else if (w > h) {
-      w += $(window).width() * 1.862; // Picture initial size if scr width < 1024 px & img width > img height
-      h = w / ar;
+    else {
     }
-    else { // Picture initial size if scr width < 1024 px & img width <= img height
-      h += $(window).height();
-      w = h * ar;
-    }
-
     zoomInit(w, h, url, fullResUrl);
   }
 
   function zoomInit(w, h, url, fullResUrl) {
     // debugger;
     
-    var initialZoom = 1;
+    var initialZoom = 3;
 
     var imageContainer = L.map('zoomable-image-container', {
       center: [500, 500],

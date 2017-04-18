@@ -2,6 +2,13 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block facebook_meta_tags %}
+  {% if record %}
+  <meta property="og:image" content="{% finna_image record.id %}">
+  <meta property="og:title" content="{{ record.title }}">
+  {% endif %}
+{% endblock %}
+
 {% block body_class %}viewer-view{% endblock %}
 {% block nav_class %}nav_viewer{% endblock %}
 
@@ -74,7 +81,7 @@
             </svg>
           </i>
         </button>
-      
+        {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
           <button name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
             <i class="actions__icon">
               <svg class="svg-icon">
@@ -82,7 +89,7 @@
               </svg>
             </i>
           </button>
-        </form>
+        {% endif %}
       </div>
     {% endif %}
   {% endblock %}
@@ -101,7 +108,11 @@
         <div class="col-md-offset-2 col-md-4 col-sm-6">
           <h2 class="record-meta__sub-header">{% trans 'Identification information' %}</h2>
           <p class="record-meta__paragraph">{% trans 'Image type:' %} {% for type in record.rawData.format %}{{ type.translated }}, {% endfor %}</p>
-          <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
+          {% if record.rawData.identifier %}
+            <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.rawData.identifier.0 }}</p>
+          {% else %}
+            <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
+          {% endif %}
           <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
            <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
           <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
