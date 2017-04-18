@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 16:39+0300\n"
+"POT-Creation-Date: 2017-04-18 12:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -46,7 +46,7 @@ msgstr "Användare"
 msgid "Is admin"
 msgstr "Huvudanvändare"
 
-#: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:109
+#: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:111
 msgid "Language"
 msgstr "Språk"
 
@@ -122,12 +122,14 @@ msgid "Price"
 msgstr "Pris"
 
 #: hkm/hkm/models.py:240
-msgid "api-poster-gloss-30x40-horizontal"
-msgstr "40x30 cm, Semi-Gloss 240g"
+msgid "api-poster-gloss-30x40"
+msgstr "30x40 cm, Semi-Gloss 240g"
 
 #: hkm/hkm/models.py:241
-msgid "api-poster-gloss-30x40-vertical"
-msgstr "30x40 cm, Semi-Gloss 240g"
+#, fuzzy
+#| msgid "api-poster-40x30"
+msgid "api-poster-gloss-40x30"
+msgstr "40x30 cm, Semi-Gloss 240g"
 
 #: hkm/hkm/models.py:242
 msgid "api-poster-50x70"
@@ -142,7 +144,7 @@ msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Liggande, Semi-Gloss 240g"
 
 #: hkm/hkm/models.py:245
-msgid "api-poster-gloss-A4-vertical"
+msgid "api-poster-gloss-A4"
 msgstr "A4 Stående, Semi-Gloss 240g"
 
 #: hkm/hkm/models.py:250
@@ -332,6 +334,7 @@ msgid "Kuvaselaamopalaute"
 msgstr "Bildapoteksrespons"
 
 #: hkm/hkm/templates/hkm/base.html:23
+#: hkm/hkm/templates/hkm/views/index.html:33
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
 msgid "Kuvaselaamo"
 msgstr "Helsingforsbilder.fi"
@@ -340,90 +343,90 @@ msgstr "Helsingforsbilder.fi"
 msgid "Kuvaselaamo demo."
 msgstr "Helsingforsbilder.fi demo"
 
-#: hkm/hkm/templates/hkm/base.html:96 hkm/hkm/templates/hkm/base.html:100
-#: hkm/hkm/templates/hkm/base.html:101
+#: hkm/hkm/templates/hkm/base.html:98 hkm/hkm/templates/hkm/base.html:102
+#: hkm/hkm/templates/hkm/base.html:103
 #: hkm/hkm/templates/hkm/views/search.html:13
 #: hkm/hkm/templates/hkm/views/search.html:18
 #: hkm/hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
 msgstr "Sök"
 
-#: hkm/hkm/templates/hkm/base.html:103
+#: hkm/hkm/templates/hkm/base.html:105
 msgid "Explore collections"
 msgstr "Bläddra i album"
 
-#: hkm/hkm/templates/hkm/base.html:105
+#: hkm/hkm/templates/hkm/base.html:107
 #: hkm/hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
 msgstr "Mina album"
 
-#: hkm/hkm/templates/hkm/base.html:107 hkm/hkm/templates/hkm/base.html:169
+#: hkm/hkm/templates/hkm/base.html:109 hkm/hkm/templates/hkm/base.html:171
 #: hkm/hkm/templates/hkm/views/info.html:9
 #: hkm/hkm/templates/hkm/views/record_feedback.html:27
 msgid "Feedback"
 msgstr "Respons"
 
-#: hkm/hkm/templates/hkm/base.html:112 hkm/hkm/templates/hkm/base.html:119
+#: hkm/hkm/templates/hkm/base.html:114 hkm/hkm/templates/hkm/base.html:121
 msgid "In English"
 msgstr "In English"
 
-#: hkm/hkm/templates/hkm/base.html:113 hkm/hkm/templates/hkm/base.html:116
+#: hkm/hkm/templates/hkm/base.html:115 hkm/hkm/templates/hkm/base.html:118
 msgid "På svenska"
 msgstr "På svenska"
 
-#: hkm/hkm/templates/hkm/base.html:115 hkm/hkm/templates/hkm/base.html:118
+#: hkm/hkm/templates/hkm/base.html:117 hkm/hkm/templates/hkm/base.html:120
 msgid "Suomeksi"
 msgstr "Suomeksi"
 
-#: hkm/hkm/templates/hkm/base.html:124
+#: hkm/hkm/templates/hkm/base.html:126
 msgid "Logout"
 msgstr "Logga ut"
 
-#: hkm/hkm/templates/hkm/base.html:126
+#: hkm/hkm/templates/hkm/base.html:128
 #: hkm/hkm/templates/hkm/snippets/login.html:14
 msgid "Log in"
 msgstr "Logga in"
 
-#: hkm/hkm/templates/hkm/base.html:137
+#: hkm/hkm/templates/hkm/base.html:139
 msgid "Facebook login"
 msgstr "Facebook-inloggning"
 
-#: hkm/hkm/templates/hkm/base.html:138
+#: hkm/hkm/templates/hkm/base.html:140
 msgid "Google login"
 msgstr "Google-inloggning"
 
-#: hkm/hkm/templates/hkm/base.html:139
+#: hkm/hkm/templates/hkm/base.html:141
 msgid "Login with credentials"
 msgstr "Logga in med koder"
 
-#: hkm/hkm/templates/hkm/base.html:141 hkm/hkm/templates/hkm/base.html:151
+#: hkm/hkm/templates/hkm/base.html:143 hkm/hkm/templates/hkm/base.html:153
 #: hkm/hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
 msgstr "Skapa kod"
 
-#: hkm/hkm/templates/hkm/base.html:165
+#: hkm/hkm/templates/hkm/base.html:167
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:9
 msgid "Information about the service"
 msgstr "Information om tjänsten"
 
-#: hkm/hkm/templates/hkm/base.html:166
+#: hkm/hkm/templates/hkm/base.html:168
 msgid "Frequently asked questions"
 msgstr "Frågor och svar"
 
-#: hkm/hkm/templates/hkm/base.html:167
+#: hkm/hkm/templates/hkm/base.html:169
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:9
 msgid "Terms of use"
 msgstr "Användningsvillkor"
 
-#: hkm/hkm/templates/hkm/base.html:168
+#: hkm/hkm/templates/hkm/base.html:170
 msgid "Privacy policy"
 msgstr "Dataskydd "
 
-#: hkm/hkm/templates/hkm/base.html:172
+#: hkm/hkm/templates/hkm/base.html:174
 msgid "This service is provided by"
 msgstr "Denna tjänst erbjuds av"
 
-#: hkm/hkm/templates/hkm/base.html:174
+#: hkm/hkm/templates/hkm/base.html:176
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
 
@@ -435,114 +438,116 @@ msgstr "Föregående bild"
 msgid "Next image"
 msgstr "Nästa bild"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:102
+#: hkm/hkm/templates/hkm/base_viewer.html:109
 #: hkm/hkm/templates/hkm/views/record_OLD.html:29
 msgid "Identification information"
 msgstr "Bildens ID:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:103
+#: hkm/hkm/templates/hkm/base_viewer.html:110
 #: hkm/hkm/templates/hkm/views/record_OLD.html:30
 msgid "Image type:"
 msgstr "Bildtyp:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:104
+#: hkm/hkm/templates/hkm/base_viewer.html:112
+#: hkm/hkm/templates/hkm/base_viewer.html:114
 #: hkm/hkm/templates/hkm/views/record_OLD.html:31
 msgid "Image ID:"
 msgstr "Bildens ID:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:106
+#: hkm/hkm/templates/hkm/base_viewer.html:117
 #: hkm/hkm/templates/hkm/views/record_OLD.html:33
 msgid "Creation information"
 msgstr "Information om bilden"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:107
+#: hkm/hkm/templates/hkm/base_viewer.html:118
 #: hkm/hkm/templates/hkm/views/record_OLD.html:34
 msgid "Photographer:"
 msgstr "Upphovsman:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:108
+#: hkm/hkm/templates/hkm/base_viewer.html:119
 #: hkm/hkm/templates/hkm/views/record_OLD.html:35
 msgid "Image pick-up year:"
 msgstr "Tidpunkt:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:110
+#: hkm/hkm/templates/hkm/base_viewer.html:121
 #: hkm/hkm/templates/hkm/views/record_OLD.html:36
 msgid "Property information"
 msgstr "Bildens egenskaper"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:111
+#: hkm/hkm/templates/hkm/base_viewer.html:122
 #: hkm/hkm/templates/hkm/views/record_OLD.html:37
 msgid "Measurements:"
 msgstr "Mått:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:117
+#: hkm/hkm/templates/hkm/base_viewer.html:128
 #: hkm/hkm/templates/hkm/views/record_OLD.html:38
 msgid "License information"
 msgstr "Licens"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:124
+#: hkm/hkm/templates/hkm/base_viewer.html:135
 #: hkm/hkm/templates/hkm/views/record_OLD.html:42
 msgid "Related collections"
 msgstr "Album som hör samman med bilden"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:143
+#: hkm/hkm/templates/hkm/base_viewer.html:154
 #: hkm/hkm/templates/hkm/views/record_OLD.html:61
 msgid "No description"
 msgstr "Ingen beskrivning"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:157
+#: hkm/hkm/templates/hkm/base_viewer.html:168
 msgid "Image feedback"
 msgstr "Skicka respons om bilden"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:161
-#: hkm/hkm/templates/hkm/base_viewer.html:211
-#: hkm/hkm/templates/hkm/views/index.html:41
-#: hkm/hkm/templates/hkm/views/index.html:63
+#: hkm/hkm/templates/hkm/base_viewer.html:172
+#: hkm/hkm/templates/hkm/base_viewer.html:222
+#: hkm/hkm/templates/hkm/views/index.html:64
+#: hkm/hkm/templates/hkm/views/index.html:86
 #: hkm/hkm/templates/hkm/views/info.html:24
 #: hkm/hkm/templates/hkm/views/record_feedback.html:31
 msgid "Submit"
 msgstr "Skicka"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:184
+#: hkm/hkm/templates/hkm/base_viewer.html:195
 msgid "Crop and order"
 msgstr "Avgränsa och beställ"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:210
-#: hkm/hkm/templates/hkm/base_viewer.html:232
-#: hkm/hkm/templates/hkm/base_viewer.html:272
-#: hkm/hkm/templates/hkm/views/index.html:40
-#: hkm/hkm/templates/hkm/views/index.html:62
+#: hkm/hkm/templates/hkm/base_viewer.html:221
+#: hkm/hkm/templates/hkm/base_viewer.html:243
+#: hkm/hkm/templates/hkm/base_viewer.html:283
+#: hkm/hkm/templates/hkm/views/index.html:46
+#: hkm/hkm/templates/hkm/views/index.html:63
+#: hkm/hkm/templates/hkm/views/index.html:85
 msgid "Close"
 msgstr "Stäng"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:222
+#: hkm/hkm/templates/hkm/base_viewer.html:233
 #: hkm/hkm/templates/hkm/snippets/popover_cart.html:10
-#: hkm/hkm/templates/hkm/views/index.html:34
+#: hkm/hkm/templates/hkm/views/index.html:57
 msgid "Crop and download"
 msgstr "Avgränsa och ladda upp"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:233
+#: hkm/hkm/templates/hkm/base_viewer.html:244
 msgid "Download"
 msgstr "Ladda upp"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:244
+#: hkm/hkm/templates/hkm/base_viewer.html:255
 msgid "Crop and add to collection"
 msgstr "Avgränsa och lägg till i albumet"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:249
+#: hkm/hkm/templates/hkm/base_viewer.html:260
 msgid "Add to an existing collection"
 msgstr "Lägg till i befintligt album"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:256
+#: hkm/hkm/templates/hkm/base_viewer.html:267
 msgid "Create a new collection"
 msgstr "Skapa nytt album"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:261
-#: hkm/hkm/templates/hkm/views/index.html:59
+#: hkm/hkm/templates/hkm/base_viewer.html:272
+#: hkm/hkm/templates/hkm/views/index.html:82
 msgid "New collection"
 msgstr "Nytt album"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:273
+#: hkm/hkm/templates/hkm/base_viewer.html:284
 #: hkm/hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
 msgstr "Lägg till i albumet"
@@ -638,15 +643,8 @@ msgstr "Tillbaka till albumet"
 msgid "Left and right click to zoom."
 msgstr "Vänsterklicka och högerklicka för att zooma in och ut"
 
-#: hkm/hkm/templates/hkm/views/index.html:53
-msgid "Add to a new collection"
-msgstr "Lägg till i nytt album"
-
-#: hkm/hkm/templates/hkm/views/index.html:83
-msgid "Search for images from the museum archive"
-msgstr "Sök bilder i museets arkiv"
-
-#: hkm/hkm/templates/hkm/views/index.html:122
+#: hkm/hkm/templates/hkm/views/index.html:36
+#: hkm/hkm/templates/hkm/views/index.html:145
 msgid ""
 "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
 "Valokuvat tarjoaa Helsingin kaupunginmuseo."
@@ -654,40 +652,55 @@ msgstr ""
 "Välkommen! Du har anlänt till Helsingforsbildernas skattkammare. Bilderna "
 "erbjuds av Helsingfors stadsmuseum."
 
-#: hkm/hkm/templates/hkm/views/index.html:123
+#: hkm/hkm/templates/hkm/views/index.html:37
+#: hkm/hkm/templates/hkm/views/index.html:146
 msgid "Täällä voit"
 msgstr "Här kan du"
 
-#: hkm/hkm/templates/hkm/views/index.html:124
+#: hkm/hkm/templates/hkm/views/index.html:38
+#: hkm/hkm/templates/hkm/views/index.html:147
 msgid ""
 "Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
 msgstr ""
 "- Bläddra bland över 40 000 foton eller söka efter foton med olika sökord"
 
-#: hkm/hkm/templates/hkm/views/index.html:125
+#: hkm/hkm/templates/hkm/views/index.html:39
+#: hkm/hkm/templates/hkm/views/index.html:148
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
 "- Gratis ladda ned både tryckbara och mindre bilder, som lämpar sig t.ex. "
 "för webbanvändning*"
 
-#: hkm/hkm/templates/hkm/views/index.html:126
+#: hkm/hkm/templates/hkm/views/index.html:40
+#: hkm/hkm/templates/hkm/views/index.html:149
 msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
 msgstr "- Bläddra i Helsingfors stadsmuseums album med olika teman"
 
-#: hkm/hkm/templates/hkm/views/index.html:127
+#: hkm/hkm/templates/hkm/views/index.html:41
+#: hkm/hkm/templates/hkm/views/index.html:150
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
 msgstr "- Skapa egna album och lägga till dina favoritbilder i dem "
 
-#: hkm/hkm/templates/hkm/views/index.html:128
+#: hkm/hkm/templates/hkm/views/index.html:42
+#: hkm/hkm/templates/hkm/views/index.html:151
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
 msgstr "- Beställa avgiftsbelagda bildprodukter såsom affischer och postkort."
 
-#: hkm/hkm/templates/hkm/views/index.html:130
+#: hkm/hkm/templates/hkm/views/index.html:43
+#: hkm/hkm/templates/hkm/views/index.html:153
 msgid ""
 "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
 "Du kan fritt använda de bilder du laddat ned, bara du kommer ihåg att nämna "
 "fotografens namn och Helsingfors stadsmuseum."
+
+#: hkm/hkm/templates/hkm/views/index.html:76
+msgid "Add to a new collection"
+msgstr "Lägg till i nytt album"
+
+#: hkm/hkm/templates/hkm/views/index.html:106
+msgid "Search for images from the museum archive"
+msgstr "Sök bilder i museets arkiv"
 
 #: hkm/hkm/templates/hkm/views/order.html:17
 #: hkm/hkm/templates/hkm/views/order_contact_information.html:15
@@ -1509,13 +1522,16 @@ msgstr ""
 "rättigheter som publicitet eller integritetslagstiftning kan begränsa hur du "
 "kan använda metadatan."
 
-#: hkm/hkm/views.py:1110
+#: hkm/hkm/views.py:1112
 msgid "Favorites"
 msgstr "Favoriter"
 
-#: hkm/hkm/views.py:1110
+#: hkm/hkm/views.py:1112
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
+
+#~ msgid "api-poster-gloss-30x40-horizontal"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
 
 #~ msgid "30x40 Semi-Gloss"
 #~ msgstr "30x40 cm, Semi-Gloss 240g"
@@ -1528,9 +1544,6 @@ msgstr "Dina favoritbilder finns samlade här"
 
 #~ msgid "A4 Portrait Semi-Gloss"
 #~ msgstr "A4 Stående, Semi-Gloss 240g"
-
-#~ msgid "api-poster-40x30"
-#~ msgstr "40x30 cm, Semi-Gloss 240g"
 
 #~ msgid "api-poster-a4"
 #~ msgstr "A4 Stående, Semi-Gloss 240g"

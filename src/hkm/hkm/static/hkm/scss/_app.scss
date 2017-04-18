@@ -1255,7 +1255,7 @@ div.grid__fav.active {
 
 .modal-search-form__field {
   font-family: $font-brownlight;
-  color: $color-hkm-blue !important;
+  color: $color-hkm-uppernav !important;
   font-size: 16px;
   padding: 0 15px;
   width: 100%;
@@ -1264,7 +1264,7 @@ div.grid__fav.active {
   border-radius: 20px;
 }
 .modal-search-form__field:focus {
-  border: solid 2px $color-hkm-blue;
+  border: solid 2px $color-hkm-uppernav;
 }
 .modal-search-form__btn,
 .modal-search-form__btn:hover {

@@ -6922,7 +6922,7 @@ div.grid__fav.active {
 
 .modal-search-form__field {
   font-family: "brownlight", sans-serif;
-  color: #5268C2 !important;
+  color: #935379 !important;
   font-size: 16px;
   padding: 0 15px;
   width: 100%;
@@ -6931,7 +6931,7 @@ div.grid__fav.active {
   border-radius: 20px; }
 
 .modal-search-form__field:focus {
-  border: solid 2px #5268C2; }
+  border: solid 2px #935379; }
 
 .modal-search-form__btn,
 .modal-search-form__btn:hover {
