@@ -1547,3 +1547,7 @@ msgstr "Dina favoritbilder finns samlade här"
 
 #~ msgid "api-poster-a4"
 #~ msgstr "A4 Stående, Semi-Gloss 240g"
+
+# form_fields
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Obligatoriskt. Max 150 tecken. Endast bokstäver, nummer och symbolerna @/./+/-/_."

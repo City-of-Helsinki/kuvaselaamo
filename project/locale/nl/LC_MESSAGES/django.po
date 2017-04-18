@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 12:58+0300\n"
+"POT-Creation-Date: 2017-04-18 17:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: hkm/hkm/models.py:93 hkm/hkm/templates/hkm/views/collection.html:26
+#: hkm/hkm/models.py:93 hkm/hkm/templates/hkm/views/collection.html:38
 msgid "Show in landing page"
 msgstr ""
 
@@ -596,32 +596,28 @@ msgstr ""
 msgid "#error-500-title"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/500.html:9
-msgid "#error-500-paragraph"
-msgstr ""
-
-#: hkm/hkm/templates/hkm/views/collection.html:20
+#: hkm/hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/collection.html:30
+#: hkm/hkm/templates/hkm/views/collection.html:42
 msgid "Set to featured"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/collection.html:36
+#: hkm/hkm/templates/hkm/views/collection.html:48
 msgid "Save"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/collection.html:37
+#: hkm/hkm/templates/hkm/views/collection.html:49
 msgid "Cancel"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/collection.html:60
+#: hkm/hkm/templates/hkm/views/collection.html:61
 #: hkm/hkm/templates/hkm/views/my_collections.html:22
 msgid "Add images"
 msgstr ""
 
-#: hkm/hkm/templates/hkm/views/collection.html:92
+#: hkm/hkm/templates/hkm/views/collection.html:93
 msgid "Are you sure you want to delete this item?"
 msgstr ""
 
