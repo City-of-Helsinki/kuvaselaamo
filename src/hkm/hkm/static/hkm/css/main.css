@@ -6379,7 +6379,8 @@ input[type="text"]:-ms-input-placeholder {
     background-color: transparent;
     border: solid 1px #ccc;
     width: 450px;
-    outline: 0; }
+    outline: 0;
+    color: #000; }
 
 @media (max-width: 400px) {
   .banner__h1 {
@@ -6625,7 +6626,7 @@ input[type="text"]:-ms-input-placeholder {
   margin-left: 0px;
   margin-right: 0px; }
   .order-options .well {
-    min-height: 60px; }
+    height: 70px; }
 
 .ordertype {
   white-space: nowrap; }
@@ -6653,6 +6654,9 @@ input[type="text"]:-ms-input-placeholder {
 .grid {
   overflow: hidden;
   width: 100%; }
+
+.collection-grid {
+  margin-bottom: 200px; }
 
 .grid__item {
   float: left;

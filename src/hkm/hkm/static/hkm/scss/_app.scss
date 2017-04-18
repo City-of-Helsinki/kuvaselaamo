@@ -620,6 +620,7 @@ color: #555 !important;
     border: solid 1px #ccc;
     width: 450px;
     outline: 0;
+    color: $color-darktext;
   }
 }
 @media (max-width: 400px) {
@@ -682,6 +683,7 @@ color: #555 !important;
 .checkbox label {
   padding: 0;
 }
+
 .banner__btn {
   vertical-align: top;
   margin: 0;
@@ -914,7 +916,7 @@ color: #555 !important;
   margin-right: 0px;
 
   .well {
-    min-height: 60px;
+    height: 70px;
   }
 }
 
@@ -951,6 +953,10 @@ color: #555 !important;
 .grid {
   overflow: hidden;
   width: 100%;
+}
+
+.collection-grid {
+  margin-bottom: 200px;
 }
 .grid__item {
   float: left;

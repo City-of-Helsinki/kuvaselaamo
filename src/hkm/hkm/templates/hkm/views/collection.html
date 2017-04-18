@@ -6,7 +6,19 @@
   <div class="page-header white">
     <div class="fullsize-container container">
       <div class="banner__title">
-        <h1 class="banner__h1">{{ collection.title }}</h1>
+        <h1 class="banner__h1">{{ collection.title }}
+          <span class="edit-btn">
+            {% if permissions.can_edit %}
+              <button class="banner-actions__btn" id="edit-title-btn">
+                <i class="banner-actions__icon">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use>
+                  </svg>
+                </i>
+              </button>
+            {% endif %}
+          </span>    
+        </h1>  
       </div>
       <div class="banner__description">{{ collection.description|default:"" }}</div>
       <form class="banner__form form-inline" method="POST">
@@ -36,17 +48,6 @@
         <button class="hkm-btn hkm-btn--default banner__btn btn btn-primary" type="submit">{% trans 'Save' %}</button>
         <button class="hkm-btn hkm-btn--cancel banner__btn btn btn-default" id="edit-title-cancel" type="button">{% trans 'Cancel' %}</button>
       </form>
-      <div class="banner-actions">
-        {% if permissions.can_edit %}
-          <button class="banner-actions__btn" id="edit-title-btn">
-            <i class="banner-actions__icon">
-              <svg class="svg-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use>
-              </svg>
-            </i>
-          </button>
-        {% endif %}
-      </div>
     </div>
   </div>
 
