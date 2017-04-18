@@ -15,3 +15,35 @@ Notes about application flow:
 4. Delicate information such as API keys are stored in a separate local_settings file, not committed to this repository.
 
 
+# Kuvaselaamo app based on https://github.com/City-of-Helsinki/kuvaselaamo 
+
+This is structural change for kuvaselaamo app for easier deployment and cleaner project structure/repository.
+
+
+## How to:
+
+- Create python 2.7 virtual envinronment and activate it
+
+```
+virtualenv venv
+source venv/bin/activate
+```
+
+- clone (this) repository
+- Install requirements from requirements.txt (see repository)
+
+```
+pip install -r requirements.txt
+```
+
+- Check your django application settings and setup database, secret key, allowed hosts etc.
+- execute `python manage.py migrate`
+- create superuser with manage.py
+
+```
+python manage.py createsuperuser
+```
+
+- execute `python manage.py collectstatic`
+
+- run kuvaselaamo (uwsgi, django's runserver or any other)
