@@ -1,7 +1,7 @@
 #HELSINKIKUVIA.FI
 
-##Setup
-
+Setup:
+------------
 - Create python 2.7 virtual envinronment and activate it
 
 ```
@@ -29,7 +29,8 @@ python manage.py createsuperuser
 - run kuvaselaamo (uwsgi, django's runserver or any other)
 
 (next paragraph borrowed from linkedevents https://raw.githubusercontent.com/City-of-Helsinki/linkedevents/master/README.md )
-##Requirements
+
+Requirements:
 ------------
 
 Linked Events uses two files for requirements. The workflow is as follows.
@@ -56,7 +57,8 @@ To remove a dependency, remove it from `requirements.in`,
 run `pip-compile` and then `pip-sync`. If everything works
 as expected, commit the changes.
 
-##Notes about application flow:
+Notes about application flow:
+------------
 
 1. To function properly, IndexView (index.html) needs at least 1 Collection with "show_on_landing_page" flag set to True. Said collection should have at least 1 Record in it.
 
