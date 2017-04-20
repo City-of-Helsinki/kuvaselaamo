@@ -76,7 +76,7 @@ MIDDLEWARE_CLASSES = (
     #    'django.middleware.gzip.GZipMiddleware',
 )
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'kuvaselaamo.urls'
 
 TEMPLATES = [
     {
