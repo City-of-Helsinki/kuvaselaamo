@@ -531,7 +531,16 @@ palikka
     })
     .done(function(data){
       if (data.url) {
-        window.open(data.url, '_self');
+        // creates anchor element and forces download
+        var a = document.createElement('a');
+        a.href = window.location.origin + data.url;
+        a.id = 'crop-dl';
+        a.download = data.url;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        $('#crop-dl').remove();
+        $('.my-modal--crop').modal('hide');
       }
       else {
         location.reload();
