@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-from project.settings import *
+from kuvaselaamo.settings import *
 
 SECRET_KEY = 'foo'
 
@@ -39,7 +39,7 @@ LOGGING = {
     },
     'filters': {
         'default': {
-            '()': 'project.logging_helpers.Filter',
+            '()': 'kuvaselaamo.logging_helpers.Filter',
         },
     },
     'handlers': {

@@ -52,7 +52,7 @@
               </svg>
           </i>
           </button>
-          <button class="actions__btn actions__btn--right" id="popover-add">
+          <button class="has-popover actions__btn actions__btn--right" id="popover-add">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo"></use>
@@ -60,7 +60,7 @@
             </i>
           </button>
         {% endif %}
-        <button class="actions__btn actions__btn--right" id="popover-share">
+        <button class="has-popover actions__btn actions__btn--right" id="popover-share">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
@@ -74,7 +74,7 @@
             </svg>
           </i>
         </button>
-        <button class="actions__btn actions__btn--right" id="popover-cart">
+        <button class="has-popover actions__btn actions__btn--right" id="popover-cart">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-download"></use>
@@ -82,7 +82,7 @@
           </i>
         </button>
         {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
-          <button name="orderbutton" class="actions__btn actions__btn--right" id="popover-buy">
+          <button name="orderbutton" class="has-popover actions__btn actions__btn--right" id="popover-buy">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>

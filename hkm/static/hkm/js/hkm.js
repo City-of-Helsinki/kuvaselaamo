@@ -117,6 +117,7 @@ palikka
   var page = 1;
   var loadedImageCount = 0;
   var imageCount;
+  var fetchingMoreImages = false;
 
   gridInit();
 
@@ -149,8 +150,9 @@ palikka
     }
   }
 
-  $window.scroll(function () {
-    if (window.innerHeight + document.body.scrollTop >= $window.height() && $infiniteScroll.length && page < $maxPages) {
+  $window.scroll(function () { 
+    if (!fetchingMoreImages && window.innerHeight + window.pageYOffset >= $infiniteScroll.height() && $infiniteScroll.length && page < $maxPages) {
+      fetchingMoreImages = true;
       ajaxGetPageImages();
     }
   });
@@ -166,6 +168,7 @@ palikka
       $container.imagesLoaded().progress(onProgress);
       imageCount = $container.find('img').length;
       loadedImageCount = 0;
+      fetchingMoreImages = false;
     });
   }
 
@@ -203,19 +206,6 @@ palikka
     }
   });
 
-
-  /*$("#popover-favorite").popover({
-    html: true,
-    toggle: 'popover',
-    container: 'body',
-    placement: 'top',
-    trigger: 'focus',
-    html: true,
-    content: function() {
-      return $('#popover-favorite-content').html();
-    }
-  });*/
-
   // scroll down to detail section when info button clicked
   $("#popover-info").click(function(){
     $("html, body").animate({
@@ -247,6 +237,16 @@ palikka
       return $('#popover-add-content').html();
     }
   });
+
+  /*$('.has-popover').click(function() {
+    var clickedButton = this;
+    $('.has-popover').each(function(current) {
+      if ($(this)[0] !== clickedButton) $(this).popover('hide');
+      else {
+        $(this).popover('toggle');
+      }
+    });
+  });*/
 
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {

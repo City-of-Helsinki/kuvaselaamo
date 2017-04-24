@@ -1173,8 +1173,6 @@ class AjaxCropRecordView(View):
         return http.HttpResponseBadRequest()
 
     def _get_cropped_full_res_file(self):
-        if self.crop_width == self.img_width and self.crop_height == self.img_height:
-            return None
         full_res_image = HKM.download_image(self.record['full_res_url'])
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
                                          self.crop_width, self.crop_height, self.img_width, self.img_height)
