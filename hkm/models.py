@@ -434,19 +434,24 @@ class ProductOrder(BaseModel):
                             self.send_mail('print')
                         elif printOrder == 400:
                             LOG.error(
-                                'Bad request to Printmotor, check payload')
+                                'Bad request to Printmotor, check payload', extra={'data': {
+                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 401:
                             LOG.error(
-                                'Unauthorized @ Printmotor, check headers')
+                                'Unauthorized @ Printmotor, check headers', extra={'data': {
+                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 500:
                             LOG.error(
-                                'Printmotor server error, maybe image URL is invalid')
+                                'Printmotor server error, maybe image URL is invalid', extra={'data': {
+                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                     else:
-                        LOG.debug('Failed to communicate with Printmotor API')
+                        LOG.error('Failed to communicate with Printmotor API', extra={'data': {
+                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                         self.is_order_successful = False
+
         else:
             self.is_checkout_successful = False
             LOG.error('CHECKOUT _NOT_ SUCCESSFUL ', extra={
@@ -454,7 +459,21 @@ class ProductOrder(BaseModel):
 
         self.save()
 
-    def send_to_print(self):
+    # quick method for canceling payments. not used currently - only works when
+    # payments are authorized but not settled (ie not billed)
+    def cancel_payment(self):
+        cancellation = PBW.cancel(self.order_hash)
+        LOG.debug(cancellation)
+        if not cancellation:
+            LOG.error('ORDER CANCELLATION ERROR ', extra={
+                      'data': {'order_hash': self.order_hash}})
+
+        if cancellation['result'] == 0:
+            LOG.debug('ORDER CANCELLATION SUCCESSFUL ', extra={
+                      'data': {'order_hash': self.order_hash}})
+        else:
+            LOG.error('ORDER CANCELLATION ERROR ', extra={
+                      'data': {'order_hash': self.order_hash}})         
         return True
 
     def send_mail(self, phase):

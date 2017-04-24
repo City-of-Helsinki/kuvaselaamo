@@ -3,6 +3,8 @@
 
 import logging
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from hkm.models import Collection, Feedback, ProductOrder
 
 LOG = logging.getLogger(__name__)
@@ -52,5 +54,15 @@ class OrderContactInformationForm(forms.ModelForm):
         model = ProductOrder
         fields = ['first_name', 'last_name', 'email',
                   'phone', 'street_address', 'postal_code', 'city']
+
+class RegistrationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

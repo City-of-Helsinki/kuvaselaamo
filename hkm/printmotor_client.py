@@ -68,8 +68,8 @@ class PrintmotorClient(object):
             })
             LOG.debug(r.status_code)
             return r.status_code
-        except requests.exceptions.RequestException:
-            LOG.error('Failed to communicate with Printmotor API')
+        except requests.exceptions.RequestException as e:
+            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order.order_hash}})
             return None
 
 

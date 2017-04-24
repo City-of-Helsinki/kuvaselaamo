@@ -47,10 +47,30 @@ class PaybywayClient(object):
             r = requests.post(url, json=payload, timeout=10)
             data = r.json()
             return data
-        except requests.exceptions.RequestException:
-            LOG.error('Failed to communicate with Paybyway API')
+        except requests.exceptions.RequestException as e:
+            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_hash}})
             return None
 
+    def cancel(self, order_hash):
+        url = PaybywayClient.API_ENDPOINT + '/cancel'
+        msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
+        authcode = hmac.new(PaybywayClient.SECRET_KEY, msg,
+                            hashlib.sha256).hexdigest().upper()
+
+        payload = {
+          'version': 'w3.1',
+          'api_key': PaybywayClient.API_KEY,
+          'order_number': order_hash,
+          'authcode': authcode,
+        }
+
+        try:
+            r = requests.post(url, json=payload, timeout=10)
+            data = r.json()
+            return data
+        except requests.exceptions.RequestException as e:
+            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_hash}})
+            return None
 
 # just for testing this with a random order ID
 client = PaybywayClient()

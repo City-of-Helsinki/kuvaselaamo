@@ -70,7 +70,7 @@ class BaseView(TemplateView):
     def get_empty_forms(self, request):
         return {
             'login_form': AuthForm(),
-            'sign_up_form': django_forms.UserCreationForm(),
+            'sign_up_form': forms.RegistrationForm(),
         }
 
     def get(self, request, *args, **kwargs):
@@ -106,7 +106,7 @@ class BaseView(TemplateView):
         return self.get(request, *args, **kwargs)
 
     def handle_signup(self, request, *args, **kwargs):
-        form = django_forms.UserCreationForm(request.POST)
+        form = forms.RegistrationForm(request.POST)
         if form.is_valid():
             auth_login(request, form.save())
             # TODO migth wanna do a PRG pattern here also. Returning the rendered template directly
