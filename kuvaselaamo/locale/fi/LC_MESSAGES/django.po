@@ -1549,3 +1549,7 @@ msgstr "Suosikkikuvasi on kerätty tänne"
 # form_fields
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Pakollinen. Alle 150 merkkiä. Vain kirjaimia, numeroita ja merkkejä @/./+/-/_."
+
+# no_results.html
+msgid "No search results or error"
+msgstr "Ei hakutuloksia (tai yhteys kuvapalvelimeen poikki)"

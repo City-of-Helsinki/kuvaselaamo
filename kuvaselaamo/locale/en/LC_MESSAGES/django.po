@@ -1565,3 +1565,7 @@ msgstr "Your favorite images are collected here"
 
 #~ msgid "api-poster-a4"
 #~ msgstr "A4 Portrait, Semi-Gloss 240g"
+
+# no_results.html
+msgid "No search results or error"
+msgstr "No search results (or connection to image server lost)"

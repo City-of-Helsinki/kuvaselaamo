@@ -1551,3 +1551,7 @@ msgstr "Dina favoritbilder finns samlade här"
 # form_fields
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Obligatoriskt. Max 150 tecken. Endast bokstäver, nummer och symbolerna @/./+/-/_."
+
+# no_results.html
+msgid "No search results or error"
+msgstr "Inga sökresultat (eller ingen anslutning till bildservern)"
