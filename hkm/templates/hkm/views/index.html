@@ -41,6 +41,8 @@
           <p>{% trans 'Luoda omia albumeita ja lisätä niihin suosikkikuviasi' %}</p>
           <p>{% trans 'Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja' %}</p>
           <p class="welcome-modal__clarification">{% trans 'Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä.' %}</p>
+          <a href="{% url 'hkm_siteinfo_terms' %}" class="welcome-modal__clarification">
+            {% trans 'Katso tarkemmat tiedot käyttöehdoista' %}</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>

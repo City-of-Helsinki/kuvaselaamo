@@ -1553,3 +1553,57 @@ msgstr "Pakollinen. Alle 150 merkkiä. Vain kirjaimia, numeroita ja merkkejä @/
 # no_results.html
 msgid "No search results or error"
 msgstr "Ei hakutuloksia (tai yhteys kuvapalvelimeen poikki)"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments"
+msgstr "Tilaus ja maksaminen"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 1"
+msgstr ""
+"Tilattavat tuotteet valitaan kotisivuilla lisäämällä ne ostoskoriin. Tilaus "
+"lähetetään maksamalla ostoskorin sisältö verkkokaupan kassatoiminnossa. Tehdessäsi "
+"tilauksen hyväksyt nämä toimitusehdot, tuotteiden hinnat sekä toimituskulut. Mikäli "
+"tilaushetkellä annetaan sähköpostiosoite, tilauksesta lähetetään tilausvahvistus "
+"sähköpostitse. Tilausvahvistuksesta ilmenevät tilatut tuotteet sekä hinta."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 2"
+msgstr ""
+"Verkkokaupan maksuvälittäjänä toimii Bambora PayForm (Paybyway Oy, y-tunnus 2486559-4), "
+"joka on rekisteröity Finanssivalvonnan ylläpitämään maksulaitosrekisteriin. Maksamiseen "
+"siirrytään Bamboran verkkopalvelun kautta ja tiliotteella ja laskulla maksun saajana "
+"näkyy Bambora tai Paybyway Oy. Bambora välittää maksut verkkokauppiaalle. Maksaminen "
+"on turvallista, sillä kaikki maksutapahtumaa koskevat tiedot välitetään salattua yhteyttä "
+"käyttäen niin ettei kukaan ulkopuolinen taho näe maksutapahtuman tietoja. Kauppa syntyy "
+"verkkokaupan asiakkaan ja verkkokaupan välille. Verkkokaupan vastuulla ovat kaikki "
+"kauppaan liittyvät velvoitteet."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 3"
+msgstr ""
+"PayForm-palvelun kautta voit maksaa verkkopankkitunnuksilla ja maksukorteilla "
+"(credit/debit). Käytettävissä ovat seuraavat maksutavat: Osuuspankki, Nordea, "
+"Danske Bank, Oma Säästöpankki, Säästöpankki, Aktia, Paikallisosuuspankit, S-Pankki, "
+"Handelsbanken, Ålandsbanken, Visa-, Visa Debit-, Visa Electron-, MasterCard- ja "
+"Debit MasterCard –kortit."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact headline"
+msgstr "Bambora PayForm -maksupalvelun yhteystiedot"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact details"
+msgstr ""
+"Bambora PayForm, Paybyway Oy (Y-tunnus 2486559-4)\n"
+"Sähköposti: payform@bambora.com\n"
+"Puhelin: 029 300 5050 (arkisin klo 9-16)\n"
+"Postiosoite: Laserkatu 6, 53850 Lappeenranta"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments read more"
+msgstr "Lue lisää Bamborasta: https://www.bambora.com"
+
+# index.html welcome-modal
+msgid "Katso tarkemmat tiedot käyttöehdoista"
+msgstr "Katso tarkemmat tiedot käyttöehdoista"

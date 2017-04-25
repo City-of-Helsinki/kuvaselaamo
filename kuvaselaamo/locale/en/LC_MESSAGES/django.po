@@ -1569,3 +1569,54 @@ msgstr "Your favorite images are collected here"
 # no_results.html
 msgid "No search results or error"
 msgstr "No search results (or connection to image server lost)"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments"
+msgstr "Orders and Payment"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 1"
+msgstr ""
+"Orders are collected from the online shop selection by adding the products "
+"to the shopping basket. The order is confirmed by using the check-out functionality "
+"in the online shop to pay for the purchase. By confirming an order, you accept these "
+"terms and conditions, product pricing and shipping costs. An e-mail confirmation will "
+"be delivered in case an e-mail address is provided by the time of confirming the order. "
+"The e-mail confirmation lists the products ordered and the price breakdown."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 2"
+msgstr ""
+"Bambora PayForm (Paybyway Oy, business-id FI24865594) is the payment facilitator of "
+"the online shop. The Paybyway Oy is a payment facilitator authorized by the Financial "
+"Supervisory Authority of Finland. The payment process is conducted in the online service "
+"of the Bambora. Bambora or Paybyway Oy is shown as the payment received in the bank account "
+"listing and in the invoice. Paying with Bambora is safe. All information is exchanged "
+"through secured connections. The trade happens between the online customer and the online "
+"shop. The online shop is responsible for all obligations related to the trade."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 3"
+msgstr ""
+"With Bambora PayForm you can pay your order by an internet banking account "
+"and a payment card (credit/debit)."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact headline"
+msgstr "Contact Bambora PayForm"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact details"
+msgstr ""
+"Bambora PayForm, Paybyway Oy (business-id FI24865594)\n"
+"E-mail: payform@bambora.com\n"
+"Telephone: +358 29 300 5050 (workdays 9-16)\n"
+"Address: Laserkatu 6, 53850 Lappeenranta, Finland"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments read more"
+msgstr "Read more about Bambora: https://www.bambora.com"
+
+# index.html welcome-modal
+msgid "Katso tarkemmat tiedot käyttöehdoista"
+msgstr "Read more on our Terms of Use page"

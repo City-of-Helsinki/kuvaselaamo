@@ -53,6 +53,7 @@
           <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Order (verb)' %}</button>
         </form>
         <p>{% trans 'By pressing Order (verb) you will be redirected to the secure payment service.' %}</p>
+        <img src="/static/hkm/img/payform_row_no_invoices.png" class="order-payform-banner" />
       </div>
       <div class="record-meta__col record-meta__col--right col-md-7">
         <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>

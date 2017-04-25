@@ -482,7 +482,7 @@ class ProductOrder(BaseModel):
 
         if phase == 'checkout':
             subject = 'Helsinkikuvia.fi - tilausvahvistus'
-            message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
+            message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.\n\nHelsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
 
         elif phase == 'print':
             subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'

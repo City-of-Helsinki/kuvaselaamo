@@ -1555,3 +1555,57 @@ msgstr "Obligatoriskt. Max 150 tecken. Endast bokstäver, nummer och symbolerna 
 # no_results.html
 msgid "No search results or error"
 msgstr "Inga sökresultat (eller ingen anslutning till bildservern)"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments"
+msgstr "Beställning och Betalning"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 1"
+msgstr ""
+"För att beställa produkter, välj produkter på hemsidan och lägg dem i "
+"kundkorgen. Skicka beställningen genom att betala produkterna i webbutikens "
+"kassa. Genom att lägga din beställning godkänner du dessa leveransvillkor, "
+"produktpriser och leveranskostnader. Om du anger din e-postadress i beställningen, "
+"skickar vi dig en beställningsbekräftelse via e-post. Av beställningsbekräftelsen "
+"framgår produkterna som beställts samt priset."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 2"
+msgstr ""
+"Betalningar i webbutiken förmedlas av Bambora PayForm (Paybyway Oy, "
+"FO-nummer 2486559-4) som är registrerat i det av Finansinspektionen övervakade "
+"registret över betalningsinstitut. Du går till betalningen via Bamboras webbtjänst "
+"och på ditt kontoutdrag är betalningsmottagaren Bambora eller Paybyway Oy. Bambora "
+"förmedlar betalningarna till webbutiken. Betalningen är trygg, då alla uppgifter om "
+"transaktionen förmedlas via en krypterad förbindelse så att ingen utomstående instans "
+"ser dem. Köpet uppstår mellan webbutikskunden och webbutiken. Webbutiken är ansvarig "
+"för samtliga skyldigheter rörande köpet."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments paragraph 3"
+msgstr ""
+"Via PayForm kan du betala med internetbankkoder och betalkort (credit/debit). "
+"Följande betalningssätt används: Andelsbanken, Nordea, Danske Bank, Sparbanken, "
+"Aktia, Lokala andelsbanker, S-banken, Handelsbanken, Visa-, Visa Debit-, Visa Electron-, "
+"MasterCard- och Debit MasterCard-kort."
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact headline"
+msgstr "Bamboras kontaktuppgifter"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments contact details"
+msgstr ""
+"Bambora PayForm, Paybyway Oy (FO-nummer 2486559-4) \n"
+"E-post: payform@bambora.com \n"
+"Telefon: +358 29 300 5050 (vardagar kl. 9–16) \n"
+"Postadress: Laserkatu 6, 53850 Villmanstrand"
+
+# siteinfo_terms.html bambora payments
+msgid "Payments read more"
+msgstr "Läs mer om Bambora: https://www.bambora.com"
+
+# index.html welcome-modal
+msgid "Katso tarkemmat tiedot käyttöehdoista"
+msgstr "Läs mer om användsvillkoren"
