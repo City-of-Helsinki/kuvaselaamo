@@ -1173,7 +1173,10 @@ class AjaxCropRecordView(View):
         return http.HttpResponseBadRequest()
 
     def _get_cropped_full_res_file(self):
-        full_res_image = HKM.download_image(self.record['full_res_url'])
+        try:
+            full_res_image = HKM.download_image(self.record['full_res_url'])
+        except:
+            return None
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
                                          self.crop_width, self.crop_height, self.img_width, self.img_height)
         crop_io = StringIO.StringIO()
@@ -1200,6 +1203,8 @@ class AjaxCropRecordView(View):
 
     def handle_download(self, request, *args, **kwargs):
         crop_file = self._get_cropped_full_res_file()
+        if not crop_file:
+            crop_file = self._get_cropped_preview_file()
         tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'],
                              edited_image=crop_file)
         if request.user.is_authenticated():
