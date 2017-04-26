@@ -261,7 +261,6 @@ class CollectionDetailView(BaseView):
     def handle_edit(self, request, *args, **kwargs):
         form = forms.CollectionForm(
             request.POST, prefix='collection-form', instance=self.collection, user=request.user)
-        print form.fields
         if form.is_valid():
             form.save()
             return redirect(reverse(self.url_name, kwargs={'collection_id': self.collection.id}))
@@ -867,7 +866,6 @@ class OrderProductView(BaseOrderView):
     def handle_order_product(self, request, *args, **kwargs):
         form = forms.OrderProductForm(
             request.POST, prefix='order-product-form', instance=self.order)
-        print request.POST
         if form.is_valid():
             order = form.save()
             # TODO maybe refactor to model form
