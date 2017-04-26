@@ -150,7 +150,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
                 ('modified', models.DateTimeField(auto_now=True, verbose_name='Modified')),
                 ('is_admin', models.BooleanField(default=False, verbose_name='Is admin')),
-                ('language', models.CharField(choices=[(b'fi', 'Finnish'), (b'en', 'English'), (b'sv', 'Svedish')], default=b'fi', max_length=4, verbose_name='Language')),
+                ('language', models.CharField(choices=[(b'fi', 'Finnish'), (b'en', 'English'), (b'sv', 'Swedish')], default=b'fi', max_length=4, verbose_name='Language')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL, verbose_name='User')),
             ],
             options={

@@ -46,7 +46,7 @@ class UserProfile(BaseModel):
     LANGUAGE_CHOICES = (
         (LANG_FI, _(u'Finnish')),
         (LANG_EN, _(u'English')),
-        (LANG_SV, _(u'Svedish')),
+        (LANG_SV, _(u'Swedish')),
     )
 
     user = models.OneToOneField(
