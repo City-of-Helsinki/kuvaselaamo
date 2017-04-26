@@ -7,16 +7,16 @@ import hmac
 import hashlib
 import base64
 
-from hkm import settings
+from django.conf import settings
 
 LOG = logging.getLogger(__name__)
 
 
 class PaybywayClient(object):
 
-    API_ENDPOINT = settings.PBW_API_ENDPOINT
-    API_KEY = settings.PBW_API_KEY
-    SECRET_KEY = settings.PBW_SECRET_KEY
+    API_ENDPOINT = settings.HKM_PBW_API_ENDPOINT
+    API_KEY = settings.HKM_PBW_API_KEY
+    SECRET_KEY = settings.HKM_PBW_SECRET_KEY
 
     def post(self, order_hash, price):
         url = PaybywayClient.API_ENDPOINT + '/auth_payment'
@@ -24,10 +24,9 @@ class PaybywayClient(object):
         authcode = hmac.new(PaybywayClient.SECRET_KEY, msg,
                             hashlib.sha256).hexdigest().upper()
         # TODO refactor to reverse
-        return_url = '%s/order/%s/confirmation/' % (
-            settings.MY_DOMAIN, order_hash)
+        return_url = '%s/order/%s/confirmation/' % (settings.HKM_MY_DOMAIN, order_hash)
         # TODO refactor to reverse
-        notify_url = '%s/order/%s/notify/' % (settings.MY_DOMAIN, order_hash)
+        notify_url = '%s/order/%s/notify/' % (settings.HKM_MY_DOMAIN, order_hash)
 
         payload = {
             'version': 'w3.1',

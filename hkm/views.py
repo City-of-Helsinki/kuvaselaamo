@@ -26,8 +26,7 @@ from hkm.models import Collection, Record, TmpImage, ProductOrder, PrintProduct
 from hkm import forms
 from hkm import tasks
 from hkm import image_utils
-from hkm import settings
-from hkm import context_processors
+from django.conf import settings
 
 
 LOG = logging.getLogger(__name__)
@@ -80,9 +79,8 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['language'] = self.request.session.get(
-            LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
-        context['my_domain_url'] = context_processors.MY_DOMAIN
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        context['my_domain_url'] = settings.HKM_MY_DOMAIN
         context['current_url'] = self.get_url()
         return context
 
@@ -967,7 +965,9 @@ class OrderContactInformationView(BaseOrderView):
                 context['record']['full_res_url'] = HKM.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
                 self.order.crop_image_url = '%s%s' % (
-                    settings.MY_DOMAIN, self.handle_crop(context['record']))
+                    settings.HKM_MY_DOMAIN,
+                    self.handle_crop(context['record']),
+                )
                 self.order.save()
         return context
 
@@ -1278,8 +1278,7 @@ class SiteinfoTermsView(BaseView):
 
 def handler404(request):
     context = {}
-    context['language'] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
     response = render_to_response('hkm/views/404.html', context)
     response.status_code = 404
     return response
@@ -1287,8 +1286,7 @@ def handler404(request):
 
 def handler500(request):
     context = {}
-    context['language'] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
