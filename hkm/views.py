@@ -2,7 +2,6 @@
 
 import datetime
 import logging
-import random
 import StringIO
 
 from django import http
@@ -384,8 +383,7 @@ class IndexView(CollectionDetailView):
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
         if not self.collection_record and self.collection:
-
-            self.collection_record = random.choice(self.collection.records.all())
+            self.collection_record = self.collection.records.order_by('?').first()
 
         self.permissions = {
             'can_edit': False
