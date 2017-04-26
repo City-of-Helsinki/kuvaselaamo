@@ -3,9 +3,9 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 
-var pathScss = './hkm/static/hkm/scss/**/*.scss'
-var pathCss = './hkm/static/hkm/css/'
-var pathStaticrootCss = './staticroot/hkm/css/'
+var pathScss = './hkm/static/hkm/scss/**/*.scss';
+var pathCss = './hkm/static/hkm/css/';
+var pathStaticrootCss = './staticroot/hkm/css/';
 
 gulp.task('sass', function () {
   return gulp.src(pathScss)
