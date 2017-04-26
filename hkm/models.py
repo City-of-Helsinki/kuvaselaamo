@@ -2,8 +2,6 @@
 
 import datetime
 import logging
-import random
-import string
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -16,6 +14,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
 from phonenumber_field.modelfields import PhoneNumberField
@@ -493,8 +492,7 @@ class ProductOrder(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.id and not self.order_hash:
-            self.order_hash = ''.join(random.SystemRandom().choice(
-                string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20))
+            self.order_hash = get_random_string(20)
         return super(ProductOrder, self).save(*args, **kwargs)
 
     def __unicode__(self):
