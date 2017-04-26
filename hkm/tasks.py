@@ -45,4 +45,3 @@ def send_feedback_notification(feedback_id, force=False):
         return False
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

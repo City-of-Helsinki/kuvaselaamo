@@ -68,4 +68,3 @@ class HKMClient(object):
 DEFAULT_CLIENT = HKMClient()
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

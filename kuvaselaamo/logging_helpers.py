@@ -11,4 +11,3 @@ class Filter:
             record.__dict__['data'], sort_keys=True, indent=2)
         return True
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

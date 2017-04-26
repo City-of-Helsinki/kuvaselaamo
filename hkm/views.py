@@ -1285,4 +1285,3 @@ def handler500(request):
     response.status_code = 500
     return response
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

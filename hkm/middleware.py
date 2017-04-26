@@ -19,4 +19,3 @@ class LanguageMiddleware(object):
             return None
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

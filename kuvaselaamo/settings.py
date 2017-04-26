@@ -179,4 +179,3 @@ HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
 
 HKM_POSTAL_FEES = 0.0
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
