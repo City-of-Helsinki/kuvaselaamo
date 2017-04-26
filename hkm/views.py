@@ -11,9 +11,7 @@ from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.urlresolvers import reverse
-from django.forms.models import model_to_dict
-from django.shortcuts import redirect, render, render_to_response
-from django.template import RequestContext
+from django.shortcuts import redirect, render_to_response
 from django.utils.translation import ugettext as _
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.views.generic import RedirectView, TemplateView, View
