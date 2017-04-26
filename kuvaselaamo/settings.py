@@ -7,6 +7,8 @@ import logging
 
 djcelery.setup_loader()
 
+SECRET_KEY = 'x'
+
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
 
 ADMINS = (

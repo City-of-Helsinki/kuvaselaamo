@@ -4,6 +4,8 @@
 *.pyc
 *.swo
 *.swp
+.cache
+.coverage
 .directory
 .DS_Store
 .fseventsd
@@ -21,6 +23,7 @@ develop-eggs
 doc/build/
 downloads
 eggs
+htmlcov
 local_settings.py
 mediaroot/*
 node_modules
