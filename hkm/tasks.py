@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import logging
+
 from celery import task
-from django.utils.translation import ugettext as _
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from hkm.models import Feedback
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
+
+from hkm.models import Feedback
 
 LOG = logging.getLogger(__name__)
 

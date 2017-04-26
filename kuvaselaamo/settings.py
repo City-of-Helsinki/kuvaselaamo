@@ -1,9 +1,10 @@
 
 # -*- coding: utf-8 -*-
 
-import os
-import djcelery
 import logging
+import os
+
+import djcelery
 
 djcelery.setup_loader()
 

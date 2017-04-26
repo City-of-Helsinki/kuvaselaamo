@@ -3,8 +3,8 @@
 
 from django.contrib import admin
 from django.contrib.auth.models import User
-from hkm import models
 
+from hkm import models
 
 admin.site.register(models.UserProfile)
 admin.site.register(models.Collection)

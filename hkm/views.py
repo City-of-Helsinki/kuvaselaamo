@@ -1,33 +1,28 @@
 
 # -*- coding: utf-8 -*-
 
-import logging
-import StringIO
 import datetime
+import logging
 import random
+import StringIO
 
 from django import http
+from django.conf import settings
 from django.contrib.auth import forms as django_forms
-from django.views.generic import TemplateView, RedirectView, View
-from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.contrib.auth import login as auth_login
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.forms.models import model_to_dict
+from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.contrib.auth import login as auth_login
-from django.forms.models import model_to_dict
+from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.views.generic import RedirectView, TemplateView, View
+
+from hkm import forms, image_utils, tasks
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-
-from hkm.models import Collection, Record, TmpImage, ProductOrder, PrintProduct
-from hkm import forms
-from hkm import tasks
-from hkm import image_utils
-from django.conf import settings
-
+from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage
 
 LOG = logging.getLogger(__name__)
 

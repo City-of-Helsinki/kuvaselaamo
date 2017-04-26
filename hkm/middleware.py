@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from django.utils.translation import LANGUAGE_SESSION_KEY
+
 from django.conf import settings
+from django.utils.translation import LANGUAGE_SESSION_KEY
 
 LOG = logging.getLogger(__name__)
 

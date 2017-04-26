@@ -1,12 +1,12 @@
 
 # -*- coding: utf-8 -*-
 
-import logging
-import requests
-import hmac
-import hashlib
 import base64
+import hashlib
+import hmac
+import logging
 
+import requests
 from django.conf import settings
 
 LOG = logging.getLogger(__name__)
@@ -57,10 +57,10 @@ class PaybywayClient(object):
                             hashlib.sha256).hexdigest().upper()
 
         payload = {
-          'version': 'w3.1',
-          'api_key': PaybywayClient.API_KEY,
-          'order_number': order_hash,
-          'authcode': authcode,
+            'version': 'w3.1',
+            'api_key': PaybywayClient.API_KEY,
+            'order_number': order_hash,
+            'authcode': authcode,
         }
 
         try:
@@ -70,6 +70,7 @@ class PaybywayClient(object):
         except requests.exceptions.RequestException as e:
             LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_hash}})
             return None
+
 
 # just for testing this with a random order ID
 client = PaybywayClient()

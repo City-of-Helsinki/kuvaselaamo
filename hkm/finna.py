@@ -1,12 +1,12 @@
 
 # -*- coding: utf-8 -*-
 
-import math
 import logging
-import requests
-from PIL import Image
+import math
 from StringIO import StringIO
 
+import requests
+from PIL import Image
 
 LOG = logging.getLogger(__name__)
 

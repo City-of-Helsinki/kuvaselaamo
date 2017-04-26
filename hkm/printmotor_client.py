@@ -1,11 +1,10 @@
-import logging
-import requests
 import base64
+import logging
 
-from requests.auth import HTTPBasicAuth
-from django.forms.models import model_to_dict
-
+import requests
 from django.conf import settings
+from django.forms.models import model_to_dict
+from requests.auth import HTTPBasicAuth
 
 LOG = logging.getLogger(__name__)
 

@@ -1,25 +1,26 @@
 
 # -*- coding: utf-8 -*-
 
+import datetime
 import logging
 import random
 import string
-import datetime
 
-from ordered_model.models import OrderedModel
-from phonenumber_field.modelfields import PhoneNumberField
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.db import models
-from django.conf import settings
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
+from django.core.validators import MinValueValidator
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
+from ordered_model.models import OrderedModel
+from phonenumber_field.modelfields import PhoneNumberField
+
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.paybyway_client import client as PBW
@@ -435,17 +436,17 @@ class ProductOrder(BaseModel):
                         elif printOrder == 400:
                             LOG.error(
                                 'Bad request to Printmotor, check payload', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 401:
                             LOG.error(
                                 'Unauthorized @ Printmotor, check headers', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 500:
                             LOG.error(
                                 'Printmotor server error, maybe image URL is invalid', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                     else:
                         LOG.error('Failed to communicate with Printmotor API', extra={'data': {
@@ -473,7 +474,7 @@ class ProductOrder(BaseModel):
                       'data': {'order_hash': self.order_hash}})
         else:
             LOG.error('ORDER CANCELLATION ERROR ', extra={
-                      'data': {'order_hash': self.order_hash}})         
+                      'data': {'order_hash': self.order_hash}})
         return True
 
     def send_mail(self, phase):
