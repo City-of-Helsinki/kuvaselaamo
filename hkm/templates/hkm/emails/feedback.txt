@@ -1,6 +1,6 @@
 {% load i18n %}
 {% trans 'Name' %}: {{ feedback.full_name|default:"No name" }}\n
-{% trans 'Email' %}: {{ feedback.full_name|default:"No email" }}\n\n
+{% trans 'Email' %}: {{ feedback.email|default:"No email" }}\n\n
 
 {% if feedback.record_id %}
     {% trans 'Record' %}: {{ MY_DOMAIN }}{% url 'hkm_record' finna_id=feedback.record_id %}
