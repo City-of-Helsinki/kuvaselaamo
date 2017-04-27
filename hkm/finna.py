@@ -1,12 +1,11 @@
-
 # -*- coding: utf-8 -*-
 
-import math
 import logging
-import requests
-from PIL import Image
+import math
 from StringIO import StringIO
 
+import requests
+from PIL import Image
 
 LOG = logging.getLogger(__name__)
 
@@ -173,4 +172,3 @@ class FinnaClient(object):
 
 DEFAULT_CLIENT = FinnaClient()
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

@@ -1,12 +1,12 @@
-
 # -*- coding: utf-8 -*-
 
 import logging
-import urlparse
 import urllib
-from PIL import Image
+import urlparse
 from StringIO import StringIO
+
 import requests
+from PIL import Image
 
 LOG = logging.getLogger(__name__)
 
@@ -68,4 +68,3 @@ class HKMClient(object):
 DEFAULT_CLIENT = HKMClient()
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

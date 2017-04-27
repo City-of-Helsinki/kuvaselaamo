@@ -1,8 +1,6 @@
-
 # -*- coding: utf-8 -*-
 
 import logging
-
 
 LOG = logging.getLogger(__name__)
 
@@ -24,4 +22,3 @@ def crop(image, crop_x, crop_y, crop_width, crop_height, img_width, img_height):
     return image.crop(box)
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

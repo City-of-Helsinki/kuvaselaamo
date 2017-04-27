@@ -1,29 +1,28 @@
-
 # -*- coding: utf-8 -*-
 
-import logging
-import random
-import string
 import datetime
+import logging
 
-from ordered_model.models import OrderedModel
-from phonenumber_field.modelfields import PhoneNumberField
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.db import models
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
 from django.core.mail import send_mail
+from django.core.validators import MinValueValidator
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.crypto import get_random_string
+from django.utils.translation import ugettext_lazy as _
+from ordered_model.models import OrderedModel
+from phonenumber_field.modelfields import PhoneNumberField
+
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
-from hkm import settings
 
 LOG = logging.getLogger(__name__)
 DEFAULT_CACHE = caches['default']
@@ -46,7 +45,7 @@ class UserProfile(BaseModel):
     LANGUAGE_CHOICES = (
         (LANG_FI, _(u'Finnish')),
         (LANG_EN, _(u'English')),
-        (LANG_SV, _(u'Svedish')),
+        (LANG_SV, _(u'Swedish')),
     )
 
     user = models.OneToOneField(
@@ -173,7 +172,7 @@ class Record(OrderedModel, BaseModel):
 
     def get_full_res_image_absolute_url(self):
         if self.edited_full_res_image:
-            return u'%s%s' % (settings.MY_DOMAIN, self.edited_full_res_image.url)
+            return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_full_res_image.url)
         else:
             record_data = self.get_details()
             if record_data:
@@ -195,7 +194,7 @@ class Record(OrderedModel, BaseModel):
         LOG.debug('Getting web image absolute url', extra={
                   'data': {'finna_id': self.record_id}})
         # if self.edited_preview_image:
-        #	return u'%s%s' % (settings.MY_DOMAIN, self.edited_preview_image.url)
+        #	return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_preview_image.url)
         # else:
         url = FINNA.get_image_url(self.record_id)
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
@@ -337,7 +336,7 @@ class ProductOrder(BaseModel):
     amount = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
     postal_fees = models.DecimalField(verbose_name=_(
-        u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.POSTAL_FEES)
+        u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
     unit_price = models.DecimalField(verbose_name=_(
         u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
     total_price = models.DecimalField(verbose_name=_(
@@ -381,7 +380,7 @@ class ProductOrder(BaseModel):
         token = checkout_request.get('token', None)
         # TODO better error logs && datetime_checkout_redirected if success
         if token:
-            redirect_url = settings.PBW_API_ENDPOINT + '/token/%s' % token
+            redirect_url = settings.HKM_PBW_API_ENDPOINT + '/token/%s' % token
             return redirect_url
         return None
 
@@ -435,17 +434,17 @@ class ProductOrder(BaseModel):
                         elif printOrder == 400:
                             LOG.error(
                                 'Bad request to Printmotor, check payload', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 401:
                             LOG.error(
                                 'Unauthorized @ Printmotor, check headers', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                         elif printOrder == 500:
                             LOG.error(
                                 'Printmotor server error, maybe image URL is invalid', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
+                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
                             self.is_order_successful = False
                     else:
                         LOG.error('Failed to communicate with Printmotor API', extra={'data': {
@@ -473,7 +472,7 @@ class ProductOrder(BaseModel):
                       'data': {'order_hash': self.order_hash}})
         else:
             LOG.error('ORDER CANCELLATION ERROR ', extra={
-                      'data': {'order_hash': self.order_hash}})         
+                      'data': {'order_hash': self.order_hash}})
         return True
 
     def send_mail(self, phase):
@@ -488,13 +487,12 @@ class ProductOrder(BaseModel):
             subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
             message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalo Printmotorille. Valmis tuote lähtee postiin viimeistään kolmantena arkipäivänä tästä päivästä lukien.\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
 
-        send_mail(subject, message, settings.FEEDBACK_FROM_EMAIL, [self.email])
+        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [self.email])
         return True
 
     def save(self, *args, **kwargs):
         if not self.id and not self.order_hash:
-            self.order_hash = ''.join(random.SystemRandom().choice(
-                string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(20))
+            self.order_hash = get_random_string(20)
         return super(ProductOrder, self).save(*args, **kwargs)
 
     def __unicode__(self):
@@ -532,4 +530,3 @@ class TmpImage(BaseModel):
         return self.record_title
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

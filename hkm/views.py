@@ -1,34 +1,24 @@
-
 # -*- coding: utf-8 -*-
 
+import datetime
 import logging
 import StringIO
-import datetime
-import random
 
 from django import http
+from django.conf import settings
 from django.contrib.auth import forms as django_forms
-from django.views.generic import TemplateView, RedirectView, View
-from django.utils.translation import LANGUAGE_SESSION_KEY
-from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.utils.translation import ugettext as _
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib.auth import login as auth_login
-from django.forms.models import model_to_dict
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect, render_to_response
+from django.utils.translation import ugettext as _
+from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.views.generic import RedirectView, TemplateView, View
+
+from hkm import forms, image_utils, tasks
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-
-from hkm.models import Collection, Record, TmpImage, ProductOrder, PrintProduct
-from hkm import forms
-from hkm import tasks
-from hkm import image_utils
-from hkm import settings
-from hkm import context_processors
-
+from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage
 
 LOG = logging.getLogger(__name__)
 
@@ -80,9 +70,8 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['language'] = self.request.session.get(
-            LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
-        context['my_domain_url'] = context_processors.MY_DOMAIN
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        context['my_domain_url'] = settings.HKM_MY_DOMAIN
         context['current_url'] = self.get_url()
         return context
 
@@ -271,7 +260,6 @@ class CollectionDetailView(BaseView):
     def handle_edit(self, request, *args, **kwargs):
         form = forms.CollectionForm(
             request.POST, prefix='collection-form', instance=self.collection, user=request.user)
-        print form.fields
         if form.is_valid():
             form.save()
             return redirect(reverse(self.url_name, kwargs={'collection_id': self.collection.id}))
@@ -395,8 +383,7 @@ class IndexView(CollectionDetailView):
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
         if not self.collection_record and self.collection:
-
-            self.collection_record = random.choice(self.collection.records.all())
+            self.collection_record = self.collection.records.order_by('?').first()
 
         self.permissions = {
             'can_edit': False
@@ -877,7 +864,6 @@ class OrderProductView(BaseOrderView):
     def handle_order_product(self, request, *args, **kwargs):
         form = forms.OrderProductForm(
             request.POST, prefix='order-product-form', instance=self.order)
-        print request.POST
         if form.is_valid():
             order = form.save()
             # TODO maybe refactor to model form
@@ -967,7 +953,9 @@ class OrderContactInformationView(BaseOrderView):
                 context['record']['full_res_url'] = HKM.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
                 self.order.crop_image_url = '%s%s' % (
-                    settings.MY_DOMAIN, self.handle_crop(context['record']))
+                    settings.HKM_MY_DOMAIN,
+                    self.handle_crop(context['record']),
+                )
                 self.order.save()
         return context
 
@@ -1278,8 +1266,7 @@ class SiteinfoTermsView(BaseView):
 
 def handler404(request):
     context = {}
-    context['language'] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
     response = render_to_response('hkm/views/404.html', context)
     response.status_code = 404
     return response
@@ -1287,10 +1274,8 @@ def handler404(request):
 
 def handler500(request):
     context = {}
-    context['language'] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.DEFAULT_LANGUAGE)
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

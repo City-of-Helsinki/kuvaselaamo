@@ -36,7 +36,7 @@ msgid "English"
 msgstr "English"
 
 #: hkm/hkm/models.py:49
-msgid "Svedish"
+msgid "Swedish"
 msgstr "Swedish"
 
 #: hkm/hkm/models.py:53 hkm/hkm/models.py:269 hkm/hkm/models.py:487

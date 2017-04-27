@@ -1,21 +1,18 @@
 import logging
+
 import requests
-import base64
-
+from django.conf import settings
 from requests.auth import HTTPBasicAuth
-from django.forms.models import model_to_dict
-
-from hkm import settings
 
 LOG = logging.getLogger(__name__)
 
 
 class PrintmotorClient(object):
 
-    API_ENDPOINT = settings.PRINTMOTOR_API_ENDPOINT
-    USERNAME = settings.PRINTMOTOR_USERNAME
-    PASSWORD = settings.PRINTMOTOR_PASSWORD
-    API_KEY = settings.PRINTMOTOR_API_KEY
+    API_ENDPOINT = settings.HKM_PRINTMOTOR_API_ENDPOINT
+    USERNAME = settings.HKM_PRINTMOTOR_USERNAME
+    PASSWORD = settings.HKM_PRINTMOTOR_PASSWORD
+    API_KEY = settings.HKM_PRINTMOTOR_API_KEY
 
     def post(self, order):
         LOG.debug(PrintmotorClient.API_KEY)

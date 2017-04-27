@@ -1,9 +1,9 @@
-
 # -*- coding: utf-8 -*-
 
 import logging
+
+from django.conf import settings
 from django.utils.translation import LANGUAGE_SESSION_KEY
-from hkm import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -15,8 +15,7 @@ class LanguageMiddleware(object):
                 language = request.user.profile.language
                 request.session[LANGUAGE_SESSION_KEY] = language
             else:
-                request.session[LANGUAGE_SESSION_KEY] = settings.DEFAULT_LANGUAGE
+                request.session[LANGUAGE_SESSION_KEY] = settings.LANGUAGE_CODE
             return None
 
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

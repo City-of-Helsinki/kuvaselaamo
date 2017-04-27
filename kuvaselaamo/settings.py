@@ -1,11 +1,13 @@
-
 # -*- coding: utf-8 -*-
 
-import os
-import djcelery
 import logging
+import os
+
+import djcelery
 
 djcelery.setup_loader()
+
+SECRET_KEY = 'x'
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -177,4 +179,3 @@ HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
 
 HKM_POSTAL_FEES = 0.0
 
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2

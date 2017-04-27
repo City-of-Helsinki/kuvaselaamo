@@ -35,7 +35,7 @@ msgid "English"
 msgstr "englanti"
 
 #: hkm/hkm/models.py:49
-msgid "Svedish"
+msgid "Swedish"
 msgstr "ruotsi"
 
 #: hkm/hkm/models.py:53 hkm/hkm/models.py:269 hkm/hkm/models.py:487
