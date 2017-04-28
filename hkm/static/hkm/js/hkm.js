@@ -187,7 +187,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -199,7 +199,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-buy-content').html();
@@ -219,7 +219,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-share-content').html();
@@ -231,7 +231,7 @@ palikka
     toggle: 'popover',
     container: 'body',
     placement: 'top',
-    trigger: 'focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-add-content').html();
