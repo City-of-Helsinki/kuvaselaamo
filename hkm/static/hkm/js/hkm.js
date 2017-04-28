@@ -238,7 +238,7 @@ palikka
     }
   });
 
-  /*$('.has-popover').click(function() {
+  $('.has-popover').click(function() {
     var clickedButton = this;
     $('.has-popover').each(function(current) {
       if ($(this)[0] !== clickedButton) $(this).popover('hide');
@@ -246,7 +246,11 @@ palikka
         $(this).popover('toggle');
       }
     });
-  });*/
+  });
+
+  $(document).on('click', '.popover', function(){
+    $(this).hide();
+  });
 
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
