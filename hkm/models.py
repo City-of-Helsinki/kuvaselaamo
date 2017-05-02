@@ -2,6 +2,8 @@
 
 import datetime
 import logging
+import hmac
+import hashlib
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -384,12 +386,41 @@ class ProductOrder(BaseModel):
             return redirect_url
         return None
 
-    def handle_confirmation(self, result):
+    def authcode_valid(self, result):
+        SECRET_KEY = settings.HKM_PBW_SECRET_KEY
+        received_authcode = result.get('authcode', None)
+        if not received_authcode:
+            return False
 
-        if not self.datetime_checkout_ended:
-            self.datetime_checkout_ended = datetime.datetime.now()
-            LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
-                      'order_hash': self.order_hash, 'time': str(self.datetime_checkout_ended)}})
+        settled = result.get('settled', None)
+        incident_id = result.get('incident_id', None)
+        return_code = result.get('return_code', None)
+
+        msg = '%s|%s' % (return_code, self.order_hash)
+        if settled:
+            msg = '%s|%s' % (msg, settled)
+        if incident_id:
+            msg = '%s|%s' % (msg, incident_id)
+
+        authcode = hmac.new(SECRET_KEY, msg,
+                            hashlib.sha256).hexdigest().upper()
+        LOG.debug('COMPARING AUTHCODES', extra={
+                    'data': {'order_hash': self.order_hash,
+                    'received authcode': received_authcode,
+                    'calculated authcode': authcode}})
+        return authcode == received_authcode
+
+    def handle_confirmation(self, result, force=False):
+
+        if not force:
+            if self.is_checkout_successful == False:
+                LOG.error('ATTEMPT TO REHANDLE UNSUCCESSFUL CHECKOUT!', extra={'data': {
+                          'order_hash': self.order_hash}})
+                return
+        self.datetime_checkout_ended = datetime.datetime.now()
+        LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
+                'order_hash': self.order_hash, 
+                'time': str(self.datetime_checkout_ended)}})
 
         # if return code for checkout is 0 (SUCCESS)
         if result['return_code'] == '0':

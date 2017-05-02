@@ -1023,13 +1023,17 @@ class OrderConfirmation(BaseOrderView):
 
     def get(self, request, *args, **kwargs):
 
-        # move basically everything to model class
         self.result['authcode'] = request.GET.get('AUTHCODE', None)
         self.result['return_code'] = request.GET.get('RETURN_CODE', None)
         self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
         self.result['settled'] = request.GET.get('SETTLED', None)
+        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
 
-        self.order.handle_confirmation(self.result)
+        if self.order.authcode_valid(self.result):
+            self.order.handle_confirmation(self.result)
+        else:
+            LOG.error('AUTHCODE MISMATCH! ', extra={
+                    'data': {'order_hash': self.order.order_hash}})
 
         return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
         # return self.render_to_response(self.get_context_data(**kwargs))
@@ -1068,8 +1072,13 @@ class OrderPBWNotify(BaseOrderView):
         self.result['return_code'] = request.GET.get('RETURN_CODE', None)
         self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
         self.result['settled'] = request.GET.get('SETTLED', None)
+        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
 
-        self.order.handle_confirmation(self.result)
+        if self.order.authcode_valid(self.result):
+            self.order.handle_confirmation(self.result)
+        else:
+            LOG.error('AUTHCODE MISMATCH! ', extra={
+                    'data': {'order_hash': self.order_hash}})
 
         return http.HttpResponse()
 
