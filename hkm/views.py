@@ -1078,7 +1078,7 @@ class OrderPBWNotify(BaseOrderView):
             self.order.handle_confirmation(self.result)
         else:
             LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order_hash}})
+                    'data': {'order_hash': self.order.order_hash}})
 
         return http.HttpResponse()
 
