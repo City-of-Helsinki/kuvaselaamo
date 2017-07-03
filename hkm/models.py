@@ -19,6 +19,7 @@ from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
+from parler.models import TranslatableModel, TranslatedFields
 from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
@@ -561,3 +562,25 @@ class TmpImage(BaseModel):
         return self.record_title
 
 
+class PageContent(BaseModel, TranslatableModel):
+    name = models.CharField(
+        verbose_name=_(u'Name'),
+        max_length=255,
+    )
+    identifier = models.CharField(
+        verbose_name=_(u'Identifier'),
+        max_length=255,
+        unique=True
+    )
+    translations = TranslatedFields(
+        title=models.CharField(
+            verbose_name=_(u"Title"),
+            max_length=255
+        ),
+        content=models.TextField(
+            verbose_name=_(u"Content")
+        )
+    )
+
+    def __unicode__(self):
+        return self.name
