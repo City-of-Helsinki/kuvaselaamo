@@ -47,3 +47,4 @@ requests
 six
 supervisor
 watchdog
+django-parler
