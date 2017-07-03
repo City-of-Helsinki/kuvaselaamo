@@ -118,6 +118,7 @@ INSTALLED_APPS = (
 
     'djcelery',
     'compressor',
+    'parler',
 
     'django.contrib.sites',
     'django.contrib.auth',
@@ -128,6 +129,20 @@ INSTALLED_APPS = (
     'django.contrib.admin.apps.SimpleAdminConfig',
 )
 
+# Parler
+PARLER_DEFAULT_LANGUAGE_CODE = 'fi'
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'fi',},
+        {'code': 'en',},
+        {'code': 'sv',},
+    ),
+    'default': {
+        'fallback': 'fi',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks too.
+    }
+}
 
 # Compress
 COMPRESS_HTML = False
