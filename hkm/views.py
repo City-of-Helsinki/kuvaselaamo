@@ -18,7 +18,7 @@ from django.views.generic import RedirectView, TemplateView, View
 from hkm import forms, image_utils, tasks
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage
+from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
 
 LOG = logging.getLogger(__name__)
 
@@ -1239,7 +1239,18 @@ class AjaxCropRecordView(View):
 
 
 # VIEWS THAT SITE FOOTER LINKS TO
-class SiteinfoAboutView(BaseView):
+class TranslatableContentView(BaseView):
+
+    def get_context_data(self, **kwargs):
+        context = super(TranslatableContentView, self).get_context_data(**kwargs)
+        try:
+            context["page_content"] = PageContent.objects.get(identifier=self.url_name)
+        except PageContent.DoesNotExist:
+            context["page_content"] = None
+        return context
+
+
+class SiteinfoAboutView(TranslatableContentView):
     template_name = 'hkm/views/siteinfo_about.html'
     url_name = 'hkm_siteinfo_about'
 
@@ -1247,7 +1258,7 @@ class SiteinfoAboutView(BaseView):
         return super(SiteinfoAboutView, self).get(request, *args, **kwargs)
 
 
-class SiteinfoPrivacyView(BaseView):
+class SiteinfoPrivacyView(TranslatableContentView):
     template_name = 'hkm/views/siteinfo_privacy.html'
     url_name = 'hkm_siteinfo_privacy'
 
@@ -1255,7 +1266,7 @@ class SiteinfoPrivacyView(BaseView):
         return super(SiteinfoPrivacyView, self).get(request, *args, **kwargs)
 
 
-class SiteinfoQAView(BaseView):
+class SiteinfoQAView(TranslatableContentView):
     template_name = 'hkm/views/siteinfo_QA.html'
     url_name = 'hkm_siteinfo_QA'
 
@@ -1263,7 +1274,7 @@ class SiteinfoQAView(BaseView):
         return super(SiteinfoQAView, self).get(request, *args, **kwargs)
 
 
-class SiteinfoTermsView(BaseView):
+class SiteinfoTermsView(TranslatableContentView):
     template_name = 'hkm/views/siteinfo_terms.html'
     url_name = 'hkm_siteinfo_terms'
 
