@@ -108,6 +108,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'djangobower.finders.BowerFinder',
 )
 
 INSTALLED_APPS = (
@@ -119,6 +120,7 @@ INSTALLED_APPS = (
     'djcelery',
     'compressor',
     'parler',
+    'djangobower',
 
     'django.contrib.sites',
     'django.contrib.auth',
@@ -127,6 +129,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'django.contrib.admin.apps.SimpleAdminConfig',
+)
+
+# Bower
+BOWER_COMPONENTS_ROOT = os.path.join(BASEDIR, '..', 'components')
+
+BOWER_INSTALLED_APPS = (
+    'ckeditor#4.7.1',
 )
 
 # Parler

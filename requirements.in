@@ -48,3 +48,4 @@ six
 supervisor
 watchdog
 django-parler
+django-bower
