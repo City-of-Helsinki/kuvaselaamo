@@ -58,7 +58,6 @@
     </div>
 
     <div class="article col-md-10">
-
       <div class="search-filter">
         {% for facet in author_facets %}
           <div class="search-filter__item" data-facet-type="author">
@@ -89,7 +88,7 @@
       <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
         {% include 'hkm/snippets/search_records_grid.html' %}
       </div>
-
+      <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block">{% trans 'Load more...' %}</button>
     </div>
 
     {% else %}

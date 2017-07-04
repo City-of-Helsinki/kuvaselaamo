@@ -879,6 +879,10 @@ msgstr "Tekijä"
 msgid "Year"
 msgstr "Vuosi"
 
+#: hkm/hkm/templates/hkm/views/search.html:92
+msgid "Load more..."
+msgstr "Lataa lisää... "
+
 #: hkm/hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"

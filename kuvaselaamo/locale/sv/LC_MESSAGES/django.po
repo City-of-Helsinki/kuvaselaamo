@@ -886,6 +886,10 @@ msgstr "Upphovsman"
 msgid "Year"
 msgstr "År"
 
+#: hkm/hkm/templates/hkm/views/search.html:92
+msgid "Load more..."
+msgstr "Ladda mer... "
+
 #: hkm/hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Tillbaka till sökningen"
