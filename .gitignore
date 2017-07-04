@@ -29,3 +29,4 @@ mediaroot/*
 node_modules
 parts
 staticroot/*
+components/*
