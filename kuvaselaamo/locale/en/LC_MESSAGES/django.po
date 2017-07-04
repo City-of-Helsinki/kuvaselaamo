@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-18 12:56+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-07-04 15:15+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
-"Language-Team: English (United States) (https://www.transifex.com/haltu/"
-"teams/69807/en_US/)\n"
+"Language-Team: English (United States) (https://www.transifex.com/haltu/teams/69807/"
+"en_US/)\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: hkm/hkm/models.py:34
 msgid "Created"
@@ -91,13 +91,11 @@ msgstr "Type"
 msgid "Creator"
 msgstr "Creator"
 
-#: hkm/hkm/models.py:150
-#: hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/hkm/models.py:150 hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Album"
 
-#: hkm/hkm/models.py:152 hkm/hkm/models.py:297 hkm/hkm/models.py:489
-#: hkm/hkm/models.py:507
+#: hkm/hkm/models.py:152 hkm/hkm/models.py:297 hkm/hkm/models.py:489 hkm/hkm/models.py:507
 msgid "Finna record ID"
 msgstr "Finna record ID"
 
@@ -116,8 +114,7 @@ msgstr "Edited preview image"
 msgid "Name"
 msgstr "Name"
 
-#: hkm/hkm/models.py:228
-#: hkm/hkm/templates/hkm/views/order_show_result.html:59
+#: hkm/hkm/models.py:228 hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
 msgstr "Price"
@@ -170,15 +167,13 @@ msgstr "First name"
 msgid "Last name"
 msgstr "Last name"
 
-#: hkm/hkm/models.py:276 hkm/hkm/models.py:493
-#: hkm/hkm/templates/hkm/emails/feedback.txt:3
+#: hkm/hkm/models.py:276 hkm/hkm/models.py:493 hkm/hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr "Email"
 
-#: hkm/hkm/models.py:278
-#: hkm/hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/hkm/models.py:278 hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Phone number"
@@ -255,8 +250,7 @@ msgstr "Product type"
 msgid "Product Name"
 msgstr "Product name"
 
-#: hkm/hkm/models.py:338
-#: hkm/hkm/templates/hkm/views/order_show_result.html:56
+#: hkm/hkm/models.py:338 hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr "Amount"
@@ -332,8 +326,7 @@ msgstr "Edited image"
 msgid "Kuvaselaamopalaute"
 msgstr "Helsinkiphotos.fi feedback"
 
-#: hkm/hkm/templates/hkm/base.html:23
-#: hkm/hkm/templates/hkm/views/index.html:33
+#: hkm/hkm/templates/hkm/base.html:23 hkm/hkm/templates/hkm/views/index.html:33
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
 msgid "Kuvaselaamo"
 msgstr "Helsinkiphotos.fi"
@@ -343,8 +336,7 @@ msgid "Kuvaselaamo demo."
 msgstr "Helsinkiphotos.fi demo."
 
 #: hkm/hkm/templates/hkm/base.html:98 hkm/hkm/templates/hkm/base.html:102
-#: hkm/hkm/templates/hkm/base.html:103
-#: hkm/hkm/templates/hkm/views/search.html:13
+#: hkm/hkm/templates/hkm/base.html:103 hkm/hkm/templates/hkm/views/search.html:13
 #: hkm/hkm/templates/hkm/views/search.html:18
 #: hkm/hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
@@ -354,14 +346,12 @@ msgstr "Search"
 msgid "Explore collections"
 msgstr "Explore albums"
 
-#: hkm/hkm/templates/hkm/base.html:107
-#: hkm/hkm/templates/hkm/views/my_collections.html:10
+#: hkm/hkm/templates/hkm/base.html:107 hkm/hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
 msgstr "My albums"
 
 #: hkm/hkm/templates/hkm/base.html:109 hkm/hkm/templates/hkm/base.html:171
-#: hkm/hkm/templates/hkm/views/info.html:9
-#: hkm/hkm/templates/hkm/views/record_feedback.html:27
+#: hkm/hkm/templates/hkm/views/info.html:9 hkm/hkm/templates/hkm/views/record_feedback.html:27
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -381,8 +371,7 @@ msgstr "Suomeksi"
 msgid "Logout"
 msgstr "Log out"
 
-#: hkm/hkm/templates/hkm/base.html:128
-#: hkm/hkm/templates/hkm/snippets/login.html:14
+#: hkm/hkm/templates/hkm/base.html:128 hkm/hkm/templates/hkm/snippets/login.html:14
 msgid "Log in"
 msgstr "Log in"
 
@@ -403,8 +392,7 @@ msgstr "Login with credentials"
 msgid "Sign up"
 msgstr "Sign up"
 
-#: hkm/hkm/templates/hkm/base.html:167
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:9
+#: hkm/hkm/templates/hkm/base.html:167 hkm/hkm/templates/hkm/views/siteinfo_about.html:9
 msgid "Information about the service"
 msgstr "Information about the service"
 
@@ -412,8 +400,7 @@ msgstr "Information about the service"
 msgid "Frequently asked questions"
 msgstr "Questions & answers"
 
-#: hkm/hkm/templates/hkm/base.html:169
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:9
+#: hkm/hkm/templates/hkm/base.html:169 hkm/hkm/templates/hkm/views/siteinfo_terms.html:9
 msgid "Terms of use"
 msgstr "Terms of use"
 
@@ -437,59 +424,48 @@ msgstr "Previous image"
 msgid "Next image"
 msgstr "Next image"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:109
-#: hkm/hkm/templates/hkm/views/record_OLD.html:29
+#: hkm/hkm/templates/hkm/base_viewer.html:109 hkm/hkm/templates/hkm/views/record_OLD.html:29
 msgid "Identification information"
 msgstr "Image details"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:110
-#: hkm/hkm/templates/hkm/views/record_OLD.html:30
+#: hkm/hkm/templates/hkm/base_viewer.html:110 hkm/hkm/templates/hkm/views/record_OLD.html:30
 msgid "Image type:"
 msgstr "Image type:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:112
-#: hkm/hkm/templates/hkm/base_viewer.html:114
+#: hkm/hkm/templates/hkm/base_viewer.html:112 hkm/hkm/templates/hkm/base_viewer.html:114
 #: hkm/hkm/templates/hkm/views/record_OLD.html:31
 msgid "Image ID:"
 msgstr "Image ID:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:117
-#: hkm/hkm/templates/hkm/views/record_OLD.html:33
+#: hkm/hkm/templates/hkm/base_viewer.html:117 hkm/hkm/templates/hkm/views/record_OLD.html:33
 msgid "Creation information"
 msgstr "Creation information"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:118
-#: hkm/hkm/templates/hkm/views/record_OLD.html:34
+#: hkm/hkm/templates/hkm/base_viewer.html:118 hkm/hkm/templates/hkm/views/record_OLD.html:34
 msgid "Photographer:"
 msgstr "Creator:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:119
-#: hkm/hkm/templates/hkm/views/record_OLD.html:35
+#: hkm/hkm/templates/hkm/base_viewer.html:119 hkm/hkm/templates/hkm/views/record_OLD.html:35
 msgid "Image pick-up year:"
 msgstr "Date:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:121
-#: hkm/hkm/templates/hkm/views/record_OLD.html:36
+#: hkm/hkm/templates/hkm/base_viewer.html:121 hkm/hkm/templates/hkm/views/record_OLD.html:36
 msgid "Property information"
 msgstr "Property information"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:122
-#: hkm/hkm/templates/hkm/views/record_OLD.html:37
+#: hkm/hkm/templates/hkm/base_viewer.html:122 hkm/hkm/templates/hkm/views/record_OLD.html:37
 msgid "Measurements:"
 msgstr "Measurements:"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:128
-#: hkm/hkm/templates/hkm/views/record_OLD.html:38
+#: hkm/hkm/templates/hkm/base_viewer.html:128 hkm/hkm/templates/hkm/views/record_OLD.html:38
 msgid "License information"
 msgstr "License"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:135
-#: hkm/hkm/templates/hkm/views/record_OLD.html:42
+#: hkm/hkm/templates/hkm/base_viewer.html:135 hkm/hkm/templates/hkm/views/record_OLD.html:42
 msgid "Related collections"
 msgstr "Related albums"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:154
-#: hkm/hkm/templates/hkm/views/record_OLD.html:61
+#: hkm/hkm/templates/hkm/base_viewer.html:154 hkm/hkm/templates/hkm/views/record_OLD.html:61
 msgid "No description"
 msgstr "No description"
 
@@ -497,10 +473,8 @@ msgstr "No description"
 msgid "Image feedback"
 msgstr "Send feedback about the image"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:172
-#: hkm/hkm/templates/hkm/base_viewer.html:222
-#: hkm/hkm/templates/hkm/views/index.html:64
-#: hkm/hkm/templates/hkm/views/index.html:86
+#: hkm/hkm/templates/hkm/base_viewer.html:172 hkm/hkm/templates/hkm/base_viewer.html:222
+#: hkm/hkm/templates/hkm/views/index.html:64 hkm/hkm/templates/hkm/views/index.html:86
 #: hkm/hkm/templates/hkm/views/info.html:24
 #: hkm/hkm/templates/hkm/views/record_feedback.html:31
 msgid "Submit"
@@ -510,12 +484,9 @@ msgstr "Submit"
 msgid "Crop and order"
 msgstr "Crop and order"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:221
-#: hkm/hkm/templates/hkm/base_viewer.html:243
-#: hkm/hkm/templates/hkm/base_viewer.html:283
-#: hkm/hkm/templates/hkm/views/index.html:46
-#: hkm/hkm/templates/hkm/views/index.html:63
-#: hkm/hkm/templates/hkm/views/index.html:85
+#: hkm/hkm/templates/hkm/base_viewer.html:221 hkm/hkm/templates/hkm/base_viewer.html:243
+#: hkm/hkm/templates/hkm/base_viewer.html:283 hkm/hkm/templates/hkm/views/index.html:46
+#: hkm/hkm/templates/hkm/views/index.html:63 hkm/hkm/templates/hkm/views/index.html:85
 msgid "Close"
 msgstr "Close"
 
@@ -541,8 +512,7 @@ msgstr "Add to an existing album"
 msgid "Create a new collection"
 msgstr "Create a new album"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:272
-#: hkm/hkm/templates/hkm/views/index.html:82
+#: hkm/hkm/templates/hkm/base_viewer.html:272 hkm/hkm/templates/hkm/views/index.html:82
 msgid "New collection"
 msgstr "New album"
 
@@ -637,62 +607,49 @@ msgid "Back to collection"
 msgstr "Back to album"
 
 #: hkm/hkm/templates/hkm/views/collection_record.html:31
-#: hkm/hkm/templates/hkm/views/index.html:18
-#: hkm/hkm/templates/hkm/views/search_record.html:33
+#: hkm/hkm/templates/hkm/views/index.html:18 hkm/hkm/templates/hkm/views/search_record.html:33
 msgid "Left and right click to zoom."
 msgstr "Left and right click to zoom."
 
-#: hkm/hkm/templates/hkm/views/index.html:36
-#: hkm/hkm/templates/hkm/views/index.html:145
+#: hkm/hkm/templates/hkm/views/index.html:36 hkm/hkm/templates/hkm/views/index.html:145
 msgid ""
-"Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
-"Valokuvat tarjoaa Helsingin kaupunginmuseo."
+"Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. Valokuvat tarjoaa "
+"Helsingin kaupunginmuseo."
 msgstr ""
-"Welcome! You have arrived at a treasure trove of Helsinki photographs, "
-"courtesy of Helsinki City Museum."
+"Welcome! You have arrived at a treasure trove of Helsinki photographs, courtesy of Helsinki "
+"City Museum."
 
-#: hkm/hkm/templates/hkm/views/index.html:37
-#: hkm/hkm/templates/hkm/views/index.html:146
+#: hkm/hkm/templates/hkm/views/index.html:37 hkm/hkm/templates/hkm/views/index.html:146
 msgid "Täällä voit"
 msgstr "At Helsinkiphotos.fi, You can"
 
-#: hkm/hkm/templates/hkm/views/index.html:38
-#: hkm/hkm/templates/hkm/views/index.html:147
-msgid ""
-"Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
+#: hkm/hkm/templates/hkm/views/index.html:38 hkm/hkm/templates/hkm/views/index.html:147
+msgid "Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
 msgstr "- Browse or search a collection of over 40,000 photographs "
 
-#: hkm/hkm/templates/hkm/views/index.html:39
-#: hkm/hkm/templates/hkm/views/index.html:148
+#: hkm/hkm/templates/hkm/views/index.html:39 hkm/hkm/templates/hkm/views/index.html:148
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
-"- Download high resolution, print-quality images or smaller images for "
-"online use on your device – free of charge*"
+"- Download high resolution, print-quality images or smaller images for online use on your "
+"device – free of charge*"
 
-#: hkm/hkm/templates/hkm/views/index.html:40
-#: hkm/hkm/templates/hkm/views/index.html:149
+#: hkm/hkm/templates/hkm/views/index.html:40 hkm/hkm/templates/hkm/views/index.html:149
 msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
 msgstr "- Browse the museum’s curated albums"
 
-#: hkm/hkm/templates/hkm/views/index.html:41
-#: hkm/hkm/templates/hkm/views/index.html:150
+#: hkm/hkm/templates/hkm/views/index.html:41 hkm/hkm/templates/hkm/views/index.html:150
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
 msgstr "- Create your own albums and add your favorite images to them "
 
-#: hkm/hkm/templates/hkm/views/index.html:42
-#: hkm/hkm/templates/hkm/views/index.html:151
+#: hkm/hkm/templates/hkm/views/index.html:42 hkm/hkm/templates/hkm/views/index.html:151
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
-msgstr ""
-"- Order customized photographic products such as posters from the "
-"collection’s images"
+msgstr "- Order customized photographic products such as posters from the collection’s images"
 
-#: hkm/hkm/templates/hkm/views/index.html:43
-#: hkm/hkm/templates/hkm/views/index.html:153
-msgid ""
-"Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
+#: hkm/hkm/templates/hkm/views/index.html:43 hkm/hkm/templates/hkm/views/index.html:153
+msgid "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
-"*You may use the downloaded images freely as long as you credit Helsinki "
-"City Museum and the photographer."
+"*You may use the downloaded images freely as long as you credit Helsinki City Museum and "
+"the photographer."
 
 #: hkm/hkm/templates/hkm/views/index.html:76
 msgid "Add to a new collection"
@@ -710,14 +667,11 @@ msgid "Kuvan tilaaminen"
 msgstr "Ordering an image"
 
 #: hkm/hkm/templates/hkm/views/order.html:23
-msgid ""
-"Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
+msgid "Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
 msgstr "Choose your desired product and the amount of products below."
 
 #: hkm/hkm/templates/hkm/views/order.html:23
-msgid ""
-"Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon "
-"kokoa."
+msgid "Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon kokoa."
 msgstr "Crop the image by resizing the frame."
 
 #: hkm/hkm/templates/hkm/views/order.html:24
@@ -726,8 +680,7 @@ msgstr "Take note that the image quality may suffer from cropping."
 
 #: hkm/hkm/templates/hkm/views/order.html:24
 msgid "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
-msgstr ""
-"The service will notify if the image quality is below the recommended size."
+msgstr "The service will notify if the image quality is below the recommended size."
 
 #: hkm/hkm/templates/hkm/views/order.html:27
 msgid "Tuotetyyppi"
@@ -741,8 +694,7 @@ msgstr "Quality of the finished print:"
 msgid "Hinta yht."
 msgstr "Total price"
 
-#: hkm/hkm/templates/hkm/views/order.html:56
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
+#: hkm/hkm/templates/hkm/views/order.html:56 hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Incl. VAT"
 msgstr "Incl. VAT"
 
@@ -770,11 +722,9 @@ msgstr "A separate order confirmation email will be sent to you."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
-"Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
-"tietoa toimituksen etenemisestä."
-msgstr ""
-"Your order has been sent to Printmotor, who will notify you of its progress "
-"by email."
+"Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla tietoa toimituksen "
+"etenemisestä."
+msgstr "Your order has been sent to Printmotor, who will notify you of its progress by email."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
@@ -784,8 +734,8 @@ msgstr "An error has occurred in sending the order to Printmotor."
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään."
 msgstr ""
-"Please contact the Helsinkikuvia.fi administrator at kuvakokoelmat@hel.fi / "
-"tel. +358 9 3103 6497"
+"Please contact the Helsinkikuvia.fi administrator at kuvakokoelmat@hel.fi / tel. +358 9 "
+"3103 6497"
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid "Kiitos tilauksestasi."
@@ -793,12 +743,12 @@ msgstr "Thank you for your order."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:27
 msgid ""
-"Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen, kun "
-"maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, "
-"kuitenkin maksimissaan puoli tuntia."
+"Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen, kun maksutapahtuma on "
+"vahvistettu. Tähän menee tyypillisesti muutama minuutti, kuitenkin maksimissaan puoli "
+"tuntia."
 msgstr ""
-"When the payment has been confirmed, you will receive a separate "
-"confirmation email. This may take from a couple of minutes to half an hour."
+"When the payment has been confirmed, you will receive a separate confirmation email. This "
+"may take from a couple of minutes to half an hour."
 
 #: hkm/hkm/templates/hkm/views/order_show_result.html:31
 msgid "Maksun käsittelyssä tapahtui virhe."
@@ -841,8 +791,7 @@ msgstr "Summary"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:21
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
-msgstr ""
-"By pressing the Order-button, you will be redirected to the payment site."
+msgstr "By pressing the Order-button, you will be redirected to the payment site."
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:23
 #: hkm/hkm/templates/hkm/views/order_summary.html:39
@@ -854,11 +803,8 @@ msgid "Order (verb)"
 msgstr "Order"
 
 #: hkm/hkm/templates/hkm/views/order_summary.html:55
-msgid ""
-"By pressing Order (verb) you will be redirected to the secure payment "
-"service."
-msgstr ""
-"By pressing Order you will be redirected to payment service provider Bambora"
+msgid "By pressing Order (verb) you will be redirected to the secure payment service."
+msgstr "By pressing Order you will be redirected to payment service provider Bambora"
 
 #: hkm/hkm/templates/hkm/views/public_collections.html:11
 msgid "Featured collections"
@@ -885,6 +831,10 @@ msgstr "Creator"
 msgid "Year"
 msgstr "Year"
 
+#: hkm/hkm/templates/hkm/views/search.html:92
+msgid "Load more..."
+msgstr "Load more..."
+
 #: hkm/hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Back to search"
@@ -904,12 +854,11 @@ msgstr "What can I do in the Helsinkiphotos.fi service?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:23
 msgid "What can I do in the Helsinkiphotos.fi service? Answer"
 msgstr ""
-"In the Helsinkiphotos.fi service, you can search for photographs with "
-"different search words, browse albums created by the museum or create albums "
-"of your own. You can download images on your own device in high resolution, "
-"or as smaller versions that are more convenient to use online. You can also "
-"order moderately priced, customized photographic products, such as posters "
-"and postcards based on any image within the collection."
+"In the Helsinkiphotos.fi service, you can search for photographs with different search "
+"words, browse albums created by the museum or create albums of your own. You can download "
+"images on your own device in high resolution, or as smaller versions that are more "
+"convenient to use online. You can also order moderately priced, customized photographic "
+"products, such as posters and postcards based on any image within the collection."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:24
 msgid "What kind of photographs can I find in the service?"
@@ -918,9 +867,9 @@ msgstr "What kind of photographs can I find in the service?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:25
 msgid "What kind of photographs can I find in the service? Answer"
 msgstr ""
-"The Helsinkiphotos.fi service includes tens of thousands of photographs "
-"related to Helsinki from the 1840s to modern days. The photographs are from "
-"the Helsinki City Museum’s collections. "
+"The Helsinkiphotos.fi service includes tens of thousands of photographs related to Helsinki "
+"from the 1840s to modern days. The photographs are from the Helsinki City Museum’s "
+"collections. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:26
 msgid "Can I use the service in a language other than Finnish?"
@@ -929,56 +878,50 @@ msgstr "Can I use the service in a language other than Finnish?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:27
 msgid "Can I use the service in a language other than Finnish? Answer"
 msgstr ""
-"Yes, in Swedish and English. However, the descriptions and keywords of the "
-"photographs are only in Finnish, which will make searching for photographs "
-"difficult in other languages."
+"Yes, in Swedish and English. However, the descriptions and keywords of the photographs are "
+"only in Finnish, which will make searching for photographs difficult in other languages."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:28
-msgid ""
-"What will I get from creating an account in the Helsinkiphotos.fi service?"
-msgstr ""
-"What will I get from creating an account in the Helsinkiphotos.fi service?"
+msgid "What will I get from creating an account in the Helsinkiphotos.fi service?"
+msgstr "What will I get from creating an account in the Helsinkiphotos.fi service?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:29
-msgid ""
-"What will I get from creating an account in the Helsinkiphotos.fi service? "
-"Answer"
+msgid "What will I get from creating an account in the Helsinkiphotos.fi service? Answer"
 msgstr ""
-"When you log in, you can create your own albums in the service and add your "
-"own favorite images to them. "
+"When you log in, you can create your own albums in the service and add your own favorite "
+"images to them. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:30
 msgid ""
-"What do you mean by a high resolution image? How do I know what kind of an "
-"image I should download on my device?"
+"What do you mean by a high resolution image? How do I know what kind of an image I should "
+"download on my device?"
 msgstr ""
-"What do you mean by a high resolution image? How do I know what kind of an "
-"image I should download on my device?"
+"What do you mean by a high resolution image? How do I know what kind of an image I should "
+"download on my device?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:31
 msgid ""
-"What do you mean by a high resolution image? How do I know what kind of an "
-"image I should download on my device? Answer"
+"What do you mean by a high resolution image? How do I know what kind of an image I should "
+"download on my device? Answer"
 msgstr ""
-"A high resolution image can be used in high-quality print products, such as "
-"posters. Smaller resolution images are more convenient for online use. "
+"A high resolution image can be used in high-quality print products, such as posters. "
+"Smaller resolution images are more convenient for online use. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:32
 msgid ""
-"Why is sharing an image from the service so inconvenient? Why can I only buy "
-"one photographic product at a time?"
+"Why is sharing an image from the service so inconvenient? Why can I only buy one "
+"photographic product at a time?"
 msgstr ""
-"Why is sharing an image from the service so inconvenient? Why can I only buy "
-"one photographic product at a time?"
+"Why is sharing an image from the service so inconvenient? Why can I only buy one "
+"photographic product at a time?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:33
 msgid ""
-"Why is sharing an image from the service so inconvenient? Why can I only buy "
-"one photographic product at a time? Answer"
+"Why is sharing an image from the service so inconvenient? Why can I only buy one "
+"photographic product at a time? Answer"
 msgstr ""
-"We are continuously developing the service. The shopping basket "
-"functionality and click-to-share on social media did not make it to our "
-"first version but they are on our to-do list!"
+"We are continuously developing the service. The shopping basket functionality and click-to-"
+"share on social media did not make it to our first version but they are on our to-do list!"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:35
 msgid "Ordering photographic products"
@@ -991,22 +934,18 @@ msgstr "Where are the photographic products made?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:38
 msgid "Where are the photographic products made? Answer"
 msgstr ""
-"The photographic products are made and delivered by our partner Printmotor, "
-"a digital printing house operating in Herttoniemi, Helsinki."
+"The photographic products are made and delivered by our partner Printmotor, a digital "
+"printing house operating in Herttoniemi, Helsinki."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:39
-msgid ""
-"I have a problem when ordering a photographic product, who should I contact?"
-msgstr ""
-"I have a problem when ordering a photographic product, who should I contact?"
+msgid "I have a problem when ordering a photographic product, who should I contact?"
+msgstr "I have a problem when ordering a photographic product, who should I contact?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:40
-msgid ""
-"I have a problem when ordering a photographic product, who should I contact? "
-"Answer"
+msgid "I have a problem when ordering a photographic product, who should I contact? Answer"
 msgstr ""
-"You can contact kuvakokoelmat@hel.fi or +358 (0)9 3103 6497 and we will help "
-"solve your issue."
+"You can contact kuvakokoelmat@hel.fi or +358 (0)9 3103 6497 and we will help solve your "
+"issue."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:41
 msgid "How soon will my product be delivered after ordering?"
@@ -1015,11 +954,10 @@ msgstr "How soon will my product be delivered after ordering?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:42
 msgid "How soon will my product be delivered after ordering? Answer"
 msgstr ""
-"Usually the photographic products are made and sent out within 48 hours of "
-"the order (on weekdays). The delivery times vary between countries: Finland "
-"and the rest of Europe 5–7 days, North America 7–10 days, other countries 10–"
-"14 days. Please note that when ordering products from outside of the EU, the "
-"delivery may be held up at customs for additional days."
+"Usually the photographic products are made and sent out within 48 hours of the order (on "
+"weekdays). The delivery times vary between countries: Finland and the rest of Europe 5–7 "
+"days, North America 7–10 days, other countries 10–14 days. Please note that when ordering "
+"products from outside of the EU, the delivery may be held up at customs for additional days."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:43
 msgid "On what kind of paper are the photographic products printed?"
@@ -1028,9 +966,8 @@ msgstr "On what kind of paper are the photographic products printed?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:44
 msgid "On what kind of paper are the photographic products printed? Answer"
 msgstr ""
-"Photographs of the size 20x30 and 30x40 are printed on high-quality 240 g "
-"semi-glossy paper. The 50x70 posters are printed on high-quality 180 g matte "
-"paper."
+"Photographs of the size 20x30 and 30x40 are printed on high-quality 240 g semi-glossy "
+"paper. The 50x70 posters are printed on high-quality 180 g matte paper."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:46
 msgid "Using the photographs"
@@ -1043,9 +980,8 @@ msgstr "How much does it cost to download or use the images?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:49
 msgid "How much does it cost to download or use the images? Answer"
 msgstr ""
-"Downloading and using the images is free. You can also order photographic "
-"products, such as posters, directly from the Helsinkiphotos.fi service. They "
-"are subject to charge."
+"Downloading and using the images is free. You can also order photographic products, such as "
+"posters, directly from the Helsinkiphotos.fi service. They are subject to charge."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:50
 msgid "What can I do with the photographs I find from the service?"
@@ -1054,51 +990,44 @@ msgstr "What can I do with the photographs I find from the service?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:51
 msgid "What can I do with the photographs I find from the service? Answer"
 msgstr ""
-"Almost anything! As long as you remember to credit the photographer and "
-"Helsinki City Museum in connection with the photograph, you can use it in a "
-"variety of ways. You can share them on social media or use them on your "
-"website and in different applications. You can also freely use the "
-"photographs in your magazines, gift products or as posters or even "
-"wallpaper. The high level of detail in the images allows for research and "
-"teaching use. Commercial use of the images is allowed within certain "
-"restrictions. "
+"Almost anything! As long as you remember to credit the photographer and Helsinki City "
+"Museum in connection with the photograph, you can use it in a variety of ways. You can "
+"share them on social media or use them on your website and in different applications. You "
+"can also freely use the photographs in your magazines, gift products or as posters or even "
+"wallpaper. The high level of detail in the images allows for research and teaching use. "
+"Commercial use of the images is allowed within certain restrictions. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:52
 msgid ""
-"How do I mention the Helsinki City Museum and the photographer’s name in "
-"connection with the photograph?"
+"How do I mention the Helsinki City Museum and the photographer’s name in connection with "
+"the photograph?"
 msgstr ""
-"How do I mention the Helsinki City Museum and the photographer’s name in "
-"connection with the photograph?"
+"How do I mention the Helsinki City Museum and the photographer’s name in connection with "
+"the photograph?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:53
 msgid ""
-"How do I mention the Helsinki City Museum and the photographer’s name in "
-"connection with the photograph? Answer"
+"How do I mention the Helsinki City Museum and the photographer’s name in connection with "
+"the photograph? Answer"
 msgstr ""
-"Here’s one way of doing it: 'Photo: Helsinki City Museum / Name of the "
-"photographer.' If the photographer’s name isn’t mentioned in the image data, "
-"you can simply credit Helsinki City Museum. On Twitter, for instance, it’s "
-"enough to mention @kaupunginmuseo / name of the photographer."
+"Here’s one way of doing it: 'Photo: Helsinki City Museum / Name of the photographer.' If "
+"the photographer’s name isn’t mentioned in the image data, you can simply credit Helsinki "
+"City Museum. On Twitter, for instance, it’s enough to mention @kaupunginmuseo / name of the "
+"photographer."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:54
 msgid "Do copyright or the Personal Data Act limit publishing the photographs?"
-msgstr ""
-"Do copyright or the Personal Data Act limit publishing the photographs?"
+msgstr "Do copyright or the Personal Data Act limit publishing the photographs?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:55
-msgid ""
-"Do copyright or the Personal Data Act limit publishing the photographs? "
-"Answer"
+msgid "Do copyright or the Personal Data Act limit publishing the photographs? Answer"
 msgstr ""
-"Copyright, the Personal Data Act and Protection of Privacy are taken into "
-"consideration when publishing the photographs. In the service, we only "
-"publish photographs with copyright agreed upon with the Helsinki City Museum "
-"or photographs that are so old that the copyright restrictions no longer "
-"apply to them. In addition, certain themes are thoroughly assessed before "
-"publishing the photographs online. These themes include photographs of "
-"children, nudity or photographs revealing for example private political "
-"opinions. "
+"Copyright, the Personal Data Act and Protection of Privacy are taken into consideration "
+"when publishing the photographs. In the service, we only publish photographs with copyright "
+"agreed upon with the Helsinki City Museum or photographs that are so old that the copyright "
+"restrictions no longer apply to them. In addition, certain themes are thoroughly assessed "
+"before publishing the photographs online. These themes include photographs of children, "
+"nudity or photographs revealing for example private political opinions. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:56
 msgid "Are there any restrictions on the commercial use of the images?"
@@ -1107,200 +1036,181 @@ msgstr "Are there any restrictions on the commercial use of the images?"
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:57
 msgid "Are there any restrictions on the commercial use of the images? Answer"
 msgstr ""
-"Yes. For instance, it is prohibited to use portraits or other identity-"
-"depicting images in marketing and/or advertising without the person’s "
-"consent. In addition, you must always credit Helsinki City Museum and the "
-"photographer. "
+"Yes. For instance, it is prohibited to use portraits or other identity-depicting images in "
+"marketing and/or advertising without the person’s consent. In addition, you must always "
+"credit Helsinki City Museum and the photographer. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:58
 msgid ""
-"What does it mean that the photographs have been published with a Creative "
-"Commons BY 4.0 license?"
+"What does it mean that the photographs have been published with a Creative Commons BY 4.0 "
+"license?"
 msgstr ""
-"What does it mean that the photographs have been published with a Creative "
-"Commons BY 4.0 license?"
+"What does it mean that the photographs have been published with a Creative Commons BY 4.0 "
+"license?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:59
 #, fuzzy
 #| msgid ""
-#| "What does it mean that the photographs have been published with a "
-#| "Creative Commons BY 4.0 license?"
+#| "What does it mean that the photographs have been published with a Creative Commons BY "
+#| "4.0 license?"
 msgid ""
-"What does it mean that the photographs have been published with a Creative "
-"Commons BY 4.0 license? Answer"
+"What does it mean that the photographs have been published with a Creative Commons BY 4.0 "
+"license? Answer"
 msgstr ""
-"The photographs published by Helsinki City Museum in the Helsinkiphotos.fi "
-"service have been licensed with the “Creative Commons Attribution 4.0 "
-"International” or CC BY 4.0 license. In brief, it means that you may use and "
-"edit the photographs for any purpose as long as you credit the source of the "
-"photograph. The license does not remove the user’s responsibility. For "
-"instance, a person’s right to decide on the commercial use of their name, "
-"photograph or other identifiable part of their identity, privacy protection "
-"rights and moral rights may limit the use of the material."
+"The photographs published by Helsinki City Museum in the Helsinkiphotos.fi service have "
+"been licensed with the “Creative Commons Attribution 4.0 International” or CC BY 4.0 "
+"license. In brief, it means that you may use and edit the photographs for any purpose as "
+"long as you credit the source of the photograph. The license does not remove the user’s "
+"responsibility. For instance, a person’s right to decide on the commercial use of their "
+"name, photograph or other identifiable part of their identity, privacy protection rights "
+"and moral rights may limit the use of the material."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:61
 msgid "I need more information or more photographs"
 msgstr "I need more information or more photographs"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:63
-msgid ""
-"Where can I get more information about the photographs or the history of "
-"Helsinki?"
-msgstr ""
-"Where can I get more information about the photographs or the history of "
-"Helsinki?"
+msgid "Where can I get more information about the photographs or the history of Helsinki?"
+msgstr "Where can I get more information about the photographs or the history of Helsinki?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:64
 msgid ""
-"Where can I get more information about the photographs or the history of "
-"Helsinki? Answer"
+"Where can I get more information about the photographs or the history of Helsinki? Answer"
 msgstr ""
-"You can contact Helsinki City Museum’s Picture Browsery. If you would like "
-"to look at specific material or you need other photo archive services, you "
-"must book an appointment and reserve the material in advance. "
+"You can contact Helsinki City Museum’s Picture Browsery. If you would like to look at "
+"specific material or you need other photo archive services, you must book an appointment "
+"and reserve the material in advance. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:65
 msgid ""
-"What should I do if I cannot find the appropriate photograph from the "
-"Helsinkiphotos.fi service?"
+"What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi "
+"service?"
 msgstr ""
-"What should I do if I cannot find the appropriate photograph from the "
-"Helsinkiphotos.fi service?"
+"What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi "
+"service?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:65
 msgid ""
-"If the Helsinkiphotos.fi service does not have all your photographs, how can "
-"I study the rest?"
+"If the Helsinkiphotos.fi service does not have all your photographs, how can I study the "
+"rest?"
 msgstr ""
-"If the Helsinkiphotos.fi service does not have all your photographs, how can "
-"I study the rest?"
+"If the Helsinkiphotos.fi service does not have all your photographs, how can I study the "
+"rest?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:66
 msgid ""
-"What should I do if I cannot find the appropriate photograph from the "
-"Helsinkiphotos.fi service? Answer"
+"What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi "
+"service? Answer"
 msgstr ""
-"This service contains practically all of the digitized photographs of the "
-"Helsinki City Museum. More photographs are digitized constantly. Thus far, "
-"only a fraction of the photographs in the entire museum collection has been "
-"digitized. If you can’t find the right photograph from the Helsinkiphotos.fi "
-"service, you can contact Helsinki City Museum’s Picture Browsery"
+"This service contains practically all of the digitized photographs of the Helsinki City "
+"Museum. More photographs are digitized constantly. Thus far, only a fraction of the "
+"photographs in the entire museum collection has been digitized. If you can’t find the right "
+"photograph from the Helsinkiphotos.fi service, you can contact Helsinki City Museum’s "
+"Picture Browsery"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:67
 msgid ""
-"Will you add photographs that have not yet been digitised to the service "
-"upon request? Is that subject to a charge?"
+"Will you add photographs that have not yet been digitised to the service upon request? Is "
+"that subject to a charge?"
 msgstr ""
-"Will you add photographs that have not yet been digitised to the service "
-"upon request? Is that subject to a charge?"
+"Will you add photographs that have not yet been digitised to the service upon request? Is "
+"that subject to a charge?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:68
 msgid ""
-"Will you add photographs that have not yet been digitised to the service "
-"upon request? Is that subject to a charge? Answer"
+"Will you add photographs that have not yet been digitised to the service upon request? Is "
+"that subject to a charge? Answer"
 msgstr ""
-"If you need a digital version of a photograph that has not yet been "
-"digitized, you can order it from the City Museum’s Picture Browsery. We "
-"charge a fee according to the museum price list on digitized photographs. "
-"The photograph you order for digitization will possibly be available at the "
-"Helsinkiphotos.fi service with a small delay for everyone to see and use."
+"If you need a digital version of a photograph that has not yet been digitized, you can "
+"order it from the City Museum’s Picture Browsery. We charge a fee according to the museum "
+"price list on digitized photographs. The photograph you order for digitization will "
+"possibly be available at the Helsinkiphotos.fi service with a small delay for everyone to "
+"see and use."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:69
 msgid "I think there is an error in an image’s data, whom can I contact?"
 msgstr "I think there is an error in an image’s data, whom can I contact?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:70
-msgid ""
-"I think there is an error in an image’s data, whom can I contact? Answer"
+msgid "I think there is an error in an image’s data, whom can I contact? Answer"
 msgstr "You can contact Helsinki City Museum’s Picture Browsery."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:71
-msgid ""
-"Where did the City Museum get all these photographs? Whose photographs are "
-"they?"
-msgstr ""
-"Where did the City Museum get all these photographs? Whose photographs are "
-"they?"
+msgid "Where did the City Museum get all these photographs? Whose photographs are they?"
+msgstr "Where did the City Museum get all these photographs? Whose photographs are they?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:72
 msgid ""
-"Where did the City Museum get all these photographs? Whose photographs are "
-"they? Answer"
+"Where did the City Museum get all these photographs? Whose photographs are they? Answer"
 msgstr ""
-"The City Museum’s collection has almost one million photographs of Helsinki "
-"and the everyday life of its inhabitants from the 1840s until today. New "
-"photographs are added to the collection mainly as donations or are taken by "
-"photographers commissioned by the museum. The City Museum’s predecessor, the "
-"Helsinki Board of Antiquities, began accumulating the collection in 1906. "
-"Signe Brander, known for her Helsinki photography, was commissioned to "
-"record the changing city in 1907. Brander’s photographs are the foundation "
+"The City Museum’s collection has almost one million photographs of Helsinki and the "
+"everyday life of its inhabitants from the 1840s until today. New photographs are added to "
+"the collection mainly as donations or are taken by photographers commissioned by the "
+"museum. The City Museum’s predecessor, the Helsinki Board of Antiquities, began "
+"accumulating the collection in 1906. Signe Brander, known for her Helsinki photography, was "
+"commissioned to record the changing city in 1907. Brander’s photographs are the foundation "
 "of the City Museum’s photography collections."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:73
 msgid ""
-"Is the Finna service still in use? Can I still find images from Helsinki "
-"City Museum in Finna?"
+"Is the Finna service still in use? Can I still find images from Helsinki City Museum in "
+"Finna?"
 msgstr ""
-"Is the Finna service still in use? Can I still find images from Helsinki "
-"City Museum in Finna?"
+"Is the Finna service still in use? Can I still find images from Helsinki City Museum in "
+"Finna?"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_QA.html:74
 msgid ""
-"Is the Finna service still in use? Can I still find images from Helsinki "
-"City Museum in Finna? Answer"
+"Is the Finna service still in use? Can I still find images from Helsinki City Museum in "
+"Finna? Answer"
 msgstr ""
-"The photographs of Helsinki City Museum collection are still available in "
-"the national Finna service at hkm.finna.fi. In addition to photographs, you "
-"can browse the museum’s object collections, from plastic bags to hairdryers "
-"and works of art. In Finna you can also find information about the buildings "
-"of Helsinki."
+"The photographs of Helsinki City Museum collection are still available in the national "
+"Finna service at hkm.finna.fi. In addition to photographs, you can browse the museum’s "
+"object collections, from plastic bags to hairdryers and works of art. In Finna you can also "
+"find information about the buildings of Helsinki."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:20
 msgid "About the service paragraph 1"
 msgstr ""
-"Helsinkiphotos.fi is an image service that provides a user-friendly way to "
-"access the Helsinki City Museum’s vast collection of photographs. At "
-"Helsinkiphotos.fi, anyone can browse, search and download detailed, high "
-"resolution photographs suitable for print materials or lower resolution "
-"images more suitable for web and social media use."
+"Helsinkiphotos.fi is an image service that provides a user-friendly way to access the "
+"Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can "
+"browse, search and download detailed, high resolution photographs suitable for print "
+"materials or lower resolution images more suitable for web and social media use."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:21
 msgid "About the service paragraph 2"
 msgstr ""
-"The photographs in the service are published under Creative Commons BY 4.0 "
-"license. In brief, CC BY means that you may use and edit the photographs for "
-"any purpose as long as you credit the source of the photograph, in this case "
-"Helsinki City Museum and the photographer. The photographs may be used "
-"commercially, with certain restrictions. For instance, a person’s right to "
-"decide on the commercial use of their name, photograph or other identifiable "
-"part of their identity, privacy protection rights and moral rights may limit "
-"the use of the material."
+"The photographs in the service are published under Creative Commons BY 4.0 license. In "
+"brief, CC BY means that you may use and edit the photographs for any purpose as long as you "
+"credit the source of the photograph, in this case Helsinki City Museum and the "
+"photographer. The photographs may be used commercially, with certain restrictions. For "
+"instance, a person’s right to decide on the commercial use of their name, photograph or "
+"other identifiable part of their identity, privacy protection rights and moral rights may "
+"limit the use of the material."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:22
 msgid "About the service paragraph 3"
 msgstr ""
-"The Helsinkiphotos.fi service also allows users to conduct Finnish-language "
-"searches, browse curated photo albums or create their own albums by logging "
-"into the service. Helsinkiphotos.fi also has an integrated web store, where "
-"users can customize and order printed photographic products, such as posters "
-"and postcards."
+"The Helsinkiphotos.fi service also allows users to conduct Finnish-language searches, "
+"browse curated photo albums or create their own albums by logging into the service. "
+"Helsinkiphotos.fi also has an integrated web store, where users can customize and order "
+"printed photographic products, such as posters and postcards."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:23
 msgid "About the service paragraph 4"
 msgstr ""
-"Currently, the service has approximately 45,000 digitized photographs. More "
-"images are being digitized and added to the system constantly. If you need a "
-"digital image that is not currently found in the Helsinkiphotos.fi service, "
-"please contact the museum’s Picture Browsery. "
+"Currently, the service has approximately 45,000 digitized photographs. More images are "
+"being digitized and added to the system constantly. If you need a digital image that is not "
+"currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture "
+"Browsery. "
 
 #: hkm/hkm/templates/hkm/views/siteinfo_about.html:24
 msgid "About the service paragraph 5"
 msgstr ""
-"The photographs of the Helsinki City Museum collection are still available "
-"in the national Finna service at hkm.finna.fi. In addition to photographs, "
-"you can also browse other material related to Helsinki in Finna, everything "
-"from plastic bags to hairdryers and bus tickets to works of art. You can "
-"also search the history of the buildings of Helsinki."
+"The photographs of the Helsinki City Museum collection are still available in the national "
+"Finna service at hkm.finna.fi. In addition to photographs, you can also browse other "
+"material related to Helsinki in Finna, everything from plastic bags to hairdryers and bus "
+"tickets to works of art. You can also search the history of the buildings of Helsinki."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
 msgid "Handling customer data in"
@@ -1313,9 +1223,8 @@ msgstr "Privacy and register details"
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:20
 msgid "Privacy when logging in"
 msgstr ""
-"When logging in with Helsinkiphotos.fi username and password the username "
-"and password of the user are stored in the service. The information is used "
-"for the following purposes:"
+"When logging in with Helsinkiphotos.fi username and password the username and password of "
+"the user are stored in the service. The information is used for the following purposes:"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:23
 #, fuzzy
@@ -1347,22 +1256,20 @@ msgstr "Password"
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:35
 msgid "Privacy in addition"
 msgstr ""
-"In addition to the above information, Finna may store information about the "
-"user’s Finna activities. Such information includes the language of use and "
-"pictures saved in the user’s albums."
+"In addition to the above information, Finna may store information about the user’s Finna "
+"activities. Such information includes the language of use and pictures saved in the user’s "
+"albums."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:36
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:23
 msgid "Terms of use linked pages"
 msgstr ""
-"Linked pages and third party APIs such as Printmotor.io, Bambora, and Finna "
-"are subject to their respective terms of use."
+"Linked pages and third party APIs such as Printmotor.io, Bambora, and Finna are subject to "
+"their respective terms of use."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:38
-msgid ""
-"Description of the client register data file for Helsinkiphotos.fi service"
-msgstr ""
-"Description of the client register data file for Helsinkiphotos.fi service"
+msgid "Description of the client register data file for Helsinkiphotos.fi service"
+msgstr "Description of the client register data file for Helsinkiphotos.fi service"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:39
 msgid "Data file controller"
@@ -1421,12 +1328,8 @@ msgid "Reason for maintaining the data file"
 msgstr "Reason for maintaining the data file"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:54
-msgid ""
-"This register has been established to maintain the unambiguity of client "
-"identities."
-msgstr ""
-"This register has been established to maintain the unambiguity of client "
-"identities."
+msgid "This register has been established to maintain the unambiguity of client identities."
+msgstr "This register has been established to maintain the unambiguity of client identities."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:55
 msgid "Data file usage"
@@ -1434,11 +1337,11 @@ msgstr "Data file usage"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:56
 msgid ""
-"This register will be used to identify users in order to enable personalised "
-"services, such as creating albums and adding pictures in them."
+"This register will be used to identify users in order to enable personalised services, such "
+"as creating albums and adding pictures in them."
 msgstr ""
-"This register will be used to identify users in order to enable personalised "
-"services, such as creating albums and adding pictures in them."
+"This register will be used to identify users in order to enable personalised services, such "
+"as creating albums and adding pictures in them."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:57
 msgid "Data types included in the file"
@@ -1468,8 +1371,7 @@ msgstr "Principles of data security"
 msgid "The information is recorded exclusively in an electronic format."
 msgstr ""
 "The information is recorded exclusively in an electronic format. Only system "
-"administrators, authenticated by username and password, may access the "
-"information."
+"administrators, authenticated by username and password, may access the information."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:66
 msgid "Archiving period for personal information"
@@ -1477,11 +1379,11 @@ msgstr "Archiving period for personal information"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:67
 msgid ""
-"Personal information will be stored in the service until 12 months have "
-"passed from the last login."
+"Personal information will be stored in the service until 12 months have passed from the "
+"last login."
 msgstr ""
-"Personal information will be stored in the service until 12 months have "
-"passed from the last login."
+"Personal information will be stored in the service until 12 months have passed from the "
+"last login."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:68
 msgid "Right to inspect the data file"
@@ -1489,11 +1391,11 @@ msgstr "Right to inspect the data file"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:69
 msgid ""
-"Users may contact Helsinki City Museum’s Picture Archives to inspect their "
-"personal information stored on the server. See contact details above."
+"Users may contact Helsinki City Museum’s Picture Archives to inspect their personal "
+"information stored on the server. See contact details above."
 msgstr ""
-"Users may contact Helsinki City Museum’s Picture Archives to inspect their "
-"personal information stored on the server. See contact details above."
+"Users may contact Helsinki City Museum’s Picture Archives to inspect their personal "
+"information stored on the server. See contact details above."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:70
 msgid "Rectifying inaccurate information"
@@ -1501,11 +1403,11 @@ msgstr "Rectifying inaccurate information"
 
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:71
 msgid ""
-"If necessary, the user may contact Helsinki City Museum’s Picture Archives. "
-"See contact details above."
+"If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact "
+"details above."
 msgstr ""
-"If necessary, the user may contact Helsinki City Museum’s Picture Archives. "
-"See contact details above."
+"If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact "
+"details above."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:20
 msgid "The following terms and conditions apply to the use of material"
@@ -1518,14 +1420,13 @@ msgstr "Images"
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:21
 msgid "Terms of use paragraph images"
 msgstr ""
-"The photographs published by Helsinki City Museum in the Helsinkiphotos.fi "
-"service have been licensed with the “Creative Commons Attribution 4.0 "
-"International” or CC BY 4.0 license. In brief, it means that you may use and "
-"edit the photographs for any purpose as long as you credit the source of the "
-"photograph. The license does not remove the user’s responsibility. For "
-"instance, a person’s right to decide on the commercial use of their name, "
-"photograph or other identifiable part of their identity, privacy protection "
-"rights and moral rights may limit the use of the material."
+"The photographs published by Helsinki City Museum in the Helsinkiphotos.fi service have "
+"been licensed with the “Creative Commons Attribution 4.0 International” or CC BY 4.0 "
+"license. In brief, it means that you may use and edit the photographs for any purpose as "
+"long as you credit the source of the photograph. The license does not remove the user’s "
+"responsibility. For instance, a person’s right to decide on the commercial use of their "
+"name, photograph or other identifiable part of their identity, privacy protection rights "
+"and moral rights may limit the use of the material."
 
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:22
 msgid "Metadata"
@@ -1534,11 +1435,10 @@ msgstr "Metadata"
 #: hkm/hkm/templates/hkm/views/siteinfo_terms.html:22
 msgid "Terms of use paragraph metadata"
 msgstr ""
-"The metadata and descriptions presented with the search results are as a "
-"rule freely available, with the the exception of personal information such "
-"as names. For instance, a person’s right to decide on the commercial use of "
-"their name or other identifiable part of their identity and privacy "
-"protection rights may limit the use of the material."
+"The metadata and descriptions presented with the search results are as a rule freely "
+"available, with the the exception of personal information such as names. For instance, a "
+"person’s right to decide on the commercial use of their name or other identifiable part of "
+"their identity and privacy protection rights may limit the use of the material."
 
 #: hkm/hkm/views.py:1112
 msgid "Favorites"
@@ -1547,24 +1447,6 @@ msgstr "Favorites"
 #: hkm/hkm/views.py:1112
 msgid "Your favorite images are collected here"
 msgstr "Your favorite images are collected here"
-
-#~ msgid "api-poster-gloss-30x40-horizontal"
-#~ msgstr "40x30 cm, Semi-Gloss 240g"
-
-#~ msgid "30x40 Semi-Gloss"
-#~ msgstr "30x40 cm, Semi-Gloss 240g"
-
-#~ msgid "40x30 Semi-Gloss"
-#~ msgstr "40x30 cm, Semi-Gloss 240g"
-
-#~ msgid "A4 Landscape Semi-Gloss"
-#~ msgstr "A4 Landscape, Semi-Gloss 240g"
-
-#~ msgid "A4 Portrait Semi-Gloss"
-#~ msgstr "A4 Landscape, Semi-Gloss 240g"
-
-#~ msgid "api-poster-a4"
-#~ msgstr "A4 Portrait, Semi-Gloss 240g"
 
 # no_results.html
 msgid "No search results or error"
@@ -1577,20 +1459,20 @@ msgstr "Orders and Payment"
 # siteinfo_terms.html bambora payments
 msgid "Payments paragraph 1"
 msgstr ""
-"Orders are collected from the online shop selection by adding the products "
-"to the shopping basket. The order is confirmed by using the check-out functionality "
-"in the online shop to pay for the purchase. By confirming an order, you accept these "
-"terms and conditions, product pricing and shipping costs. An e-mail confirmation will "
-"be delivered in case an e-mail address is provided by the time of confirming the order. "
-"The e-mail confirmation lists the products ordered and the price breakdown."
+"Orders are collected from the online shop selection by adding the products to the shopping "
+"basket. The order is confirmed by using the check-out functionality in the online shop to "
+"pay for the purchase. By confirming an order, you accept these terms and conditions, "
+"product pricing and shipping costs. An e-mail confirmation will be delivered in case an e-"
+"mail address is provided by the time of confirming the order. The e-mail confirmation lists "
+"the products ordered and the price breakdown."
 
 # siteinfo_terms.html bambora payments
 msgid "Payments paragraph 2"
 msgstr ""
-"Bambora PayForm (Paybyway Oy, business-id FI24865594) is the payment facilitator of "
-"the online shop. The Paybyway Oy is a payment facilitator authorized by the Financial "
-"Supervisory Authority of Finland. The payment process is conducted in the online service "
-"of the Bambora. Bambora or Paybyway Oy is shown as the payment received in the bank account "
+"Bambora PayForm (Paybyway Oy, business-id FI24865594) is the payment facilitator of the "
+"online shop. The Paybyway Oy is a payment facilitator authorized by the Financial "
+"Supervisory Authority of Finland. The payment process is conducted in the online service of "
+"the Bambora. Bambora or Paybyway Oy is shown as the payment received in the bank account "
 "listing and in the invoice. Paying with Bambora is safe. All information is exchanged "
 "through secured connections. The trade happens between the online customer and the online "
 "shop. The online shop is responsible for all obligations related to the trade."
@@ -1598,8 +1480,8 @@ msgstr ""
 # siteinfo_terms.html bambora payments
 msgid "Payments paragraph 3"
 msgstr ""
-"With Bambora PayForm you can pay your order by an internet banking account "
-"and a payment card (credit/debit)."
+"With Bambora PayForm you can pay your order by an internet banking account and a payment "
+"card (credit/debit)."
 
 # siteinfo_terms.html bambora payments
 msgid "Payments contact headline"
@@ -1620,3 +1502,21 @@ msgstr "Read more about Bambora: https://www.bambora.com"
 # index.html welcome-modal
 msgid "Katso tarkemmat tiedot käyttöehdoista"
 msgstr "Read more on our Terms of Use page"
+
+#~ msgid "api-poster-gloss-30x40-horizontal"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "30x40 Semi-Gloss"
+#~ msgstr "30x40 cm, Semi-Gloss 240g"
+
+#~ msgid "40x30 Semi-Gloss"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "A4 Landscape Semi-Gloss"
+#~ msgstr "A4 Landscape, Semi-Gloss 240g"
+
+#~ msgid "A4 Portrait Semi-Gloss"
+#~ msgstr "A4 Landscape, Semi-Gloss 240g"
+
+#~ msgid "api-poster-a4"
+#~ msgstr "A4 Portrait, Semi-Gloss 240g"

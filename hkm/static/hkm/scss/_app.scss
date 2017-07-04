@@ -1713,3 +1713,32 @@ a.welcome-modal__clarification {
     font-weight: bold;
   }
 }
+
+.btn-load-more {
+  margin: 2em 0;
+  border-radius: 3px;
+  position: relative;
+}
+
+.icon-spinner {
+  display: inline-block;
+  position: absolute;
+  top: 12px;
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: 3px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 20px;
+  animation: spinner 0.35s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

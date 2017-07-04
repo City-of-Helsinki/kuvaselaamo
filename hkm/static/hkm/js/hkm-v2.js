@@ -20,7 +20,9 @@ palikka
 
   $('#login-btn').on('click', hideModal);
 
-  
+  // In addition to hiding the modal, hide the bottom green search modal 
+  // and make more space for signup to expand
+
   $('#signup-btn').on('click', function() {
     hideModal();
     hideSearchModal();
@@ -41,7 +43,7 @@ palikka
     });
   }
 
-  // Close the search modal function whenever necessary
+  // Close the search modal function whenever called
 
   function hideSearchModal() {
     $('#landing-search').fadeOut();
@@ -120,9 +122,10 @@ palikka
   var $itemGroup = $('.grid__group');
   var $items = $('.flex-images .item');
   var $maxPages = $('.grid').attr('data-pages');
+  var loadMoreButton = $('#btn-load-more');
   var page = 1;
   var loadedImageCount = 0;
-  var imageCount;
+  var imageCount = 40;
   var fetchingMoreImages = false;
 
   gridInit();
@@ -156,11 +159,12 @@ palikka
     }
   }
 
-  $window.scroll(function () { 
-    if (!fetchingMoreImages && window.innerHeight + window.pageYOffset >= $infiniteScroll.height() && $infiniteScroll.length && page < $maxPages) {
-      fetchingMoreImages = true;
-      ajaxGetPageImages();
-    }
+  // Make ajax calls to the api server on button click 
+
+  loadMoreButton.on('click', function() {
+    fetchingMoreImages = true;
+    ajaxGetPageImages();
+    $(this).append($('<i class="icon-spinner"></i>'));
   });
 
   function ajaxGetPageImages() {
@@ -175,6 +179,7 @@ palikka
       imageCount = $container.find('img').length;
       loadedImageCount = 0;
       fetchingMoreImages = false;
+      loadMoreButton.find('.icon-spinner').remove();
     });
   }
 
@@ -184,7 +189,6 @@ palikka
       gridInit();
     }
   }
-
 })
 .define('app.pop-over', ['jQuery', 'docReady'], function () {
 
