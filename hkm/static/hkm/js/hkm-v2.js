@@ -19,19 +19,19 @@ palikka
 .define('app.bootstrap', ['jQuery', 'docReady'], function () {
 
   $('#login-btn').on('click', hideModal);
-  $('#signup-btn').on('click', hideModal);
+
+  
+  $('#signup-btn').on('click', function() {
+    hideModal();
+    hideSearchModal();
+  });
+
   $('#account-dropdown').on('click', hideModal);
   $('#nav-collapse-btn').on('click', hideModal);
 
-  $('#landing-search-close').click(function() {
-    $('#landing-search').fadeOut();
-  });
-  $('.actions').click(function(){
-    $('#landing-search').fadeOut();
-  });
-  $('#zoomable-image-container').click(function(){
-    $('#landing-search').fadeOut();
-  });
+  $('#landing-search-close').on('click', hideSearchModal);
+  $('.actions').on('click', hideSearchModal);
+  $('#zoomable-image-container').on('click', hideSearchModal);
 
   function hideModal() {
     $('.modal').each(function() {
@@ -39,6 +39,12 @@ palikka
         $(this).modal('hide');
       }
     });
+  }
+
+  // Close the search modal function whenever necessary
+
+  function hideSearchModal() {
+    $('#landing-search').fadeOut();
   }
 
   $('.modal').on('shown.bs.modal', function() {
