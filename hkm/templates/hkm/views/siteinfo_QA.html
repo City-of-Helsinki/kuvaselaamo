@@ -6,7 +6,7 @@
   <div class="page-header">
     <div class="fullsize-container container">
       <div class="banner__title">
-        <h1 class="banner__h1 centered-fullwidth">{% trans 'Questions and answers' %}</h1>
+        <h1 class="banner__h1 centered-fullwidth">{{ page_content.title|safe }}</h1>
       </div>
     </div>
   </div>
@@ -16,63 +16,7 @@
 {% block content %}
 
   <div class="container-small container justified">
-
-    <h1 class="section-title">{% trans 'The use of Helsinkiphotos.fi service' %}</h1>
-
-    <p class="question">{% trans 'What can I do in the Helsinkiphotos.fi service?' %}</p>
-    <p>{% trans 'What can I do in the Helsinkiphotos.fi service? Answer' %}</p>
-    <p class="question">{% trans 'What kind of photographs can I find in the service?' %}</p>
-    <p>{% trans 'What kind of photographs can I find in the service? Answer' %}</p>
-    <p class="question">{% trans 'Can I use the service in a language other than Finnish?' %}</p>
-    <p>{% trans 'Can I use the service in a language other than Finnish? Answer' %}</p>
-    <p class="question">{% trans 'What will I get from creating an account in the Helsinkiphotos.fi service?' %}</p>
-    <p>{% trans 'What will I get from creating an account in the Helsinkiphotos.fi service? Answer' %}</p>
-    <p class="question">{% trans 'What do you mean by a high resolution image? How do I know what kind of an image I should download on my device?' %}</p>
-    <p>{% trans 'What do you mean by a high resolution image? How do I know what kind of an image I should download on my device? Answer' %}</p>
-    <p class="question">{% trans 'Why is sharing an image from the service so inconvenient? Why can I only buy one photographic product at a time?' %}</p>
-    <p>{% trans 'Why is sharing an image from the service so inconvenient? Why can I only buy one photographic product at a time? Answer' %}</p>
-
-    <h1 class="section-title">{% trans 'Ordering photographic products' %}</h1>
-
-    <p class="question">{% trans 'Where are the photographic products made?' %}</p>
-    <p>{% trans 'Where are the photographic products made? Answer' %}</p>
-    <p class="question">{% trans 'I have a problem when ordering a photographic product, who should I contact?' %}</p>
-    <p>{% trans 'I have a problem when ordering a photographic product, who should I contact? Answer' %}</p>
-    <p class="question">{% trans 'How soon will my product be delivered after ordering?' %}</p>
-    <p>{% trans 'How soon will my product be delivered after ordering? Answer' %}</p>
-    <p class="question">{% trans 'On what kind of paper are the photographic products printed?' %}</p>
-    <p>{% trans 'On what kind of paper are the photographic products printed? Answer' %}</p>
-
-    <h1 class="section-title">{% trans 'Using the photographs' %}</h1>
-
-    <p class="question">{% trans 'How much does it cost to download or use the images?' %}</p>
-    <p>{% trans 'How much does it cost to download or use the images? Answer' %}</p>
-    <p class="question">{% trans 'What can I do with the photographs I find from the service?' %}</p>
-    <p>{% trans 'What can I do with the photographs I find from the service? Answer' %}</p>
-    <p class="question">{% trans 'How do I mention the Helsinki City Museum and the photographer’s name in connection with the photograph?' %}</p>
-    <p>{% trans 'How do I mention the Helsinki City Museum and the photographer’s name in connection with the photograph? Answer' %}</p>
-    <p class="question">{% trans 'Do copyright or the Personal Data Act limit publishing the photographs?' %}</p>
-    <p>{% trans 'Do copyright or the Personal Data Act limit publishing the photographs? Answer' %}</p>
-    <p class="question">{% trans 'Are there any restrictions on the commercial use of the images?' %}</p>
-    <p>{% trans 'Are there any restrictions on the commercial use of the images? Answer' %}</p>
-    <p class="question">{% trans 'What does it mean that the photographs have been published with a Creative Commons BY 4.0 license?' %}</p>
-    <p>{% trans 'What does it mean that the photographs have been published with a Creative Commons BY 4.0 license? Answer' %}</p>
-
-    <h1 class="section-title">{% trans 'I need more information or more photographs' %}</h1>
-
-    <p class="question">{% trans 'Where can I get more information about the photographs or the history of Helsinki?' %}</p>
-    <p>{% trans 'Where can I get more information about the photographs or the history of Helsinki? Answer' %}</p>
-    <p class="question">{% trans 'What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi service?' %} {% trans 'If the Helsinkiphotos.fi service does not have all your photographs, how can I study the rest?' %}</p>
-    <p>{% trans 'What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi service? Answer' %}</p>
-    <p class="question">{% trans 'Will you add photographs that have not yet been digitised to the service upon request? Is that subject to a charge?' %}</p>
-    <p>{% trans 'Will you add photographs that have not yet been digitised to the service upon request? Is that subject to a charge? Answer' %}</p>
-    <p class="question">{% trans 'I think there is an error in an image’s data, whom can I contact?' %}</p>
-    <p>{% trans 'I think there is an error in an image’s data, whom can I contact? Answer' %}</p>
-    <p class="question">{% trans 'Where did the City Museum get all these photographs? Whose photographs are they?' %}</p>
-    <p>{% trans 'Where did the City Museum get all these photographs? Whose photographs are they? Answer' %}</p>
-    <p class="question">{% trans 'Is the Finna service still in use? Can I still find images from Helsinki City Museum in Finna?' %}</p>
-    <p>{% trans 'Is the Finna service still in use? Can I still find images from Helsinki City Museum in Finna? Answer' %}</p>
-
+    {{ page_content.content|safe }}
   </div>
 
 {% endblock %}
