@@ -523,6 +523,7 @@ color: #555 !important;
   bottom: 0px;
   width: 100%;
   height: calc(100% - 120px);
+  z-index: 100;
   background-repeat: no-repeat;
   background-position: center;
   -webkit-background-size: cover;
@@ -1104,7 +1105,7 @@ div.grid__fav.active {
   left: 0;
   width: 100%;
   bottom: 60px;
-  z-index: 10000;
+  z-index: 120;
   box-shadow: none !important;
 }
 .search-modal__dialog {
@@ -1546,7 +1547,6 @@ div.grid__fav.active {
   color: $color-darktext;
   text-decoration: none;
 }
-
 /* Crop */
 .crop__container {
   display: table;

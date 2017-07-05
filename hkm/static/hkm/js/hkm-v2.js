@@ -195,9 +195,9 @@ palikka
   $("#popover-cart").popover({
     html: true,
     toggle: 'popover',
-    container: 'body',
+    container: '#popover-cart',
     placement: 'top',
-    trigger: 'click',
+    trigger: 'hover focus',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -207,9 +207,9 @@ palikka
   $("#popover-buy").popover({
     html: true,
     toggle: 'popover',
-    container: 'body',
+    container: '#popover-buy',
     placement: 'top',
-    trigger: 'click',
+    trigger: 'hover focus',
     html: true,
     content: function() {
       return $('#popover-buy-content').html();
@@ -227,9 +227,9 @@ palikka
   $("#popover-share").popover({
     html: true,
     toggle: 'popover',
-    container: 'body',
+    container: '#popover-share',
     placement: 'top',
-    trigger: 'click',
+    trigger: 'hover focus',
     html: true,
     content: function() {
       return $('#popover-share-content').html();
@@ -239,29 +239,18 @@ palikka
   $("#popover-add").popover({
     html: true,
     toggle: 'popover',
-    container: 'body',
+    container: '#popover-add',
     placement: 'top',
-    trigger: 'click',
+    trigger: 'hover focus',
     html: true,
     content: function() {
       return $('#popover-add-content').html();
     }
   });
 
-  $('.has-popover').click(function() {
-    var clickedButton = this;
-    $('.has-popover').each(function(current) {
-      if ($(this)[0] !== clickedButton) $(this).popover('hide');
-      else {
-        $(this).popover('toggle');
-      }
-    });
-  });
-
-  $(document).on('click', '.popover', function(){
-    $(this).hide();
-  });
-
+  // $('.has-popover').on('mouseover', function() {
+  //   $('.has-popover').find('.popover').css('background', '#000');
+  // });
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
@@ -271,6 +260,7 @@ palikka
   $(document).on('click', favBtn, function() {
     postFav($(this), favBtn);
   });
+
   $(document).on('click', navFavBtn, function() {
     console.log('nav fav button clicked');
     postFav($(this), navFavBtn);
