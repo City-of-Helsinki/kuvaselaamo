@@ -487,23 +487,26 @@ class SearchView(BaseView):
         # which is technically same view as this, it only shows one image per
         # page
         if self.search_result:
+            favorite_records = None
+            if request.user.is_authenticated():
+                # Fetch all favorite records once
+                try:
+                    favorite_records = Record.objects.filter(
+                        collection__owner=request.user,
+                        collection__collection_type=Collection.TYPE_FAVORITE
+                    ).values_list("record_id", flat=True)
+                except Record.DoesNotExist:
+                    pass
+
             if not self.search_result['resultCount'] == 0:
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
                     record['index'] = p * self.search_result['limit'] + i
                     i += 1
-                    # Check also if this record is in user's favorite
-                    # collection
-                    if request.user.is_authenticated():
-                        try:
-                            favorites_collection = Collection.objects.get(
-                                owner=request.user, collection_type=Collection.TYPE_FAVORITE)
-                        except Collection.DoesNotExist:
-                            pass
-                        else:
-                            record['is_favorite'] = favorites_collection.records.filter(
-                                record_id=record['id']).exists()
+                    # Check also if this record is one of user's favorites
+                    if favorite_records:
+                        record['is_favorite'] = record['id'] in favorite_records
 
     def get_facet_result(self, search_term):
         if self.request.is_ajax():
