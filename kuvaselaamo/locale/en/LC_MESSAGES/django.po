@@ -530,6 +530,7 @@ msgid "Finnas material server is not responding"
 msgstr "Finnas material server is not responding"
 
 #: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
+#: hkm/hkm/templates/hkm/base_viewer.html:85
 msgid "Buy this as a poster"
 msgstr "Buy this as a poster"
 
@@ -1520,3 +1521,15 @@ msgstr "Read more on our Terms of Use page"
 
 #~ msgid "api-poster-a4"
 #~ msgstr "A4 Portrait, Semi-Gloss 240g"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:77
+msgid "Download picture"
+msgstr "Download picture"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:70
+msgid "Show details"
+msgstr "Show details"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:63
+msgid "Share"
+msgstr "Share"

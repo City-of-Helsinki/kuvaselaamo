@@ -60,35 +60,35 @@
             </i>
           </button>
         {% endif %}
-        <a href="#" class="has-popover actions__btn actions__btn--right" id="popover-share">
+        <button class="has-popover actions__btn actions__btn--right" id="popover-share" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
             </svg>
           </i>
-        </a>
-        <button class="actions__btn actions__btn--right" id="popover-info">
+        </button>
+        <button class="actions__btn actions__btn--right" id="popover-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
             </svg>
           </i>
         </button>
-        <a href="#" class="has-popover actions__btn actions__btn--right" id="popover-cart">
+        <button class="has-popover actions__btn actions__btn--right" id="popover-cart" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Download picture' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-download"></use>
             </svg>
           </i>
-        </a>
+        </button>
         {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
-          <a href="#" name="orderbutton" class="has-popover actions__btn actions__btn--right" id="popover-buy">
+          <button name="orderbutton" class="has-popover actions__btn actions__btn--right" id="popover-buy" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
               </svg>
             </i>
-          </a>
+          </button>
         {% endif %}
       </div>
     {% endif %}

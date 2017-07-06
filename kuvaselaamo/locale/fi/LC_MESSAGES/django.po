@@ -559,6 +559,7 @@ msgid "Finnas material server is not responding"
 msgstr "Finnan aineistopalvelin ei vastaa"
 
 #: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
+#: hkm/hkm/templates/hkm/base_viewer.html:85
 msgid "Buy this as a poster"
 msgstr "Osta tämä julisteena"
 
@@ -1611,3 +1612,15 @@ msgstr "Lue lisää Bamborasta: https://www.bambora.com"
 # index.html welcome-modal
 msgid "Katso tarkemmat tiedot käyttöehdoista"
 msgstr "Katso tarkemmat tiedot käyttöehdoista"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:77
+msgid "Download picture"
+msgstr "Lataa kuva"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:70
+msgid "Show details"
+msgstr "Näytä tarkat tiedot"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:63
+msgid "Share"
+msgstr "Jaa"

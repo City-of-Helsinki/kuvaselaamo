@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-18 12:56+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
 "Language: sv\n"
@@ -17,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: hkm/hkm/models.py:34
 msgid "Created"
@@ -90,8 +90,7 @@ msgstr "Typ"
 msgid "Creator"
 msgstr "Upphovsman"
 
-#: hkm/hkm/models.py:150
-#: hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/hkm/models.py:150 hkm/hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Album"
 
@@ -115,8 +114,7 @@ msgstr "Redigera bild i förhandsvisning"
 msgid "Name"
 msgstr "Namn"
 
-#: hkm/hkm/models.py:228
-#: hkm/hkm/templates/hkm/views/order_show_result.html:59
+#: hkm/hkm/models.py:228 hkm/hkm/templates/hkm/views/order_show_result.html:59
 #: hkm/hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
 msgstr "Pris"
@@ -178,8 +176,7 @@ msgstr "Efternamn"
 msgid "Email"
 msgstr "E-post"
 
-#: hkm/hkm/models.py:278
-#: hkm/hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/hkm/models.py:278 hkm/hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Telefonnummer"
@@ -256,8 +253,7 @@ msgstr "Produkttyp"
 msgid "Product Name"
 msgstr "Produktnamn"
 
-#: hkm/hkm/models.py:338
-#: hkm/hkm/templates/hkm/views/order_show_result.html:56
+#: hkm/hkm/models.py:338 hkm/hkm/templates/hkm/views/order_show_result.html:56
 #: hkm/hkm/templates/hkm/views/order_summary.html:44
 msgid "Amount"
 msgstr "Antal"
@@ -333,8 +329,7 @@ msgstr "Redigerad bild"
 msgid "Kuvaselaamopalaute"
 msgstr "Bildapoteksrespons"
 
-#: hkm/hkm/templates/hkm/base.html:23
-#: hkm/hkm/templates/hkm/views/index.html:33
+#: hkm/hkm/templates/hkm/base.html:23 hkm/hkm/templates/hkm/views/index.html:33
 #: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
 msgid "Kuvaselaamo"
 msgstr "Helsingforsbilder.fi"
@@ -561,6 +556,7 @@ msgid "Finnas material server is not responding"
 msgstr "Finnas materialserver svarar inte"
 
 #: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
+#: hkm/hkm/templates/hkm/base_viewer.html:85
 msgid "Buy this as a poster"
 msgstr "Köp denna bild som affisch"
 
@@ -1534,27 +1530,11 @@ msgstr "Favoriter"
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
 
-#~ msgid "api-poster-gloss-30x40-horizontal"
-#~ msgstr "40x30 cm, Semi-Gloss 240g"
-
-#~ msgid "30x40 Semi-Gloss"
-#~ msgstr "30x40 cm, Semi-Gloss 240g"
-
-#~ msgid "40x30 Semi-Gloss"
-#~ msgstr "40x30 cm, Semi-Gloss 240g"
-
-#~ msgid "A4 Landscape Semi-Gloss"
-#~ msgstr "A4 Liggande, Semi-Gloss 240g"
-
-#~ msgid "A4 Portrait Semi-Gloss"
-#~ msgstr "A4 Stående, Semi-Gloss 240g"
-
-#~ msgid "api-poster-a4"
-#~ msgstr "A4 Stående, Semi-Gloss 240g"
-
 # form_fields
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Obligatoriskt. Max 150 tecken. Endast bokstäver, nummer och symbolerna @/./+/-/_."
+msgstr ""
+"Obligatoriskt. Max 150 tecken. Endast bokstäver, nummer och symbolerna @/./"
+"+/-/_."
 
 # no_results.html
 msgid "No search results or error"
@@ -1570,29 +1550,30 @@ msgstr ""
 "För att beställa produkter, välj produkter på hemsidan och lägg dem i "
 "kundkorgen. Skicka beställningen genom att betala produkterna i webbutikens "
 "kassa. Genom att lägga din beställning godkänner du dessa leveransvillkor, "
-"produktpriser och leveranskostnader. Om du anger din e-postadress i beställningen, "
-"skickar vi dig en beställningsbekräftelse via e-post. Av beställningsbekräftelsen "
-"framgår produkterna som beställts samt priset."
+"produktpriser och leveranskostnader. Om du anger din e-postadress i "
+"beställningen, skickar vi dig en beställningsbekräftelse via e-post. Av "
+"beställningsbekräftelsen framgår produkterna som beställts samt priset."
 
 # siteinfo_terms.html bambora payments
 msgid "Payments paragraph 2"
 msgstr ""
-"Betalningar i webbutiken förmedlas av Bambora PayForm (Paybyway Oy, "
-"FO-nummer 2486559-4) som är registrerat i det av Finansinspektionen övervakade "
-"registret över betalningsinstitut. Du går till betalningen via Bamboras webbtjänst "
-"och på ditt kontoutdrag är betalningsmottagaren Bambora eller Paybyway Oy. Bambora "
-"förmedlar betalningarna till webbutiken. Betalningen är trygg, då alla uppgifter om "
-"transaktionen förmedlas via en krypterad förbindelse så att ingen utomstående instans "
-"ser dem. Köpet uppstår mellan webbutikskunden och webbutiken. Webbutiken är ansvarig "
-"för samtliga skyldigheter rörande köpet."
+"Betalningar i webbutiken förmedlas av Bambora PayForm (Paybyway Oy, FO-"
+"nummer 2486559-4) som är registrerat i det av Finansinspektionen övervakade "
+"registret över betalningsinstitut. Du går till betalningen via Bamboras "
+"webbtjänst och på ditt kontoutdrag är betalningsmottagaren Bambora eller "
+"Paybyway Oy. Bambora förmedlar betalningarna till webbutiken. Betalningen är "
+"trygg, då alla uppgifter om transaktionen förmedlas via en krypterad "
+"förbindelse så att ingen utomstående instans ser dem. Köpet uppstår mellan "
+"webbutikskunden och webbutiken. Webbutiken är ansvarig för samtliga "
+"skyldigheter rörande köpet."
 
 # siteinfo_terms.html bambora payments
 msgid "Payments paragraph 3"
 msgstr ""
-"Via PayForm kan du betala med internetbankkoder och betalkort (credit/debit). "
-"Följande betalningssätt används: Andelsbanken, Nordea, Danske Bank, Sparbanken, "
-"Aktia, Lokala andelsbanker, S-banken, Handelsbanken, Visa-, Visa Debit-, Visa Electron-, "
-"MasterCard- och Debit MasterCard-kort."
+"Via PayForm kan du betala med internetbankkoder och betalkort (credit/"
+"debit). Följande betalningssätt används: Andelsbanken, Nordea, Danske Bank, "
+"Sparbanken, Aktia, Lokala andelsbanker, S-banken, Handelsbanken, Visa-, Visa "
+"Debit-, Visa Electron-, MasterCard- och Debit MasterCard-kort."
 
 # siteinfo_terms.html bambora payments
 msgid "Payments contact headline"
@@ -1613,3 +1594,33 @@ msgstr "Läs mer om Bambora: https://www.bambora.com"
 # index.html welcome-modal
 msgid "Katso tarkemmat tiedot käyttöehdoista"
 msgstr "Läs mer om användsvillkoren"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:77
+msgid "Download picture"
+msgstr "Ladda ner"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:70
+msgid "Show details"
+msgstr "Visa detaljer"
+
+#: hkm/hkm/templates/hkm/base_viewer.html:63
+msgid "Share"
+msgstr "Dela"
+
+#~ msgid "api-poster-gloss-30x40-horizontal"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "30x40 Semi-Gloss"
+#~ msgstr "30x40 cm, Semi-Gloss 240g"
+
+#~ msgid "40x30 Semi-Gloss"
+#~ msgstr "40x30 cm, Semi-Gloss 240g"
+
+#~ msgid "A4 Landscape Semi-Gloss"
+#~ msgstr "A4 Liggande, Semi-Gloss 240g"
+
+#~ msgid "A4 Portrait Semi-Gloss"
+#~ msgstr "A4 Stående, Semi-Gloss 240g"
+
+#~ msgid "api-poster-a4"
+#~ msgstr "A4 Stående, Semi-Gloss 240g"

@@ -195,9 +195,9 @@ palikka
   $("#popover-cart").popover({
     html: true,
     toggle: 'popover',
-    container: '#popover-cart',
+    container: '.actions',
     placement: 'top',
-    trigger: 'hover focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-cart-content').html();
@@ -207,9 +207,9 @@ palikka
   $("#popover-buy").popover({
     html: true,
     toggle: 'popover',
-    container: '#popover-buy',
+    container: '.actions',
     placement: 'top',
-    trigger: 'hover focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-buy-content').html();
@@ -227,9 +227,9 @@ palikka
   $("#popover-share").popover({
     html: true,
     toggle: 'popover',
-    container: '#popover-share',
+    container: '.actions',
     placement: 'top',
-    trigger: 'hover focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-share-content').html();
@@ -239,18 +239,34 @@ palikka
   $("#popover-add").popover({
     html: true,
     toggle: 'popover',
-    container: '#popover-add',
+    container: '.actions',
     placement: 'top',
-    trigger: 'hover focus',
+    trigger: 'click',
     html: true,
     content: function() {
       return $('#popover-add-content').html();
     }
   });
 
-  // $('.has-popover').on('mouseover', function() {
-  //   $('.has-popover').find('.popover').css('background', '#000');
-  // });
+  $('.has-popover').click(function() {
+      var clickedButton = this;
+      $('.has-popover').each(function(current) {
+        if ($(this)[0] !== clickedButton) {
+          $(this).popover('hide').tooltip('hide');
+        }
+        else {
+          $(this).popover('toggle');
+        }
+      });
+      $(this).tooltip('hide');
+  });
+
+  $('.actions__btn').each(function(){
+    $(this).tooltip({
+      title: $(this).attr("tooltip-title")
+    })
+  });
+  
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
@@ -487,6 +503,10 @@ palikka
       });
       
     }
+
+    // Initialize tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
   });
   
 
