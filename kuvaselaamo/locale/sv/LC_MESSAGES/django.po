@@ -48,7 +48,7 @@ msgstr "Huvudanvändare"
 
 #: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:111
 msgid "Language"
-msgstr "Språk"
+msgstr "Suomeksi / In English"
 
 #: hkm/hkm/models.py:81
 msgid "Normal"
