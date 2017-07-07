@@ -49,7 +49,7 @@ msgstr "Is admin"
 
 #: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:111
 msgid "Language"
-msgstr "Language"
+msgstr "Suomeksi / På svenska"
 
 #: hkm/hkm/models.py:81
 msgid "Normal"

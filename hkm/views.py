@@ -429,7 +429,7 @@ class IndexView(CollectionDetailView):
         context = super(IndexView, self).get_context_data(**kwargs)
         if self.collection_record:
             context['hkm_id'] = self.collection_record.record_id
-        if 'seen_welcome_modal' in self.request.session:
+        if 'seen_welcome_modal' in self.request.session and self.request.session['seen_welcome_modal'] == True:
             context['open_popup'] = False
         else:
             self.request.session['seen_welcome_modal'] = True
@@ -1095,11 +1095,11 @@ class LanguageView(RedirectView):
             profile.language = lang
             profile.save()
         request.session[LANGUAGE_SESSION_KEY] = lang
+        self.request.session['seen_welcome_modal'] = False
         return super(LanguageView, self).get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
         return self.request.GET.get('next', '/')
-
 
 class AjaxUserFavoriteRecordView(View):
     def post(self, request, *args, **kwargs):
