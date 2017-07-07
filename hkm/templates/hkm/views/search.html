@@ -39,7 +39,7 @@
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
           <ul id="collapse-author" class="list-group panel-collapse collapse {% if author_facets %}in{% endif %}">
-            {% for author in facet_result.facets.author_facet %}
+            {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
               <li class="list-group__item list-group-item"><a href="#" class="list-group__link {% if author.value in author_facets %}active{% endif %}" data-author-value="{{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
             {% endfor %}
           </ul>
@@ -48,7 +48,7 @@
           <span class="caret"></span>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-year">{% trans 'Year' %}</a>
           <ul id="collapse-year" class="list-group panel-collapse collapse {% if date_facets %}in{% endif %}">
-            {% for date_facet in facet_result.facets.main_date_str %}
+            {% for date_facet in facet_result.facets.main_date_str|dictsort:"translated" %}
               <li class="list-group__item list-group-item"><a href="#" class="list-group__link {% if date_facet.value in date_facets %}active{% endif %}" data-date-value="{{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
             {% endfor %}
           </ul>
