@@ -88,7 +88,7 @@
       <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
         {% include 'hkm/snippets/search_records_grid.html' %}
       </div>
-      <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block">{% trans 'Load more...' %}</button>
+      <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block" data-current-page="{{ current_page }}">{% trans 'Load more...' %}</button>
     </div>
 
     {% else %}

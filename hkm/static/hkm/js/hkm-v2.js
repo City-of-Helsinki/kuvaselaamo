@@ -127,6 +127,8 @@ palikka
   var loadedImageCount = 0;
   var imageCount = 40;
   var fetchingMoreImages = false;
+  var queryParameters = {};
+  var queryString = location.search.substring(1);
 
   gridInit();
 
@@ -157,29 +159,52 @@ palikka
         rowHeight: 310
       });
     }
+    scrollToLastItem();
+  }
+
+  function scrollToLastItem() {
+
+    var itemId = localStorage.getItem("last_record_browsed") || "";
+    if(itemId.length) {
+      var $item = $("[name="+itemId+"]");
+
+      $('html, body').animate({
+        scrollTop: $item.offset().top
+      }, 1000);
+      localStorage.setItem("last_record_browsed", "");
+    }
   }
 
   // Make ajax calls to the api server on button click 
 
   loadMoreButton.on('click', function() {
     fetchingMoreImages = true;
-    ajaxGetPageImages();
+    var page = parseInt($(this).data("current-page")) || 0;
+    ajaxGetPageImages(page+1);
     $(this).append($('<i class="icon-spinner"></i>'));
   });
 
-  function ajaxGetPageImages() {
-    page++;
+  function ajaxGetPageImages(page) {
     $.get({
       url: '',
-      data: 'page=' + page
+      data: 'loadallpages=0&page=' + page
     })
     .done(function(data) {
+      var re = /([^&=]+)=([^&]*)/g, m;
+
+      while (m = re.exec(queryString)) {
+        queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      }
+      queryParameters['page'] = page;
+
+      window.history.replaceState("", "", "?"+$.param(queryParameters));
       $container.append(data);
       $container.imagesLoaded().progress(onProgress);
       imageCount = $container.find('img').length;
       loadedImageCount = 0;
       fetchingMoreImages = false;
       loadMoreButton.find('.icon-spinner').remove();
+      loadMoreButton.data({'current-page': page})
     });
   }
 
