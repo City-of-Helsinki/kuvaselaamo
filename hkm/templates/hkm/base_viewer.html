@@ -169,6 +169,7 @@
             {% csrf_token %}
             {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
             <input type="hidden" name="action" value="feedback" />
+            <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
             <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
           </form>
         </div>
