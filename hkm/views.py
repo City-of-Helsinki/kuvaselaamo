@@ -480,8 +480,21 @@ class SearchView(BaseView):
             facets['author_facet'] = self.author_facets
         if self.date_facets:
             facets['main_date_str'] = self.date_facets
-        self.search_result = self.get_search_result(self.search_term, facets,
-                                                    self.page, self.page_size)
+        load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
+        records = []
+        if load_all_pages and not kwargs.get('record'):
+            # Load all pages from 0 to n with page_size * n records
+            for page in range(1, self.page+1):
+                results = self.get_search_result(self.search_term, facets, page, self.page_size)
+                self.search_result = results
+                records += results['records']
+
+            # its all one big page of records. So set page number as first page
+            self.search_result['records'] = records
+            self.search_result['page'] = 1
+        else:
+            # Load only desired page and page_size results.
+            self.search_result = self.get_search_result(self.search_term, facets, self.page, self.page_size)
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -534,6 +547,9 @@ class SearchRecordDetailView(SearchView):
 
     page_size = 1
     use_detailed_query = True
+
+    def get(self, request, *args, **kwargs):
+        return super(SearchRecordDetailView, self).get(request, record=True, *args, **kwargs)
 
     def get_facet_result(self, search_term):
         return None

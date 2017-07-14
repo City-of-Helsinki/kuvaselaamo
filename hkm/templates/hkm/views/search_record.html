@@ -50,3 +50,8 @@
       {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
     {% endif %}
   {% endblock %}
+{% block extra_js %}
+  <script>
+    localStorage.setItem("last_record_browsed", "{{ search_term }}_{{ record.index }}");
+  </script>
+{% endblock %}
