@@ -134,7 +134,9 @@ class InfoView(BaseView):
         form = forms.FeedbackForm(
             request.POST, prefix='feedback-form', user=user)
         if form.is_valid():
-            feedback = form.save()
+            feedback = form.save(commit=False)
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
+            feedback.save()
             tasks.send_feedback_notification.apply_async(
                 args=(feedback.id,), countdown=5)
             # TODO: redirect to success page?
@@ -290,6 +292,7 @@ class CollectionDetailView(BaseView):
         if form.is_valid():
             feedback = form.save(commit=False)
             feedback.record_id = self.collection_record.record_id
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
             tasks.send_feedback_notification.apply_async(
                 args=(feedback.id,), countdown=5)
@@ -416,6 +419,7 @@ class IndexView(CollectionDetailView):
             request.POST, prefix='feedback-form', user=user)
         if form.is_valid():
             feedback = form.save(commit=False)
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.record_id = self.collection_record.record_id
             feedback.save()
             tasks.send_feedback_notification.apply_async(
@@ -628,15 +632,15 @@ class SearchRecordDetailView(SearchView):
         form = forms.FeedbackForm(
             request.POST, prefix='feedback-form', user=user)
         if form.is_valid():
-            if self.search_result:
-                record = self.search_result['records'][0]
-                feedback = form.save(commit=False)
-                feedback.record_id = record['id']
-                feedback.save()
-                tasks.send_feedback_notification.apply_async(
-                    args=(feedback.id,), countdown=5)
-                # TODO: redirect to success page?
-                return redirect(reverse('hkm_record', kwargs={'finna_id': record['id']}))
+            record = request.POST.get("hkm_id", "")
+            feedback = form.save(commit=False)
+            feedback.record_id = record
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
+            feedback.save()
+            tasks.send_feedback_notification.apply_async(
+                args=(feedback.id,), countdown=5)
+            # TODO: redirect to success page?
+            return redirect(reverse('hkm_record', kwargs={'finna_id': record}))
         kwargs['feedback_form'] = form
         return self.get(request, *args, **kwargs)
 
@@ -719,6 +723,7 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
         if form.is_valid():
             feedback = form.save(commit=False)
             feedback.record_id = self.record['id']
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
             tasks.send_feedback_notification.apply_async(
                 args=(feedback.id,), countdown=5)
@@ -760,6 +765,7 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
         if form.is_valid():
             feedback = form.save(commit=False)
             feedback.record_id = self.record['id']
+            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
             tasks.send_feedback_notification.apply_async(
                 args=(feedback.id,), countdown=5)

@@ -543,6 +543,7 @@ class Feedback(BaseModel):
     content = models.TextField(verbose_name=_(u'Content'))
     is_notification_sent = models.BooleanField(
         verbose_name=_(u'Notification sent'), default=False)
+    sent_from = models.CharField(verbose_name=_(u"Sent from"), max_length=500, null=True, blank=True)
 
 
 def get_tmp_upload_path(instance, filename):
