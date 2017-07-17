@@ -5,6 +5,7 @@ import logging
 from django import template
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
+from kuvaselaamo import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -44,3 +45,6 @@ def is_favorite(record, user):
     return record.is_favorite(user)
 
 
+@register.filter
+def is_museum(user):
+    return user.groups.filter(name=settings.MUSEUM_GROUP).exists()

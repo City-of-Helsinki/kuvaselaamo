@@ -1,5 +1,5 @@
 {% load compress %}
-{% load i18n %}
+{% load i18n hkm_tags %}
 
 <html>
 <head>
@@ -103,10 +103,12 @@
         <li class="nav-search-link__mobile"><a href="{% url 'hkm_search' %}">{% trans 'Search' %}</a><li> 
         
         <li> <a href="{% url 'hkm_public_collections' %}">{% trans 'Explore collections' %}</a></li>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and not user|is_museum %}
             <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My collections' %}</a></li>
         {% endif %}
-          <li><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></li>
+        {% if not user|is_museum %}
+            <li><a href="{% url 'hkm_info' %}">{% trans 'Feedback' %}</a></li>
+        {% endif %}
         <li>
             <a href="#" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Language' %}</a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="language-dropdown">
@@ -122,12 +124,13 @@
               {% endif %}
             </ul>
           </li>
-        {% if user.is_authenticated %}
+        {% if not user|is_museum %}
+          {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}?next=/">{% trans 'Logout' %}</a></li>
-        {% else %}
+          {% else %}
             <li><a href="#" id="login-btn" data-toggle="modal" data-target="#login">{% trans 'Log in' %}</a></li>
+          {% endif %}
         {% endif %}
-        
       </ul>
     </div>
   </nav>

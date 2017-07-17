@@ -3,7 +3,7 @@
 {% load i18n %}
 
   {% block actions %}
-    {% if record %}
+    {% if record  and not user|is_museum %}
       <div class="actions">
         <button class="actions__btn actions__btn--left" id="zoom-in-btn">
           <i class="actions__icon">
