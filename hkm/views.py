@@ -1324,3 +1324,8 @@ def handler500(request):
     response.status_code = 500
     return response
 
+# Temporary addition just to enable the url for the template
+
+class BasketView(BaseView):
+    template_name = 'hkm/views/basket.html'
+    url_name = 'hkm_basket'
