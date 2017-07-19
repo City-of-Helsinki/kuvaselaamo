@@ -253,6 +253,7 @@ class PrintProduct(Product):
     height = models.IntegerField(verbose_name=_(u'Height'))
     paper_quality = models.CharField(
         verbose_name=_(u'Paper quality'), max_length=255)
+    is_museum_only = models.BooleanField(default=False, verbose_name=_(u"Museum purchase only"))
 
 
 class ProductOrderQuerySet(models.QuerySet):

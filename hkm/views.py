@@ -924,7 +924,10 @@ class OrderProductView(BaseOrderView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderProductView, self).get_context_data(**kwargs)
-        print_product_types = PrintProduct.objects.all()
+        if self.request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+            print_product_types = PrintProduct.objects.filter(is_museum_only=True)
+        else:
+            print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
         context['product_types'] = print_product_types
         context['form_page'] = 1
         if self.order.record_finna_id:
