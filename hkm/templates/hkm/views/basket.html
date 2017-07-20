@@ -1,0 +1,90 @@
+{% extends 'hkm/base.html' %}
+{% load i18n hkm_tags %}
+
+{% block body_class %}basket-page{% endblock %}
+{% block nav_class %}nav_collection{% endblock %}
+
+{% block main_content %}
+
+<div class="container-medium container-center">
+    <div class="btn-container"><a href="#" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+    <section class="basket">
+        <div class="basket-row">
+            <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+            <div class="basket-thumbnail">
+                <figure>
+                    <img src="https://finna.fi/Cover/Show?id=hkm.HKMS000005:km003orz&fullres=1&index=0" alt="">
+                    <figcaption>420mm x 315mm</figcaption>
+                </figure>
+            </div>
+
+            <div class="basket-metadata">
+                <h3>Semper pulvinar primis nisl himenaeos a.</h3>
+                <p>Habitant tortor consectetur suspendisse mauris elit parturient aliquam a magna in.</p>
+            </div>
+
+            <div class="basket-quantity">
+                <a class="btn-down" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+                <h3 class="basket-quantity-value" data-quantity>1</h3>
+                <a class="btn-up" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="basket-price basket-price-item">
+                <span class="basket-price-value" data-price>10.45</span>
+            </div>
+        </div> 
+
+        <div class="basket-row">
+            <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+            <div class="basket-thumbnail">
+                <figure>
+                    <img src="https://finna.fi/Cover/Show?id=hkm.HKMS000005:km003orz&fullres=1&index=0" alt="">
+                    <figcaption>420mm x 315mm</figcaption>
+                </figure>
+            </div>
+
+            <div class="basket-metadata">
+                <h3>Semper pulvinar primis nisl himenaeos a.</h3>
+                <p>Habitant tortor consectetur suspendisse mauris elit parturient aliquam a magna in.</p>
+            </div>
+
+            <div class="basket-quantity">
+                <a class="btn-down" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+                <h3 class="basket-quantity-value">1</h3>
+                <a class="btn-up" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="basket-price basket-price-item">
+                <span class="basket-price-value" data-price>10.45</span>
+            </div>
+        </div>
+
+        <div class="basket-footer basket-row">
+            <div class="basket-total">
+                <div class="basket-price-total"><h5>{% trans 'Shipping' %}</h5><span class="basket-price-value">0,00</span></div>
+                <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value" data-total>0</span></div>
+            </div>
+        </div>
+
+    </section>
+    <a href="#" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</a>
+
+</div>
+
+{% endblock %}
