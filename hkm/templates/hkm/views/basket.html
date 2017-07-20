@@ -29,7 +29,7 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
                     </svg>
                 </a>
-                <h3 class="basket-quantity-value">1</h3>
+                <h3 class="basket-quantity-value" data-quantity>1</h3>
                 <a class="btn-up" href="#">
                     <svg class="svg-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="basket-price basket-price-item">
-                <span class="basket-price-value">10,45</span>
+                <span class="basket-price-value" data-price>10.45</span>
             </div>
         </div> 
 
@@ -71,19 +71,19 @@
             </div>
 
             <div class="basket-price basket-price-item">
-                <span class="basket-price-value">10,45</span>
+                <span class="basket-price-value" data-price>10.45</span>
             </div>
         </div>
 
         <div class="basket-footer basket-row">
             <div class="basket-total">
                 <div class="basket-price-total"><h5>{% trans 'Shipping' %}</h5><span class="basket-price-value">0,00</span></div>
-                <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value">20,00</span></div>
+                <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value" data-total>0</span></div>
             </div>
         </div>
 
     </section>
-    <a href="#" class="btn btn-primary btn-lg pull-right">Proceed to Checkout</a>
+    <a href="#" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</a>
 
 </div>
 

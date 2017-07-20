@@ -273,7 +273,7 @@ palikka
     }
   });
 
-  $('.has-popover').click(function() {
+  $('.has-popover').on('click', function() {
       var clickedButton = this;
       $('.has-popover').each(function(current) {
         if ($(this)[0] !== clickedButton) {
@@ -291,7 +291,6 @@ palikka
       title: $(this).attr("tooltip-title")
     })
   });
-  
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
@@ -531,6 +530,80 @@ palikka
 
     // Initialize tooltips
     $('[data-toggle="tooltip"]').tooltip();
+
+    // Basket page add remove quantity 
+    
+    // Some essential caching
+    var container = $('.basket-row');
+    var price = 10.45;
+    var quantityEl = $('[data-quantity]');
+    var priceEl = $('[data-price]');
+    var totalEl = $('[data-total]');
+
+    // Adds up the row prices
+    function calculateTotal() {
+      var total = 0;
+
+      priceEl.each(function(){
+        var currentTotal = parseFloat($(this).text());
+        return total += currentTotal;
+      })
+      
+      totalEl.html(total.toFixed(2));
+    }
+
+    // Get image count and current price 
+    function getValues(selector) {
+      var count = parseInt(selector.closest(container).find(quantityEl).text(), 10);
+      var price = parseFloat(selector.closest(container).find(priceEl).text());
+
+      return {
+          count: count,
+          price: price
+      }
+    }
+
+    // Sets the innerHTML content with new values
+    function setValues(selector, count, price) {
+      selector.closest(container).find(quantityEl).html(count.toString());
+      selector.closest(container).find(priceEl).html(price.toFixed(2));
+    }
+
+    // Handles the click events
+    function handleCount(e) {
+      e.preventDefault();
+
+      if ($(this).hasClass('btn-up')) {
+        var currentCount = getValues($(this)).count;
+        var currentPrice = getValues($(this)).price;
+    
+        currentCount += 1;
+        currentPrice += price;
+
+        setValues($(this), currentCount, currentPrice);
+        calculateTotal();
+      }
+
+      else {
+        var currentCount = getValues($(this)).count;
+        var currentPrice = getValues($(this)).price;
+
+
+        if (currentCount > 1) {
+            currentCount -= 1;
+            currentPrice -= price;
+        }
+
+        setValues($(this), currentCount, currentPrice);
+        calculateTotal();
+      }
+
+    }
+
+    calculateTotal();
+
+    // Bind click event to buttons    
+    $('.btn-up, .btn-down').on('click', handleCount);
 
   });
   
