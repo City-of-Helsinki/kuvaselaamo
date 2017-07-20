@@ -5871,6 +5871,8 @@ button.close {
   .basket-page nav.navbar,
   .basket-page .site-footer {
     display: none; }
+  .basket-page .btn {
+    font-family: "brownbold", sans-serif; }
 
 a.btn-delete-row {
   position: absolute;
@@ -5958,6 +5960,16 @@ a.btn-delete-row {
     .basket-price-total span {
       color: #00C281;
       font-size: 24px; }
+
+.btn-container {
+  margin-top: 2em; }
+
+.btn-normal-green {
+  background-color: rgba(0, 194, 129, 0.1);
+  color: #00C281; }
+  .btn-normal-green:hover {
+    background-color: rgba(0, 194, 129, 0.2);
+    color: rgba(0, 194, 129, 0.8); }
 
 body {
   margin: 0;
