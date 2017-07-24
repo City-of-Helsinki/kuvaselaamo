@@ -1,0 +1,50 @@
+{% load i18n hkm_tags %}
+<div class="container-medium container-center">
+    <div class="btn-container"><a href="#" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+    <section class="basket">
+        {% for line in basket.lines %}
+        <div class="basket-row" data-lineId="{{ line.line_id }}">
+            <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+            <div class="basket-thumbnail">
+                <figure>
+                    <img src="{{ line.line_details.image_url }}" alt="">
+                    <figcaption>{{ line.product }}</figcaption>
+                </figure>
+            </div>
+
+            <div class="basket-metadata">
+                <h3>{{ line.text }}</h3>
+                <p>Habitant tortor consectetur suspendisse mauris elit parturient aliquam a magna in.</p>
+            </div>
+
+            <div class="basket-quantity">
+                <a class="btn-down" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+                <h3 class="basket-quantity-value">{{ line.quantity }}</h3>
+                <a class="btn-up" href="#">
+                    <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="basket-price basket-price-item">
+                <span class="basket-price-value">{{ line.total_price }} </span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="basket-footer basket-row">
+            <div class="basket-total">
+                <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value">{{ basket.basket_total_price }}</span></div>
+            </div>
+        </div>
+
+    </section>
+    {% if basket.lines %}
+        <a href="#" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</a>
+    {% endif %}
+</div>

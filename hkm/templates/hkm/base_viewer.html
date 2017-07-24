@@ -91,6 +91,13 @@
           </button>
         {% endif %}
       </div>
+        {% elif record.id %}
+        <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="order">
+          <button class="btn" type="submit">{% trans "Buy picture" %}</button>
+        </form>
+
     {% endif %}
   {% endblock %}
   {% block detail %}

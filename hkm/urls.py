@@ -49,15 +49,11 @@ urlpatterns = [
         restrict_for_museum(views.OrderShowResultView.as_view()), name='hkm_order_show_result'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/notify/$',
         restrict_for_museum(views.OrderPBWNotify.as_view()), name='hkm_order_pbw_notify'),
-
     url(r'^ajax/record/fav/$', restrict_for_museum(login_required()(views.AjaxUserFavoriteRecordView.as_view())),
         name='hkm_ajax_record_fav'),
     url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),
         name='hkm_ajax_crop'),
-
-    url(r'^basket/$',
-        views.BasketView.as_view(), name='hkm_basket'),
-
+    url(r'^basket/$', views.BasketView.as_view(), name='basket'),
 ]
 
 

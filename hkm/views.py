@@ -4,13 +4,16 @@ import datetime
 import logging
 import StringIO
 
+from copy import deepcopy
 from django import http
 from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response
+from django.template import RequestContext, loader
 from django.utils.translation import ugettext as _
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.views.generic import RedirectView, TemplateView, View
@@ -600,7 +603,8 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-
+        print self.request.basket
+        print self.request.basket.lines
         if self.search_result:
             record = self.search_result['records'][0]
             record['full_res_url'] = HKM.get_full_res_image_url(
@@ -847,6 +851,10 @@ class BaseOrderView(BaseView):
             #self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
             self.order = ProductOrder.objects.get(
                 order_hash=kwargs['order_id'])
+            if self.order.record_finna_id:
+                record_data = FINNA.get_record(self.order.record_finna_id)
+                self.record = record_data['records'][0]
+
         except ProductOrder.DoesNotExist:
             LOG.error('Product order does not exist for user')
             raise http.Http404()
@@ -874,6 +882,27 @@ class BaseOrderView(BaseView):
         context = super(BaseOrderView, self).get_context_data(**kwargs)
         context['order'] = self.order
         return context
+
+    def _get_cropped_full_res_file(self, record):
+        full_res_image = HKM.download_image(self.order.image_url)
+        cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
+                                         self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
+        crop_io = StringIO.StringIO()
+        cropped_image.save(crop_io, format=full_res_image.format)
+        filename = u'%s.%s' % (record['title'], full_res_image.format.lower())
+        LOG.debug('Cropped image', extra={
+                  'data': {'size': repr(cropped_image.size)}})
+        return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
+                                    crop_io.len, None)
+
+    def handle_crop(self, record):
+        crop_file = self._get_cropped_full_res_file(record)
+        tmp_image = TmpImage(record_id=self.order.record_finna_id,
+                             edited_image=crop_file)
+        tmp_image.save()
+        LOG.debug('Cropped image', extra={
+                  'data': {'url': tmp_image.edited_image.url}})
+        return tmp_image.edited_image.url
 
 
 class OrderProductView(BaseOrderView):
@@ -907,6 +936,24 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
+            if request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+                order.crop_image_url = '%s%s' % (
+                    settings.HKM_MY_DOMAIN,
+                    self.handle_crop(self.record),
+                )
+                order.save()
+                line_data = {
+                    'hkm_id': self.order.record_finna_id,
+                    'order_pk': order.pk,  # order == basketline
+                    'text': self.record["title"],
+                    'product_id': printproduct_type.pk
+                    }
+                request.basket.add_picture(
+                    line_data,
+                    order.amount
+                )
+
+                return redirect('basket')
             # TODO make template render links based on order fields, not the
             # other way around (as now)
             order.form_phase = 2
@@ -930,13 +977,11 @@ class OrderProductView(BaseOrderView):
             print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
         context['product_types'] = print_product_types
         context['form_page'] = 1
-        if self.order.record_finna_id:
-            record_data = FINNA.get_record(self.order.record_finna_id)
-            if record_data:
-                context['record'] = record_data['records'][0]
-                self.order.image_url = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
-                self.order.save()
+        if self.record:
+            context['record'] = self.record
+            self.order.image_url = HKM.get_full_res_image_url(
+                context['record']['rawData']['thumbnail'])
+            self.order.save()
 
         return context
 
@@ -986,27 +1031,6 @@ class OrderContactInformationView(BaseOrderView):
                 )
                 self.order.save()
         return context
-
-    def _get_cropped_full_res_file(self, record):
-        full_res_image = HKM.download_image(self.order.image_url)
-        cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
-                                         self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
-        crop_io = StringIO.StringIO()
-        cropped_image.save(crop_io, format=full_res_image.format)
-        filename = u'%s.%s' % (record['title'], full_res_image.format.lower())
-        LOG.debug('Cropped image', extra={
-                  'data': {'size': repr(cropped_image.size)}})
-        return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
-                                    crop_io.len, None)
-
-    def handle_crop(self, record):
-        crop_file = self._get_cropped_full_res_file(record)
-        tmp_image = TmpImage(record_id=self.order.record_finna_id,
-                             edited_image=crop_file)
-        tmp_image.save()
-        LOG.debug('Cropped image', extra={
-                  'data': {'url': tmp_image.edited_image.url}})
-        return tmp_image.edited_image.url
 
 
 class OrderSummaryView(BaseOrderView):
@@ -1310,6 +1334,57 @@ class SiteinfoTermsView(TranslatableContentView):
         return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
 
 
+class BasketView(TemplateView):
+    template_name = 'hkm/views/basket.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+            return HttpResponseForbidden()
+        return super(BasketView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(BasketView, self).get_context_data(**kwargs)
+        context['basket'] = self.request.basket
+        context['include_base'] = kwargs.get('include_base')
+        return context
+
+    def handle_add(self, request):
+        item_id = request.POST.get('record_id')
+        request.basket.add_picture({'hkm_id': item_id, 'name': 'test'}, 1)
+        return http.JsonResponse({'ok': 'ok'})
+
+    def handle_delete(self, request):
+
+        line_id = request.POST.get('line')
+        self.request.basket.delete_line(int(line_id))
+        return http.JsonResponse({"html": self.render_basket_html()})
+
+    def handle_update(self, request):
+        basket = request.basket
+        line_id = request.POST.get("line")
+        quantity = int(request.POST.get("quantity"))
+        line = basket.find_line_by_line_id(line_id)
+        if line and quantity:
+            line["quantity"] = quantity
+            basket.clean_empty_lines()
+            basket.dirty = True
+        return http.JsonResponse({"html": self.render_basket_html()})
+
+    def render_basket_html(self):
+        html = loader.render_to_string(
+            "hkm/views/_basket_content.html",
+            context=RequestContext(self.request, self.get_context_data(include_base=True))
+        )
+        return html
+
+    def post(self, request):
+        action = request.POST.get('action')
+        if action == 'update':
+            return self.handle_update(request)
+        if action == 'delete':
+            return self.handle_delete(request)
+        if action == 'add':
+            return self.handle_add(request)
 # ERROR HANDLERS
 
 def handler404(request):
@@ -1326,9 +1401,3 @@ def handler500(request):
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
-
-# Temporary addition just to enable the url for the template
-
-class BasketView(BaseView):
-    template_name = 'hkm/views/basket.html'
-    url_name = 'hkm_basket'
