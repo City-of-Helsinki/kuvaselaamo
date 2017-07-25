@@ -164,9 +164,9 @@ palikka
 
   function scrollToLastItem() {
 
-    var itemId = localStorage.getItem("last_record_browsed") || "";
-    if(itemId.length) {
-      var $item = $("[name="+itemId+"]");
+    var itemId = localStorage.getItem("last_record_browsed") || "_";
+    var $item = $("[name="+itemId+"]");
+    if($item.length) {
 
       $('html, body').animate({
         scrollTop: $item.offset().top
