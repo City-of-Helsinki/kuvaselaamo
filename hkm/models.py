@@ -375,6 +375,9 @@ class ProductOrder(BaseModel):
     is_order_successful = models.NullBooleanField(
         verbose_name=_(u'Order successful'), null=True, blank=True)
 
+    # A product order may belong to a collection of orders (multiple prints ordered at once)
+    order = models.ForeignKey('ProductOrderCollection', blank=True, null=True, related_name="product_orders")
+
     objects = ProductOrderQuerySet.as_manager()
 
     def checkout(self):
@@ -586,3 +589,13 @@ class PageContent(BaseModel, TranslatableModel):
 
     def __unicode__(self):
         return self.name
+
+
+class ProductOrderCollection(models.Model):
+    # A bundle of ProductOrder's for in museum purchases.
+    orderer_name = models.CharField(verbose_name=_(u'Orderer\'s name'), max_length=255)
+    total_price = models.DecimalField(verbose_name=_(u'Total order price'), max_digits=6, decimal_places=2)
+    sent_to_print = models.BooleanField(default=False, verbose_name=_(u'Sent to printer'))
+
+    def __unicode__(self):
+        return "%s - order" % self.orderer_name

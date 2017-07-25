@@ -1,5 +1,6 @@
 {% load i18n hkm_tags %}
-<div class="container-medium container-center">
+<form class="container-medium container-center" method="post" action="{% url "checkout" %}">
+    {% csrf_token %}
     <div class="btn-container"><a href="#" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
     <section class="basket">
         {% for line in basket.lines %}
@@ -7,7 +8,7 @@
             <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
             <div class="basket-thumbnail">
                 <figure>
-                    <img src="{{ line.line_details.image_url }}" alt="">
+                    <img src="{{ line.order.image_url }}" alt="">
                     <figcaption>{{ line.product }}</figcaption>
                 </figure>
             </div>
@@ -38,6 +39,7 @@
         {% endfor %}
 
         <div class="basket-footer basket-row">
+            <div><label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}</div>
             <div class="basket-total">
                 <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value">{{ basket.basket_total_price }}</span></div>
             </div>
@@ -45,6 +47,7 @@
 
     </section>
     {% if basket.lines %}
-        <a href="#" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</a>
+        {{ form.action }}
+        <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
     {% endif %}
-</div>
+</form>

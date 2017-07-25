@@ -22,6 +22,7 @@ admin.site.register(models.PrintProduct)
 admin.site.register(models.ProductOrder)
 admin.site.register(models.Feedback)
 admin.site.register(models.TmpImage)
+admin.site.register(models.ProductOrderCollection)
 admin.site.register(models.PageContent, PageContentAdmin)
 
 

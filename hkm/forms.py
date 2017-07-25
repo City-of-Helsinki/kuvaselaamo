@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from hkm.models import Collection, Feedback, ProductOrder
+from hkm.models import Collection, Feedback, ProductOrder, ProductOrderCollection
 
 LOG = logging.getLogger(__name__)
 
@@ -67,3 +67,11 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email']
 
+
+class ProductOrderCollectionForm(forms.ModelForm):
+    action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
+    orderer_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = ProductOrderCollection
+        fields = ['orderer_name']

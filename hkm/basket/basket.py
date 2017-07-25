@@ -97,7 +97,7 @@ class Basket(object):
                 return line
         return None
 
-    def get_line_details(self, order_id):
+    def get_order(self, order_id):
         if not order_id:
             return None
 

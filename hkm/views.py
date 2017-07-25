@@ -20,6 +20,7 @@ from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
 from hkm.finna import DEFAULT_CLIENT as FINNA
+from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
 
@@ -1344,6 +1345,7 @@ class BasketView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BasketView, self).get_context_data(**kwargs)
+        context['form'] = ProductOrderCollectionForm()
         context['basket'] = self.request.basket
         context['include_base'] = kwargs.get('include_base')
         return context
@@ -1377,7 +1379,22 @@ class BasketView(TemplateView):
         )
         return html
 
-    def post(self, request):
+    def handle_checkout(self, request):
+        form = ProductOrderCollectionForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.total_price = request.basket.basket_total_price
+            order.save()
+            for line in request.basket.lines:
+                line.order.order = order
+                line.order.save()
+            self.template_name = 'hkm/views/order_complete.html'
+            #TODO: send files to printer
+            self.request.basket.clear_all()
+
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def post(self, request, **kwargs):
         action = request.POST.get('action')
         if action == 'update':
             return self.handle_update(request)
@@ -1385,6 +1402,9 @@ class BasketView(TemplateView):
             return self.handle_delete(request)
         if action == 'add':
             return self.handle_add(request)
+        if action == 'checkout' and kwargs.get('phase') == 'checkout':
+            return self.handle_checkout(request)
+
 # ERROR HANDLERS
 
 def handler404(request):

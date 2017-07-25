@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),
         name='hkm_ajax_crop'),
     url(r'^basket/$', views.BasketView.as_view(), name='basket'),
+    url(r'^basket/checkout/$', views.BasketView.as_view(), {"phase": "checkout"}, name='checkout'),
 ]
 
 
