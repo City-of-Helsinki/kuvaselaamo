@@ -1,5 +1,9 @@
 {% load i18n hkm_tags %}
 <div class="status-page">
   <img class="status-page__image" src="/static/hkm/img/no-results-image.jpg"></img>
-  <h1 class="status-page__title">{% trans 'No search results or error' %}</h1>
+  {% if search_result %}
+    <h1 class="status-page__title">{% trans 'No search results' %}</h1>
+  {% else %}
+    <h1 class="status-page__title">{% trans 'Oops, there was an error, try again soon.' %}</h1>
+  {% endif %}
 </div>

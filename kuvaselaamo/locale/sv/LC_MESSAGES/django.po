@@ -1530,6 +1530,10 @@ msgstr "Favoriter"
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
 
+#: hkm/templates/hkm/snippets/no_results.html:7
+msgid "Oops, there was an error, try again soon."
+msgstr "Bildsökning har misslyckats. Försök igen om en stund."
+
 # form_fields
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
@@ -1537,8 +1541,8 @@ msgstr ""
 "+/-/_."
 
 # no_results.html
-msgid "No search results or error"
-msgstr "Inga sökresultat (eller ingen anslutning till bildservern)"
+msgid "No search results"
+msgstr "Inga sökresultat"
 
 # siteinfo_terms.html bambora payments
 msgid "Payments"
