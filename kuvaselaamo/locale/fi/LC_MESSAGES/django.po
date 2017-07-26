@@ -1530,6 +1530,10 @@ msgstr "Suosikit"
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
 
+#: hkm/templates/hkm/snippets/no_results.html:7
+msgid "Oops, there was an error, try again soon."
+msgstr "Kuvien haku epäonnistui. Kokeile hetken kuluttua uudestaan."
+
 #~ msgid "#error-500-paragraph"
 #~ msgstr "Palvelimella tapahtui virhe. Yritä myöhemmin uudelleen."
 
@@ -1556,8 +1560,8 @@ msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Pakollinen. Alle 150 merkkiä. Vain kirjaimia, numeroita ja merkkejä @/./+/-/_."
 
 # no_results.html
-msgid "No search results or error"
-msgstr "Ei hakutuloksia (tai yhteys kuvapalvelimeen poikki)"
+msgid "No search results"
+msgstr "Ei hakutuloksia"
 
 # siteinfo_terms.html bambora payments
 msgid "Payments"

@@ -490,12 +490,13 @@ class SearchView(BaseView):
             # Load all pages from 0 to n with page_size * n records
             for page in range(1, self.page+1):
                 results = self.get_search_result(self.search_term, facets, page, self.page_size)
-                self.search_result = results
-                records += results['records']
-
-            # its all one big page of records. So set page number as first page
-            self.search_result['records'] = records
-            self.search_result['page'] = 1
+                if results:
+                    self.search_result = results
+                    records += results.get('records', [])
+            if records:
+                # its all one big page of records. So set page number as first page
+                self.search_result['records'] = records
+                self.search_result['page'] = 1
         else:
             # Load only desired page and page_size results.
             self.search_result = self.get_search_result(self.search_term, facets, self.page, self.page_size)
