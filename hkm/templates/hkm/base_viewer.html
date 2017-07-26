@@ -95,7 +95,13 @@
         <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
           {% csrf_token %}
           <input type="hidden" name="action" value="order">
-          <button class="btn" type="submit">{% trans "Buy picture" %}</button>
+          <button name="orderbutton" class="has-popover actions__btn actions__btn pull-left" type="submit">
+            <i class="actions__icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+              </svg>
+            </i>
+          </button>
         </form>
 
     {% endif %}
