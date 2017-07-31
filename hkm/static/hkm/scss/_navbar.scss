@@ -158,9 +158,11 @@ button.navbar-toggle {
 }
 
 @media (min-width: 901px) {
-    .collapse {
-        display: block;
-        height: auto !important;
+    .navigation {
+        .collapse {
+            display: block;
+            height: auto !important;
+        }
     }
     
     .navbar-toggle {
