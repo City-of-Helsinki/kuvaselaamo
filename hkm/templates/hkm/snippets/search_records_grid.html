@@ -16,7 +16,7 @@
     </a>
     <div class="grid__meta">
       <span class="grid__meta--title">{{ record.title }}</span>
-      <span class="grid__meta--other">{% for author in record.rawData.author %}{{ author }}{% endfor %} {{ record.year }}</span>
+      <span class="grid__meta--other">{% for author in record.rawData.author %}{{ author }}{% endfor %} {{ record.rawData.era.0|default:"" }}</span>
       {% if user.is_authenticated %}
         <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}">
             <i class="grid__fav-icon">
