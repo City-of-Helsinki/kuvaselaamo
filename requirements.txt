@@ -65,6 +65,6 @@ rcssmin==1.0.6            # via django-compressor
 redis==2.10.6             # via django-redis-sessions
 requests==2.18.4
 rjsmin==1.0.12            # via django-compressor
-six==1.10.0
+six==1.11.0
 supervisor==3.3.3
 watchdog==0.8.3
