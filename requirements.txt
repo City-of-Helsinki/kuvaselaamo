@@ -60,7 +60,7 @@ python-dateutil==2.6.1    # via faker
 python-memcached==1.58
 pytz==2017.2
 pyyaml==3.12
-raven==6.2.0
+raven==6.2.1
 rcssmin==1.0.6            # via django-compressor
 redis==2.10.6             # via django-redis-sessions
 requests==2.18.4
