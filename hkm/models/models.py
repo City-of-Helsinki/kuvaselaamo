@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.fields import JSONField
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -56,6 +57,15 @@ class UserProfile(BaseModel):
     is_admin = models.BooleanField(verbose_name=_(u'Is admin'), default=False)
     language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
                                 choices=LANGUAGE_CHOICES, max_length=4)
+    is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
+    printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    albums = models.ManyToManyField(
+        "Collection",
+        help_text=u"List of albums for browsing if user is museum",
+        blank=True,
+        null=True
+    )
+
 
     def __unicode__(self):
         return self.user.username
