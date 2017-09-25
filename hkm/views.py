@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import StringIO
 import datetime
 import logging
-import StringIO
 
 import math
 from django import http
@@ -14,15 +14,15 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
-from django.utils.translation import ugettext as _
 from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
 
 LOG = logging.getLogger(__name__)
 

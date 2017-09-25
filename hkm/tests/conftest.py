@@ -1,6 +1,6 @@
 import pytest
 
-from hkm.models import Collection
+from hkm.models.models import Collection
 
 
 @pytest.fixture

@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from hkm.models import Collection, Feedback, ProductOrder, ProductOrderCollection
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection
 
 LOG = logging.getLogger(__name__)
 

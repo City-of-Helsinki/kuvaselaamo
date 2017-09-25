@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from parler.admin import TranslatableAdmin
 
-from hkm import models
+from hkm.models import models
 
 
 class PageContentAdmin(TranslatableAdmin):
