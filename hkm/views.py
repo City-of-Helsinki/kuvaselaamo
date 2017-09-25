@@ -11,7 +11,7 @@ from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
 from django.utils.translation import LANGUAGE_SESSION_KEY
@@ -941,7 +941,7 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            if request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+            if request.user.profile.is_museum:
                 order.crop_image_url = '%s%s' % (
                     settings.HKM_MY_DOMAIN,
                     self.handle_crop(self.record),
@@ -976,7 +976,7 @@ class OrderProductView(BaseOrderView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderProductView, self).get_context_data(**kwargs)
-        if self.request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+        if self.request.user.profile.is_museum:
             print_product_types = PrintProduct.objects.filter(is_museum_only=True)
         else:
             print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
@@ -1343,7 +1343,7 @@ class BasketView(TemplateView):
     template_name = 'hkm/views/basket.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+        if not request.user.profile.is_museum:
             return HttpResponseForbidden()
         return super(BasketView, self).dispatch(request, *args, **kwargs)
 

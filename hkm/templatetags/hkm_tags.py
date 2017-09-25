@@ -43,8 +43,3 @@ def display_images(collection):
 @register.filter
 def is_favorite(record, user):
     return record.is_favorite(user)
-
-
-@register.filter
-def is_museum(user):
-    return user.groups.filter(name=settings.MUSEUM_GROUP).exists()

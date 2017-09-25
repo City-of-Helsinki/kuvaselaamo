@@ -1,7 +1,7 @@
 {% load i18n hkm_tags %}
 <form class="container-medium container-center" method="post" action="{% url "checkout" %}">
     {% csrf_token %}
-    <div class="btn-container"><a href="#" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+    <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
     <section class="basket">
         {% for line in basket.lines %}
         <div class="basket-row" data-lineId="{{ line.line_id }}">

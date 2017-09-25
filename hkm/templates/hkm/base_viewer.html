@@ -24,7 +24,7 @@
   </div>
 
   {% block actions %}
-    {% if record and not user|is_museum %}
+    {% if record and not user.profile.is_museum %}
       <div class="actions">
         <button class="actions__btn actions__btn--left" id="zoom-in-btn">
           <i class="actions__icon">
@@ -174,7 +174,7 @@
           </div>
           </div> <!-- endrow -->
         {% endif %}
-        {% if not user|is_museum %}
+        {% if not user.profile.is_museum %}
         <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <form method="POST">
