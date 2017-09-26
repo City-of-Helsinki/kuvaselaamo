@@ -172,6 +172,8 @@ class PublicCollectionsView(BaseCollectionListView):
     url_name = 'hkm_public_collections'
 
     def get_collection_qs(self, request, *args, **kwargs):
+        if request.user.profile.is_museum:
+            return request.user.profile.albums.all()
         return Collection.objects.filter(is_public=True).order_by('created')
 
     def get_context_data(self, **kwargs):
