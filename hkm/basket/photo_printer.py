@@ -119,10 +119,8 @@ class PhotoPrinter(object):
         :param line: Ordered photo
         :return: Int
         """
-        # TODO: return proper value...
-        return "1111"
-        # printing_settings = line.user.profile.printing_settings
-        # return printing_settings["line.product_type.name"]
+        printer_presets = line.user.profile.get_printer_presets
+        return printer_presets["line.product_type.name"]
 
     def generate_dpof(self, photo, line, image_upload_path):
         return DPOF_TEMPLATE.format(

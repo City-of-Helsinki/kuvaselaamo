@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import json
 import logging
 import hmac
 import hashlib
@@ -59,6 +60,19 @@ class UserProfile(BaseModel):
                                 choices=LANGUAGE_CHOICES, max_length=4)
     is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
     printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    printer_username = models.CharField(verbose_name=u'Printer username', blank=True, null=True, max_length=255)
+    printer_password = models.CharField(verbose_name=u'Printer password', blank=True, null=True, max_length=255)
+    printer_presets = models.TextField(
+        verbose_name=u"Tulostimen presetit",
+        default=json.dumps({
+            'api-poster-gloss-30x40': 0,
+            'api-poster-gloss-40x30': 0,
+            'api-poster-50x70': 0,
+            'api-poster-70x50': 0,
+            'api-poster-gloss-A4-horizontal': 0,
+            'api-poster-gloss-A4': 0
+        }))
+
     albums = models.ManyToManyField(
         "Collection",
         help_text=u"List of albums for browsing if user is museum",
@@ -66,9 +80,12 @@ class UserProfile(BaseModel):
         null=True
     )
 
-
     def __unicode__(self):
         return self.user.username
+
+    @property
+    def get_printer_presets(self):
+        return json.loads(self.printer_presets)
 
 
 class CollectionQuerySet(models.QuerySet):
