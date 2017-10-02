@@ -1356,6 +1356,8 @@ class BasketView(TemplateView):
         context = super(BasketView, self).get_context_data(**kwargs)
         context['form'] = ProductOrderCollectionForm()
         context['basket'] = self.request.basket
+        context["page_content"] = kwargs.get('page_content')
+        context["order"] = kwargs.get('order')
         context['include_base'] = kwargs.get('include_base')
         return context
 
@@ -1390,6 +1392,7 @@ class BasketView(TemplateView):
 
     def handle_checkout(self, request):
         form = ProductOrderCollectionForm(request.POST)
+        page_content = None
         if form.is_valid():
             user = request.user
             order = form.save(commit=False)
@@ -1409,7 +1412,8 @@ class BasketView(TemplateView):
             self.send_notification_email(order)
 
             self.request.basket.clear_all()
-
+            page_content = PageContent.objects.get(identifier="checkout_complete")
+            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order))
         return self.render_to_response(self.get_context_data(form=form))
 
     def send_notification_email(self, order):
