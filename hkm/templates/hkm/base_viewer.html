@@ -129,7 +129,7 @@
           <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
            <h2 class="record-meta__sub-header">{% trans 'Creation information' %}</h2>
           <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
-          <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.year }}</p>
+          <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.rawData.era.0|default:"" }}</p>
 
           <h2 class="record-meta__sub-header">{% trans 'Property information' %}</h2>
           <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
