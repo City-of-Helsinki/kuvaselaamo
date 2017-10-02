@@ -4,7 +4,7 @@ import datetime
 import logging
 import StringIO
 
-from copy import deepcopy
+import math
 from django import http
 from django.conf import settings
 from django.contrib.auth import forms as django_forms
@@ -26,6 +26,7 @@ from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage,
 
 LOG = logging.getLogger(__name__)
 
+RESULTS_PER_PAGE = 40
 
 class AuthForm(django_forms.AuthenticationForm):
     username = django_forms.UsernameField(
@@ -449,7 +450,7 @@ class SearchView(BaseView):
     template_name = 'hkm/views/search.html'
     url_name = 'hkm_search'
 
-    page_size = 40
+    page_size = RESULTS_PER_PAGE
     use_detailed_query = True
 
     facet_result = None
@@ -494,12 +495,13 @@ class SearchView(BaseView):
             # Load all pages from 0 to n with page_size * n records
             for page in range(1, self.page+1):
                 results = self.get_search_result(self.search_term, facets, page, self.page_size)
-                self.search_result = results
-                records += results['records']
-
-            # its all one big page of records. So set page number as first page
-            self.search_result['records'] = records
-            self.search_result['page'] = 1
+                if results:
+                    self.search_result = results
+                    records += results.get('records', [])
+            if records:
+                # its all one big page of records. So set page number as first page
+                self.search_result['records'] = records
+                self.search_result['page'] = 1
         else:
             # Load only desired page and page_size results.
             self.search_result = self.get_search_result(self.search_term, facets, self.page, self.page_size)
@@ -626,6 +628,8 @@ class SearchRecordDetailView(SearchView):
                 owner=self.request.user).order_by('title')
         else:
             context['my_collections'] = Collection.objects.none()
+        # calculate search result page to return to
+        context['search_result_page'] = int(math.ceil(float(self.page)/RESULTS_PER_PAGE))
         return context
 
     def get_empty_forms(self, request):
