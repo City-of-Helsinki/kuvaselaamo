@@ -10,15 +10,18 @@ from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
+from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
+from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
@@ -1388,6 +1391,7 @@ class BasketView(TemplateView):
     def handle_checkout(self, request):
         form = ProductOrderCollectionForm(request.POST)
         if form.is_valid():
+            user = request.user
             order = form.save(commit=False)
             order.total_price = request.basket.basket_total_price
             order.save()
@@ -1395,10 +1399,24 @@ class BasketView(TemplateView):
                 line.order.order = order
                 line.order.save()
             self.template_name = 'hkm/views/order_complete.html'
-            #TODO: send files to printer
+            #upload images and create a printer job.
+            printer = PhotoPrinter(
+                address=user.profile.printer_ip,
+                username=user.profile.printer_username,
+                password=user.profile.printer_password,
+            )
+            printer.print_order(order)
+            self.send_notification_email(order)
+
             self.request.basket.clear_all()
 
         return self.render_to_response(self.get_context_data(form=form))
+
+    def send_notification_email(self, order):
+        subject = u"Print order# %d" % order.pk
+        order_line = order.product_orders.first()
+        message = render_to_string("hkm/emails/print_order.html", context={"order": order})
+        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
 
     def post(self, request, **kwargs):
         action = request.POST.get('action')
