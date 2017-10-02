@@ -89,7 +89,8 @@ class PhotoPrinter(object):
         for line in order.product_orders.all():
             record_data = FINNA.get_record(line.record_finna_id)
             record = record_data["records"][0]
-
+            line.record = record
+            line.save()
             #get croped img
             photo = get_cropped_full_res_file(record["title"], line)
             printing_preset = self.get_printing_preset(line)
