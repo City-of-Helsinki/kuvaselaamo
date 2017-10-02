@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #    'django.middleware.gzip.GZipMiddleware',
+    'hkm.middleware.BasketMiddleware',
 )
 
 ROOT_URLCONF = 'kuvaselaamo.urls'
@@ -203,3 +203,4 @@ HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
 
 HKM_POSTAL_FEES = 0.0
 
+MUSEUM_GROUP = 'museum'
