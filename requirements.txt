@@ -7,34 +7,36 @@
 amqp==1.4.9
 anyjson==0.3.3
 argh==0.26.2
-asn1crypto==0.22.0        # via cryptography
-babel==2.4.0
+asn1crypto==0.23.0        # via cryptography
+babel==2.5.1
 billiard==3.3.0.23
 celery==3.1.25
-cffi==1.10.0
-contextlib2==0.5.4        # via raven
-coverage==4.3.4
-cryptography==1.8.1
+certifi==2017.7.27.1      # via requests
+cffi==1.11.0
+chardet==3.0.4            # via requests
+contextlib2==0.5.5        # via raven
+coverage==4.4.1
+cryptography==2.0.3
 django-appconf==1.0.2
-django-apptemplates==1.2
+django-apptemplates==1.3
 django-bower==5.2.0
 django-celery==3.2.1
-django-compressor==2.1.1
-django-extensions==1.7.8
-django-nose==1.4.4
-django-ordered-model==1.4.1
+django-compressor==2.2
+django-extensions==1.9.1
+django-nose==1.4.5
+django-ordered-model==1.4.3
 django-parler==1.8
 django-phonenumber-field==1.3.0
-django-redis-sessions==0.5.6
+django-redis-sessions==0.6.1
 django-supervisor==0.4.0
 django-widget-tweaks==1.4.1
-django==1.10.2
-djangorestframework==3.6.2
+django==1.10.8
+djangorestframework==3.6.4
 enum34==1.1.6
-factory-boy==2.8.1
-faker==0.7.11             # via factory-boy
+factory-boy==2.9.2
+faker==0.8.4              # via factory-boy
 funcsigs==1.0.2           # via mock
-idna==2.5
+idna==2.6
 ipaddress==1.0.18
 jinja2==2.9.6
 kombu==3.0.37
@@ -44,27 +46,26 @@ meld3==1.0.2
 mock==2.0.0
 nose==1.3.7
 olefile==0.44             # via pillow
-packaging==16.8           # via cryptography
 pathlib==1.0.1
 pathtools==0.1.2
-pbr==2.1.0                # via mock
-phonenumberslite==8.4.1
-pillow==4.1.0
-psycopg2==2.7.1
-pyasn1==0.2.3
-pycparser==2.17
-pyopenssl==16.2.0
-pyparsing==2.2.0          # via packaging
+pbr==3.1.1                # via mock
+phonenumberslite==8.8.2
+pillow==4.3.0
+psycopg2==2.7.3.1
+pyasn1==0.3.6
+pycparser==2.18
+pyopenssl==17.3.0
 pyscss==1.3.5
-python-dateutil==2.6.0    # via faker
+python-dateutil==2.6.1    # via faker
 python-memcached==1.58
 pytz==2017.2
 pyyaml==3.12
-raven==6.0.0
+raven==6.2.1
 rcssmin==1.0.6            # via django-compressor
-redis==2.10.5             # via django-redis-sessions
-requests==2.13.0
+redis==2.10.6             # via django-redis-sessions
+requests==2.18.4
 rjsmin==1.0.12            # via django-compressor
-six==1.10.0
-supervisor==3.3.1
+six==1.11.0
+supervisor==3.3.3
+urllib3==1.22             # via requests
 watchdog==0.8.3
