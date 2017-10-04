@@ -15,7 +15,7 @@
 
             <div class="basket-metadata">
                 <h3>{{ line.text }}</h3>
-                <p>Habitant tortor consectetur suspendisse mauris elit parturient aliquam a magna in.</p>
+                <p>{{ line.record.rawData.description }}</p>
             </div>
 
             <div class="basket-quantity">
@@ -41,7 +41,7 @@
         <div class="basket-footer basket-row">
             <div><label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}</div>
             <div class="basket-total">
-                <div class="basket-price-total"><h5>{% trans 'Total' %}</h5><span class="basket-price-value">{{ basket.basket_total_price }}</span></div>
+                <div class="basket-price-total"><h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price }}</span></div>
             </div>
         </div>
 

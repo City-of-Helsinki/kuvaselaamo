@@ -25,15 +25,14 @@
 					<button class="btn btn-primary nav-search__btn" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
 				</form>
 			</span><li class="nav-search-link__mobile"><a href="{% url 'hkm_search' %}">{% trans 'Search' %}</a><li>
-			{% endif %}
-			{% if user.profile.is_museum %}
+			{% else %}
 			  <li>
 				<a href="{% url "basket" %}">
 					{% if request.basket.lines %}
 						{%  trans "The cart contains" %} {{ request.basket.lines|length }}
-					{% blocktrans count request.basket.lines|length as lines %}
-						photo {% plural %} photos
-					{% endblocktrans %}
+						{% blocktrans count request.basket.lines|length as lines %}
+							photo {% plural %} photos
+						{% endblocktrans %}
 					{% else %}
 						{% trans "Your cart is empty" %}
 					{% endif %}
