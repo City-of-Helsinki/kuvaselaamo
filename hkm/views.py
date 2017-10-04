@@ -175,7 +175,7 @@ class PublicCollectionsView(BaseCollectionListView):
     url_name = 'hkm_public_collections'
 
     def get_collection_qs(self, request, *args, **kwargs):
-        if request.user.profile.is_museum:
+        if request.user.is_authenticated() and request.user.profile.is_museum:
             return request.user.profile.albums.all()
         return Collection.objects.filter(is_public=True).order_by('created')
 
@@ -946,7 +946,7 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            if request.user.profile.is_museum:
+            if request.user.is_authenticated() and request.user.profile.is_museum:
                 order.crop_image_url = '%s%s' % (
                     settings.HKM_MY_DOMAIN,
                     self.handle_crop(self.record),
@@ -981,7 +981,7 @@ class OrderProductView(BaseOrderView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderProductView, self).get_context_data(**kwargs)
-        if self.request.user.profile.is_museum:
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
             print_product_types = PrintProduct.objects.filter(is_museum_only=True)
         else:
             print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
@@ -1348,7 +1348,7 @@ class BasketView(TemplateView):
     template_name = 'hkm/views/basket.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.profile.is_museum:
+        if self.request.user.is_authenticated() and not request.user.profile.is_museum:
             return HttpResponseForbidden()
         return super(BasketView, self).dispatch(request, *args, **kwargs)
 
