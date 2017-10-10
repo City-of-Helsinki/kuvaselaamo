@@ -16,7 +16,7 @@
       <div class="record-meta__col record-meta__col--left col-md-5">
         <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
-        {% if not user|is_museum %}
+        {% if not user.profile.is_museum %}
           <div class="order-steps-banner">
               {% include 'hkm/views/order_steps_menu.html' %}
           </div>
@@ -54,8 +54,8 @@
               {% endif %}
             {% endfor %}
           {% endif %}
-          </span> € {% if not user|is_museum %}+ {% trans 'Postal fees' %} {{ order.postal_fees }} €{% endif %} {% trans 'Incl. VAT' %}</p>
-          {% if user|is_museum %}
+          </span> € {% if not user.profile.is_museum %}+ {% trans 'Postal fees' %} {{ order.postal_fees }} €{% endif %} {% trans 'Incl. VAT' %}</p>
+          {% if user.profile.is_museum %}
             <button class="hkm-btn hkm-btn--default btn btn-primary" value="add-to-basket" type="submit">{% trans 'Lisää koriin' %}</button>
           {% else %}
             <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">{% trans 'Jatka' %}</button>

@@ -5,8 +5,9 @@ import logging
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
-from hkm.models import Collection, Feedback, ProductOrder, ProductOrderCollection
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection
 
 LOG = logging.getLogger(__name__)
 
@@ -70,7 +71,7 @@ class RegistrationForm(UserCreationForm):
 
 class ProductOrderCollectionForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
-    orderer_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    orderer_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
 
     class Meta:
         model = ProductOrderCollection

@@ -5,9 +5,39 @@
     <h1 class="banner__h1 centered-fullwidth">{% trans "Thank you for purchase" %}</h1>
     <div class="content">
         <div class="row">
-            <div class="container-small container">
-                <p class="center">{% trans  "TODO: futher instructions" %}</p>
+            <div class="container-medium container">
+                <h2>TILATUT TUOTTEET</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Kuvan nimi</th>
+                            <th>Hinta</th>
+                            <th>Määrä</th>
+                            <th>Yhteensä</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for line in order.product_orders.all %}
+                            <tr>
+                                <td>{{ line.record.title }}</td>
+                                <td>{{ line.unit_price|floatformat:2 }}</td>
+                                <td>{{ line.amount }}</td>
+                                <td>{{ line.total_price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="row">
+            {{ page_content.content|safe }}
+        </div>
     </div>
+{% endblock %}
+{% block extra_js %}
+    <script>
+        var delay = 60000;
+        setTimeout(function(){ window.location = '/'; }, delay);
+    </script>
 {% endblock %}

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import random
-from decimal import Decimal
 
 from hkm.basket.basket_line import BasketLine
-from hkm.models import PrintProduct, ProductOrder
+from hkm.models.models import PrintProduct, ProductOrder
 
 
 class Basket(object):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import StringIO
 import datetime
 import logging
-import StringIO
 
 import math
 from django import http
@@ -10,19 +10,22 @@ from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
-from django.utils.translation import ugettext as _
+from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
+from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
 
 LOG = logging.getLogger(__name__)
 
@@ -172,6 +175,8 @@ class PublicCollectionsView(BaseCollectionListView):
     url_name = 'hkm_public_collections'
 
     def get_collection_qs(self, request, *args, **kwargs):
+        if request.user.is_authenticated() and request.user.profile.is_museum:
+            return request.user.profile.albums.all()
         return Collection.objects.filter(is_public=True).order_by('created')
 
     def get_context_data(self, **kwargs):
@@ -941,7 +946,7 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            if request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+            if request.user.is_authenticated() and request.user.profile.is_museum:
                 order.crop_image_url = '%s%s' % (
                     settings.HKM_MY_DOMAIN,
                     self.handle_crop(self.record),
@@ -976,7 +981,7 @@ class OrderProductView(BaseOrderView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderProductView, self).get_context_data(**kwargs)
-        if self.request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
             print_product_types = PrintProduct.objects.filter(is_museum_only=True)
         else:
             print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
@@ -1343,7 +1348,7 @@ class BasketView(TemplateView):
     template_name = 'hkm/views/basket.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name=settings.MUSEUM_GROUP).exists():
+        if self.request.user.is_authenticated() and not request.user.profile.is_museum:
             return HttpResponseForbidden()
         return super(BasketView, self).dispatch(request, *args, **kwargs)
 
@@ -1351,6 +1356,8 @@ class BasketView(TemplateView):
         context = super(BasketView, self).get_context_data(**kwargs)
         context['form'] = ProductOrderCollectionForm()
         context['basket'] = self.request.basket
+        context["page_content"] = kwargs.get('page_content')
+        context["order"] = kwargs.get('order')
         context['include_base'] = kwargs.get('include_base')
         return context
 
@@ -1385,7 +1392,9 @@ class BasketView(TemplateView):
 
     def handle_checkout(self, request):
         form = ProductOrderCollectionForm(request.POST)
+        page_content = None
         if form.is_valid():
+            user = request.user
             order = form.save(commit=False)
             order.total_price = request.basket.basket_total_price
             order.save()
@@ -1393,10 +1402,25 @@ class BasketView(TemplateView):
                 line.order.order = order
                 line.order.save()
             self.template_name = 'hkm/views/order_complete.html'
-            #TODO: send files to printer
-            self.request.basket.clear_all()
+            #upload images and create a printer job.
+            printer = PhotoPrinter(
+                address=user.profile.printer_ip,
+                username=user.profile.printer_username,
+                password=user.profile.printer_password,
+            )
+            printer.print_order(order)
+            self.send_notification_email(order)
 
+            self.request.basket.clear_all()
+            page_content = PageContent.objects.get(identifier="checkout_complete")
+            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order))
         return self.render_to_response(self.get_context_data(form=form))
+
+    def send_notification_email(self, order):
+        subject = u"Print order# %d" % order.pk
+        order_line = order.product_orders.first()
+        message = render_to_string("hkm/emails/print_order.html", context={"order": order})
+        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
 
     def post(self, request, **kwargs):
         action = request.POST.get('action')

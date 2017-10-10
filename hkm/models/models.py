@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import json
 import logging
 import hmac
 import hashlib
@@ -9,6 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.fields import JSONField
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -56,9 +58,34 @@ class UserProfile(BaseModel):
     is_admin = models.BooleanField(verbose_name=_(u'Is admin'), default=False)
     language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
                                 choices=LANGUAGE_CHOICES, max_length=4)
+    is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
+    printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    printer_username = models.CharField(verbose_name=u'Printer username', blank=True, null=True, max_length=255)
+    printer_password = models.CharField(verbose_name=u'Printer password', blank=True, null=True, max_length=255)
+    printer_presets = models.TextField(
+        verbose_name=u"Tulostimen presetit",
+        default=json.dumps({
+            'api-poster-gloss-30x40': 0,
+            'api-poster-gloss-40x30': 0,
+            'api-poster-50x70': 0,
+            'api-poster-70x50': 0,
+            'api-poster-gloss-A4-horizontal': 0,
+            'api-poster-gloss-A4': 0
+        }))
+
+    albums = models.ManyToManyField(
+        "Collection",
+        help_text=u"List of albums for browsing if user is museum",
+        blank=True,
+        null=True
+    )
 
     def __unicode__(self):
         return self.user.username
+
+    @property
+    def get_printer_presets(self):
+        return json.loads(self.printer_presets)
 
 
 class CollectionQuerySet(models.QuerySet):

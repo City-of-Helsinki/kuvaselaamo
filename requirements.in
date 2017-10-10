@@ -1,3 +1,4 @@
+paramiko
 Pillow
 django==1.10.2
 amqp
