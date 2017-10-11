@@ -35,7 +35,8 @@ class Basket(object):
             'order_pk': picture['order_pk'],
             'text': picture['text'],
             'quantity': int(quantity),
-            'product_id': picture['product_id']
+            'product_id': picture['product_id'],
+            'record': picture.get('record', {})
         }
 
     def _find_line_data_for_product(self, picture_id):
