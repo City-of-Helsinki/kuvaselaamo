@@ -956,7 +956,8 @@ class OrderProductView(BaseOrderView):
                     'hkm_id': self.order.record_finna_id,
                     'order_pk': order.pk,  # order == basketline
                     'text': self.record["title"],
-                    'product_id': printproduct_type.pk
+                    'product_id': printproduct_type.pk,
+                    'record': self.record
                     }
                 request.basket.add_picture(
                     line_data,
