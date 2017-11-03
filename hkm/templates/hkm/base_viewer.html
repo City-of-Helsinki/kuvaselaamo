@@ -82,13 +82,17 @@
           </i>
         </button>
         {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
-          <button name="orderbutton" class="has-popover actions__btn actions__btn--right" id="popover-buy" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
-            <i class="actions__icon">
-              <svg class="svg-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-              </svg>
-            </i>
-          </button>
+          <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="order" />
+            <button name="orderbutton" formaction="{% url 'hkm_order_create' finna_id=record.id %}" class="actions__btn actions__btn--right" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
+              <i class="actions__icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+                </svg>
+              </i>
+            </button>
+          </form>
         {% endif %}
       </div>
         {% elif record.id %}
