@@ -1,53 +1,61 @@
-{% load i18n hkm_tags %}
-<form class="container-medium container-center" method="post" action="{% url "checkout" %}">
-    {% csrf_token %}
-    <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
-    <section class="basket">
-        {% for line in basket.lines %}
-        <div class="basket-row" data-lineId="{{ line.line_id }}">
-            <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
-            <div class="basket-thumbnail">
-                <figure>
-                    <img src="{{ line.order.image_url }}" alt="">
-                    <figcaption>{{ line.product }}</figcaption>
-                </figure>
+{% load i18n l10n hkm_tags %}
+{% if basket.lines %}
+    <form class="container-medium container-center" method="post" action="{% url "checkout" %}">
+        {% csrf_token %}
+        <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+        <section class="basket">
+            {% for line in basket.lines %}
+            <div class="basket-row" data-lineId="{{ line.line_id }}">
+                <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+                <div class="basket-thumbnail">
+                    <figure>
+                        <img src="{{ line.order.image_url }}" alt="">
+                        <figcaption>{{ line.product.get_name_display }}</figcaption>
+                    </figure>
+                </div>
+
+                <div class="basket-metadata">
+                    <h3>{{ line.text }}</h3>
+                </div>
+
+                <div class="basket-quantity" >
+                    <a class="btn-down" href="#" data-toggle="tooltip" data-placement="top" title="Vähennä">
+                        <svg class="svg-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                        </svg>
+                    </a>
+                    <h3 class="basket-quantity-value">{{ line.quantity }}</h3>
+                    <a class="btn-up" href="#" data-toggle="tooltip" data-placement="top" title="Lisää">
+                        <svg class="svg-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+                        </svg>
+                    </a>
+                    <h3 class="basket-quantity-value">{% trans "kpl" %}</h3>
+                </div>
+
+                <div class="basket-price basket-price-item">
+                    <span class="basket-price-value">{{ line.total_price|localize }} </span>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="basket-footer basket-row">
+                <div><label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}</div>
+                <div class="basket-total">
+                    <div class="basket-price-total"><h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localize }}</span></div>
+                </div>
             </div>
 
-            <div class="basket-metadata">
-                <h3>{{ line.text }}</h3>
-                <p>{{ line.record.rawData.description }}</p>
-            </div>
+        </section>
+        {% if basket.lines %}
+            {{ form.action }}
+            <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
+        {% endif %}
+    </form>
+{% else %}
+    <div class="container-medium container-center">
+        <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+        <h3 class="centered-fullwidth">{% trans "Your cart is empty" %}</h3>
+    </div>
 
-            <div class="basket-quantity">
-                <a class="btn-down" href="#">
-                    <svg class="svg-icon">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
-                    </svg>
-                </a>
-                <h3 class="basket-quantity-value">{{ line.quantity }}</h3>
-                <a class="btn-up" href="#">
-                    <svg class="svg-icon">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="basket-price basket-price-item">
-                <span class="basket-price-value">{{ line.total_price }} </span>
-            </div>
-        </div>
-        {% endfor %}
-
-        <div class="basket-footer basket-row">
-            <div><label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}</div>
-            <div class="basket-total">
-                <div class="basket-price-total"><h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price }}</span></div>
-            </div>
-        </div>
-
-    </section>
-    {% if basket.lines %}
-        {{ form.action }}
-        <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
-    {% endif %}
-</form>
+{% endif %}

@@ -145,7 +145,11 @@ class Basket(object):
     def _get_taxful_total_price(self):
         return sum(l.total_price for l in self.lines)
 
+    def _get_product_count(self):
+        return sum(l.quantity for l in self.lines if l.product_id)
+
     lines = property(_get_processed_lines)
     data = property(load)
     _raw_lines = property(_get_data_lines, _set_data_lines)
     basket_total_price = property(_get_taxful_total_price)
+    product_count = property(_get_product_count)

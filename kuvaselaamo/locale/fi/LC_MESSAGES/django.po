@@ -649,7 +649,7 @@ msgstr "500 - Palvelinvirhe"
 
 #: hkm/templates/hkm/views/_basket_content.html:4
 msgid "Back to Homepage"
-msgstr "Takaisin etusivuulle"
+msgstr "Takaisin etusivulle"
 
 #: hkm/templates/hkm/views/_basket_content.html:44
 msgid "Total"
