@@ -32,6 +32,7 @@ $(document).ready(function() {
             },
             success: function (data) {
                 $(".container-center").html(data.html);
+                $(".product-counter").html(data.nav_counter);
 
             }
         })
@@ -48,7 +49,7 @@ $(document).ready(function() {
             },
             success: function (data) {
                 $(".container-center").html(data.html);
-
+                $(".product-counter").html(data.nav_counter);
             }
         })
     }
@@ -56,4 +57,6 @@ $(document).ready(function() {
     // Bind click event to buttons
     $('body').on('click', '.btn-up, .btn-down', handleCount);
     $('body').on('click', '.btn-delete-row', handleDelete);
+    // Init tooltips
+    $(document.body).tooltip({ selector: "[title]" });
 });

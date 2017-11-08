@@ -1357,6 +1357,7 @@ class BasketView(TemplateView):
         context = super(BasketView, self).get_context_data(**kwargs)
         context['form'] = ProductOrderCollectionForm()
         context['basket'] = self.request.basket
+        context['request'] = self.request
         context["page_content"] = kwargs.get('page_content')
         context["order"] = kwargs.get('order')
         context['include_base'] = kwargs.get('include_base')
@@ -1382,7 +1383,17 @@ class BasketView(TemplateView):
             line["quantity"] = quantity
             basket.clean_empty_lines()
             basket.dirty = True
-        return http.JsonResponse({"html": self.render_basket_html()})
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
+    def render_nav_product_counter(self):
+        html = loader.render_to_string(
+            "hkm/snippets/nav_basket_counter.html",
+            context=RequestContext(self.request, self.get_context_data())
+        )
+        return html
 
     def render_basket_html(self):
         html = loader.render_to_string(

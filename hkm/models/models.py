@@ -283,6 +283,8 @@ class PrintProduct(Product):
     is_museum_only = models.BooleanField(default=False, verbose_name=_(u"Museum purchase only"))
 
 
+
+
 class ProductOrderQuerySet(models.QuerySet):
     def for_user(self, user, session_orderid):
         if user.is_authenticated():
