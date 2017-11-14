@@ -1,11 +1,11 @@
 Pillow
-django==1.10.2
+django==1.10.8
 amqp
 anyjson
 argh
 Babel
 billiard
-celery
+celery<4.0
 cffi
 coverage
 cryptography
