@@ -843,10 +843,11 @@ class CreateOrderView(BaseFinnaRecordDetailView):
 
         # Save order identifier in session
         request.session['order_hash'] = order.order_hash
+        order_url = reverse('hkm_order_product', kwargs={'order_id': order.order_hash})
+        if self.request.is_ajax():
+            return http.JsonResponse({"redirect": order_url})
 
-        # return redirect(reverse('hkm_order_product', kwargs={'order_id':
-        # order.id}))
-        return redirect(reverse('hkm_order_product', kwargs={'order_id': order.order_hash}))
+        return redirect(order_url)
 
 
 class BaseOrderView(BaseView):
