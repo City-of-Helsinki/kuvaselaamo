@@ -65,7 +65,7 @@
       <div class="grid__group item-slider invisible">
         {% for record in collection.records.all %}
           <div class="grid__item item" data-w="" data-h="">
-            <a class="grid__item--buy" href="#" aria-label="{% trans 'Buy this as a poster' %}" data-action="{% url 'hkm_order_create' finna_id=record.record_id %}">
+            <a class="grid__item--buy" href="#" data-toggle="tooltip" title="{% trans 'Buy' %}"  aria-label="{% trans 'Buy this as a poster' %}" data-action="{% url 'hkm_order_create' finna_id=record.record_id %}">
                 <svg class="svg-icon">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
                   </svg>
