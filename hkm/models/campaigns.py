@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -32,16 +34,13 @@ class CampaignStatus(object):
 
 class _UsageMixin(object):
     def is_applicable_in(self, dt):
-        if isinstance(dt, datetime.datetime):
-            dt = dt.date()
-            dt = dt.date()
-
         if not self.usable_from or dt >= self.usable_from:
             if not self.usable_to or dt <= self.usable_to:
                 return True
+        return False
 
     def is_applicable_today(self):
-        return self.is_applicable_in(datetime.datetime.now())
+        return self.is_applicable_in(datetime.datetime.now().date())
 
     def is_used(self, user=None):
         if user and self.usage_type == CampaignUsageType.SINGLE_USE_PER_USER:
@@ -53,13 +52,6 @@ class _UsageMixin(object):
             return self.campaign_usage.exists()
         else:
             return False
-
-    def is_applicable(self, user=None):
-        return (
-            self.is_applicable_today() and
-            not self.is_used(user=user)
-            and self.status != CampaignStatus.DISABLED
-        )
 
 
 class Campaign(TranslatableModel, _UsageMixin):
@@ -139,6 +131,17 @@ class Campaign(TranslatableModel, _UsageMixin):
             return unicode(self.name)
         except:
             return "%s %s" % (unicode(self._meta.verbose_name), self.pk)
+
+    def get_discount_value(self, basket_lines):
+        total_price = sum(l.total_price for l in basket_lines if l.type != 4)
+        p_discount = 0
+        f_discount = 0
+        if self.percentage_discount:
+            p_discount = (self.percentage_discount / 100) * total_price
+        if self.fixed_discount:
+            f_discount = self.fixed_discount
+
+        return Decimal(max(p_discount, f_discount) * -1)
 
 
 class CampaignCode(models.Model, _UsageMixin):

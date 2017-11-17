@@ -1,10 +1,9 @@
 {% load i18n l10n hkm_tags %}
-{% if basket.lines %}
-    <form class="container-medium container-center" method="post" action="{% url "checkout" %}">
-        {% csrf_token %}
+{% if basket.product_lines %}
+    <div class="container-medium container-center">
         <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
         <section class="basket">
-            {% for line in basket.lines %}
+            {% for line in basket.product_lines %}
             <div class="basket-row" data-lineId="{{ line.line_id }}">
                 <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
                 <div class="basket-thumbnail">
@@ -34,24 +33,42 @@
                 </div>
 
                 <div class="basket-price basket-price-item">
-                    <span class="basket-price-value">{{ line.total_price|localize }} </span>
+                    <span class="basket-price-value">{{ line.total_price|localized_decimal:2 }} </span>
                 </div>
             </div>
             {% endfor %}
-
-            <div class="basket-footer basket-row">
-                <div><label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}</div>
-                <div class="basket-total">
-                    <div class="basket-price-total"><h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localize }}</span></div>
+            {% for discount in basket.discount_lines %}
+                {% include 'hkm/views/_discount_lines.html' with line=discount %}
+            {% endfor %}
+                <input type="hidden" name="action" value="discount">
+                <div class="basket-footer basket-row">
+                    <div>
+                        <label>{% trans "Discount code" %}:&nbsp;</label>
+                        <input class="form-control" id="discount-code" name="discount_code" type="text">
+                    </div>
+                    <button class="btn btn-primary btn-lg pull-right add-discount">{% trans 'Use code' %}</button>
                 </div>
-            </div>
 
+            <form method="post" action="{% url "checkout" %}">
+                {% csrf_token %}
+                <div class="basket-footer basket-row">
+                    <div>
+                        <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
+                    </div>
+                    <div class="basket-total">
+                        <div class="basket-price-total">
+                            <h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localized_decimal:2 }}</span>
+                        </div>
+                        {% if basket.lines %}
+                            {{ form.action }}
+                            <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
+                        {% endif %}
+                    </div>
+
+            </form>
         </section>
-        {% if basket.lines %}
-            {{ form.action }}
-            <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
-        {% endif %}
-    </form>
+
+    </div>
 {% else %}
     <div class="container-medium container-center">
         <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>

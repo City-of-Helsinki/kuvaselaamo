@@ -25,6 +25,7 @@ from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm.models.campaigns import Campaign, CampaignStatus
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
 
 LOG = logging.getLogger(__name__)
@@ -611,8 +612,6 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-        print self.request.basket
-        print self.request.basket.lines
         if self.search_result:
             record = self.search_result['records'][0]
             record['full_res_url'] = HKM.get_full_res_image_url(
@@ -1372,7 +1371,12 @@ class BasketView(TemplateView):
     def handle_delete(self, request):
 
         line_id = request.POST.get('line')
-        self.request.basket.delete_line(int(line_id))
+        if line_id:
+            self.request.basket.delete_line(int(line_id))
+        campaign_id = request.POST.get('campaign')
+        if campaign_id:
+            self.request.basket.remove_campaign(campaign_id)
+
         return http.JsonResponse({"html": self.render_basket_html()})
 
     def handle_update(self, request):
@@ -1412,8 +1416,18 @@ class BasketView(TemplateView):
             order.total_price = request.basket.basket_total_price
             order.save()
             for line in request.basket.lines:
-                line.order.order = order
-                line.order.save()
+                if line.type == 1 and line.order:
+                    # a product line
+                    line.order.order = order
+                    line.order.save()
+                if line.type == 4:
+                    # a discount line
+                    campaign = Campaign.objects.get(pk=line.campaign_id)
+                    if not campaign.is_applicable_today():ß
+                        return self.clear_campaigns(form)
+                    if line.code and not campaign.campaign_codes.filter(code=line.code, status=CampaignStatus.ENABLED).exists():
+                        return self.clear_campaigns(form)
+                    order.add_discount(campaign=campaign, code=line.code)
             self.template_name = 'hkm/views/order_complete.html'
             #upload images and create a printer job.
             printer = PhotoPrinter(
@@ -1429,14 +1443,28 @@ class BasketView(TemplateView):
             return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order))
         return self.render_to_response(self.get_context_data(form=form))
 
+    def clear_campaigns(self, form):
+        # somehting went very wrong with discount codes, so lets reset them from basket.
+        return self.render_to_response(self.get_context_data(form=form))
+
+
     def send_notification_email(self, order):
         subject = u"Print order# %d" % order.pk
         order_line = order.product_orders.first()
         message = render_to_string("hkm/emails/print_order.html", context={"order": order})
         send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
 
+    def handle_discount(self, request):
+        request.basket.set_discount_campaigns(request.POST.get('discount_code'))
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
     def post(self, request, **kwargs):
         action = request.POST.get('action')
+        if action == 'discount':
+            return self.handle_discount(request)
         if action == 'update':
             return self.handle_update(request)
         if action == 'delete':

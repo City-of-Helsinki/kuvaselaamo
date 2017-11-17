@@ -5913,6 +5913,8 @@ a.btn-delete-row {
     text-align: center;
     margin-top: 12px;
     color: rgba(0, 0, 0, 0.5); }
+  .basket .discount {
+    padding-left: 30px; }
   .basket-metadata {
     align-self: flex-start;
     max-width: 420px;
@@ -5931,6 +5933,24 @@ a.btn-delete-row {
         height: 18px; }
     .basket-quantity a.btn-up svg.svg-icon {
       transform: rotate(180deg); }
+  .basket-discounts-value {
+    font-weight: 700;
+    position: relative; }
+    .basket-discounts-value::after {
+      content: "€";
+      margin-left: 5px; }
+  .basket-discounts-total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 200px; }
+    .basket-discounts-total h5 {
+      letter-spacing: 0.6px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5); }
+    .basket-discounts-total span {
+      color: #00C281;
+      font-size: 18px; }
   .basket-price-item .basket-price-value {
     font-size: 24px;
     color: rgba(51, 51, 51, 0.8); }

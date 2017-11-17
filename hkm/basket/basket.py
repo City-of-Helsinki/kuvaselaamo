@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 import random
+from decimal import Decimal
+
+from django.utils import timezone
 
 from hkm.basket.basket_line import BasketLine
+from hkm.models.campaigns import CampaignCode, CampaignStatus, Campaign, CampaignUsageType
 from hkm.models.models import PrintProduct, ProductOrder
 
 
@@ -35,6 +39,7 @@ class Basket(object):
             'order_pk': picture['order_pk'],
             'text': picture['text'],
             'quantity': int(quantity),
+            'type': 1,
             'product_id': picture['product_id'],
             'record': picture.get('record', {})
         }
@@ -62,7 +67,7 @@ class Basket(object):
 
         line = BasketLine(self, data_line)
         line.add_quantity(quantity)
-
+        self.set_discount_campaigns()
         self._add_line(data_line)
         return line
 
@@ -71,12 +76,38 @@ class Basket(object):
             if picture['hkm_id'] == data_line['hkm_id']:
                 return data_line
 
+
     def _get_processed_lines(self):
         lines = getattr(self, '_processed_lines_cache', None)
         if lines is None:
             lines = [BasketLine(self, line) for line in self._raw_lines]
+            # apply discounts
+            if lines:
+                lines += self.get_processed_campaign_lines(lines)
             self._processed_lines_cache = lines
         return lines
+
+    def get_processed_campaign_lines(self, basket_lines):
+        basket_campaigns = self.data.get("campaign_ids", {})
+        campaigns = Campaign.objects.filter(pk__in=basket_campaigns.keys())
+        discount_lines = []
+
+        for campaign in campaigns:
+            data_line = {
+                'line_id': str(random.randint(0, 0x7FFFFFFF)),
+                'product_id': None,
+                'order_pk': None,
+                'type': 4,
+                'can_remove': campaign.usage_type != CampaignUsageType.CODELESS,
+                'quantity': 1,
+                'code': basket_campaigns.get(str(campaign.pk)),
+                'text': campaign.name,
+                'discount_value': campaign.get_discount_value(basket_lines),
+                'campaign_id': campaign.pk
+            }
+
+            discount_lines.append(BasketLine(self, data_line))
+        return discount_lines
 
     def _get_data_lines(self):
         return self.data.setdefault('lines', [])
@@ -142,13 +173,62 @@ class Basket(object):
         self._processed_lines_cache = None
         self.dirty = True
 
+    def set_discount_campaigns(self, code=None):
+        # All current campaigns
+        campaigns = Campaign.objects.filter(
+            status=CampaignStatus.ENABLED
+        ).exclude(
+            usable_from__gte=timezone.now()
+        ).exclude(
+            usable_to__lte=timezone.now()
+        )
+
+        available_campaigns = []
+
+        # Matched be code
+        available_campaigns += list(CampaignCode.objects.filter(
+            code=code,
+            status=CampaignStatus.ENABLED,
+            campaign__in=campaigns
+        ).values_list('campaign__pk', 'code'))
+
+        # Matched by time, codeless campaing.
+        available_campaigns += list(campaigns.filter(usage_type=CampaignUsageType.CODELESS).values_list('pk', 'campaign_codes__code'))
+
+        campaign_ids = self.data.get("campaign_ids", {})
+        for campaign in available_campaigns:
+            campaign_ids[str(campaign[0])] = campaign[1] or None
+
+        self.data["campaign_ids"] = campaign_ids
+        self._processed_lines_cache = None  # uncache basket
+        self.save()
+
+    def remove_campaign(self, campaign_pk_to_remove):
+        """
+        :type campaign_to_remove: Campaign
+        """
+        print self.data["campaign_ids"]
+        self.data["campaign_ids"].pop(str(campaign_pk_to_remove))
+        print self.data["campaign_ids"]
+        self._processed_lines_cache = None  # uncache basket
+        self.save()
+
     def _get_taxful_total_price(self):
-        return sum(l.total_price for l in self.lines)
+        total_price = sum(l.total_price for l in self.lines)
+        return total_price if total_price > Decimal('0.0') else Decimal('0.0')
 
     def _get_product_count(self):
         return sum(l.quantity for l in self.lines if l.product_id)
 
+    def _get_product_lines(self):
+        return [l for l in self._get_processed_lines() if l.type != 4]
+
+    def _get_discount_lines(self):
+        return [l for l in self._get_processed_lines() if l.type == 4]
+
     lines = property(_get_processed_lines)
+    product_lines = property(_get_product_lines)
+    discount_lines = property(_get_discount_lines)
     data = property(load)
     _raw_lines = property(_get_data_lines, _set_data_lines)
     basket_total_price = property(_get_taxful_total_price)

@@ -30,11 +30,7 @@ $(document).ready(function() {
                 "quantity": currentCount,
                 "line": $(this).closest('.basket-row').data("lineid")
             },
-            success: function (data) {
-                $(".container-center").html(data.html);
-                $(".product-counter").html(data.nav_counter);
-
-            }
+            success: updateBaketView
         })
     }
 
@@ -45,18 +41,34 @@ $(document).ready(function() {
             url: "",
             data: {
                 "action": "delete",
-                "line": $(this).closest('.basket-row').data("lineid")
+                "line": $(this).closest('.basket-row').data("lineid"),
+                "campaign": $(this).closest('.basket-row').data("campaignid")
             },
-            success: function (data) {
-                $(".container-center").html(data.html);
-                $(".product-counter").html(data.nav_counter);
-            }
+            success:  updateBaketView
         })
+    }
+    function handleDiscountCode(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: {
+                "action": "discount",
+                "discount_code": $('#discount-code').val()
+            },
+            success: updateBaketView
+        })
+    }
+
+    function updateBaketView(data) {
+        $(".container-center").html(data.html);
+        $(".product-counter").html(data.nav_counter);
     }
 
     // Bind click event to buttons
     $('body').on('click', '.btn-up, .btn-down', handleCount);
     $('body').on('click', '.btn-delete-row', handleDelete);
+    $('body').on('click', '.add-discount', handleDiscountCode);
     // Init tooltips
     $(document.body).tooltip({ selector: "[title]" });
 });

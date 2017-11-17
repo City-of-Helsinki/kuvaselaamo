@@ -26,6 +26,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
 
@@ -620,6 +621,13 @@ class PageContent(BaseModel, TranslatableModel):
         return self.name
 
 
+class ProductOrderDiscount(models.Model):
+    # A log of used discounts
+    campaign = models.ForeignKey(Campaign)
+    order = models.ForeignKey('ProductOrderCollection')
+    code_used = models.CharField(max_length=255, verbose_name=_(u'Used discount code'), null=True)
+
+
 class ProductOrderCollection(models.Model):
     # A bundle of ProductOrder's for in museum purchases.
     orderer_name = models.CharField(verbose_name=_(u'Orderer\'s name'), max_length=255)
@@ -628,3 +636,18 @@ class ProductOrderCollection(models.Model):
 
     def __unicode__(self):
         return "%s - order" % self.orderer_name
+
+    def add_discount(self, campaign, code=None):
+        if campaign.is_applicable_today():
+            order_discount = ProductOrderDiscount(order=self, campaign=campaign)
+            if code:
+                CampaignCode.objects.filter(
+                    code=code,
+                    campaign=campaign
+                ).update(
+                    status=CampaignStatus.DISABLED
+                )
+
+                order_discount.code = code
+            order_discount.save()
+
