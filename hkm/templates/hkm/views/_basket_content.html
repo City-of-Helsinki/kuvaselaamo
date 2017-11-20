@@ -53,7 +53,9 @@
                 {% csrf_token %}
                 <div class="basket-footer basket-row">
                     <div>
-                        <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
+                        {% if user.is_authenticated and not user.profile.is_museum %}
+                            <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
+                        {% endif %}
                     </div>
                     <div class="basket-total">
                         <div class="basket-price-total">

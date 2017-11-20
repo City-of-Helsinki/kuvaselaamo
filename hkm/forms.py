@@ -72,7 +72,7 @@ class RegistrationForm(UserCreationForm):
 
 class ProductOrderCollectionForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
-    orderer_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
+    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
 
     class Meta:
         model = ProductOrderCollection

@@ -3,8 +3,9 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
-from hkm import views
+from hkm.views import views
 from hkm.decorators import restrict_for_museum
+from hkm.views.checkout import OrderContactFormView, OrderSummaryView
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='hkm_index'),
@@ -35,14 +36,13 @@ urlpatterns = [
     url(r'^signup/$', restrict_for_museum(views.SignUpView.as_view()), name='hkm_signup'),
     url(r'^language/$', views.LanguageView.as_view(), name='hkm_language'),
 
+    url(r'^order/contact/$', restrict_for_museum(OrderContactFormView.as_view()), name='hkm_order_contact'),
+    url(r'^order/summary/$', restrict_for_museum(OrderSummaryView.as_view()), name='hkm_order_summary'),
+
     url(r'^order/(?P<finna_id>[a-zA-Z0-9:.]+)/$',
         views.CreateOrderView.as_view(), name='hkm_order_create'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/product/$',
         views.OrderProductView.as_view(), name='hkm_order_product'),
-    url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/contact/$',
-        restrict_for_museum(views.OrderContactInformationView.as_view()), name='hkm_order_contact_information'),
-    url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/summary/$',
-        restrict_for_museum(views.OrderSummaryView.as_view()), name='hkm_order_summary'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/confirmation/$',
         restrict_for_museum(views.OrderConfirmation.as_view()), name='hkm_order_confirmation'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/show_result/$',

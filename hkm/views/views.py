@@ -21,6 +21,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
+from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
@@ -869,22 +870,10 @@ class BaseOrderView(BaseView):
             LOG.error('Product order does not exist for user')
             raise http.Http404()
 
-        # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
-        # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN
-        # ORDER
-        if not 'order_hash' in request.session or request.session['order_hash'] != self.order.order_hash:
-            # if order identifier in session does not match the order in the
-            # url, raise 404
-            LOG.error('Unauthorized')
-            raise http.Http404()
-        else:
-            # if user has successfully checked out the order, they will always be redirected to
-            # order result page. This way user cant modify the same order
-            # retroactively
-            if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
-                LOG.debug(
-                    'checkout is already done for this order, redirect user to result page')
-                return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
+        if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
+            LOG.debug(
+                'checkout is already done for this order, redirect user to result page')
+            return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
 
         return True
 
@@ -946,25 +935,25 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            if request.user.is_authenticated() and request.user.profile.is_museum:
-                order.crop_image_url = '%s%s' % (
-                    settings.HKM_MY_DOMAIN,
-                    self.handle_crop(self.record),
-                )
-                order.save()
-                line_data = {
-                    'hkm_id': self.order.record_finna_id,
-                    'order_pk': order.pk,  # order == basketline
-                    'text': self.record["title"],
-                    'product_id': printproduct_type.pk,
-                    'record': self.record
-                    }
-                request.basket.add_picture(
-                    line_data,
-                    order.amount
-                )
+            #if request.user.is_authenticated() and request.user.profile.is_museum:
+            order.crop_image_url = '%s%s' % (
+                settings.HKM_MY_DOMAIN,
+                self.handle_crop(self.record),
+            )
+            order.save()
+            line_data = {
+                'hkm_id': self.order.record_finna_id,
+                'order_pk': order.pk,  # order == basketline
+                'text': self.record["title"],
+                'product_id': printproduct_type.pk,
+                'record': self.record
+                }
+            request.basket.add_picture(
+                line_data,
+                order.amount
+            )
 
-                return redirect('basket')
+            return redirect('basket')
             # TODO make template render links based on order fields, not the
             # other way around (as now)
             order.form_phase = 2
@@ -1014,7 +1003,7 @@ class OrderContactInformationView(BaseOrderView):
             order = form.save()
             order.form_phase = 3
             order.save()
-            return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
+            return redirect(reverse('hkm_order_summary'))
         kwargs['order_contact_information_form'] = form
         return self.get(request, *args, **kwargs)
 
@@ -1060,7 +1049,7 @@ class OrderSummaryView(BaseOrderView):
                 return redirect(redirect_url)
 
         # TODO error messaging for user in UI
-        return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
+        return redirect(reverse('hkm_order_summary'))
 
     def get_context_data(self, **kwargs):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
@@ -1348,14 +1337,12 @@ class SiteinfoTermsView(TranslatableContentView):
 class BasketView(TemplateView):
     template_name = 'hkm/views/basket.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated() and not request.user.profile.is_museum:
-            return HttpResponseForbidden()
-        return super(BasketView, self).dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(BasketView, self).get_context_data(**kwargs)
-        context['form'] = ProductOrderCollectionForm()
+        form = ProductOrderCollectionForm()
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
+            form.fields['orderer_name'].required = True
+        context['form'] = form
         context['basket'] = self.request.basket
         context['request'] = self.request
         context["page_content"] = kwargs.get('page_content')
@@ -1410,24 +1397,18 @@ class BasketView(TemplateView):
     def handle_checkout(self, request):
         form = ProductOrderCollectionForm(request.POST)
         page_content = None
+        if not (self.request.user.is_authenticated() and self.request.user.profile.is_museum):
+            return redirect(reverse('hkm_order_contact'))
+
         if form.is_valid():
             user = request.user
-            order = form.save(commit=False)
-            order.total_price = request.basket.basket_total_price
-            order.save()
-            for line in request.basket.lines:
-                if line.type == 1 and line.order:
-                    # a product line
-                    line.order.order = order
-                    line.order.save()
-                if line.type == 4:
-                    # a discount line
-                    campaign = Campaign.objects.get(pk=line.campaign_id)
-                    if not campaign.is_applicable_today():ß
-                        return self.clear_campaigns(form)
-                    if line.code and not campaign.campaign_codes.filter(code=line.code, status=CampaignStatus.ENABLED).exists():
-                        return self.clear_campaigns(form)
-                    order.add_discount(campaign=campaign, code=line.code)
+            order_creator = OrderCreator()
+            if not order_creator.validate_basket(request.basket):
+                return self.clear_campaigns(form)
+            order_collection = order_creator.create_order_from_basket(request.basket)
+            order_collection.orderer_name = form.cleaned_data
+            order_collection.save()
+
             self.template_name = 'hkm/views/order_complete.html'
             #upload images and create a printer job.
             printer = PhotoPrinter(
@@ -1435,12 +1416,12 @@ class BasketView(TemplateView):
                 username=user.profile.printer_username,
                 password=user.profile.printer_password,
             )
-            printer.print_order(order)
-            self.send_notification_email(order)
+            printer.print_order(order_collection)
+            self.send_notification_email(order_collection)
 
             self.request.basket.clear_all()
             page_content = PageContent.objects.get(identifier="checkout_complete")
-            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order))
+            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order_collection))
         return self.render_to_response(self.get_context_data(form=form))
 
     def clear_campaigns(self, form):
