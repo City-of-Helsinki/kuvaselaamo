@@ -410,17 +410,6 @@ class ProductOrder(BaseModel):
 
     objects = ProductOrderQuerySet.as_manager()
 
-    def checkout(self):
-        checkout_request = PBW.post(self.order_hash, int(
-            self.total_price_with_postage * 100))  # api requires sum in cents
-        LOG.debug(checkout_request)
-        token = checkout_request.get('token', None)
-        # TODO better error logs && datetime_checkout_redirected if success
-        if token:
-            redirect_url = settings.HKM_PBW_API_ENDPOINT + '/token/%s' % token
-            return redirect_url
-        return None
-
     def authcode_valid(self, result):
         SECRET_KEY = settings.HKM_PBW_SECRET_KEY
         received_authcode = result.get('authcode', None)
@@ -651,3 +640,13 @@ class ProductOrderCollection(models.Model):
                 order_discount.code = code
             order_discount.save()
 
+    def checkout(self):
+        checkout_request = PBW.post(self.pk, int(
+            self.total_price * 100))  # api requires sum in cents
+        LOG.debug(checkout_request)
+        token = checkout_request.get('token', None)
+        # TODO better error logs && datetime_checkout_redirected if success
+        if token:
+            redirect_url = settings.HKM_PBW_API_ENDPOINT + '/token/%s' % token
+            return redirect_url
+        return None
