@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from hkm.views import views
 from hkm.decorators import restrict_for_museum
-from hkm.views.checkout import OrderContactFormView, OrderSummaryView
+from hkm.views.checkout import OrderContactFormView, OrderSummaryView, OrderPBWNotify, OrderConfirmation
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='hkm_index'),
@@ -44,11 +44,9 @@ urlpatterns = [
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/product/$',
         views.OrderProductView.as_view(), name='hkm_order_product'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/confirmation/$',
-        restrict_for_museum(views.OrderConfirmation.as_view()), name='hkm_order_confirmation'),
-    url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/show_result/$',
-        restrict_for_museum(views.OrderShowResultView.as_view()), name='hkm_order_show_result'),
+        restrict_for_museum(OrderConfirmation.as_view()), name='hkm_order_confirmation'),
     url(r'^order/(?P<order_id>[a-zA-Z0-9]+)/notify/$',
-        restrict_for_museum(views.OrderPBWNotify.as_view()), name='hkm_order_pbw_notify'),
+        restrict_for_museum(OrderPBWNotify.as_view()), name='hkm_order_pbw_notify'),
     url(r'^ajax/record/fav/$', restrict_for_museum(login_required()(views.AjaxUserFavoriteRecordView.as_view())),
         name='hkm_ajax_record_fav'),
     url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),
