@@ -53,7 +53,7 @@
                 {% csrf_token %}
                 <div class="basket-footer basket-row">
                     <div>
-                        {% if user.is_authenticated and not user.profile.is_museum %}
+                        {% if request.user.is_authenticated and request.user.profile.is_museum %}
                             <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
                         {% endif %}
                     </div>
