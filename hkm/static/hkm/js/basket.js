@@ -61,6 +61,7 @@ $(document).ready(function() {
     }
 
     function updateBaketView(data) {
+        $('.tooltip').tooltip('destroy');
         $("section.basket").html(data.html);
         $(".product-counter").html(data.nav_counter);
         $(".basket-price-value").html(data.basket_total_price);
