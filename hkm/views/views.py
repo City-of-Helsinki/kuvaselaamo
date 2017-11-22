@@ -28,6 +28,7 @@ from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.campaigns import Campaign, CampaignStatus
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
 
@@ -1305,6 +1306,7 @@ class BasketView(TemplateView):
             basket.dirty = True
         return http.JsonResponse({
             "html": self.render_basket_html(),
+            "basket_total_price": localized_decimal(basket.basket_total_price, 2),
             "nav_counter": self.render_nav_product_counter()
         })
 

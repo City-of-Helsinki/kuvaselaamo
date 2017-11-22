@@ -7,5 +7,38 @@
     <script src="{{ STATIC_URL }}hkm/js/basket.js"></script>
 {% endblock %}
 {% block main_content %}
-    {% include "hkm/views/_basket_content.html" %}
+    {% if basket.product_lines %}
+        <div class="container-medium container-center">
+            <div class="btn-container">
+                <a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a>
+            </div>
+                <section class="basket">
+                    {% include "hkm/views/_basket_content.html" %}
+                            </section>
+                    <form method="post" action="{% url "checkout" %}">
+                        {% csrf_token %}
+                        <div class="basket-footer basket-row">
+                            <div>
+                                {% if request.user.is_authenticated and request.user.profile.is_museum %}
+                                    <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
+                                {% endif %}
+                            </div>
+                            <div class="basket-total">
+                                <div class="basket-price-total">
+                                    <h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localized_decimal:2 }}</span>
+                                </div>
+                                {{ form.action }}
+                                <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
+                            </div>
+                        </div>
+                    </form>
+
+        </div>
+    {% else %}
+        <div class="container-medium container-center">
+            <div class="btn-container"><a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a></div>
+            <h3 class="centered-fullwidth">{% trans "Your cart is empty" %}</h3>
+        </div>
+
+    {% endif %}
 {% endblock %}
