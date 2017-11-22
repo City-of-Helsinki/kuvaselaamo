@@ -204,3 +204,8 @@ HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
 HKM_POSTAL_FEES = 0.0
 
 MUSEUM_GROUP = 'museum'
+
+try:
+  from local_settings import *
+except ImportError:
+  pass
