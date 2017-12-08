@@ -55,11 +55,8 @@
             {% endfor %}
           {% endif %}
           </span> € {% if not user.profile.is_museum %}+ {% trans 'Postal fees' %} {{ order.postal_fees }} €{% endif %} {% trans 'Incl. VAT' %}</p>
-          {% if user.profile.is_museum %}
+
             <button class="hkm-btn hkm-btn--default btn btn-primary" value="add-to-basket" type="submit">{% trans 'Lisää koriin' %}</button>
-          {% else %}
-            <button class="hkm-btn hkm-btn--default btn btn-primary" value="crop-for-order" type="submit">{% trans 'Jatka' %}</button>
-          {% endif %}
         </form>
       </div>
 

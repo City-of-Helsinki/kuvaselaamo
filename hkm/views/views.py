@@ -21,11 +21,14 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, tasks
+from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm.models.campaigns import Campaign, CampaignStatus
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
 
@@ -611,8 +614,6 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-        print self.request.basket
-        print self.request.basket.lines
         if self.search_result:
             record = self.search_result['records'][0]
             record['full_res_url'] = HKM.get_full_res_image_url(
@@ -870,22 +871,10 @@ class BaseOrderView(BaseView):
             LOG.error('Product order does not exist for user')
             raise http.Http404()
 
-        # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
-        # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN
-        # ORDER
-        if not 'order_hash' in request.session or request.session['order_hash'] != self.order.order_hash:
-            # if order identifier in session does not match the order in the
-            # url, raise 404
-            LOG.error('Unauthorized')
-            raise http.Http404()
-        else:
-            # if user has successfully checked out the order, they will always be redirected to
-            # order result page. This way user cant modify the same order
-            # retroactively
-            if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
-                LOG.debug(
-                    'checkout is already done for this order, redirect user to result page')
-                return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
+        if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
+            LOG.debug(
+                'checkout is already done for this order, redirect user to result page')
+            return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
 
         return True
 
@@ -947,25 +936,25 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            if request.user.is_authenticated() and request.user.profile.is_museum:
-                order.crop_image_url = '%s%s' % (
-                    settings.HKM_MY_DOMAIN,
-                    self.handle_crop(self.record),
-                )
-                order.save()
-                line_data = {
-                    'hkm_id': self.order.record_finna_id,
-                    'order_pk': order.pk,  # order == basketline
-                    'text': self.record["title"],
-                    'product_id': printproduct_type.pk,
-                    'record': self.record
-                    }
-                request.basket.add_picture(
-                    line_data,
-                    order.amount
-                )
+            #if request.user.is_authenticated() and request.user.profile.is_museum:
+            order.crop_image_url = '%s%s' % (
+                settings.HKM_MY_DOMAIN,
+                self.handle_crop(self.record),
+            )
+            order.save()
+            line_data = {
+                'hkm_id': self.order.record_finna_id,
+                'order_pk': order.pk,  # order == basketline
+                'text': self.record["title"],
+                'product_id': printproduct_type.pk,
+                'record': self.record
+                }
+            request.basket.add_picture(
+                line_data,
+                order.amount
+            )
 
-                return redirect('basket')
+            return redirect('basket')
             # TODO make template render links based on order fields, not the
             # other way around (as now)
             order.form_phase = 2
@@ -1073,78 +1062,6 @@ class OrderSummaryView(BaseOrderView):
                 context['record']['full_res_url'] = HKM.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
         return context
-
-# User is redirected to this route from Payment Provider after payment
-# With a success return code, the user is displayed a success message
-# If and only if the request parameter 'settled' is true, the order will
-# be sent to print
-
-
-class OrderConfirmation(BaseOrderView):
-    template_name = ''
-    url_name = 'hkm_order_confirmation'
-    result = {}
-
-    def get(self, request, *args, **kwargs):
-
-        self.result['authcode'] = request.GET.get('AUTHCODE', None)
-        self.result['return_code'] = request.GET.get('RETURN_CODE', None)
-        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-        self.result['settled'] = request.GET.get('SETTLED', None)
-        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
-
-        if self.order.authcode_valid(self.result):
-            self.order.handle_confirmation(self.result)
-        else:
-            LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order.order_hash}})
-
-        return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
-        # return self.render_to_response(self.get_context_data(**kwargs))
-
-    def get_context_data(self, **kwargs):
-        context = super(OrderConfirmation, self).get_context_data(**kwargs)
-        context['order_result'] = self.order_result
-        return context
-
-
-class OrderShowResultView(BaseOrderView):
-    template_name = 'hkm/views/order_show_result.html'
-    url_name = 'hkm_order_show_result'
-
-    def get_context_data(self, **kwargs):
-        context = super(OrderShowResultView, self).get_context_data(**kwargs)
-        if self.order.record_finna_id:
-            record_data = FINNA.get_record(self.order.record_finna_id)
-            if record_data:
-                context['record'] = record_data['records'][0]
-        return context
-
-# Payment Provider GETs this route after payment has been processed to notify of success/failure
-# In testing API there is never time lag with this, but in real system
-# there can be
-
-
-class OrderPBWNotify(BaseOrderView):
-    template_name = ''
-    url_name = 'hkm_order_pbw_notify'
-    result = {}
-
-    def get(self, request, *args, **kwargs):
-
-        self.result['authcode'] = request.GET.get('AUTHCODE', None)
-        self.result['return_code'] = request.GET.get('RETURN_CODE', None)
-        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-        self.result['settled'] = request.GET.get('SETTLED', None)
-        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
-
-        if self.order.authcode_valid(self.result):
-            self.order.handle_confirmation(self.result)
-        else:
-            LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order.order_hash}})
-
-        return http.HttpResponse()
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
 
@@ -1349,14 +1266,12 @@ class SiteinfoTermsView(TranslatableContentView):
 class BasketView(TemplateView):
     template_name = 'hkm/views/basket.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated() and not request.user.profile.is_museum:
-            return HttpResponseForbidden()
-        return super(BasketView, self).dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(BasketView, self).get_context_data(**kwargs)
-        context['form'] = ProductOrderCollectionForm()
+        form = ProductOrderCollectionForm()
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
+            form.fields['orderer_name'].required = True
+        context['form'] = form
         context['basket'] = self.request.basket
         context['request'] = self.request
         context["page_content"] = kwargs.get('page_content')
@@ -1372,7 +1287,12 @@ class BasketView(TemplateView):
     def handle_delete(self, request):
 
         line_id = request.POST.get('line')
-        self.request.basket.delete_line(int(line_id))
+        if line_id:
+            self.request.basket.delete_line(int(line_id))
+        campaign_id = request.POST.get('campaign')
+        if campaign_id:
+            self.request.basket.remove_campaign(campaign_id)
+
         return http.JsonResponse({"html": self.render_basket_html()})
 
     def handle_update(self, request):
@@ -1386,6 +1306,7 @@ class BasketView(TemplateView):
             basket.dirty = True
         return http.JsonResponse({
             "html": self.render_basket_html(),
+            "basket_total_price": localized_decimal(basket.basket_total_price, 2),
             "nav_counter": self.render_nav_product_counter()
         })
 
@@ -1406,14 +1327,18 @@ class BasketView(TemplateView):
     def handle_checkout(self, request):
         form = ProductOrderCollectionForm(request.POST)
         page_content = None
+        if not (self.request.user.is_authenticated() and self.request.user.profile.is_museum):
+            return redirect(reverse('hkm_order_contact'))
+
         if form.is_valid():
             user = request.user
-            order = form.save(commit=False)
-            order.total_price = request.basket.basket_total_price
-            order.save()
-            for line in request.basket.lines:
-                line.order.order = order
-                line.order.save()
+            order_creator = OrderCreator()
+            if not order_creator.validate_basket(request.basket):
+                return self.clear_campaigns(form)
+            order_collection = order_creator.create_order_from_basket(request.basket)
+            order_collection.orderer_name = form.cleaned_data
+            order_collection.save()
+
             self.template_name = 'hkm/views/order_complete.html'
             #upload images and create a printer job.
             printer = PhotoPrinter(
@@ -1421,13 +1346,18 @@ class BasketView(TemplateView):
                 username=user.profile.printer_username,
                 password=user.profile.printer_password,
             )
-            printer.print_order(order)
-            self.send_notification_email(order)
+            printer.print_order(order_collection)
+            self.send_notification_email(order_collection)
 
             self.request.basket.clear_all()
             page_content = PageContent.objects.get(identifier="checkout_complete")
-            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order))
+            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order_collection))
         return self.render_to_response(self.get_context_data(form=form))
+
+    def clear_campaigns(self, form):
+        # somehting went very wrong with discount codes, so lets reset them from basket.
+        return self.render_to_response(self.get_context_data(form=form))
+
 
     def send_notification_email(self, order):
         subject = u"Print order# %d" % order.pk
@@ -1435,8 +1365,17 @@ class BasketView(TemplateView):
         message = render_to_string("hkm/emails/print_order.html", context={"order": order})
         send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
 
+    def handle_discount(self, request):
+        request.basket.set_discount_campaigns(request.POST.get('discount_code'))
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
     def post(self, request, **kwargs):
         action = request.POST.get('action')
+        if action == 'discount':
+            return self.handle_discount(request)
         if action == 'update':
             return self.handle_update(request)
         if action == 'delete':

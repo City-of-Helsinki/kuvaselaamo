@@ -6,6 +6,7 @@ import logging
 
 import requests
 from django.conf import settings
+from django.urls import reverse
 
 LOG = logging.getLogger(__name__)
 
@@ -21,10 +22,9 @@ class PaybywayClient(object):
         msg = '%s|%s' % (PaybywayClient.API_KEY, order_hash)
         authcode = hmac.new(PaybywayClient.SECRET_KEY, msg,
                             hashlib.sha256).hexdigest().upper()
-        # TODO refactor to reverse
-        return_url = '%s/order/%s/confirmation/' % (settings.HKM_MY_DOMAIN, order_hash)
-        # TODO refactor to reverse
-        notify_url = '%s/order/%s/notify/' % (settings.HKM_MY_DOMAIN, order_hash)
+
+        return_url = reverse('hkm_order_confirmation', kwargs={"order_id": order_hash})
+        notify_url = reverse('hkm_order_pbw_notify', kwargs={"order_id": order_hash})
 
         payload = {
             'version': 'w3.1',

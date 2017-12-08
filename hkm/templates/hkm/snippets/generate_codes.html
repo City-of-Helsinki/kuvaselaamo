@@ -1,0 +1,14 @@
+{% if obj.campaign_codes.exists %}
+    <a href="{% url 'admin:hkm_campaigncode_changelist' %}">Kampanjassa on {{ obj.campaign_codes.count }} koodia</a><br>
+{% endif %}
+
+<lable>Määrä:&nbsp;</lable>
+<input class="vTextField" id="id_amount" maxlength="128" name="amount" type="text" value="20">
+<br>
+<lable>Prefix:&nbsp;</lable>
+<input class="vTextField" id="id_prefix" maxlength="128" name="prefix" type="text">
+<br>
+<lable>Koodin pituus:&nbsp;</lable>
+<input class="vTextField" id="id_length" maxlength="128" name="length" type="text" value="10">
+<br>
+<button class="button" id="generate-codes" data-href="{% url 'admin:generate-campaign-codes' campaign_id=obj.id %}">Generoi koodit</button>

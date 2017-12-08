@@ -85,6 +85,10 @@ a.btn-delete-row {
         }
     }
 
+    .discount {
+        padding-left: 30px;
+    }
+
     &-metadata {
         align-self: flex-start;
         max-width: 420px;
@@ -116,7 +120,36 @@ a.btn-delete-row {
             transform: rotate(180deg);
         }
     }
+    &-discounts {
 
+        &-value {
+            font-weight: 700;
+            position: relative;
+
+            &::after {
+                content: "€";
+                margin-left: 5px;
+            }
+        }
+
+        &-total {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            width: 200px;
+
+            h5 {
+                letter-spacing: 0.6px;
+                font-size: 14px;
+                color: transparentize($color-darktext, 0.5);
+            }
+
+            span {
+                color: $color-hkm-green;
+                font-size: 18px;
+            }
+        }
+    }
     &-price {
 
         &-item {
