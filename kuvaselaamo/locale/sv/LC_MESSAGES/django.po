@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-14 18:40+0200\n"
+"POT-Creation-Date: 2017-12-11 11:24+0200\n"
 "PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -18,346 +18,402 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: hkm/forms.py:74 hkm/models/models.py:625
+#: hkm/forms.py:75 hkm/models/models.py:505
 #, fuzzy
 #| msgid "Order ended"
 msgid "Orderer's name"
 msgstr "Beställningen har avslutats"
 
-#: hkm/models/models.py:38
+#: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
+msgid "Tila"
+msgstr ""
+
+#: hkm/models/campaigns.py:77
+msgid "Alkupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:82
+msgid "Loppupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:87
+#, fuzzy
+#| msgid "Tuotetyyppi"
+msgid "Tyyppi"
+msgstr "Produkttyp"
+
+#: hkm/models/campaigns.py:93
+msgid "Kampanjamoduuli"
+msgstr ""
+
+#: hkm/models/campaigns.py:98
+msgid "Yhteiskäyttöestoryhmä"
+msgstr ""
+
+#: hkm/models/campaigns.py:104
+msgid "Prosentuaalinen alennus"
+msgstr ""
+
+#: hkm/models/campaigns.py:111
+msgid "Absoluuttinen alennus (veroton)"
+msgstr ""
+
+#: hkm/models/campaigns.py:121
+msgid "Nimi"
+msgstr ""
+
+#: hkm/models/campaigns.py:126
+msgid "kampanja"
+msgstr ""
+
+#: hkm/models/campaigns.py:127
+msgid "kampanjat"
+msgstr ""
+
+#: hkm/models/campaigns.py:160
+msgid "kampanjakoodi"
+msgstr ""
+
+#: hkm/models/campaigns.py:161
+msgid "kampanjakoodit"
+msgstr ""
+
+#: hkm/models/models.py:39
 msgid "Created"
 msgstr "Skapad"
 
-#: hkm/models/models.py:39
+#: hkm/models/models.py:40
 msgid "Modified"
 msgstr "Redigerad"
 
-#: hkm/models/models.py:51
+#: hkm/models/models.py:52
 msgid "Finnish"
 msgstr "finska"
 
-#: hkm/models/models.py:52
+#: hkm/models/models.py:53
 msgid "English"
 msgstr "engelska"
 
-#: hkm/models/models.py:53
+#: hkm/models/models.py:54
 msgid "Swedish"
 msgstr "svenska"
 
-#: hkm/models/models.py:57 hkm/models/models.py:301 hkm/models/models.py:569
+#: hkm/models/models.py:58 hkm/models/models.py:302 hkm/models/models.py:441
 msgid "User"
 msgstr "Användare"
 
-#: hkm/models/models.py:58
+#: hkm/models/models.py:59
 msgid "Is admin"
 msgstr "Huvudanvändare"
 
-#: hkm/models/models.py:59 hkm/templates/hkm/snippets/navigation.html:40
+#: hkm/models/models.py:60 hkm/templates/hkm/snippets/navigation.html:38
 msgid "Language"
 msgstr "Suomeksi / In English"
 
-#: hkm/models/models.py:61
+#: hkm/models/models.py:62
 msgid "Is museum"
 msgstr ""
 
-#: hkm/models/models.py:110
+#: hkm/models/models.py:111
 msgid "Normal"
 msgstr "Normal"
 
-#: hkm/models/models.py:111
+#: hkm/models/models.py:112
 msgid "Favorite"
 msgstr "Favorit"
 
-#: hkm/models/models.py:114
+#: hkm/models/models.py:115
 msgid "Owner"
 msgstr "Ägare"
 
-#: hkm/models/models.py:115 hkm/models/models.py:591 hkm/models/models.py:611
+#: hkm/models/models.py:116 hkm/models/models.py:463 hkm/models/models.py:483
 msgid "Title"
 msgstr "Titel"
 
-#: hkm/models/models.py:117 hkm/models/models.py:255
+#: hkm/models/models.py:118 hkm/models/models.py:256
 msgid "Description"
 msgstr "Beskrivning"
 
-#: hkm/models/models.py:118
+#: hkm/models/models.py:119
 msgid "Public"
 msgstr "Offentlig"
 
-#: hkm/models/models.py:120
+#: hkm/models/models.py:121
 msgid "Featured"
 msgstr "Utställt"
 
-#: hkm/models/models.py:122 hkm/templates/hkm/views/collection.html:38
+#: hkm/models/models.py:123 hkm/templates/hkm/views/collection.html:38
 msgid "Show in landing page"
 msgstr "Visa på första sidan"
 
-#: hkm/models/models.py:123
+#: hkm/models/models.py:124
 msgid "Type"
 msgstr "Typ"
 
-#: hkm/models/models.py:177 hkm/models/models.py:588
+#: hkm/models/models.py:178 hkm/models/models.py:460
 msgid "Creator"
 msgstr "Upphovsman"
 
-#: hkm/models/models.py:179 hkm/templates/hkm/views/collection_record.html:20
+#: hkm/models/models.py:180 hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Album"
 
-#: hkm/models/models.py:181 hkm/models/models.py:329 hkm/models/models.py:571
-#: hkm/models/models.py:590
+#: hkm/models/models.py:182 hkm/models/models.py:330 hkm/models/models.py:443
+#: hkm/models/models.py:462
 msgid "Finna record ID"
 msgstr "Finna-postens ID"
 
-#: hkm/models/models.py:182
+#: hkm/models/models.py:183
 msgid "Edited full resolution image"
 msgstr "Redigera bild med full upplösning"
 
-#: hkm/models/models.py:184
+#: hkm/models/models.py:185
 msgid "Edited preview image"
 msgstr "Redigera bild i förhandsvisning"
 
-#: hkm/models/models.py:253 hkm/models/models.py:278 hkm/models/models.py:573
-#: hkm/models/models.py:601 hkm/templates/hkm/emails/feedback.txt:2
+#: hkm/models/models.py:254 hkm/models/models.py:279 hkm/models/models.py:445
+#: hkm/models/models.py:473 hkm/templates/hkm/emails/feedback.txt:2
 #: hkm/templates/hkm/views/order_show_result.html:37
 #: hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
 msgstr "Namn"
 
-#: hkm/models/models.py:257 hkm/templates/hkm/views/order_show_result.html:59
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/models/models.py:258 hkm/templates/hkm/views/order_show_result.html:55
+#: hkm/templates/hkm/views/order_summary.html:43
 msgid "Price"
 msgstr "Pris"
 
-#: hkm/models/models.py:269
+#: hkm/models/models.py:270
 msgid "api-poster-gloss-30x40"
 msgstr "30x40 cm, Semi-Gloss 240g"
 
-#: hkm/models/models.py:270
+#: hkm/models/models.py:271
 #, fuzzy
 #| msgid "api-poster-40x30"
 msgid "api-poster-gloss-40x30"
 msgstr "40x30 cm, Semi-Gloss 240g"
 
-#: hkm/models/models.py:271
+#: hkm/models/models.py:272
 msgid "api-poster-50x70"
 msgstr "50x70 cm, Matt 180g"
 
-#: hkm/models/models.py:272
+#: hkm/models/models.py:273
 msgid "api-poster-70x50"
 msgstr "70x50 cm, Matt 180g"
 
-#: hkm/models/models.py:273
+#: hkm/models/models.py:274
 msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Liggande, Semi-Gloss 240g"
 
-#: hkm/models/models.py:274
+#: hkm/models/models.py:275
 msgid "api-poster-gloss-A4"
 msgstr "A4 Stående, Semi-Gloss 240g"
 
-#: hkm/models/models.py:279
+#: hkm/models/models.py:280
 msgid "Width"
 msgstr "Bredd"
 
-#: hkm/models/models.py:280
+#: hkm/models/models.py:281
 msgid "Height"
 msgstr "Höjd"
 
-#: hkm/models/models.py:282
+#: hkm/models/models.py:283
 msgid "Paper quality"
 msgstr "Papperskvalitet"
 
-#: hkm/models/models.py:283
+#: hkm/models/models.py:284
 msgid "Museum purchase only"
 msgstr ""
 
-#: hkm/models/models.py:302
+#: hkm/models/models.py:303
 msgid "Session"
 msgstr "Session"
 
-#: hkm/models/models.py:304
+#: hkm/models/models.py:305
 msgid "First name"
 msgstr "Förnamn"
 
-#: hkm/models/models.py:306
+#: hkm/models/models.py:307
 msgid "Last name"
 msgstr "Efternamn"
 
-#: hkm/models/models.py:308 hkm/models/models.py:575
+#: hkm/models/models.py:309 hkm/models/models.py:447
 #: hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr "E-post"
 
-#: hkm/models/models.py:310 hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/models/models.py:311 hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: hkm/models/models.py:312
+#: hkm/models/models.py:313
 msgid "Street adress"
 msgstr "Gatuadress"
 
-#: hkm/models/models.py:314
+#: hkm/models/models.py:315
 msgid "Postal code"
 msgstr "Postnummer"
 
-#: hkm/models/models.py:316
+#: hkm/models/models.py:317
 msgid "City"
 msgstr "Postanstalt"
 
-#: hkm/models/models.py:331
+#: hkm/models/models.py:332
 msgid "Crop x coordinate from left"
 msgstr "Beskär bilden genom att ändra på x-koordinaten i vänster kant"
 
-#: hkm/models/models.py:333
+#: hkm/models/models.py:334
 msgid "Crop y coordinate from top"
 msgstr "Beskär bilden genom att ändra på y-koordinaten i övre kant"
 
-#: hkm/models/models.py:335
+#: hkm/models/models.py:336
 msgid "Crop width"
 msgstr "Avgränsningens bredd"
 
-#: hkm/models/models.py:337
+#: hkm/models/models.py:338
 msgid "Crop height"
 msgstr "Avgränsningens höjd"
 
-#: hkm/models/models.py:339
+#: hkm/models/models.py:340
 msgid "Original image width"
 msgstr "Bildens ursprungliga bredd"
 
-#: hkm/models/models.py:341
+#: hkm/models/models.py:342
 msgid "Original image height"
 msgstr "Bildens ursprungliga höjd"
 
-#: hkm/models/models.py:343
+#: hkm/models/models.py:344
 msgid "Full res original image width"
 msgstr "Den högupplösta bildens ursprungliga bredd"
 
-#: hkm/models/models.py:345
+#: hkm/models/models.py:346
 msgid "Full res original image height"
 msgstr "Den högupplösta bildens ursprungliga höjd"
 
-#: hkm/models/models.py:351
+#: hkm/models/models.py:352
 msgid "Image URL"
 msgstr "Bildens URL"
 
-#: hkm/models/models.py:353
+#: hkm/models/models.py:354
 msgid "Cropped Image URL"
 msgstr "Den beskurna bildens URL"
 
-#: hkm/models/models.py:357 hkm/templates/hkm/emails/feedback.txt:6
+#: hkm/models/models.py:358 hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr "Bild"
 
-#: hkm/models/models.py:360
+#: hkm/models/models.py:361
 msgid "Order form phase"
 msgstr "Beställningens status"
 
-#: hkm/models/models.py:362
+#: hkm/models/models.py:363
 msgid "Randomized order identifier phrase"
 msgstr "Beställningens individuella, slumpmässiga kod"
 
-#: hkm/models/models.py:364
+#: hkm/models/models.py:365
 msgid "Product type"
 msgstr "Produkttyp"
 
-#: hkm/models/models.py:366
+#: hkm/models/models.py:367
 msgid "Product Name"
 msgstr "Produktnamn"
 
-#: hkm/models/models.py:370 hkm/templates/hkm/views/order_show_result.html:56
-#: hkm/templates/hkm/views/order_summary.html:44
+#: hkm/models/models.py:371 hkm/templates/hkm/views/order_show_result.html:54
+#: hkm/templates/hkm/views/order_summary.html:42
 msgid "Amount"
 msgstr "Antal"
 
-#: hkm/models/models.py:372 hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/models/models.py:373 hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_summary.html:59
 msgid "Postal fees"
 msgstr "fraktkostnader"
 
-#: hkm/models/models.py:374
+#: hkm/models/models.py:375
 msgid "Unit price"
 msgstr "Pris per styck"
 
-#: hkm/models/models.py:376
+#: hkm/models/models.py:377
 msgid "Total price"
 msgstr "Totalpris"
 
-#: hkm/models/models.py:378
+#: hkm/models/models.py:379
 #, fuzzy
 #| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Totalpris"
 
-#: hkm/models/models.py:382
+#: hkm/models/models.py:383
 msgid "Confirmed"
 msgstr "Bekräftat"
 
-#: hkm/models/models.py:386
+#: hkm/models/models.py:387
 msgid "Checkout started"
 msgstr "Kassatransaktionen har påbörjats"
 
-#: hkm/models/models.py:388
+#: hkm/models/models.py:389
 msgid "Checkout ended"
 msgstr "Kassatransaktionen har avslutats"
 
-#: hkm/models/models.py:390
+#: hkm/models/models.py:391 hkm/models/models.py:510
 msgid "Checkout successful"
 msgstr "Kassatransaktionen lyckades"
 
-#: hkm/models/models.py:394
+#: hkm/models/models.py:395
 msgid "Payment processed at"
 msgstr "Betalningen har behandlats"
 
-#: hkm/models/models.py:396
+#: hkm/models/models.py:397 hkm/models/models.py:512
 msgid "Payment successful"
 msgstr "Betalningen lyckades"
 
-#: hkm/models/models.py:401
+#: hkm/models/models.py:402
 msgid "Order started"
 msgstr "Beställningen har påbörjats"
 
-#: hkm/models/models.py:403
+#: hkm/models/models.py:404
 msgid "Order ended"
 msgstr "Beställningen har avslutats"
 
-#: hkm/models/models.py:405
+#: hkm/models/models.py:406 hkm/models/models.py:515
 msgid "Order successful"
 msgstr "Beställningen lyckades"
 
-#: hkm/models/models.py:576 hkm/models/models.py:615
+#: hkm/models/models.py:448 hkm/models/models.py:487
 msgid "Content"
 msgstr "Innehåll"
 
-#: hkm/models/models.py:578
+#: hkm/models/models.py:450
 msgid "Notification sent"
 msgstr "Annonsen skickad"
 
-#: hkm/models/models.py:579
+#: hkm/models/models.py:451
 msgid "Sent from"
 msgstr ""
 
-#: hkm/models/models.py:593
+#: hkm/models/models.py:465
 msgid "Edited image"
 msgstr "Redigerad bild"
 
-#: hkm/models/models.py:605
+#: hkm/models/models.py:477
 msgid "Identifier"
 msgstr ""
 
-#: hkm/models/models.py:626
+#: hkm/models/models.py:499
+msgid "Used discount code"
+msgstr ""
+
+#: hkm/models/models.py:506
 #, fuzzy
 #| msgid "Total price"
 msgid "Total order price"
 msgstr "Totalpris"
 
-#: hkm/models/models.py:627
-#, fuzzy
-#| msgid "Set to public"
+#: hkm/models/models.py:507
 msgid "Sent to printer"
-msgstr "Ställ in som offentlig"
+msgstr "Skickas till skrivaren"
 
 #: hkm/tasks.py:26
 msgid "Kuvaselaamopalaute"
@@ -368,51 +424,51 @@ msgstr "Bildapoteksrespons"
 msgid "Kuvaselaamo"
 msgstr "Helsingforsbilder.fi"
 
-#: hkm/templates/hkm/base.html:82
+#: hkm/templates/hkm/base.html:81
 msgid "Facebook login"
 msgstr "Facebook-inloggning"
 
-#: hkm/templates/hkm/base.html:83
+#: hkm/templates/hkm/base.html:82
 msgid "Google login"
 msgstr "Google-inloggning"
 
-#: hkm/templates/hkm/base.html:84
+#: hkm/templates/hkm/base.html:83
 msgid "Login with credentials"
 msgstr "Logga in med koder"
 
-#: hkm/templates/hkm/base.html:86 hkm/templates/hkm/base.html:96
+#: hkm/templates/hkm/base.html:85 hkm/templates/hkm/base.html:95
 #: hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
 msgstr "Skapa kod"
 
-#: hkm/templates/hkm/base.html:110
+#: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information om tjänsten"
 
-#: hkm/templates/hkm/base.html:111
+#: hkm/templates/hkm/base.html:110
 msgid "Frequently asked questions"
 msgstr "Frågor och svar"
 
-#: hkm/templates/hkm/base.html:112
+#: hkm/templates/hkm/base.html:111
 msgid "Terms of use"
 msgstr "Användningsvillkor"
 
-#: hkm/templates/hkm/base.html:113
+#: hkm/templates/hkm/base.html:112
 msgid "Privacy policy"
 msgstr "Dataskydd "
 
-#: hkm/templates/hkm/base.html:114
-#: hkm/templates/hkm/snippets/navigation.html:37
+#: hkm/templates/hkm/base.html:113
+#: hkm/templates/hkm/snippets/navigation.html:35
 #: hkm/templates/hkm/views/info.html:9
 #: hkm/templates/hkm/views/record_feedback.html:27
 msgid "Feedback"
 msgstr "Respons"
 
-#: hkm/templates/hkm/base.html:117
+#: hkm/templates/hkm/base.html:116
 msgid "This service is provided by"
 msgstr "Denna tjänst erbjuds av"
 
-#: hkm/templates/hkm/base.html:119
+#: hkm/templates/hkm/base.html:118
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
 
@@ -546,7 +602,7 @@ msgid "Message"
 msgstr "Meddelande"
 
 #: hkm/templates/hkm/snippets/login.html:14
-#: hkm/templates/hkm/snippets/navigation.html:58
+#: hkm/templates/hkm/snippets/navigation.html:56
 msgid "Log in"
 msgstr "Logga in"
 
@@ -565,7 +621,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:9
-#: hkm/templates/hkm/views/_basket_content.html:58
+#: hkm/templates/hkm/views/basket.html:40
 msgid "Your cart is empty"
 msgstr ""
 
@@ -577,31 +633,31 @@ msgstr ""
 msgid "Search"
 msgstr "Sök"
 
-#: hkm/templates/hkm/snippets/navigation.html:32
+#: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
 
-#: hkm/templates/hkm/snippets/navigation.html:34
+#: hkm/templates/hkm/snippets/navigation.html:32
 #: hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
 msgstr "Mina album"
 
-#: hkm/templates/hkm/snippets/navigation.html:43
-#: hkm/templates/hkm/snippets/navigation.html:50
+#: hkm/templates/hkm/snippets/navigation.html:41
+#: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
 msgstr "In English"
 
-#: hkm/templates/hkm/snippets/navigation.html:44
-#: hkm/templates/hkm/snippets/navigation.html:47
+#: hkm/templates/hkm/snippets/navigation.html:42
+#: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
 msgstr "På svenska"
 
-#: hkm/templates/hkm/snippets/navigation.html:46
-#: hkm/templates/hkm/snippets/navigation.html:49
+#: hkm/templates/hkm/snippets/navigation.html:44
+#: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
 msgstr "Suomeksi"
 
-#: hkm/templates/hkm/snippets/navigation.html:56
+#: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
 msgstr "Logga ut"
 
@@ -659,24 +715,36 @@ msgstr "Tyvärr kunde vi inte hitta den sida du letar efter."
 msgid "#error-500-title"
 msgstr "500 - Internt fel på webbservern"
 
-#: hkm/templates/hkm/views/_basket_content.html:5
-#: hkm/templates/hkm/views/_basket_content.html:57
+#: hkm/templates/hkm/views/_basket_content.html:28
+msgid "kpl"
+msgstr ""
+
+#: hkm/templates/hkm/views/_basket_content.html:42
+msgid "Discount code"
+msgstr ""
+
+#: hkm/templates/hkm/views/_basket_content.html:45
+#, fuzzy
+#| msgid "Postal code"
+msgid "Use code"
+msgstr "Postnummer"
+
+#: hkm/templates/hkm/views/basket.html:13
+#: hkm/templates/hkm/views/basket.html:39
 #, fuzzy
 #| msgid "Back to search"
 msgid "Back to Homepage"
 msgstr "Tillbaka till sökningen"
 
-#: hkm/templates/hkm/views/_basket_content.html:33
-msgid "kpl"
-msgstr ""
-
-#: hkm/templates/hkm/views/_basket_content.html:45
+#: hkm/templates/hkm/views/basket.html:28
+#: hkm/templates/hkm/views/order_show_result.html:72
+#: hkm/templates/hkm/views/order_summary.html:57
 #, fuzzy
 #| msgid "Total price"
 msgid "Total"
 msgstr "Totalpris"
 
-#: hkm/templates/hkm/views/_basket_content.html:52
+#: hkm/templates/hkm/views/basket.html:31
 msgid "Proceed to Checkout"
 msgstr ""
 
@@ -815,18 +883,14 @@ msgid "Hinta yht."
 msgstr "Totalpris"
 
 #: hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/templates/hkm/views/order_show_result.html:74
+#: hkm/templates/hkm/views/order_summary.html:59
 msgid "Incl. VAT"
 msgstr "Inkl. moms"
 
 #: hkm/templates/hkm/views/order.html:59
 msgid "Lisää koriin"
 msgstr ""
-
-#: hkm/templates/hkm/views/order.html:61
-#: hkm/templates/hkm/views/order_contact_information.html:25
-msgid "Jatka"
-msgstr "Fortsätt"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
@@ -842,6 +906,10 @@ msgstr ""
 #: hkm/templates/hkm/views/order_summary.html:21
 msgid "Tarkistathan, että tiedot ovat oikein."
 msgstr "Kontrollera att uppgifterna är korrekta."
+
+#: hkm/templates/hkm/views/order_contact_information.html:25
+msgid "Jatka"
+msgstr "Fortsätt"
 
 #: hkm/templates/hkm/views/order_show_result.html:18
 msgid "Kiitos tilauksestasi - maksu on vahvistettu."
@@ -889,8 +957,8 @@ msgid "Maksun käsittelyssä tapahtui virhe."
 msgstr "Det uppstod ett fel vid hanteringen av betalningen."
 
 #: hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/templates/hkm/views/order_steps_menu.html:12
-#: hkm/templates/hkm/views/order_steps_menu.html:14
+#: hkm/templates/hkm/views/order_steps_menu.html:13
+#: hkm/templates/hkm/views/order_steps_menu.html:15
 #: hkm/templates/hkm/views/order_summary.html:23
 msgid "Contact details"
 msgstr "Kontaktuppgifter"
@@ -910,16 +978,12 @@ msgstr "Beställning"
 msgid "Product"
 msgstr "Produkt"
 
-#: hkm/templates/hkm/views/order_show_result.html:59
-msgid "incl. VAT"
-msgstr "inkl. moms"
-
-#: hkm/templates/hkm/views/order_steps_menu.html:7
+#: hkm/templates/hkm/views/order_steps_menu.html:8
 msgid "Product selection"
 msgstr "Produktsortiment"
 
-#: hkm/templates/hkm/views/order_steps_menu.html:21
-#: hkm/templates/hkm/views/order_steps_menu.html:23
+#: hkm/templates/hkm/views/order_steps_menu.html:22
+#: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
 msgstr "Sammandrag"
 
@@ -932,11 +996,11 @@ msgstr "Gå till betalningssidan genom att klicka på Beställ."
 msgid "Change"
 msgstr "Ändra"
 
-#: hkm/templates/hkm/views/order_summary.html:53
+#: hkm/templates/hkm/views/order_summary.html:66
 msgid "Order (verb)"
 msgstr "Beställ"
 
-#: hkm/templates/hkm/views/order_summary.html:55
+#: hkm/templates/hkm/views/order_summary.html:68
 msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
@@ -970,13 +1034,16 @@ msgstr "Ladda mer... "
 msgid "Back to search"
 msgstr "Tillbaka till sökningen"
 
-#: hkm/views.py:1173
+#: hkm/views/views.py:1090
 msgid "Favorites"
 msgstr "Favoriter"
 
-#: hkm/views.py:1173
+#: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
+
+#~ msgid "incl. VAT"
+#~ msgstr "inkl. moms"
 
 #~ msgid "Kuvaselaamo demo."
 #~ msgstr "Helsingforsbilder.fi demo"
