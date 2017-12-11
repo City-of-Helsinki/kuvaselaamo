@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-14 18:40+0200\n"
+"POT-Creation-Date: 2017-12-11 11:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -18,342 +18,396 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: hkm/forms.py:74 hkm/models/models.py:625
+#: hkm/forms.py:75 hkm/models/models.py:505
 msgid "Orderer's name"
 msgstr "Tilaajan nimi"
 
-#: hkm/models/models.py:38
+#: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
+msgid "Tila"
+msgstr ""
+
+#: hkm/models/campaigns.py:77
+msgid "Alkupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:82
+msgid "Loppupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:87
+#, fuzzy
+#| msgid "Tuotetyyppi"
+msgid "Tyyppi"
+msgstr "Tuotetyyppi"
+
+#: hkm/models/campaigns.py:93
+msgid "Kampanjamoduuli"
+msgstr ""
+
+#: hkm/models/campaigns.py:98
+msgid "Yhteiskäyttöestoryhmä"
+msgstr ""
+
+#: hkm/models/campaigns.py:104
+msgid "Prosentuaalinen alennus"
+msgstr ""
+
+#: hkm/models/campaigns.py:111
+msgid "Absoluuttinen alennus (veroton)"
+msgstr ""
+
+#: hkm/models/campaigns.py:121
+msgid "Nimi"
+msgstr ""
+
+#: hkm/models/campaigns.py:126
+msgid "kampanja"
+msgstr ""
+
+#: hkm/models/campaigns.py:127
+msgid "kampanjat"
+msgstr ""
+
+#: hkm/models/campaigns.py:160
+msgid "kampanjakoodi"
+msgstr ""
+
+#: hkm/models/campaigns.py:161
+msgid "kampanjakoodit"
+msgstr ""
+
+#: hkm/models/models.py:39
 msgid "Created"
 msgstr "Luotu"
 
-#: hkm/models/models.py:39
+#: hkm/models/models.py:40
 msgid "Modified"
 msgstr "Muokattu"
 
-#: hkm/models/models.py:51
+#: hkm/models/models.py:52
 msgid "Finnish"
 msgstr "suomi"
 
-#: hkm/models/models.py:52
+#: hkm/models/models.py:53
 msgid "English"
 msgstr "englanti"
 
-#: hkm/models/models.py:53
+#: hkm/models/models.py:54
 msgid "Swedish"
 msgstr "ruotsi"
 
-#: hkm/models/models.py:57 hkm/models/models.py:301 hkm/models/models.py:569
+#: hkm/models/models.py:58 hkm/models/models.py:302 hkm/models/models.py:441
 msgid "User"
 msgstr "Käyttäjä"
 
-#: hkm/models/models.py:58
+#: hkm/models/models.py:59
 msgid "Is admin"
 msgstr "Pääkäyttäjä"
 
-#: hkm/models/models.py:59 hkm/templates/hkm/snippets/navigation.html:40
+#: hkm/models/models.py:60 hkm/templates/hkm/snippets/navigation.html:38
 msgid "Language"
 msgstr "In English / På Svenska"
 
-#: hkm/models/models.py:61
+#: hkm/models/models.py:62
 msgid "Is museum"
 msgstr ""
 
-#: hkm/models/models.py:110
+#: hkm/models/models.py:111
 msgid "Normal"
 msgstr "Normaali"
 
-#: hkm/models/models.py:111
+#: hkm/models/models.py:112
 msgid "Favorite"
 msgstr "Suosikki"
 
-#: hkm/models/models.py:114
+#: hkm/models/models.py:115
 msgid "Owner"
 msgstr "Omistaja"
 
-#: hkm/models/models.py:115 hkm/models/models.py:591 hkm/models/models.py:611
+#: hkm/models/models.py:116 hkm/models/models.py:463 hkm/models/models.py:483
 msgid "Title"
 msgstr "Otsikko"
 
-#: hkm/models/models.py:117 hkm/models/models.py:255
+#: hkm/models/models.py:118 hkm/models/models.py:256
 msgid "Description"
 msgstr "Kuvaus"
 
-#: hkm/models/models.py:118
+#: hkm/models/models.py:119
 msgid "Public"
 msgstr "Julkinen"
 
-#: hkm/models/models.py:120
+#: hkm/models/models.py:121
 msgid "Featured"
 msgstr "Näytteillä"
 
-#: hkm/models/models.py:122 hkm/templates/hkm/views/collection.html:38
+#: hkm/models/models.py:123 hkm/templates/hkm/views/collection.html:38
 msgid "Show in landing page"
 msgstr "Näytä etusivulla"
 
-#: hkm/models/models.py:123
+#: hkm/models/models.py:124
 msgid "Type"
 msgstr "Tyyppi"
 
-#: hkm/models/models.py:177 hkm/models/models.py:588
+#: hkm/models/models.py:178 hkm/models/models.py:460
 msgid "Creator"
 msgstr "Tekijä"
 
-#: hkm/models/models.py:179 hkm/templates/hkm/views/collection_record.html:20
+#: hkm/models/models.py:180 hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Albumi"
 
-#: hkm/models/models.py:181 hkm/models/models.py:329 hkm/models/models.py:571
-#: hkm/models/models.py:590
+#: hkm/models/models.py:182 hkm/models/models.py:330 hkm/models/models.py:443
+#: hkm/models/models.py:462
 msgid "Finna record ID"
 msgstr "Finna-tietueen ID"
 
-#: hkm/models/models.py:182
+#: hkm/models/models.py:183
 msgid "Edited full resolution image"
 msgstr "Editoi täysiresoluutioisen kuvan"
 
-#: hkm/models/models.py:184
+#: hkm/models/models.py:185
 msgid "Edited preview image"
 msgstr "Editoi esikatselukuvan"
 
-#: hkm/models/models.py:253 hkm/models/models.py:278 hkm/models/models.py:573
-#: hkm/models/models.py:601 hkm/templates/hkm/emails/feedback.txt:2
+#: hkm/models/models.py:254 hkm/models/models.py:279 hkm/models/models.py:445
+#: hkm/models/models.py:473 hkm/templates/hkm/emails/feedback.txt:2
 #: hkm/templates/hkm/views/order_show_result.html:37
 #: hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
 msgstr "Nimi"
 
-#: hkm/models/models.py:257 hkm/templates/hkm/views/order_show_result.html:59
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/models/models.py:258 hkm/templates/hkm/views/order_show_result.html:55
+#: hkm/templates/hkm/views/order_summary.html:43
 msgid "Price"
 msgstr "Hinta"
 
-#: hkm/models/models.py:269
+#: hkm/models/models.py:270
 msgid "api-poster-gloss-30x40"
 msgstr "30x40 cm, Puolikiiltävä 240g"
 
-#: hkm/models/models.py:270
+#: hkm/models/models.py:271
 msgid "api-poster-gloss-40x30"
 msgstr "40x30 cm, Puolikiiltävä 240g"
 
-#: hkm/models/models.py:271
+#: hkm/models/models.py:272
 msgid "api-poster-50x70"
 msgstr "50x70 cm, Matta 180g"
 
-#: hkm/models/models.py:272
+#: hkm/models/models.py:273
 msgid "api-poster-70x50"
 msgstr "70x50 cm, Matta 180g"
 
-#: hkm/models/models.py:273
+#: hkm/models/models.py:274
 msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Vaaka, Puolikiiltävä 240g"
 
-#: hkm/models/models.py:274
+#: hkm/models/models.py:275
 msgid "api-poster-gloss-A4"
 msgstr "A4 Pysty, Puolikiiltävä 240g"
 
-#: hkm/models/models.py:279
+#: hkm/models/models.py:280
 msgid "Width"
 msgstr "Leveys"
 
-#: hkm/models/models.py:280
+#: hkm/models/models.py:281
 msgid "Height"
 msgstr "Korkeus"
 
-#: hkm/models/models.py:282
+#: hkm/models/models.py:283
 msgid "Paper quality"
 msgstr "Paperin laatu"
 
-#: hkm/models/models.py:283
+#: hkm/models/models.py:284
 msgid "Museum purchase only"
 msgstr ""
 
-#: hkm/models/models.py:302
+#: hkm/models/models.py:303
 msgid "Session"
 msgstr "Sessio"
 
-#: hkm/models/models.py:304
+#: hkm/models/models.py:305
 msgid "First name"
 msgstr "Etunimi"
 
-#: hkm/models/models.py:306
+#: hkm/models/models.py:307
 msgid "Last name"
 msgstr "Sukunimi"
 
-#: hkm/models/models.py:308 hkm/models/models.py:575
+#: hkm/models/models.py:309 hkm/models/models.py:447
 #: hkm/templates/hkm/emails/feedback.txt:3
 #: hkm/templates/hkm/views/order_show_result.html:40
 #: hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr "Sähköposti"
 
-#: hkm/models/models.py:310 hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/models/models.py:311 hkm/templates/hkm/views/order_show_result.html:43
 #: hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Puhelinnumero"
 
-#: hkm/models/models.py:312
+#: hkm/models/models.py:313
 msgid "Street adress"
 msgstr "Katuosoite"
 
-#: hkm/models/models.py:314
+#: hkm/models/models.py:315
 msgid "Postal code"
 msgstr "Postinumero"
 
-#: hkm/models/models.py:316
+#: hkm/models/models.py:317
 msgid "City"
 msgstr "Postitoimipaikka"
 
-#: hkm/models/models.py:331
+#: hkm/models/models.py:332
 msgid "Crop x coordinate from left"
 msgstr "Rajaa x-koordinaatti vasemmalta"
 
-#: hkm/models/models.py:333
+#: hkm/models/models.py:334
 msgid "Crop y coordinate from top"
 msgstr "Rajaa y-koordinaatti ylhäältä"
 
-#: hkm/models/models.py:335
+#: hkm/models/models.py:336
 msgid "Crop width"
 msgstr "Rajauksen leveys"
 
-#: hkm/models/models.py:337
+#: hkm/models/models.py:338
 msgid "Crop height"
 msgstr "Rajauksen korkeus"
 
-#: hkm/models/models.py:339
+#: hkm/models/models.py:340
 msgid "Original image width"
 msgstr "Kuvan alkuperäinen leveys"
 
-#: hkm/models/models.py:341
+#: hkm/models/models.py:342
 msgid "Original image height"
 msgstr "Kuvan alkuperäinen korkeus"
 
-#: hkm/models/models.py:343
+#: hkm/models/models.py:344
 msgid "Full res original image width"
 msgstr "Kokoresoluutioisen kuvan alkuperäinen leveys"
 
-#: hkm/models/models.py:345
+#: hkm/models/models.py:346
 msgid "Full res original image height"
 msgstr "Kokoresoluutioisen kuvan alkuperäinen korkeus"
 
-#: hkm/models/models.py:351
+#: hkm/models/models.py:352
 msgid "Image URL"
 msgstr "Kuvan URL"
 
-#: hkm/models/models.py:353
+#: hkm/models/models.py:354
 msgid "Cropped Image URL"
 msgstr "Rajatun kuvan URL"
 
-#: hkm/models/models.py:357 hkm/templates/hkm/emails/feedback.txt:6
+#: hkm/models/models.py:358 hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr "Kuva"
 
-#: hkm/models/models.py:360
+#: hkm/models/models.py:361
 msgid "Order form phase"
 msgstr "Tilauksen vaihe"
 
-#: hkm/models/models.py:362
+#: hkm/models/models.py:363
 msgid "Randomized order identifier phrase"
 msgstr "Tilauksen yksilöivä satunnainen tunniste"
 
-#: hkm/models/models.py:364
+#: hkm/models/models.py:365
 msgid "Product type"
 msgstr "Tuotetyyppi"
 
-#: hkm/models/models.py:366
+#: hkm/models/models.py:367
 msgid "Product Name"
 msgstr "Tuotteen nimi"
 
-#: hkm/models/models.py:370 hkm/templates/hkm/views/order_show_result.html:56
-#: hkm/templates/hkm/views/order_summary.html:44
+#: hkm/models/models.py:371 hkm/templates/hkm/views/order_show_result.html:54
+#: hkm/templates/hkm/views/order_summary.html:42
 msgid "Amount"
 msgstr "Määrä"
 
-#: hkm/models/models.py:372 hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/models/models.py:373 hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_summary.html:59
 msgid "Postal fees"
 msgstr "postikulut"
 
-#: hkm/models/models.py:374
+#: hkm/models/models.py:375
 msgid "Unit price"
 msgstr "Yksikköhinta"
 
-#: hkm/models/models.py:376
+#: hkm/models/models.py:377
 msgid "Total price"
 msgstr "Kokonaishinta"
 
-#: hkm/models/models.py:378
+#: hkm/models/models.py:379
 #, fuzzy
 #| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Kokonaishinta"
 
-#: hkm/models/models.py:382
+#: hkm/models/models.py:383
 msgid "Confirmed"
 msgstr "Vahvistettu"
 
-#: hkm/models/models.py:386
+#: hkm/models/models.py:387
 msgid "Checkout started"
 msgstr "Kassatapahtuma aloitettu"
 
-#: hkm/models/models.py:388
+#: hkm/models/models.py:389
 msgid "Checkout ended"
 msgstr "Kassatapahtuma päättynyt"
 
-#: hkm/models/models.py:390
+#: hkm/models/models.py:391 hkm/models/models.py:510
 msgid "Checkout successful"
 msgstr "Kassatapahtuma onnistui"
 
-#: hkm/models/models.py:394
+#: hkm/models/models.py:395
 msgid "Payment processed at"
 msgstr "Maksu käsitelty"
 
-#: hkm/models/models.py:396
+#: hkm/models/models.py:397 hkm/models/models.py:512
 msgid "Payment successful"
 msgstr "Maksu onnistui"
 
-#: hkm/models/models.py:401
+#: hkm/models/models.py:402
 msgid "Order started"
 msgstr "Tilaus aloitettu"
 
-#: hkm/models/models.py:403
+#: hkm/models/models.py:404
 msgid "Order ended"
 msgstr "Tilaus päättynyt"
 
-#: hkm/models/models.py:405
+#: hkm/models/models.py:406 hkm/models/models.py:515
 msgid "Order successful"
 msgstr "Tilaus onnistui"
 
-#: hkm/models/models.py:576 hkm/models/models.py:615
+#: hkm/models/models.py:448 hkm/models/models.py:487
 msgid "Content"
 msgstr "Sisältö"
 
-#: hkm/models/models.py:578
+#: hkm/models/models.py:450
 msgid "Notification sent"
 msgstr "Ilmoitus lähetetty"
 
-#: hkm/models/models.py:579
+#: hkm/models/models.py:451
 msgid "Sent from"
 msgstr ""
 
-#: hkm/models/models.py:593
+#: hkm/models/models.py:465
 msgid "Edited image"
 msgstr "Muokattu kuva"
 
-#: hkm/models/models.py:605
+#: hkm/models/models.py:477
 msgid "Identifier"
 msgstr ""
 
-#: hkm/models/models.py:626
-#, fuzzy
-#| msgid "Total price"
+#: hkm/models/models.py:499
+msgid "Used discount code"
+msgstr ""
+
+#: hkm/models/models.py:506
 msgid "Total order price"
 msgstr "Kokonaishinta"
 
-#: hkm/models/models.py:627
-#, fuzzy
-#| msgid "Set to public"
+#: hkm/models/models.py:507
 msgid "Sent to printer"
-msgstr "Aseta julkiseksi"
+msgstr "Lähetetty tulostettavaksi"
 
 #: hkm/tasks.py:26
 msgid "Kuvaselaamopalaute"
@@ -364,51 +418,51 @@ msgstr "Helsinkikuvia.fi palaute"
 msgid "Kuvaselaamo"
 msgstr "Helsinkikuvia.fi"
 
-#: hkm/templates/hkm/base.html:82
+#: hkm/templates/hkm/base.html:81
 msgid "Facebook login"
 msgstr "Facebook-kirjautuminen"
 
-#: hkm/templates/hkm/base.html:83
+#: hkm/templates/hkm/base.html:82
 msgid "Google login"
 msgstr "Google-kirjautuminen"
 
-#: hkm/templates/hkm/base.html:84
+#: hkm/templates/hkm/base.html:83
 msgid "Login with credentials"
 msgstr "Kirjaudu sisään tunnuksilla"
 
-#: hkm/templates/hkm/base.html:86 hkm/templates/hkm/base.html:96
+#: hkm/templates/hkm/base.html:85 hkm/templates/hkm/base.html:95
 #: hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
 msgstr "Luo tunnus"
 
-#: hkm/templates/hkm/base.html:110
+#: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Tietoa palvelusta"
 
-#: hkm/templates/hkm/base.html:111
+#: hkm/templates/hkm/base.html:110
 msgid "Frequently asked questions"
 msgstr "Kysymyksiä ja vastauksia"
 
-#: hkm/templates/hkm/base.html:112
+#: hkm/templates/hkm/base.html:111
 msgid "Terms of use"
 msgstr "Käyttöehdot"
 
-#: hkm/templates/hkm/base.html:113
+#: hkm/templates/hkm/base.html:112
 msgid "Privacy policy"
 msgstr "Tietosuoja"
 
-#: hkm/templates/hkm/base.html:114
-#: hkm/templates/hkm/snippets/navigation.html:37
+#: hkm/templates/hkm/base.html:113
+#: hkm/templates/hkm/snippets/navigation.html:35
 #: hkm/templates/hkm/views/info.html:9
 #: hkm/templates/hkm/views/record_feedback.html:27
 msgid "Feedback"
 msgstr "Palaute"
 
-#: hkm/templates/hkm/base.html:117
+#: hkm/templates/hkm/base.html:116
 msgid "This service is provided by"
 msgstr "Tämän palvelun tarjoaa"
 
-#: hkm/templates/hkm/base.html:119
+#: hkm/templates/hkm/base.html:118
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
 
@@ -542,7 +596,7 @@ msgid "Message"
 msgstr "Viesti"
 
 #: hkm/templates/hkm/snippets/login.html:14
-#: hkm/templates/hkm/snippets/navigation.html:58
+#: hkm/templates/hkm/snippets/navigation.html:56
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
@@ -561,7 +615,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:9
-#: hkm/templates/hkm/views/_basket_content.html:58
+#: hkm/templates/hkm/views/basket.html:40
 msgid "Your cart is empty"
 msgstr "Ostoskori on tyhjä"
 
@@ -573,31 +627,31 @@ msgstr "Ostoskori on tyhjä"
 msgid "Search"
 msgstr "Haku"
 
-#: hkm/templates/hkm/snippets/navigation.html:32
+#: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Selaa albumeita"
 
-#: hkm/templates/hkm/snippets/navigation.html:34
+#: hkm/templates/hkm/snippets/navigation.html:32
 #: hkm/templates/hkm/views/my_collections.html:10
 msgid "My collections"
 msgstr "Omat albumit"
 
-#: hkm/templates/hkm/snippets/navigation.html:43
-#: hkm/templates/hkm/snippets/navigation.html:50
+#: hkm/templates/hkm/snippets/navigation.html:41
+#: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
 msgstr "In English"
 
-#: hkm/templates/hkm/snippets/navigation.html:44
-#: hkm/templates/hkm/snippets/navigation.html:47
+#: hkm/templates/hkm/snippets/navigation.html:42
+#: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
 msgstr "På svenska"
 
-#: hkm/templates/hkm/snippets/navigation.html:46
-#: hkm/templates/hkm/snippets/navigation.html:49
+#: hkm/templates/hkm/snippets/navigation.html:44
+#: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
 msgstr "Suomeksi"
 
-#: hkm/templates/hkm/snippets/navigation.html:56
+#: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
@@ -655,20 +709,30 @@ msgstr "Etsimääsi sivua ei löydy"
 msgid "#error-500-title"
 msgstr "500 - Palvelinvirhe"
 
-#: hkm/templates/hkm/views/_basket_content.html:5
-#: hkm/templates/hkm/views/_basket_content.html:57
-msgid "Back to Homepage"
-msgstr "Takaisin etusivulle"
-
-#: hkm/templates/hkm/views/_basket_content.html:33
+#: hkm/templates/hkm/views/_basket_content.html:28
 msgid "kpl"
 msgstr ""
 
+#: hkm/templates/hkm/views/_basket_content.html:42
+msgid "Discount code"
+msgstr "Alennuskoodi"
+
 #: hkm/templates/hkm/views/_basket_content.html:45
+msgid "Use code"
+msgstr "Käytä"
+
+#: hkm/templates/hkm/views/basket.html:13
+#: hkm/templates/hkm/views/basket.html:39
+msgid "Back to Homepage"
+msgstr "Takaisin etusivulle"
+
+#: hkm/templates/hkm/views/basket.html:28
+#: hkm/templates/hkm/views/order_show_result.html:72
+#: hkm/templates/hkm/views/order_summary.html:57
 msgid "Total"
 msgstr "Kokonaishinta"
 
-#: hkm/templates/hkm/views/_basket_content.html:52
+#: hkm/templates/hkm/views/basket.html:31
 msgid "Proceed to Checkout"
 msgstr "Tilaa"
 
@@ -808,18 +872,14 @@ msgid "Hinta yht."
 msgstr "Hinta yht."
 
 #: hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:47
+#: hkm/templates/hkm/views/order_show_result.html:74
+#: hkm/templates/hkm/views/order_summary.html:59
 msgid "Incl. VAT"
 msgstr "Sis. ALV"
 
 #: hkm/templates/hkm/views/order.html:59
 msgid "Lisää koriin"
 msgstr ""
-
-#: hkm/templates/hkm/views/order.html:61
-#: hkm/templates/hkm/views/order_contact_information.html:25
-msgid "Jatka"
-msgstr "Jatka"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
@@ -833,6 +893,10 @@ msgstr "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
 #: hkm/templates/hkm/views/order_summary.html:21
 msgid "Tarkistathan, että tiedot ovat oikein."
 msgstr "Tarkistathan, että tiedot ovat oikein."
+
+#: hkm/templates/hkm/views/order_contact_information.html:25
+msgid "Jatka"
+msgstr "Jatka"
 
 #: hkm/templates/hkm/views/order_show_result.html:18
 msgid "Kiitos tilauksestasi - maksu on vahvistettu."
@@ -880,8 +944,8 @@ msgid "Maksun käsittelyssä tapahtui virhe."
 msgstr "Maksun käsittelyssä tapahtui virhe."
 
 #: hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/templates/hkm/views/order_steps_menu.html:12
-#: hkm/templates/hkm/views/order_steps_menu.html:14
+#: hkm/templates/hkm/views/order_steps_menu.html:13
+#: hkm/templates/hkm/views/order_steps_menu.html:15
 #: hkm/templates/hkm/views/order_summary.html:23
 msgid "Contact details"
 msgstr "Yhteystiedot"
@@ -901,16 +965,12 @@ msgstr "Tilaus"
 msgid "Product"
 msgstr "Tuote"
 
-#: hkm/templates/hkm/views/order_show_result.html:59
-msgid "incl. VAT"
-msgstr "sis. ALV"
-
-#: hkm/templates/hkm/views/order_steps_menu.html:7
+#: hkm/templates/hkm/views/order_steps_menu.html:8
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
-#: hkm/templates/hkm/views/order_steps_menu.html:21
-#: hkm/templates/hkm/views/order_steps_menu.html:23
+#: hkm/templates/hkm/views/order_steps_menu.html:22
+#: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
 msgstr "Yhteenveto"
 
@@ -923,11 +983,11 @@ msgstr "Siirry maksusivulle Tilaa-painikkeella."
 msgid "Change"
 msgstr "Vaihda"
 
-#: hkm/templates/hkm/views/order_summary.html:53
+#: hkm/templates/hkm/views/order_summary.html:66
 msgid "Order (verb)"
 msgstr "Tilaa"
 
-#: hkm/templates/hkm/views/order_summary.html:55
+#: hkm/templates/hkm/views/order_summary.html:68
 msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
@@ -961,13 +1021,16 @@ msgstr "Lataa lisää... "
 msgid "Back to search"
 msgstr "Takaisin hakuun"
 
-#: hkm/views.py:1173
+#: hkm/views/views.py:1090
 msgid "Favorites"
 msgstr "Suosikit"
 
-#: hkm/views.py:1173
+#: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
+
+#~ msgid "incl. VAT"
+#~ msgstr "sis. ALV"
 
 #~ msgid "Kuvaselaamo demo."
 #~ msgstr "Helsinkikuvia.fi-demo."
