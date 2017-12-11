@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 11:24+0200\n"
+"POT-Creation-Date: 2017-12-11 16:40+0200\n"
 "PO-Revision-Date: 2017-07-04 15:15+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: English (United States) (https://www.transifex.com/haltu/"
@@ -612,16 +612,12 @@ msgid "The cart contains"
 msgstr ""
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid ""
-"\n"
-"            photo "
-msgid_plural ""
-" photos\n"
-"        "
+msgid "photo"
+msgid_plural "photos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:9
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Your cart is empty"
 msgstr ""
@@ -720,7 +716,7 @@ msgstr "500 - Internal Server Error"
 
 #: hkm/templates/hkm/views/_basket_content.html:28
 msgid "kpl"
-msgstr ""
+msgstr "pcs"
 
 #: hkm/templates/hkm/views/_basket_content.html:42
 msgid "Discount code"
@@ -893,8 +889,8 @@ msgid "Incl. VAT"
 msgstr "Incl. VAT"
 
 #: hkm/templates/hkm/views/order.html:59
-msgid "Lisää koriin"
-msgstr ""
+msgid "Add to cart"
+msgstr "Add to cart"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
