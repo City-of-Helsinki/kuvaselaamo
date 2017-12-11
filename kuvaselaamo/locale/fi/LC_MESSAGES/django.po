@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 11:24+0200\n"
+"POT-Creation-Date: 2017-12-11 16:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -605,16 +605,12 @@ msgid "The cart contains"
 msgstr "Ostoskorissa on"
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid ""
-"\n"
-"            photo "
-msgid_plural ""
-" photos\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
+msgid "photo"
+msgid_plural "photos"
+msgstr[0] "kuva"
+msgstr[1] "kuvaa"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:9
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Your cart is empty"
 msgstr "Ostoskori on tyhjä"
@@ -878,8 +874,8 @@ msgid "Incl. VAT"
 msgstr "Sis. ALV"
 
 #: hkm/templates/hkm/views/order.html:59
-msgid "Lisää koriin"
-msgstr ""
+msgid "Add to cart"
+msgstr "Lisää koriin"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
@@ -1028,6 +1024,15 @@ msgstr "Suosikit"
 #: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
+
+#~ msgid "            photo "
+#~ msgid_plural ""
+#~ " photos\n"
+#~ "        "
+#~ msgstr[0] "            photo "
+#~ msgstr[1] ""
+#~ " kuvaa\n"
+#~ "        "
 
 #~ msgid "incl. VAT"
 #~ msgstr "sis. ALV"
