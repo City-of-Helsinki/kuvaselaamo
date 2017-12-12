@@ -230,11 +230,15 @@ class Basket(object):
     def _get_total_with_postal_fees(self):
         return self.basket_total_price + Decimal(settings.HKM_POSTAL_FEES)
 
+    def _get_postal_fee(self):
+        return settings.HKM_POSTAL_FEES
+
     lines = property(_get_processed_lines)
     product_lines = property(_get_product_lines)
     discount_lines = property(_get_discount_lines)
     data = property(load)
     _raw_lines = property(_get_data_lines, _set_data_lines)
     basket_total_price = property(_get_taxful_total_price)
+    postal_fee = property(_get_postal_fee)
     product_count = property(_get_product_count)
     total_price_with_postal_fees = property(_get_total_with_postal_fees)

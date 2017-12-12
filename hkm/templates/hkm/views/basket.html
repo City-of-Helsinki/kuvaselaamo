@@ -25,7 +25,10 @@
                             </div>
                             <div class="basket-total">
                                 <div class="basket-price-total">
-                                    <h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localized_decimal:2 }}</span>
+                                    <h5>{% trans 'Total' %}&nbsp;
+                                        {{ request.basket.basket_total_price|localized_decimal:2 }} € + {% trans 'Postal fees' %} {{ request.basket.postal_fee }} € = <span class="basket-price-value">{{ request.basket.total_price_with_postal_fees|localized_decimal:2 }} </span> {% trans 'Incl. VAT' %}
+                                    </h5>
+
                                 </div>
                                 {{ form.action }}
                                 <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
