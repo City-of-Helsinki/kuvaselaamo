@@ -5975,7 +5975,7 @@ a.btn-delete-row {
       letter-spacing: 0.6px;
       font-size: 18px;
       color: rgba(0, 0, 0, 0.5); }
-    .basket-price-total span {
+    .basket-price-total span.basket-price-value {
       color: #00C281;
       font-size: 24px; }
 
@@ -6027,6 +6027,9 @@ input[type="text"]::-moz-placeholder {
 
 input[type="text"]:-ms-input-placeholder {
   color: #555 !important; }
+
+span.no-postal-fee {
+  text-decoration: line-through; }
 
 .centered-fullwidth {
   width: 100%;

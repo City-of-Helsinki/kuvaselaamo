@@ -1,0 +1,10 @@
+{% load i18n hkm_tags %}
+<h5>{% trans 'Total' %}&nbsp;
+    {{ request.basket.basket_total_price|localized_decimal:2 }} € +
+    {% if not request.basket.is_free_shipping  %}
+        {% trans 'Postal fees' %} {{ request.basket.postal_fee }} €
+    {% else %}
+        <span class="no-postal-fee">{% trans 'Postal fees' %} {{ request.basket.postal_fee }} €</span> 0 €
+    {% endif %}
+    = <span class="basket-price-value">{{ request.basket.total_price_with_postal_fees|localized_decimal:2 }} </span> {% trans 'Incl. VAT' %}
+</h5>

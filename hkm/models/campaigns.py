@@ -113,7 +113,7 @@ class Campaign(TranslatableModel, _UsageMixin):
         null=True,
         blank=True,
     )
-
+    free_shipping = models.BooleanField(default=False, verbose_name=_(u'Free shipping'))
     translations = TranslatedFields(
         name=models.CharField(
             max_length=256,
