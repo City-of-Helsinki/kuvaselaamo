@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 11:24+0200\n"
+"POT-Creation-Date: 2017-12-11 16:40+0200\n"
 "PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -340,8 +340,6 @@ msgid "Total price"
 msgstr "Totalpris"
 
 #: hkm/models/models.py:379
-#, fuzzy
-#| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Totalpris"
 
@@ -406,8 +404,6 @@ msgid "Used discount code"
 msgstr ""
 
 #: hkm/models/models.py:506
-#, fuzzy
-#| msgid "Total price"
 msgid "Total order price"
 msgstr "Totalpris"
 
@@ -608,22 +604,18 @@ msgstr "Logga in"
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:4
 msgid "The cart contains"
-msgstr ""
+msgstr "Kundvagnen innehåller"
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid ""
-"\n"
-"            photo "
-msgid_plural ""
-" photos\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
+msgid "photo"
+msgid_plural "photos"
+msgstr[0] "foto"
+msgstr[1] "fotos"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:9
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Your cart is empty"
-msgstr ""
+msgstr "Din vagn är tom"
 
 #: hkm/templates/hkm/snippets/navigation.html:23
 #: hkm/templates/hkm/snippets/navigation.html:26
@@ -717,36 +709,30 @@ msgstr "500 - Internt fel på webbservern"
 
 #: hkm/templates/hkm/views/_basket_content.html:28
 msgid "kpl"
-msgstr ""
+msgstr "mängd"
 
 #: hkm/templates/hkm/views/_basket_content.html:42
 msgid "Discount code"
-msgstr ""
+msgstr "Rabattkod"
 
 #: hkm/templates/hkm/views/_basket_content.html:45
-#, fuzzy
-#| msgid "Postal code"
 msgid "Use code"
-msgstr "Postnummer"
+msgstr "Använd rabattkod"
 
 #: hkm/templates/hkm/views/basket.html:13
 #: hkm/templates/hkm/views/basket.html:39
-#, fuzzy
-#| msgid "Back to search"
 msgid "Back to Homepage"
-msgstr "Tillbaka till sökningen"
+msgstr "Tillbaka till startsidan"
 
 #: hkm/templates/hkm/views/basket.html:28
 #: hkm/templates/hkm/views/order_show_result.html:72
 #: hkm/templates/hkm/views/order_summary.html:57
-#, fuzzy
-#| msgid "Total price"
 msgid "Total"
 msgstr "Totalpris"
 
 #: hkm/templates/hkm/views/basket.html:31
 msgid "Proceed to Checkout"
-msgstr ""
+msgstr "Fortsätt till utcheckningen"
 
 #: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
@@ -889,8 +875,8 @@ msgid "Incl. VAT"
 msgstr "Inkl. moms"
 
 #: hkm/templates/hkm/views/order.html:59
-msgid "Lisää koriin"
-msgstr ""
+msgid "Add to cart"
+msgstr "Lägg i korgen"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
@@ -1041,6 +1027,19 @@ msgstr "Favoriter"
 #: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
+
+#~ msgid ""
+#~ "\n"
+#~ "            photo "
+#~ msgid_plural ""
+#~ " photos\n"
+#~ "        "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "            bild "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "            bilder "
 
 #~ msgid "incl. VAT"
 #~ msgstr "inkl. moms"

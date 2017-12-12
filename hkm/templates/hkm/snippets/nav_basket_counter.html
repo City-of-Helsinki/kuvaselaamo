@@ -2,9 +2,7 @@
 <a href="{% url "basket" %}">
     {% if request.basket.lines %}
         {%  trans "The cart contains" %} {{ request.basket.product_count }}
-        {% blocktrans count request.basket.lines|length as lines %}
-            photo {% plural %} photos
-        {% endblocktrans %}
+        {% blocktrans count request.basket.lines|length as lines %}photo{% plural %}photos{% endblocktrans %}
     {% else %}
         {% trans "Your cart is empty" %}
     {% endif %}
