@@ -5970,8 +5970,7 @@ a.btn-delete-row {
   .basket-price-total {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
-    width: 200px; }
+    justify-content: space-between; }
     .basket-price-total h5 {
       letter-spacing: 0.6px;
       font-size: 18px;
