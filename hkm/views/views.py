@@ -1293,7 +1293,11 @@ class BasketView(TemplateView):
         if campaign_id:
             self.request.basket.remove_campaign(campaign_id)
 
-        return http.JsonResponse({"html": self.render_basket_html()})
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "basket_total_price_row": self.render_basket_total_row(),
+            "nav_counter": self.render_nav_product_counter()
+        })
 
     def handle_update(self, request):
         basket = request.basket
@@ -1306,9 +1310,16 @@ class BasketView(TemplateView):
             basket.dirty = True
         return http.JsonResponse({
             "html": self.render_basket_html(),
-            "basket_total_price": localized_decimal(basket.basket_total_price, 2),
+            "basket_total_price_row": self.render_basket_total_row(),
             "nav_counter": self.render_nav_product_counter()
         })
+
+    def render_basket_total_row(self):
+        html = loader.render_to_string(
+            "hkm/snippets/_basket_total_row.html",
+            context=RequestContext(self.request, self.get_context_data())
+        )
+        return html
 
     def render_nav_product_counter(self):
         html = loader.render_to_string(
@@ -1369,6 +1380,7 @@ class BasketView(TemplateView):
         request.basket.set_discount_campaigns(request.POST.get('discount_code'))
         return http.JsonResponse({
             "html": self.render_basket_html(),
+            "basket_total_price_row": self.render_basket_total_row(),
             "nav_counter": self.render_nav_product_counter()
         })
 

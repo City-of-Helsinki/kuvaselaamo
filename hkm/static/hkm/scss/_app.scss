@@ -40,7 +40,9 @@ color: #555 !important;
 input[type="text"]:-ms-input-placeholder {  
 color: #555 !important;  
 }
-
+span.no-postal-fee {
+    text-decoration: line-through;
+}
 .centered-fullwidth {
   width: 100%;
   text-align: center;
