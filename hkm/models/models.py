@@ -26,7 +26,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode
+from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode, CodeUsage
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
 
@@ -519,17 +519,20 @@ class ProductOrderCollection(models.Model):
 
     def add_discount(self, campaign, code=None, discount_value=0):
         if campaign.is_applicable_today():
-            order_discount = ProductOrderDiscount(order=self, campaign=campaign, discounted_value=discount_value)
+            ProductOrderDiscount.objects.create(
+                order=self,
+                campaign=campaign,
+                discounted_value=discount_value,
+                code_used=code
+            )
             if code:
-                CampaignCode.objects.filter(
+                code_object = CampaignCode.objects.get(
                     code=code,
                     campaign=campaign
-                ).update(
-                    status=CampaignStatus.DISABLED
                 )
-
-                order_discount.code = code
-            order_discount.save()
+                if code_object.use_type == CodeUsage.SINGLE_USE:
+                    code_object.status = CampaignStatus.DISABLED
+                    code_object.save(update_fields=['status'])
 
     def checkout(self):
         checkout_request = PBW.post(self.pk, int(
