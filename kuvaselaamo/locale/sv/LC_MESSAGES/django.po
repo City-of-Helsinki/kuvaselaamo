@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 16:40+0200\n"
+"POT-Creation-Date: 2017-12-13 10:37+0200\n"
 "PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -56,6 +56,10 @@ msgstr ""
 
 #: hkm/models/campaigns.py:111
 msgid "Absoluuttinen alennus (veroton)"
+msgstr ""
+
+#: hkm/models/campaigns.py:116
+msgid "Free shipping"
 msgstr ""
 
 #: hkm/models/campaigns.py:121
@@ -326,10 +330,13 @@ msgstr "Produktnamn"
 msgid "Amount"
 msgstr "Antal"
 
-#: hkm/models/models.py:373 hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:59
-msgid "Postal fees"
-msgstr "fraktkostnader"
+#: hkm/models/models.py:373 hkm/templates/hkm/snippets/_basket_total_row.html:5
+#: hkm/templates/hkm/snippets/_basket_total_row.html:7
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_summary.html:61
+#: hkm/templates/hkm/views/order_summary.html:63
+msgid "Shipping fees"
+msgstr "leveranskostnader"
 
 #: hkm/models/models.py:375
 msgid "Unit price"
@@ -597,6 +604,19 @@ msgstr "Lägg till i albumet"
 msgid "Message"
 msgstr "Meddelande"
 
+#: hkm/templates/hkm/snippets/_basket_total_row.html:2
+#: hkm/templates/hkm/views/order_show_result.html:72
+#: hkm/templates/hkm/views/order_summary.html:57
+msgid "Total"
+msgstr "Totalpris"
+
+#: hkm/templates/hkm/snippets/_basket_total_row.html:9
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_show_result.html:74
+#: hkm/templates/hkm/views/order_summary.html:65
+msgid "Incl. VAT"
+msgstr "Inkl. moms"
+
 #: hkm/templates/hkm/snippets/login.html:14
 #: hkm/templates/hkm/snippets/navigation.html:56
 msgid "Log in"
@@ -613,7 +633,7 @@ msgstr[0] "foto"
 msgstr[1] "fotos"
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:40
+#: hkm/templates/hkm/views/basket.html:41
 msgid "Your cart is empty"
 msgstr "Din vagn är tom"
 
@@ -720,17 +740,11 @@ msgid "Use code"
 msgstr "Använd rabattkod"
 
 #: hkm/templates/hkm/views/basket.html:13
-#: hkm/templates/hkm/views/basket.html:39
+#: hkm/templates/hkm/views/basket.html:40
 msgid "Back to Homepage"
 msgstr "Tillbaka till startsidan"
 
-#: hkm/templates/hkm/views/basket.html:28
-#: hkm/templates/hkm/views/order_show_result.html:72
-#: hkm/templates/hkm/views/order_summary.html:57
-msgid "Total"
-msgstr "Totalpris"
-
-#: hkm/templates/hkm/views/basket.html:31
+#: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
 msgstr "Fortsätt till utcheckningen"
 
@@ -868,12 +882,6 @@ msgstr "Kvaliteten på den färdiga utskriften:"
 msgid "Hinta yht."
 msgstr "Totalpris"
 
-#: hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_show_result.html:74
-#: hkm/templates/hkm/views/order_summary.html:59
-msgid "Incl. VAT"
-msgstr "Inkl. moms"
-
 #: hkm/templates/hkm/views/order.html:59
 msgid "Add to cart"
 msgstr "Lägg i korgen"
@@ -982,11 +990,11 @@ msgstr "Gå till betalningssidan genom att klicka på Beställ."
 msgid "Change"
 msgstr "Ändra"
 
-#: hkm/templates/hkm/views/order_summary.html:66
+#: hkm/templates/hkm/views/order_summary.html:72
 msgid "Order (verb)"
 msgstr "Beställ"
 
-#: hkm/templates/hkm/views/order_summary.html:68
+#: hkm/templates/hkm/views/order_summary.html:74
 msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
@@ -1027,6 +1035,9 @@ msgstr "Favoriter"
 #: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Dina favoritbilder finns samlade här"
+
+#~ msgid "Postal fees"
+#~ msgstr "fraktkostnader"
 
 #~ msgid ""
 #~ "\n"

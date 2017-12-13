@@ -370,7 +370,7 @@ class ProductOrder(BaseModel):
     amount = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
     postal_fees = models.DecimalField(verbose_name=_(
-        u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
+        u'Shipping fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
     unit_price = models.DecimalField(verbose_name=_(
         u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
     total_price = models.DecimalField(verbose_name=_(
