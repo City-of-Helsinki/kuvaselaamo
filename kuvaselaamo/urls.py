@@ -15,8 +15,8 @@ class AdminSite(admin.AdminSite):
 admin.site = AdminSite()
 admin.autodiscover()
 
-handler404 = 'hkm.views.handler404'
-handler500 = 'hkm.views.handler500'
+handler404 = 'hkm.views.views.handler404'
+handler500 = 'hkm.views.views.handler500'
 
 admin_urls = [
     url(r'^sysadmin/', include(admin.site.urls)),

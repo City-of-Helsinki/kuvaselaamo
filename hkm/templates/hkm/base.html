@@ -1,5 +1,5 @@
 {% load compress %}
-{% load i18n %}
+{% load i18n hkm_tags %}
 
 <html>
 <head>
@@ -71,7 +71,7 @@
 <body class="{% block body_class %}{% endblock %}">
 
   {% include 'hkm/snippets/svg_icons.html' %}
-
+  
   {% include 'hkm/snippets/navigation.html' %}
 
   <div class="login-modal modal fade {% if login_form.errors %}error{% endif %}" id="login" tabindex="-1" role="dialog">
@@ -137,6 +137,7 @@
     <script src="/static/hkm/js/leaflet.js"></script>
     <script src="/static/hkm/js/clipboard.js"></script>
     <script src="/static/hkm/js/hkm-v2.js"></script>
+    <script src="/static/hkm/js/buy.js"></script>
     <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

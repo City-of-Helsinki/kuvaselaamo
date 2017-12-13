@@ -5,8 +5,10 @@ import logging
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
-from hkm.models import Collection, Feedback, ProductOrder
+from hkm.models.campaigns import CampaignCode
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection
 
 LOG = logging.getLogger(__name__)
 
@@ -67,3 +69,44 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email']
 
+
+class ProductOrderCollectionForm(forms.ModelForm):
+    action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
+    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
+
+    class Meta:
+        model = ProductOrderCollection
+        fields = ['orderer_name']
+
+
+class GenerateCampaignCodesActionForm(forms.Form):
+    code_prefix = forms.CharField(
+        required=False,
+        widget=forms.TextInput,
+    )
+    code_length = forms.CharField(
+        required=False,
+        widget=forms.TextInput,
+    )
+    amount = forms.IntegerField(
+        required=False,
+    )
+
+    def form_action(self, campaign):
+        for i in range(0, self.cleaned_data["amount"]):
+            code = CampaignCode(campaign=campaign)
+            code.generate_code(
+                length=self.cleaned_data["code_length"],
+                prefix=self.cleaned_data["code_prefix"],
+            )
+            code.save()
+
+    # def save(self, campaign):
+    #     try:
+    #         account, action = self.form_action(account, user)
+    #     except errors.Error as e:
+    #         error_message = str(e)
+    #         self.add_error(None, error_message)
+    #         raise
+    #
+    #     return account, action

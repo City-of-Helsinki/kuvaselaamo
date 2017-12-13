@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 16:45+0300\n"
+"POT-Creation-Date: 2017-12-13 10:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -18,628 +18,774 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: hkm/hkm/models.py:34
+#: hkm/forms.py:75 hkm/models/models.py:505
+msgid "Orderer's name"
+msgstr "Tilaajan nimi"
+
+#: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
+msgid "Tila"
+msgstr ""
+
+#: hkm/models/campaigns.py:77
+msgid "Alkupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:82
+msgid "Loppupäivämäärä"
+msgstr ""
+
+#: hkm/models/campaigns.py:87
+#, fuzzy
+#| msgid "Tuotetyyppi"
+msgid "Tyyppi"
+msgstr "Tuotetyyppi"
+
+#: hkm/models/campaigns.py:93
+msgid "Kampanjamoduuli"
+msgstr ""
+
+#: hkm/models/campaigns.py:98
+msgid "Yhteiskäyttöestoryhmä"
+msgstr ""
+
+#: hkm/models/campaigns.py:104
+msgid "Prosentuaalinen alennus"
+msgstr ""
+
+#: hkm/models/campaigns.py:111
+msgid "Absoluuttinen alennus (veroton)"
+msgstr ""
+
+#: hkm/models/campaigns.py:116
+msgid "Free shipping"
+msgstr ""
+
+#: hkm/models/campaigns.py:121
+msgid "Nimi"
+msgstr ""
+
+#: hkm/models/campaigns.py:126
+msgid "kampanja"
+msgstr ""
+
+#: hkm/models/campaigns.py:127
+msgid "kampanjat"
+msgstr ""
+
+#: hkm/models/campaigns.py:160
+msgid "kampanjakoodi"
+msgstr ""
+
+#: hkm/models/campaigns.py:161
+msgid "kampanjakoodit"
+msgstr ""
+
+#: hkm/models/models.py:39
 msgid "Created"
 msgstr "Luotu"
 
-#: hkm/hkm/models.py:35
+#: hkm/models/models.py:40
 msgid "Modified"
 msgstr "Muokattu"
 
-#: hkm/hkm/models.py:47
+#: hkm/models/models.py:52
 msgid "Finnish"
 msgstr "suomi"
 
-#: hkm/hkm/models.py:48
+#: hkm/models/models.py:53
 msgid "English"
 msgstr "englanti"
 
-#: hkm/hkm/models.py:49
+#: hkm/models/models.py:54
 msgid "Swedish"
 msgstr "ruotsi"
 
-#: hkm/hkm/models.py:53 hkm/hkm/models.py:269 hkm/hkm/models.py:487
+#: hkm/models/models.py:58 hkm/models/models.py:302 hkm/models/models.py:441
 msgid "User"
 msgstr "Käyttäjä"
 
-#: hkm/hkm/models.py:54
+#: hkm/models/models.py:59
 msgid "Is admin"
 msgstr "Pääkäyttäjä"
 
-#: hkm/hkm/models.py:55 hkm/hkm/templates/hkm/base.html:111
+#: hkm/models/models.py:60 hkm/templates/hkm/snippets/navigation.html:38
 msgid "Language"
 msgstr "In English / På Svenska"
 
-#: hkm/hkm/models.py:81
+#: hkm/models/models.py:62
+msgid "Is museum"
+msgstr ""
+
+#: hkm/models/models.py:111
 msgid "Normal"
 msgstr "Normaali"
 
-#: hkm/hkm/models.py:82
+#: hkm/models/models.py:112
 msgid "Favorite"
 msgstr "Suosikki"
 
-#: hkm/hkm/models.py:85
+#: hkm/models/models.py:115
 msgid "Owner"
 msgstr "Omistaja"
 
-#: hkm/hkm/models.py:86 hkm/hkm/models.py:508
+#: hkm/models/models.py:116 hkm/models/models.py:463 hkm/models/models.py:483
 msgid "Title"
 msgstr "Otsikko"
 
-#: hkm/hkm/models.py:88 hkm/hkm/models.py:226
+#: hkm/models/models.py:118 hkm/models/models.py:256
 msgid "Description"
 msgstr "Kuvaus"
 
-#: hkm/hkm/models.py:89
+#: hkm/models/models.py:119
 msgid "Public"
 msgstr "Julkinen"
 
-#: hkm/hkm/models.py:91
+#: hkm/models/models.py:121
 msgid "Featured"
 msgstr "Näytteillä"
 
-#: hkm/hkm/models.py:93 hkm/hkm/templates/hkm/views/collection.html:38
+#: hkm/models/models.py:123 hkm/templates/hkm/views/collection.html:38
 msgid "Show in landing page"
 msgstr "Näytä etusivulla"
 
-#: hkm/hkm/models.py:94
+#: hkm/models/models.py:124
 msgid "Type"
 msgstr "Tyyppi"
 
-#: hkm/hkm/models.py:148 hkm/hkm/models.py:505
+#: hkm/models/models.py:178 hkm/models/models.py:460
 msgid "Creator"
 msgstr "Tekijä"
 
-#: hkm/hkm/models.py:150
-#: hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/models/models.py:180 hkm/templates/hkm/views/collection_record.html:20
 msgid "Collection"
 msgstr "Albumi"
 
-#: hkm/hkm/models.py:152 hkm/hkm/models.py:297 hkm/hkm/models.py:489
-#: hkm/hkm/models.py:507
+#: hkm/models/models.py:182 hkm/models/models.py:330 hkm/models/models.py:443
+#: hkm/models/models.py:462
 msgid "Finna record ID"
 msgstr "Finna-tietueen ID"
 
-#: hkm/hkm/models.py:153
+#: hkm/models/models.py:183
 msgid "Edited full resolution image"
 msgstr "Editoi täysiresoluutioisen kuvan"
 
-#: hkm/hkm/models.py:155
+#: hkm/models/models.py:185
 msgid "Edited preview image"
 msgstr "Editoi esikatselukuvan"
 
-#: hkm/hkm/models.py:224 hkm/hkm/models.py:249 hkm/hkm/models.py:491
-#: hkm/hkm/templates/hkm/emails/feedback.txt:2
-#: hkm/hkm/templates/hkm/views/order_show_result.html:37
-#: hkm/hkm/templates/hkm/views/order_summary.html:25
+#: hkm/models/models.py:254 hkm/models/models.py:279 hkm/models/models.py:445
+#: hkm/models/models.py:473 hkm/templates/hkm/emails/feedback.txt:2
+#: hkm/templates/hkm/views/order_show_result.html:37
+#: hkm/templates/hkm/views/order_summary.html:25
 msgid "Name"
 msgstr "Nimi"
 
-#: hkm/hkm/models.py:228
-#: hkm/hkm/templates/hkm/views/order_show_result.html:59
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
+#: hkm/models/models.py:258 hkm/templates/hkm/views/order_show_result.html:55
+#: hkm/templates/hkm/views/order_summary.html:43
 msgid "Price"
 msgstr "Hinta"
 
-#: hkm/hkm/models.py:240
+#: hkm/models/models.py:270
 msgid "api-poster-gloss-30x40"
 msgstr "30x40 cm, Puolikiiltävä 240g"
 
-#: hkm/hkm/models.py:241
+#: hkm/models/models.py:271
 msgid "api-poster-gloss-40x30"
 msgstr "40x30 cm, Puolikiiltävä 240g"
 
-#: hkm/hkm/models.py:242
+#: hkm/models/models.py:272
 msgid "api-poster-50x70"
 msgstr "50x70 cm, Matta 180g"
 
-#: hkm/hkm/models.py:243
+#: hkm/models/models.py:273
 msgid "api-poster-70x50"
 msgstr "70x50 cm, Matta 180g"
 
-#: hkm/hkm/models.py:244
+#: hkm/models/models.py:274
 msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Vaaka, Puolikiiltävä 240g"
 
-#: hkm/hkm/models.py:245
+#: hkm/models/models.py:275
 msgid "api-poster-gloss-A4"
 msgstr "A4 Pysty, Puolikiiltävä 240g"
 
-#: hkm/hkm/models.py:250
+#: hkm/models/models.py:280
 msgid "Width"
 msgstr "Leveys"
 
-#: hkm/hkm/models.py:251
+#: hkm/models/models.py:281
 msgid "Height"
 msgstr "Korkeus"
 
-#: hkm/hkm/models.py:253
+#: hkm/models/models.py:283
 msgid "Paper quality"
 msgstr "Paperin laatu"
 
-#: hkm/hkm/models.py:270
+#: hkm/models/models.py:284
+msgid "Museum purchase only"
+msgstr ""
+
+#: hkm/models/models.py:303
 msgid "Session"
 msgstr "Sessio"
 
-#: hkm/hkm/models.py:272
+#: hkm/models/models.py:305
 msgid "First name"
 msgstr "Etunimi"
 
-#: hkm/hkm/models.py:274
+#: hkm/models/models.py:307
 msgid "Last name"
 msgstr "Sukunimi"
 
-#: hkm/hkm/models.py:276 hkm/hkm/models.py:493
-#: hkm/hkm/templates/hkm/emails/feedback.txt:3
-#: hkm/hkm/templates/hkm/views/order_show_result.html:40
-#: hkm/hkm/templates/hkm/views/order_summary.html:28
+#: hkm/models/models.py:309 hkm/models/models.py:447
+#: hkm/templates/hkm/emails/feedback.txt:3
+#: hkm/templates/hkm/views/order_show_result.html:40
+#: hkm/templates/hkm/views/order_summary.html:28
 msgid "Email"
 msgstr "Sähköposti"
 
-#: hkm/hkm/models.py:278
-#: hkm/hkm/templates/hkm/views/order_show_result.html:43
-#: hkm/hkm/templates/hkm/views/order_summary.html:31
+#: hkm/models/models.py:311 hkm/templates/hkm/views/order_show_result.html:43
+#: hkm/templates/hkm/views/order_summary.html:31
 msgid "Phone number"
 msgstr "Puhelinnumero"
 
-#: hkm/hkm/models.py:280
+#: hkm/models/models.py:313
 msgid "Street adress"
 msgstr "Katuosoite"
 
-#: hkm/hkm/models.py:282
+#: hkm/models/models.py:315
 msgid "Postal code"
 msgstr "Postinumero"
 
-#: hkm/hkm/models.py:284
+#: hkm/models/models.py:317
 msgid "City"
 msgstr "Postitoimipaikka"
 
-#: hkm/hkm/models.py:299
+#: hkm/models/models.py:332
 msgid "Crop x coordinate from left"
 msgstr "Rajaa x-koordinaatti vasemmalta"
 
-#: hkm/hkm/models.py:301
+#: hkm/models/models.py:334
 msgid "Crop y coordinate from top"
 msgstr "Rajaa y-koordinaatti ylhäältä"
 
-#: hkm/hkm/models.py:303
+#: hkm/models/models.py:336
 msgid "Crop width"
 msgstr "Rajauksen leveys"
 
-#: hkm/hkm/models.py:305
+#: hkm/models/models.py:338
 msgid "Crop height"
 msgstr "Rajauksen korkeus"
 
-#: hkm/hkm/models.py:307
+#: hkm/models/models.py:340
 msgid "Original image width"
 msgstr "Kuvan alkuperäinen leveys"
 
-#: hkm/hkm/models.py:309
+#: hkm/models/models.py:342
 msgid "Original image height"
 msgstr "Kuvan alkuperäinen korkeus"
 
-#: hkm/hkm/models.py:311
+#: hkm/models/models.py:344
 msgid "Full res original image width"
 msgstr "Kokoresoluutioisen kuvan alkuperäinen leveys"
 
-#: hkm/hkm/models.py:313
+#: hkm/models/models.py:346
 msgid "Full res original image height"
 msgstr "Kokoresoluutioisen kuvan alkuperäinen korkeus"
 
-#: hkm/hkm/models.py:319
+#: hkm/models/models.py:352
 msgid "Image URL"
 msgstr "Kuvan URL"
 
-#: hkm/hkm/models.py:321
+#: hkm/models/models.py:354
 msgid "Cropped Image URL"
 msgstr "Rajatun kuvan URL"
 
-#: hkm/hkm/models.py:325 hkm/hkm/templates/hkm/emails/feedback.txt:6
+#: hkm/models/models.py:358 hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr "Kuva"
 
-#: hkm/hkm/models.py:328
+#: hkm/models/models.py:361
 msgid "Order form phase"
 msgstr "Tilauksen vaihe"
 
-#: hkm/hkm/models.py:330
+#: hkm/models/models.py:363
 msgid "Randomized order identifier phrase"
 msgstr "Tilauksen yksilöivä satunnainen tunniste"
 
-#: hkm/hkm/models.py:332
+#: hkm/models/models.py:365
 msgid "Product type"
 msgstr "Tuotetyyppi"
 
-#: hkm/hkm/models.py:334
+#: hkm/models/models.py:367
 msgid "Product Name"
 msgstr "Tuotteen nimi"
 
-#: hkm/hkm/models.py:338
-#: hkm/hkm/templates/hkm/views/order_show_result.html:56
-#: hkm/hkm/templates/hkm/views/order_summary.html:44
+#: hkm/models/models.py:371 hkm/templates/hkm/views/order_show_result.html:54
+#: hkm/templates/hkm/views/order_summary.html:42
 msgid "Amount"
 msgstr "Määrä"
 
-#: hkm/hkm/models.py:340 hkm/hkm/templates/hkm/views/order.html:56
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
-msgid "Postal fees"
-msgstr "postikulut"
+#: hkm/models/models.py:373 hkm/templates/hkm/snippets/_basket_total_row.html:5
+#: hkm/templates/hkm/snippets/_basket_total_row.html:7
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_summary.html:61
+#: hkm/templates/hkm/views/order_summary.html:63
+msgid "Shipping fees"
+msgstr "toimituskulut"
 
-#: hkm/hkm/models.py:342
+#: hkm/models/models.py:375
 msgid "Unit price"
 msgstr "Yksikköhinta"
 
-#: hkm/hkm/models.py:344
+#: hkm/models/models.py:377
 msgid "Total price"
 msgstr "Kokonaishinta"
 
-#: hkm/hkm/models.py:346
+#: hkm/models/models.py:379
 #, fuzzy
 #| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Kokonaishinta"
 
-#: hkm/hkm/models.py:350
+#: hkm/models/models.py:383
 msgid "Confirmed"
 msgstr "Vahvistettu"
 
-#: hkm/hkm/models.py:354
+#: hkm/models/models.py:387
 msgid "Checkout started"
 msgstr "Kassatapahtuma aloitettu"
 
-#: hkm/hkm/models.py:356
+#: hkm/models/models.py:389
 msgid "Checkout ended"
 msgstr "Kassatapahtuma päättynyt"
 
-#: hkm/hkm/models.py:358
+#: hkm/models/models.py:391 hkm/models/models.py:510
 msgid "Checkout successful"
 msgstr "Kassatapahtuma onnistui"
 
-#: hkm/hkm/models.py:362
+#: hkm/models/models.py:395
 msgid "Payment processed at"
 msgstr "Maksu käsitelty"
 
-#: hkm/hkm/models.py:364
+#: hkm/models/models.py:397 hkm/models/models.py:512
 msgid "Payment successful"
 msgstr "Maksu onnistui"
 
-#: hkm/hkm/models.py:369
+#: hkm/models/models.py:402
 msgid "Order started"
 msgstr "Tilaus aloitettu"
 
-#: hkm/hkm/models.py:371
+#: hkm/models/models.py:404
 msgid "Order ended"
 msgstr "Tilaus päättynyt"
 
-#: hkm/hkm/models.py:373
+#: hkm/models/models.py:406 hkm/models/models.py:515
 msgid "Order successful"
 msgstr "Tilaus onnistui"
 
-#: hkm/hkm/models.py:494
+#: hkm/models/models.py:448 hkm/models/models.py:487
 msgid "Content"
 msgstr "Sisältö"
 
-#: hkm/hkm/models.py:496
+#: hkm/models/models.py:450
 msgid "Notification sent"
 msgstr "Ilmoitus lähetetty"
 
-#: hkm/hkm/models.py:510
+#: hkm/models/models.py:451
+msgid "Sent from"
+msgstr ""
+
+#: hkm/models/models.py:465
 msgid "Edited image"
 msgstr "Muokattu kuva"
 
-#: hkm/hkm/tasks.py:25
+#: hkm/models/models.py:477
+msgid "Identifier"
+msgstr ""
+
+#: hkm/models/models.py:499
+msgid "Used discount code"
+msgstr ""
+
+#: hkm/models/models.py:506
+msgid "Total order price"
+msgstr "Kokonaishinta"
+
+#: hkm/models/models.py:507
+msgid "Sent to printer"
+msgstr "Lähetetty tulostettavaksi"
+
+#: hkm/tasks.py:26
 msgid "Kuvaselaamopalaute"
 msgstr "Helsinkikuvia.fi palaute"
 
-#: hkm/hkm/templates/hkm/base.html:23
-#: hkm/hkm/templates/hkm/views/index.html:33
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
+#: hkm/templates/hkm/base.html:23 hkm/templates/hkm/base.html:24
+#: hkm/templates/hkm/views/index.html:33
 msgid "Kuvaselaamo"
 msgstr "Helsinkikuvia.fi"
 
-#: hkm/hkm/templates/hkm/base.html:24
-msgid "Kuvaselaamo demo."
-msgstr "Helsinkikuvia.fi-demo."
-
-#: hkm/hkm/templates/hkm/base.html:98 hkm/hkm/templates/hkm/base.html:102
-#: hkm/hkm/templates/hkm/base.html:103
-#: hkm/hkm/templates/hkm/views/search.html:13
-#: hkm/hkm/templates/hkm/views/search.html:18
-#: hkm/hkm/templates/hkm/views/search_record.html:22
-msgid "Search"
-msgstr "Haku"
-
-#: hkm/hkm/templates/hkm/base.html:105
-msgid "Explore collections"
-msgstr "Selaa albumeita"
-
-#: hkm/hkm/templates/hkm/base.html:107
-#: hkm/hkm/templates/hkm/views/my_collections.html:10
-msgid "My collections"
-msgstr "Omat albumit"
-
-#: hkm/hkm/templates/hkm/base.html:109 hkm/hkm/templates/hkm/base.html:171
-#: hkm/hkm/templates/hkm/views/info.html:9
-#: hkm/hkm/templates/hkm/views/record_feedback.html:27
-msgid "Feedback"
-msgstr "Palaute"
-
-#: hkm/hkm/templates/hkm/base.html:114 hkm/hkm/templates/hkm/base.html:121
-msgid "In English"
-msgstr "In English"
-
-#: hkm/hkm/templates/hkm/base.html:115 hkm/hkm/templates/hkm/base.html:118
-msgid "På svenska"
-msgstr "På svenska"
-
-#: hkm/hkm/templates/hkm/base.html:117 hkm/hkm/templates/hkm/base.html:120
-msgid "Suomeksi"
-msgstr "Suomeksi"
-
-#: hkm/hkm/templates/hkm/base.html:126
-msgid "Logout"
-msgstr "Kirjaudu ulos"
-
-#: hkm/hkm/templates/hkm/base.html:128
-#: hkm/hkm/templates/hkm/snippets/login.html:14
-msgid "Log in"
-msgstr "Kirjaudu sisään"
-
-#: hkm/hkm/templates/hkm/base.html:139
+#: hkm/templates/hkm/base.html:81
 msgid "Facebook login"
 msgstr "Facebook-kirjautuminen"
 
-#: hkm/hkm/templates/hkm/base.html:140
+#: hkm/templates/hkm/base.html:82
 msgid "Google login"
 msgstr "Google-kirjautuminen"
 
-#: hkm/hkm/templates/hkm/base.html:141
+#: hkm/templates/hkm/base.html:83
 msgid "Login with credentials"
 msgstr "Kirjaudu sisään tunnuksilla"
 
-#: hkm/hkm/templates/hkm/base.html:143 hkm/hkm/templates/hkm/base.html:153
-#: hkm/hkm/templates/hkm/snippets/signup.html:14
+#: hkm/templates/hkm/base.html:85 hkm/templates/hkm/base.html:95
+#: hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
 msgstr "Luo tunnus"
 
-#: hkm/hkm/templates/hkm/base.html:167
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:9
+#: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Tietoa palvelusta"
 
-#: hkm/hkm/templates/hkm/base.html:168
+#: hkm/templates/hkm/base.html:110
 msgid "Frequently asked questions"
 msgstr "Kysymyksiä ja vastauksia"
 
-#: hkm/hkm/templates/hkm/base.html:169
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:9
+#: hkm/templates/hkm/base.html:111
 msgid "Terms of use"
 msgstr "Käyttöehdot"
 
-#: hkm/hkm/templates/hkm/base.html:170
+#: hkm/templates/hkm/base.html:112
 msgid "Privacy policy"
 msgstr "Tietosuoja"
 
-#: hkm/hkm/templates/hkm/base.html:174
+#: hkm/templates/hkm/base.html:113
+#: hkm/templates/hkm/snippets/navigation.html:35
+#: hkm/templates/hkm/views/info.html:9
+#: hkm/templates/hkm/views/record_feedback.html:27
+msgid "Feedback"
+msgstr "Palaute"
+
+#: hkm/templates/hkm/base.html:116
 msgid "This service is provided by"
 msgstr "Tämän palvelun tarjoaa"
 
-#: hkm/hkm/templates/hkm/base.html:176
+#: hkm/templates/hkm/base.html:118
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
 
-#: hkm/hkm/templates/hkm/base_browse.html:19
+#: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Edellinen kuva"
 
-#: hkm/hkm/templates/hkm/base_browse.html:22
+#: hkm/templates/hkm/base_browse.html:22
 msgid "Next image"
 msgstr "Seuraava kuva"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:109
-#: hkm/hkm/templates/hkm/views/record_OLD.html:29
-msgid "Identification information"
-msgstr "Kuvan tiedot"
+#: hkm/templates/hkm/base_viewer.html:63
+msgid "Share"
+msgstr "Jaa"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:110
-#: hkm/hkm/templates/hkm/views/record_OLD.html:30
-msgid "Image type:"
-msgstr "Kuvatyyppi:"
+#: hkm/templates/hkm/base_viewer.html:70
+msgid "Show details"
+msgstr "Näytä tarkat tiedot"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:112
-#: hkm/hkm/templates/hkm/base_viewer.html:114
-#: hkm/hkm/templates/hkm/views/record_OLD.html:31
-msgid "Image ID:"
-msgstr "Kuvan tunniste:"
+#: hkm/templates/hkm/base_viewer.html:77
+msgid "Download picture"
+msgstr "Lataa kuva"
 
-#: hkm/hkm/templates/hkm/base_viewer.html:117
-#: hkm/hkm/templates/hkm/views/record_OLD.html:33
-msgid "Creation information"
-msgstr "Tekijätiedot"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:118
-#: hkm/hkm/templates/hkm/views/record_OLD.html:34
-msgid "Photographer:"
-msgstr "Tekijä:"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:119
-#: hkm/hkm/templates/hkm/views/record_OLD.html:35
-msgid "Image pick-up year:"
-msgstr "Ajankohta:"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:121
-#: hkm/hkm/templates/hkm/views/record_OLD.html:36
-msgid "Property information"
-msgstr "Tallenteen tiedot"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:122
-#: hkm/hkm/templates/hkm/views/record_OLD.html:37
-msgid "Measurements:"
-msgstr "Mitat:"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:128
-#: hkm/hkm/templates/hkm/views/record_OLD.html:38
-msgid "License information"
-msgstr "Lisenssi"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:135
-#: hkm/hkm/templates/hkm/views/record_OLD.html:42
-msgid "Related collections"
-msgstr "Kuvaan liittyvät albumit"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:154
-#: hkm/hkm/templates/hkm/views/record_OLD.html:61
-msgid "No description"
-msgstr "Ei kuvausta"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:168
-msgid "Image feedback"
-msgstr "Lähetä palautetta kuvasta"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:172
-#: hkm/hkm/templates/hkm/base_viewer.html:222
-#: hkm/hkm/templates/hkm/views/index.html:64
-#: hkm/hkm/templates/hkm/views/index.html:86
-#: hkm/hkm/templates/hkm/views/info.html:24
-#: hkm/hkm/templates/hkm/views/record_feedback.html:31
-msgid "Submit"
-msgstr "Lähetä"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:195
-msgid "Crop and order"
-msgstr "Rajaa ja tilaa"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:221
-#: hkm/hkm/templates/hkm/base_viewer.html:243
-#: hkm/hkm/templates/hkm/base_viewer.html:283
-#: hkm/hkm/templates/hkm/views/index.html:46
-#: hkm/hkm/templates/hkm/views/index.html:63
-#: hkm/hkm/templates/hkm/views/index.html:85
-msgid "Close"
-msgstr "Sulje"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:233
-#: hkm/hkm/templates/hkm/snippets/popover_cart.html:10
-#: hkm/hkm/templates/hkm/views/index.html:57
-msgid "Crop and download"
-msgstr "Rajaa ja lataa"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:244
-msgid "Download"
-msgstr "Lataa"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:255
-msgid "Crop and add to collection"
-msgstr "Rajaa ja lisää albumiin"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:260
-msgid "Add to an existing collection"
-msgstr "Lisää olemassa olevaan albumiin"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:267
-msgid "Create a new collection"
-msgstr "Luo uusi albumi"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:272
-#: hkm/hkm/templates/hkm/views/index.html:82
-msgid "New collection"
-msgstr "Uusi albumi"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:284
-#: hkm/hkm/templates/hkm/snippets/popover_add.html:4
-msgid "Add to collection"
-msgstr "Lisää albumiin"
-
-#: hkm/hkm/templates/hkm/emails/feedback.txt:9
-msgid "Message"
-msgstr "Viesti"
-
-#: hkm/hkm/templates/hkm/snippets/not_responding.html:4
-msgid "Finnas material server is not responding"
-msgstr "Finnan aineistopalvelin ei vastaa"
-
-#: hkm/hkm/templates/hkm/snippets/popover_buy.html:8
-#: hkm/hkm/templates/hkm/base_viewer.html:85
+#: hkm/templates/hkm/base_viewer.html:88
+#: hkm/templates/hkm/snippets/search_records_grid.html:7
+#: hkm/templates/hkm/views/collection.html:68
+#: hkm/templates/hkm/views/record.html:63
 msgid "Buy this as a poster"
 msgstr "Osta tämä julisteena"
 
-#: hkm/hkm/templates/hkm/snippets/popover_cart.html:5
+#: hkm/templates/hkm/base_viewer.html:126
+msgid "Identification information"
+msgstr "Kuvan tiedot"
+
+#: hkm/templates/hkm/base_viewer.html:127
+msgid "Image type:"
+msgstr "Kuvatyyppi:"
+
+#: hkm/templates/hkm/base_viewer.html:129
+#: hkm/templates/hkm/base_viewer.html:131
+msgid "Image ID:"
+msgstr "Kuvan tunniste:"
+
+#: hkm/templates/hkm/base_viewer.html:134
+msgid "Creation information"
+msgstr "Tekijätiedot"
+
+#: hkm/templates/hkm/base_viewer.html:135
+msgid "Photographer:"
+msgstr "Tekijä:"
+
+#: hkm/templates/hkm/base_viewer.html:136
+msgid "Image pick-up year:"
+msgstr "Ajankohta:"
+
+#: hkm/templates/hkm/base_viewer.html:138
+msgid "Property information"
+msgstr "Tallenteen tiedot"
+
+#: hkm/templates/hkm/base_viewer.html:139
+msgid "Measurements:"
+msgstr "Mitat:"
+
+#: hkm/templates/hkm/base_viewer.html:145
+msgid "License information"
+msgstr "Lisenssi"
+
+#: hkm/templates/hkm/base_viewer.html:152
+msgid "Related collections"
+msgstr "Kuvaan liittyvät albumit"
+
+#: hkm/templates/hkm/base_viewer.html:171
+msgid "No description"
+msgstr "Ei kuvausta"
+
+#: hkm/templates/hkm/base_viewer.html:185
+msgid "Image feedback"
+msgstr "Lähetä palautetta kuvasta"
+
+#: hkm/templates/hkm/base_viewer.html:190
+#: hkm/templates/hkm/base_viewer.html:241 hkm/templates/hkm/views/index.html:66
+#: hkm/templates/hkm/views/index.html:88 hkm/templates/hkm/views/info.html:24
+#: hkm/templates/hkm/views/record_feedback.html:31
+msgid "Submit"
+msgstr "Lähetä"
+
+#: hkm/templates/hkm/base_viewer.html:214
+msgid "Crop and order"
+msgstr "Rajaa ja tilaa"
+
+#: hkm/templates/hkm/base_viewer.html:240
+#: hkm/templates/hkm/base_viewer.html:262
+#: hkm/templates/hkm/base_viewer.html:302 hkm/templates/hkm/views/index.html:48
+#: hkm/templates/hkm/views/index.html:65 hkm/templates/hkm/views/index.html:87
+msgid "Close"
+msgstr "Sulje"
+
+#: hkm/templates/hkm/base_viewer.html:252
+#: hkm/templates/hkm/snippets/popover_cart.html:10
+#: hkm/templates/hkm/views/index.html:59
+msgid "Crop and download"
+msgstr "Rajaa ja lataa"
+
+#: hkm/templates/hkm/base_viewer.html:263
+msgid "Download"
+msgstr "Lataa"
+
+#: hkm/templates/hkm/base_viewer.html:274
+msgid "Crop and add to collection"
+msgstr "Rajaa ja lisää albumiin"
+
+#: hkm/templates/hkm/base_viewer.html:279
+msgid "Add to an existing collection"
+msgstr "Lisää olemassa olevaan albumiin"
+
+#: hkm/templates/hkm/base_viewer.html:286
+msgid "Create a new collection"
+msgstr "Luo uusi albumi"
+
+#: hkm/templates/hkm/base_viewer.html:291 hkm/templates/hkm/views/index.html:84
+msgid "New collection"
+msgstr "Uusi albumi"
+
+#: hkm/templates/hkm/base_viewer.html:303
+#: hkm/templates/hkm/snippets/popover_add.html:4
+msgid "Add to collection"
+msgstr "Lisää albumiin"
+
+#: hkm/templates/hkm/emails/feedback.txt:9
+msgid "Message"
+msgstr "Viesti"
+
+#: hkm/templates/hkm/snippets/_basket_total_row.html:2
+#: hkm/templates/hkm/views/order_show_result.html:72
+#: hkm/templates/hkm/views/order_summary.html:57
+msgid "Total"
+msgstr "Kokonaishinta"
+
+#: hkm/templates/hkm/snippets/_basket_total_row.html:9
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_show_result.html:74
+#: hkm/templates/hkm/views/order_summary.html:65
+msgid "Incl. VAT"
+msgstr "Sis. ALV"
+
+#: hkm/templates/hkm/snippets/login.html:14
+#: hkm/templates/hkm/snippets/navigation.html:56
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:4
+msgid "The cart contains"
+msgstr "Ostoskorissa on"
+
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
+msgid "photo"
+msgid_plural "photos"
+msgstr[0] "kuva"
+msgstr[1] "kuvaa"
+
+#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
+#: hkm/templates/hkm/views/basket.html:41
+msgid "Your cart is empty"
+msgstr "Ostoskori on tyhjä"
+
+#: hkm/templates/hkm/snippets/navigation.html:23
+#: hkm/templates/hkm/snippets/navigation.html:26
+#: hkm/templates/hkm/views/search.html:13
+#: hkm/templates/hkm/views/search.html:18
+#: hkm/templates/hkm/views/search_record.html:22
+msgid "Search"
+msgstr "Haku"
+
+#: hkm/templates/hkm/snippets/navigation.html:30
+msgid "Explore collections"
+msgstr "Selaa albumeita"
+
+#: hkm/templates/hkm/snippets/navigation.html:32
+#: hkm/templates/hkm/views/my_collections.html:10
+msgid "My collections"
+msgstr "Omat albumit"
+
+#: hkm/templates/hkm/snippets/navigation.html:41
+#: hkm/templates/hkm/snippets/navigation.html:48
+msgid "In English"
+msgstr "In English"
+
+#: hkm/templates/hkm/snippets/navigation.html:42
+#: hkm/templates/hkm/snippets/navigation.html:45
+msgid "På svenska"
+msgstr "På svenska"
+
+#: hkm/templates/hkm/snippets/navigation.html:44
+#: hkm/templates/hkm/snippets/navigation.html:47
+msgid "Suomeksi"
+msgstr "Suomeksi"
+
+#: hkm/templates/hkm/snippets/navigation.html:54
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+# no_results.html
+#: hkm/templates/hkm/snippets/no_results.html:5
+msgid "No search results"
+msgstr "Ei hakutuloksia"
+
+#: hkm/templates/hkm/snippets/no_results.html:7
+msgid "Oops, there was an error, try again soon."
+msgstr "Kuvien haku epäonnistui. Kokeile hetken kuluttua uudestaan."
+
+#: hkm/templates/hkm/snippets/not_responding.html:4
+msgid "Finnas material server is not responding"
+msgstr "Finnan aineistopalvelin ei vastaa"
+
+#: hkm/templates/hkm/snippets/popover_cart.html:5
 msgid "Download printable image"
 msgstr "Lataa painokelpoinen kuva"
 
-#: hkm/hkm/templates/hkm/snippets/popover_cart.html:8
+#: hkm/templates/hkm/snippets/popover_cart.html:8
 msgid "Download web-image"
 msgstr "Lataa web-kuva"
 
-#: hkm/hkm/templates/hkm/snippets/popover_cart.html:12
+#: hkm/templates/hkm/snippets/popover_cart.html:12
 msgid "Order a product of the image"
 msgstr "Tilaa kuvatuote"
 
-#: hkm/hkm/templates/hkm/snippets/popover_cart.html:14
+#: hkm/templates/hkm/snippets/popover_cart.html:14
 msgid "This is a low resolution image, product orders are not available"
 msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
 
-#: hkm/hkm/templates/hkm/snippets/popover_favorite.html:3
+#: hkm/templates/hkm/snippets/popover_favorite.html:3
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
 
-#: hkm/hkm/templates/hkm/snippets/popover_share.html:4
+#: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
 msgstr "Kopioi kuvan osoite leikepöydälle"
 
-#: hkm/hkm/templates/hkm/views/404.html:8
+#: hkm/templates/hkm/snippets/search_records_grid.html:7
+#: hkm/templates/hkm/views/collection.html:68
+msgid "Buy"
+msgstr "Osta"
+
+#: hkm/templates/hkm/views/404.html:8
 msgid "#error-404-title"
 msgstr "404 - Sivua ei löydy"
 
-#: hkm/hkm/templates/hkm/views/404.html:9
+#: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Etsimääsi sivua ei löydy"
 
-#: hkm/hkm/templates/hkm/views/500.html:8
+#: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
 msgstr "500 - Palvelinvirhe"
 
-#: hkm/hkm/templates/hkm/views/collection.html:32
+#: hkm/templates/hkm/views/_basket_content.html:28
+msgid "kpl"
+msgstr ""
+
+#: hkm/templates/hkm/views/_basket_content.html:42
+msgid "Discount code"
+msgstr "Alennuskoodi"
+
+#: hkm/templates/hkm/views/_basket_content.html:45
+msgid "Use code"
+msgstr "Käytä"
+
+#: hkm/templates/hkm/views/basket.html:13
+#: hkm/templates/hkm/views/basket.html:40
+msgid "Back to Homepage"
+msgstr "Takaisin etusivulle"
+
+#: hkm/templates/hkm/views/basket.html:32
+msgid "Proceed to Checkout"
+msgstr "Tilaa"
+
+#: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr "Aseta julkiseksi"
 
-#: hkm/hkm/templates/hkm/views/collection.html:42
+#: hkm/templates/hkm/views/collection.html:42
 msgid "Set to featured"
 msgstr "Aseta ajankohtaiseksi"
 
-#: hkm/hkm/templates/hkm/views/collection.html:48
+#: hkm/templates/hkm/views/collection.html:48
 msgid "Save"
 msgstr "Tallenna"
 
-#: hkm/hkm/templates/hkm/views/collection.html:49
+#: hkm/templates/hkm/views/collection.html:49
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: hkm/hkm/templates/hkm/views/collection.html:61
-#: hkm/hkm/templates/hkm/views/my_collections.html:22
+#: hkm/templates/hkm/views/collection.html:61
+#: hkm/templates/hkm/views/my_collections.html:22
 msgid "Add images"
 msgstr "Lisää kuvia"
 
-#: hkm/hkm/templates/hkm/views/collection.html:93
+#: hkm/templates/hkm/views/collection.html:98
 msgid "Are you sure you want to delete this item?"
 msgstr "Oletko varma, että haluat poistaa tämän kuvan albumista?"
 
-#: hkm/hkm/templates/hkm/views/collection_record.html:20
+#: hkm/templates/hkm/views/collection_record.html:20
 msgid "Picture"
 msgstr "Kuva"
 
-#: hkm/hkm/templates/hkm/views/collection_record.html:27
+#: hkm/templates/hkm/views/collection_record.html:27
 msgid "Back to collection"
 msgstr "Takaisin albumiin"
 
-#: hkm/hkm/templates/hkm/views/collection_record.html:31
-#: hkm/hkm/templates/hkm/views/index.html:18
-#: hkm/hkm/templates/hkm/views/search_record.html:33
+#: hkm/templates/hkm/views/collection_record.html:31
+#: hkm/templates/hkm/views/index.html:18
+#: hkm/templates/hkm/views/search_record.html:33
 msgid "Left and right click to zoom."
 msgstr "Suurenna ja pienennä kuvaa hiiren painikkeilla"
 
-#: hkm/hkm/templates/hkm/views/index.html:36
-#: hkm/hkm/templates/hkm/views/index.html:145
+#: hkm/templates/hkm/views/index.html:36 hkm/templates/hkm/views/index.html:146
 msgid ""
 "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
 "Valokuvat tarjoaa Helsingin kaupunginmuseo."
@@ -647,124 +793,124 @@ msgstr ""
 "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
 "Valokuvat tarjoaa Helsingin kaupunginmuseo."
 
-#: hkm/hkm/templates/hkm/views/index.html:37
-#: hkm/hkm/templates/hkm/views/index.html:146
+#: hkm/templates/hkm/views/index.html:37 hkm/templates/hkm/views/index.html:147
 msgid "Täällä voit"
 msgstr "Täällä voit"
 
-#: hkm/hkm/templates/hkm/views/index.html:38
-#: hkm/hkm/templates/hkm/views/index.html:147
+#: hkm/templates/hkm/views/index.html:38 hkm/templates/hkm/views/index.html:148
 msgid ""
 "Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta"
 msgstr ""
 "- Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan "
 "joukosta"
 
-#: hkm/hkm/templates/hkm/views/index.html:39
-#: hkm/hkm/templates/hkm/views/index.html:148
+#: hkm/templates/hkm/views/index.html:39 hkm/templates/hkm/views/index.html:149
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
 "- Ladata ilmaiseksi laitteellesi painokelpoisia tai pienempiä, "
 "verkkokäyttöön sopivia kuvia*"
 
-#: hkm/hkm/templates/hkm/views/index.html:40
-#: hkm/hkm/templates/hkm/views/index.html:149
+#: hkm/templates/hkm/views/index.html:40 hkm/templates/hkm/views/index.html:150
 msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
 msgstr "- Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
 
-#: hkm/hkm/templates/hkm/views/index.html:41
-#: hkm/hkm/templates/hkm/views/index.html:150
+#: hkm/templates/hkm/views/index.html:41 hkm/templates/hkm/views/index.html:151
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
 msgstr "- Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
 
-#: hkm/hkm/templates/hkm/views/index.html:42
-#: hkm/hkm/templates/hkm/views/index.html:151
+#: hkm/templates/hkm/views/index.html:42 hkm/templates/hkm/views/index.html:152
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
 msgstr "- Tilata maksullisia kuvatuotteita, kuten julisteita"
 
-#: hkm/hkm/templates/hkm/views/index.html:43
-#: hkm/hkm/templates/hkm/views/index.html:153
+#: hkm/templates/hkm/views/index.html:43 hkm/templates/hkm/views/index.html:154
 msgid ""
 "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
 "*Voit käyttää lataamiasi kuvia haluamaasi tarkoitukseen, kunhan muistat "
 "mainita kuvan ottajan nimen ja Helsingin kaupunginmuseon."
 
-#: hkm/hkm/templates/hkm/views/index.html:76
+# index.html welcome-modal
+#: hkm/templates/hkm/views/index.html:45
+msgid "Katso tarkemmat tiedot käyttöehdoista"
+msgstr "Katso tarkemmat tiedot käyttöehdoista"
+
+#: hkm/templates/hkm/views/index.html:78
 msgid "Add to a new collection"
 msgstr "Lisää uuteen albumiin"
 
-#: hkm/hkm/templates/hkm/views/index.html:106
+#: hkm/templates/hkm/views/index.html:108
 msgid "Search for images from the museum archive"
 msgstr "Etsi kuvia museon arkistosta"
 
-#: hkm/hkm/templates/hkm/views/order.html:17
-#: hkm/hkm/templates/hkm/views/order_contact_information.html:15
-#: hkm/hkm/templates/hkm/views/order_show_result.html:13
-#: hkm/hkm/templates/hkm/views/order_summary.html:16
+#: hkm/templates/hkm/views/order.html:17
+#: hkm/templates/hkm/views/order_contact_information.html:15
+#: hkm/templates/hkm/views/order_show_result.html:13
+#: hkm/templates/hkm/views/order_summary.html:16
 msgid "Kuvan tilaaminen"
 msgstr "Kuvan tilaaminen"
 
-#: hkm/hkm/templates/hkm/views/order.html:23
+#: hkm/templates/hkm/views/order.html:24
 msgid ""
 "Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
 msgstr ""
 "Valitse alta haluamasi kuvatuotetyyppi ja tilattavien tuotteiden lukumäärä."
 
-#: hkm/hkm/templates/hkm/views/order.html:23
+#: hkm/templates/hkm/views/order.html:24
 msgid ""
 "Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon "
 "kokoa."
 msgstr "Rajaa kuva muuttamalla kuvan päällä olevan kehikon kokoa."
 
-#: hkm/hkm/templates/hkm/views/order.html:24
+#: hkm/templates/hkm/views/order.html:25
 msgid "Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä."
 msgstr "Huomaathan, että jos kuvaa rajataan, sen laatu voi kärsiä."
 
-#: hkm/hkm/templates/hkm/views/order.html:24
+#: hkm/templates/hkm/views/order.html:25
 msgid "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
 msgstr "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
 
-#: hkm/hkm/templates/hkm/views/order.html:27
+#: hkm/templates/hkm/views/order.html:28
 msgid "Tuotetyyppi"
 msgstr "Tuotetyyppi"
 
-#: hkm/hkm/templates/hkm/views/order.html:45
+#: hkm/templates/hkm/views/order.html:46
 msgid "Valmiin tulosteen laatu:"
 msgstr "Valmiin tulosteen laatu:"
 
-#: hkm/hkm/templates/hkm/views/order.html:46
+#: hkm/templates/hkm/views/order.html:47
 msgid "Hinta yht."
 msgstr "Hinta yht."
 
-#: hkm/hkm/templates/hkm/views/order.html:56
-#: hkm/hkm/templates/hkm/views/order_summary.html:47
-msgid "Incl. VAT"
-msgstr "Sis. ALV"
+#: hkm/templates/hkm/views/order.html:59
+msgid "Add to cart"
+msgstr "Lisää koriin"
 
-#: hkm/hkm/templates/hkm/views/order.html:57
-#: hkm/hkm/templates/hkm/views/order_contact_information.html:25
-msgid "Jatka"
-msgstr "Jatka"
+#: hkm/templates/hkm/views/order_complete.html:5
+msgid "Thank you for purchase"
+msgstr "Kiitos tilauksestasi"
 
-#: hkm/hkm/templates/hkm/views/order_contact_information.html:20
+#: hkm/templates/hkm/views/order_contact_information.html:20
 msgid "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
 msgstr "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
 
-#: hkm/hkm/templates/hkm/views/order_contact_information.html:20
-#: hkm/hkm/templates/hkm/views/order_summary.html:21
+#: hkm/templates/hkm/views/order_contact_information.html:20
+#: hkm/templates/hkm/views/order_summary.html:21
 msgid "Tarkistathan, että tiedot ovat oikein."
 msgstr "Tarkistathan, että tiedot ovat oikein."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:18
+#: hkm/templates/hkm/views/order_contact_information.html:25
+msgid "Jatka"
+msgstr "Jatka"
+
+#: hkm/templates/hkm/views/order_show_result.html:18
 msgid "Kiitos tilauksestasi - maksu on vahvistettu."
 msgstr "Kiitos tilauksestasi – maksu on vahvistettu."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:18
+#: hkm/templates/hkm/views/order_show_result.html:18
 msgid "Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen."
 msgstr "Saat  vielä erillisen tilausvahvistuksen sähköpostitse."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:21
+#: hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
 "Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
 "tietoa toimituksen etenemisestä."
@@ -772,22 +918,22 @@ msgstr ""
 "Tilauksesi on lähetetty Printmotorille. Saat Printmotorilta sähköpostia "
 "tilauksesi etenemisestä."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:23
+#: hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
 msgstr "Tilauksen lähettämisessä Printmotorille tapahtui virhe."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:23
-#: hkm/hkm/templates/hkm/views/order_show_result.html:31
+#: hkm/templates/hkm/views/order_show_result.html:23
+#: hkm/templates/hkm/views/order_show_result.html:31
 msgid "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään."
 msgstr ""
 "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään: kuvakokoelmat@hel.fi / "
 "puh. +358 9 3103 6497"
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:27
+#: hkm/templates/hkm/views/order_show_result.html:27
 msgid "Kiitos tilauksestasi."
 msgstr "Kiitos tilauksestasi."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:27
+#: hkm/templates/hkm/views/order_show_result.html:27
 msgid ""
 "Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen, kun "
 "maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, "
@@ -797,742 +943,655 @@ msgstr ""
 "vahvistettu. Tähän menee tyypillisesti muutama minuutti, kuitenkin "
 "maksimissaan puoli tuntia."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:31
+#: hkm/templates/hkm/views/order_show_result.html:31
 msgid "Maksun käsittelyssä tapahtui virhe."
 msgstr "Maksun käsittelyssä tapahtui virhe."
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:35
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:12
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:14
-#: hkm/hkm/templates/hkm/views/order_summary.html:23
+#: hkm/templates/hkm/views/order_show_result.html:35
+#: hkm/templates/hkm/views/order_steps_menu.html:13
+#: hkm/templates/hkm/views/order_steps_menu.html:15
+#: hkm/templates/hkm/views/order_summary.html:23
 msgid "Contact details"
 msgstr "Yhteystiedot"
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:46
-#: hkm/hkm/templates/hkm/views/order_summary.html:34
+#: hkm/templates/hkm/views/order_show_result.html:46
+#: hkm/templates/hkm/views/order_summary.html:34
 msgid "Address"
 msgstr "Osoite"
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:51
-#: hkm/hkm/templates/hkm/views/order_summary.html:39
+#: hkm/templates/hkm/views/order_show_result.html:51
+#: hkm/templates/hkm/views/order_summary.html:39
 msgid "Order (noun)"
 msgstr "Tilaus"
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:53
-#: hkm/hkm/templates/hkm/views/order_summary.html:41
+#: hkm/templates/hkm/views/order_show_result.html:53
+#: hkm/templates/hkm/views/order_summary.html:41
 msgid "Product"
 msgstr "Tuote"
 
-#: hkm/hkm/templates/hkm/views/order_show_result.html:59
-msgid "incl. VAT"
-msgstr "sis. ALV"
-
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:7
+#: hkm/templates/hkm/views/order_steps_menu.html:8
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:21
-#: hkm/hkm/templates/hkm/views/order_steps_menu.html:23
+#: hkm/templates/hkm/views/order_steps_menu.html:22
+#: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
 msgstr "Yhteenveto"
 
-#: hkm/hkm/templates/hkm/views/order_summary.html:21
+#: hkm/templates/hkm/views/order_summary.html:21
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
 msgstr "Siirry maksusivulle Tilaa-painikkeella."
 
-#: hkm/hkm/templates/hkm/views/order_summary.html:23
-#: hkm/hkm/templates/hkm/views/order_summary.html:39
+#: hkm/templates/hkm/views/order_summary.html:23
+#: hkm/templates/hkm/views/order_summary.html:39
 msgid "Change"
 msgstr "Vaihda"
 
-#: hkm/hkm/templates/hkm/views/order_summary.html:53
+#: hkm/templates/hkm/views/order_summary.html:72
 msgid "Order (verb)"
 msgstr "Tilaa"
 
-#: hkm/hkm/templates/hkm/views/order_summary.html:55
+#: hkm/templates/hkm/views/order_summary.html:74
 msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
 
-#: hkm/hkm/templates/hkm/views/public_collections.html:11
+#: hkm/templates/hkm/views/public_collections.html:11
 msgid "Featured collections"
 msgstr "Ajankohtaiset kokoelmat"
 
-#: hkm/hkm/templates/hkm/views/record_OLD.html:9
-msgid "Image details"
-msgstr "Kuvatiedot"
-
-#: hkm/hkm/templates/hkm/views/record_OLD.html:24
-#: hkm/hkm/templates/hkm/views/record_feedback.html:9
+#: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
 msgstr "Lähetä palautetta kuvasta"
 
-#: hkm/hkm/templates/hkm/views/search.html:11
+#: hkm/templates/hkm/views/search.html:11
 msgid "Records"
 msgstr "Kuvaa"
 
-#: hkm/hkm/templates/hkm/views/search.html:40
+#: hkm/templates/hkm/views/search.html:40
 msgid "Author"
 msgstr "Tekijä"
 
-#: hkm/hkm/templates/hkm/views/search.html:49
+#: hkm/templates/hkm/views/search.html:49
 msgid "Year"
 msgstr "Vuosi"
 
-#: hkm/hkm/templates/hkm/views/search.html:92
+#: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
 msgstr "Lataa lisää... "
 
-#: hkm/hkm/templates/hkm/views/search_record.html:29
+#: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"
 
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:9
-msgid "Questions and answers"
-msgstr "Kysymyksiä ja vastauksia"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:20
-msgid "The use of Helsinkiphotos.fi service"
-msgstr "Helsinkikuvia.fi-palvelun käyttäminen"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:22
-msgid "What can I do in the Helsinkiphotos.fi service?"
-msgstr "Mitä Helsinkikuvia.fi-palvelussa voi tehdä?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:23
-msgid "What can I do in the Helsinkiphotos.fi service? Answer"
-msgstr ""
-"Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, "
-"selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja "
-"lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle laitteelleen "
-"korkearesoluutioisina eli painolaatuisina tai pienempinä, verkkolaatuisina "
-"kuvina. Palvelusta voi myös tilata maksullisia kuvatuotteita, kuten "
-"julisteita ja postikortteja."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:24
-msgid "What kind of photographs can I find in the service?"
-msgstr "Mitä kuvia palvelussa on?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:25
-msgid "What kind of photographs can I find in the service? Answer"
-msgstr ""
-"Helsinkikuvia.fi-palvelussa on kymmeniä tuhansia Helsinkiin liittyviä "
-"valokuvia 1840-luvulta nykypäivään asti. Kuvat ovat peräisin Helsingin "
-"kaupunginmuseon kokoelmista. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:26
-msgid "Can I use the service in a language other than Finnish?"
-msgstr "Voiko palvelua käyttää muilla kielillä?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:27
-msgid "Can I use the service in a language other than Finnish? Answer"
-msgstr ""
-"Kyllä, ruotsiksi ja englanniksi. Valokuvien kuvailutiedot ja asiasanat ovat "
-"kuitenkin ainoastaan suomeksi, mikä vaikeuttaa hakujen tekemistä muilla "
-"kielillä."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:28
-msgid ""
-"What will I get from creating an account in the Helsinkiphotos.fi service?"
-msgstr "Mitä hyödyn kirjautumisesta Helsinkikuvia.fi-palveluun?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:29
-msgid ""
-"What will I get from creating an account in the Helsinkiphotos.fi service? "
-"Answer"
-msgstr ""
-"Kun kirjaudut, voit luoda palvelussa omia albumeja ja lisätä niihin "
-"suosikkikuviasi. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:30
-msgid ""
-"What do you mean by a high resolution image? How do I know what kind of an "
-"image I should download on my device?"
-msgstr ""
-"Mitä tarkoittaa korkearesoluutioinen kuva? Miten osaan valita, minkälaisen "
-"kuvan laitteelleni lataan?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:31
-msgid ""
-"What do you mean by a high resolution image? How do I know what kind of an "
-"image I should download on my device? Answer"
-msgstr ""
-"Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa "
-"painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli "
-"verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai "
-"sosiaalisessa mediassa. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:32
-msgid ""
-"Why is sharing an image from the service so inconvenient? Why can I only buy "
-"one photographic product at a time?"
-msgstr ""
-"Miksi kuvien jakaminen somessa on tehty palvelussa niin hankalaksi? Miksi "
-"voin ostaa vain yhden kuvatuotteen kerrallaan?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:33
-msgid ""
-"Why is sharing an image from the service so inconvenient? Why can I only buy "
-"one photographic product at a time? Answer"
-msgstr ""
-"Kehitämme palvelua jatkuvasti. Ostoskoritoiminnallisuus ja somejakamisen "
-"helpottaminen eivät ehtineet ensimmäiseen versioon mukaan mutta ovat "
-"kehityslistallamme."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:35
-msgid "Ordering photographic products"
-msgstr "Kuvatuotteiden tilaus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:37
-msgid "Where are the photographic products made?"
-msgstr "Mistä tilaamani kuvatuotteet toimitetaan ja missä ne tehdään?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:38
-msgid "Where are the photographic products made? Answer"
-msgstr ""
-"Kuvatuotteet valmistaa ja toimittaa yhteistyökumppanimme Printmotor, "
-"Helsingin Herttoniemessä toimiva digipainotalo."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:39
-msgid ""
-"I have a problem when ordering a photographic product, who should I contact?"
-msgstr "Minulla on ongelmia kuvatuotteen tilaamisessa, mihin otan yhteyttä?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:40
-msgid ""
-"I have a problem when ordering a photographic product, who should I contact? "
-"Answer"
-msgstr ""
-"Voit ottaa yhteyttä osoitteeseen kuvakokoelmat@hel.fi tai 09 3103 6497, niin "
-"autamme ratkaisemaan ongelman. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:41
-msgid "How soon will my product be delivered after ordering?"
-msgstr "Kuinka nopeasti saan kuvatuotteen tilauksen jälkeen?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:42
-msgid "How soon will my product be delivered after ordering? Answer"
-msgstr ""
-"Kuvatuotteet valmistetaan ja toimitetaan kuljetukseen normaalisti 48h "
-"kuluessa tilauksen tekemisestä (arkipäivisin). Toimitusaika-arvio vaihtelee "
-"maittain: Suomi ja muu Eurooppa 5–7 päivää, Pohjois-Amerikka 7–10 päivää, "
-"muut maat 10 –14 päivää. Huomaathan, että EU:n ulkopuolelle toimitettaessa "
-"tilaus voi viipyä ylimääräisiä päiviä tullissa."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:43
-msgid "On what kind of paper are the photographic products printed?"
-msgstr "Millaiselle paperille kuvatuotteet tehdään? "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:44
-msgid "On what kind of paper are the photographic products printed? Answer"
-msgstr ""
-"20x30- ja 30x40-kokoiset kuvat painetaan korkealaatuiselle 240g "
-"puolikiiltävälle (Semi-Glossy) paperille. 50x70-juliste painetaan "
-"korkealaatuiselle 180g mattapaperille."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:46
-msgid "Using the photographs"
-msgstr "Valokuvien käyttö"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:48
-msgid "How much does it cost to download or use the images?"
-msgstr "Paljonko kuvan lataaminen tai käyttö maksaa?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:49
-msgid "How much does it cost to download or use the images? Answer"
-msgstr ""
-"Valokuvien lataaminen ja käyttö eivät maksa mitään. Helsinkikuvia.fi-"
-"palvelun kautta voi tilata myös kuvatuotteita, kuten julisteita, jotka ovat "
-"maksullisia."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:50
-msgid "What can I do with the photographs I find from the service?"
-msgstr "Mitä kaikkea palvelusta löytyvillä valokuvilla voi tehdä?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:51
-msgid "What can I do with the photographs I find from the service? Answer"
-msgstr ""
-"Melkein mitä vain! Kunhan muistaa mainita kuvan yhteydessä kuvaajan nimen ja "
-"Helsingin kaupunginmuseon, kuvia voi käyttää monipuolisesti. Kuvia voi "
-"esimerkiksi jakaa sosiaalisessa mediassa, käyttää verkkosivuilla tai "
-"sovelluksissa. Kuvista voi tehdä tai teettää vapaasti myös tauluja, kirjoja, "
-"lehtiä, lahjatavaroita tai vaikka tapetteja. Mahdollisuus tutkia hyvinkin "
-"tarkkoja yksityiskohtia helpottaa myös opetus- ja tutkimuskäyttöä. Myös "
-"kaupallinen käyttö on sallittua tietyin rajoituksin. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:52
-msgid ""
-"How do I mention the Helsinki City Museum and the photographer’s name in "
-"connection with the photograph?"
-msgstr ""
-"Millä tavalla kaupunginmuseo ja kuvaajan nimi on mainittava kuvan yhteydessä?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:53
-msgid ""
-"How do I mention the Helsinki City Museum and the photographer’s name in "
-"connection with the photograph? Answer"
-msgstr ""
-"Vaikkapa näin: 'Kuva: Helsingin kaupunginmuseo / Kuvaajan Nimi'. Jos "
-"kuvaajan nimeä ei ole tiedossa, riittää pelkkä Helsingin kaupunginmuseo. "
-"Esimerkiksi Twitterissä riittää maininta @kaupunginmuseo sekä kuvaajan nimi, "
-"jos se on tiedossa."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:54
-msgid "Do copyright or the Personal Data Act limit publishing the photographs?"
-msgstr ""
-"Eivätkö tekijänoikeudet tai henkilötietolaki aseta rajoituksia kuvien "
-"julkaisulle?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:55
-msgid ""
-"Do copyright or the Personal Data Act limit publishing the photographs? "
-"Answer"
-msgstr ""
-"Tekijänoikeudet, henkilötietolaki ja intimiteettisuoja otetaan huomioon "
-"kuvia julkaistaessa. Julkaisemme palvelussa vain valokuvia, joiden "
-"oikeuksista Helsingin kaupunginmuseo on sopinut tai jotka ovat jo niin "
-"vanhoja, että tekijänoikeuden rajoitukset eivät niitä koske. Lisäksi tietyt "
-"teemat arvioidaan perusteellisesti ennen verkossa julkaisemista. Tällaisia "
-"ovat esimerkiksi lapsikuvat, alastomuus tai henkilön poliittisen "
-"suuntautuneisuuden paljastavat kuvat. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:56
-msgid "Are there any restrictions on the commercial use of the images?"
-msgstr "Onko kuvien kaupalliseen käyttöön rajoituksia?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:57
-msgid "Are there any restrictions on the commercial use of the images? Answer"
-msgstr ""
-"Kyllä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa "
-"on kielletty ilman kuvassa olevan henkilön suostumusta. Lisäksi on "
-"mainittava Helsingin kaupunginmuseo ja kuvaajan nimi. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:58
-msgid ""
-"What does it mean that the photographs have been published with a Creative "
-"Commons BY 4.0 license?"
-msgstr "Mitä tarkoittaa, että kuvat on julkaistu lisenssillä CC BY 4.0?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:59
-msgid ""
-"What does it mean that the photographs have been published with a Creative "
-"Commons BY 4.0 license? Answer"
-msgstr ""
-"Helsingin kaupunginmuseon julkaisemat kuvat Helsinkikuvia.fi-palvelussa on "
-"lisensoitu 'Creative Commons Nimeä 4.0 Kansainvälinen' eli CC BY 4.0 -"
-"lisenssillä. Lyhyesti ilmaistuna se tarkoittaa, että kuvia voi käyttää ja "
-"muunnella missä tarkoituksessa tahansa, kunhan mainitsee kuvalähteen. "
-"Lisenssi ei poista käyttäjän vastuuta. Esimerkiksi henkilön oikeus määrätä "
-"nimensä, kuvansa tai henkilönsä muun tunnistettavan osan kaupallisesta "
-"käytöstä, yksityisyyden suojaa koskevat oikeudet tai moraaliset oikeudet "
-"voivat rajoittaa aineiston käyttöä."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:61
-msgid "I need more information or more photographs"
-msgstr "Kaipaan lisätietoa tai lisää kuvia"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:63
-msgid ""
-"Where can I get more information about the photographs or the history of "
-"Helsinki?"
-msgstr ""
-"Mistä saan lisätietoa kuvista, tietystä aineistosta tai Helsingin "
-"historiasta?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:64
-msgid ""
-"Where can I get more information about the photographs or the history of "
-"Helsinki? Answer"
-msgstr ""
-"Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat "
-"tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, "
-"käyntiaika ja aineistot on varattava etukäteen. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:65
-msgid ""
-"What should I do if I cannot find the appropriate photograph from the "
-"Helsinkiphotos.fi service?"
-msgstr "Mitä teen, jos en löydä sopivaa kuvaa Helsinkikuvia.fi-palvelusta? "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:65
-msgid ""
-"If the Helsinkiphotos.fi service does not have all your photographs, how can "
-"I study the rest?"
-msgstr ""
-"Jos Helsinkikuvia.fi-palvelussa ei kerran ole kaikkia kuvianne, miten niitä "
-"muita pääsee tutkimaan?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:66
-msgid ""
-"What should I do if I cannot find the appropriate photograph from the "
-"Helsinkiphotos.fi service? Answer"
-msgstr ""
-"Palvelussa on käytännössä kaikki kaupunginmuseon digitoidut eli sähköiseen "
-"muotoon saatetut kuvat. Lisää tulee saataville sitä mukaa kuin kuvien "
-"digitointi etenee. Museon kokoelmien kuvista on digitoitu vasta murto-osa. "
-"Jos et löydä Helsinkikuvia.fi-palvelusta sopivaa kuvaa, voit ottaa yhteyttä "
-"Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa "
-"tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on "
-"varattava etukäteen. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:67
-msgid ""
-"Will you add photographs that have not yet been digitised to the service "
-"upon request? Is that subject to a charge?"
-msgstr ""
-"Lisäättekö palveluun pyynnöstä digitoimattomia kuvianne? Onko se maksullista?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:68
-msgid ""
-"Will you add photographs that have not yet been digitised to the service "
-"upon request? Is that subject to a charge? Answer"
-msgstr ""
-"Helsinkikuvia.fi-palvelussa on käytännössä kaikki Helsingin kaupunginmuseon "
-"digitoidut valokuvat. Jos tarvitset digitaalisen version kuvasta, jota ei "
-"ole digitoitu, voit tilata sen kaupunginmuseon Kuvaselaamoon. Asiakkaan "
-"tilaamista digitoinneista veloitetaan museon hinnaston mukainen maksu. "
-"Tilaamasi kuva tulee usein pienellä viiveellä Helsinkikuvia.fi-palveluun "
-"kaikkien nähtäväksi ja käytettäväksi."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:69
-msgid "I think there is an error in an image’s data, whom can I contact?"
-msgstr "Kuvan tiedoissa on mielestäni virhe, mihin voin korjata sen?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:70
-msgid ""
-"I think there is an error in an image’s data, whom can I contact? Answer"
-msgstr "Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:71
-msgid ""
-"Where did the City Museum get all these photographs? Whose photographs are "
-"they?"
-msgstr "Mistä kaupunginmuseo on saanut kuvat? Kenen kuvia ne oikein ovat?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:72
-msgid ""
-"Where did the City Museum get all these photographs? Whose photographs are "
-"they? Answer"
-msgstr ""
-"Kaupunginmuseon kokoelmissa on lähes miljoona valokuvaa Helsingistä ja "
-"helsinkiläisten arjesta 1840-luvulta nykypäivään. Kokoelmiin tulee uusia "
-"kuvia pääsääntöisesti lahjoituksina ja museon omien tai museon palkkaamien "
-"kuvaajien kuvaamina. Valokuvakokoelman kartuttamisen aloitti kaupunginmuseon "
-"edeltäjä, Helsingin muinaismuistolautakunta, vuonna 1906. Helsinki-kuvistaan "
-"tunnettu Signe Brander palkattiin tallentamaan muuttuvaa kaupunkia vuonna "
-"1907. Branderin ottamat kuvat muodostavat kaupunginmuseon valokuvakokoelmien "
-"perustan."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:73
-msgid ""
-"Is the Finna service still in use? Can I still find images from Helsinki "
-"City Museum in Finna?"
-msgstr ""
-"Onko kuvianne edelleen Finna-palvelussa? Onko Finnassa samat kuvat kuin "
-"Helsinkikuvia.fi-palvelussa?"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_QA.html:74
-msgid ""
-"Is the Finna service still in use? Can I still find images from Helsinki "
-"City Museum in Finna? Answer"
-msgstr ""
-"Helsingin kaupunginmuseon valokuvat ovat edelleen myös kansallisessa Finna-"
-"palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia "
-"muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivaajiin ja "
-"matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten "
-"rakennusten historiasta."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:20
-msgid "About the service paragraph 1"
-msgstr ""
-"Helsinkikuvia.fi-palvelu tarjoaa Helsinki-aiheisia valokuvia Helsingin "
-"kaupunginmuseon kokoelmista. Valokuvia voi ladata omalle laitteelleen "
-"korkearesoluutioisina eli painokelpoisina tai pienempinä, verkkoon sopivina "
-"kuvina."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:21
-msgid "About the service paragraph 2"
-msgstr ""
-"Kuvat on julkaistu CC BY 4.0 -lisenssillä. Se merkitsee, että kuvia voi "
-"käyttää haluamallaan tavalla maksutta, kunhan mainitsee kuvan yhteydessä "
-"kuvaajan nimen ja Helsingin kaupunginmuseon. Lisenssi sallii myös kuvien "
-"kaupallisen käytön, jos lainsäädäntö ei sitä estä. Esimerkiksi henkilökuvien "
-"käyttö markkinoinnissa ja mainonnassa on kielletty ilman kuvassa olevan "
-"henkilön suostumusta."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:22
-msgid "About the service paragraph 3"
-msgstr ""
-"Helsinkikuvia.fi-palvelussa voi hakea kuvia erilaisilla hakusanoilla, selata "
-"museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä "
-"niihin suosikkikuviaan. Palvelusta voi myös tilata maksullisia "
-"kuvatuotteita, kuten julisteita ja postikortteja. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:23
-msgid "About the service paragraph 4"
-msgstr ""
-"Helsinkikuvia.fi-palvelussa on julkaistu Helsingin kaupunginmuseon "
-"valokuvakokoelman kaikki digitoidut kuvat, tällä hetkellä noin 45 000 kuvaa. "
-"Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Jos kaipaat "
-"kuvaa, jota ei löydy Helsinkikuvia.fi-palvelusta, ota yhteys Helsingin "
-"kaupunginmuseon Kuvaselaamoon."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_about.html:24
-msgid "About the service paragraph 5"
-msgstr ""
-"Helsinkikuvia.fi-palvelun kuvat ovat saatavilla myös kansallisessa Finna-"
-"palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia "
-"muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivajiin ja "
-"matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten "
-"rakennusten historiasta."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:9
-msgid "Handling customer data in"
-msgstr "Asiakastietojen käsittely palvelussa"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:19
-msgid "Privacy"
-msgstr "Tietosuoja"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:20
-msgid "Privacy when logging in"
-msgstr ""
-"Kun käyttäjä kirjautuu Helsinkikuvia.fi-palveluun (jatkossa Palvelu) omalla "
-"tunnuksellaan, palveluun tallennetaan tunnus ja salasana. Tietoja käytetään "
-"seuraaviin käyttötarkoituksiin:"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:23
-msgid "Information"
-msgstr "Tieto"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:24
-msgid "Purpose"
-msgstr "Käyttötarkoitus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:27
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:59
-msgid "Username"
-msgstr "Käyttäjätunnus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:28
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:32
-msgid "User authentication"
-msgstr "Käyttäjän tunnistaminen"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:31
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:60
-msgid "Password"
-msgstr "Salasana"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:35
-msgid "Privacy in addition"
-msgstr ""
-"Edellä mainittujen tietojen lisäksi palveluun voidaan tallentaa tietoja, "
-"jotka seuraavat käyttäjän toiminnasta palvelussa. Tällaisia ovat mm. "
-"käyttökieli, suosikit, omat albumit ja omiin albumeihin tallennetut "
-"tietueet. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:36
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:23
-msgid "Terms of use linked pages"
-msgstr ""
-"Palvelu hyödyntää Bamboran rajapintaa maksujen välittämiseen ja Printmotorin "
-"rajapintaa kuvatuotteiden tilausta varten. Näitä tai muita linkitettyjä "
-"sivuja käytettäessä sovelletaan palvelun tarjoavan kolmannen osapuolen "
-"määrittelemiä käyttöehtoja."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:38
-msgid ""
-"Description of the client register data file for Helsinkiphotos.fi service"
-msgstr "Helsinkikuvia.fi-asiakasrekisterin seloste"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:39
-msgid "Data file controller"
-msgstr "Rekisterin ylläpitäjä"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:40
-msgid "Helsinki City Museum"
-msgstr "Helsingin kaupunginmuseo"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:41
-msgid "Aleksanterinkatu 16"
-msgstr "Aleksanterinkatu 16"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:42
-msgid "P.O. Box 4300"
-msgstr " "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:43
-msgid "00099 CITY OF HELSINKI"
-msgstr "00170 HELSINKI"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:44
-msgid "tel. 09 3103 6497"
-msgstr "puh. 09 3103 6497"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:45
-msgid "kuvakokoelmat@hel.fi"
-msgstr "kuvakokoelmat@hel.fi"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:47
-msgid "Regular sources of data"
-msgstr "Säännönmukaiset tietolähteet"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:48
-msgid "The information is recorded by the user."
-msgstr "Personoitujen toimintojen tiedot tallentaa käyttäjä itse."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:49
-msgid "Regular disclosure of information"
-msgstr "Säännönmukainen tietojen luovutus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:50
-msgid "The information will not be disclosed to third parties."
-msgstr "Tietoja ei luovuteta eteenpäin."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:51
-msgid "Name of data file"
-msgstr "Rekisterin nimi"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:52
-msgid "Client register for Helsinkiphotos.fi service"
-msgstr "Helsinkikuvia.fi-palvelun asiakasrekisteri."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:53
-msgid "Reason for maintaining the data file"
-msgstr "Rekisterin pitämisen peruste"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:54
-msgid ""
-"This register has been established to maintain the unambiguity of client "
-"identities."
-msgstr ""
-"Rekisteri on perustettu asiakkaiden yksikäsitteisyyden ylläpitämiseksi."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:55
-msgid "Data file usage"
-msgstr "Rekisterin käyttötarkoitus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:56
-msgid ""
-"This register will be used to identify users in order to enable personalised "
-"services, such as creating albums and adding pictures in them."
-msgstr ""
-"Rekisteriä käytetään käyttäjien tunnistamiseen, jotta voidaan tarjota "
-"personoituja palveluita. Esimerkkinä Omat albumit -toiminto, jolla käyttäjä "
-"voi luoda ja halutessaan jakaa omia kokoelmia palvelun kuvista."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:57
-msgid "Data types included in the file"
-msgstr "Rekisterin sisältämät tietotyypit"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:58
-msgid "Basic user information"
-msgstr "Käyttäjän perustiedot"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:61
-msgid "Data collected for personalised services"
-msgstr "Personoituja toimintoja varten kerättävät tiedot"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:62
-msgid "Favourites"
-msgstr "Suosikit"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:63
-msgid "Own albums"
-msgstr "Omat albumit"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:64
-msgid "Principles of data security"
-msgstr "Rekisterin suojausperiaatteet"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:65
-msgid "The information is recorded exclusively in an electronic format."
-msgstr ""
-"Tietoja säilytetään ainoastaan sähköisessä muodossa. Tietoihin pääsevät "
-"käsiksi ainoastaan järjestelmän ylläpitäjät, jotka tunnistetaan "
-"käyttäjätunnuksella ja salasanalla."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:66
-msgid "Archiving period for personal information"
-msgstr "Henkilötietojen säilytysaika"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:67
-msgid ""
-"Personal information will be stored in the service until 12 months have "
-"passed from the last login."
-msgstr ""
-"Henkilötietoja säilytetään palvelussa, kunnes viimeisestä kirjautumisesta on "
-"kulunut 12 kuukautta."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:68
-msgid "Right to inspect the data file"
-msgstr "Rekisteröidyn tarkistusoikeus"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:69
-msgid ""
-"Users may contact Helsinki City Museum’s Picture Archives to inspect their "
-"personal information stored on the server. See contact details above."
-msgstr ""
-"Tarkistaaksesi, mitä henkilötietoja käyttäjästä on kerätty palvelimeen, "
-"käyttäjän tulee ottaa yhteys Helsingin kaupunginmuseon kuvakokoelmiin, ks. "
-"yhteystiedot ylempänä."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:70
-msgid "Rectifying inaccurate information"
-msgstr "Virheellisten tietojen oikaisu"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_privacy.html:71
-msgid ""
-"If necessary, the user may contact Helsinki City Museum’s Picture Archives. "
-"See contact details above."
-msgstr "Käyttäjä voi ottaa yhteyttä Helsingin kaupunginmuseon kuvakokoelmiin."
-
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:20
-msgid "The following terms and conditions apply to the use of material"
-msgstr "Aineistojen käyttöä koskevat seuraavat ehdot:"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:21
-msgid "Images"
-msgstr "Kuvat"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:21
-msgid "Terms of use paragraph images"
-msgstr ""
-"Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat "
-"julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan "
-"yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa "
-"julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on "
-"mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja yksityisyyden "
-"suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö markkinoinnissa "
-"ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. "
-"Ota yhteys Helsingin kaupunginmuseoon, jos tieto kuvan käyttöoikeuksista "
-"puuttuu tai olet epävarma oikeudestasi käyttää kuvaa. "
-
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:22
-msgid "Metadata"
-msgstr "Kuvailutiedot"
-
-#: hkm/hkm/templates/hkm/views/siteinfo_terms.html:22
-msgid "Terms of use paragraph metadata"
-msgstr ""
-"Hakutulosten yhteydessä esitettäviä kuvailutietoja voi pääsääntöisesti "
-"käyttää vapaasti. Poikkeuksen muodostavat kuvailutietoihin sisältyvät "
-"henkilönimet, joiden julkaisemisessa käyttäjällä on vastuu yksityisyyden "
-"suojan kunnioittamisessa."
-
-#: hkm/hkm/views.py:1112
+#: hkm/views/views.py:1090
 msgid "Favorites"
 msgstr "Suosikit"
 
-#: hkm/hkm/views.py:1112
+#: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
 
-#: hkm/templates/hkm/snippets/no_results.html:7
-msgid "Oops, there was an error, try again soon."
-msgstr "Kuvien haku epäonnistui. Kokeile hetken kuluttua uudestaan."
+#~ msgid "Postal fees"
+#~ msgstr "toimituskulut"
+
+#~ msgid "            photo "
+#~ msgid_plural ""
+#~ " photos\n"
+#~ "        "
+#~ msgstr[0] "            photo "
+#~ msgstr[1] ""
+#~ " kuvaa\n"
+#~ "        "
+
+#~ msgid "incl. VAT"
+#~ msgstr "sis. ALV"
+
+#~ msgid "Kuvaselaamo demo."
+#~ msgstr "Helsinkikuvia.fi-demo."
+
+#~ msgid "Image details"
+#~ msgstr "Kuvatiedot"
+
+#~ msgid "Questions and answers"
+#~ msgstr "Kysymyksiä ja vastauksia"
+
+#~ msgid "The use of Helsinkiphotos.fi service"
+#~ msgstr "Helsinkikuvia.fi-palvelun käyttäminen"
+
+#~ msgid "What can I do in the Helsinkiphotos.fi service?"
+#~ msgstr "Mitä Helsinkikuvia.fi-palvelussa voi tehdä?"
+
+#~ msgid "What can I do in the Helsinkiphotos.fi service? Answer"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, "
+#~ "selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita "
+#~ "ja lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle "
+#~ "laitteelleen korkearesoluutioisina eli painolaatuisina tai pienempinä, "
+#~ "verkkolaatuisina kuvina. Palvelusta voi myös tilata maksullisia "
+#~ "kuvatuotteita, kuten julisteita ja postikortteja."
+
+#~ msgid "What kind of photographs can I find in the service?"
+#~ msgstr "Mitä kuvia palvelussa on?"
+
+#~ msgid "What kind of photographs can I find in the service? Answer"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelussa on kymmeniä tuhansia Helsinkiin liittyviä "
+#~ "valokuvia 1840-luvulta nykypäivään asti. Kuvat ovat peräisin Helsingin "
+#~ "kaupunginmuseon kokoelmista. "
+
+#~ msgid "Can I use the service in a language other than Finnish?"
+#~ msgstr "Voiko palvelua käyttää muilla kielillä?"
+
+#~ msgid "Can I use the service in a language other than Finnish? Answer"
+#~ msgstr ""
+#~ "Kyllä, ruotsiksi ja englanniksi. Valokuvien kuvailutiedot ja asiasanat "
+#~ "ovat kuitenkin ainoastaan suomeksi, mikä vaikeuttaa hakujen tekemistä "
+#~ "muilla kielillä."
+
+#~ msgid ""
+#~ "What will I get from creating an account in the Helsinkiphotos.fi service?"
+#~ msgstr "Mitä hyödyn kirjautumisesta Helsinkikuvia.fi-palveluun?"
+
+#~ msgid ""
+#~ "What will I get from creating an account in the Helsinkiphotos.fi "
+#~ "service? Answer"
+#~ msgstr ""
+#~ "Kun kirjaudut, voit luoda palvelussa omia albumeja ja lisätä niihin "
+#~ "suosikkikuviasi. "
+
+#~ msgid ""
+#~ "What do you mean by a high resolution image? How do I know what kind of "
+#~ "an image I should download on my device?"
+#~ msgstr ""
+#~ "Mitä tarkoittaa korkearesoluutioinen kuva? Miten osaan valita, "
+#~ "minkälaisen kuvan laitteelleni lataan?"
+
+#~ msgid ""
+#~ "What do you mean by a high resolution image? How do I know what kind of "
+#~ "an image I should download on my device? Answer"
+#~ msgstr ""
+#~ "Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa "
+#~ "painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli "
+#~ "verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai "
+#~ "sosiaalisessa mediassa. "
+
+#~ msgid ""
+#~ "Why is sharing an image from the service so inconvenient? Why can I only "
+#~ "buy one photographic product at a time?"
+#~ msgstr ""
+#~ "Miksi kuvien jakaminen somessa on tehty palvelussa niin hankalaksi? Miksi "
+#~ "voin ostaa vain yhden kuvatuotteen kerrallaan?"
+
+#~ msgid ""
+#~ "Why is sharing an image from the service so inconvenient? Why can I only "
+#~ "buy one photographic product at a time? Answer"
+#~ msgstr ""
+#~ "Kehitämme palvelua jatkuvasti. Ostoskoritoiminnallisuus ja somejakamisen "
+#~ "helpottaminen eivät ehtineet ensimmäiseen versioon mukaan mutta ovat "
+#~ "kehityslistallamme."
+
+#~ msgid "Ordering photographic products"
+#~ msgstr "Kuvatuotteiden tilaus"
+
+#~ msgid "Where are the photographic products made?"
+#~ msgstr "Mistä tilaamani kuvatuotteet toimitetaan ja missä ne tehdään?"
+
+#~ msgid "Where are the photographic products made? Answer"
+#~ msgstr ""
+#~ "Kuvatuotteet valmistaa ja toimittaa yhteistyökumppanimme Printmotor, "
+#~ "Helsingin Herttoniemessä toimiva digipainotalo."
+
+#~ msgid ""
+#~ "I have a problem when ordering a photographic product, who should I "
+#~ "contact?"
+#~ msgstr "Minulla on ongelmia kuvatuotteen tilaamisessa, mihin otan yhteyttä?"
+
+#~ msgid ""
+#~ "I have a problem when ordering a photographic product, who should I "
+#~ "contact? Answer"
+#~ msgstr ""
+#~ "Voit ottaa yhteyttä osoitteeseen kuvakokoelmat@hel.fi tai 09 3103 6497, "
+#~ "niin autamme ratkaisemaan ongelman. "
+
+#~ msgid "How soon will my product be delivered after ordering?"
+#~ msgstr "Kuinka nopeasti saan kuvatuotteen tilauksen jälkeen?"
+
+#~ msgid "How soon will my product be delivered after ordering? Answer"
+#~ msgstr ""
+#~ "Kuvatuotteet valmistetaan ja toimitetaan kuljetukseen normaalisti 48h "
+#~ "kuluessa tilauksen tekemisestä (arkipäivisin). Toimitusaika-arvio "
+#~ "vaihtelee maittain: Suomi ja muu Eurooppa 5–7 päivää, Pohjois-Amerikka 7–"
+#~ "10 päivää, muut maat 10 –14 päivää. Huomaathan, että EU:n ulkopuolelle "
+#~ "toimitettaessa tilaus voi viipyä ylimääräisiä päiviä tullissa."
+
+#~ msgid "On what kind of paper are the photographic products printed?"
+#~ msgstr "Millaiselle paperille kuvatuotteet tehdään? "
+
+#~ msgid "On what kind of paper are the photographic products printed? Answer"
+#~ msgstr ""
+#~ "20x30- ja 30x40-kokoiset kuvat painetaan korkealaatuiselle 240g "
+#~ "puolikiiltävälle (Semi-Glossy) paperille. 50x70-juliste painetaan "
+#~ "korkealaatuiselle 180g mattapaperille."
+
+#~ msgid "Using the photographs"
+#~ msgstr "Valokuvien käyttö"
+
+#~ msgid "How much does it cost to download or use the images?"
+#~ msgstr "Paljonko kuvan lataaminen tai käyttö maksaa?"
+
+#~ msgid "How much does it cost to download or use the images? Answer"
+#~ msgstr ""
+#~ "Valokuvien lataaminen ja käyttö eivät maksa mitään. Helsinkikuvia.fi-"
+#~ "palvelun kautta voi tilata myös kuvatuotteita, kuten julisteita, jotka "
+#~ "ovat maksullisia."
+
+#~ msgid "What can I do with the photographs I find from the service?"
+#~ msgstr "Mitä kaikkea palvelusta löytyvillä valokuvilla voi tehdä?"
+
+#~ msgid "What can I do with the photographs I find from the service? Answer"
+#~ msgstr ""
+#~ "Melkein mitä vain! Kunhan muistaa mainita kuvan yhteydessä kuvaajan nimen "
+#~ "ja Helsingin kaupunginmuseon, kuvia voi käyttää monipuolisesti. Kuvia voi "
+#~ "esimerkiksi jakaa sosiaalisessa mediassa, käyttää verkkosivuilla tai "
+#~ "sovelluksissa. Kuvista voi tehdä tai teettää vapaasti myös tauluja, "
+#~ "kirjoja, lehtiä, lahjatavaroita tai vaikka tapetteja. Mahdollisuus tutkia "
+#~ "hyvinkin tarkkoja yksityiskohtia helpottaa myös opetus- ja "
+#~ "tutkimuskäyttöä. Myös kaupallinen käyttö on sallittua tietyin "
+#~ "rajoituksin. "
+
+#~ msgid ""
+#~ "How do I mention the Helsinki City Museum and the photographer’s name in "
+#~ "connection with the photograph?"
+#~ msgstr ""
+#~ "Millä tavalla kaupunginmuseo ja kuvaajan nimi on mainittava kuvan "
+#~ "yhteydessä?"
+
+#~ msgid ""
+#~ "How do I mention the Helsinki City Museum and the photographer’s name in "
+#~ "connection with the photograph? Answer"
+#~ msgstr ""
+#~ "Vaikkapa näin: 'Kuva: Helsingin kaupunginmuseo / Kuvaajan Nimi'. Jos "
+#~ "kuvaajan nimeä ei ole tiedossa, riittää pelkkä Helsingin kaupunginmuseo. "
+#~ "Esimerkiksi Twitterissä riittää maininta @kaupunginmuseo sekä kuvaajan "
+#~ "nimi, jos se on tiedossa."
+
+#~ msgid ""
+#~ "Do copyright or the Personal Data Act limit publishing the photographs?"
+#~ msgstr ""
+#~ "Eivätkö tekijänoikeudet tai henkilötietolaki aseta rajoituksia kuvien "
+#~ "julkaisulle?"
+
+#~ msgid ""
+#~ "Do copyright or the Personal Data Act limit publishing the photographs? "
+#~ "Answer"
+#~ msgstr ""
+#~ "Tekijänoikeudet, henkilötietolaki ja intimiteettisuoja otetaan huomioon "
+#~ "kuvia julkaistaessa. Julkaisemme palvelussa vain valokuvia, joiden "
+#~ "oikeuksista Helsingin kaupunginmuseo on sopinut tai jotka ovat jo niin "
+#~ "vanhoja, että tekijänoikeuden rajoitukset eivät niitä koske. Lisäksi "
+#~ "tietyt teemat arvioidaan perusteellisesti ennen verkossa julkaisemista. "
+#~ "Tällaisia ovat esimerkiksi lapsikuvat, alastomuus tai henkilön "
+#~ "poliittisen suuntautuneisuuden paljastavat kuvat. "
+
+#~ msgid "Are there any restrictions on the commercial use of the images?"
+#~ msgstr "Onko kuvien kaupalliseen käyttöön rajoituksia?"
+
+#~ msgid ""
+#~ "Are there any restrictions on the commercial use of the images? Answer"
+#~ msgstr ""
+#~ "Kyllä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai "
+#~ "mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. "
+#~ "Lisäksi on mainittava Helsingin kaupunginmuseo ja kuvaajan nimi. "
+
+#~ msgid ""
+#~ "What does it mean that the photographs have been published with a "
+#~ "Creative Commons BY 4.0 license?"
+#~ msgstr "Mitä tarkoittaa, että kuvat on julkaistu lisenssillä CC BY 4.0?"
+
+#~ msgid ""
+#~ "What does it mean that the photographs have been published with a "
+#~ "Creative Commons BY 4.0 license? Answer"
+#~ msgstr ""
+#~ "Helsingin kaupunginmuseon julkaisemat kuvat Helsinkikuvia.fi-palvelussa "
+#~ "on lisensoitu 'Creative Commons Nimeä 4.0 Kansainvälinen' eli CC BY 4.0 -"
+#~ "lisenssillä. Lyhyesti ilmaistuna se tarkoittaa, että kuvia voi käyttää ja "
+#~ "muunnella missä tarkoituksessa tahansa, kunhan mainitsee kuvalähteen. "
+#~ "Lisenssi ei poista käyttäjän vastuuta. Esimerkiksi henkilön oikeus "
+#~ "määrätä nimensä, kuvansa tai henkilönsä muun tunnistettavan osan "
+#~ "kaupallisesta käytöstä, yksityisyyden suojaa koskevat oikeudet tai "
+#~ "moraaliset oikeudet voivat rajoittaa aineiston käyttöä."
+
+#~ msgid "I need more information or more photographs"
+#~ msgstr "Kaipaan lisätietoa tai lisää kuvia"
+
+#~ msgid ""
+#~ "Where can I get more information about the photographs or the history of "
+#~ "Helsinki?"
+#~ msgstr ""
+#~ "Mistä saan lisätietoa kuvista, tietystä aineistosta tai Helsingin "
+#~ "historiasta?"
+
+#~ msgid ""
+#~ "Where can I get more information about the photographs or the history of "
+#~ "Helsinki? Answer"
+#~ msgstr ""
+#~ "Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat "
+#~ "tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, "
+#~ "käyntiaika ja aineistot on varattava etukäteen. "
+
+#~ msgid ""
+#~ "What should I do if I cannot find the appropriate photograph from the "
+#~ "Helsinkiphotos.fi service?"
+#~ msgstr "Mitä teen, jos en löydä sopivaa kuvaa Helsinkikuvia.fi-palvelusta? "
+
+#~ msgid ""
+#~ "If the Helsinkiphotos.fi service does not have all your photographs, how "
+#~ "can I study the rest?"
+#~ msgstr ""
+#~ "Jos Helsinkikuvia.fi-palvelussa ei kerran ole kaikkia kuvianne, miten "
+#~ "niitä muita pääsee tutkimaan?"
+
+#~ msgid ""
+#~ "What should I do if I cannot find the appropriate photograph from the "
+#~ "Helsinkiphotos.fi service? Answer"
+#~ msgstr ""
+#~ "Palvelussa on käytännössä kaikki kaupunginmuseon digitoidut eli "
+#~ "sähköiseen muotoon saatetut kuvat. Lisää tulee saataville sitä mukaa kuin "
+#~ "kuvien digitointi etenee. Museon kokoelmien kuvista on digitoitu vasta "
+#~ "murto-osa. Jos et löydä Helsinkikuvia.fi-palvelusta sopivaa kuvaa, voit "
+#~ "ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia "
+#~ "tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika "
+#~ "ja aineistot on varattava etukäteen. "
+
+#~ msgid ""
+#~ "Will you add photographs that have not yet been digitised to the service "
+#~ "upon request? Is that subject to a charge?"
+#~ msgstr ""
+#~ "Lisäättekö palveluun pyynnöstä digitoimattomia kuvianne? Onko se "
+#~ "maksullista?"
+
+#~ msgid ""
+#~ "Will you add photographs that have not yet been digitised to the service "
+#~ "upon request? Is that subject to a charge? Answer"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelussa on käytännössä kaikki Helsingin "
+#~ "kaupunginmuseon digitoidut valokuvat. Jos tarvitset digitaalisen version "
+#~ "kuvasta, jota ei ole digitoitu, voit tilata sen kaupunginmuseon "
+#~ "Kuvaselaamoon. Asiakkaan tilaamista digitoinneista veloitetaan museon "
+#~ "hinnaston mukainen maksu. Tilaamasi kuva tulee usein pienellä viiveellä "
+#~ "Helsinkikuvia.fi-palveluun kaikkien nähtäväksi ja käytettäväksi."
+
+#~ msgid "I think there is an error in an image’s data, whom can I contact?"
+#~ msgstr "Kuvan tiedoissa on mielestäni virhe, mihin voin korjata sen?"
+
+#~ msgid ""
+#~ "I think there is an error in an image’s data, whom can I contact? Answer"
+#~ msgstr "Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon."
+
+#~ msgid ""
+#~ "Where did the City Museum get all these photographs? Whose photographs "
+#~ "are they?"
+#~ msgstr "Mistä kaupunginmuseo on saanut kuvat? Kenen kuvia ne oikein ovat?"
+
+#~ msgid ""
+#~ "Where did the City Museum get all these photographs? Whose photographs "
+#~ "are they? Answer"
+#~ msgstr ""
+#~ "Kaupunginmuseon kokoelmissa on lähes miljoona valokuvaa Helsingistä ja "
+#~ "helsinkiläisten arjesta 1840-luvulta nykypäivään. Kokoelmiin tulee uusia "
+#~ "kuvia pääsääntöisesti lahjoituksina ja museon omien tai museon "
+#~ "palkkaamien kuvaajien kuvaamina. Valokuvakokoelman kartuttamisen aloitti "
+#~ "kaupunginmuseon edeltäjä, Helsingin muinaismuistolautakunta, vuonna 1906. "
+#~ "Helsinki-kuvistaan tunnettu Signe Brander palkattiin tallentamaan "
+#~ "muuttuvaa kaupunkia vuonna 1907. Branderin ottamat kuvat muodostavat "
+#~ "kaupunginmuseon valokuvakokoelmien perustan."
+
+#~ msgid ""
+#~ "Is the Finna service still in use? Can I still find images from Helsinki "
+#~ "City Museum in Finna?"
+#~ msgstr ""
+#~ "Onko kuvianne edelleen Finna-palvelussa? Onko Finnassa samat kuvat kuin "
+#~ "Helsinkikuvia.fi-palvelussa?"
+
+#~ msgid ""
+#~ "Is the Finna service still in use? Can I still find images from Helsinki "
+#~ "City Museum in Finna? Answer"
+#~ msgstr ""
+#~ "Helsingin kaupunginmuseon valokuvat ovat edelleen myös kansallisessa "
+#~ "Finna-palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa "
+#~ "voi tutkia muutakin Helsinki-aiheista aineistoa muovipusseista "
+#~ "hiustenkuivaajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea "
+#~ "tietoa helsinkiläisten rakennusten historiasta."
+
+#~ msgid "About the service paragraph 1"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelu tarjoaa Helsinki-aiheisia valokuvia Helsingin "
+#~ "kaupunginmuseon kokoelmista. Valokuvia voi ladata omalle laitteelleen "
+#~ "korkearesoluutioisina eli painokelpoisina tai pienempinä, verkkoon "
+#~ "sopivina kuvina."
+
+#~ msgid "About the service paragraph 2"
+#~ msgstr ""
+#~ "Kuvat on julkaistu CC BY 4.0 -lisenssillä. Se merkitsee, että kuvia voi "
+#~ "käyttää haluamallaan tavalla maksutta, kunhan mainitsee kuvan yhteydessä "
+#~ "kuvaajan nimen ja Helsingin kaupunginmuseon. Lisenssi sallii myös kuvien "
+#~ "kaupallisen käytön, jos lainsäädäntö ei sitä estä. Esimerkiksi "
+#~ "henkilökuvien käyttö markkinoinnissa ja mainonnassa on kielletty ilman "
+#~ "kuvassa olevan henkilön suostumusta."
+
+#~ msgid "About the service paragraph 3"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelussa voi hakea kuvia erilaisilla hakusanoilla, "
+#~ "selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita "
+#~ "ja lisätä niihin suosikkikuviaan. Palvelusta voi myös tilata maksullisia "
+#~ "kuvatuotteita, kuten julisteita ja postikortteja. "
+
+#~ msgid "About the service paragraph 4"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelussa on julkaistu Helsingin kaupunginmuseon "
+#~ "valokuvakokoelman kaikki digitoidut kuvat, tällä hetkellä noin 45 000 "
+#~ "kuvaa. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. "
+#~ "Jos kaipaat kuvaa, jota ei löydy Helsinkikuvia.fi-palvelusta, ota yhteys "
+#~ "Helsingin kaupunginmuseon Kuvaselaamoon."
+
+#~ msgid "About the service paragraph 5"
+#~ msgstr ""
+#~ "Helsinkikuvia.fi-palvelun kuvat ovat saatavilla myös kansallisessa Finna-"
+#~ "palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi "
+#~ "tutkia muutakin Helsinki-aiheista aineistoa muovipusseista "
+#~ "hiustenkuivajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea "
+#~ "tietoa helsinkiläisten rakennusten historiasta."
+
+#~ msgid "Handling customer data in"
+#~ msgstr "Asiakastietojen käsittely palvelussa"
+
+#~ msgid "Privacy"
+#~ msgstr "Tietosuoja"
+
+#~ msgid "Privacy when logging in"
+#~ msgstr ""
+#~ "Kun käyttäjä kirjautuu Helsinkikuvia.fi-palveluun (jatkossa Palvelu) "
+#~ "omalla tunnuksellaan, palveluun tallennetaan tunnus ja salasana. Tietoja "
+#~ "käytetään seuraaviin käyttötarkoituksiin:"
+
+#~ msgid "Information"
+#~ msgstr "Tieto"
+
+#~ msgid "Purpose"
+#~ msgstr "Käyttötarkoitus"
+
+#~ msgid "Username"
+#~ msgstr "Käyttäjätunnus"
+
+#~ msgid "User authentication"
+#~ msgstr "Käyttäjän tunnistaminen"
+
+#~ msgid "Password"
+#~ msgstr "Salasana"
+
+#~ msgid "Privacy in addition"
+#~ msgstr ""
+#~ "Edellä mainittujen tietojen lisäksi palveluun voidaan tallentaa tietoja, "
+#~ "jotka seuraavat käyttäjän toiminnasta palvelussa. Tällaisia ovat mm. "
+#~ "käyttökieli, suosikit, omat albumit ja omiin albumeihin tallennetut "
+#~ "tietueet. "
+
+#~ msgid "Terms of use linked pages"
+#~ msgstr ""
+#~ "Palvelu hyödyntää Bamboran rajapintaa maksujen välittämiseen ja "
+#~ "Printmotorin rajapintaa kuvatuotteiden tilausta varten. Näitä tai muita "
+#~ "linkitettyjä sivuja käytettäessä sovelletaan palvelun tarjoavan kolmannen "
+#~ "osapuolen määrittelemiä käyttöehtoja."
+
+#~ msgid ""
+#~ "Description of the client register data file for Helsinkiphotos.fi service"
+#~ msgstr "Helsinkikuvia.fi-asiakasrekisterin seloste"
+
+#~ msgid "Data file controller"
+#~ msgstr "Rekisterin ylläpitäjä"
+
+#~ msgid "Helsinki City Museum"
+#~ msgstr "Helsingin kaupunginmuseo"
+
+#~ msgid "Aleksanterinkatu 16"
+#~ msgstr "Aleksanterinkatu 16"
+
+#~ msgid "P.O. Box 4300"
+#~ msgstr " "
+
+#~ msgid "00099 CITY OF HELSINKI"
+#~ msgstr "00170 HELSINKI"
+
+#~ msgid "tel. 09 3103 6497"
+#~ msgstr "puh. 09 3103 6497"
+
+#~ msgid "kuvakokoelmat@hel.fi"
+#~ msgstr "kuvakokoelmat@hel.fi"
+
+#~ msgid "Regular sources of data"
+#~ msgstr "Säännönmukaiset tietolähteet"
+
+#~ msgid "The information is recorded by the user."
+#~ msgstr "Personoitujen toimintojen tiedot tallentaa käyttäjä itse."
+
+#~ msgid "Regular disclosure of information"
+#~ msgstr "Säännönmukainen tietojen luovutus"
+
+#~ msgid "The information will not be disclosed to third parties."
+#~ msgstr "Tietoja ei luovuteta eteenpäin."
+
+#~ msgid "Name of data file"
+#~ msgstr "Rekisterin nimi"
+
+#~ msgid "Client register for Helsinkiphotos.fi service"
+#~ msgstr "Helsinkikuvia.fi-palvelun asiakasrekisteri."
+
+#~ msgid "Reason for maintaining the data file"
+#~ msgstr "Rekisterin pitämisen peruste"
+
+#~ msgid ""
+#~ "This register has been established to maintain the unambiguity of client "
+#~ "identities."
+#~ msgstr ""
+#~ "Rekisteri on perustettu asiakkaiden yksikäsitteisyyden ylläpitämiseksi."
+
+#~ msgid "Data file usage"
+#~ msgstr "Rekisterin käyttötarkoitus"
+
+#~ msgid ""
+#~ "This register will be used to identify users in order to enable "
+#~ "personalised services, such as creating albums and adding pictures in "
+#~ "them."
+#~ msgstr ""
+#~ "Rekisteriä käytetään käyttäjien tunnistamiseen, jotta voidaan tarjota "
+#~ "personoituja palveluita. Esimerkkinä Omat albumit -toiminto, jolla "
+#~ "käyttäjä voi luoda ja halutessaan jakaa omia kokoelmia palvelun kuvista."
+
+#~ msgid "Data types included in the file"
+#~ msgstr "Rekisterin sisältämät tietotyypit"
+
+#~ msgid "Basic user information"
+#~ msgstr "Käyttäjän perustiedot"
+
+#~ msgid "Data collected for personalised services"
+#~ msgstr "Personoituja toimintoja varten kerättävät tiedot"
+
+#~ msgid "Favourites"
+#~ msgstr "Suosikit"
+
+#~ msgid "Own albums"
+#~ msgstr "Omat albumit"
+
+#~ msgid "Principles of data security"
+#~ msgstr "Rekisterin suojausperiaatteet"
+
+#~ msgid "The information is recorded exclusively in an electronic format."
+#~ msgstr ""
+#~ "Tietoja säilytetään ainoastaan sähköisessä muodossa. Tietoihin pääsevät "
+#~ "käsiksi ainoastaan järjestelmän ylläpitäjät, jotka tunnistetaan "
+#~ "käyttäjätunnuksella ja salasanalla."
+
+#~ msgid "Archiving period for personal information"
+#~ msgstr "Henkilötietojen säilytysaika"
+
+#~ msgid ""
+#~ "Personal information will be stored in the service until 12 months have "
+#~ "passed from the last login."
+#~ msgstr ""
+#~ "Henkilötietoja säilytetään palvelussa, kunnes viimeisestä kirjautumisesta "
+#~ "on kulunut 12 kuukautta."
+
+#~ msgid "Right to inspect the data file"
+#~ msgstr "Rekisteröidyn tarkistusoikeus"
+
+#~ msgid ""
+#~ "Users may contact Helsinki City Museum’s Picture Archives to inspect "
+#~ "their personal information stored on the server. See contact details "
+#~ "above."
+#~ msgstr ""
+#~ "Tarkistaaksesi, mitä henkilötietoja käyttäjästä on kerätty palvelimeen, "
+#~ "käyttäjän tulee ottaa yhteys Helsingin kaupunginmuseon kuvakokoelmiin, "
+#~ "ks. yhteystiedot ylempänä."
+
+#~ msgid "Rectifying inaccurate information"
+#~ msgstr "Virheellisten tietojen oikaisu"
+
+#~ msgid ""
+#~ "If necessary, the user may contact Helsinki City Museum’s Picture "
+#~ "Archives. See contact details above."
+#~ msgstr ""
+#~ "Käyttäjä voi ottaa yhteyttä Helsingin kaupunginmuseon kuvakokoelmiin."
+
+#~ msgid "The following terms and conditions apply to the use of material"
+#~ msgstr "Aineistojen käyttöä koskevat seuraavat ehdot:"
+
+#~ msgid "Images"
+#~ msgstr "Kuvat"
+
+#~ msgid "Terms of use paragraph images"
+#~ msgstr ""
+#~ "Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat "
+#~ "julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan "
+#~ "yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa "
+#~ "julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on "
+#~ "mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja "
+#~ "yksityisyyden suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö "
+#~ "markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan "
+#~ "henkilön suostumusta. Ota yhteys Helsingin kaupunginmuseoon, jos tieto "
+#~ "kuvan käyttöoikeuksista puuttuu tai olet epävarma oikeudestasi käyttää "
+#~ "kuvaa. "
+
+#~ msgid "Metadata"
+#~ msgstr "Kuvailutiedot"
+
+#~ msgid "Terms of use paragraph metadata"
+#~ msgstr ""
+#~ "Hakutulosten yhteydessä esitettäviä kuvailutietoja voi pääsääntöisesti "
+#~ "käyttää vapaasti. Poikkeuksen muodostavat kuvailutietoihin sisältyvät "
+#~ "henkilönimet, joiden julkaisemisessa käyttäjällä on vastuu yksityisyyden "
+#~ "suojan kunnioittamisessa."
 
 #~ msgid "#error-500-paragraph"
 #~ msgstr "Palvelimella tapahtui virhe. Yritä myöhemmin uudelleen."
@@ -1556,75 +1615,61 @@ msgstr "Kuvien haku epäonnistui. Kokeile hetken kuluttua uudestaan."
 #~ msgstr "A4 Pysty, Puolikiiltävä 240g"
 
 # form_fields
-msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Pakollinen. Alle 150 merkkiä. Vain kirjaimia, numeroita ja merkkejä @/./+/-/_."
-
-# no_results.html
-msgid "No search results"
-msgstr "Ei hakutuloksia"
-
-# siteinfo_terms.html bambora payments
-msgid "Payments"
-msgstr "Tilaus ja maksaminen"
+#~ msgid ""
+#~ "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+#~ msgstr ""
+#~ "Pakollinen. Alle 150 merkkiä. Vain kirjaimia, numeroita ja merkkejä @/./"
+#~ "+/-/_."
 
 # siteinfo_terms.html bambora payments
-msgid "Payments paragraph 1"
-msgstr ""
-"Tilattavat tuotteet valitaan kotisivuilla lisäämällä ne ostoskoriin. Tilaus "
-"lähetetään maksamalla ostoskorin sisältö verkkokaupan kassatoiminnossa. Tehdessäsi "
-"tilauksen hyväksyt nämä toimitusehdot, tuotteiden hinnat sekä toimituskulut. Mikäli "
-"tilaushetkellä annetaan sähköpostiosoite, tilauksesta lähetetään tilausvahvistus "
-"sähköpostitse. Tilausvahvistuksesta ilmenevät tilatut tuotteet sekä hinta."
+#~ msgid "Payments"
+#~ msgstr "Tilaus ja maksaminen"
 
 # siteinfo_terms.html bambora payments
-msgid "Payments paragraph 2"
-msgstr ""
-"Verkkokaupan maksuvälittäjänä toimii Bambora PayForm (Paybyway Oy, y-tunnus 2486559-4), "
-"joka on rekisteröity Finanssivalvonnan ylläpitämään maksulaitosrekisteriin. Maksamiseen "
-"siirrytään Bamboran verkkopalvelun kautta ja tiliotteella ja laskulla maksun saajana "
-"näkyy Bambora tai Paybyway Oy. Bambora välittää maksut verkkokauppiaalle. Maksaminen "
-"on turvallista, sillä kaikki maksutapahtumaa koskevat tiedot välitetään salattua yhteyttä "
-"käyttäen niin ettei kukaan ulkopuolinen taho näe maksutapahtuman tietoja. Kauppa syntyy "
-"verkkokaupan asiakkaan ja verkkokaupan välille. Verkkokaupan vastuulla ovat kaikki "
-"kauppaan liittyvät velvoitteet."
+#~ msgid "Payments paragraph 1"
+#~ msgstr ""
+#~ "Tilattavat tuotteet valitaan kotisivuilla lisäämällä ne ostoskoriin. "
+#~ "Tilaus lähetetään maksamalla ostoskorin sisältö verkkokaupan "
+#~ "kassatoiminnossa. Tehdessäsi tilauksen hyväksyt nämä toimitusehdot, "
+#~ "tuotteiden hinnat sekä toimituskulut. Mikäli tilaushetkellä annetaan "
+#~ "sähköpostiosoite, tilauksesta lähetetään tilausvahvistus sähköpostitse. "
+#~ "Tilausvahvistuksesta ilmenevät tilatut tuotteet sekä hinta."
 
 # siteinfo_terms.html bambora payments
-msgid "Payments paragraph 3"
-msgstr ""
-"PayForm-palvelun kautta voit maksaa verkkopankkitunnuksilla ja maksukorteilla "
-"(credit/debit). Käytettävissä ovat seuraavat maksutavat: Osuuspankki, Nordea, "
-"Danske Bank, Oma Säästöpankki, Säästöpankki, Aktia, Paikallisosuuspankit, S-Pankki, "
-"Handelsbanken, Ålandsbanken, Visa-, Visa Debit-, Visa Electron-, MasterCard- ja "
-"Debit MasterCard –kortit."
+#~ msgid "Payments paragraph 2"
+#~ msgstr ""
+#~ "Verkkokaupan maksuvälittäjänä toimii Bambora PayForm (Paybyway Oy, y-"
+#~ "tunnus 2486559-4), joka on rekisteröity Finanssivalvonnan ylläpitämään "
+#~ "maksulaitosrekisteriin. Maksamiseen siirrytään Bamboran verkkopalvelun "
+#~ "kautta ja tiliotteella ja laskulla maksun saajana näkyy Bambora tai "
+#~ "Paybyway Oy. Bambora välittää maksut verkkokauppiaalle. Maksaminen on "
+#~ "turvallista, sillä kaikki maksutapahtumaa koskevat tiedot välitetään "
+#~ "salattua yhteyttä käyttäen niin ettei kukaan ulkopuolinen taho näe "
+#~ "maksutapahtuman tietoja. Kauppa syntyy verkkokaupan asiakkaan ja "
+#~ "verkkokaupan välille. Verkkokaupan vastuulla ovat kaikki kauppaan "
+#~ "liittyvät velvoitteet."
 
 # siteinfo_terms.html bambora payments
-msgid "Payments contact headline"
-msgstr "Bambora PayForm -maksupalvelun yhteystiedot"
+#~ msgid "Payments paragraph 3"
+#~ msgstr ""
+#~ "PayForm-palvelun kautta voit maksaa verkkopankkitunnuksilla ja "
+#~ "maksukorteilla (credit/debit). Käytettävissä ovat seuraavat maksutavat: "
+#~ "Osuuspankki, Nordea, Danske Bank, Oma Säästöpankki, Säästöpankki, Aktia, "
+#~ "Paikallisosuuspankit, S-Pankki, Handelsbanken, Ålandsbanken, Visa-, Visa "
+#~ "Debit-, Visa Electron-, MasterCard- ja Debit MasterCard –kortit."
 
 # siteinfo_terms.html bambora payments
-msgid "Payments contact details"
-msgstr ""
-"Bambora PayForm, Paybyway Oy (Y-tunnus 2486559-4)\n"
-"Sähköposti: payform@bambora.com\n"
-"Puhelin: 029 300 5050 (arkisin klo 9-16)\n"
-"Postiosoite: Laserkatu 6, 53850 Lappeenranta"
+#~ msgid "Payments contact headline"
+#~ msgstr "Bambora PayForm -maksupalvelun yhteystiedot"
 
 # siteinfo_terms.html bambora payments
-msgid "Payments read more"
-msgstr "Lue lisää Bamborasta: https://www.bambora.com"
+#~ msgid "Payments contact details"
+#~ msgstr ""
+#~ "Bambora PayForm, Paybyway Oy (Y-tunnus 2486559-4)\n"
+#~ "Sähköposti: payform@bambora.com\n"
+#~ "Puhelin: 029 300 5050 (arkisin klo 9-16)\n"
+#~ "Postiosoite: Laserkatu 6, 53850 Lappeenranta"
 
-# index.html welcome-modal
-msgid "Katso tarkemmat tiedot käyttöehdoista"
-msgstr "Katso tarkemmat tiedot käyttöehdoista"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:77
-msgid "Download picture"
-msgstr "Lataa kuva"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:70
-msgid "Show details"
-msgstr "Näytä tarkat tiedot"
-
-#: hkm/hkm/templates/hkm/base_viewer.html:63
-msgid "Share"
-msgstr "Jaa"
+# siteinfo_terms.html bambora payments
+#~ msgid "Payments read more"
+#~ msgstr "Lue lisää Bamborasta: https://www.bambora.com"

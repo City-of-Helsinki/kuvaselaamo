@@ -40,7 +40,9 @@ color: #555 !important;
 input[type="text"]:-ms-input-placeholder {  
 color: #555 !important;  
 }
-
+span.no-postal-fee {
+    text-decoration: line-through;
+}
 .centered-fullwidth {
   width: 100%;
   text-align: center;
@@ -801,6 +803,12 @@ color: #555 !important;
   box-sizing: content-box;
   overflow: hidden;
   position: relative;
+
+  &:hover {
+    .grid__item--buy {
+      opacity: 1;
+    }
+  }
 }
 .grid__item--featured {
   height: 0px;
@@ -927,6 +935,60 @@ div.grid__fav.active {
   color: $color-hkm-orange;
 }
 
+// Buy button on grid
+.grid__item--buy {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-color: $color-hkm-green;
+  padding: 8px;
+  border-radius: 40px;
+  box-shadow: 0 0 0 4px rgba($color-white, 0.2);
+  opacity: 0;
+  z-index: 100;
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  svg {
+    fill: darken($color-hkm-green, 25%);
+  }
+
+  &:hover {
+    background-color: darken($color-hkm-green, 4%);
+    box-shadow: 0 0 0 700px rgba($color-white, 0.2);
+
+    svg {
+      fill: darken($color-hkm-green, 28%);
+    }
+  }
+}
+
+.grid.flex-images {
+  a:not(.grid__item--buy) {
+    z-index: 50;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(#000000, 0.3);
+      opacity: 0;
+      transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    }
+
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}
 /* Search */
 .search-modal,
 .search-modal.in ~ .modal-backdrop.in {

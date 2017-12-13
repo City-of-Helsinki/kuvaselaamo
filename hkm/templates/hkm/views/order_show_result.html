@@ -5,19 +5,19 @@
 
 {% block content %}
 
-  <div class="record-meta">
+  <div class="record-meta container-medium container-center">
 
-    {% if order %}
+    {% if order_collection %}
 
-      <div class="record-meta__col record-meta__col--left col-md-5">
+      <div class="record-meta__col record-meta__col--left col-md-12">
         <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
-        {% if order.is_checkout_successful %}
+        {% if order_collection.is_checkout_successful %}
 
-          {% if order.is_payment_successful %}
+          {% if order_collection.is_payment_successful %}
             <div class="alert alert-success">{% trans 'Kiitos tilauksestasi - maksu on vahvistettu.' %} {% trans 'Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen.' %}</div>
 
-            {% if order.is_order_successful %}
+            {% if order_collection.is_order_successful %}
               <div class="alert alert-success">{% trans 'Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla tietoa toimituksen etenemisestä.' %}</div>
             {% else %}
               <div class="alert alert-danger">{% trans 'Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe.' %} {% trans 'Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään.' %}</div>
@@ -50,18 +50,31 @@
         <table class="table table-striped">
         <caption>{% trans 'Order (noun)' %}</caption>
         <tr>
-        <td>{% trans 'Product' %}: </td><td>{{ order.product_name }}</td>
+          <th>{% trans 'Product' %}</th>
+        <th>{% trans 'Amount' %}</th>
+        <th>{% trans 'Price' %}</th>
         </tr>
+        {% for order in order_collection.product_orders.all %}
         <tr>
-        <td>{% trans 'Amount' %}: </td><td>{{ order.amount }}</td>
+          <td>{{ order.product_name }}</td>
+          <td>{{ order.amount }}</td>
+          <td>{{ order.total_price|localized_decimal:2 }} €</td>
         </tr>
+        {% endfor %}
+        {% for discount in order_collection.productorderdiscount_set.all %}
         <tr>
-        <td>{% trans 'Price' %}: </td><td>{{ order.total_price }} € {% trans 'incl. VAT' %} {% if order.amount > 1 %} (á {{ order.unit_price }}€){% endif %}</td>
+          <td>{{ discount.campaign }}{% if discount.code_used %} - {{ discount.code_used }}{% endif %}</td>
+          <td></td>
+          <td>{{ discount.discounted_value|localized_decimal:2 }} €</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="2">{% trans 'Total' %}: </td>
+        <td>
+           {{ order_collection.total_price }} € {% trans 'Incl. VAT' %}
+        </td>
         </tr>
         </table>
-      </div>
-      <div class="record-meta__col record-meta__col--right col-md-7">
-        <div><img class="record-meta__image" data-img-url="{% finna_image order.record_finna_id %}" src="{{ order.crop_image_url }}"></img></div>
       </div>
      
   </div>

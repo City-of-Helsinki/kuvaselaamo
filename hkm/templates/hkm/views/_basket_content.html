@@ -1,0 +1,46 @@
+{% load i18n l10n hkm_tags %}
+{% for line in basket.product_lines %}
+<div class="basket-row" data-lineId="{{ line.line_id }}">
+    <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+    <div class="basket-thumbnail">
+        <figure>
+            <img src="{{ line.order.image_url }}" alt="">
+            <figcaption>{{ line.product.get_name_display }}</figcaption>
+        </figure>
+    </div>
+
+    <div class="basket-metadata">
+        <h3>{{ line.text }}</h3>
+    </div>
+
+    <div class="basket-quantity" >
+        <a class="btn-down" href="#" data-toggle="tooltip" data-placement="top" title="Vähennä">
+            <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+            </svg>
+        </a>
+        <h3 class="basket-quantity-value">{{ line.quantity }}</h3>
+        <a class="btn-up" href="#" data-toggle="tooltip" data-placement="top" title="Lisää">
+            <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
+            </svg>
+        </a>
+        <h3 class="basket-quantity-value">{% trans "kpl" %}</h3>
+    </div>
+
+    <div class="basket-price basket-price-item">
+        <span class="basket-price-value">{{ line.total_price|localized_decimal:2 }} </span>
+    </div>
+</div>
+{% endfor %}
+{% for discount in basket.discount_lines %}
+    {% include 'hkm/views/_discount_lines.html' with line=discount %}
+{% endfor %}
+    <input type="hidden" name="action" value="discount">
+    <div class="basket-footer basket-row">
+        <div>
+            <label>{% trans "Discount code" %}:&nbsp;</label>
+            <input class="form-control" id="discount-code" name="discount_code" type="text">
+        </div>
+        <button class="btn btn-primary btn-lg pull-right add-discount">{% trans 'Use code' %}</button>
+    </div>

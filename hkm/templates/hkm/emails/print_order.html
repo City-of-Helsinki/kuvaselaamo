@@ -1,0 +1,8 @@
+Tilaus #{{ order.pk }}\n
+Tilaaja: {{ order.orderer_name }}\n\n
+
+{% for line in order.product_orders.all %}
+    {{ line.record_finna_id }} / {{ line.product_type.name }} - {{ line.amount }} kpl \n
+{% endfor %}
+\n
+Yhteensä: {{ order.total_price }}

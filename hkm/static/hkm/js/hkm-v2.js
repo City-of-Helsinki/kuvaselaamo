@@ -291,7 +291,7 @@ palikka
     }
   });
 
-  $('.has-popover').click(function() {
+  $('.has-popover').on('click', function() {
       var clickedButton = this;
       $('.has-popover').each(function(current) {
         if ($(this)[0] !== clickedButton) {
@@ -309,7 +309,6 @@ palikka
       title: $(this).attr("tooltip-title")
     })
   });
-  
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
@@ -548,7 +547,10 @@ palikka
     }
 
     // Initialize tooltips
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({
+      container: 'body'
+    });
+
 
   });
   
@@ -823,6 +825,4 @@ palikka
     
 
   }
-
-
 });
