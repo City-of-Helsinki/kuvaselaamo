@@ -22,6 +22,16 @@ class CampaignUsageType(object):
     )
 
 
+class CodeUsage(object):
+    SINGLE_USE = "SINGLE_USE"
+    MULTI_USE = "MULTI_USE"
+
+    choices = (
+        (SINGLE_USE, (u"Kertakäyttöinen")),
+        (MULTI_USE, (u"Monikäyttöinen"))
+    )
+
+
 class CampaignStatus(object):
     DISABLED = "DISABLED"
     ENABLED = "ENABLED"
@@ -148,6 +158,13 @@ class CampaignCode(models.Model, _UsageMixin):
     campaign = models.ForeignKey(Campaign, related_name="campaign_codes", verbose_name=(u"Kampanja"))
     code = models.CharField(max_length=40, db_index=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    use_type = models.CharField(
+        max_length=20,
+        default=CodeUsage.SINGLE_USE,
+        verbose_name=_(u"Käyttö"),
+        db_index=True,
+        choices=CodeUsage.choices
+    )
     status = models.CharField(
         max_length=20,
         default=CampaignStatus.ENABLED,
