@@ -58,9 +58,9 @@
         <td>
           {{ request.basket.basket_total_price|localized_decimal:2 }} € +
             {% if not request.basket.is_free_shipping %}
-              {% trans 'Postal fees' %} {{ order.postal_fees|localized_decimal:2 }} €
+              {% trans 'Shipping fees' %} {{ order.postal_fees|localized_decimal:2 }} €
             {% else %}
-                <span class="no-postal-fee"> {% trans 'Postal fees' %} {{ order.postal_fees|localized_decimal:2 }} €</span> 0 €
+                <span class="no-postal-fee"> {% trans 'Shipping fees' %} {{ order.postal_fees|localized_decimal:2 }} €</span> 0 €
             {% endif %}
                 = {{ request.basket.total_price_with_postal_fees|localized_decimal:2 }} {% trans 'Incl. VAT' %}
         </td>

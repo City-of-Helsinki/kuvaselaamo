@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 16:40+0200\n"
+"POT-Creation-Date: 2017-12-13 10:37+0200\n"
 "PO-Revision-Date: 2017-07-04 15:15+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: English (United States) (https://www.transifex.com/haltu/"
@@ -57,6 +57,10 @@ msgstr ""
 
 #: hkm/models/campaigns.py:111
 msgid "Absoluuttinen alennus (veroton)"
+msgstr ""
+
+#: hkm/models/campaigns.py:116
+msgid "Free shipping"
 msgstr ""
 
 #: hkm/models/campaigns.py:121
@@ -325,10 +329,13 @@ msgstr "Product name"
 msgid "Amount"
 msgstr "Amount"
 
-#: hkm/models/models.py:373 hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_summary.html:59
-msgid "Postal fees"
-msgstr "postal fees"
+#: hkm/models/models.py:373 hkm/templates/hkm/snippets/_basket_total_row.html:5
+#: hkm/templates/hkm/snippets/_basket_total_row.html:7
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_summary.html:61
+#: hkm/templates/hkm/views/order_summary.html:63
+msgid "Shipping fees"
+msgstr "shipping fees"
 
 #: hkm/models/models.py:375
 msgid "Unit price"
@@ -602,6 +609,21 @@ msgstr "Add to album"
 msgid "Message"
 msgstr "Message"
 
+#: hkm/templates/hkm/snippets/_basket_total_row.html:2
+#: hkm/templates/hkm/views/order_show_result.html:72
+#: hkm/templates/hkm/views/order_summary.html:57
+#, fuzzy
+#| msgid "Total price"
+msgid "Total"
+msgstr "Total price"
+
+#: hkm/templates/hkm/snippets/_basket_total_row.html:9
+#: hkm/templates/hkm/views/order.html:57
+#: hkm/templates/hkm/views/order_show_result.html:74
+#: hkm/templates/hkm/views/order_summary.html:65
+msgid "Incl. VAT"
+msgstr "Incl. VAT"
+
 #: hkm/templates/hkm/snippets/login.html:14
 #: hkm/templates/hkm/snippets/navigation.html:56
 msgid "Log in"
@@ -618,7 +640,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:40
+#: hkm/templates/hkm/views/basket.html:41
 msgid "Your cart is empty"
 msgstr ""
 
@@ -729,21 +751,13 @@ msgid "Use code"
 msgstr "Postal code"
 
 #: hkm/templates/hkm/views/basket.html:13
-#: hkm/templates/hkm/views/basket.html:39
+#: hkm/templates/hkm/views/basket.html:40
 #, fuzzy
 #| msgid "Back to search"
 msgid "Back to Homepage"
 msgstr "Back to search"
 
-#: hkm/templates/hkm/views/basket.html:28
-#: hkm/templates/hkm/views/order_show_result.html:72
-#: hkm/templates/hkm/views/order_summary.html:57
-#, fuzzy
-#| msgid "Total price"
-msgid "Total"
-msgstr "Total price"
-
-#: hkm/templates/hkm/views/basket.html:31
+#: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
 msgstr ""
 
@@ -882,12 +896,6 @@ msgstr "Quality of the finished print:"
 msgid "Hinta yht."
 msgstr "Total price"
 
-#: hkm/templates/hkm/views/order.html:57
-#: hkm/templates/hkm/views/order_show_result.html:74
-#: hkm/templates/hkm/views/order_summary.html:59
-msgid "Incl. VAT"
-msgstr "Incl. VAT"
-
 #: hkm/templates/hkm/views/order.html:59
 msgid "Add to cart"
 msgstr "Add to cart"
@@ -994,11 +1002,11 @@ msgstr ""
 msgid "Change"
 msgstr "Change"
 
-#: hkm/templates/hkm/views/order_summary.html:66
+#: hkm/templates/hkm/views/order_summary.html:72
 msgid "Order (verb)"
 msgstr "Order"
 
-#: hkm/templates/hkm/views/order_summary.html:68
+#: hkm/templates/hkm/views/order_summary.html:74
 msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
@@ -1040,6 +1048,9 @@ msgstr "Favorites"
 #: hkm/views/views.py:1090
 msgid "Your favorite images are collected here"
 msgstr "Your favorite images are collected here"
+
+#~ msgid "Postal fees"
+#~ msgstr "postal fees"
 
 #~ msgid "incl. VAT"
 #~ msgstr "incl. VAT"
