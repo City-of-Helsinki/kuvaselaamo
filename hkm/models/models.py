@@ -26,7 +26,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode
+from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode, CodeUsage
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
 
@@ -370,7 +370,7 @@ class ProductOrder(BaseModel):
     amount = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
     postal_fees = models.DecimalField(verbose_name=_(
-        u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
+        u'Shipping fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
     unit_price = models.DecimalField(verbose_name=_(
         u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
     total_price = models.DecimalField(verbose_name=_(
@@ -519,17 +519,20 @@ class ProductOrderCollection(models.Model):
 
     def add_discount(self, campaign, code=None, discount_value=0):
         if campaign.is_applicable_today():
-            order_discount = ProductOrderDiscount(order=self, campaign=campaign, discounted_value=discount_value)
+            ProductOrderDiscount.objects.create(
+                order=self,
+                campaign=campaign,
+                discounted_value=discount_value,
+                code_used=code
+            )
             if code:
-                CampaignCode.objects.filter(
+                code_object = CampaignCode.objects.get(
                     code=code,
                     campaign=campaign
-                ).update(
-                    status=CampaignStatus.DISABLED
                 )
-
-                order_discount.code = code
-            order_discount.save()
+                if code_object.use_type == CodeUsage.SINGLE_USE:
+                    code_object.status = CampaignStatus.DISABLED
+                    code_object.save(update_fields=['status'])
 
     def checkout(self):
         checkout_request = PBW.post(self.pk, int(

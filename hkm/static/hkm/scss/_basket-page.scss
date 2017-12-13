@@ -183,15 +183,13 @@ a.btn-delete-row {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            width: 200px;
 
             h5 {
                 letter-spacing: 0.6px;
                 font-size: 18px;
                 color: transparentize($color-darktext, 0.5);
             }
-
-            span {
+            span.basket-price-value {
                 color: $color-hkm-green;
                 font-size: 24px;
             }

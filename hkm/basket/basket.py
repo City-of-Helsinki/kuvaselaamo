@@ -92,8 +92,11 @@ class Basket(object):
         basket_campaigns = self.data.get("campaign_ids", {})
         campaigns = Campaign.objects.filter(pk__in=basket_campaigns.keys())
         discount_lines = []
-
+        self._data["free_shipping"] = False
         for campaign in campaigns:
+            if campaign.free_shipping:
+                self._data["free_shipping"] = True
+
             data_line = {
                 'line_id': str(random.randint(0, 0x7FFFFFFF)),
                 'product_id': None,
@@ -228,7 +231,13 @@ class Basket(object):
         return [l for l in self._get_processed_lines() if l.type == 4]
 
     def _get_total_with_postal_fees(self):
-        return self.basket_total_price + Decimal(settings.HKM_POSTAL_FEES)
+        return self.basket_total_price + (Decimal(settings.HKM_POSTAL_FEES) if not self.is_free_shipping else Decimal("0"))
+
+    def _get_postal_fee(self):
+        return settings.HKM_POSTAL_FEES
+
+    def _get_free_shipping(self):
+        return bool(self._data.get("free_shipping"))
 
     lines = property(_get_processed_lines)
     product_lines = property(_get_product_lines)
@@ -236,5 +245,7 @@ class Basket(object):
     data = property(load)
     _raw_lines = property(_get_data_lines, _set_data_lines)
     basket_total_price = property(_get_taxful_total_price)
+    postal_fee = property(_get_postal_fee)
     product_count = property(_get_product_count)
     total_price_with_postal_fees = property(_get_total_with_postal_fees)
+    is_free_shipping = property(_get_free_shipping)

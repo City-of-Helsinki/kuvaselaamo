@@ -25,7 +25,8 @@
                             </div>
                             <div class="basket-total">
                                 <div class="basket-price-total">
-                                    <h5>{% trans 'Total' %}&nbsp;</h5><span class="basket-price-value">{{ basket.basket_total_price|localized_decimal:2 }}</span>
+                                    {% include "hkm/snippets/_basket_total_row.html" %}
+
                                 </div>
                                 {{ form.action }}
                                 <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
