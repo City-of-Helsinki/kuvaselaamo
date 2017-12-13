@@ -57,7 +57,7 @@
             <td colspan="2">{% trans 'Total' %}: </td>
         <td>
           {{ request.basket.basket_total_price|localized_decimal:2 }} € +
-            {% if not request.basketюis_free_shipping %}
+            {% if not request.basket.is_free_shipping %}
               {% trans 'Postal fees' %} {{ order.postal_fees|localized_decimal:2 }} €
             {% else %}
                 <span class="no-postal-fee"> {% trans 'Postal fees' %} {{ order.postal_fees|localized_decimal:2 }} €</span> 0 €
