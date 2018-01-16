@@ -102,3 +102,10 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
+
+{% block extra_js %}
+    {# Gives access to translated "no more results" text in js code #}
+    <script>
+        window.NO_MORE_SEARCH_RESULTS_TEXT = '{% trans 'No more results' %}';
+    </script>
+{% endblock %}
