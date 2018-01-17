@@ -197,11 +197,10 @@ class Basket(object):
         ).values_list('campaign__pk', 'code'))
 
         # Matched by time, codeless campaing.
-        available_campaigns += list(campaigns.filter(usage_type=CampaignUsageType.CODELESS).values_list('pk', 'campaign_codes__code'))
-
+        available_campaigns += list(campaigns.filter(usage_type=CampaignUsageType.CODELESS).values_list('pk',))
         campaign_ids = self.data.get("campaign_ids", {})
         for campaign in available_campaigns:
-            campaign_ids[str(campaign[0])] = campaign[1] or None
+            campaign_ids[str(campaign[0])] = campaign[1] if len(campaign) > 1 else None
 
         self.data["campaign_ids"] = campaign_ids
         self._processed_lines_cache = None  # uncache basket
@@ -211,9 +210,7 @@ class Basket(object):
         """
         :type campaign_to_remove: Campaign
         """
-        print self.data["campaign_ids"]
         self.data["campaign_ids"].pop(str(campaign_pk_to_remove))
-        print self.data["campaign_ids"]
         self._processed_lines_cache = None  # uncache basket
         self.save()
 
