@@ -205,6 +205,11 @@ palikka
       fetchingMoreImages = false;
       loadMoreButton.find('.icon-spinner').remove();
       loadMoreButton.data({'current-page': page})
+    })
+    .fail(function(jqXHR, textStatus){
+      loadMoreButton.attr("disabled", true);
+      // translated button text is given in search.html template
+      loadMoreButton.html(window.NO_MORE_SEARCH_RESULTS_TEXT);
     });
   }
 

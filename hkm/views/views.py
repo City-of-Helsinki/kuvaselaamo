@@ -470,7 +470,9 @@ class SearchView(BaseView):
     page = 1
 
     def get(self, request, *args, **kwargs):
-        self.handle_search(request, *args, **kwargs)
+        result = self.handle_search(request, *args, **kwargs)
+        if isinstance(result, http.HttpResponse):
+            return result
         return super(SearchView, self).get(request, *args, **kwargs)
 
     def get_template_names(self):
@@ -529,7 +531,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result['resultCount'] == 0:
+            if not self.search_result['resultCount'] == 0 and 'records' in self.search_result:
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -538,6 +540,10 @@ class SearchView(BaseView):
                     # Check also if this record is one of user's favorites
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
+            elif 'records' not in self.search_result:
+                # No more records available for the next page
+                if self.request.is_ajax():
+                    return http.HttpResponseBadRequest()
 
     def get_facet_result(self, search_term):
         if self.request.is_ajax():

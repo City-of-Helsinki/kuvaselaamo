@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-13 10:37+0200\n"
+"POT-Creation-Date: 2018-01-16 12:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -22,61 +22,65 @@ msgstr ""
 msgid "Orderer's name"
 msgstr "Tilaajan nimi"
 
-#: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
+#: hkm/models/campaigns.py:76 hkm/models/campaigns.py:171
 msgid "Tila"
 msgstr ""
 
-#: hkm/models/campaigns.py:77
+#: hkm/models/campaigns.py:87
 msgid "Alkupäivämäärä"
 msgstr ""
 
-#: hkm/models/campaigns.py:82
+#: hkm/models/campaigns.py:92
 msgid "Loppupäivämäärä"
 msgstr ""
 
-#: hkm/models/campaigns.py:87
+#: hkm/models/campaigns.py:97
 #, fuzzy
 #| msgid "Tuotetyyppi"
 msgid "Tyyppi"
 msgstr "Tuotetyyppi"
 
-#: hkm/models/campaigns.py:93
+#: hkm/models/campaigns.py:103
 msgid "Kampanjamoduuli"
 msgstr ""
 
-#: hkm/models/campaigns.py:98
+#: hkm/models/campaigns.py:108
 msgid "Yhteiskäyttöestoryhmä"
 msgstr ""
 
-#: hkm/models/campaigns.py:104
+#: hkm/models/campaigns.py:114
 msgid "Prosentuaalinen alennus"
 msgstr ""
 
-#: hkm/models/campaigns.py:111
+#: hkm/models/campaigns.py:121
 msgid "Absoluuttinen alennus (veroton)"
 msgstr ""
 
-#: hkm/models/campaigns.py:116
+#: hkm/models/campaigns.py:126
 msgid "Free shipping"
 msgstr ""
 
-#: hkm/models/campaigns.py:121
+#: hkm/models/campaigns.py:131
 msgid "Nimi"
 msgstr ""
 
-#: hkm/models/campaigns.py:126
+#: hkm/models/campaigns.py:136
 msgid "kampanja"
 msgstr ""
 
-#: hkm/models/campaigns.py:127
+#: hkm/models/campaigns.py:137
 msgid "kampanjat"
 msgstr ""
 
-#: hkm/models/campaigns.py:160
+#: hkm/models/campaigns.py:164
+msgid "Käyttö"
+msgstr ""
+
+#: hkm/models/campaigns.py:177
 msgid "kampanjakoodi"
 msgstr ""
 
-#: hkm/models/campaigns.py:161
+#: hkm/models/campaigns.py:178
 msgid "kampanjakoodit"
 msgstr ""
 
@@ -1021,15 +1025,20 @@ msgstr "Vuosi"
 msgid "Load more..."
 msgstr "Lataa lisää... "
 
+# no_results.html
+#: hkm/templates/hkm/views/search.html:108
+msgid "No more results"
+msgstr "Ei enempää tuloksia"
+
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"
 
-#: hkm/views/views.py:1090
+#: hkm/views/views.py:1096
 msgid "Favorites"
 msgstr "Suosikit"
 
-#: hkm/views/views.py:1090
+#: hkm/views/views.py:1096
 msgid "Your favorite images are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
 
