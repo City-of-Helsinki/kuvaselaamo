@@ -6,6 +6,7 @@ import logging
 import hmac
 import hashlib
 
+from decimal import Decimal
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -18,6 +19,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
@@ -521,6 +523,10 @@ class ProductOrderCollection(models.Model):
     def __unicode__(self):
         return "%s - order" % self.orderer_name
 
+    @property
+    def is_zero_price(self):
+        return self.total_price == Decimal(0)
+
     def add_discount(self, campaign, code=None, discount_value=0):
         if campaign.is_applicable_today():
             ProductOrderDiscount.objects.create(
@@ -573,6 +579,89 @@ class ProductOrderCollection(models.Model):
                     'calculated authcode': authcode}})
         return authcode == received_authcode
 
+    def send_order_to_printmotor_and_inform(self):
+        """
+        Sends order to Printmotor and sets is_order_successful field to True or False
+        based on response from Printmotor. Also sends email to customer on successful
+        print order request. Returns boolean value which tells if print order request
+        was successful or not.
+        """
+
+        LOG.debug('sending to Printmotor')
+        datetime_order_started = datetime.datetime.now()
+        LOG.debug('PRINT ORDER ATTEMPT STARTED AT: ', extra={'data': {
+                  'order_hash': self.pk, 'time': str(datetime_order_started)}})
+
+        printOrder = PRINTMOTOR.post(self)
+
+        datetime_order_ended = timezone.now()
+        self.product_orders.update(datetime_order_ended=datetime_order_ended)
+        if printOrder:
+            LOG.debug('PRINT ORDER ATTEMPT ENDED AT: ', extra={'data': {
+                      'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+            if printOrder == 200:
+                LOG.debug('Successfully sent order to printmotor')
+                self.is_order_successful = True
+                self.send_mail('print')
+            elif printOrder == 400:
+                LOG.error(
+                    'Bad request to Printmotor, check payload', extra={'data': {
+                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            elif printOrder == 401:
+                LOG.error(
+                    'Unauthorized @ Printmotor, check headers', extra={'data': {
+                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            elif printOrder == 500:
+                LOG.error(
+                    'Printmotor server error, maybe image URL is invalid', extra={'data': {
+                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            else:
+                LOG.error(
+                    'Unknown status code from Printmotor', extra={'data': {
+                        'order_hash': self.pk, 'time': str(datetime_order_ended),
+                        'status_code': printOrder}})
+                self.is_order_successful = False
+        else:
+            LOG.error('Failed to communicate with Printmotor API', extra={'data': {
+                      'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+            self.is_order_successful = False
+
+        return self.is_order_successful
+
+    def handle_zero_price_confirmation(self):
+
+        # Process only if total price is 0
+        if not self.is_zero_price:
+            return
+
+        datetime_checkout_ended = timezone.now()
+        self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
+        LOG.debug('ZERO PRICE CHECKOUT ENDED AT: ', extra={'data': {
+                'order_hash': self.pk,
+                'time': str(datetime_checkout_ended)}})
+
+        if not self.is_checkout_successful:
+            LOG.debug('ZERO PRICE CHECKOUT SUCCESSFUL ', extra={
+                      'data': {'order_hash': self.pk}})
+            self.send_mail('checkout')
+            self.is_checkout_successful = True
+
+        # If payment has not yet been marked as successfully processed,
+        # Mark it as such and try to send order details to Printing
+        # Agency
+        if not self.is_payment_successful:
+            self.is_payment_successful = True
+            LOG.debug('ZERO PRICE PAYMENT SETTLED SUCCESSFULLY ', extra={
+                      'data': {'order_hash': self.pk}})
+
+        # If order has not yet been marked as successfully sent, send it to PRINTMOTOR
+        if not self.is_order_successful:
+            self.send_order_to_printmotor_and_inform()
+        self.save()
+
     def handle_confirmation(self, result, force=False):
 
         if not force:
@@ -580,7 +669,7 @@ class ProductOrderCollection(models.Model):
                 LOG.error('ATTEMPT TO REHANDLE UNSUCCESSFUL CHECKOUT!', extra={'data': {
                           'order_hash': self.pk}})
                 return
-        datetime_checkout_ended = datetime.datetime.now()
+        datetime_checkout_ended = timezone.now()
         self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
         LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
                 'order_hash': self.pk,
@@ -608,45 +697,9 @@ class ProductOrderCollection(models.Model):
                     LOG.debug('PAYMENT SETTLED SUCCESSFULLY ', extra={
                               'data': {'order_hash': self.pk}})
 
-                # If order has not yet been marked as successfully sent, send it
-                # PRINTMOTOR post method returns status code of Send Print
-                # Order Request
+                # If order has not yet been marked as successfully sent, send it to Printmotor
                 if not self.is_order_successful:
-                    LOG.debug('sending to Printmotor')
-                    datetime_order_started = datetime.datetime.now()
-                    LOG.debug('PRINT ORDER ATTEMPT STARTED AT: ', extra={'data': {
-                              'order_hash': self.pk, 'time': str(datetime_order_started)}})
-
-                    printOrder = PRINTMOTOR.post(self)
-
-                    datetime_order_ended = datetime.datetime.now()
-                    self.product_orders.update(datetime_order_ended=datetime_order_ended)
-                    if printOrder:
-                        LOG.debug('PRINT ORDER ATTEMPT ENDED AT: ', extra={'data': {
-                                  'order_hash': self.pk, 'time': str(datetime_order_ended)}})
-                        if printOrder == 200:
-                            LOG.debug('Successfully sent order to printmotor')
-                            self.is_order_successful = True
-                            self.send_mail('print')
-                        elif printOrder == 400:
-                            LOG.error(
-                                'Bad request to Printmotor, check payload', extra={'data': {
-                                    'order_hash': self.pk, 'time': str(datetime_order_ended)}})
-                            self.is_order_successful = False
-                        elif printOrder == 401:
-                            LOG.error(
-                                'Unauthorized @ Printmotor, check headers', extra={'data': {
-                                    'order_hash': self.pk, 'time': str(datetime_order_ended)}})
-                            self.is_order_successful = False
-                        elif printOrder == 500:
-                            LOG.error(
-                                'Printmotor server error, maybe image URL is invalid', extra={'data': {
-                                    'order_hash': self.pk, 'time': str(datetime_order_ended)}})
-                            self.is_order_successful = False
-                    else:
-                        LOG.error('Failed to communicate with Printmotor API', extra={'data': {
-                                  'order_hash': self.pk, 'time': str(datetime_order_ended)}})
-                        self.is_order_successful = False
+                    self.send_order_to_printmotor_and_inform()
 
         else:
             self.is_checkout_successful = False

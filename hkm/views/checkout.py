@@ -77,6 +77,11 @@ class OrderSummaryView(TemplateView):
                     }
                 })
             order_collection.save()
+
+            # If order total price is 0, skip payment api and redirect straight to confirmation view
+            if order_collection.is_zero_price:
+                return redirect(reverse('hkm_order_confirmation', kwargs={"order_id": order_collection.pk}))
+
             redirect_url = order_collection.checkout()
             if redirect_url:
                 return redirect(redirect_url)
@@ -136,15 +141,17 @@ class OrderConfirmation(TemplateView):
 
         self.result['authcode'] = request.GET.get('AUTHCODE', None)
         self.result['return_code'] = request.GET.get('RETURN_CODE', None)
-        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
+        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', kwargs.get("order_id"))
         self.result['settled'] = request.GET.get('SETTLED', None)
         self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
         try:
             self.order_collection = ProductOrderCollection.objects.get(pk=self.result['order_hash'])
         except ObjectDoesNotExist:
             return HttpResponseForbidden()
-
-        if self.order_collection.authcode_valid(self.result):
+        if self.order_collection.is_zero_price:
+            self.order_collection.handle_zero_price_confirmation()
+            request.basket.clear_all()
+        elif self.order_collection.authcode_valid(self.result):
             self.order_collection.handle_confirmation(self.result)
             request.basket.clear_all()
         else:
