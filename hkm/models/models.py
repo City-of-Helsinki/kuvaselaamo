@@ -68,6 +68,8 @@ class UserProfile(BaseModel):
         default=json.dumps({
             'api-poster-gloss-30x40': 0,
             'api-poster-gloss-40x30': 0,
+            'api-poster-30x40': 0,
+            'api-poster-40x30': 0,
             'api-poster-50x70': 0,
             'api-poster-70x50': 0,
             'api-poster-gloss-A4-horizontal': 0,
@@ -269,6 +271,8 @@ class PrintProduct(Product):
     PRODUCT_LAYOUTS_LIST = (
         ('api-poster-gloss-30x40', _(u'api-poster-gloss-30x40')),
         ('api-poster-gloss-40x30', _(u'api-poster-gloss-40x30')),
+        ('api-poster-30x40', _(u'api-poster-30x40')),
+        ('api-poster-40x30', _(u'api-poster-40x30')),
         ('api-poster-50x70', _(u'api-poster-50x70')),
         ('api-poster-70x50', _(u'api-poster-70x50')),
         ('api-poster-gloss-A4-horizontal', _(u'api-poster-gloss-A4-horizontal')),
