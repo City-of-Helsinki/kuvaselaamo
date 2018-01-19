@@ -72,7 +72,7 @@ class OrderSummaryView(TemplateView):
             LOG.debug('ORDER ATTEMPT STARTED AT: ',
                 extra={
                     'data': {
-                        'order_hash': order_collection.pk,
+                        'order_hash': order_collection.order_hash,
                         'time': str(datetime_checkout_started)
                     }
                 })
@@ -115,13 +115,13 @@ class OrderPBWNotify(View):
         self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
         self.result['settled'] = request.GET.get('SETTLED', None)
         self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
-        order_collection = ProductOrderCollection.objects.get(pk=self.result['order_hash'])
+        order_collection = ProductOrderCollection.objects.get(order_hash=self.result['order_hash'])
 
         if order_collection.authcode_valid(self.result):
             order_collection.handle_confirmation(self.result)
         else:
             LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': order_collection.pk}})
+                    'data': {'order_hash': order_collection.order_hash}})
 
         return HttpResponse()
 
@@ -145,7 +145,7 @@ class OrderConfirmation(TemplateView):
         self.result['settled'] = request.GET.get('SETTLED', None)
         self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
         try:
-            self.order_collection = ProductOrderCollection.objects.get(pk=self.result['order_hash'])
+            self.order_collection = ProductOrderCollection.objects.get(order_hash=self.result['order_hash'])
         except ObjectDoesNotExist:
             return HttpResponseForbidden()
         if self.order_collection.is_zero_price:
@@ -156,7 +156,7 @@ class OrderConfirmation(TemplateView):
             request.basket.clear_all()
         else:
             LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order_collection.pk}})
+                    'data': {'order_hash': self.order_collection.order_hash}})
             return HttpResponseForbidden()
         return super(OrderConfirmation, self).get(request, args, kwargs)
 
