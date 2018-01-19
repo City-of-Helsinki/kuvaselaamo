@@ -165,9 +165,10 @@ palikka
   function scrollToLastItem() {
 
     var itemId = localStorage.getItem("last_record_browsed") || "_";
+    // Remove white spaces in case of multiple search keywords
+    itemId = itemId.replace(' ', '_');
     var $item = $("[name="+itemId+"]");
     if($item.length) {
-
       $('html, body').animate({
         scrollTop: $item.offset().top
       }, 1000);
