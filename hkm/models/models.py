@@ -520,8 +520,16 @@ class ProductOrderCollection(models.Model):
     is_order_successful = models.NullBooleanField(
         verbose_name=_(u'Order successful'), null=True, blank=True)
 
+    order_hash = models.CharField(verbose_name=_(
+        u'Randomized order collection identifier phrase'), max_length=1024, null=True, blank=True, unique=True)
+
     def __unicode__(self):
         return "%s - order" % self.orderer_name
+
+    def save(self, *args, **kwargs):
+        if not self.id and not self.order_hash:
+            self.order_hash = get_random_string(20)
+        return super(ProductOrderCollection, self).save(*args, **kwargs)
 
     @property
     def is_zero_price(self):
@@ -545,7 +553,7 @@ class ProductOrderCollection(models.Model):
                     code_object.save(update_fields=['status'])
 
     def checkout(self):
-        checkout_request = PBW.post(self.pk, int(
+        checkout_request = PBW.post(self.order_hash, int(
             self.total_price * 100))  # api requires sum in cents
         LOG.debug(checkout_request)
         token = checkout_request.get('token', None)
@@ -565,7 +573,7 @@ class ProductOrderCollection(models.Model):
         incident_id = result.get('incident_id', None)
         return_code = result.get('return_code', None)
 
-        msg = '%s|%s' % (return_code, self.pk)
+        msg = '%s|%s' % (return_code, self.order_hash)
         if settled:
             msg = '%s|%s' % (msg, settled)
         if incident_id:
@@ -574,7 +582,7 @@ class ProductOrderCollection(models.Model):
         authcode = hmac.new(SECRET_KEY, msg,
                             hashlib.sha256).hexdigest().upper()
         LOG.debug('COMPARING AUTHCODES', extra={
-                    'data': {'order_hash': self.pk,
+                    'data': {'order_hash': self.order_hash,
                     'received authcode': received_authcode,
                     'calculated authcode': authcode}})
         return authcode == received_authcode
@@ -590,7 +598,7 @@ class ProductOrderCollection(models.Model):
         LOG.debug('sending to Printmotor')
         datetime_order_started = datetime.datetime.now()
         LOG.debug('PRINT ORDER ATTEMPT STARTED AT: ', extra={'data': {
-                  'order_hash': self.pk, 'time': str(datetime_order_started)}})
+                  'order_hash': self.order_hash, 'time': str(datetime_order_started)}})
 
         printOrder = PRINTMOTOR.post(self)
 
@@ -598,7 +606,7 @@ class ProductOrderCollection(models.Model):
         self.product_orders.update(datetime_order_ended=datetime_order_ended)
         if printOrder:
             LOG.debug('PRINT ORDER ATTEMPT ENDED AT: ', extra={'data': {
-                      'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                      'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
             if printOrder == 200:
                 LOG.debug('Successfully sent order to printmotor')
                 self.is_order_successful = True
@@ -606,27 +614,27 @@ class ProductOrderCollection(models.Model):
             elif printOrder == 400:
                 LOG.error(
                     'Bad request to Printmotor, check payload', extra={'data': {
-                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
                 self.is_order_successful = False
             elif printOrder == 401:
                 LOG.error(
                     'Unauthorized @ Printmotor, check headers', extra={'data': {
-                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
                 self.is_order_successful = False
             elif printOrder == 500:
                 LOG.error(
                     'Printmotor server error, maybe image URL is invalid', extra={'data': {
-                        'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
                 self.is_order_successful = False
             else:
                 LOG.error(
                     'Unknown status code from Printmotor', extra={'data': {
-                        'order_hash': self.pk, 'time': str(datetime_order_ended),
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended),
                         'status_code': printOrder}})
                 self.is_order_successful = False
         else:
             LOG.error('Failed to communicate with Printmotor API', extra={'data': {
-                      'order_hash': self.pk, 'time': str(datetime_order_ended)}})
+                      'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
             self.is_order_successful = False
 
         return self.is_order_successful
@@ -640,12 +648,12 @@ class ProductOrderCollection(models.Model):
         datetime_checkout_ended = timezone.now()
         self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
         LOG.debug('ZERO PRICE CHECKOUT ENDED AT: ', extra={'data': {
-                'order_hash': self.pk,
+                'order_hash': self.order_hash,
                 'time': str(datetime_checkout_ended)}})
 
         if not self.is_checkout_successful:
             LOG.debug('ZERO PRICE CHECKOUT SUCCESSFUL ', extra={
-                      'data': {'order_hash': self.pk}})
+                      'data': {'order_hash': self.order_hash}})
             self.send_mail('checkout')
             self.is_checkout_successful = True
 
@@ -655,7 +663,7 @@ class ProductOrderCollection(models.Model):
         if not self.is_payment_successful:
             self.is_payment_successful = True
             LOG.debug('ZERO PRICE PAYMENT SETTLED SUCCESSFULLY ', extra={
-                      'data': {'order_hash': self.pk}})
+                      'data': {'order_hash': self.order_hash}})
 
         # If order has not yet been marked as successfully sent, send it to PRINTMOTOR
         if not self.is_order_successful:
@@ -667,12 +675,12 @@ class ProductOrderCollection(models.Model):
         if not force:
             if self.is_checkout_successful == False:
                 LOG.error('ATTEMPT TO REHANDLE UNSUCCESSFUL CHECKOUT!', extra={'data': {
-                          'order_hash': self.pk}})
+                          'order_hash': self.order_hash}})
                 return
         datetime_checkout_ended = timezone.now()
         self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
         LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
-                'order_hash': self.pk,
+                'order_hash': self.order_hash,
                 'time': str(datetime_checkout_ended)}})
 
         # if return code for checkout is 0 (SUCCESS)
@@ -682,7 +690,7 @@ class ProductOrderCollection(models.Model):
             # successful
             if not self.is_checkout_successful:
                 LOG.debug('CHECKOUT SUCCESSFUL ', extra={
-                          'data': {'order_hash': self.pk}})
+                          'data': {'order_hash': self.order_hash}})
                 self.send_mail('checkout')
                 self.is_checkout_successful = True
 
@@ -695,7 +703,7 @@ class ProductOrderCollection(models.Model):
                 if not self.is_payment_successful:
                     self.is_payment_successful = True
                     LOG.debug('PAYMENT SETTLED SUCCESSFULLY ', extra={
-                              'data': {'order_hash': self.pk}})
+                              'data': {'order_hash': self.order_hash}})
 
                 # If order has not yet been marked as successfully sent, send it to Printmotor
                 if not self.is_order_successful:
@@ -704,7 +712,7 @@ class ProductOrderCollection(models.Model):
         else:
             self.is_checkout_successful = False
             LOG.error('CHECKOUT _NOT_ SUCCESSFUL ', extra={
-                      'data': {'order_hash': self.pk}})
+                      'data': {'order_hash': self.order_hash}})
 
         self.save()
 
