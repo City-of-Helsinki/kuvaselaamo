@@ -182,9 +182,9 @@ class Basket(object):
         campaigns = Campaign.objects.filter(
             status=CampaignStatus.ENABLED
         ).exclude(
-            usable_from__gte=timezone.now()
+            usable_from__gt=timezone.now()
         ).exclude(
-            usable_to__lte=timezone.now()
+            usable_to__lt=timezone.now()
         )
 
         available_campaigns = []
