@@ -66,7 +66,7 @@ class PrintmotorClient(object):
             LOG.debug(r.status_code)
             return r.status_code
         except requests.exceptions.RequestException as e:
-            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_collection.pk}})
+            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_collection.order_hash}})
             return None
 
 
