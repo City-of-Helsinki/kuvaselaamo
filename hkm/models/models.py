@@ -317,8 +317,8 @@ class ProductOrder(BaseModel):
         u'Phone number'), null=True, blank=False)
     street_address = models.CharField(verbose_name=_(
         u'Street adress'), max_length=1024, null=True, blank=False)
-    postal_code = models.IntegerField(
-        verbose_name=_(u'Postal code'), null=True, blank=False)
+    postal_code = models.CharField(
+        verbose_name=_(u'Postal code'), max_length=64, null=True, blank=False)
     city = models.CharField(verbose_name=_(
         u'City'), max_length=255, null=True, blank=False)
 
