@@ -5917,7 +5917,8 @@ a.btn-delete-row {
     padding-left: 30px; }
   .basket-metadata {
     align-self: flex-start;
-    max-width: 420px;
+    text-align: center;
+    width: 420px;
     margin-left: -3%; }
     .basket-metadata p {
       font-size: 16px; }
