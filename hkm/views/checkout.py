@@ -79,6 +79,7 @@ class OrderSummaryView(TemplateView):
             order_collection.save()
 
             # If order total price is 0, skip payment api and redirect straight to confirmation view
+            # Here we should handle "museum user" / "kiosk user" the same way as 0 price
             if order_collection.is_zero_price:
                 return redirect(reverse('hkm_order_confirmation', kwargs={"order_id": order_collection.order_hash}))
 
