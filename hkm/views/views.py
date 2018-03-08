@@ -1353,7 +1353,7 @@ class BasketView(TemplateView):
             if not order_creator.validate_basket(request.basket):
                 return self.clear_campaigns(form)
             order_collection = order_creator.create_order_from_basket(request.basket)
-            order_collection.orderer_name = form.cleaned_data
+            order_collection.orderer_name = form.cleaned_data["orderer_name"]
             order_collection.save()
 
             self.template_name = 'hkm/views/order_complete.html'

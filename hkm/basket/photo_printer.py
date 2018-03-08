@@ -91,10 +91,7 @@ class PhotoPrinter(object):
         for line in order.product_orders.all():
             record_data = FINNA.get_record(line.record_finna_id)
             record = record_data["records"][0]
-            line.finna_record = record["id"]
-            line.save()
             #get croped img
-            #FIXME: This thing actually fails to get full res image
             photo = get_cropped_full_res_file(record["title"], line)
             printing_preset = self.get_printing_preset(line)
             job_base_folder = os.path.join(
@@ -124,7 +121,7 @@ class PhotoPrinter(object):
         :return: Int
         """
         printer_presets = line.user.profile.get_printer_presets
-        return printer_presets[line.product_type.name]
+        return printer_presets.get(line.product_type.name, 0)
 
     def generate_dpof(self, photo, line, image_upload_path):
         return DPOF_TEMPLATE.format(
