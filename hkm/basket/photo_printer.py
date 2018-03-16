@@ -8,31 +8,31 @@ from django.utils import timezone
 from hkm.image_utils import get_cropped_full_res_file
 from hkm.finna import DEFAULT_CLIENT as FINNA
 
-
+# Note DOS line endings
 DPOF_TEMPLATE = u"""
-[HDR]
-GEN REV = 01.00
-GEN CRT = "OrderConverter 1.33"-01.00
-GEN DTM = {datetime_stamp}
-USR NAM = "{username}"
-USR TEL = ""
-VUQ RGN = BGN
-VUQ VNM = "SEIKO EPSON" -ATR "Print Info"
-PRT PCH = {print_settings_preset}
-VUQ RGN = END
+[HDR]\r\n
+GEN REV = 01.00\r\n
+GEN CRT = "OrderConverter 1.33"-01.00\r\n
+GEN DTM = {datetime_stamp}\r\n
+USR NAM = "{username}"\r\n
+USR TEL = ""\r\n
+VUQ RGN = BGN\r\n
+VUQ VNM = "SEIKO EPSON" -ATR "Print Info"\r\n
+PRT PCH = {print_settings_preset}\r\n
+VUQ RGN = END\r\n
 
-[JOB]
-PRT PID = {orderline_id}
-PRT TYP = STD
-PRT QTY = {amount}
-IMG FMT = EXIF2 -J
-<IMG SRC = "{img_source}">
-VUQ RGN = BGN
-VUQ VNM = "SEIKO EPSON" -ATR "Print Info"
-VUQ VER = 01.00
-PRT CVP1 = 1 -STR "10137_MIT_CK_FTP1 - Pasi Paavola"
-PRT CVP2 = 1 -STR "{file_name}"
-VUQ RGN = END
+[JOB]\r\n
+PRT PID = {orderline_id}\r\n
+PRT TYP = STD\r\n
+PRT QTY = {amount}\r\n
+IMG FMT = EXIF2 -J\r\n
+<IMG SRC = "../IMAGES/{img_source}">\r\n
+VUQ RGN = BGN\r\n
+VUQ VNM = "SEIKO EPSON" -ATR "Print Info"\r\n
+VUQ VER = 01.00\r\n
+PRT CVP1 = 1 -STR "10137_MIT_CK_FTP1 - Pasi Paavola"\r\n
+PRT CVP2 = 1 -STR "{file_name}"\r\n
+VUQ RGN = END\r\n
 
 """
 
@@ -55,6 +55,8 @@ class PhotoPrinter(object):
                 look_for_keys=False,
                 allow_agent=False,
         )
+        # we need username for path
+        self.username = username
         self.client = client
 
     def __enter__(self):
@@ -66,7 +68,7 @@ class PhotoPrinter(object):
             self.client = None
 
     def upload(self, file_obj, filename, remote_path):
-        base_folder = "/"
+        base_folder = "/home/%s" % self.username
         with self.client.open_sftp() as connection:
             for folder in remote_path.split("/"):
                 if folder == "":
@@ -89,13 +91,11 @@ class PhotoPrinter(object):
         for line in order.product_orders.all():
             record_data = FINNA.get_record(line.record_finna_id)
             record = record_data["records"][0]
-            line.record = record
-            line.save()
             #get croped img
             photo = get_cropped_full_res_file(record["title"], line)
             printing_preset = self.get_printing_preset(line)
             job_base_folder = os.path.join(
-                ("e%s%s" % (printing_preset, ("%s" % line.pk).zfill(6))),
+                ("O%s%s" % (printing_preset, ("%s" % line.pk).zfill(6))),
             )
             # upload image
             image_upload_path = os.path.join(
@@ -121,7 +121,7 @@ class PhotoPrinter(object):
         :return: Int
         """
         printer_presets = line.user.profile.get_printer_presets
-        return printer_presets["line.product_type.name"]
+        return printer_presets.get(line.product_type.name, 0)
 
     def generate_dpof(self, photo, line, image_upload_path):
         return DPOF_TEMPLATE.format(
@@ -130,6 +130,6 @@ class PhotoPrinter(object):
             print_settings_preset=self.get_printing_preset(line),
             orderline_id=line.pk,
             amount=line.amount,
-            img_source=image_upload_path,
+            img_source=os.path.basename(photo.edited_image.name),
             file_name=os.path.basename(photo.edited_image.name)
         )
