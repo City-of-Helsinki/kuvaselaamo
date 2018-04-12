@@ -97,7 +97,13 @@ class BaseView(TemplateView):
     def handle_login(self, request, *args, **kwargs):
         form = django_forms.AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            auth_login(request, form.get_user())
+            user = form.get_user()
+            auth_login(request, user)
+
+            # Redirect museum users to collections page after logging in
+            if user.profile.is_museum:
+                return redirect("hkm_public_collections")
+
             # TODO migth wanna do a PRG pattern here also. Returning the rendered template directly
             # is to keep the query string values in place, which otherwise
             # would be lost in redirect phase
