@@ -7054,7 +7054,8 @@ div.grid__fav.active {
   border-width: 2px;
   border-color: #00C281;
   padding: 5px;
-  vertical-align: middle; }
+  vertical-align: middle;
+  margin-top: 1px; }
 
 @media (max-width: 1099px) {
   .nav-search-form__desktop {
