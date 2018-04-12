@@ -95,7 +95,7 @@ class PhotoPrinter(object):
             photo = get_cropped_full_res_file(record["title"], line)
             printing_preset = self.get_printing_preset(line)
             job_base_folder = os.path.join(
-                ("O%s%s" % (printing_preset, ("%s" % line.pk).zfill(6))),
+                ("O%s%s%s" % (printing_preset, ("%s" % line.pk).zfill(6), order.orderer_name)),
             )
             # upload image
             image_upload_path = os.path.join(
