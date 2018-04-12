@@ -15,6 +15,9 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
+# Set age of cookie to 15 weeks (in seconds).
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 15
+
 MANAGERS = ADMINS
 
 INTERNAL_IPS = ('127.0.0.1',)
