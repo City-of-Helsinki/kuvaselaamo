@@ -94,6 +94,8 @@ class PhotoPrinter(object):
             #get croped img
             photo = get_cropped_full_res_file(record["title"], line)
             printing_preset = self.get_printing_preset(line)
+            # Replace scandic letters from image name to prevent problems with sftp upload
+            image_name = self.strip_scandic_letters(os.path.basename(photo.edited_image.name))
             job_base_folder = os.path.join(
                 ("O%s%s%s" % (printing_preset, ("%s" % line.pk).zfill(6), order.orderer_name)),
             )
@@ -102,14 +104,14 @@ class PhotoPrinter(object):
                 job_base_folder,
                 "IMAGES"
             )
-            full_remote_path = self.upload(photo.edited_image, os.path.basename(photo.edited_image.name), image_upload_path)
+            full_remote_path = self.upload(photo.edited_image, image_name, image_upload_path)
 
             # generate and upload DPOF file
             dpof_upload_path = os.path.join(
                 job_base_folder,
                 "MISC"
             )
-            dpof = self.generate_dpof(photo, line, full_remote_path)
+            dpof = self.generate_dpof(line, image_name)
             self.upload(StringIO(dpof), "AUTPRINT.MRK", dpof_upload_path)
             return True
 
@@ -123,13 +125,24 @@ class PhotoPrinter(object):
         printer_presets = line.user.profile.get_printer_presets
         return printer_presets.get(line.product_type.name, 0)
 
-    def generate_dpof(self, photo, line, image_upload_path):
+    def generate_dpof(self, line, image_name):
         return DPOF_TEMPLATE.format(
             datetime_stamp=timezone.now(),
             username=line.user,
             print_settings_preset=self.get_printing_preset(line),
             orderline_id=line.pk,
             amount=line.amount,
-            img_source=os.path.basename(photo.edited_image.name),
-            file_name=os.path.basename(photo.edited_image.name)
+            img_source=image_name,
+            file_name=image_name
         )
+
+    def strip_scandic_letters(self, image_name):
+        scandic_letters = [
+            (u"Ä", u"A"),
+            (u"ä", u"a"),
+            (u"Ö", u"O"),
+            (u"ö", u"o"),
+        ]
+        for scandic, char in scandic_letters:
+            image_name = image_name.replace(scandic, char)
+        return image_name
