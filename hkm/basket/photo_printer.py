@@ -97,7 +97,7 @@ class PhotoPrinter(object):
             # Replace scandic letters from image name to prevent problems with sftp upload
             image_name = self.strip_scandic_letters(os.path.basename(photo.edited_image.name))
             job_base_folder = os.path.join(
-                ("O%s%s%s" % (printing_preset, ("%s" % line.pk).zfill(6), order.orderer_name)),
+                ("o%s%s%s" % (printing_preset, ("%s" % line.pk).zfill(6), order.orderer_name)),
             )
             # upload image
             image_upload_path = os.path.join(
