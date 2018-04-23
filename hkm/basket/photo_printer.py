@@ -113,7 +113,6 @@ class PhotoPrinter(object):
             )
             dpof = self.generate_dpof(line, image_name)
             self.upload(StringIO(dpof), "AUTPRINT.MRK", dpof_upload_path)
-            return True
 
     def get_printing_preset(self, line):
         """
