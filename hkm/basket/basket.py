@@ -114,7 +114,7 @@ class Basket(object):
 
             discount_lines.append(BasketLine(self, data_line))
         # if user is museum / kiosk user they should always have free shipping anyway
-        if self.user.profile.is_museum:
+        if self.user and self.user.profile.is_museum:
             self._data["free_shipping"] = True
         return discount_lines
 
