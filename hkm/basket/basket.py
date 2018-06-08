@@ -97,6 +97,10 @@ class Basket(object):
             if campaign.free_shipping:
                 self._data["free_shipping"] = True
 
+        # if user is museum / kiosk user they should always have free shipping anyway
+        if self.user.profile.is_museum:
+                self._data["free_shipping"] = True
+
             data_line = {
                 'line_id': str(random.randint(0, 0x7FFFFFFF)),
                 'product_id': None,
