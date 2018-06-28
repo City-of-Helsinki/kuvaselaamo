@@ -457,6 +457,13 @@ class IndexView(CollectionDetailView):
         else:
             self.request.session['seen_welcome_modal'] = True
             context['open_popup'] = True
+
+        # try to get modal contents
+        try:
+            context["page_content"] = PageContent.objects.get(identifier=self.url_name)
+        except PageContent.DoesNotExist:
+            context["page_content"] = None
+
         return context
 
 
