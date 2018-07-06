@@ -947,11 +947,9 @@ msgstr "A separate order confirmation email will be sent to you."
 
 #: hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
-"Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
-"tietoa toimituksen etenemisestä."
+"Tilauksesi on lähetetty Printmotorille painoon."
 msgstr ""
-"Your order has been sent to Printmotor, who will notify you of its progress "
-"by email."
+"Your order has been sent to Printmotor."
 
 #: hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."

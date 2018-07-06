@@ -920,11 +920,9 @@ msgstr "Saat  vielä erillisen tilausvahvistuksen sähköpostitse."
 
 #: hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
-"Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
-"tietoa toimituksen etenemisestä."
+"Tilauksesi on lähetetty Printmotorille painoon."
 msgstr ""
-"Tilauksesi on lähetetty Printmotorille. Saat Printmotorilta sähköpostia "
-"tilauksesi etenemisestä."
+"Tilauksesi on lähetetty Printmotorille painoon."
 
 #: hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."

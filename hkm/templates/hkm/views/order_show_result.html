@@ -18,7 +18,7 @@
             <div class="alert alert-success">{% trans 'Kiitos tilauksestasi - maksu on vahvistettu.' %} {% trans 'Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen.' %}</div>
 
             {% if order_collection.is_order_successful %}
-              <div class="alert alert-success">{% trans 'Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla tietoa toimituksen etenemisestä.' %}</div>
+              <div class="alert alert-success">{% trans 'Tilauksesi on lähetetty Printmotorille painoon.' %}</div>
             {% else %}
               <div class="alert alert-danger">{% trans 'Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe.' %} {% trans 'Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään.' %}</div>
             {% endif %}
