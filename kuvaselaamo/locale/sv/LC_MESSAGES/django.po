@@ -915,11 +915,9 @@ msgstr "Du får en separat orderbekräftelse till din e-post."
 
 #: hkm/templates/hkm/views/order_show_result.html:21
 msgid ""
-"Tilauksesi on lähetetty Printmotorille painoon, josta saat sähköpostilla "
-"tietoa toimituksen etenemisestä."
+"Tilauksesi on lähetetty Printmotorille painoon."
 msgstr ""
-"Beställningen har skickats till Printmotor. Printmotor informerar dig per e-"
-"post om status för beställningen."
+"Beställningen har skickats till Printmotor."
 
 #: hkm/templates/hkm/views/order_show_result.html:23
 msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
