@@ -66,7 +66,6 @@ class OrderSummaryView(TemplateView):
             if not order_creator.validate_basket(request.basket):
                 raise
             order_collection = order_creator.create_order_from_basket(request.basket)
-            order_collection.save()
 
             datetime_checkout_started = timezone.now()
             LOG.debug('ORDER ATTEMPT STARTED AT: ',
@@ -76,7 +75,6 @@ class OrderSummaryView(TemplateView):
                         'time': str(datetime_checkout_started)
                     }
                 })
-            order_collection.save()
 
             # If order total price is 0, skip payment api and redirect straight to confirmation view
             if order_collection.is_zero_price:
