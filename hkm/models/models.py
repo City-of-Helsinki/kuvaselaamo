@@ -434,7 +434,7 @@ class ProductOrder(BaseModel):
         return True
 
     def save(self, *args, **kwargs):
-        if not self.id and not self.order_hash:
+        if not self.order_hash:
             self.order_hash = get_random_string(20)
         return super(ProductOrder, self).save(*args, **kwargs)
 
@@ -527,7 +527,7 @@ class ProductOrderCollection(models.Model):
         return "%s - order" % self.orderer_name
 
     def save(self, *args, **kwargs):
-        if not self.id and not self.order_hash:
+        if not self.order_hash:
             self.order_hash = get_random_string(20)
         return super(ProductOrderCollection, self).save(*args, **kwargs)
 
