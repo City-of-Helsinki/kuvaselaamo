@@ -64,7 +64,7 @@ class Basket(object):
     def add_picture(self, picture_data, quantity, extra=None):
         if not extra:
             extra = {}
-        data_line = (self._find_line_data_for_picture(picture_data, extra) or self._initialize_line(picture_data))
+        data_line = self._initialize_line(picture_data)
 
         line = BasketLine(self, data_line)
         line.add_quantity(quantity)
@@ -76,7 +76,6 @@ class Basket(object):
         for data_line in self._raw_lines:
             if picture['hkm_id'] == data_line['hkm_id']:
                 return data_line
-
 
     def _get_processed_lines(self):
         lines = getattr(self, '_processed_lines_cache', None)
