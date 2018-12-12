@@ -6,7 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from hkm.basket.basket_line import BasketLine
-from hkm.models.campaigns import CampaignCode, CampaignStatus, Campaign, CampaignUsageType
+from hkm.models.campaigns import CampaignCode, CampaignStatus, Campaign, CampaignUsageType, CampaignUserGroup
 from hkm.models.models import PrintProduct, ProductOrder
 
 
@@ -89,7 +89,8 @@ class Basket(object):
 
     def get_processed_campaign_lines(self, basket_lines):
         basket_campaigns = self.data.get("campaign_ids", {})
-        campaigns = Campaign.objects.filter(pk__in=basket_campaigns.keys())
+        is_museum_user = self.user.profile.is_museum if self.user else False
+        campaigns = Campaign.objects.for_user_group(is_museum_user).filter(pk__in=basket_campaigns.keys())
         discount_lines = []
         self._data["free_shipping"] = False
         for campaign in campaigns:
@@ -182,18 +183,18 @@ class Basket(object):
         self.dirty = True
 
     def set_discount_campaigns(self, code=None):
-        # All current campaigns
-        campaigns = Campaign.objects.filter(
-            status=CampaignStatus.ENABLED
+        # All current campaigns for user group
+        is_museum_user = self.user.profile.is_museum if self.user else False
+        campaigns = Campaign.objects.for_user_group(is_museum_user).filter(
+            status=CampaignStatus.ENABLED,
         ).exclude(
             usable_from__gt=timezone.now()
         ).exclude(
             usable_to__lt=timezone.now()
         )
-
         available_campaigns = []
 
-        # Matched be code
+        # Matched by code
         available_campaigns += list(CampaignCode.objects.filter(
             code=code,
             status=CampaignStatus.ENABLED,
@@ -205,7 +206,6 @@ class Basket(object):
         campaign_ids = self.data.get("campaign_ids", {})
         for campaign in available_campaigns:
             campaign_ids[str(campaign[0])] = campaign[1] if len(campaign) > 1 else None
-
         self.data["campaign_ids"] = campaign_ids
         self._processed_lines_cache = None  # uncache basket
         self.save()
