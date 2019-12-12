@@ -4,6 +4,7 @@ from decimal import Decimal
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from parler.managers import TranslatableQuerySet
 from parler.models import TranslatableModel, TranslatedFields
 
 import datetime
@@ -42,6 +43,18 @@ class CampaignStatus(object):
     )
 
 
+class CampaignUserGroup(object):
+    ALL = "ALL"
+    MUSEUM = "MUSEUM"
+    NORMAL = "NORMAL"
+
+    choices = (
+        (ALL, (u"Kaikki")),
+        (MUSEUM, (u"Kioskikäyttäjät")),
+        (NORMAL, (u"Normaalikäyttäjät"))
+    )
+
+
 class _UsageMixin(object):
     def is_applicable_in(self, dt):
         if not self.usable_from or dt >= self.usable_from:
@@ -62,6 +75,14 @@ class _UsageMixin(object):
             return self.campaign_usage.exists()
         else:
             return False
+
+
+class CampaignQuerySet(TranslatableQuerySet):
+    def for_user_group(self, is_museum_user=False):
+        if is_museum_user:
+            return self.filter(user_group__in=[CampaignUserGroup.MUSEUM, CampaignUserGroup.ALL])
+        else:
+            return self.filter(user_group__in=[CampaignUserGroup.NORMAL, CampaignUserGroup.ALL])
 
 
 class Campaign(TranslatableModel, _UsageMixin):
@@ -97,6 +118,13 @@ class Campaign(TranslatableModel, _UsageMixin):
         verbose_name=_(u"Tyyppi"),
         choices=CampaignUsageType.choices
     )
+    user_group = models.CharField(
+        default=CampaignUserGroup.ALL,
+        verbose_name=_(u"Käyttäjäryhmä"),
+        max_length=20,
+        choices=CampaignUserGroup.choices,
+        help_text=u"Käyttäjäryhmä, jolle tarjous on voimassa"
+    )
     module = models.CharField(
         max_length=128,
         blank=True,
@@ -131,6 +159,8 @@ class Campaign(TranslatableModel, _UsageMixin):
             verbose_name=_(u"Nimi")
         )
     )
+
+    objects = CampaignQuerySet.as_manager()
 
     class Meta:
         verbose_name = _(u"kampanja")
