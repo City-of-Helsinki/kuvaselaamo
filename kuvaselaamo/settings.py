@@ -3,10 +3,6 @@
 import logging
 import os
 
-import djcelery
-
-djcelery.setup_loader()
-
 SECRET_KEY = 'x'
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
@@ -120,7 +116,6 @@ INSTALLED_APPS = (
 
     'phonenumber_field',
 
-    'djcelery',
     'compressor',
     'parler',
     'djangobower',

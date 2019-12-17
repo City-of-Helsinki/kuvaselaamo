@@ -20,7 +20,7 @@ from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
-from hkm import forms, image_utils, tasks
+from hkm import forms, image_utils, email
 from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
@@ -154,8 +154,7 @@ class InfoView(BaseView):
             feedback = form.save(commit=False)
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.url_name)
         kwargs['feedback_form'] = form
@@ -313,8 +312,7 @@ class CollectionDetailView(BaseView):
             feedback.record_id = self.collection_record.record_id
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.get_url())
         kwargs['feedback_form'] = form
@@ -441,8 +439,7 @@ class IndexView(CollectionDetailView):
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.record_id = self.collection_record.record_id
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.url_name)
         kwargs['feedback_form'] = form
@@ -687,8 +684,7 @@ class SearchRecordDetailView(SearchView):
             feedback.record_id = record
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': record}))
         kwargs['feedback_form'] = form
@@ -775,8 +771,7 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
             feedback.record_id = self.record['id']
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
         kwargs['feedback_form'] = form
@@ -817,8 +812,7 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
             feedback.record_id = self.record['id']
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
         kwargs['feedback_form'] = form

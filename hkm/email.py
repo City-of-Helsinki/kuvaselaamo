@@ -2,7 +2,6 @@
 
 import logging
 
-from celery import task
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -13,7 +12,6 @@ from hkm.models.models import Feedback
 LOG = logging.getLogger(__name__)
 
 
-@task(ignore_result=True)
 def send_feedback_notification(feedback_id, force=False):
     try:
         feedback = Feedback.objects.get(id=feedback_id)
