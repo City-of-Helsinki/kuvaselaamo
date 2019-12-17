@@ -6,13 +6,11 @@ anyjson
 argh
 Babel
 billiard
-celery
 cffi
 coverage
 cryptography
 django-appconf
 django-apptemplates
-django-celery
 django-compressor
 django-extensions
 django-nose
