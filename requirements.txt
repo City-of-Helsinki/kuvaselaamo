@@ -50,7 +50,7 @@ pathtools==0.1.2
 pbr==2.1.0                # via mock
 phonenumberslite==8.4.1
 pillow==4.1.0
-psycopg2==2.7.1
+psycopg2==2.8.4
 pyasn1==0.2.3
 pycparser==2.17
 pyopenssl==16.2.0
