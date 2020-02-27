@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import StringIO
 import datetime
 import logging
-import StringIO
 
 import math
 from django import http
@@ -10,16 +10,25 @@ from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
-from django.utils.translation import ugettext as _
+from django.template import RequestContext, loader
+from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
-from hkm import forms, image_utils, tasks
+from hkm import forms, image_utils, email
+from hkm.basket.order_creator import OrderCreator
+from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
+from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.models.campaigns import Campaign, CampaignStatus
+from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
 
@@ -88,7 +97,13 @@ class BaseView(TemplateView):
     def handle_login(self, request, *args, **kwargs):
         form = django_forms.AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            auth_login(request, form.get_user())
+            user = form.get_user()
+            auth_login(request, user)
+
+            # Redirect museum users to collections page after logging in
+            if user.profile.is_museum:
+                return redirect("hkm_public_collections")
+
             # TODO migth wanna do a PRG pattern here also. Returning the rendered template directly
             # is to keep the query string values in place, which otherwise
             # would be lost in redirect phase
@@ -139,8 +154,7 @@ class InfoView(BaseView):
             feedback = form.save(commit=False)
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.url_name)
         kwargs['feedback_form'] = form
@@ -169,6 +183,8 @@ class PublicCollectionsView(BaseCollectionListView):
     url_name = 'hkm_public_collections'
 
     def get_collection_qs(self, request, *args, **kwargs):
+        if request.user.is_authenticated() and request.user.profile.is_museum:
+            return request.user.profile.albums.all()
         return Collection.objects.filter(is_public=True).order_by('created')
 
     def get_context_data(self, **kwargs):
@@ -296,8 +312,7 @@ class CollectionDetailView(BaseView):
             feedback.record_id = self.collection_record.record_id
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.get_url())
         kwargs['feedback_form'] = form
@@ -424,8 +439,7 @@ class IndexView(CollectionDetailView):
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.record_id = self.collection_record.record_id
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(self.url_name)
         kwargs['feedback_form'] = form
@@ -440,6 +454,13 @@ class IndexView(CollectionDetailView):
         else:
             self.request.session['seen_welcome_modal'] = True
             context['open_popup'] = True
+
+        # try to get modal contents
+        try:
+            context["page_content"] = PageContent.objects.get(identifier=self.url_name)
+        except PageContent.DoesNotExist:
+            context["page_content"] = None
+
         return context
 
 
@@ -459,7 +480,9 @@ class SearchView(BaseView):
     page = 1
 
     def get(self, request, *args, **kwargs):
-        self.handle_search(request, *args, **kwargs)
+        result = self.handle_search(request, *args, **kwargs)
+        if isinstance(result, http.HttpResponse):
+            return result
         return super(SearchView, self).get(request, *args, **kwargs)
 
     def get_template_names(self):
@@ -518,7 +541,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result['resultCount'] == 0:
+            if not self.search_result['resultCount'] == 0 and 'records' in self.search_result:
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -527,6 +550,10 @@ class SearchView(BaseView):
                     # Check also if this record is one of user's favorites
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
+            elif 'records' not in self.search_result:
+                # No more records available for the next page
+                if self.request.is_ajax():
+                    return http.HttpResponseBadRequest()
 
     def get_facet_result(self, search_term):
         if self.request.is_ajax():
@@ -603,7 +630,6 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-
         if self.search_result:
             record = self.search_result['records'][0]
             record['full_res_url'] = HKM.get_full_res_image_url(
@@ -658,8 +684,7 @@ class SearchRecordDetailView(SearchView):
             feedback.record_id = record
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': record}))
         kwargs['feedback_form'] = form
@@ -746,8 +771,7 @@ class FinnaRecordDetailView(BaseFinnaRecordDetailView):
             feedback.record_id = self.record['id']
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
         kwargs['feedback_form'] = form
@@ -788,8 +812,7 @@ class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
             feedback.record_id = self.record['id']
             feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
             feedback.save()
-            tasks.send_feedback_notification.apply_async(
-                args=(feedback.id,), countdown=5)
+            email.send_feedback_notification(feedback.id)
             # TODO: redirect to success page?
             return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
         kwargs['feedback_form'] = form
@@ -834,10 +857,11 @@ class CreateOrderView(BaseFinnaRecordDetailView):
 
         # Save order identifier in session
         request.session['order_hash'] = order.order_hash
+        order_url = reverse('hkm_order_product', kwargs={'order_id': order.order_hash})
+        if self.request.is_ajax():
+            return http.JsonResponse({"redirect": order_url})
 
-        # return redirect(reverse('hkm_order_product', kwargs={'order_id':
-        # order.id}))
-        return redirect(reverse('hkm_order_product', kwargs={'order_id': order.order_hash}))
+        return redirect(order_url)
 
 
 class BaseOrderView(BaseView):
@@ -852,26 +876,18 @@ class BaseOrderView(BaseView):
             #self.order = ProductOrder.objects.for_user(request.user, request.session.session_key).get(order_hash=kwargs['order_id'])
             self.order = ProductOrder.objects.get(
                 order_hash=kwargs['order_id'])
+            if self.order.record_finna_id:
+                record_data = FINNA.get_record(self.order.record_finna_id)
+                self.record = record_data['records'][0]
+
         except ProductOrder.DoesNotExist:
             LOG.error('Product order does not exist for user')
             raise http.Http404()
 
-        # PREVENT ACCESS TO VIEW IF order identifier IN REQUEST DOES NOT MATCH THOSE IN ORDER OBJECT
-        # TODO? ALLOW FROM DIFFERENT SESSION IF user IN REQUEST MATCHES user IN
-        # ORDER
-        if not 'order_hash' in request.session or request.session['order_hash'] != self.order.order_hash:
-            # if order identifier in session does not match the order in the
-            # url, raise 404
-            LOG.error('Unauthorized')
-            raise http.Http404()
-        else:
-            # if user has successfully checked out the order, they will always be redirected to
-            # order result page. This way user cant modify the same order
-            # retroactively
-            if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
-                LOG.debug(
-                    'checkout is already done for this order, redirect user to result page')
-                return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
+        if not self.url_name == 'hkm_order_show_result' and self.order.is_checkout_successful:
+            LOG.debug(
+                'checkout is already done for this order, redirect user to result page')
+            return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
 
         return True
 
@@ -879,6 +895,27 @@ class BaseOrderView(BaseView):
         context = super(BaseOrderView, self).get_context_data(**kwargs)
         context['order'] = self.order
         return context
+
+    def _get_cropped_full_res_file(self, record):
+        full_res_image = HKM.download_image(self.order.image_url)
+        cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
+                                         self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
+        crop_io = StringIO.StringIO()
+        cropped_image.save(crop_io, format=full_res_image.format)
+        filename = u'%s.%s' % (record['title'], full_res_image.format.lower())
+        LOG.debug('Cropped image', extra={
+                  'data': {'size': repr(cropped_image.size)}})
+        return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
+                                    crop_io.len, None)
+
+    def handle_crop(self, record):
+        crop_file = self._get_cropped_full_res_file(record)
+        tmp_image = TmpImage(record_id=self.order.record_finna_id,
+                             edited_image=crop_file)
+        tmp_image.save()
+        LOG.debug('Cropped image', extra={
+                  'data': {'url': tmp_image.edited_image.url}})
+        return tmp_image.edited_image.url
 
 
 class OrderProductView(BaseOrderView):
@@ -912,6 +949,25 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
+            #if request.user.is_authenticated() and request.user.profile.is_museum:
+            order.crop_image_url = '%s%s' % (
+                settings.HKM_MY_DOMAIN,
+                self.handle_crop(self.record),
+            )
+            order.save()
+            line_data = {
+                'hkm_id': self.order.record_finna_id,
+                'order_pk': order.pk,  # order == basketline
+                'text': self.record["title"],
+                'product_id': printproduct_type.pk,
+                'record': self.record
+                }
+            request.basket.add_picture(
+                line_data,
+                order.amount
+            )
+
+            return redirect('basket')
             # TODO make template render links based on order fields, not the
             # other way around (as now)
             order.form_phase = 2
@@ -929,16 +985,17 @@ class OrderProductView(BaseOrderView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderProductView, self).get_context_data(**kwargs)
-        print_product_types = PrintProduct.objects.all()
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
+            print_product_types = PrintProduct.objects.filter(is_museum_only=True)
+        else:
+            print_product_types = PrintProduct.objects.all().exclude(is_museum_only=True)
         context['product_types'] = print_product_types
         context['form_page'] = 1
-        if self.order.record_finna_id:
-            record_data = FINNA.get_record(self.order.record_finna_id)
-            if record_data:
-                context['record'] = record_data['records'][0]
-                self.order.image_url = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
-                self.order.save()
+        if self.record:
+            context['record'] = self.record
+            self.order.image_url = HKM.get_full_res_image_url(
+                context['record']['rawData']['thumbnail'])
+            self.order.save()
 
         return context
 
@@ -960,7 +1017,7 @@ class OrderContactInformationView(BaseOrderView):
             order = form.save()
             order.form_phase = 3
             order.save()
-            return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
+            return redirect(reverse('hkm_order_summary'))
         kwargs['order_contact_information_form'] = form
         return self.get(request, *args, **kwargs)
 
@@ -989,27 +1046,6 @@ class OrderContactInformationView(BaseOrderView):
                 self.order.save()
         return context
 
-    def _get_cropped_full_res_file(self, record):
-        full_res_image = HKM.download_image(self.order.image_url)
-        cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
-                                         self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
-        crop_io = StringIO.StringIO()
-        cropped_image.save(crop_io, format=full_res_image.format)
-        filename = u'%s.%s' % (record['title'], full_res_image.format.lower())
-        LOG.debug('Cropped image', extra={
-                  'data': {'size': repr(cropped_image.size)}})
-        return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
-                                    crop_io.len, None)
-
-    def handle_crop(self, record):
-        crop_file = self._get_cropped_full_res_file(record)
-        tmp_image = TmpImage(record_id=self.order.record_finna_id,
-                             edited_image=crop_file)
-        tmp_image.save()
-        LOG.debug('Cropped image', extra={
-                  'data': {'url': tmp_image.edited_image.url}})
-        return tmp_image.edited_image.url
-
 
 class OrderSummaryView(BaseOrderView):
     template_name = 'hkm/views/order_summary.html'
@@ -1027,7 +1063,7 @@ class OrderSummaryView(BaseOrderView):
                 return redirect(redirect_url)
 
         # TODO error messaging for user in UI
-        return redirect(reverse('hkm_order_summary', kwargs={'order_id': self.order.order_hash}))
+        return redirect(reverse('hkm_order_summary'))
 
     def get_context_data(self, **kwargs):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
@@ -1039,78 +1075,6 @@ class OrderSummaryView(BaseOrderView):
                 context['record']['full_res_url'] = HKM.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
         return context
-
-# User is redirected to this route from Payment Provider after payment
-# With a success return code, the user is displayed a success message
-# If and only if the request parameter 'settled' is true, the order will
-# be sent to print
-
-
-class OrderConfirmation(BaseOrderView):
-    template_name = ''
-    url_name = 'hkm_order_confirmation'
-    result = {}
-
-    def get(self, request, *args, **kwargs):
-
-        self.result['authcode'] = request.GET.get('AUTHCODE', None)
-        self.result['return_code'] = request.GET.get('RETURN_CODE', None)
-        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-        self.result['settled'] = request.GET.get('SETTLED', None)
-        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
-
-        if self.order.authcode_valid(self.result):
-            self.order.handle_confirmation(self.result)
-        else:
-            LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order.order_hash}})
-
-        return redirect(reverse('hkm_order_show_result', kwargs={'order_id': self.order.order_hash}))
-        # return self.render_to_response(self.get_context_data(**kwargs))
-
-    def get_context_data(self, **kwargs):
-        context = super(OrderConfirmation, self).get_context_data(**kwargs)
-        context['order_result'] = self.order_result
-        return context
-
-
-class OrderShowResultView(BaseOrderView):
-    template_name = 'hkm/views/order_show_result.html'
-    url_name = 'hkm_order_show_result'
-
-    def get_context_data(self, **kwargs):
-        context = super(OrderShowResultView, self).get_context_data(**kwargs)
-        if self.order.record_finna_id:
-            record_data = FINNA.get_record(self.order.record_finna_id)
-            if record_data:
-                context['record'] = record_data['records'][0]
-        return context
-
-# Payment Provider GETs this route after payment has been processed to notify of success/failure
-# In testing API there is never time lag with this, but in real system
-# there can be
-
-
-class OrderPBWNotify(BaseOrderView):
-    template_name = ''
-    url_name = 'hkm_order_pbw_notify'
-    result = {}
-
-    def get(self, request, *args, **kwargs):
-
-        self.result['authcode'] = request.GET.get('AUTHCODE', None)
-        self.result['return_code'] = request.GET.get('RETURN_CODE', None)
-        self.result['order_hash'] = request.GET.get('ORDER_NUMBER', None)
-        self.result['settled'] = request.GET.get('SETTLED', None)
-        self.result['incident_id'] = request.GET.get('INCIDENT_ID', None)
-
-        if self.order.authcode_valid(self.result):
-            self.order.handle_confirmation(self.result)
-        else:
-            LOG.error('AUTHCODE MISMATCH! ', extra={
-                    'data': {'order_hash': self.order.order_hash}})
-
-        return http.HttpResponse()
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
 
@@ -1312,6 +1276,140 @@ class SiteinfoTermsView(TranslatableContentView):
         return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
 
 
+class BasketView(TemplateView):
+    template_name = 'hkm/views/basket.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BasketView, self).get_context_data(**kwargs)
+        form = ProductOrderCollectionForm()
+        if self.request.user.is_authenticated() and self.request.user.profile.is_museum:
+            form.fields['orderer_name'].required = True
+        context['form'] = form
+        context['basket'] = self.request.basket
+        context['request'] = self.request
+        context["page_content"] = kwargs.get('page_content')
+        context["order"] = kwargs.get('order')
+        context['include_base'] = kwargs.get('include_base')
+        return context
+
+    def handle_add(self, request):
+        item_id = request.POST.get('record_id')
+        request.basket.add_picture({'hkm_id': item_id, 'name': 'test'}, 1)
+        return http.JsonResponse({'ok': 'ok'})
+
+    def handle_delete(self, request):
+
+        line_id = request.POST.get('line')
+        if line_id:
+            self.request.basket.delete_line(int(line_id))
+        campaign_id = request.POST.get('campaign')
+        if campaign_id:
+            self.request.basket.remove_campaign(campaign_id)
+
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "basket_total_price_row": self.render_basket_total_row(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
+    def handle_update(self, request):
+        basket = request.basket
+        line_id = request.POST.get("line")
+        quantity = int(request.POST.get("quantity"))
+        line = basket.find_line_by_line_id(line_id)
+        if line and quantity:
+            line["quantity"] = quantity
+            basket.clean_empty_lines()
+            basket.dirty = True
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "basket_total_price_row": self.render_basket_total_row(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
+    def render_basket_total_row(self):
+        html = loader.render_to_string(
+            "hkm/snippets/_basket_total_row.html",
+            context=RequestContext(self.request, self.get_context_data())
+        )
+        return html
+
+    def render_nav_product_counter(self):
+        html = loader.render_to_string(
+            "hkm/snippets/nav_basket_counter.html",
+            context=RequestContext(self.request, self.get_context_data())
+        )
+        return html
+
+    def render_basket_html(self):
+        html = loader.render_to_string(
+            "hkm/views/_basket_content.html",
+            context=RequestContext(self.request, self.get_context_data(include_base=True))
+        )
+        return html
+
+    def handle_checkout(self, request):
+        form = ProductOrderCollectionForm(request.POST)
+        page_content = None
+        if not (self.request.user.is_authenticated() and self.request.user.profile.is_museum):
+            return redirect(reverse('hkm_order_contact'))
+
+        if form.is_valid():
+            user = request.user
+            order_creator = OrderCreator()
+            if not order_creator.validate_basket(request.basket):
+                return self.clear_campaigns(form)
+            order_collection = order_creator.create_order_from_basket(request.basket)
+            order_collection.orderer_name = form.cleaned_data["orderer_name"]
+            order_collection.save()
+
+            self.template_name = 'hkm/views/order_complete.html'
+            #upload images and create a printer job.
+            printer = PhotoPrinter(
+                address=user.profile.printer_ip,
+                username=user.profile.printer_username,
+                password=user.profile.printer_password,
+            )
+            printer.print_order(order_collection)
+            self.send_notification_email(order_collection)
+
+            self.request.basket.clear_all()
+            page_content = PageContent.objects.get(identifier="checkout_complete")
+            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order_collection))
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def clear_campaigns(self, form):
+        # somehting went very wrong with discount codes, so lets reset them from basket.
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+    def send_notification_email(self, order):
+        subject = u"Print order# %d" % order.pk
+        order_line = order.product_orders.first()
+        message = render_to_string("hkm/emails/print_order.html", context={"order": order})
+        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
+
+    def handle_discount(self, request):
+        request.basket.set_discount_campaigns(request.POST.get('discount_code'))
+        return http.JsonResponse({
+            "html": self.render_basket_html(),
+            "basket_total_price_row": self.render_basket_total_row(),
+            "nav_counter": self.render_nav_product_counter()
+        })
+
+    def post(self, request, **kwargs):
+        action = request.POST.get('action')
+        if action == 'discount':
+            return self.handle_discount(request)
+        if action == 'update':
+            return self.handle_update(request)
+        if action == 'delete':
+            return self.handle_delete(request)
+        if action == 'add':
+            return self.handle_add(request)
+        if action == 'checkout' and kwargs.get('phase') == 'checkout':
+            return self.handle_checkout(request)
+
 # ERROR HANDLERS
 
 def handler404(request):
@@ -1328,4 +1426,3 @@ def handler500(request):
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
-

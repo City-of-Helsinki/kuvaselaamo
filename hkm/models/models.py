@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import json
 import logging
 import hmac
 import hashlib
 
+from decimal import Decimal
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.fields import JSONField
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -16,6 +19,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
@@ -24,6 +28,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
+from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode, CodeUsage
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
 
@@ -56,9 +61,36 @@ class UserProfile(BaseModel):
     is_admin = models.BooleanField(verbose_name=_(u'Is admin'), default=False)
     language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
                                 choices=LANGUAGE_CHOICES, max_length=4)
+    is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
+    printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    printer_username = models.CharField(verbose_name=u'Printer username', blank=True, null=True, max_length=255)
+    printer_password = models.CharField(verbose_name=u'Printer password', blank=True, null=True, max_length=255)
+    printer_presets = models.TextField(
+        verbose_name=u"Tulostimen presetit",
+        default=json.dumps({
+            'api-poster-gloss-30x40': 0,
+            'api-poster-gloss-40x30': 0,
+            'api-poster-30x40': 0,
+            'api-poster-40x30': 0,
+            'api-poster-50x70': 0,
+            'api-poster-70x50': 0,
+            'api-poster-gloss-A4-horizontal': 0,
+            'api-poster-gloss-A4': 0
+        }))
+
+    albums = models.ManyToManyField(
+        "Collection",
+        help_text=u"List of albums for browsing if user is museum",
+        blank=True,
+        null=True
+    )
 
     def __unicode__(self):
         return self.user.username
+
+    @property
+    def get_printer_presets(self):
+        return json.loads(self.printer_presets)
 
 
 class CollectionQuerySet(models.QuerySet):
@@ -241,6 +273,8 @@ class PrintProduct(Product):
     PRODUCT_LAYOUTS_LIST = (
         ('api-poster-gloss-30x40', _(u'api-poster-gloss-30x40')),
         ('api-poster-gloss-40x30', _(u'api-poster-gloss-40x30')),
+        ('api-poster-30x40', _(u'api-poster-30x40')),
+        ('api-poster-40x30', _(u'api-poster-40x30')),
         ('api-poster-50x70', _(u'api-poster-50x70')),
         ('api-poster-70x50', _(u'api-poster-70x50')),
         ('api-poster-gloss-A4-horizontal', _(u'api-poster-gloss-A4-horizontal')),
@@ -253,6 +287,9 @@ class PrintProduct(Product):
     height = models.IntegerField(verbose_name=_(u'Height'))
     paper_quality = models.CharField(
         verbose_name=_(u'Paper quality'), max_length=255)
+    is_museum_only = models.BooleanField(default=False, verbose_name=_(u"Museum purchase only"))
+
+
 
 
 class ProductOrderQuerySet(models.QuerySet):
@@ -280,8 +317,8 @@ class ProductOrder(BaseModel):
         u'Phone number'), null=True, blank=False)
     street_address = models.CharField(verbose_name=_(
         u'Street adress'), max_length=1024, null=True, blank=False)
-    postal_code = models.IntegerField(
-        verbose_name=_(u'Postal code'), null=True, blank=False)
+    postal_code = models.CharField(
+        verbose_name=_(u'Postal code'), max_length=64, null=True, blank=False)
     city = models.CharField(verbose_name=_(
         u'City'), max_length=255, null=True, blank=False)
 
@@ -339,7 +376,7 @@ class ProductOrder(BaseModel):
     amount = models.PositiveIntegerField(
         validators=[MinValueValidator(1)], verbose_name=_(u'Amount'), default=1)
     postal_fees = models.DecimalField(verbose_name=_(
-        u'Postal fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
+        u'Shipping fees'), decimal_places=2, max_digits=10, null=False, blank=False, default=settings.HKM_POSTAL_FEES)
     unit_price = models.DecimalField(verbose_name=_(
         u'Unit price'), decimal_places=2, max_digits=10, null=True, blank=True)
     total_price = models.DecimalField(verbose_name=_(
@@ -374,121 +411,10 @@ class ProductOrder(BaseModel):
     is_order_successful = models.NullBooleanField(
         verbose_name=_(u'Order successful'), null=True, blank=True)
 
+    # A product order may belong to a collection of orders (multiple prints ordered at once)
+    order = models.ForeignKey('ProductOrderCollection', blank=True, null=True, related_name="product_orders")
+
     objects = ProductOrderQuerySet.as_manager()
-
-    def checkout(self):
-        checkout_request = PBW.post(self.order_hash, int(
-            self.total_price_with_postage * 100))  # api requires sum in cents
-        LOG.debug(checkout_request)
-        token = checkout_request.get('token', None)
-        # TODO better error logs && datetime_checkout_redirected if success
-        if token:
-            redirect_url = settings.HKM_PBW_API_ENDPOINT + '/token/%s' % token
-            return redirect_url
-        return None
-
-    def authcode_valid(self, result):
-        SECRET_KEY = settings.HKM_PBW_SECRET_KEY
-        received_authcode = result.get('authcode', None)
-        if not received_authcode:
-            return False
-
-        settled = result.get('settled', None)
-        incident_id = result.get('incident_id', None)
-        return_code = result.get('return_code', None)
-
-        msg = '%s|%s' % (return_code, self.order_hash)
-        if settled:
-            msg = '%s|%s' % (msg, settled)
-        if incident_id:
-            msg = '%s|%s' % (msg, incident_id)
-
-        authcode = hmac.new(SECRET_KEY, msg,
-                            hashlib.sha256).hexdigest().upper()
-        LOG.debug('COMPARING AUTHCODES', extra={
-                    'data': {'order_hash': self.order_hash,
-                    'received authcode': received_authcode,
-                    'calculated authcode': authcode}})
-        return authcode == received_authcode
-
-    def handle_confirmation(self, result, force=False):
-
-        if not force:
-            if self.is_checkout_successful == False:
-                LOG.error('ATTEMPT TO REHANDLE UNSUCCESSFUL CHECKOUT!', extra={'data': {
-                          'order_hash': self.order_hash}})
-                return
-        self.datetime_checkout_ended = datetime.datetime.now()
-        LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
-                'order_hash': self.order_hash, 
-                'time': str(self.datetime_checkout_ended)}})
-
-        # if return code for checkout is 0 (SUCCESS)
-        if result['return_code'] == '0':
-            # if order not yet marked as successful,
-            # send order confirmation mail to customer and mark checkout as
-            # successful
-            if not self.is_checkout_successful:
-                LOG.debug('CHECKOUT SUCCESSFUL ', extra={
-                          'data': {'order_hash': self.order_hash}})
-                self.send_mail('checkout')
-                self.is_checkout_successful = True
-
-            # If payment has been successfully processed
-            if result['settled'] == '1':
-
-                # If payment has not yet been marked as successfully processed,
-                # Mark it as such and try to send order details to Printing
-                # Agency
-                if not self.is_payment_successful:
-                    self.is_payment_successful = True
-                    LOG.debug('PAYMENT SETTLED SUCCESSFULLY ', extra={
-                              'data': {'order_hash': self.order_hash}})
-
-                # If order has not yet been marked as successfully sent, send it
-                # PRINTMOTOR post method returns status code of Send Print
-                # Order Request
-                if not self.is_order_successful:
-                    LOG.debug('sending to Printmotor')
-                    self.datetime_order_started = datetime.datetime.now()
-                    LOG.debug('PRINT ORDER ATTEMPT STARTED AT: ', extra={'data': {
-                              'order_hash': self.order_hash, 'time': str(self.datetime_order_started)}})
-                    printOrder = PRINTMOTOR.post(self)
-                    self.datetime_order_ended = datetime.datetime.now()
-
-                    if printOrder:
-                        LOG.debug('PRINT ORDER ATTEMPT ENDED AT: ', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
-                        if printOrder == 200:
-                            LOG.debug('Successfully sent order to printmotor')
-                            self.is_order_successful = True
-                            self.send_mail('print')
-                        elif printOrder == 400:
-                            LOG.error(
-                                'Bad request to Printmotor, check payload', extra={'data': {
-                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
-                            self.is_order_successful = False
-                        elif printOrder == 401:
-                            LOG.error(
-                                'Unauthorized @ Printmotor, check headers', extra={'data': {
-                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
-                            self.is_order_successful = False
-                        elif printOrder == 500:
-                            LOG.error(
-                                'Printmotor server error, maybe image URL is invalid', extra={'data': {
-                                    'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
-                            self.is_order_successful = False
-                    else:
-                        LOG.error('Failed to communicate with Printmotor API', extra={'data': {
-                                  'order_hash': self.order_hash, 'time': str(self.datetime_order_ended)}})
-                        self.is_order_successful = False
-
-        else:
-            self.is_checkout_successful = False
-            LOG.error('CHECKOUT _NOT_ SUCCESSFUL ', extra={
-                      'data': {'order_hash': self.order_hash}})
-
-        self.save()
 
     # quick method for canceling payments. not used currently - only works when
     # payments are authorized but not settled (ie not billed)
@@ -507,23 +433,8 @@ class ProductOrder(BaseModel):
                       'data': {'order_hash': self.order_hash}})
         return True
 
-    def send_mail(self, phase):
-        if not phase:
-            return False
-
-        if phase == 'checkout':
-            subject = 'Helsinkikuvia.fi - tilausvahvistus'
-            message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.\n\nHelsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
-
-        elif phase == 'print':
-            subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
-            message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalo Printmotorille. Valmis tuote lähtee postiin viimeistään kolmantena arkipäivänä tästä päivästä lukien.\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
-
-        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [self.email])
-        return True
-
     def save(self, *args, **kwargs):
-        if not self.id and not self.order_hash:
+        if not self.order_hash:
             self.order_hash = get_random_string(20)
         return super(ProductOrder, self).save(*args, **kwargs)
 
@@ -585,3 +496,241 @@ class PageContent(BaseModel, TranslatableModel):
 
     def __unicode__(self):
         return self.name
+
+
+class ProductOrderDiscount(models.Model):
+    # A log of used discounts
+    campaign = models.ForeignKey(Campaign)
+    order = models.ForeignKey('ProductOrderCollection')
+    code_used = models.CharField(max_length=255, verbose_name=_(u'Used discount code'), null=True)
+    discounted_value = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+class ProductOrderCollection(models.Model):
+    # A bundle of ProductOrder's for in museum purchases.
+    orderer_name = models.CharField(verbose_name=_(u'Orderer\'s name'), max_length=255)
+    total_price = models.DecimalField(verbose_name=_(u'Total order price'), max_digits=6, decimal_places=2)
+    sent_to_print = models.BooleanField(default=False, verbose_name=_(u'Sent to printer'))
+
+    is_checkout_successful = models.NullBooleanField(
+        verbose_name=_(u'Checkout successful'), null=True, blank=True)
+    is_payment_successful = models.NullBooleanField(
+        verbose_name=_(u'Payment successful'), null=True, blank=True)
+
+    is_order_successful = models.NullBooleanField(
+        verbose_name=_(u'Order successful'), null=True, blank=True)
+
+    order_hash = models.CharField(verbose_name=_(
+        u'Randomized order collection identifier phrase'), max_length=1024, null=True, blank=True, unique=True)
+
+    def __unicode__(self):
+        return "%s - order" % self.orderer_name
+
+    def save(self, *args, **kwargs):
+        if not self.order_hash:
+            self.order_hash = get_random_string(20)
+        return super(ProductOrderCollection, self).save(*args, **kwargs)
+
+    @property
+    def is_zero_price(self):
+        return self.total_price == Decimal(0)
+
+    def add_discount(self, campaign, code=None, discount_value=0):
+        if campaign.is_applicable_today():
+            ProductOrderDiscount.objects.create(
+                order=self,
+                campaign=campaign,
+                discounted_value=discount_value,
+                code_used=code
+            )
+            if code:
+                code_object = CampaignCode.objects.get(
+                    code=code,
+                    campaign=campaign
+                )
+                if code_object.use_type == CodeUsage.SINGLE_USE:
+                    code_object.status = CampaignStatus.DISABLED
+                    code_object.save(update_fields=['status'])
+
+    def checkout(self):
+        checkout_request = PBW.post(self.order_hash, int(
+            self.total_price * 100))  # api requires sum in cents
+        LOG.debug(checkout_request)
+        token = checkout_request.get('token', None)
+        # TODO better error logs && datetime_checkout_redirected if success
+        if token:
+            redirect_url = settings.HKM_PBW_API_ENDPOINT + '/token/%s' % token
+            return redirect_url
+        return None
+
+    def authcode_valid(self, result):
+        SECRET_KEY = settings.HKM_PBW_SECRET_KEY
+        received_authcode = result.get('authcode', None)
+        if not received_authcode:
+            return False
+
+        settled = result.get('settled', None)
+        incident_id = result.get('incident_id', None)
+        return_code = result.get('return_code', None)
+
+        msg = '%s|%s' % (return_code, self.order_hash)
+        if settled:
+            msg = '%s|%s' % (msg, settled)
+        if incident_id:
+            msg = '%s|%s' % (msg, incident_id)
+
+        authcode = hmac.new(SECRET_KEY, msg,
+                            hashlib.sha256).hexdigest().upper()
+        LOG.debug('COMPARING AUTHCODES', extra={
+                    'data': {'order_hash': self.order_hash,
+                    'received authcode': received_authcode,
+                    'calculated authcode': authcode}})
+        return authcode == received_authcode
+
+    def send_order_to_printmotor_and_inform(self):
+        """
+        Sends order to Printmotor and sets is_order_successful field to True or False
+        based on response from Printmotor. Also sends email to customer on successful
+        print order request. Returns boolean value which tells if print order request
+        was successful or not.
+        """
+
+        LOG.debug('sending to Printmotor')
+        datetime_order_started = datetime.datetime.now()
+        LOG.debug('PRINT ORDER ATTEMPT STARTED AT: ', extra={'data': {
+                  'order_hash': self.order_hash, 'time': str(datetime_order_started)}})
+
+        printOrder = PRINTMOTOR.post(self)
+
+        datetime_order_ended = timezone.now()
+        self.product_orders.update(datetime_order_ended=datetime_order_ended)
+        if printOrder:
+            LOG.debug('PRINT ORDER ATTEMPT ENDED AT: ', extra={'data': {
+                      'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
+            if printOrder == 200:
+                LOG.debug('Successfully sent order to printmotor')
+                self.is_order_successful = True
+                self.send_mail('print')
+            elif printOrder == 400:
+                LOG.error(
+                    'Bad request to Printmotor, check payload', extra={'data': {
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            elif printOrder == 401:
+                LOG.error(
+                    'Unauthorized @ Printmotor, check headers', extra={'data': {
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            elif printOrder == 500:
+                LOG.error(
+                    'Printmotor server error, maybe image URL is invalid', extra={'data': {
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
+                self.is_order_successful = False
+            else:
+                LOG.error(
+                    'Unknown status code from Printmotor', extra={'data': {
+                        'order_hash': self.order_hash, 'time': str(datetime_order_ended),
+                        'status_code': printOrder}})
+                self.is_order_successful = False
+        else:
+            LOG.error('Failed to communicate with Printmotor API', extra={'data': {
+                      'order_hash': self.order_hash, 'time': str(datetime_order_ended)}})
+            self.is_order_successful = False
+
+        return self.is_order_successful
+
+    def handle_zero_price_confirmation(self):
+
+        # Process only if total price is 0
+        if not self.is_zero_price:
+            return
+
+        datetime_checkout_ended = timezone.now()
+        self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
+        LOG.debug('ZERO PRICE CHECKOUT ENDED AT: ', extra={'data': {
+                'order_hash': self.order_hash,
+                'time': str(datetime_checkout_ended)}})
+
+        if not self.is_checkout_successful:
+            LOG.debug('ZERO PRICE CHECKOUT SUCCESSFUL ', extra={
+                      'data': {'order_hash': self.order_hash}})
+            self.send_mail('checkout')
+            self.is_checkout_successful = True
+
+        # If payment has not yet been marked as successfully processed,
+        # Mark it as such and try to send order details to Printing
+        # Agency
+        if not self.is_payment_successful:
+            self.is_payment_successful = True
+            LOG.debug('ZERO PRICE PAYMENT SETTLED SUCCESSFULLY ', extra={
+                      'data': {'order_hash': self.order_hash}})
+
+        # If order has not yet been marked as successfully sent, send it to PRINTMOTOR
+        if not self.is_order_successful:
+            self.send_order_to_printmotor_and_inform()
+        self.save()
+
+    def handle_confirmation(self, result, force=False):
+
+        if not force:
+            if self.is_checkout_successful == False:
+                LOG.error('ATTEMPT TO REHANDLE UNSUCCESSFUL CHECKOUT!', extra={'data': {
+                          'order_hash': self.order_hash}})
+                return
+        datetime_checkout_ended = timezone.now()
+        self.product_orders.update(datetime_checkout_ended=datetime_checkout_ended)
+        LOG.debug('CHECKOUT ENDED AT: ', extra={'data': {
+                'order_hash': self.order_hash,
+                'time': str(datetime_checkout_ended)}})
+
+        # if return code for checkout is 0 (SUCCESS)
+        if result['return_code'] == '0':
+            # if order not yet marked as successful,
+            # send order confirmation mail to customer and mark checkout as
+            # successful
+            if not self.is_checkout_successful:
+                LOG.debug('CHECKOUT SUCCESSFUL ', extra={
+                          'data': {'order_hash': self.order_hash}})
+                self.send_mail('checkout')
+                self.is_checkout_successful = True
+
+            # If payment has been successfully processed
+            if result['settled'] == '1':
+
+                # If payment has not yet been marked as successfully processed,
+                # Mark it as such and try to send order details to Printing
+                # Agency
+                if not self.is_payment_successful:
+                    self.is_payment_successful = True
+                    LOG.debug('PAYMENT SETTLED SUCCESSFULLY ', extra={
+                              'data': {'order_hash': self.order_hash}})
+
+                # If order has not yet been marked as successfully sent, send it to Printmotor
+                if not self.is_order_successful:
+                    self.send_order_to_printmotor_and_inform()
+
+        else:
+            self.is_checkout_successful = False
+            LOG.error('CHECKOUT _NOT_ SUCCESSFUL ', extra={
+                      'data': {'order_hash': self.order_hash}})
+
+        self.save()
+
+    def send_mail(self, phase):
+        if not phase:
+            return False
+
+        if phase == 'checkout':
+            subject = 'Helsinkikuvia.fi - tilausvahvistus'
+            message = 'Hei! Kiitos tilauksestasi. Saat vielä toisen viestin, kun tilaus lähtee painoon.\n\nHelsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
+
+        elif phase == 'print':
+            subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
+            message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalo Printmotorille. Valmis tilaus lähetetään Matkahuollon lähipakettina viimeistään kolmantena arkipäivänä tästä päivästä lukien. Tilaukseen liittyvät yhteydenotot sähköpostitse: support@printmotor.io (mainitse viestissä, että tilaus on tehty Helsinkikuvia.fi-palvelussa).\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
+
+        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [self.customer_email])
+        return True
+
+    @property
+    def customer_email(self):
+        return self.product_orders.first().email

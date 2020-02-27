@@ -33,16 +33,7 @@
           <h2 class="welcome-modal__title modal-title">{% trans 'Kuvaselaamo' %}</h2>
         </div>
         <div class="modal-body">
-          <h4 class="welcome-modal__biggertext">{% trans 'Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. Valokuvat tarjoaa Helsingin kaupunginmuseo.' %}</h4>
-          <h4 class="welcome-modal__biggertext">{% trans 'Täällä voit' %}:</h4>
-          <p>{% trans 'Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan joukosta' %}</p>
-          <p>{% trans 'Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia' %}</p>
-          <p>{% trans 'Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista' %}</p>
-          <p>{% trans 'Luoda omia albumeita ja lisätä niihin suosikkikuviasi' %}</p>
-          <p>{% trans 'Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja' %}</p>
-          <p class="welcome-modal__clarification">{% trans 'Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä.' %}</p>
-          <a href="{% url 'hkm_siteinfo_terms' %}" class="welcome-modal__clarification">
-            {% trans 'Katso tarkemmat tiedot käyttöehdoista' %}</a>
+          {{ page_content.content|safe }}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
@@ -120,7 +111,6 @@
 
 {% block hidden %}
   {% if collection_record %}
-    {% include 'hkm/snippets/popover_buy.html' with finna_id=hkm_id %}
     {% include 'hkm/snippets/popover_cart.html' with finna_id=collection_record.record_id full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url cropped_web_image_url=record_web_url finna_id=record.id %}
     {% include 'hkm/snippets/popover_favorite.html'%}
     {% include 'hkm/snippets/popover_info.html' with record_year=collection_record.get_details.year record_measures=collection_record.get_details.rawData.measurements record_geo=collection_record.get_details.rawData.geographic record_description=collection_record.get_details.rawData.description record_authors=collection_record.get_details.rawData.author record_title=collection_record.get_details.title finna_id=collection_record.record_id %}

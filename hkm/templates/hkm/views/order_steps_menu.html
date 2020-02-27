@@ -4,12 +4,13 @@
 			<table class="order-steps-table">
 			<tr>
 			<td>
-		  <span class="order-step {% if form_page == 1 %} order-step-current {% endif %}"><a href="{% url 'hkm_order_product' order_id=order.order_hash %}">1. {% trans 'Product selection' %}</a></span>
+		  <span class="order-step {% if form_page == 1 %} order-step-current {% endif %}">
+			  <a href={% if request.basket.lines > 0 %}"{% url 'basket' %}"{% else %} "#" {% endif %}>1. {% trans 'Product selection' %}</a></span>
 		  </td>
 		  <td>
 		  <span class="order-step {% if form_page == 2 %} order-step-current {% endif %}">
 		  {% if order.form_phase >= 2 %}
-		  	<a href="{% url 'hkm_order_contact_information' order_id=order.order_hash %}">2. {% trans 'Contact details' %}</a>
+		  	<a href="{% url 'hkm_order_contact' %}">2. {% trans 'Contact details' %}</a>
 		  {% else %}
 		  	2. {% trans 'Contact details' %}
 		  {% endif %}
@@ -18,7 +19,7 @@
 		  <td>
 		  <span class="order-step {% if form_page == 3 %} order-step-current {% endif %}">
 		  {% if order.form_phase >= 3 %}
-		  <a href="{% url 'hkm_order_summary' order_id=order.order_hash %}">3. {% trans 'Summary' %}</a>
+		  <a href="{% url 'hkm_order_summary' %}">3. {% trans 'Summary' %}</a>
 		  {% else %}
 		  	3. {% trans 'Summary' %}
 		  {% endif %}

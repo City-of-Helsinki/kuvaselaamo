@@ -7,11 +7,11 @@
 
 {% block content %}
 
-  <div class="record-meta">
+  <div class="record-meta container-medium container-center">
 
     {% if order %}
 
-      <div class="record-meta__col record-meta__col--left col-md-5">
+      <div class="record-meta__col record-meta__col--left col-md-12">
         <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>
         <div class="order-steps-banner">
@@ -25,11 +25,6 @@
           <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Jatka' %}</button>
         </form>
       </div>
-      <div class="record-meta__col record-meta__col--right col-md-7">
-       <!-- <img class="record-meta__image" src="{% finna_image order.record_finna_id %}"></img> -->
-       <img class="record-meta__image" src="{{ order.crop_image_url }}"></img>
-      </div>
-  </div>
 
     {% else %}
 

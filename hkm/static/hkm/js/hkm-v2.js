@@ -165,9 +165,10 @@ palikka
   function scrollToLastItem() {
 
     var itemId = localStorage.getItem("last_record_browsed") || "_";
+    // Remove white spaces in case of multiple search keywords
+    itemId = itemId.replace(' ', '_');
     var $item = $("[name="+itemId+"]");
     if($item.length) {
-
       $('html, body').animate({
         scrollTop: $item.offset().top
       }, 1000);
@@ -223,6 +224,21 @@ palikka
       else {
         loadMoreButton.text('Inga fler resultat');
       }
+      queryParameters['page'] = page;
+
+      window.history.replaceState("", "", "?"+$.param(queryParameters));
+      $container.append(data);
+      $container.imagesLoaded().progress(onProgress);
+      imageCount = $container.find('img').length;
+      loadedImageCount = 0;
+      fetchingMoreImages = false;
+      loadMoreButton.find('.icon-spinner').remove();
+      loadMoreButton.data({'current-page': page})
+    })
+    .fail(function(jqXHR, textStatus){
+      loadMoreButton.attr("disabled", true);
+      // translated button text is given in search.html template
+      loadMoreButton.html(window.NO_MORE_SEARCH_RESULTS_TEXT);
     });
   }
 
@@ -291,7 +307,7 @@ palikka
     }
   });
 
-  $('.has-popover').click(function() {
+  $('.has-popover').on('click', function() {
       var clickedButton = this;
       $('.has-popover').each(function(current) {
         if ($(this)[0] !== clickedButton) {
@@ -309,7 +325,6 @@ palikka
       title: $(this).attr("tooltip-title")
     })
   });
-  
 })
 .define('app.fav', ['jQuery', 'docReady'], function () {
 
@@ -548,7 +563,10 @@ palikka
     }
 
     // Initialize tooltips
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({
+      container: 'body'
+    });
+
 
   });
   
@@ -823,6 +841,4 @@ palikka
     
 
   }
-
-
 });

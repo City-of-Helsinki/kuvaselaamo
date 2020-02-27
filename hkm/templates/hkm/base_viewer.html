@@ -24,7 +24,7 @@
   </div>
 
   {% block actions %}
-    {% if record %}
+    {% if record and not user.profile.is_museum %}
       <div class="actions">
         <button class="actions__btn actions__btn--left" id="zoom-in-btn">
           <i class="actions__icon">
@@ -82,15 +82,32 @@
           </i>
         </button>
         {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
-          <button name="orderbutton" class="has-popover actions__btn actions__btn--right" id="popover-buy" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
+          <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="order" />
+            <button name="orderbutton" formaction="{% url 'hkm_order_create' finna_id=record.id %}" class="actions__btn actions__btn--right" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
+              <i class="actions__icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
+                </svg>
+              </i>
+            </button>
+          </form>
+        {% endif %}
+      </div>
+        {% elif record.id %}
+        <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="order">
+          <button name="orderbutton" class="has-popover actions__btn actions__btn pull-left" type="submit">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
               </svg>
             </i>
           </button>
-        {% endif %}
-      </div>
+        </form>
+
     {% endif %}
   {% endblock %}
   {% block detail %}
@@ -161,7 +178,7 @@
           </div>
           </div> <!-- endrow -->
         {% endif %}
-
+        {% if not user.profile.is_museum %}
         <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <form method="POST">
@@ -174,6 +191,7 @@
           </form>
         </div>
         </div>
+        {% endif %}
       </div>
       </div>
       </div>

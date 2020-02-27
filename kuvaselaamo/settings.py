@@ -3,10 +3,6 @@
 import logging
 import os
 
-import djcelery
-
-djcelery.setup_loader()
-
 SECRET_KEY = 'x'
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,6 +10,9 @@ BASEDIR = os.path.dirname(os.path.abspath(__file__))
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
+
+# Set age of cookie to 15 weeks (in seconds).
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 15
 
 MANAGERS = ADMINS
 
@@ -75,7 +74,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #    'django.middleware.gzip.GZipMiddleware',
+    'hkm.middleware.BasketMiddleware',
 )
 
 ROOT_URLCONF = 'kuvaselaamo.urls'
@@ -117,7 +116,6 @@ INSTALLED_APPS = (
 
     'phonenumber_field',
 
-    'djcelery',
     'compressor',
     'parler',
     'djangobower',
@@ -203,3 +201,9 @@ HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
 
 HKM_POSTAL_FEES = 0.0
 
+MUSEUM_GROUP = 'museum'
+
+try:
+  from local_settings import *
+except ImportError:
+  pass

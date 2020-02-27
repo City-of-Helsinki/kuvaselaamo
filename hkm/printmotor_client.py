@@ -14,12 +14,29 @@ class PrintmotorClient(object):
     PASSWORD = settings.HKM_PRINTMOTOR_PASSWORD
     API_KEY = settings.HKM_PRINTMOTOR_API_KEY
 
-    def post(self, order):
+    def post(self, order_collection):
         LOG.debug(PrintmotorClient.API_KEY)
         url = PrintmotorClient.API_ENDPOINT
-        layout = order.product_name
+        order = order_collection.product_orders.first()
+        products = order_collection.product_orders.all()
 
-        # order['phone'] = model_to_dict(order['phone'], ['national_number'])['national_number']
+        product_payload = []
+
+        for product in products:
+            product_payload.append({
+                'layoutName': product.product_name,
+                'amount': product.amount,
+                'customization': [
+                    {
+                        'fieldName': "image",
+                        'value': product.crop_image_url,
+                    }
+                ],
+                'endUserPrice': {
+                    'priceValue': float(product.total_price),
+                    'currencyIso4217': "EUR",
+                }
+            })
 
         payload = {
             'orderer': {
@@ -34,31 +51,14 @@ class PrintmotorClient(object):
                 'postalCode': order.postal_code,
                 'countryIso2': "FI",
             },
-            'products': [
-                {
-                    'layoutName': layout,
-                    'amount': order.amount,
-                    'customization': [
-                        {
-                            'fieldName': "image",
-                            'value': order.crop_image_url,
-                        }
-                    ],
-                    'endUserPrice': {
-                        'priceValue': float(order.total_price),
-                        'currencyIso4217': "EUR",
-                    }
-                }
-            ],
+            'products': product_payload,
             'meta': {
                 "reference": order.order_hash,
             }
         }
-
         LOG.debug(payload)
 
         try:
-
             r = requests.post(url, json=payload, auth=HTTPBasicAuth(self.USERNAME, self.PASSWORD), headers={
                 'X-Printmotor-Service': PrintmotorClient.API_KEY,
                 'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ class PrintmotorClient(object):
             LOG.debug(r.status_code)
             return r.status_code
         except requests.exceptions.RequestException as e:
-            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order.order_hash}})
+            LOG.error(e, exc_info=True, extra={'data': {'order_hash': order_collection.order_hash}})
             return None
 
 
