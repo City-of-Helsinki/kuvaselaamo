@@ -1,6 +1,6 @@
 paramiko
 Pillow
-django==1.10.8
+django==1.11.28
 amqp
 anyjson
 argh
