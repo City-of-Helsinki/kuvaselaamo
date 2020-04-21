@@ -150,13 +150,8 @@ class FinnaClient(object):
                   'data': {'result_data': repr(result_data)}})
         return result_data
 
-    def get_image_url(self, record_id, w=0, h=0):
-        if w != 0 and h != 0:
-            url = 'https://finna.fi/Cover/Show?id=%s&w=%d&h=%d' % (
-                record_id, w, h)
-        else:
-            url = 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % record_id
-        return url
+    def get_image_url(self, record_id):
+        return 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % record_id
 
     def download_image(self, record_id):
         r = requests.get(self.get_image_url(record_id), stream=True)
