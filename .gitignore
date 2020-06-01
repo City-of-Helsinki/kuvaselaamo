@@ -30,3 +30,4 @@ node_modules
 parts
 staticroot/*
 components/*
+docker-compose.env.yaml

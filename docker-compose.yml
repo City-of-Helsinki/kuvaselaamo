@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+    postgres:
+        image: helsinkitest/postgis:9.6-2.5-alpine
+        restart: on-failure
+        environment:
+            POSTGRES_USER: kuvaselaamo
+            POSTGRES_PASSWORD: kuvaselaamo
+            POSTGRES_DB: kuvaselaamo
+        ports:
+            - 5435:5432
+        volumes:
+          - pgdata:/var/lib/postgresql/data
+        container_name: kuvaselaamo-db
+
+    django:
+        build:
+            context: .
+            target: development
+        env_file:
+            - docker-compose.env.yaml
+        environment:
+            DATABASE_URL: postgres://kuvaselaamo:kuvaselaamo@kuvaselaamo-db/kuvaselaamo
+            DATABASE_HOST: "kuvaselaamo-db"
+        volumes:
+            - .:/app
+            - django-media-volume:/var/media/
+        ports:
+            - "8080:8080"
+        depends_on:
+            - postgres
+        container_name: kuvaselaamo-backend
+
+volumes:
+        pgdata:
+            driver: local
+        django-media-volume:
+
+
+networks:
+    default:
+        name: helsinki

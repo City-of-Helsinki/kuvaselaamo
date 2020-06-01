@@ -2,8 +2,33 @@
 
 import logging
 import os
+import environ
 
-SECRET_KEY = 'x'
+env = environ.Env(
+    DEBUG=(bool, True),
+    SECRET_KEY=(str, ''),
+    DATABASE_URL=(str, ''),
+    EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
+    HKM_FEEDBACK_FROM_EMAIL=(str, 'system@localhost'),
+    HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
+    HKM_PBW_API_ENDPOINT = (str, ''),
+    HKM_PBW_API_KEY = (str, ''),
+    HKM_PBW_SECRET_KEY = (str, ''),
+    HKM_PRINTMOTOR_USERNAME = (str, ''),
+    HKM_PRINTMOTOR_PASSWORD = (str, ''),
+    HKM_PRINTMOTOR_API_KEY = (str, ''),
+    HKM_PRINTMOTOR_API_ENDPOINT = (str, ''),
+    HKM_POSTAL_FEES = (float, 0.0),
+    HKM_MY_DOMAIN = (str, 'http://localhost:8080')
+)
+
+DEBUG=env.bool('DEBUG')
+
+SECRET_KEY = env.str("SECRET_KEY")
+if DEBUG and not SECRET_KEY:
+    SECRET_KEY = "xxx"
+
+EMAIL_BACKEND=env.str('EMAIL_BACKEND')
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,10 +44,7 @@ MANAGERS = ADMINS
 INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASEDIR, 'database.db'),
-    }
+    'default': env.db(),
 }
 
 CACHES = {
@@ -127,6 +149,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'django.contrib.admin.apps.SimpleAdminConfig',
+
+    #'utils',
 )
 
 # Bower
@@ -170,40 +194,25 @@ logging.getLogger('scss').addHandler(logging.StreamHandler())
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'FI'
 
-HKM_MY_DOMAIN = 'http://localhost:3333'
-HKM_MY_DOMAIN = 'http://10.0.1.125:3333'
-HKM_FEEDBACK_NOTIFICATION_EMAILS = [
-    'dummy.address@tld.fi',
-]
-HKM_FEEDBACK_FROM_EMAIL = 'system@localhost'
+HKM_MY_DOMAIN = env.str('HKM_MY_DOMAIN')
+HKM_FEEDBACK_NOTIFICATION_EMAILS = env.list('HKM_FEEDBACK_NOTIFICATION_EMAILS')
+HKM_FEEDBACK_FROM_EMAIL=env.str('HKM_FEEDBACK_FROM_EMAIL')
 HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
 
 # Paybyway
-HKM_PBW_API_ENDPOINT = ''
-HKM_PBW_API_KEY = ''
-HKM_PBW_SECRET_KEY = ''
-
-HKM_PBW_DEV_API_ENDPOINT = ''
-HKM_PBW_DEV_API_KEY = ''
-HKM_PBW_DEV_SECRET_KEY = ''
+HKM_PBW_API_ENDPOINT = env.str('HKM_PBW_API_ENDPOINT')
+HKM_PBW_API_KEY = env.str('HKM_PBW_API_KEY')
+HKM_PBW_SECRET_KEY = env.str('HKM_PBW_SECRET_KEY')
 
 # Printmotor
 
-HKM_PRINTMOTOR_USERNAME = ''
-HKM_PRINTMOTOR_PASSWORD = ''
-HKM_PRINTMOTOR_API_KEY = ''
-HKM_PRINTMOTOR_API_ENDPOINT = ''
-
-HKM_PRINTMOTOR_DEV_API_KEY = ''
-HKM_PRINTMOTOR_DEV_API_ENDPOINT = ''
+HKM_PRINTMOTOR_USERNAME = env.str('HKM_PRINTMOTOR_USERNAME')
+HKM_PRINTMOTOR_PASSWORD = env.str('HKM_PRINTMOTOR_PASSWORD')
+HKM_PRINTMOTOR_API_KEY = env.str('HKM_PRINTMOTOR_API_KEY')
+HKM_PRINTMOTOR_API_ENDPOINT = env.str('HKM_PRINTMOTOR_API_ENDPOINT')
 
 # Pricing
 
-HKM_POSTAL_FEES = 0.0
+HKM_POSTAL_FEES = env.float('HKM_POSTAL_FEES')
 
 MUSEUM_GROUP = 'museum'
-
-try:
-  from local_settings import *
-except ImportError:
-  pass
