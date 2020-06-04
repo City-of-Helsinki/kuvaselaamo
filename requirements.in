@@ -12,6 +12,7 @@ cryptography
 django-appconf
 django-apptemplates
 django-compressor
+django-environ
 django-extensions
 django-nose
 django-redis-sessions

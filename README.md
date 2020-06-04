@@ -1,7 +1,41 @@
-#HELSINKIKUVIA.FI
+# Kuvaselaamo / Helsinkikuvia.fi
 
-Setup:
-------------
+## Summary
+
+Kuvaselaamo is an application for browsing the image archive of Finna service (https://finna.fi). The application also
+provides functionalities for arranging images into collections which can be created either by staff members or by
+users who have created an account for themselves. The images may be ordered as physical prints by the users for a fee.
+
+The current implementation is Helsinkikuvia.fi service which is maintained by Helsinki City Museum.
+
+## Development with [Docker](https://docs.docker.com/)
+
+Prerequisites:
+* Docker engine: 18.06.0+
+* Docker compose 1.22.0+
+
+1. Create a `docker-compose.env.yaml` file in the project folder:
+   * Use `docker-compose.env.yaml.example` as a base, it does not need any changes for getting the project running.
+   * Set entrypoint/startup variables according to taste.
+     * `DEBUG`, controls debug mode on/off 
+     * `APPLY_MIGRATIONS`, applies migrations on startup
+     * `CREATE_ADMIN_USER`, creates an admin user with credentials `admin`:(password, see below)
+     (admin@example.com)
+     * `ADMIN_USER_PASSWORD`, the admin user's password. If this is not given, a random password is generated
+     and written into stdout when an admin user is created automatically.
+     * `ADD_INITIAL_CONTENT`, bootstrap data import for divisions
+     * `HKM_PBW_*`, Bambora-related configuration. Used when the user is forwarded to Bambora for print payments.
+     * `HKM_PRINTMOTOR_*`, Printmotor-related configuration. Used when ordering prints.
+
+2. Run `docker-compose up`
+    * The project is now running at [localhost:8080](http://localhost:8080)
+
+## Development without Docker
+
+This chapter contains the application's old documentation. Docker usage is preferred.
+
+### Setup:
+
 - Create python 2.7 virtual envinronment and activate it
 
 ```
@@ -28,10 +62,9 @@ python manage.py createsuperuser
 
 - run kuvaselaamo (uwsgi, django's runserver or any other)
 
-(next paragraph borrowed from linkedevents https://raw.githubusercontent.com/City-of-Helsinki/linkedevents/master/README.md )
+### Requirements:
 
-Requirements:
-------------
+(this paragraph borrowed from linkedevents https://raw.githubusercontent.com/City-of-Helsinki/linkedevents/master/README.md )
 
 Linked Events uses two files for requirements. The workflow is as follows.
 
@@ -57,8 +90,7 @@ To remove a dependency, remove it from `requirements.in`,
 run `pip-compile` and then `pip-sync`. If everything works
 as expected, commit the changes.
 
-Notes about application flow:
-------------
+### Notes about application flow:
 
 1. To function properly, IndexView (index.html) needs at least 1 Collection with "show_on_landing_page" flag set to True. Said collection should have at least 1 Record in it.
 
@@ -72,4 +104,24 @@ Notes about application flow:
 
 4. Delicate information such as API keys are stored in a separate local_settings file, not committed to this repository.
 
+## Issue tracking
 
+* [Github issue list](https://github.com/City-of-Helsinki/kuvaselaamo/issues)
+* [Jira issues](https://helsinkisolutionoffice.atlassian.net/projects/HEL/issues/?filter=allissues)
+
+
+## API documentation
+
+* N/A currently
+
+
+## Environments
+Test: https://helsinkikuvia.test.kuva.hel.ninja/
+
+Production: https://helsinkikuvia.fi
+
+## CI/CD builds
+
+Project is using [Gitlab](https://gitlab.com/City-of-Helsinki/KuVa/github-mirrors/kuvaselaamo/pipelines)
+for automated builds and deployment into the test environment.
+The test environment is built automatically from the `develop` branch.

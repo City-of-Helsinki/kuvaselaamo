@@ -62,7 +62,7 @@ class UserProfile(BaseModel):
     language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
                                 choices=LANGUAGE_CHOICES, max_length=4)
     is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
-    printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    printer_ip = models.GenericIPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
     printer_username = models.CharField(verbose_name=u'Printer username', blank=True, null=True, max_length=255)
     printer_password = models.CharField(verbose_name=u'Printer password', blank=True, null=True, max_length=255)
     printer_presets = models.TextField(
