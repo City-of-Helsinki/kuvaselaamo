@@ -16,15 +16,10 @@ fi
 # Create admin user. Generate password if there isn't one in the environment variables
 if [[ "$CREATE_ADMIN_USER" = "1" ]]; then
     if [[ "$ADMIN_USER_PASSWORD" ]]; then
-      PWD=$ADMIN_USER_PASSWORD
+      ./manage.py add_admin_user -u admin -p $ADMIN_USER_PASSWORD -e admin@example.com
     else
-      PWD=$(date +%s | sha256sum | base64 | head -c 20)
-      echo "Using generated admin user password: $PWD"
+      ./manage.py add_admin_user -u admin -e admin@example.com
     fi
-
-    ./manage.py add_admin_user -u admin -p $PWD -e admin@example.com
-
-    echo "Admin user created with credentials admin (email: admin@example.com)"
 fi
 
 # Apply database migrations
