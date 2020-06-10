@@ -79,11 +79,10 @@ STATICFILES_DIRS = (
     os.path.join(BASEDIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASEDIR, '..', 'staticroot')
+STATIC_ROOT = os.path.join(BASEDIR, '..', 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASEDIR, '..', 'mediaroot')
-
+MEDIA_ROOT = os.path.join(BASEDIR, '..', 'media')
 MEDIA_URL = '/media/'
 
 MIDDLEWARE_CLASSES = (
