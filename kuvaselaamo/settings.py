@@ -215,3 +215,5 @@ HKM_PRINTMOTOR_API_ENDPOINT = env.str('HKM_PRINTMOTOR_API_ENDPOINT')
 HKM_POSTAL_FEES = env.float('HKM_POSTAL_FEES')
 
 MUSEUM_GROUP = 'museum'
+
+WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
