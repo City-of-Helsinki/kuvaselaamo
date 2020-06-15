@@ -23,7 +23,7 @@ class Command(BaseCommand):
         if not get_user_model().objects.filter(username=kwargs["username"]).count():
             password = kwargs["password"]
             if not password:
-                password = self.random_string(20)
+                password = get_user_model().objects.make_random_password(20)
                 self.stdout.write(self.style.WARNING("Generated admin password " + password))
                 self.stdout.write(self.style.WARNING("You should probably go and change it."))
 
@@ -34,7 +34,3 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS("Created admin user " + kwargs["username"]))
         else:
             self.stdout.write("Admin user " + kwargs["username"] + " already exists, no need to create.")
-
-    def random_string(self, len):
-        password_characters = string.ascii_letters + string.digits + string.punctuation
-        return ''.join(random.choice(password_characters) for i in range(len))
