@@ -2,6 +2,8 @@
 
 set -e
 
+echo "docker-entrypoint.sh here ..."
+
 if [ -z "$SKIP_DATABASE_CHECK" -o "$SKIP_DATABASE_CHECK" = "0" ]; then
     wait-for-it.sh "${DATABASE_HOST}:${DATABASE_PORT-5432}"
 fi
@@ -16,15 +18,10 @@ fi
 # Create admin user. Generate password if there isn't one in the environment variables
 if [[ "$CREATE_ADMIN_USER" = "1" ]]; then
     if [[ "$ADMIN_USER_PASSWORD" ]]; then
-      PWD=$ADMIN_USER_PASSWORD
+      ./manage.py add_admin_user -u admin -p $ADMIN_USER_PASSWORD -e admin@example.com
     else
-      PWD=$(date +%s | sha256sum | base64 | head -c 20)
-      echo "Using generated admin user password: $PWD"
+      ./manage.py add_admin_user -u admin -e admin@example.com
     fi
-
-    ./manage.py add_admin_user -u admin -p $PWD -e admin@example.com
-
-    echo "Admin user created with credentials admin (email: admin@example.com)"
 fi
 
 # Apply database migrations
@@ -41,3 +38,5 @@ elif [[ "$DEV_SERVER" = "1" ]]; then
 else
     uwsgi --ini .prod/uwsgi.ini
 fi
+
+echo "docker-entrypoint.sh here ... done"

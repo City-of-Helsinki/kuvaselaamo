@@ -1,0 +1,37 @@
+include:
+    - project: "city-of-helsinki/kuva/ci-cd-config/ci-configuration"
+      ref: v2
+      file: "/.gitlab-ci-template.yml"
+
+variables:
+    APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
+    SERVICE_PORT: "8080"
+
+build:
+    extends: .build
+
+review:
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 1
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+
+staging:
+    only:
+        refs:
+            - develop
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 0
+        K8S_SECRET_SECRET_KEY: "$GL_QA_DJANGO_SECRET_KEY"
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+
+production:
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 0
+        K8S_SECRET_SECRET_KEY: "$GL_STABLE_DJANGO_SECRET_KEY"
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.fi"

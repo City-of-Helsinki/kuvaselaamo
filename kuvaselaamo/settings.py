@@ -7,6 +7,7 @@ import environ
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, ''),
+    ALLOWED_HOSTS=(list, []),
     DATABASE_URL=(str, ''),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
     HKM_FEEDBACK_FROM_EMAIL=(str, 'system@localhost'),
@@ -19,7 +20,7 @@ env = environ.Env(
     HKM_PRINTMOTOR_API_KEY = (str, ''),
     HKM_PRINTMOTOR_API_ENDPOINT = (str, ''),
     HKM_POSTAL_FEES = (float, 0.0),
-    HKM_MY_DOMAIN = (str, 'http://localhost:8080')
+    HKM_MY_DOMAIN = (str, 'http://localhost:8080'),
 )
 
 DEBUG=env.bool('DEBUG')
@@ -27,6 +28,8 @@ DEBUG=env.bool('DEBUG')
 SECRET_KEY = env.str("SECRET_KEY")
 if DEBUG and not SECRET_KEY:
     SECRET_KEY = "xxx"
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 EMAIL_BACKEND=env.str('EMAIL_BACKEND')
 
@@ -79,11 +82,10 @@ STATICFILES_DIRS = (
     os.path.join(BASEDIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASEDIR, '..', 'staticroot')
+STATIC_ROOT = os.path.join(BASEDIR, '..', 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASEDIR, '..', 'mediaroot')
-
+MEDIA_ROOT = os.path.join(BASEDIR, '..', 'media')
 MEDIA_URL = '/media/'
 
 MIDDLEWARE_CLASSES = (
@@ -216,3 +218,5 @@ HKM_PRINTMOTOR_API_ENDPOINT = env.str('HKM_PRINTMOTOR_API_ENDPOINT')
 HKM_POSTAL_FEES = env.float('HKM_POSTAL_FEES')
 
 MUSEUM_GROUP = 'museum'
+
+WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
