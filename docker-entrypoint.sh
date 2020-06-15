@@ -2,6 +2,8 @@
 
 set -e
 
+echo "docker-entrypoint.sh here ..."
+
 if [ -z "$SKIP_DATABASE_CHECK" -o "$SKIP_DATABASE_CHECK" = "0" ]; then
     wait-for-it.sh "${DATABASE_HOST}:${DATABASE_PORT-5432}"
 fi
@@ -36,3 +38,5 @@ elif [[ "$DEV_SERVER" = "1" ]]; then
 else
     uwsgi --ini .prod/uwsgi.ini
 fi
+
+echo "docker-entrypoint.sh here ... done"
