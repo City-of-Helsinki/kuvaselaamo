@@ -540,7 +540,7 @@ class Command(BaseCommand):
             admin = User.objects.filter(is_superuser=True).first()
 
             collection = Collection.objects.create(owner=admin, title="Oletuskokoelma", description="",
-                                                   is_public=False, is_featured=False, show_in_landing_page=True)
+                                                   is_public=True, is_featured=True, show_in_landing_page=True)
             collection.save()
 
             record = Record.objects.create(creator=admin, collection=collection, record_id="hkm.HKMS000005:000000eg")
