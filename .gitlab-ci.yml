@@ -19,6 +19,7 @@ review:
         K8S_SECRET_HKM_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
         K8S_SECRET_HKM_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
         K8S_SECRET_HKM_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://$TF_PROJECT_NAME_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN"
 
 staging:
     only:
@@ -34,6 +35,7 @@ staging:
         K8S_SECRET_HKM_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
         K8S_SECRET_HKM_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
         K8S_SECRET_HKM_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.test.kuva.hel.ninja"
 
 production:
     variables:
@@ -47,3 +49,4 @@ production:
         K8S_SECRET_HKM_HKM_PBW_API_ENDPOINT: ""
         K8S_SECRET_HKM_HKM_PBW_API_KEY: "$GL_STABLE_PBW_API_KEY"
         K8S_SECRET_HKM_HKM_PBW_SECRET_KEY: "$GL_STABLE_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.fi"
