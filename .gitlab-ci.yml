@@ -50,3 +50,19 @@ production:
         K8S_SECRET_HKM_HKM_PBW_API_KEY: "$GL_STABLE_PBW_API_KEY"
         K8S_SECRET_HKM_HKM_PBW_SECRET_KEY: "$GL_STABLE_PBW_SECRET_KEY"
         K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.fi"
+
+test-codeanalysis:
+    stage: test
+    #only:
+     #   refs:
+      #      - develop
+    image: python:2.7-slim
+    variables:
+        DEBUG: 1
+    script:
+        - apt-get update
+        - pip install -U pip
+        - pip install -r requirements.txt -r requirements-dev.txt
+        - flake8
+        - py.test -ra -vvv --cov
+        - isort -c
