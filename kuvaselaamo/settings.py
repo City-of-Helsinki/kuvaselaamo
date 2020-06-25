@@ -220,3 +220,19 @@ HKM_POSTAL_FEES = env.float('HKM_POSTAL_FEES')
 MUSEUM_GROUP = 'museum'
 
 WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "ERROR"
+        },
+    },
+}
