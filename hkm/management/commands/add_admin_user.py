@@ -10,13 +10,13 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "-u", "--username", type=str, help="Username", default="admin"
+            "-u", "--username", type=str, help="Username", default="kuva-admin"
         )
         parser.add_argument(
             "-p", "--password", type=str, help="Password", default=""
         )
         parser.add_argument(
-            "-e", "--email", type=str, help="Email", default="admin@example.com"
+            "-e", "--email", type=str, help="Email", default="kuva-admin@hel.ninja"
         )
 
     def handle(self, *args, **kwargs):

@@ -19,8 +19,8 @@ Prerequisites:
    * Set entrypoint/startup variables according to taste.
      * `DEBUG`, controls debug mode on/off 
      * `APPLY_MIGRATIONS`, applies migrations on startup
-     * `CREATE_ADMIN_USER`, creates an admin user with credentials `admin`:(password, see below)
-     (admin@example.com)
+     * `CREATE_ADMIN_USER`, creates an admin user with credentials `kuva-admin`:(password, see below)
+     (kuva-admin@hel.ninja)
      * `ADMIN_USER_PASSWORD`, the admin user's password. If this is not given, a random password is generated
      and written into stdout when an admin user is created automatically.
      * `ADD_INITIAL_CONTENT`, bootstrap data import for divisions
