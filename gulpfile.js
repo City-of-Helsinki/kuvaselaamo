@@ -1,21 +1,21 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
 
-var pathScss = './hkm/static/hkm/scss/**/*.scss';
-var pathCss = './hkm/static/hkm/css/';
-var pathStaticrootCss = './staticroot/hkm/css/';
+const pathScss = './hkm/static/hkm/scss/**/*.scss';
+const pathCss = './hkm/static/hkm/css/';
+const pathStaticrootCss = './staticroot/hkm/css/';
 
-gulp.task('sass', function () {
+gulp.task('sass', function() {
   return gulp.src(pathScss)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(pathCss))
-    .pipe(gulp.dest(pathStaticrootCss));
-});
+      .pipe(sass())
+      .pipe(gulp.dest(pathCss))
+      .pipe(gulp.dest(pathStaticrootCss))
+})
 
-gulp.task('sass:watch', function () {
-  gulp.watch(pathScss, ['sass']);
-});
+gulp.task('sass:watch', function() {
+  gulp.watch(pathScss, gulp.series(['sass']));
+})
 
-gulp.task('default', ['sass', 'sass:watch']);
+gulp.task('default', gulp.series(['sass', 'sass:watch']))
