@@ -1,0 +1,44 @@
+{% extends 'hkm/base.html' %}
+{% load hkm_tags %}
+{% load i18n %}
+
+
+{% block main_content %}
+    <div class="home-page">
+        <div class="home-page__centered">
+            <div class="home-page__image">
+                <div class="home-page__welcome-text">
+                    <h1>Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!</h1>
+                    <p>Yli 65 000 kuvaa käytössäsi ilmaiseksi! Voit ladata koneellesi painokelpoisia kuvia ilmaiseksi tai tilata palvelun kautta maksullisia kuvatulosteita.</p>
+                </div>
+            </div>
+        </div>
+        <div class="home-page__search-banner">
+            <p>Etsi kuvia millä tahansa hakusanalla, vaikka paikan nimellä tai vuosiluvulla</p>
+            <input type="text"/>
+            <button>Etsi</button>
+        </div>
+        <div class="home-page__featured">
+            <div class="home-page__centered">
+            <h2>Esittely</h2>
+            <div class="featured__wrapper">
+                {% for collection in featured_collections %}
+                <div class="card">
+                    {% with images=collection|display_images %}
+                    {% if images|length == 1 %}
+                    <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
+                    {% else %}
+                        {% for image_url in images %}
+                        <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
+                        {% endfor %}
+                    {% endif%}
+                    {% endwith%}
+                    <div class="card-meta"></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
