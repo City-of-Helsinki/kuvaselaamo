@@ -37,6 +37,8 @@ COPY --chown=appuser:appuser requirements-dev.txt /app/requirements-dev.txt
 RUN pip install --no-cache-dir -r /app/requirements-dev.txt \
     && pip install --no-cache-dir pip-tools
 
+RUN apt-get update && apt-get install -y gettext
+
 ENV DEV_SERVER=1
 
 COPY --chown=appuser:appuser . /app/
