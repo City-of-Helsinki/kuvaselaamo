@@ -9,7 +9,7 @@ const pathStaticrootCss = './staticroot/hkm/css/';
 
 gulp.task('sass', function() {
   return gulp.src(pathScss)
-      .pipe(sass())
+      .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest(pathCss))
       .pipe(gulp.dest(pathStaticrootCss))
 })
