@@ -374,6 +374,21 @@ class CollectionDetailView(BaseView):
         return context
 
 
+class HomeView(BaseCollectionListView):
+    template_name = 'hkm/views/home_page.html'
+    url_name = 'hkm_index'
+
+    def get_collection_qs(self, request, *args, **kwargs):
+        return Collection.objects.filter(is_public=True).order_by('created')
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['frontpage_images'] = self.collection_qs.filter(
+        show_in_landing_page=True)
+        context['featured_collections'] = self.collection_qs.filter(
+            is_featured=True)
+        return context
+
 # using collection_record here also instead of record (see
 # CollectionDetailView naming confusion)
 class IndexView(CollectionDetailView):
