@@ -383,6 +383,8 @@ class HomeView(BaseCollectionListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
+        context['frontpage_images'] = self.collection_qs.filter(
+        show_in_landing_page=True)
         context['featured_collections'] = self.collection_qs.filter(
             is_featured=True)
         return context

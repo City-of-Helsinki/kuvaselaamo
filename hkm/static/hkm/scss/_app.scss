@@ -367,7 +367,6 @@ span.no-postal-fee {
   &__right {
     width: 50%;
     height: 100%;
-    background-image: url("/static/hkm/img/bg.jpg");
   }
 }
 
@@ -414,13 +413,13 @@ span.no-postal-fee {
     border: none;
   }
 
-  &__search {
+  &__button {
     width: 20%;
     height: 40px;
     background-color: #935379;
     color: #FFF;
     border: none;
-    margin-left: -5px;
+    margin-left: 0;
   }
 }
 

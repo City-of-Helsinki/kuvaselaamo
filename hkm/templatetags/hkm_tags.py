@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from random import randrange
 from decimal import Decimal
 
 from django import template
@@ -53,3 +54,17 @@ def is_favorite(record, user):
 def localized_decimal(value, arg=-1):
     formatted_value = floatformat(value, arg)
     return force_unicode(formats.localize(Decimal(formatted_value), use_l10n=True))
+
+@register.filter
+def front_page_url(collection):
+    records = collection.records.all()
+    record_count = records.count()
+    img_url = ""
+
+    if (record_count == 0 ):
+        img_url = '/static/hkm/img/front_page_default.jpg'
+    else:
+        random_index = randrange(0, record_count - 1)
+        img_url = records[random_index].get_preview_image_absolute_url()
+
+    return img_url

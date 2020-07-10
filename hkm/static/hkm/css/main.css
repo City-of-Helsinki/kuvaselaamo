@@ -6300,8 +6300,7 @@ span.no-postal-fee {
     flex-direction: column; }
   .welcome-area__right {
     width: 50%;
-    height: 100%;
-    background-image: url("/static/hkm/img/bg.jpg"); }
+    height: 100%; }
 
 .center-content {
   width: 80%;
@@ -6338,13 +6337,13 @@ span.no-postal-fee {
     width: 75%;
     height: 40px;
     border: none; }
-  .search-components__search {
+  .search-components__button {
     width: 20%;
     height: 40px;
     background-color: #935379;
     color: #FFF;
     border: none;
-    margin-left: -5px; }
+    margin-left: 0; }
 
 .home-page__featured {
   background-color: #F1F1F1;
