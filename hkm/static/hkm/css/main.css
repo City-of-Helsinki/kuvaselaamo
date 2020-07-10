@@ -6286,13 +6286,15 @@ span.no-postal-fee {
 
 /* Main */
 .home-page {
-  width: 100%; }
+  width: 100%;
+  font-family: 'Brown std'; }
 
 .welcome-area {
   display: flex;
   width: 100%;
   height: 60%;
-  flex-direction: row; }
+  flex-direction: row;
+  min-height: 430px; }
   .welcome-area__left {
     width: 50%;
     height: 100%;
@@ -6317,7 +6319,9 @@ span.no-postal-fee {
   background-color: #5268C2;
   color: #FFF; }
   .welcome-text p {
-    margin-top: 30px; }
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500; }
 
 .search {
   height: 30%;
@@ -6328,11 +6332,16 @@ span.no-postal-fee {
   justify-content: center;
   align-items: center; }
 
+.search__description {
+  font-size: 16px;
+  color: #595D59; }
+
 .search-components {
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 0; }
   .search-components__input {
     width: 75%;
     height: 40px;
@@ -6393,14 +6402,16 @@ span.no-postal-fee {
   grid-column-end: span 2;
   display: flex;
   flex-direction: column;
-  padding: 10px; }
+  padding: 10px;
+  justify-content: space-between; }
   .card-meta__title {
     width: 100%;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #5268C2; }
   .card-meta__owner {
-    color: #595D59; }
+    color: #595D59;
+    font-size: 16px; }
 
 .welcome-area__right,
 .card-image,
@@ -6418,11 +6429,11 @@ span.no-postal-fee {
     height: 70%; }
   .welcome-area__left {
     width: 100%;
-    height: 50%;
+    height: 60%;
     flex-direction: column-reverse; }
   .welcome-area__right {
     width: 100%;
-    height: 50%; }
+    height: 40%; }
   .welcome-text {
     height: 80%; }
     .welcome-text h1 {

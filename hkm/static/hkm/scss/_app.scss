@@ -349,6 +349,7 @@ span.no-postal-fee {
 /* Main */
 .home-page {
   width: 100%;
+  font-family: 'Brown std';
 }
 
 .welcome-area {
@@ -356,6 +357,7 @@ span.no-postal-fee {
   width: 100%;
   height: 60%;
   flex-direction: row;
+  min-height: 430px;
 
   &__left {
     width: 50%;
@@ -388,6 +390,8 @@ span.no-postal-fee {
 
   p {
     margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
   }
 }
 
@@ -401,11 +405,17 @@ span.no-postal-fee {
   align-items: center;
 }
 
+.search__description {
+  font-size: 16px;
+  color: #595D59;
+}
+
 .search-components {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 0;
 
   &__input {
     width: 75%;
@@ -482,16 +492,18 @@ span.no-postal-fee {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  justify-content: space-between;
 
   &__title {
     width: 100%;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #5268C2;
   }
 
   &__owner {
     color: #595D59;
+    font-size: 16px;
   }
 }
 
@@ -515,13 +527,13 @@ span.no-postal-fee {
 
   .welcome-area__left {
     width: 100%;
-    height: 50%;
+    height: 60%;
     flex-direction: column-reverse;
   }
 
   .welcome-area__right {
     width: 100%;
-    height: 50%;
+    height: 40%;
   }
 
   .welcome-text {
