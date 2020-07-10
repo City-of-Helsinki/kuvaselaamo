@@ -6346,29 +6346,6 @@ span.no-postal-fee {
     border: none;
     margin-left: -5px; }
 
-@media (max-width: 550px) {
-  .welcome-area {
-    flex-direction: column-reverse;
-    height: 70%; }
-  .welcome-area__left {
-    width: 100%;
-    height: 50%;
-    flex-direction: column-reverse; }
-  .welcome-area__right {
-    width: 100%;
-    height: 50%; }
-  .welcome-text {
-    height: 80%; }
-    .welcome-text h1 {
-      font-size: 20px; }
-    .welcome-text p {
-      margin-top: 5px;
-      font-size: 12px; }
-  .search__description {
-    visibility: hidden;
-    height: 0;
-    margin: 0; } }
-
 .home-page__featured {
   background-color: #F1F1F1;
   display: grid;
@@ -6383,26 +6360,24 @@ span.no-postal-fee {
   background-color: #F1F1F1;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 20px; }
   .featured__wrapper a {
     text-decoration: none; }
 
+.card-link {
+  width: 32%; }
+
 .card {
   margin-top: 20px;
   background-color: #FFF;
-  width: 400px;
-  height: 250px;
-  display: grid;
-  grid-template-columns: 255px 140px;
-  grid-template-rows: 85px 85px 70px;
-  row-gap: 5px;
-  column-gap: 5px; }
-
-.card-link {
   width: 100%;
-  height: 100%; }
+  height: 300px;
+  display: grid;
+  grid-template-columns: 63% 36%;
+  grid-template-rows: 34% 34% 30%;
+  row-gap: 1%;
+  column-gap: 1%; }
 
 .card-image:nth-child(1) {
   grid-row-start: 1;
@@ -6437,6 +6412,33 @@ span.no-postal-fee {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover; }
+
+@media (max-width: 550px) {
+  .welcome-area {
+    flex-direction: column-reverse;
+    height: 70%; }
+  .welcome-area__left {
+    width: 100%;
+    height: 50%;
+    flex-direction: column-reverse; }
+  .welcome-area__right {
+    width: 100%;
+    height: 50%; }
+  .welcome-text {
+    height: 80%; }
+    .welcome-text h1 {
+      font-size: 20px; }
+    .welcome-text p {
+      margin-top: 5px;
+      font-size: 12px; }
+  .search__description {
+    visibility: hidden;
+    height: 0;
+    margin: 0; }
+  .featured__wrapper {
+    flex-direction: column; }
+  .card-link {
+    width: 100%; } }
 
 .image-viewer {
   background-color: #fff !important;

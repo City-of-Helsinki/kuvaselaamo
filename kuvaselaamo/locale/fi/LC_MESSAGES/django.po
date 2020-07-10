@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: hkm/templates/hkm/home_page.html:12
+msgid "Welcome title"
+msgstr "Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!"
+
+#: hkm/templates/hkm/home_page.html:13
+msgid "Welcome text"
+msgstr "Yli 65 000 kuvaa käytössäsi ilmaiseksi! Voit ladata koneellesi painokelpoisia kuvia tai tilata maksullisia kuvatulosteita."
+
+#: hkm/templates/hkm/home_page.html:18
+msgid "Search description"
+msgstr "Etsi kuvia museon arkistosta millä tahansa hakusanalla, esimerkiksi paikan nimellä tai vuosiluvulla:"
+
 #: hkm/forms.py:75 hkm/models/models.py:511
 msgid "Orderer's name"
 msgstr "Tilaajan nimi"

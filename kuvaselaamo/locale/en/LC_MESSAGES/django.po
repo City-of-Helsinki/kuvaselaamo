@@ -19,6 +19,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
+#: hkm/templates/hkm/home_page.html:12
+msgid "Welcome title"
+msgstr "Welcome to the treasure trove of Helsinki-themed photos"
+
+#: hkm/templates/hkm/home_page.html:13
+msgid "Welcome text"
+msgstr "Over 65 000 images for free! You can download printable images to your computer or order paid image prints."
+
+#: hkm/templates/hkm/home_page.html:18
+msgid "Search description"
+msgstr "Search the museum's archives with any keyword, such as the name of the place or the year:"
+
 #: hkm/forms.py:75 hkm/models/models.py:511
 #, fuzzy
 #| msgid "Order ended"

@@ -18,6 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
+#: hkm/templates/hkm/home_page.html:12
+msgid "Welcome title"
+msgstr "Välkommen till skattkammaren från Helsingfors-teman"
+
+#: hkm/templates/hkm/home_page.html:13
+msgid "Welcome text"
+msgstr "Över 65 000 bilder gratis! Du kan ladda ner utskrivbara bilder till din dator eller beställa betalda bilder."
+
+#: hkm/templates/hkm/home_page.html:18
+msgid "Search description"
+msgstr "Sök i museets arkiv med valfritt nyckelord, t.ex. platsen eller året:"
+
 #: hkm/forms.py:75 hkm/models/models.py:505
 #, fuzzy
 #| msgid "Order ended"
