@@ -9,7 +9,6 @@ from hkm.views.checkout import OrderContactFormView, OrderSummaryView, OrderPBWN
 
 urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='hkm_index'),
-    #url(r'^$', views.IndexView.as_view(), name='hkm_index'),
     url(r'^info/$', views.InfoView.as_view(), name='hkm_info'),
 
     url(r'^about/$', views.SiteinfoAboutView.as_view(), name='hkm_siteinfo_about'),
