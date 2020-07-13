@@ -7519,7 +7519,6 @@ a.welcome-modal__clarification {
 .navigation {
   height: 60px;
   background-color: #fff;
-  border-bottom: 1px solid #935379;
   display: block; }
 
 .navigation-header {
@@ -7567,7 +7566,7 @@ button.navbar-toggle {
         display: block;
         margin: 7px;
         font-family: "brownbold", sans-serif;
-        color: #935379; }
+        color: #000; }
         .navigation-links ul li a:hover, .navigation-links ul li a:focus {
           background-color: transparent !important; }
       .navigation-links ul li > .dropdown-menu {
@@ -7575,7 +7574,7 @@ button.navbar-toggle {
       .navigation-links ul li.open > .dropdown-menu {
         display: block; }
     .navigation-links ul.dropdown-menu {
-      background-color: #935379;
+      background-color: #fff;
       left: 50%;
       transform: translateX(-50%);
       top: 59px;
@@ -7584,7 +7583,7 @@ button.navbar-toggle {
         text-align: center;
         display: block; }
         .navigation-links ul.dropdown-menu li a {
-          color: #fff;
+          color: #000;
           margin: 0;
           padding: 1.2em !important; }
           .navigation-links ul.dropdown-menu li a:hover {
@@ -7593,7 +7592,7 @@ button.navbar-toggle {
   @media (max-width: 900px) {
     .navigation-links {
       position: absolute;
-      background-color: #935379;
+      background-color: #fff;
       top: 60px;
       width: 100%;
       z-index: 150; }
@@ -7603,10 +7602,10 @@ button.navbar-toggle {
         .navigation-links ul li {
           display: block; }
           .navigation-links ul li a {
-            color: #fff;
+            color: #000;
             display: block; }
           .navigation-links ul li.open .dropdown-menu {
-            background-color: #522e43;
+            background-color: #fff;
             position: static;
             left: 0;
             top: 0;
@@ -7617,6 +7616,42 @@ button.navbar-toggle {
             z-index: 200;
             float: none;
             margin-top: 0; } }
+
+.lang {
+  color: #5268C2 !important; }
+
+.nav-svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px; }
+
+.cart_wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center; }
+
+.cart_svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 0; }
+  @media (max-width: 900px) {
+    .cart_svg {
+      margin-left: 15px; } }
+
+@media (min-width: 900px) {
+  .cart_text {
+    visibility: hidden;
+    width: 0;
+    height: 0; } }
+
+.cart_counter {
+  background-color: #01C97E;
+  color: #fff;
+  padding: 1px 9px;
+  border-radius: 50%;
+  font-size: 10px;
+  margin-left: 7px; }
 
 @media (min-width: 901px) {
   .navigation .collapse {

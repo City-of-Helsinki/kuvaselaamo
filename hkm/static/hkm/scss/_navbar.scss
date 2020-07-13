@@ -1,7 +1,6 @@
 .navigation {
     height: 60px;
     background-color: $color-white;
-    border-bottom: 1px solid $color-hkm-uppernav;
     display: block;
 }
 
@@ -74,7 +73,7 @@ button.navbar-toggle {
                 display: block;
                 margin: 7px;
                 font-family: $font-brownbold;
-                color: $color-hkm-purple;
+                color: #000;
 
                 &:hover,
                 &:focus {
@@ -94,7 +93,7 @@ button.navbar-toggle {
         }
 
         &.dropdown-menu {
-            background-color: $color-hkm-purple;
+            background-color: $color-white;
             left: 50%;
             transform: translateX(-50%);
             top: 59px;
@@ -105,7 +104,7 @@ button.navbar-toggle {
                 display: block;
 
                 a {
-                    color: $color-white;
+                    color: #000;
                     margin: 0;
                     padding: 1.2em !important;
 
@@ -120,7 +119,7 @@ button.navbar-toggle {
 
     @media (max-width: 900px) {
         position: absolute;
-        background-color: $color-hkm-purple;
+        background-color: $color-white;
         top: 60px;
         width: 100%;
         z-index: 150;
@@ -133,13 +132,13 @@ button.navbar-toggle {
                 display: block;
 
                 a {
-                    color: $color-white;
+                    color: #000;
                     display: block;
                 }
 
                 &.open {
                     .dropdown-menu {
-                        background-color: darken($color-hkm-purple, 20%);
+                        background-color: $color-white;
                         position: static;
                         left: 0;
                         top: 0;
@@ -154,6 +153,52 @@ button.navbar-toggle {
                 }
             }
         }
+    }
+}
+
+.lang {
+    color: #5268C2 !important;
+}
+
+.nav-svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+}
+
+.cart {
+    &_wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    &_svg {
+        width: 20px;
+        height: 20px;
+        margin-left: 0;
+
+        @media (max-width: 900px) {
+            margin-left: 15px;
+        }
+    }
+
+    &_text {
+        @media (min-width: 900px) {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+    }
+
+    &_counter {
+        background-color: #01C97E;
+        color: $color-white;
+        padding: 1px 9px;
+        border-radius: 50%;
+        font-size: 10px;
+        margin-left: 7px;
     }
 }
 

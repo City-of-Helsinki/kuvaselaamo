@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="22px" viewBox="0 0 26 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 7</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <filter id="filter-2">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.576471 0 0 0 0 0.325490 0 0 0 0 0.474510 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7" transform="translate(-11.000000, -303.000000)" filter="url(#filter-1)">
+            <g transform="translate(12.021654, 303.000000)">
+                <g filter="url(#filter-2)" id="Group-3">
+                    <g transform="translate(4.978346, 0.000000)">
+                        <polygon id="Color" fill="#000000" points="7.5 0 7.5 12.8782727 11.5 8.75757576 13 10.3030303 6.5 17 0 10.3030303 1.5 8.75757576 5.5 12.8782727 5.5 0"></polygon>
+                    </g>
+                </g>
+                <polyline id="Path-2" stroke="#935379" stroke-width="2" stroke-linecap="round" points="2.25597319e-13 8.0000094 2.25597319e-13 21.0000094 22.0134132 21.0000094 22.0134132 8.0000094"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

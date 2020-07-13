@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 5</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5" transform="translate(-101.000000, -303.000000)" filter="url(#filter-1)">
+            <g transform="translate(101.000000, 303.000000)">
+                <rect id="Rectangle" stroke="#935379" stroke-width="2" x="1" y="7" width="22" height="14" rx="1"></rect>
+                <rect id="Rectangle" fill="#935379" fill-rule="nonzero" x="2" y="3" width="20" height="2"></rect>
+                <rect id="Rectangle-Copy-2" fill="#935379" x="4" y="0" width="16" height="2"></rect>
+                <polygon id="+" fill="#935379" fill-rule="nonzero" points="13.0227273 18 13.0227273 15.0227273 16 15.0227273 16 12.9772727 13.0227273 12.9772727 13.0227273 10 10.9772727 10 10.9772727 12.9772727 8 12.9772727 8 15.0227273 10.9772727 15.0227273 10.9772727 18"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

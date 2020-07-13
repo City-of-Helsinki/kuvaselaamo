@@ -1,9 +1,13 @@
 {% load i18n %}
-<a href="{% url "basket" %}">
+<a href="{% url 'basket' %}">
+  <div class="cart_wrapper">
     {% if request.basket.lines %}
-        {%  trans "The cart contains" %} {{ request.basket.product_count }}
-        {% blocktrans count request.basket.lines|length as lines %}photo{% plural %}photos{% endblocktrans %}
+    <div class="cart_text">{% trans 'Shopping cart' %}</div>
+    <img class="cart_svg" src="/static/hkm/svg/Cart.svg" alt="shopping">
+    <div class="cart_counter">{{ request.basket.product_count }}</div>
     {% else %}
-        {% trans "Your cart is empty" %}
+    <img class="cart_svg" src="/static/hkm/svg/Cart.svg" alt="shopping">
     {% endif %}
+  </div>
+
 </a>

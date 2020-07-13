@@ -634,20 +634,9 @@ msgstr "Inkl. moms"
 msgid "Log in"
 msgstr "Logga in"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:4
-msgid "The cart contains"
-msgstr "Kundvagnen innehåller"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid "photo"
-msgid_plural "photos"
-msgstr[0] "foto"
-msgstr[1] "fotos"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:41
-msgid "Your cart is empty"
-msgstr "Din vagn är tom"
+#: hmk/templates/hkm/snippets/nav_basket_counter.html:5
+msgid "Shopping cart"
+msgstr "Kundvagn"
 
 #: hkm/templates/hkm/snippets/navigation.html:23
 #: hkm/templates/hkm/snippets/navigation.html:26
@@ -669,17 +658,17 @@ msgstr "Mina album"
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "In English"
+msgstr "EN"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "På svenska"
+msgstr "SV"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "Suomeksi"
+msgstr "FI"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
