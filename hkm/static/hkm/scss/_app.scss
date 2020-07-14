@@ -875,10 +875,12 @@ span.no-postal-fee {
 }
 
 /* Content */
+/* Set content min height 50% to prevent footer from flowing up too much */
 .content {
   background-color: $color-gray-background;
   float: left;
   width: 100%;
+  min-height: 50%;
 }
 .sidebar {
   float: left;

@@ -65,6 +65,7 @@ button.navbar-toggle {
         padding: 0;
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         li {
             list-style: none;
@@ -163,27 +164,41 @@ button.navbar-toggle {
     color: #5268C2 !important;
 }
 
+.nav-user {
+    position: relative;
+}
+
 .nav-svg {
     width: 23px;
     height: 23px;
-    margin-left: 7px;
+    position: absolute;
+    top: 11px;
+    right: -14px;
+
+    @media (max-width: 900px) {
+        top: 7px;
+    }
 }
 
 .cart {
     &_wrapper {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        width: 70px;
         justify-content: center;
+        position: relative;
     }
 
     &_svg {
         width: 23px;
         height: 23px;
-        margin-left: 0;
+        position: absolute;
+        top: -13px;
 
         @media (max-width: 900px) {
             margin-left: 15px;
+            top: -10px;
+            right: -15px;
         }
     }
 
@@ -193,6 +208,12 @@ button.navbar-toggle {
             width: 0;
             height: 0;
         }
+
+        @media (max-width: 900px) {
+            position: absolute;
+            top: -8px;
+            left: -20px;
+        }
     }
 
     &_counter {
@@ -201,7 +222,14 @@ button.navbar-toggle {
         padding: 1px 9px;
         border-radius: 50%;
         font-size: 10px;
-        margin-left: 7px;
+        position: absolute;
+        top: -11px;
+        right: -3px;
+
+        @media (max-width: 900px) {
+            right: -45px;
+            top: -9px;
+        }
     }
 }
 
