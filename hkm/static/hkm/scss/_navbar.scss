@@ -2,6 +2,7 @@
     height: 60px;
     background-color: $color-white;
     display: block;
+    font-size: 16px;
 }
 
 .navigation-header {
@@ -204,6 +205,57 @@ button.navbar-toggle {
     }
 }
 
+.list-item {
+    &_lang-wrapper {
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        order: 1;
+    }
+
+    &_search {
+        order: 2;
+    }
+
+    &_collection {
+        order: 3;
+    }
+
+    &_user,
+    &_login {
+        order: 4;
+    }
+
+    &_cart {
+        order: 5;
+    }
+
+    @media (max-width: 900px) {
+        &_lang-wrapper {
+            order: 5;
+            margin: 0 auto;
+        }
+
+        &_search {
+            order: 1;
+        }
+
+        &_collection {
+            order: 2;
+        }
+
+        &_user,
+        &_login {
+            order: 3;
+        }
+
+        &_cart {
+            order: 4;
+        }
+    }
+}
+
 @media (min-width: 901px) {
     .navigation {
         .collapse {
@@ -211,66 +263,8 @@ button.navbar-toggle {
             height: auto !important;
         }
     }
-    
+
     .navbar-toggle {
         display: none;
-    }
-}
-
-.list-item {
-    &_lang-en,
-    &_lang-fi {
-        order: 1
-    }
-
-    &_lang-en,
-    &_lang-sv {
-        order: 2
-    }
-
-    &_search {
-        order: 3
-    }
-
-    &_collection {
-        order: 4
-    }
-
-    &_user,
-    &_login {
-        order: 5
-    }
-
-    &_cart {
-        order: 6
-    }
-
-    @media (max-width: 900px) {
-        &_lang-en,
-        &_lang-fi {
-            order: 5
-        }
-
-        &_lang-en,
-        &_lang-sv {
-            order: 6
-        }
-
-        &_search {
-            order: 1
-        }
-
-        &_collection {
-            order: 2
-        }
-
-        &_user,
-        &_login {
-            order: 3
-        }
-
-        &_cart {
-            order: 4
-        }
     }
 }

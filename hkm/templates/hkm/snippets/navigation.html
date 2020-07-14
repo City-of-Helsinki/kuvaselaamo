@@ -19,14 +19,23 @@
   <div id="navigation-toggle" class="navigation-links collapse navbar-collapse">
     <ul class="nav navbar-nav">
       {% if language == 'fi' %}
-        <li class="list-item_lang-en"><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> </li>
-        <li class="list-item_lang-sv"><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        <div class="list-item_lang-wrapper">
+          <li><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> </li>
+          <li><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        </div>
+
       {% elif language == 'en' %}
-        <li class="list-item_lang-fi"><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
-        <li class="list-item_lang-sv"><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+      <div class="list-item_lang-wrapper">
+        <li><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
+        <li><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+      </div>
+
       {% elif language == 'sv' %}
-        <li class="list-item_lang-fi"><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
-        <li class="list-item_lang-en"><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+      <div class="list-item_lang-wrapper">
+        <li><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
+        <li><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+      </div>
+
       {% endif %}
       <li class="list-item_search"><a href="{% url 'hkm_search' %}">{% trans 'Search pictures' %}</a><li>
       <li class="list-item_collection"><a href="{% url 'hkm_public_collections' %}">{% trans 'Explore collections' %}</a></li>

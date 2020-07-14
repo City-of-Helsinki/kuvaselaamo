@@ -7521,7 +7521,8 @@ a.welcome-modal__clarification {
 .navigation {
   height: 60px;
   background-color: #fff;
-  display: block; }
+  display: block;
+  font-size: 16px; }
 
 .navigation-header {
   margin-right: auto;
@@ -7657,36 +7658,29 @@ button.navbar-toggle {
   font-size: 10px;
   margin-left: 7px; }
 
-@media (min-width: 901px) {
-  .navigation .collapse {
-    display: block;
-    height: auto !important; }
-  .navbar-toggle {
-    display: none; } }
-
-.list-item_lang-en, .list-item_lang-fi {
+.list-item_lang-wrapper {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   order: 1; }
 
-.list-item_lang-en, .list-item_lang-sv {
+.list-item_search {
   order: 2; }
 
-.list-item_search {
+.list-item_collection {
   order: 3; }
 
-.list-item_collection {
+.list-item_user, .list-item_login {
   order: 4; }
 
-.list-item_user, .list-item_login {
+.list-item_cart {
   order: 5; }
 
-.list-item_cart {
-  order: 6; }
-
 @media (max-width: 900px) {
-  .list-item_lang-en, .list-item_lang-fi {
-    order: 5; }
-  .list-item_lang-en, .list-item_lang-sv {
-    order: 6; }
+  .list-item_lang-wrapper {
+    order: 5;
+    margin: 0 auto; }
   .list-item_search {
     order: 1; }
   .list-item_collection {
@@ -7695,3 +7689,10 @@ button.navbar-toggle {
     order: 3; }
   .list-item_cart {
     order: 4; } }
+
+@media (min-width: 901px) {
+  .navigation .collapse {
+    display: block;
+    height: auto !important; }
+  .navbar-toggle {
+    display: none; } }
