@@ -652,6 +652,10 @@ msgstr "Ostoskori"
 msgid "Search"
 msgstr "Haku"
 
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Etsi kuvia"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Selaa albumeita"

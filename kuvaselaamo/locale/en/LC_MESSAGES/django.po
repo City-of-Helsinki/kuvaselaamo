@@ -673,6 +673,10 @@ msgstr "Shopping cart"
 msgid "Search"
 msgstr "Search"
 
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Search pictures"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Explore albums"

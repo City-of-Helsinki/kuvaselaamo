@@ -62,7 +62,8 @@ button.navbar-toggle {
     ul {
         margin: 0;
         padding: 0;
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
 
         li {
             list-style: none;
@@ -127,6 +128,7 @@ button.navbar-toggle {
         ul {
             width: 100%;
             text-align: center;
+            flex-direction: column;
 
             li {
                 display: block;
@@ -215,8 +217,60 @@ button.navbar-toggle {
     }
 }
 
-@media (min-width: 937px) {
-    .navbar-nav {
-        float: none;
+.list-item {
+    &_lang-en,
+    &_lang-fi {
+        order: 1
+    }
+
+    &_lang-en,
+    &_lang-sv {
+        order: 2
+    }
+
+    &_search {
+        order: 3
+    }
+
+    &_collection {
+        order: 4
+    }
+
+    &_user,
+    &_login {
+        order: 5
+    }
+
+    &_cart {
+        order: 6
+    }
+
+    @media (max-width: 900px) {
+        &_lang-en,
+        &_lang-fi {
+            order: 5
+        }
+
+        &_lang-en,
+        &_lang-sv {
+            order: 6
+        }
+
+        &_search {
+            order: 1
+        }
+
+        &_collection {
+            order: 2
+        }
+
+        &_user,
+        &_login {
+            order: 3
+        }
+
+        &_cart {
+            order: 4
+        }
     }
 }

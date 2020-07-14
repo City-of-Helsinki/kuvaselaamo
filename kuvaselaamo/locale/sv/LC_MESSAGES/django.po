@@ -646,6 +646,10 @@ msgstr "Kundvagn"
 msgid "Search"
 msgstr "Sök"
 
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Sök bilder"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
