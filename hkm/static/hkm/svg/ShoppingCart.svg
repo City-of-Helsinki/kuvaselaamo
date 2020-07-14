@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="21px" viewBox="0 0 24 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>ostoskori</title>
     <defs>
         <filter id="filter-1">
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
         </filter>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-13.000000, -78.000000)">
-            <g id="Group" transform="translate(13.000000, 76.000000)">
-                <g filter="url(#filter-1)" id="ostoskori">
-                    <g transform="translate(1.000000, 3.000000)">
-                        <polyline id="Path-3" stroke="#000000" stroke-width="2" stroke-linecap="round" points="0 0 2.44266709 0 4.59521766 13 19.4288214 13 22 3.05005804"></polyline>
-                        <circle id="Oval" stroke="#000000" stroke-width="2" cx="7.5" cy="17.5" r="1.5"></circle>
-                        <circle id="Oval-Copy-4" stroke="#000000" stroke-width="2" cx="16.5" cy="17.5" r="1.5"></circle>
-                    </g>
-                </g>
-                <polygon id="+" fill="#1A1A1A" fill-rule="nonzero" points="14.0227273 13 14.0227273 10.0227273 17 10.0227273 17 7.97727273 14.0227273 7.97727273 14.0227273 5 11.9772727 5 11.9772727 7.97727273 9 7.97727273 9 10.0227273 11.9772727 10.0227273 11.9772727 13"></polygon>
+    <g id="ostoskori" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Boundingbox" x="0" y="0" width="24" height="24"></rect>
+        <g filter="url(#filter-1)">
+            <g transform="translate(0.000000, 2.000000)">
+                <path d="M1,0 L4.29070209,0 L6.443,13 L19.654,13 L22.031804,3.79986514 C22.1601119,3.30333953 22.6396238,2.99069535 23.1355976,3.05919801 L23.2501929,3.08186203 C23.7467185,3.21016992 24.0593627,3.68968185 23.99086,4.1856556 L23.968196,4.30025094 L21.2032587,15 L4.74718266,15 L2.595,2 L1,2 C0.487164161,2 0.0644928393,1.61395981 0.00672773133,1.11662113 L0,1 C0,0.487164161 0.38604019,0.0644928393 0.883378875,0.00672773133 L1,0 Z" id="Path-3" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M8.5,16 C9.88071187,16 11,17.1192881 11,18.5 C11,19.8807119 9.88071187,21 8.5,21 C7.11928813,21 6,19.8807119 6,18.5 C6,17.1192881 7.11928813,16 8.5,16 Z M8.5,18 C8.22385763,18 8,18.2238576 8,18.5 C8,18.7761424 8.22385763,19 8.5,19 C8.77614237,19 9,18.7761424 9,18.5 C9,18.2238576 8.77614237,18 8.5,18 Z" id="Oval" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M17.5,16 C18.8807119,16 20,17.1192881 20,18.5 C20,19.8807119 18.8807119,21 17.5,21 C16.1192881,21 15,19.8807119 15,18.5 C15,17.1192881 16.1192881,16 17.5,16 Z M17.5,18 C17.2238576,18 17,18.2238576 17,18.5 C17,18.7761424 17.2238576,19 17.5,19 C17.7761424,19 18,18.7761424 18,18.5 C18,18.2238576 17.7761424,18 17.5,18 Z" id="Oval-Copy-4" fill="#000000" fill-rule="nonzero"></path>
             </g>
         </g>
     </g>
