@@ -6355,7 +6355,7 @@ span.no-postal-fee {
     margin-left: 0; }
 
 .home-page__featured {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   display: grid;
   width: 100%;
   padding: 20px; }
@@ -6497,13 +6497,14 @@ span.no-postal-fee {
   max-height: 100%; }
 
 .banner {
+  background-color: #f1f1f1;
   float: left;
   width: 100%;
   min-height: 100px;
-  padding: 0;
-  margin-bottom: 30px; }
+  padding: 0; }
 
 .page-header {
+  background-color: #f1f1f1;
   display: block;
   color: #f5c7b8;
   border: 0;
@@ -6723,9 +6724,9 @@ span.no-postal-fee {
 
 /* Content */
 .content {
+  background-color: #f1f1f1;
   float: left;
-  width: 100%;
-  margin-bottom: 30px; }
+  width: 100%; }
 
 .sidebar {
   float: left;
@@ -6745,7 +6746,8 @@ span.no-postal-fee {
   .sidebar .list-group.list-group-root .list-group__item {
     border-radius: 0;
     border: 0;
-    padding: 0; }
+    padding: 0;
+    background-color: #f1f1f1; }
   .sidebar .list-group.list-group-root > .list-group-item:first-child {
     border: 0; }
   .sidebar .list-group.panel-collapse.collapse.in {

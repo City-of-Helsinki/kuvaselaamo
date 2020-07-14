@@ -3,10 +3,10 @@
   <div class="cart_wrapper">
     {% if request.basket.lines %}
     <div class="cart_text">{% trans 'Shopping cart' %}</div>
-    <img class="cart_svg" src="/static/hkm/svg/Cart.svg" alt="shopping">
+    <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="shopping">
     <div class="cart_counter">{{ request.basket.product_count }}</div>
     {% else %}
-    <img class="cart_svg" src="/static/hkm/svg/Cart.svg" alt="shopping">
+    <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="shopping">
     {% endif %}
   </div>
 
