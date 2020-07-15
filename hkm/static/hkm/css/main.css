@@ -6388,6 +6388,7 @@ span.no-postal-fee {
   width: 32%; }
 
 .card {
+  padding: 10px;
   margin-top: 20px;
   background-color: #FFF;
   width: 100%;
@@ -6413,7 +6414,7 @@ span.no-postal-fee {
   grid-column-end: span 2;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding-top: 5px;
   justify-content: space-between; }
   .card-meta__title {
     width: 100%;
@@ -6431,13 +6432,6 @@ span.no-postal-fee {
     color: #595D59;
     font-size: 16px; }
 
-/*
-    line-height: 1.15;
-    max-height: 48px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-*/
 .welcome-area__right,
 .card-image,
 .card-image__fullsize {
