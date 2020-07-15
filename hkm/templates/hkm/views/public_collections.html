@@ -6,38 +6,34 @@
 
   <div class="page-header">
     <div class="fullsize-container container">
-    <div class="public-collections-padding">
-      <div class="banner__title">
-       <!-- <h1 class="banner__h1">{% trans 'Featured collections' %}</h1> -->
-      </div>
-      <div class="grid flex-images">
-        <div class="grid__group item-slider invisible" data-grid-type="collection">
+      <h1 class="public-collections__title">{% trans 'Browse albums' %}</h1>
+      <div class=public-collections__content>
+        <div class="public-collections__wrapper">
           {% for collection in featured_collections %}
-            <div class="grid__item grid__item--featured item" data-w="550" data-h="400">
-              <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-                {% with images=collection|display_images %}
-                  {% if images|length == 1 %}
-                    <span class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></span>
-                  {% else %}
-                    <span class="sub-grid">
-                      {% for image_url in images %}
-                        <span class="sub-grid__item" style="background-image:url('{{ image_url }}')">
-                        </span>
-                      {% endfor %}
-                    </span>
-                  {% endif %}
-                {% endwith %}
-                <div class="grid__meta">
-                  <span class="grid__meta--title">{{ collection.title }}</span>
-                  <span class="grid__meta--other">{{ collection.description }}</span>
-                </div>
-                <span class="hkm-created-icon" />
-              </a>
+          <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <div class="card">
+              {% with images=collection|display_images %}
+              {% if images|length == 1 %}
+              <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
+              {% else %}
+              {% for image_url in images %}
+              <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
+              {% endfor %}
+              {% endif%}
+              {% endwith%}
+              <div class="card-meta">
+                <span class="card-meta__title">
+                  {{ collection.title }}
+                </span>
+                <span class="card-meta__owner">
+                  <img src="/static/hkm/svg/Kaupunginmuseo.svg" alt="museum" class="public-collections__svg">
+                </span>
+              </div>
             </div>
+          </a>
           {% endfor %}
         </div>
       </div>
-    </div>
     </div>
   </div>
 
@@ -46,35 +42,33 @@
 {% block content %}
 
   <div class="fullsize-container container">
-
-    <div class="collection-grid grid flex-images">
-      <div class="grid__group item-slider invisible">
+      <div class="public-collections__wrapper">
         {% for collection in collections %}
           {% if collection.records.all %}
-            <div class="grid__item item" data-w="550" data-h="400">
-              <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+              <div class="card">
                 {% with images=collection|display_images %}
-                  {% if images|length == 1 %}
-                    <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
-                  {% else %}
-                    <div class="sub-grid">
-                      {% for image_url in images %}
-                        <div class="sub-grid__item" style="background-image:url('{{ image_url }}')"></div>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                {% endwith %}
-                <div class="grid__meta">
-                  <span class="grid__meta--title">{{ collection.title }}</span>
-                  <span class="grid__meta--other">{{ collection.description }}</span>
+                {% if images|length == 1 %}
+                <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
+                {% else %}
+                {% for image_url in images %}
+                <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
+                {% endfor %}
+                {% endif%}
+                {% endwith%}
+                <div class="card-meta">
+                  <div class="card-meta__title">
+                    {{ collection.title }}
+                  </div>
+                  <span class="card-meta__owner">
+                    {{ collection.owner }}
+                  </span>
                 </div>
-              </a>
-            </div>
+              </div>
+            </a>
           {% endif %}
         {% endfor %}
       </div>
-    </div>
-
   </div> <!-- Container -->
 
 {% endblock %}

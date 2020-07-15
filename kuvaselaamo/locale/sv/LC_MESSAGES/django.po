@@ -1004,8 +1004,8 @@ msgid ""
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
 
 #: hkm/templates/hkm/views/public_collections.html:11
-msgid "Featured collections"
-msgstr "Museets album "
+msgid "Browse albums"
+msgstr "Bläddra i album"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
