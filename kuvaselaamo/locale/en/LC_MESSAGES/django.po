@@ -1037,8 +1037,8 @@ msgstr ""
 "By pressing Order you will be redirected to payment service provider Bambora"
 
 #: hkm/templates/hkm/views/public_collections.html:11
-msgid "Featured collections"
-msgstr "Featured albums"
+msgid "Browse albums"
+msgstr "Browse albums"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"

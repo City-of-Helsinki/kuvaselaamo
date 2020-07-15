@@ -1009,8 +1009,8 @@ msgid ""
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
 
 #: hkm/templates/hkm/views/public_collections.html:11
-msgid "Featured collections"
-msgstr "Ajankohtaiset kokoelmat"
+msgid "Browse albums"
+msgstr "Selaa albumeita"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"

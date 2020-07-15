@@ -6185,6 +6185,9 @@ span.no-postal-fee {
   height: 60px;
   width: auto;
   margin-bottom: 20px; }
+  @media (max-width: 400px) {
+    .brand-img__footer {
+      width: 100%; } }
 
 .public-collections-padding {
   padding-left: 15px; }
@@ -6244,12 +6247,13 @@ span.no-postal-fee {
 
 .site-footer {
   clear: both;
-  background: #F5C7B8;
-  color: #935379;
+  background: #fff;
+  color: #595D58;
   font-family: 'brownlight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 80px 20px 80px 20px; }
   .site-footer a {
-    color: #935379 !important;
+    font-size: 16px;
+    color: #595D58 !important;
     font-family: 'brownlight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 /* Login */
@@ -6354,15 +6358,18 @@ span.no-postal-fee {
     border: none;
     margin-left: 0; }
 
+.public-collections__content,
 .home-page__featured {
   background-color: #f1f1f1;
   display: grid;
   width: 100%;
   padding: 20px; }
+  .public-collections__content h2,
   .home-page__featured h2 {
     color: #5268C2;
     margin-top: 0; }
 
+.public-collections__wrapper,
 .featured__wrapper {
   width: 100%;
   background-color: #F1F1F1;
@@ -6370,8 +6377,12 @@ span.no-postal-fee {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 20px; }
+  .public-collections__wrapper a,
   .featured__wrapper a {
     text-decoration: none; }
+
+.public-collections__wrapper {
+  flex-wrap: wrap; }
 
 .card-link {
   width: 32%; }
@@ -6408,11 +6419,25 @@ span.no-postal-fee {
     width: 100%;
     font-size: 20px;
     font-weight: bold;
-    color: #5268C2; }
+    color: #5268C2;
+    line-height: 1.15;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal; }
   .card-meta__owner {
     color: #595D59;
     font-size: 16px; }
 
+/*
+    line-height: 1.15;
+    max-height: 48px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+*/
 .welcome-area__right,
 .card-image,
 .card-image__fullsize {
@@ -6449,6 +6474,26 @@ span.no-postal-fee {
     flex-direction: column; }
   .card-link {
     width: 100%; } }
+
+/* Public Collections */
+.public-collections__title {
+  font-family: "Brown std";
+  font-size: 45px;
+  color: #5268C2;
+  margin-left: 17px;
+  font-weight: 800; }
+  @media (max-width: 400px) {
+    .public-collections__title {
+      font-size: 30px; } }
+
+.public-collections__svg {
+  height: 30px; }
+  @media (max-width: 600px) {
+    .public-collections__svg {
+      height: 20px; } }
+  @media (max-width: 550px) {
+    .public-collections__svg {
+      height: 30px; } }
 
 .image-viewer {
   background-color: #fff !important;

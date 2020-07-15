@@ -223,7 +223,12 @@ span.no-postal-fee {
   height: 60px;
   width: auto;
   margin-bottom: 20px;
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 }
+
 
 .public-collections-padding {
   padding-left: 15px;
@@ -294,14 +299,14 @@ span.no-postal-fee {
 .site-footer {
 
   clear: both;
-  background: $color-hkm-pink;
-  color: $color-hkm-purple;
+  background: $color-white;
+  color: #595D58;
   font-family: 'brownlight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 80px 20px 80px 20px;
 
   a {
-
-    color: $color-hkm-purple !important;
+    font-size: 16px;
+    color: #595D58 !important;
     font-family: 'brownlight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
@@ -433,6 +438,7 @@ span.no-postal-fee {
   }
 }
 
+.public-collections__content,
 .home-page__featured {
   background-color: $color-gray-background;
   display: grid;
@@ -445,6 +451,7 @@ span.no-postal-fee {
   }
 }
 
+.public-collections__wrapper,
 .featured__wrapper {
   width: 100%;
   background-color: #F1F1F1;
@@ -456,6 +463,10 @@ span.no-postal-fee {
   a {
     text-decoration: none;
   }
+}
+
+.public-collections__wrapper {
+  flex-wrap: wrap;
 }
 
 .card-link {
@@ -499,6 +510,13 @@ span.no-postal-fee {
     font-size: 20px;
     font-weight: bold;
     color: #5268C2;
+    line-height: 1.15;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
   }
 
   &__owner {
@@ -506,6 +524,14 @@ span.no-postal-fee {
     font-size: 16px;
   }
 }
+
+/*
+    line-height: 1.15;
+    max-height: 48px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+*/
 
 .welcome-area__right,
 .card-image,
@@ -564,6 +590,32 @@ span.no-postal-fee {
   }
 }
 
+/* Public Collections */
+.public-collections {
+  &__title {
+    font-family: "Brown std";
+    font-size: 45px;
+    color: #5268C2;
+    margin-left: 17px;
+    font-weight: 800;
+
+    @media (max-width: 400px) {
+      font-size: 30px;
+    }
+  }
+
+  &__svg {
+    height: 30px;
+
+    @media (max-width: 600px) {
+      height: 20px;
+    }
+
+    @media (max-width: 550px) {
+      height: 30px;
+    }
+  }
+}
 
 .image-viewer {
   background-color: $color-shark !important;
