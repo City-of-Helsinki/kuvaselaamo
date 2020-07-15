@@ -6349,7 +6349,8 @@ span.no-postal-fee {
   .search-components__input {
     width: 75%;
     height: 40px;
-    border: none; }
+    border: none;
+    padding-left: 10px; }
   .search-components__button {
     width: 20%;
     height: 40px;
