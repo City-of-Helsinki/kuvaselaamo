@@ -640,20 +640,9 @@ msgstr "Sis. ALV"
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:4
-msgid "The cart contains"
-msgstr "Ostoskorissa on"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid "photo"
-msgid_plural "photos"
-msgstr[0] "kuva"
-msgstr[1] "kuvaa"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:41
-msgid "Your cart is empty"
-msgstr "Ostoskori on tyhjä"
+#: hmk/templates/hkm/snippets/nav_basket_counter.html:5
+msgid "Shopping cart"
+msgstr "Ostoskori"
 
 #: hkm/templates/hkm/snippets/navigation.html:23
 #: hkm/templates/hkm/snippets/navigation.html:26
@@ -662,6 +651,10 @@ msgstr "Ostoskori on tyhjä"
 #: hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
 msgstr "Haku"
+
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Etsi kuvia"
 
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
@@ -675,17 +668,17 @@ msgstr "Omat albumit"
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "In English"
+msgstr "EN"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "På svenska"
+msgstr "SV"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "Suomeksi"
+msgstr "FI"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"

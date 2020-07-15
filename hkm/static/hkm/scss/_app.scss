@@ -434,7 +434,7 @@ span.no-postal-fee {
 }
 
 .home-page__featured {
-  background-color: #F1F1F1;
+  background-color: $color-gray-background;
   display: grid;
   width: 100%;
   padding: 20px;
@@ -616,13 +616,15 @@ span.no-postal-fee {
   max-height: 100%;
 }
 .banner {
+  background-color: $color-gray-background;
   float: left;
   width: 100%;
   min-height: 100px;
   padding: 0;
-  margin-bottom: 30px;
 }
+
 .page-header {
+  background-color: $color-gray-background;
   display: block;
   color: $color-hkm-headings;
   border: 0;
@@ -873,10 +875,12 @@ span.no-postal-fee {
 }
 
 /* Content */
+/* Set content min height 50% to prevent footer from flowing up too much */
 .content {
+  background-color: $color-gray-background;
   float: left;
   width: 100%;
-  margin-bottom: 30px;
+  min-height: 50%;
 }
 .sidebar {
   float: left;
@@ -900,6 +904,7 @@ span.no-postal-fee {
     border-radius: 0;
     border: 0;
     padding: 0;
+    background-color: $color-gray-background;
   }
   .list-group.list-group-root > .list-group-item:first-child {
     border: 0;
