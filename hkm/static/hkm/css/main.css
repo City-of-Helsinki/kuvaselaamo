@@ -6483,12 +6483,9 @@ span.no-postal-fee {
 
 .public-collections__svg {
   height: 30px; }
-  @media (max-width: 600px) {
+  @media (min-width: 550px) and (max-width: 615px) {
     .public-collections__svg {
       height: 20px; } }
-  @media (max-width: 550px) {
-    .public-collections__svg {
-      height: 30px; } }
 
 .image-viewer {
   background-color: #fff !important;

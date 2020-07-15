@@ -601,12 +601,8 @@ span.no-postal-fee {
   &__svg {
     height: 30px;
 
-    @media (max-width: 600px) {
+    @media (min-width: 550px) and (max-width: 615px){
       height: 20px;
-    }
-
-    @media (max-width: 550px) {
-      height: 30px;
     }
   }
 }
