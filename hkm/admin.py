@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django import forms
+from django.core.exceptions import ValidationError
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
@@ -59,9 +61,28 @@ class PageContentAdmin(TranslatableAdmin):
         js = ('ckeditor/ckeditor.js', 'hkm/js/init.js')
 
 
+class ShowcaseForm(forms.ModelForm):
+    class Meta:
+        model = models.Showcase
+        fields = ['title', 'albums', 'show_on_home_page']
+
+    def clean(self):
+        title = self.cleaned_data.get('title')
+        albums = self.cleaned_data.get('albums')
+
+
+        if albums:
+            if albums.count() > 3:
+                raise ValidationError('Albumien maksimimäärä on kolme')
+        return self.cleaned_data
+
+class ShowcaseAdmin(admin.ModelAdmin):
+    form = ShowcaseForm
+
 admin.site.register(models.UserProfile)
 admin.site.register(models.Collection)
 admin.site.register(models.Record)
+admin.site.register(models.Showcase, ShowcaseAdmin)
 admin.site.register(User)
 admin.site.register(Group)
 admin.site.register(models.PrintProduct)

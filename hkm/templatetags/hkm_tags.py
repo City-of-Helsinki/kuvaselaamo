@@ -68,3 +68,8 @@ def front_page_url(collection):
         img_url = records[random_index].get_preview_image_absolute_url()
 
     return img_url
+
+@register.filter
+def showcase_collections(collection):
+    albums = collection.albums.all()
+    return albums

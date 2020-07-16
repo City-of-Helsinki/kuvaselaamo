@@ -17,7 +17,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -253,6 +253,15 @@ def user_post_save(sender, instance, created, *args, **kwargs):
         profile = UserProfile(user=instance)
         profile.save()
 
+
+
+class Showcase(BaseModel):
+    title = models.CharField(verbose_name=_(u'Showcase title'), max_length=255)
+    albums = models.ManyToManyField(Collection, verbose_name=_(u'Selected albums'))
+    show_on_home_page = models.BooleanField(verbose_name=_(u'Show on Home page'), default=True)
+
+    def __unicode__(self):
+        return self.title
 
 class Product(BaseModel):
     name = models.CharField(verbose_name=_(u'Name'), max_length=255)
