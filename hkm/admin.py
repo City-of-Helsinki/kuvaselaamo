@@ -62,8 +62,6 @@ class PageContentAdmin(TranslatableAdmin):
         js = ('ckeditor/ckeditor.js', 'hkm/js/init.js')
 
 
-
-
 class ShowcaseAdmin(admin.ModelAdmin):
     form = ShowcaseForm
 

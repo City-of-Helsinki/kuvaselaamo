@@ -120,18 +120,9 @@ class ShowcaseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ShowcaseForm, self).__init__(*args, **kwargs)       
-        collection_ids = []
-        
-        # Find all collections that are owned by museum
-        for collection in Collection.objects.all():
-            user = UserProfile.objects.get(id=collection.owner.id)
-            if user.is_museum and user.user_id == collection.owner.id:
-                collection_ids.append(collection.id)
-        self.fields['albums'].queryset = Collection.objects.all().filter(pk__in=collection_ids)
-
+        self.fields['albums'].queryset = Collection.objects.filter(owner__profile__is_museum=True)
 
     def clean(self):
-        title = self.cleaned_data.get('title')
         albums = self.cleaned_data.get('albums')
 
         if albums:

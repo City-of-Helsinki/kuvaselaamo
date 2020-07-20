@@ -378,25 +378,12 @@ class HomeView(BaseView):
     template_name = 'hkm/views/home_page.html'
     url_name = 'hkm_index'
 
-    collection_qs = Collection.objects.none()
-    showcase_qs = Showcase.objects.none()
-
-    def setup(self, request, *args, **kwargs):
-        self.collection_qs = self.get_collection_qs(request, *args, **kwargs)
-        self.showcase_qs = self.get_showcase_qs(request, *args, **kwargs)
-        return True
-
-    def get_collection_qs(self, request, *args, **kwargs):
-        return Collection.objects.filter(show_in_landing_page=True)
-
-    def get_showcase_qs(self, request, *args, **kwargs):
-        return Showcase.objects.filter(show_on_home_page=True)
-
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['frontpage_images'] = self.collection_qs.order_by('created')
-        context['showcases'] = self.showcase_qs
+        context['frontpage_images'] = Collection.objects.filter(show_in_landing_page=True)
+        context['showcases'] = Showcase.objects.filter(show_on_home_page=True).order_by('created')
         return context
+
 
 # using collection_record here also instead of record (see
 # CollectionDetailView naming confusion)
