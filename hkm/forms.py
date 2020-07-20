@@ -6,9 +6,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from hkm.models.campaigns import CampaignCode
-from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase, UserProfile
 
 LOG = logging.getLogger(__name__)
 
@@ -110,3 +111,30 @@ class GenerateCampaignCodesActionForm(forms.Form):
     #         raise
     #
     #     return account, action
+
+
+class ShowcaseForm(forms.ModelForm):
+    class Meta:
+        model = Showcase
+        fields = ['title', 'albums', 'show_on_home_page']
+
+    def __init__(self, *args, **kwargs):
+        super(ShowcaseForm, self).__init__(*args, **kwargs)       
+        collection_ids = []
+        
+        # Find all collections that are owned by museum
+        for collection in Collection.objects.all():
+            user = UserProfile.objects.get(id=collection.owner.id)
+            if user.is_museum and user.user_id == collection.owner.id:
+                collection_ids.append(collection.id)
+        self.fields['albums'].queryset = Collection.objects.all().filter(pk__in=collection_ids)
+
+
+    def clean(self):
+        title = self.cleaned_data.get('title')
+        albums = self.cleaned_data.get('albums')
+
+        if albums:
+            if albums.count() > 3:
+                raise ValidationError('Albumien maksimimäärä on kolme')
+        return self.cleaned_data

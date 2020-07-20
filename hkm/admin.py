@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from hkm.forms import ShowcaseForm
 from django.core.exceptions import ValidationError
 from django.conf.urls import url
 from django.contrib import admin
@@ -61,20 +62,7 @@ class PageContentAdmin(TranslatableAdmin):
         js = ('ckeditor/ckeditor.js', 'hkm/js/init.js')
 
 
-class ShowcaseForm(forms.ModelForm):
-    class Meta:
-        model = models.Showcase
-        fields = ['title', 'albums', 'show_on_home_page']
 
-    def clean(self):
-        title = self.cleaned_data.get('title')
-        albums = self.cleaned_data.get('albums')
-
-
-        if albums:
-            if albums.count() > 3:
-                raise ValidationError('Albumien maksimimäärä on kolme')
-        return self.cleaned_data
 
 class ShowcaseAdmin(admin.ModelAdmin):
     form = ShowcaseForm

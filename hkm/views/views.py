@@ -394,7 +394,7 @@ class HomeView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['frontpage_images'] = self.collection_qs
+        context['frontpage_images'] = self.collection_qs.order_by('created')
         context['showcases'] = self.showcase_qs
         return context
 
