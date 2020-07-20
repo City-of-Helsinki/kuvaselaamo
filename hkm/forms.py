@@ -127,5 +127,5 @@ class ShowcaseForm(forms.ModelForm):
 
         if albums:
             if albums.count() > 3:
-                raise ValidationError('Albumien maksimimäärä on kolme')
+                raise ValidationError(u'Max amount of albums is three')
         return self.cleaned_data
