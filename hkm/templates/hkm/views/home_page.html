@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      {% with image_url=frontpage_images.0|front_page_url %}
+      {% with image_url=frontpage_image_collection|front_page_url %}
         <div class="welcome-area__right" style="background-image: url('{{ image_url }}')"></div>
       {% endwith %}
     </div>

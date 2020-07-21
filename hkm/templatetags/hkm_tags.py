@@ -57,13 +57,14 @@ def localized_decimal(value, arg=-1):
 
 @register.filter
 def front_page_url(collection):
-    records = collection.records.all()
-    record_count = records.count()
     img_url = ""
+    record_count = collection.records.count if collection else 0
 
-    if (record_count == 0 ):
+    if not record_count:
         img_url = '/static/hkm/img/front_page_default.jpg'
     else:
+        records = collection.records.all()
+        record_count = records.count()
         random_index = randrange(0, record_count - 1)
         img_url = records[random_index].get_preview_image_absolute_url()
 
