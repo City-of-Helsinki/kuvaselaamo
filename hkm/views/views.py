@@ -381,7 +381,7 @@ class HomeView(BaseView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['frontpage_image_collection'] = Collection.objects.filter(show_in_landing_page=True).order_by('created').first()
-        context['showcases'] = Showcase.objects.filter(show_on_home_page=True).order_by('created').reverse()
+        context['showcases'] = Showcase.objects.filter(show_on_home_page=True).order_by('-created')
         return context
 
 
