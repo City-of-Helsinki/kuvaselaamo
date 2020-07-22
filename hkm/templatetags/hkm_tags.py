@@ -70,6 +70,6 @@ def front_page_url(collection):
     return img_url
 
 @register.filter
-def showcase_collections(collection):
-    albums = collection.albums.all()
+def showcase_collections(showcase):
+    albums = showcase.albums.all().order_by('created')
     return albums
