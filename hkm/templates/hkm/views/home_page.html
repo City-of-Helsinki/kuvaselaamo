@@ -23,37 +23,41 @@
           </div>
         </div>
       </div>
-      {% with image_url=frontpage_images.0|front_page_url %}
+      {% with image_url=frontpage_image_collection|front_page_url %}
         <div class="welcome-area__right" style="background-image: url('{{ image_url }}')"></div>
       {% endwith %}
     </div>
     <div class="home-page__featured">
-        <h2>Esittely</h2>
-        <div class="featured__wrapper">
-          {% for collection in featured_collections %}
-          <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
-            <div class="card">
-              {% with images=collection|display_images %}
-                {% if images|length == 1 %}
-                  <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
-                {% else %}
-                  {% for image_url in images %}
-                    <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
-                  {% endfor %}
-                {% endif%}
-              {% endwith%}
-              <div class="card-meta">
-                <span class="card-meta__title">
-                  {{ collection.title }}
-                </span>
-                <span class="card-meta__owner">
-                  {{ collection.owner }}
-                </span>
-              </div>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
+        {% for showcase in showcases %}
+          <h2>{{ showcase.title }}</h2>
+          <div class="featured__wrapper">
+            {% with collections=showcase|showcase_collections %}
+              {% for collection in collections %}
+                <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+                  <div class="card">
+                    {% with images=collection|display_images %}
+                      {% if images|length == 1 %}
+                      <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
+                      {% else %}
+                      {% for image_url in images %}
+                      <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
+                      {% endfor %}
+                      {% endif%}
+                      {% endwith%}
+                      <div class="card-meta">
+                        <span class="card-meta__title">
+                          {{ collection.title }}
+                        </span>
+                        <span class="card-meta__owner">
+                         {{ collection.owner }}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% endwith %}
+          </div>
+        {% endfor %}
     </div>
   </div>
 

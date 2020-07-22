@@ -27,7 +27,7 @@ from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.campaigns import Campaign, CampaignStatus
-from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
+from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
@@ -374,20 +374,16 @@ class CollectionDetailView(BaseView):
         return context
 
 
-class HomeView(BaseCollectionListView):
+class HomeView(BaseView):
     template_name = 'hkm/views/home_page.html'
     url_name = 'hkm_index'
 
-    def get_collection_qs(self, request, *args, **kwargs):
-        return Collection.objects.filter(is_public=True).order_by('created')
-
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['frontpage_images'] = self.collection_qs.filter(
-        show_in_landing_page=True)
-        context['featured_collections'] = self.collection_qs.filter(
-            is_featured=True)
+        context['frontpage_image_collection'] = Collection.objects.filter(show_in_landing_page=True).order_by('created').first()
+        context['showcases'] = Showcase.objects.filter(show_on_home_page=True).order_by('-created')
         return context
+
 
 # using collection_record here also instead of record (see
 # CollectionDetailView naming confusion)
