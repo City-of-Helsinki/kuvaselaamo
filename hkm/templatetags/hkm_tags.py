@@ -73,3 +73,22 @@ def front_page_url(collection):
 def showcase_collections(showcase):
     albums = showcase.albums.all().order_by('created')
     return albums
+
+@register.filter
+def previous_image(record, records=None):
+    # If image index in array is 1, it has previous image
+    previous_id = ""
+    image_index = records.index(record)
+    if image_index == 1:
+        previous_id = records[0]['id']
+    print('PREVIOUS ID', previous_id)
+    return previous_id
+
+@register.filter
+def next_image(record, records=None):
+    next_id = ""
+    image_index = records.index(record)
+    print('record1', records[0])
+    if image_index == 1 and len(records) == 3:
+        next_id = records[2]['id']
+    return next_id

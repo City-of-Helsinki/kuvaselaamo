@@ -5,11 +5,11 @@
 {% block viewer_arrows %}
 
 
-  {% if search_result.previous_page %}
-    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}{% for facet in author_facets %}&author[]={{ facet }}{% endfor %}{% for facet in date_facets %}&main_date_str[]={{ facet }}{% endfor %}&page={{ search_result.previous_page }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+  {% if record|previous_image:search_result.records %}
+    <a href="{% url 'hkm_search_record' %}?image_id={{ record|previous_image:search_result.records }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
   {% endif %}
-  {% if search_result.next_page %}
-    <a href="{% url 'hkm_search_record' %}?search={{ search_term }}{% for facet in author_facets %}&author[]={{ facet }}{% endfor %}{% for facet in date_facets %}&main_date_str[]={{ facet }}{% endfor %}&page={{ search_result.next_page }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
+  {% if record|next_image:search_result.records %}
+    <a href="{% url 'hkm_search_record' %}?image_id={{ record|next_image:search_result.records }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
   {% endif %}
 
 {% endblock %}

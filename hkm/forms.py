@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from hkm.models.campaigns import CampaignCode
-from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase, UserProfile
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase
 
 LOG = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ class CollectionForm(forms.ModelForm):
         super(CollectionForm, self).__init__(*args, **kwargs)
         if not self.user.is_authenticated() or not self.user.profile.is_admin:
             del self.fields['show_in_landing_page']
-            del self.fields['is_featured']
+            del self.fields['is_fea tured']
 
     class Meta:
         model = Collection
@@ -73,7 +73,8 @@ class RegistrationForm(UserCreationForm):
 
 class ProductOrderCollectionForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
-    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
+    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}),
+                                   label=_(u"Orderer's name"))
 
     class Meta:
         model = ProductOrderCollection
@@ -119,7 +120,7 @@ class ShowcaseForm(forms.ModelForm):
         fields = ['title', 'albums', 'show_on_home_page']
 
     def __init__(self, *args, **kwargs):
-        super(ShowcaseForm, self).__init__(*args, **kwargs)       
+        super(ShowcaseForm, self).__init__(*args, **kwargs)
         self.fields['albums'].queryset = Collection.objects.filter(owner__profile__is_museum=True)
 
     def clean(self):

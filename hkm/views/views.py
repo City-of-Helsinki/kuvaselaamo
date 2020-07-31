@@ -32,7 +32,7 @@ from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
 
-RESULTS_PER_PAGE = 40
+RESULTS_PER_PAGE = 100
 
 class AuthForm(django_forms.AuthenticationForm):
     username = django_forms.UsernameField(
@@ -503,6 +503,8 @@ class SearchView(BaseView):
             return self.template_name
 
     def setup(self, request, *args, **kwargs):
+        # Session expires after one(1) minute
+        request.session.set_expiry(60)
         self.search_term = request.GET.get('search', '')
         self.author_facets = filter(
             None, request.GET.getlist('author[]', None))
@@ -521,21 +523,52 @@ class SearchView(BaseView):
         if self.date_facets:
             facets['main_date_str'] = self.date_facets
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
-        records = []
+
+        # This maybe requires checks for year / author as well
+        records = request.session.get('records', []) if self.search_term != request.GET.get('search') else []
+
+        # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            # Load all pages from 0 to n with page_size * n records
-            for page in range(1, self.page+1):
-                results = self.get_search_result(self.search_term, facets, page, self.page_size)
-                if results:
-                    self.search_result = results
-                    records += results.get('records', [])
+            results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+            if results:
+                self.search_result = results
+                records += results.get('records', [])
             if records:
                 # its all one big page of records. So set page number as first page
                 self.search_result['records'] = records
                 self.search_result['page'] = 1
+                request.session['search_result'] = self.search_result
+                request.session['page'] = self.page
+                request.session['search'] = self.search_term
         else:
-            # Load only desired page and page_size results.
-            self.search_result = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+            # If records exist we are in "single image view"
+            if kwargs.get('record'):
+                # Check if user came from list view or from direct link
+                # TODO THIS REQUIRES INDEX CHECK AGAINS TOTAL LENGHT, IF IT'S SAME FETCH MORE
+                finna_id = request.GET.get('image_id')
+                # TODO maybe check other filters as well
+                if not request.session.get('search') and not request.session.get('page'):
+                    self.search_result = FINNA.get_record(finna_id)
+                # If user came from list view, get selected image from session
+                else:
+                    search_result = request.session.get('search_result', {})
+
+                    records = search_result.get('records', [])
+                    print('RECORDS LENGHT', len(records))
+
+                    record = [x for x in records if x['id'] == finna_id]
+                    # Form 3 record array, previous - selected - next
+                    record_index = record[0]['index']
+                    new_record_list = [records[record_index - 2], record[0], records[record_index + 1]]
+                    self.search_result = search_result
+                    self.search_result['records'] = new_record_list
+            # This else statement is executed when "Load more" is pressed
+            else:
+                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+                self.search_result = results
+                request.session['search_result'] = results
+                request.session['page'] = self.page
+
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -552,7 +585,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result['resultCount'] == 0 and 'records' in self.search_result:
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and len(self.search_result.get('records')) > 1:
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -642,7 +675,9 @@ class SearchRecordDetailView(SearchView):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
         if self.search_result:
-            record = self.search_result['records'][0]
+            # Record position will be 0,1,2 depending if previous & next images exist
+            # TODO add logic that fetches right image
+            record = self.search_result['records'][1]
             record['full_res_url'] = HKM.get_full_res_image_url(
                 record['rawData']['thumbnail'])
             related_collections_ids = Record.objects.filter(
