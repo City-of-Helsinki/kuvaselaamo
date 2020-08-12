@@ -32,3 +32,6 @@ staticroot/*
 components/*
 docker-compose.env.yaml
 .idea
+/venv/
+media/*
+static/*
