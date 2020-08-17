@@ -10,6 +10,9 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, []),
     DATABASE_URL=(str, ''),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
+    MAIL_MAILGUN_KEY=(str, ""),
+    MAIL_MAILGUN_DOMAIN=(str, ""),
+    MAIL_MAILGUN_API=(str, ""),
     HKM_FEEDBACK_FROM_EMAIL=(str, 'system@localhost'),
     HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
     HKM_PBW_API_ENDPOINT = (str, ''),
@@ -32,6 +35,12 @@ if DEBUG and not SECRET_KEY:
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 EMAIL_BACKEND=env.str('EMAIL_BACKEND')
+if env("MAIL_MAILGUN_KEY"):
+    ANYMAIL = {
+        "MAILGUN_API_KEY": env("MAIL_MAILGUN_KEY"),
+        "MAILGUN_SENDER_DOMAIN": env("MAIL_MAILGUN_DOMAIN"),
+        "MAILGUN_API_URL": env("MAIL_MAILGUN_API"),
+    }
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -152,7 +161,7 @@ INSTALLED_APPS = (
 
     'django.contrib.admin.apps.SimpleAdminConfig',
 
-    #'utils',
+    'anymail'
 )
 
 # Bower

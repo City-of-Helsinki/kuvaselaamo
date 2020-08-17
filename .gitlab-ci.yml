@@ -16,6 +16,11 @@ review:
         K8S_SECRET_DEBUG: 1
         K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
         K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
         K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
         K8S_SECRET_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
         K8S_SECRET_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
@@ -24,6 +29,7 @@ review:
         K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
         K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
         K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test.printmotor.io/api/v1/order"
+
 
 staging:
     only:
@@ -36,6 +42,11 @@ staging:
         K8S_SECRET_SECRET_KEY: "$GL_QA_DJANGO_SECRET_KEY"
         K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
         K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
         K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
         K8S_SECRET_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
         K8S_SECRET_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
@@ -53,6 +64,12 @@ production:
         K8S_SECRET_SECRET_KEY: "$GL_STABLE_DJANGO_SECRET_KEY"
         K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
         K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.fi"
+        # TODO: Configure production feedback recipient
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
         # TODO: Configure production PayByWay
         K8S_SECRET_HKM_PBW_API_ENDPOINT: ""
         K8S_SECRET_HKM_PBW_API_KEY: "$GL_STABLE_PBW_API_KEY"
