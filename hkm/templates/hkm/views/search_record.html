@@ -19,7 +19,7 @@
   {% if record %}
     <div class="back-to">
       <span class="back-to__title">{{ record.title }}</span><br>
-      <span>{% trans 'Search' %}: {{ search_term }} ({{ current_page }}/{{search_result.resultCount}})</span><br>
+      <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
       <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ search_result_page }}">
         <i class="back-to__icon">
           <svg class="svg-icon">

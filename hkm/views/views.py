@@ -12,7 +12,6 @@ from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
@@ -21,14 +20,13 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, email
+import copy
 from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models.campaigns import Campaign, CampaignStatus
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
-from hkm.templatetags.hkm_tags import localized_decimal
 
 LOG = logging.getLogger(__name__)
 
@@ -484,6 +482,7 @@ class SearchView(BaseView):
 
     facet_result = None
     search_result = None
+    record = None
 
     search_term = None
     author_facets = None
@@ -537,9 +536,6 @@ class SearchView(BaseView):
                 # its all one big page of records. So set page number as first page
                 self.search_result['records'] = records
                 self.search_result['page'] = 1
-                request.session['search_result'] = self.search_result
-                request.session['page'] = self.page
-                request.session['search'] = self.search_term
         else:
             # If records exist we are in "single image view"
             if kwargs.get('record'):
@@ -548,27 +544,34 @@ class SearchView(BaseView):
                 finna_id = request.GET.get('image_id')
                 # TODO maybe check other filters as well
                 if not request.session.get('search') and not request.session.get('page'):
-                    self.search_result = FINNA.get_record(finna_id)
+                    result = FINNA.get_record(finna_id)
+                    self.search_result = result
+                    self.record = result.get('records')[0]
                 # If user came from list view, get selected image from session
                 else:
                     search_result = request.session.get('search_result', {})
-
                     records = search_result.get('records', [])
-                    print('RECORDS LENGHT', len(records))
-
                     record = [x for x in records if x['id'] == finna_id]
+
                     # Form 3 record array, previous - selected - next
-                    record_index = record[0]['index']
-                    new_record_list = [records[record_index - 2], record[0], records[record_index + 1]]
-                    self.search_result = search_result
-                    self.search_result['records'] = new_record_list
+                    record_index = record[0].get('index')
+                    new_record_list = []
+                    if record_index > 1:
+                        new_record_list.append(records[record_index - 2])
+                    new_record_list.append(record[0])
+                    if record_index < len(records):
+                        new_record_list.append(records[record_index])
+                    # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
+                    self.record = copy.deepcopy(record[0])
+                    self.search_result = copy.deepcopy(search_result)
+                    self.search_result['records'] = copy.deepcopy(new_record_list)
             # This else statement is executed when "Load more" is pressed
             else:
                 results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
                 self.search_result = results
-                request.session['search_result'] = results
-                request.session['page'] = self.page
-
+                # TODO FIGURE OUT WHAT TO DO WITH THESE
+                #request.session['search_result'] = results
+                #request.session['page'] = self.page
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -585,7 +588,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and len(self.search_result.get('records')) > 1:
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and len(self.search_result.get('records')) > 1 and not kwargs.get('record'):
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -594,6 +597,10 @@ class SearchView(BaseView):
                     # Check also if this record is one of user's favorites
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
+                request.session['search_result'] = self.search_result
+                request.session['search'] = self.search_term
+                request.session['page'] = self.page
+                print('INDEXED')
             elif 'records' not in self.search_result:
                 # No more records available for the next page
                 if self.request.is_ajax():
@@ -674,10 +681,8 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-        if self.search_result:
-            # Record position will be 0,1,2 depending if previous & next images exist
-            # TODO add logic that fetches right image
-            record = self.search_result['records'][1]
+        if self.record:
+            record = self.record
             record['full_res_url'] = HKM.get_full_res_image_url(
                 record['rawData']['thumbnail'])
             related_collections_ids = Record.objects.filter(
