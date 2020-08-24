@@ -76,16 +76,7 @@ def showcase_collections(showcase):
 
 @register.filter
 def previous_image(record, records=None):
-    previous_id = ""
-
-    # Or should this only be a check that if records[0][index] < record[index]
-    if records is not None and record.get('index'):
-        for r in records:
-            if r['index'] < record['index']:
-                previous_id = r['id']
-                break
-
-    return previous_id
+    return records[0]['id'] if len(records) > 1 and record.get('index') > records[0].get('index') else ""
 
 @register.filter
 def next_image(record, records=None):

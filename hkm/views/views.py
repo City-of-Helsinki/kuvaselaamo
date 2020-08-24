@@ -503,7 +503,7 @@ class SearchView(BaseView):
 
     def setup(self, request, *args, **kwargs):
         # Session expires after one(1) minute
-        request.session.set_expiry(60)
+        request.session.set_expiry(60 * 5)
         self.search_term = request.GET.get('search', '')
         self.author_facets = filter(
             None, request.GET.getlist('author[]', None))
@@ -523,27 +523,33 @@ class SearchView(BaseView):
             facets['main_date_str'] = self.date_facets
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
-        # This maybe requires checks for year / author as well
-        records = request.session.get('records', []) if self.search_term != request.GET.get('search') else []
+        session_search_result = copy.deepcopy(request.session.get('search_result', {}))
+        self.search_result = session_search_result
+        records = session_search_result.get('records', []) if self.search_term != request.GET.get('search', '') else []
+
+        search_term_changed = self.search_term != request.session.get('search')
+        page_changed = self.page != request.session.get('page')
+        author_facets_changed = len(self.author_facets) != len(request.session.get('author_facets', []))
+        date_facets_changed = len(self.date_facets) != len(request.session.get('date_facets', []))
 
         # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
-            if results:
-                self.search_result = results
-                records += results.get('records', [])
-            if records:
-                # its all one big page of records. So set page number as first page
-                self.search_result['records'] = records
-                self.search_result['page'] = 1
+            if search_term_changed or page_changed or author_facets_changed or date_facets_changed:
+                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+                if results:
+                    self.search_result = results
+                    records += results.get('records', [])
+                if records:
+                    # its all one big page of records. So set page number as first page
+                    self.search_result['records'] = records
         else:
-            # If records exist we are in "single image view"
+            # If record exist we are in "single image view"
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
-                # TODO THIS REQUIRES INDEX CHECK AGAINS TOTAL LENGHT, IF IT'S SAME FETCH MORE
                 finna_id = request.GET.get('image_id')
-                # TODO maybe check other filters as well
-                if not request.session.get('search') and not request.session.get('page'):
+
+                if not request.session.get('search') and not request.session.get('page') and \
+                        not request.session.get('author_facets') and not request.session.get('date_facets'):
                     result = FINNA.get_record(finna_id)
                     self.search_result = result
                     self.record = result.get('records')[0]
@@ -565,13 +571,21 @@ class SearchView(BaseView):
                     self.record = copy.deepcopy(record[0])
                     self.search_result = copy.deepcopy(search_result)
                     self.search_result['records'] = copy.deepcopy(new_record_list)
+
+                    # Take search parameters from session.
+                    # This is required for "Back to search results" link to work
+                    self.search_term = request.session.get('search', '')
+                    self.page = request.session.get('page')
+                    self.author_facets = request.session.get('author_facets', [])
+                    self.date_facets = request.session.get('date_facets', [])
+
             # This else statement is executed when "Load more" is pressed
             else:
                 results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
-                self.search_result = results
-                # TODO FIGURE OUT WHAT TO DO WITH THESE
-                #request.session['search_result'] = results
-                #request.session['page'] = self.page
+                session_search_result['records'].extend(results.get('records'))
+                self.search_result = session_search_result
+                request.session['search_result'] = session_search_result
+                request.session['page'] = self.page
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -588,7 +602,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and len(self.search_result.get('records')) > 1 and not kwargs.get('record'):
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get('record'):
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -598,9 +612,10 @@ class SearchView(BaseView):
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
                 request.session['search_result'] = self.search_result
+                request.session['author_facets'] = self.author_facets
+                request.session['date_facets'] = self.date_facets
                 request.session['search'] = self.search_term
                 request.session['page'] = self.page
-                print('INDEXED')
             elif 'records' not in self.search_result:
                 # No more records available for the next page
                 if self.request.is_ajax():
