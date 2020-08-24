@@ -502,8 +502,8 @@ class SearchView(BaseView):
             return self.template_name
 
     def setup(self, request, *args, **kwargs):
-        # Session expires after one(1) minute
-        request.session.set_expiry(60 * 5)
+        # Session expires after one(1) hour
+        request.session.set_expiry(60 * 60)
         self.search_term = request.GET.get('search', '')
         self.author_facets = filter(
             None, request.GET.getlist('author[]', None))
