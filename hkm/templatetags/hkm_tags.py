@@ -73,18 +73,3 @@ def front_page_url(collection):
 def showcase_collections(showcase):
     albums = showcase.albums.all().order_by('created')
     return albums
-
-@register.filter
-def previous_image(record, records=None):
-    return records[0]['id'] if len(records) > 1 and record.get('index') > records[0].get('index') else ""
-
-@register.filter
-def next_image(record, records=None):
-    next_id = ""
-
-    if records is not None and record.get('index'):
-        for r in records:
-            if r['index'] > record['index']:
-                next_id = r['id']
-
-    return next_id

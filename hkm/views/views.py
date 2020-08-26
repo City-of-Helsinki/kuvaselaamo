@@ -482,7 +482,9 @@ class SearchView(BaseView):
 
     facet_result = None
     search_result = None
+    previous_record = None
     record = None
+    next_record = None
 
     search_term = None
     author_facets = None
@@ -547,30 +549,26 @@ class SearchView(BaseView):
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
                 finna_id = request.GET.get('image_id')
-
-                if not request.session.get('search') and not request.session.get('page') and \
-                        not request.session.get('author_facets') and not request.session.get('date_facets'):
+                # Check if record is found in session, if not, get it from finna
+                search_result = request.session.get('search_result', {})
+                records = search_result.get('records', [])
+                record = next((x for x in records if x['id'] == finna_id), None)
+                if not record:
                     result = FINNA.get_record(finna_id)
                     self.search_result = result
-                    self.record = result.get('records')[0]
+                    self.record = result.get('records')[0] if result else None
                 # If user came from list view, get selected image from session
                 else:
-                    search_result = request.session.get('search_result', {})
-                    records = search_result.get('records', [])
-                    record = [x for x in records if x['id'] == finna_id]
-
                     # Form 3 record array, previous - selected - next
-                    record_index = record[0].get('index')
-                    new_record_list = []
+                    record_index = record.get('index')
                     if record_index > 1:
-                        new_record_list.append(records[record_index - 2])
-                    new_record_list.append(record[0])
+                        self.previous_record = records[record_index - 2]
                     if record_index < len(records):
-                        new_record_list.append(records[record_index])
+                        self.next_record = records[record_index]
+
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
-                    self.record = copy.deepcopy(record[0])
+                    self.record = copy.deepcopy(record)
                     self.search_result = copy.deepcopy(search_result)
-                    self.search_result['records'] = copy.deepcopy(new_record_list)
 
                     # Take search parameters from session.
                     # This is required for "Back to search results" link to work
@@ -706,17 +704,21 @@ class SearchRecordDetailView(SearchView):
                 self.request.user).filter(id__in=related_collections_ids).distinct()
 
             context['related_collections'] = related_collections
+            context['previous_record'] = self.previous_record
             context['record'] = record
+            context['next_record'] = self.next_record
             context['hkm_id'] = record['id']
             LOG.debug('record id', extra={'data': {'finnaid': record['id']}})
             context['record_web_url'] = FINNA.get_image_url(record['id'])
-
         if self.request.user.is_authenticated():
             context['my_collections'] = Collection.objects.filter(
                 owner=self.request.user).order_by('title')
         else:
             context['my_collections'] = Collection.objects.none()
         # calculate search result page to return to
+        if self.record is None:
+            context['search_result'] = None
+            context['record'] = None
         context['search_result_page'] = int(math.ceil(float(self.page)/RESULTS_PER_PAGE))
         return context
 
