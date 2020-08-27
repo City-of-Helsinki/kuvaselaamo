@@ -229,6 +229,16 @@ span.no-postal-fee {
   }
 }
 
+.brand-img-images {
+  height: 60px;
+  width: auto;
+  margin-bottom: 20px;
+
+  @media (max-width: 290px) {
+    width: 100%;
+  }
+}
+
 
 .public-collections-padding {
   padding-left: 15px;
@@ -354,7 +364,31 @@ span.no-postal-fee {
 /* Main */
 .home-page {
   width: 100%;
-  font-family: 'Brown std';
+  font-family: $font-brownlight;
+
+  h1 {
+    font-size: 36px;
+    font-family: $font-signe;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-family: $font-signe;
+  }
+
+  p {
+    font-weight: 800;
+  }
+
+  @media (min-width: 850px) {
+    h1 {
+      font-size: 48px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+  }
 }
 
 .welcome-area {
@@ -362,7 +396,7 @@ span.no-postal-fee {
   width: 100%;
   height: 60%;
   flex-direction: row;
-  min-height: 430px;
+  min-height: 700px;
 
   &__left {
     width: 50%;
@@ -375,16 +409,24 @@ span.no-postal-fee {
     width: 50%;
     height: 100%;
   }
+
+  @media (min-width: 300px) {
+    min-height: 550px;
+  }
 }
 
 .center-content {
-  width: 80%;
+  width: 96%;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 650px) {
+    align-items: normal;
+  }
 }
 
 .welcome-text {
@@ -395,8 +437,7 @@ span.no-postal-fee {
 
   p {
     margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
   }
 }
 
@@ -436,6 +477,13 @@ span.no-postal-fee {
     color: #FFF;
     border: none;
     margin-left: 0;
+    font-size: 20px;
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
   }
 }
 
@@ -444,11 +492,12 @@ span.no-postal-fee {
   background-color: $color-gray-background;
   display: grid;
   width: 100%;
-  padding: 20px;
+  padding: 30px 20px;
 
   h2 {
     color: #5268C2;
     margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -456,13 +505,22 @@ span.no-postal-fee {
 .featured__wrapper {
   width: 100%;
   background-color: #F1F1F1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-count: 3;
+  column-gap: 1%;
   margin-bottom: 20px;
 
   a {
     text-decoration: none;
+  }
+
+  @media (min-width: 300px) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(3, 1fr)
   }
 }
 
@@ -471,12 +529,12 @@ span.no-postal-fee {
 }
 
 .card-link {
-  width: 32%;
+  width: 100%;
 }
 
 .card {
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #FFF;
   width: 100%;
   height: 300px;
@@ -559,13 +617,9 @@ span.no-postal-fee {
   .welcome-text {
     height: 80%;
 
-    h1 {
-      font-size: 20px;
-    }
-
     p {
       margin-top: 5px;
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 
@@ -573,14 +627,6 @@ span.no-postal-fee {
     visibility: hidden;
     height: 0;
     margin: 0;
-  }
-
-  .featured__wrapper {
-    flex-direction: column;
-  }
-
-  .card-link {
-    width: 100%;
   }
 }
 
@@ -600,10 +646,6 @@ span.no-postal-fee {
 
   &__svg {
     height: 30px;
-
-    @media (min-width: 550px) and (max-width: 615px){
-      height: 20px;
-    }
   }
 }
 
@@ -684,13 +726,12 @@ span.no-postal-fee {
   color: $color-darktext !important;
 }
 .banner__h1 {
-  display: block;
   font-size: 3em;
   line-height: 40px;
   margin: 0;
-  font-family: 'goviniusbold';
+  font-family: $font-signe;
   display: inline-block;
-  color: $color-hkm-headings;
+  color: $color-hkm-blue;
 }
 .banner__form {
   float: left;
@@ -1164,13 +1205,18 @@ span.no-postal-fee {
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
+  margin-top: 5px;
 }
 .grid__meta--title {
   color: #5268C2;
-  line-height: 18px;
-  text-transform: uppercase;
-  font-size: 25px;
-  font-family: $font-brownbold;
+  font-size: 18px;
+  font-family: $font-brownlight;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.15;
+  white-space: normal;
 }
 .grid__meta--other {
   color: $color-darktext;

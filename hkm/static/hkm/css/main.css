@@ -6189,6 +6189,14 @@ span.no-postal-fee {
     .brand-img__footer {
       width: 100%; } }
 
+.brand-img-images {
+  height: 60px;
+  width: auto;
+  margin-bottom: 20px; }
+  @media (max-width: 290px) {
+    .brand-img-images {
+      width: 100%; } }
+
 .public-collections-padding {
   padding-left: 15px; }
 
@@ -6291,14 +6299,27 @@ span.no-postal-fee {
 /* Main */
 .home-page {
   width: 100%;
-  font-family: 'Brown std'; }
+  font-family: "brownlight", sans-serif; }
+  .home-page h1 {
+    font-size: 36px;
+    font-family: "Signe", sans-serif; }
+  .home-page h2 {
+    font-size: 24px;
+    font-family: "Signe", sans-serif; }
+  .home-page p {
+    font-weight: 800; }
+  @media (min-width: 850px) {
+    .home-page h1 {
+      font-size: 48px; }
+    .home-page h2 {
+      font-size: 36px; } }
 
 .welcome-area {
   display: flex;
   width: 100%;
   height: 60%;
   flex-direction: row;
-  min-height: 430px; }
+  min-height: 700px; }
   .welcome-area__left {
     width: 50%;
     height: 100%;
@@ -6307,15 +6328,21 @@ span.no-postal-fee {
   .welcome-area__right {
     width: 50%;
     height: 100%; }
+  @media (min-width: 300px) {
+    .welcome-area {
+      min-height: 550px; } }
 
 .center-content {
-  width: 80%;
+  width: 96%;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+  @media (min-width: 650px) {
+    .center-content {
+      align-items: normal; } }
 
 .welcome-text {
   height: 70%;
@@ -6324,8 +6351,7 @@ span.no-postal-fee {
   color: #FFF; }
   .welcome-text p {
     margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500; }
+    font-size: 18px; }
 
 .search {
   height: 30%;
@@ -6357,40 +6383,55 @@ span.no-postal-fee {
     background-color: #935379;
     color: #FFF;
     border: none;
-    margin-left: 0; }
+    margin-left: 0;
+    font-size: 20px; }
+    .search-components__button img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px; }
 
 .public-collections__content,
 .home-page__featured {
   background-color: #f1f1f1;
   display: grid;
   width: 100%;
-  padding: 20px; }
+  padding: 30px 20px; }
   .public-collections__content h2,
   .home-page__featured h2 {
     color: #5268C2;
-    margin-top: 0; }
+    margin-top: 0;
+    margin-bottom: 0; }
 
 .public-collections__wrapper,
 .featured__wrapper {
   width: 100%;
   background-color: #F1F1F1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-count: 3;
+  column-gap: 1%;
   margin-bottom: 20px; }
   .public-collections__wrapper a,
   .featured__wrapper a {
     text-decoration: none; }
+  @media (min-width: 300px) {
+    .public-collections__wrapper,
+    .featured__wrapper {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); } }
+  @media (min-width: 1000px) {
+    .public-collections__wrapper,
+    .featured__wrapper {
+      grid-template-columns: repeat(3, 1fr); } }
 
 .public-collections__wrapper {
   flex-wrap: wrap; }
 
 .card-link {
-  width: 32%; }
+  width: 100%; }
 
 .card {
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #FFF;
   width: 100%;
   height: 300px;
@@ -6456,19 +6497,13 @@ span.no-postal-fee {
     height: 40%; }
   .welcome-text {
     height: 80%; }
-    .welcome-text h1 {
-      font-size: 20px; }
     .welcome-text p {
       margin-top: 5px;
-      font-size: 12px; }
+      font-size: 16px; }
   .search__description {
     visibility: hidden;
     height: 0;
-    margin: 0; }
-  .featured__wrapper {
-    flex-direction: column; }
-  .card-link {
-    width: 100%; } }
+    margin: 0; } }
 
 /* Public Collections */
 .public-collections__title {
@@ -6483,9 +6518,6 @@ span.no-postal-fee {
 
 .public-collections__svg {
   height: 30px; }
-  @media (min-width: 550px) and (max-width: 615px) {
-    .public-collections__svg {
-      height: 20px; } }
 
 .image-viewer {
   background-color: #fff !important;
@@ -6559,13 +6591,12 @@ span.no-postal-fee {
   color: #000 !important; }
 
 .banner__h1 {
-  display: block;
   font-size: 3em;
   line-height: 40px;
   margin: 0;
-  font-family: 'goviniusbold';
+  font-family: "Signe", sans-serif;
   display: inline-block;
-  color: #f5c7b8; }
+  color: #5268C2; }
 
 .banner__form {
   float: left;
@@ -6960,14 +6991,19 @@ span.no-postal-fee {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block; }
+  display: block;
+  margin-top: 5px; }
 
 .grid__meta--title {
   color: #5268C2;
-  line-height: 18px;
-  text-transform: uppercase;
-  font-size: 25px;
-  font-family: "brownbold", sans-serif; }
+  font-size: 18px;
+  font-family: "brownlight", sans-serif;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.15;
+  white-space: normal; }
 
 .grid__meta--other {
   color: #000;
@@ -7561,7 +7597,7 @@ a.welcome-modal__clarification {
   height: 60px;
   background-color: #fff;
   display: block;
-  font-size: 16px; }
+  font-size: 18px; }
 
 .navigation-header {
   margin-right: auto;
@@ -7609,7 +7645,8 @@ button.navbar-toggle {
       .navigation-links ul li a {
         display: block;
         margin: 7px;
-        font-family: "brownbold", sans-serif;
+        font-family: "brownlight", sans-serif;
+        font-weight: bold;
         color: #000; }
         .navigation-links ul li a:hover, .navigation-links ul li a:focus {
           background-color: transparent !important; }

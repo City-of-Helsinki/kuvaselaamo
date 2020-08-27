@@ -2,7 +2,7 @@
     height: 60px;
     background-color: $color-white;
     display: block;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .navigation-header {
@@ -75,7 +75,8 @@ button.navbar-toggle {
             a {
                 display: block;
                 margin: 7px;
-                font-family: $font-brownbold;
+                font-family: $font-brownlight;
+                font-weight: bold;
                 color: #000;
 
                 &:hover,
