@@ -6181,20 +6181,20 @@ span.no-postal-fee {
 #price-indicator {
   font-weight: bold; }
 
-.brand-img__footer {
+.brand-img__helsinkimuseum {
   height: 60px;
   width: auto;
   margin-bottom: 20px; }
   @media (max-width: 400px) {
-    .brand-img__footer {
+    .brand-img__helsinkimuseum {
       width: 100%; } }
 
-.brand-img-images {
+.brand-img__kuvaselaamo {
   height: 60px;
   width: auto;
   margin-bottom: 20px; }
   @media (max-width: 290px) {
-    .brand-img-images {
+    .brand-img__kuvaselaamo {
       width: 100%; } }
 
 .public-collections-padding {
