@@ -559,7 +559,7 @@ class SearchView(BaseView):
                     self.record = result.get('records')[0] if result else None
                 # If user came from list view, get selected image from session
                 else:
-                    # Form 3 record array, previous - selected - next
+                    # Save previous - selected - next records to corresponding variables
                     record_index = record.get('index')
                     if record_index > 1:
                         self.previous_record = records[record_index - 2]
