@@ -6508,11 +6508,9 @@ span.no-postal-fee {
 
 /* Public Collections */
 .public-collections__title {
-  font-family: "Brown std";
-  font-size: 45px;
+  font: 48px "Signe", sans-serif;
   color: #5268C2;
-  margin-left: 17px;
-  font-weight: 800; }
+  margin-left: 17px; }
   @media (max-width: 400px) {
     .public-collections__title {
       font-size: 30px; } }
@@ -6592,12 +6590,11 @@ span.no-postal-fee {
   color: #000 !important; }
 
 .banner__h1 {
-  font-size: 3em;
   line-height: 40px;
   margin: 0;
-  font-family: "Signe", sans-serif;
   display: inline-block;
-  color: #5268C2; }
+  color: #5268C2;
+  font: 48px "Signe", sans-serif; }
 
 .banner__form {
   float: left;
@@ -6859,9 +6856,12 @@ span.no-postal-fee {
   font: bold 18px "brownlight", sans-serif; }
 
 .record-meta__feedback {
-  font: 36px "Signe", sans-serif;
+  font: 24px "Signe", sans-serif;
   color: #5268C2;
   margin-top: 40px; }
+  @media (min-width: 768px) {
+    .record-meta__feedback {
+      font-size: 36px; } }
 
 .control-label {
   font: bold 18px "brownlight", sans-serif; }

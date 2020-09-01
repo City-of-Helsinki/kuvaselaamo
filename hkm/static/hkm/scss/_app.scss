@@ -635,11 +635,9 @@ span.no-postal-fee {
 /* Public Collections */
 .public-collections {
   &__title {
-    font-family: "Brown std";
-    font-size: 45px;
+    font: 48px $font-signe;
     color: #5268C2;
     margin-left: 17px;
-    font-weight: 800;
 
     @media (max-width: 400px) {
       font-size: 30px;
@@ -728,12 +726,11 @@ span.no-postal-fee {
   color: $color-darktext !important;
 }
 .banner__h1 {
-  font-size: 3em;
   line-height: 40px;
   margin: 0;
-  font-family: $font-signe;
   display: inline-block;
   color: $color-hkm-blue;
+  font: 48px $font-signe;
 }
 .banner__form {
   float: left;
@@ -1041,9 +1038,13 @@ span.no-postal-fee {
 }
 
 .record-meta__feedback {
-  font: 36px $font-signe;
+  font: 24px $font-signe;
   color: $color-hkm-blue;
   margin-top: 40px;
+
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
 }
 
 .control-label {
