@@ -6154,7 +6154,7 @@ span.no-postal-fee {
 
 .order-step-current {
   font-weight: bold;
-  font-size: 100%; }
+  font-size: 18px; }
 
 .order-steps {
   position: relative;
@@ -6165,7 +6165,8 @@ span.no-postal-fee {
 .order-steps-table {
   border: 0;
   margin: 0;
-  width: 100%; }
+  width: 100%;
+  font: bold 18px "brownlight", sans-serif; }
 
 .order-steps-banner {
   margin-top: 30px; }
@@ -6847,15 +6848,23 @@ span.no-postal-fee {
   width: 100%; }
 
 .record-meta__title {
-  font-family: 'goviniusbold';
-  color: #f5c7b8; }
+  font: 48px "Signe", sans-serif;
+  color: #5268C2;
+  margin-bottom: 40px; }
 
 .record-meta__sub-header {
-  font-size: 19px;
-  font-weight: 600; }
+  font: 600 18px "Signe", sans-serif; }
 
 .record-meta__paragraph {
-  font-size: 17px; }
+  font: bold 18px "brownlight", sans-serif; }
+
+.record-meta__feedback {
+  font: 36px "Signe", sans-serif;
+  color: #5268C2;
+  margin-top: 40px; }
+
+.control-label {
+  font: bold 18px "brownlight", sans-serif; }
 
 @media (max-width: 768px) {
   .record-meta__title {
@@ -6884,18 +6893,19 @@ span.no-postal-fee {
   font-family: 'goviniusbold';
   color: #63c29d; }
 
+.order-preview__title {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font: 48px "Signe", sans-serif;
+  color: #5268C2; }
+
 .order-meta__title-small {
   margin-top: 0;
   margin-bottom: 20px;
-  font-family: 'goviniusbold';
-  font-size: 18px !important;
-  color: #63c29d; }
+  font: 24px "Signe", sans-serif; }
 
-.order-preview__text {
-  margin-top: 0;
-  margin-bottom: 40px;
-  font-family: 'goviniusbold';
-  color: #f5c7b8; }
+.order-meta__paragraph {
+  font: bold 18px "brownlight", sans-serif; }
 
 /* Grid */
 .grid {

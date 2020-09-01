@@ -184,7 +184,7 @@ span.no-postal-fee {
 
 .order-step-current {
   font-weight: bold;
-  font-size: 100%;
+  font-size: 18px;
 }
 
 .order-steps {
@@ -198,6 +198,8 @@ span.no-postal-fee {
   border: 0;
   margin: 0;
   width: 100%;
+  font: bold 18px $font-brownlight;
+
 }
 
 
@@ -520,7 +522,7 @@ span.no-postal-fee {
   }
 
   @media (min-width: 1000px) {
-    grid-template-columns: repeat(3, 1fr)
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1026,16 +1028,26 @@ span.no-postal-fee {
   width: 100%;
 }
 .record-meta__title {
-  font-family: 'goviniusbold';
-  color: $color-hkm-headings;
+  font: 48px $font-signe;
+  color: $color-hkm-blue;
+  margin-bottom: 40px;
 }
 
 .record-meta__sub-header {
-  font-size: 19px;
-  font-weight: 600;
+  font: 600 18px $font-signe;
 }
 .record-meta__paragraph {
-  font-size: 17px;
+  font: bold 18px $font-brownlight;
+}
+
+.record-meta__feedback {
+  font: 36px $font-signe;
+  color: $color-hkm-blue;
+  margin-top: 40px;
+}
+
+.control-label {
+  font: bold 18px $font-brownlight;
 }
 
 
@@ -1078,19 +1090,21 @@ span.no-postal-fee {
   color: $color-silvertree;
 }
 
+.order-preview__title {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font: 48px $font-signe;
+  color: $color-hkm-blue;
+}
+
 .order-meta__title-small {
   margin-top: 0;
   margin-bottom: 20px;
-  font-family: 'goviniusbold';
-  font-size: 18px !important;
-  color: $color-silvertree;
+  font: 24px $font-signe;
 }
 
-.order-preview__text {
-  margin-top: 0;
-  margin-bottom: 40px;
-  font-family: 'goviniusbold';
-  color: $color-hkm-headings;
+.order-meta__paragraph {
+  font: bold 18px $font-brownlight;
 }
 
 /* Grid */
@@ -1290,7 +1304,7 @@ div.grid__fav.active {
       left: 0;
       background-color: rgba(#000000, 0.3);
       opacity: 0;
-      transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     &:hover {
@@ -1493,7 +1507,9 @@ div.grid__fav.active {
 
 @media (max-width: 566px) {
   
-  .modal-search-form__field { font-size: 12px }
+  .modal-search-form__field {
+    font-size: 12px;
+  }
 }
 
 
