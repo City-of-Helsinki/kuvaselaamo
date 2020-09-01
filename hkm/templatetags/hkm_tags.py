@@ -62,6 +62,9 @@ def front_page_url(collection):
 
     if not record_count:
         img_url = '/static/hkm/img/front_page_default.jpg'
+    elif record_count == 1:
+        record = collection.records.first()
+        img_url = record.get_preview_image_absolute_url()
     else:
         records = collection.records.all()
         random_index = randrange(0, record_count - 1)
