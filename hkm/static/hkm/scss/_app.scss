@@ -1033,8 +1033,19 @@ span.no-postal-fee {
 .record-meta__sub-header {
   font: 600 18px $font-signe;
 }
+
+.record-meta__description,
 .record-meta__paragraph {
   font: bold 18px $font-brownlight;
+}
+
+.record-meta__description {
+  margin-top: 40px;
+  font-size: 13px;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .record-meta__feedback {
@@ -1225,8 +1236,7 @@ span.no-postal-fee {
 .grid__meta--title {
   color: #5268C2;
   font-size: 18px;
-  font-family: $font-brownlight;
-  font-weight: bold;
+  font-family: $font-brownbold;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1235,9 +1245,8 @@ span.no-postal-fee {
 }
 .grid__meta--other {
   color: $color-darktext;
-  font-size: 11px;
-  font-family: $font-brownbold;
-  font-weight: bold;
+  font-size: 14px;
+  font-family: $font-brownlight;
 }
 .grid__fav {
   display: block;
