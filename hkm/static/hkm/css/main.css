@@ -6852,8 +6852,16 @@ span.no-postal-fee {
 .record-meta__sub-header {
   font: 600 18px "Signe", sans-serif; }
 
+.record-meta__description,
 .record-meta__paragraph {
   font: bold 18px "brownlight", sans-serif; }
+
+.record-meta__description {
+  margin-top: 40px;
+  font-size: 13px; }
+  @media (min-width: 768px) {
+    .record-meta__description {
+      font-size: 18px; } }
 
 .record-meta__feedback {
   font: 24px "Signe", sans-serif;
@@ -7007,8 +7015,7 @@ span.no-postal-fee {
 .grid__meta--title {
   color: #5268C2;
   font-size: 18px;
-  font-family: "brownlight", sans-serif;
-  font-weight: bold;
+  font-family: "brownbold", sans-serif;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -7017,9 +7024,8 @@ span.no-postal-fee {
 
 .grid__meta--other {
   color: #000;
-  font-size: 11px;
-  font-family: "brownbold", sans-serif;
-  font-weight: bold; }
+  font-size: 14px;
+  font-family: "brownlight", sans-serif; }
 
 .grid__fav {
   display: block;

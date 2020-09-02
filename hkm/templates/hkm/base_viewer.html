@@ -135,9 +135,12 @@
           {% else %}
           <p class="record-meta__paragraph">{% trans 'Image ID:' %} {{ record.id }}</p>
           {% endif %}
-          <p class="record-meta__paragraph">{{ record.rawData.description }}</p>
           <p class="record-meta__paragraph">{% trans 'Measurements:' %} {% for measure in record.rawData.measurements %}{{ measure }}, {% endfor %}</p>
-        </div>  
+        </div>
+
+        <div class="col-md-offset-2 col-md-7 col-sm-6">
+          <p class="record-meta__description">{{ record.rawData.description }}</p>
+        </div>
         </div><!-- endrow -->
         {% if related_collections %}
         <div class="row">
