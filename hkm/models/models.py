@@ -125,6 +125,7 @@ class Collection(BaseModel):
         verbose_name=_(u'Featured'), default=False)
     show_in_landing_page = models.BooleanField(
         verbose_name=_(u'Show in landing page'), default=False)
+    is_showcaseable = models.BooleanField(verbose_name=_(u'Use in Showcases'), default=False, db_index=True)
     collection_type = models.CharField(verbose_name=_(u'Type'), max_length=255, choices=TYPE_CHOICES,
                                        default=TYPE_NORMAL)
 
@@ -254,14 +255,14 @@ def user_post_save(sender, instance, created, *args, **kwargs):
         profile.save()
 
 
-
 class Showcase(BaseModel):
     title = models.CharField(verbose_name=_(u'Showcase title'), max_length=255)
-    albums = models.ManyToManyField(Collection, verbose_name=_(u'Selected albums'))
+    albums = models.ManyToManyField(Collection, verbose_name=_(u'Albums'), limit_choices_to={'is_showcaseable': True})
     show_on_home_page = models.BooleanField(verbose_name=_(u'Show on Home page'), default=True)
 
     def __unicode__(self):
         return self.title
+
 
 class Product(BaseModel):
     name = models.CharField(verbose_name=_(u'Name'), max_length=255)

@@ -119,10 +119,6 @@ class ShowcaseForm(forms.ModelForm):
         model = Showcase
         fields = ['title', 'albums', 'show_on_home_page']
 
-    def __init__(self, *args, **kwargs):
-        super(ShowcaseForm, self).__init__(*args, **kwargs)
-        self.fields['albums'].queryset = Collection.objects.filter(owner__profile__is_museum=True)
-
     def clean(self):
         albums = self.cleaned_data.get('albums')
 

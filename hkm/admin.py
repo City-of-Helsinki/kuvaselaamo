@@ -64,6 +64,8 @@ class PageContentAdmin(TranslatableAdmin):
 
 class ShowcaseAdmin(admin.ModelAdmin):
     form = ShowcaseForm
+    filter_horizontal = ['albums']
+
 
 admin.site.register(models.UserProfile)
 admin.site.register(models.Collection)
