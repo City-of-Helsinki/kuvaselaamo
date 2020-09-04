@@ -36,6 +36,10 @@ msgstr "Sök i museets arkiv med valfritt nyckelord, t.ex. platsen eller året:"
 msgid "Orderer's name"
 msgstr "Beställningen har avslutats"
 
+#: hkm/forms.py:127
+msgid "Max amount of albums is three"
+msgstr "Max antal album är tre"
+
 #: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
 msgid "Tila"
 msgstr ""
@@ -162,6 +166,10 @@ msgstr "Utställt"
 msgid "Show in landing page"
 msgstr "Visa på första sidan"
 
+#:hkm/models/models.py:128
+msgid "Use in Showcases"
+msgstr "Använd i utställningsfönster"
+
 #: hkm/models/models.py:124
 msgid "Type"
 msgstr "Typ"
@@ -186,6 +194,18 @@ msgstr "Redigera bild med full upplösning"
 #: hkm/models/models.py:185
 msgid "Edited preview image"
 msgstr "Redigera bild i förhandsvisning"
+
+#: hkm/models/models.py:259
+msgid "Showcase title"
+msgstr "Showcase-titel"
+
+#: hkm/models/models.py:260
+msgid "Albums"
+msgstr "Album"
+
+#: hkm/models/models.py:261
+msgid "Show on Home page"
+msgstr "Visa på hemsidan"
 
 #: hkm/models/models.py:254 hkm/models/models.py:279 hkm/models/models.py:445
 #: hkm/models/models.py:473 hkm/templates/hkm/emails/feedback.txt:2

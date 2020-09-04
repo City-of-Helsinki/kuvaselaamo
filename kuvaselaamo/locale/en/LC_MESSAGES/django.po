@@ -37,6 +37,10 @@ msgstr "Search the museum's archives with any keyword, such as the name of the p
 msgid "Orderer's name"
 msgstr "Order ended"
 
+#: hkm/forms.py:127
+msgid "Max amount of albums is three"
+msgstr "Max amount of albums is three"
+
 #: hkm/models/campaigns.py:76 hkm/models/campaigns.py:171
 msgid "Tila"
 msgstr ""
@@ -167,6 +171,10 @@ msgstr "Featured"
 msgid "Show in landing page"
 msgstr "Show in landing page"
 
+#:hkm/models/models.py:128
+msgid "Use in Showcases"
+msgstr "Use in Showcases"
+
 #: hkm/models/models.py:128
 msgid "Type"
 msgstr "Type"
@@ -191,6 +199,18 @@ msgstr "Edited full resolution image"
 #: hkm/models/models.py:189
 msgid "Edited preview image"
 msgstr "Edited preview image"
+
+#: hkm/models/models.py:259
+msgid "Showcase title"
+msgstr "Showcase title"
+
+#: hkm/models/models.py:260
+msgid "Albums"
+msgstr "Albums"
+
+#: hkm/models/models.py:261
+msgid "Show on Home page"
+msgstr "Show on Home page"
 
 #: hkm/models/models.py:258 hkm/models/models.py:285 hkm/models/models.py:451
 #: hkm/models/models.py:479 hkm/templates/hkm/emails/feedback.txt:2

@@ -34,6 +34,11 @@ msgstr "Etsi kuvia museon arkistosta millä tahansa hakusanalla, esimerkiksi pai
 msgid "Orderer's name"
 msgstr "Tilaajan nimi"
 
+#: hkm/forms.py:127
+msgid "Max amount of albums is three"
+msgstr "Voit valita enintään kolme albumia"
+
+
 #: hkm/models/campaigns.py:76 hkm/models/campaigns.py:171
 msgid "Tila"
 msgstr ""
@@ -164,6 +169,10 @@ msgstr "Näytteillä"
 msgid "Show in landing page"
 msgstr "Näytä etusivulla"
 
+#:hkm/models/models.py:128
+msgid "Use in Showcases"
+msgstr "Käytä esittelyissä"
+
 #: hkm/models/models.py:128
 msgid "Type"
 msgstr "Tyyppi"
@@ -188,6 +197,18 @@ msgstr "Editoi täysiresoluutioisen kuvan"
 #: hkm/models/models.py:189
 msgid "Edited preview image"
 msgstr "Editoi esikatselukuvan"
+
+#: hkm/models/models.py:259
+msgid "Showcase title"
+msgstr "Otsikko"
+
+#: hkm/models/models.py:260
+msgid "Albums"
+msgstr "Albumit"
+
+#: hkm/models/models.py:261
+msgid "Show on Home page"
+msgstr "Näytä etusivulla"
 
 #: hkm/models/models.py:258 hkm/models/models.py:285 hkm/models/models.py:451
 #: hkm/models/models.py:479 hkm/templates/hkm/emails/feedback.txt:2
