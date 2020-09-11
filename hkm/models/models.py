@@ -142,8 +142,8 @@ class Collection(BaseModel):
                     'Only one Favorite collection per user is allowed')
 
     def save(self, *args, **kwargs):
-        if self.show_in_landing_page or self.is_featured:
-            # If collection is shown in landing page or set as featured, it
+        if self.show_in_landing_page or self.is_featured or self.is_showcaseable:
+            # If collection is shown in landing page, set as featured or showcaseable, it
             # must also be public
             if self.show_in_landing_page:
                 # Only one collection in landing page at the time
