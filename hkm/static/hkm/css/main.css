@@ -6428,7 +6428,8 @@ span.no-postal-fee {
   flex-wrap: wrap; }
 
 .card-link {
-  width: 100%; }
+  width: 100%;
+  font: bold 16px "brownlight", sans-serif !important; }
 
 .card {
   padding: 10px;
@@ -6472,8 +6473,8 @@ span.no-postal-fee {
     text-overflow: ellipsis;
     white-space: normal; }
   .card-meta__owner {
-    color: #595D59;
-    font-size: 16px; }
+    color: #000;
+    font: 14px "brownlight", sans-serif; }
 
 .welcome-area__right,
 .card-image,
