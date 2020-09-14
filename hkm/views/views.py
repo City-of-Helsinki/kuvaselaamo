@@ -30,7 +30,7 @@ from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, Tm
 
 LOG = logging.getLogger(__name__)
 
-RESULTS_PER_PAGE = 100
+RESULTS_PER_PAGE = 40
 
 class AuthForm(django_forms.AuthenticationForm):
     username = django_forms.UsernameField(
@@ -504,8 +504,8 @@ class SearchView(BaseView):
             return self.template_name
 
     def setup(self, request, *args, **kwargs):
-        # Session expires after one(1) hour
-        request.session.set_expiry(60 * 60)
+        # Session expires after browser is closed
+        request.session.set_expiry(0)
         self.search_term = request.GET.get('search', '')
         self.author_facets = filter(
             None, request.GET.getlist('author[]', None))
@@ -526,7 +526,6 @@ class SearchView(BaseView):
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
-        self.search_result = session_search_result
         records = session_search_result.get('records', []) if self.search_term != request.GET.get('search', '') else []
 
         search_term_changed = self.search_term != request.session.get('search')
@@ -544,14 +543,15 @@ class SearchView(BaseView):
                 if records:
                     # its all one big page of records. So set page number as first page
                     self.search_result['records'] = records
+                    # Reset search_result session to make sure there is no wrong values stored
+                    request.session['search_result'] = None
         else:
             # If record exist we are in "single image view"
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
                 finna_id = request.GET.get('image_id')
                 # Check if record is found in session, if not, get it from finna
-                search_result = request.session.get('search_result', {})
-                records = search_result.get('records', [])
+                records = session_search_result.get('records', [])
                 record = next((x for x in records if x['id'] == finna_id), None)
                 if not record:
                     result = FINNA.get_record(finna_id)
@@ -568,7 +568,7 @@ class SearchView(BaseView):
 
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
                     self.record = copy.deepcopy(record)
-                    self.search_result = copy.deepcopy(search_result)
+                    self.search_result = copy.deepcopy(session_search_result)
 
                     # Take search parameters from session.
                     # This is required for "Back to search results" link to work
@@ -580,10 +580,7 @@ class SearchView(BaseView):
             # This else statement is executed when "Load more" is pressed
             else:
                 results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
-                session_search_result['records'].extend(results.get('records'))
-                self.search_result = session_search_result
-                request.session['search_result'] = session_search_result
-                request.session['page'] = self.page
+                self.search_result = results
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -609,7 +606,12 @@ class SearchView(BaseView):
                     # Check also if this record is one of user's favorites
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
-                request.session['search_result'] = self.search_result
+                # If user is loading more pictures add them to session.
+                # Otherwise set session to equal self.search_result
+                if request.session.get('search_result'):
+                    request.session['search_result']['records'].extend(self.search_result.get('records'))
+                else:
+                    request.session['search_result'] = self.search_result
                 request.session['author_facets'] = self.author_facets
                 request.session['date_facets'] = self.date_facets
                 request.session['search'] = self.search_term
