@@ -494,12 +494,11 @@ span.no-postal-fee {
   background-color: $color-gray-background;
   display: grid;
   width: 100%;
-  padding: 30px 20px;
+  padding: 40px 20px;
 
   h2 {
     color: #5268C2;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 30px 0 15px 0;
   }
 }
 
@@ -646,6 +645,10 @@ span.no-postal-fee {
 
   &__svg {
     height: 30px;
+  }
+
+  &__svg-person {
+    height: 25px;
   }
 }
 

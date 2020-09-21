@@ -6396,12 +6396,11 @@ span.no-postal-fee {
   background-color: #f1f1f1;
   display: grid;
   width: 100%;
-  padding: 30px 20px; }
+  padding: 40px 20px; }
   .public-collections__content h2,
   .home-page__featured h2 {
     color: #5268C2;
-    margin-top: 0;
-    margin-bottom: 0; }
+    margin: 30px 0 15px 0; }
 
 .public-collections__wrapper,
 .featured__wrapper {
@@ -6517,6 +6516,9 @@ span.no-postal-fee {
 
 .public-collections__svg {
   height: 30px; }
+
+.public-collections__svg-person {
+  height: 25px; }
 
 .image-viewer {
   background-color: #fff !important;
