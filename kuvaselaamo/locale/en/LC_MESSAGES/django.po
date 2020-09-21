@@ -485,6 +485,9 @@ msgstr "Terms of use"
 msgid "Privacy policy"
 msgstr "Privacy and register details"
 
+msgid "Accessibility statement"
+msgstr "Accessibility statement"
+
 #: hkm/templates/hkm/base.html:113
 #: hkm/templates/hkm/snippets/navigation.html:35
 #: hkm/templates/hkm/views/info.html:9
