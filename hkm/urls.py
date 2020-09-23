@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^info/$', views.InfoView.as_view(), name='hkm_info'),
 
     url(r'^about/$', views.SiteinfoAboutView.as_view(), name='hkm_siteinfo_about'),
+    url(r'^accessibility/$', views.SiteinfoAccessibilityView.as_view(), name='hkm_siteinfo_accessibility'),
     url(r'^privacy/$', views.SiteinfoPrivacyView.as_view(),
         name='hkm_siteinfo_privacy'),
     url(r'^QA/$', views.SiteinfoQAView.as_view(), name='hkm_siteinfo_QA'),
