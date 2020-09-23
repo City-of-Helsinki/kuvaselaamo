@@ -1,0 +1,20 @@
+{% extends 'hkm/base_browse.html' %}
+{% load i18n %}
+
+{% block banner %}
+
+  <div class="page-header">
+    <div class="fullsize-container container">
+      <div class="banner__title">
+        <h1 class="banner__h1 centered-fullwidth">{{ page_content.title|safe }}</h1>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+  <div class="container-small container">
+    {{ page_content.content|safe }}
+  </div>
+{% endblock %}
