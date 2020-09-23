@@ -466,6 +466,9 @@ msgstr "Käyttöehdot"
 msgid "Privacy policy"
 msgstr "Tietosuoja"
 
+msgid "Accessibility statement"
+msgstr "Saavutettavuusseloste"
+
 #: hkm/templates/hkm/base.html:113
 #: hkm/templates/hkm/snippets/navigation.html:35
 #: hkm/templates/hkm/views/info.html:9
