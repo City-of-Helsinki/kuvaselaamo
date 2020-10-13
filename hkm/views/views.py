@@ -12,7 +12,6 @@ from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
@@ -21,14 +20,13 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 
 from hkm import forms, image_utils, email
+import copy
 from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
-from hkm.models.campaigns import Campaign, CampaignStatus
-from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent
-from hkm.templatetags.hkm_tags import localized_decimal
+from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
 LOG = logging.getLogger(__name__)
 
@@ -374,6 +372,17 @@ class CollectionDetailView(BaseView):
         return context
 
 
+class HomeView(BaseView):
+    template_name = 'hkm/views/home_page.html'
+    url_name = 'hkm_index'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['frontpage_image_collection'] = Collection.objects.filter(show_in_landing_page=True).order_by('created').first()
+        context['showcases'] = Showcase.objects.filter(show_on_home_page=True).order_by('-created')
+        return context
+
+
 # using collection_record here also instead of record (see
 # CollectionDetailView naming confusion)
 class IndexView(CollectionDetailView):
@@ -473,6 +482,9 @@ class SearchView(BaseView):
 
     facet_result = None
     search_result = None
+    previous_record = None
+    record = None
+    next_record = None
 
     search_term = None
     author_facets = None
@@ -492,6 +504,8 @@ class SearchView(BaseView):
             return self.template_name
 
     def setup(self, request, *args, **kwargs):
+        # Session expires after browser is closed
+        request.session.set_expiry(0)
         self.search_term = request.GET.get('search', '')
         self.author_facets = filter(
             None, request.GET.getlist('author[]', None))
@@ -510,21 +524,63 @@ class SearchView(BaseView):
         if self.date_facets:
             facets['main_date_str'] = self.date_facets
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
-        records = []
+
+        session_search_result = copy.deepcopy(request.session.get('search_result', {}))
+        records = session_search_result.get('records', []) if self.search_term != request.GET.get('search', '') else []
+
+        search_term_changed = self.search_term != request.session.get('search')
+        page_changed = self.page != request.session.get('page')
+        author_facets_changed = len(self.author_facets) != len(request.session.get('author_facets', []))
+        date_facets_changed = len(self.date_facets) != len(request.session.get('date_facets', []))
+
+        # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            # Load all pages from 0 to n with page_size * n records
-            for page in range(1, self.page+1):
-                results = self.get_search_result(self.search_term, facets, page, self.page_size)
+            if search_term_changed or page_changed or author_facets_changed or date_facets_changed:
+                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
                 if results:
                     self.search_result = results
                     records += results.get('records', [])
-            if records:
-                # its all one big page of records. So set page number as first page
-                self.search_result['records'] = records
-                self.search_result['page'] = 1
+                if records:
+                    # its all one big page of records. So set page number as first page
+                    self.search_result['records'] = records
+                    # Reset search_result session to make sure there is no wrong values stored
+                    request.session['search_result'] = None
         else:
-            # Load only desired page and page_size results.
-            self.search_result = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+            # If record exist we are in "single image view"
+            if kwargs.get('record'):
+                # Check if user came from list view or from direct link
+                finna_id = request.GET.get('image_id')
+                # Check if record is found in session, if not, get it from finna
+                records = session_search_result.get('records', [])
+                record = next((x for x in records if x['id'] == finna_id), None)
+                if not record:
+                    result = FINNA.get_record(finna_id)
+                    self.search_result = result
+                    self.record = result.get('records')[0] if result else None
+                # If user came from list view, get selected image from session
+                else:
+                    # Save previous - selected - next records to corresponding variables
+                    record_index = record.get('index')
+                    if record_index > 1:
+                        self.previous_record = records[record_index - 2]
+                    if record_index < len(records):
+                        self.next_record = records[record_index]
+
+                    # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
+                    self.record = copy.deepcopy(record)
+                    self.search_result = copy.deepcopy(session_search_result)
+
+                    # Take search parameters from session.
+                    # This is required for "Back to search results" link to work
+                    self.search_term = request.session.get('search', '')
+                    self.page = request.session.get('page')
+                    self.author_facets = request.session.get('author_facets', [])
+                    self.date_facets = request.session.get('date_facets', [])
+
+            # This else statement is executed when "Load more" is pressed
+            else:
+                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+                self.search_result = results
 
         # calculate global index for the record, this is used to form links to search detail view
         # which is technically same view as this, it only shows one image per
@@ -541,7 +597,7 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result['resultCount'] == 0 and 'records' in self.search_result:
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get('record'):
                 i = 1  # record's index in current page
                 for record in self.search_result['records']:
                     p = self.search_result['page'] - 1  # zero indexed page
@@ -550,6 +606,16 @@ class SearchView(BaseView):
                     # Check also if this record is one of user's favorites
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
+                # If user is loading more pictures add them to session.
+                # Otherwise set session to equal self.search_result
+                if request.session.get('search_result'):
+                    request.session['search_result']['records'].extend(self.search_result.get('records'))
+                else:
+                    request.session['search_result'] = self.search_result
+                request.session['author_facets'] = self.author_facets
+                request.session['date_facets'] = self.date_facets
+                request.session['search'] = self.search_term
+                request.session['page'] = self.page
             elif 'records' not in self.search_result:
                 # No more records available for the next page
                 if self.request.is_ajax():
@@ -630,8 +696,8 @@ class SearchRecordDetailView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(SearchRecordDetailView,
                         self).get_context_data(**kwargs)
-        if self.search_result:
-            record = self.search_result['records'][0]
+        if self.record:
+            record = self.record
             record['full_res_url'] = HKM.get_full_res_image_url(
                 record['rawData']['thumbnail'])
             related_collections_ids = Record.objects.filter(
@@ -640,17 +706,21 @@ class SearchRecordDetailView(SearchView):
                 self.request.user).filter(id__in=related_collections_ids).distinct()
 
             context['related_collections'] = related_collections
+            context['previous_record'] = self.previous_record
             context['record'] = record
+            context['next_record'] = self.next_record
             context['hkm_id'] = record['id']
             LOG.debug('record id', extra={'data': {'finnaid': record['id']}})
             context['record_web_url'] = FINNA.get_image_url(record['id'])
-
         if self.request.user.is_authenticated():
             context['my_collections'] = Collection.objects.filter(
                 owner=self.request.user).order_by('title')
         else:
             context['my_collections'] = Collection.objects.none()
         # calculate search result page to return to
+        if self.record is None:
+            context['search_result'] = None
+            context['record'] = None
         context['search_result_page'] = int(math.ceil(float(self.page)/RESULTS_PER_PAGE))
         return context
 

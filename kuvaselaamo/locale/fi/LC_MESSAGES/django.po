@@ -18,9 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: hkm/templates/hkm/home_page.html:12
+msgid "Welcome title"
+msgstr "Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!"
+
+#: hkm/templates/hkm/home_page.html:13
+msgid "Welcome text"
+msgstr "Yli 65 000 kuvaa käytössäsi ilmaiseksi! Voit ladata koneellesi painokelpoisia kuvia tai tilata maksullisia kuvatulosteita."
+
+#: hkm/templates/hkm/home_page.html:18
+msgid "Search description"
+msgstr "Etsi kuvia museon arkistosta millä tahansa hakusanalla, esimerkiksi paikan nimellä tai vuosiluvulla:"
+
 #: hkm/forms.py:75 hkm/models/models.py:511
 msgid "Orderer's name"
 msgstr "Tilaajan nimi"
+
+#: hkm/forms.py:127
+msgid "Max amount of albums is three"
+msgstr "Voit valita enintään kolme albumia"
+
 
 #: hkm/models/campaigns.py:76 hkm/models/campaigns.py:171
 msgid "Tila"
@@ -152,6 +169,10 @@ msgstr "Näytteillä"
 msgid "Show in landing page"
 msgstr "Näytä etusivulla"
 
+#:hkm/models/models.py:128
+msgid "Use in Showcases"
+msgstr "Käytä esittelyissä"
+
 #: hkm/models/models.py:128
 msgid "Type"
 msgstr "Tyyppi"
@@ -176,6 +197,18 @@ msgstr "Editoi täysiresoluutioisen kuvan"
 #: hkm/models/models.py:189
 msgid "Edited preview image"
 msgstr "Editoi esikatselukuvan"
+
+#: hkm/models/models.py:259
+msgid "Showcase title"
+msgstr "Otsikko"
+
+#: hkm/models/models.py:260
+msgid "Albums"
+msgstr "Albumit"
+
+#: hkm/models/models.py:261
+msgid "Show on Home page"
+msgstr "Näytä etusivulla"
 
 #: hkm/models/models.py:258 hkm/models/models.py:285 hkm/models/models.py:451
 #: hkm/models/models.py:479 hkm/templates/hkm/emails/feedback.txt:2
@@ -631,20 +664,9 @@ msgstr "Sis. ALV"
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:4
-msgid "The cart contains"
-msgstr "Ostoskorissa on"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid "photo"
-msgid_plural "photos"
-msgstr[0] "kuva"
-msgstr[1] "kuvaa"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:41
-msgid "Your cart is empty"
-msgstr "Ostoskori on tyhjä"
+#: hmk/templates/hkm/snippets/nav_basket_counter.html:5
+msgid "Shopping cart"
+msgstr "Ostoskori"
 
 #: hkm/templates/hkm/snippets/navigation.html:23
 #: hkm/templates/hkm/snippets/navigation.html:26
@@ -653,6 +675,14 @@ msgstr "Ostoskori on tyhjä"
 #: hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
 msgstr "Haku"
+
+#: hkm/templates/hmk/views/home_page.html
+msgid "Find"
+msgstr "Etsi"
+
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Etsi kuvia"
 
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
@@ -666,17 +696,17 @@ msgstr "Omat albumit"
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "In English"
+msgstr "EN"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "På svenska"
+msgstr "SV"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "Suomeksi"
+msgstr "FI"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
@@ -1007,8 +1037,8 @@ msgid ""
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
 
 #: hkm/templates/hkm/views/public_collections.html:11
-msgid "Featured collections"
-msgstr "Ajankohtaiset kokoelmat"
+msgid "Browse albums"
+msgstr "Selaa albumeita"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"

@@ -62,7 +62,7 @@ class UserProfile(BaseModel):
     language = models.CharField(verbose_name=_(u'Language'), default=LANG_FI,
                                 choices=LANGUAGE_CHOICES, max_length=4)
     is_museum = models.BooleanField(verbose_name=_(u'Is museum'), default=False)
-    printer_ip = models.IPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
+    printer_ip = models.GenericIPAddressField(verbose_name=u"Museum printer IP", blank=True, null=True)
     printer_username = models.CharField(verbose_name=u'Printer username', blank=True, null=True, max_length=255)
     printer_password = models.CharField(verbose_name=u'Printer password', blank=True, null=True, max_length=255)
     printer_presets = models.TextField(
@@ -125,6 +125,7 @@ class Collection(BaseModel):
         verbose_name=_(u'Featured'), default=False)
     show_in_landing_page = models.BooleanField(
         verbose_name=_(u'Show in landing page'), default=False)
+    is_showcaseable = models.BooleanField(verbose_name=_(u'Use in Showcases'), default=False, db_index=True)
     collection_type = models.CharField(verbose_name=_(u'Type'), max_length=255, choices=TYPE_CHOICES,
                                        default=TYPE_NORMAL)
 
@@ -141,8 +142,8 @@ class Collection(BaseModel):
                     'Only one Favorite collection per user is allowed')
 
     def save(self, *args, **kwargs):
-        if self.show_in_landing_page or self.is_featured:
-            # If collection is shown in landing page or set as featured, it
+        if self.show_in_landing_page or self.is_featured or self.is_showcaseable:
+            # If collection is shown in landing page, set as featured or showcaseable, it
             # must also be public
             if self.show_in_landing_page:
                 # Only one collection in landing page at the time
@@ -252,6 +253,15 @@ def user_post_save(sender, instance, created, *args, **kwargs):
     if created:
         profile = UserProfile(user=instance)
         profile.save()
+
+
+class Showcase(BaseModel):
+    title = models.CharField(verbose_name=_(u'Showcase title'), max_length=255)
+    albums = models.ManyToManyField(Collection, verbose_name=_(u'Albums'), limit_choices_to={'is_showcaseable': True})
+    show_on_home_page = models.BooleanField(verbose_name=_(u'Show on Home page'), default=True)
+
+    def __unicode__(self):
+        return self.title
 
 
 class Product(BaseModel):

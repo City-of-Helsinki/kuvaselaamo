@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from django import forms
+from hkm.forms import ShowcaseForm
+from django.core.exceptions import ValidationError
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
@@ -59,9 +62,15 @@ class PageContentAdmin(TranslatableAdmin):
         js = ('ckeditor/ckeditor.js', 'hkm/js/init.js')
 
 
+class ShowcaseAdmin(admin.ModelAdmin):
+    form = ShowcaseForm
+    filter_horizontal = ['albums']
+
+
 admin.site.register(models.UserProfile)
 admin.site.register(models.Collection)
 admin.site.register(models.Record)
+admin.site.register(models.Showcase, ShowcaseAdmin)
 admin.site.register(User)
 admin.site.register(Group)
 admin.site.register(models.PrintProduct)

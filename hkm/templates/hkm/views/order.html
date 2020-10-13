@@ -14,15 +14,15 @@
 
       
       <div class="record-meta__col record-meta__col--left col-md-5">
-        <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
-        <h1 class="order-meta__title-small">{{ record.title }}</h1>
+        <h1 class="order-preview__title">{% trans 'Kuvan tilaaminen' %}</h1>
+        <h2 class="order-meta__title-small">{{ record.title }}</h2>
         {% if not user.profile.is_museum %}
           <div class="order-steps-banner">
               {% include 'hkm/views/order_steps_menu.html' %}
           </div>
         {% endif %}
-        <p>{% trans 'Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä.' %} {% trans 'Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon kokoa.' %}</p>
-        <p>{% trans 'Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä.' %} {% trans 'Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan.' %}</p>
+        <p class="order-meta__paragraph">{% trans 'Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä.' %} {% trans 'Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon kokoa.' %}</p>
+        <p class="order-meta__paragraph">{% trans 'Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä.' %} {% trans 'Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan.' %}</p>
         <form method="POST">
           {% csrf_token %}
           <label for="product" class="control-label">{% trans 'Tuotetyyppi' %} *</label>

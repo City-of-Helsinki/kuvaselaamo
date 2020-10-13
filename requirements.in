@@ -12,6 +12,7 @@ cryptography
 django-appconf
 django-apptemplates
 django-compressor
+django-environ
 django-extensions
 django-nose
 django-redis-sessions
@@ -48,3 +49,4 @@ supervisor
 watchdog
 django-parler
 django-bower
+django-anymail~=3.0

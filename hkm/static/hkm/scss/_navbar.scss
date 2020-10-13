@@ -1,8 +1,8 @@
 .navigation {
     height: 60px;
     background-color: $color-white;
-    border-bottom: 1px solid $color-hkm-uppernav;
     display: block;
+    font-size: 18px;
 }
 
 .navigation-header {
@@ -63,7 +63,9 @@ button.navbar-toggle {
     ul {
         margin: 0;
         padding: 0;
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
         li {
             list-style: none;
@@ -73,8 +75,9 @@ button.navbar-toggle {
             a {
                 display: block;
                 margin: 7px;
-                font-family: $font-brownbold;
-                color: $color-hkm-purple;
+                font-family: $font-brownlight;
+                font-weight: bold;
+                color: #000;
 
                 &:hover,
                 &:focus {
@@ -94,7 +97,7 @@ button.navbar-toggle {
         }
 
         &.dropdown-menu {
-            background-color: $color-hkm-purple;
+            background-color: $color-white;
             left: 50%;
             transform: translateX(-50%);
             top: 59px;
@@ -105,7 +108,7 @@ button.navbar-toggle {
                 display: block;
 
                 a {
-                    color: $color-white;
+                    color: #000;
                     margin: 0;
                     padding: 1.2em !important;
 
@@ -120,7 +123,7 @@ button.navbar-toggle {
 
     @media (max-width: 900px) {
         position: absolute;
-        background-color: $color-hkm-purple;
+        background-color: $color-white;
         top: 60px;
         width: 100%;
         z-index: 150;
@@ -128,18 +131,19 @@ button.navbar-toggle {
         ul {
             width: 100%;
             text-align: center;
+            flex-direction: column;
 
             li {
                 display: block;
 
                 a {
-                    color: $color-white;
+                    color: #000;
                     display: block;
                 }
 
                 &.open {
                     .dropdown-menu {
-                        background-color: darken($color-hkm-purple, 20%);
+                        background-color: $color-white;
                         position: static;
                         left: 0;
                         top: 0;
@@ -157,6 +161,130 @@ button.navbar-toggle {
     }
 }
 
+.lang {
+    color: #5268C2 !important;
+}
+
+.nav-user {
+    position: relative;
+}
+
+.nav-svg {
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    top: 11px;
+    right: -14px;
+
+    @media (max-width: 900px) {
+        top: 7px;
+    }
+}
+
+.cart {
+    &_wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 70px;
+        justify-content: center;
+        position: relative;
+    }
+
+    &_svg {
+        width: 23px;
+        height: 23px;
+        position: absolute;
+        top: -13px;
+
+        @media (max-width: 900px) {
+            margin-left: 15px;
+            top: -10px;
+            right: -15px;
+        }
+    }
+
+    &_text {
+        @media (min-width: 900px) {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+
+        @media (max-width: 900px) {
+            position: absolute;
+            top: -8px;
+            left: -20px;
+        }
+    }
+
+    &_counter {
+        background-color: #01C97E;
+        color: $color-white;
+        padding: 1px 9px;
+        border-radius: 50%;
+        font-size: 10px;
+        position: absolute;
+        top: -11px;
+        right: -3px;
+
+        @media (max-width: 900px) {
+            right: -45px;
+            top: -9px;
+        }
+    }
+}
+
+.list-item {
+    &_lang-wrapper {
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        order: 1;
+    }
+
+    &_search {
+        order: 2;
+    }
+
+    &_collection {
+        order: 3;
+    }
+
+    &_user,
+    &_login {
+        order: 4;
+    }
+
+    &_cart {
+        order: 5;
+    }
+
+    @media (max-width: 900px) {
+        &_lang-wrapper {
+            order: 5;
+            margin: 0 auto;
+        }
+
+        &_search {
+            order: 1;
+        }
+
+        &_collection {
+            order: 2;
+        }
+
+        &_user,
+        &_login {
+            order: 3;
+        }
+
+        &_cart {
+            order: 4;
+        }
+    }
+}
+
 @media (min-width: 901px) {
     .navigation {
         .collapse {
@@ -164,14 +292,8 @@ button.navbar-toggle {
             height: auto !important;
         }
     }
-    
+
     .navbar-toggle {
         display: none;
-    }
-}
-
-@media (min-width: 937px) {
-    .navbar-nav {
-        float: none;
     }
 }

@@ -6,9 +6,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from hkm.models.campaigns import CampaignCode
-from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection
+from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase
 
 LOG = logging.getLogger(__name__)
 
@@ -72,7 +73,8 @@ class RegistrationForm(UserCreationForm):
 
 class ProductOrderCollectionForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
-    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}), label=_(u"Orderer's name"))
+    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}),
+                                   label=_(u"Orderer's name"))
 
     class Meta:
         model = ProductOrderCollection
@@ -110,3 +112,17 @@ class GenerateCampaignCodesActionForm(forms.Form):
     #         raise
     #
     #     return account, action
+
+
+class ShowcaseForm(forms.ModelForm):
+    class Meta:
+        model = Showcase
+        fields = ['title', 'albums', 'show_on_home_page']
+
+    def clean(self):
+        albums = self.cleaned_data.get('albums')
+
+        if albums:
+            if albums.count() > 3:
+                raise ValidationError(_(u'Max amount of albums is three'))
+        return self.cleaned_data

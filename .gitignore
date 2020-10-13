@@ -30,3 +30,8 @@ node_modules
 parts
 staticroot/*
 components/*
+docker-compose.env.yaml
+.idea
+/venv/
+media/*
+static/*

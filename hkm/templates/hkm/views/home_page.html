@@ -1,0 +1,71 @@
+{% extends 'hkm/base.html' %}
+{% load hkm_tags %}
+{% load i18n %}
+
+
+{% block main_content %}
+  <div class="home-page">
+    <div class="welcome-area">
+      <div class="welcome-area__left">
+        <div class="welcome-text">
+          <div class="center-content">
+            <h1>{% trans 'Welcome title' %}</h1>
+            <p>{% trans 'Welcome text' %}</p>
+          </div>
+        </div>
+        <div class="search">
+          <div class="center-content">
+            <p class="search__description">{% trans 'Search description' %}</p>
+            <form action="/search/" class="search-components">
+              <input name="search" type="text" class="search-components__input" {% if search_term %} value="{{ search_term }}" {% endif %}/>
+              <button type="submit" class="search-components__button">
+                {% trans 'Find' %}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% with image_url=frontpage_image_collection|front_page_url %}
+        <div class="welcome-area__right" style="background-image: url('{{ image_url }}')"></div>
+      {% endwith %}
+    </div>
+    <div class="home-page__featured">
+        {% for showcase in showcases %}
+          <h2>{{ showcase.title }}</h2>
+          <div class="featured__wrapper">
+            {% with collections=showcase|showcase_collections %}
+              {% for collection in collections %}
+                <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+                  <div class="card">
+                    {% with images=collection|display_images %}
+                      {% if images|length == 1 %}
+                      <div class="card-image__fullsize" style="background-image: url('{{ images.0 }}')"></div>
+                      {% else %}
+                      {% for image_url in images %}
+                      <div class="card-image" style="background-image:url('{{ image_url }}')"></div>
+                      {% endfor %}
+                      {% endif%}
+                      {% endwith%}
+                      <div class="card-meta">
+                        <span class="card-meta__title">
+                          {{ collection.title }}
+                        </span>
+                        <span class="card-meta__owner">
+                          {% if collection.is_featured %}
+                            <img src="/static/hkm/svg/Kaupunginmuseo.svg" alt="museum" class="public-collections__svg">
+                          {% else %}
+                            <img src="/static/hkm/svg/Person.svg" alt="museum" class="public-collections__svg-person">
+                            {{ collection.owner }}
+                          {% endif %}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% endwith %}
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

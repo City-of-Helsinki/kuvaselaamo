@@ -1,0 +1,83 @@
+include:
+    - project: "city-of-helsinki/kuva/ci-cd-config/ci-configuration"
+      ref: v2
+      file: "/.gitlab-ci-template.yml"
+
+variables:
+    APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
+    SERVICE_PORT: "8080"
+
+build:
+    extends: .build
+
+review:
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 1
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
+        K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
+        K8S_SECRET_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
+        K8S_SECRET_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://$TF_PROJECT_NAME_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN"
+        K8S_SECRET_HKM_PRINTMOTOR_USERNAME: "helsinkikuvia"
+        K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
+        K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
+        K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
+
+
+staging:
+    only:
+        refs:
+            - develop
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 0
+        K8S_SECRET_SKIP_DATABASE_CHECK: 1
+        K8S_SECRET_SECRET_KEY: "$GL_QA_DJANGO_SECRET_KEY"
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
+        K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
+        K8S_SECRET_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
+        K8S_SECRET_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.test.kuva.hel.ninja"
+        K8S_SECRET_HKM_PRINTMOTOR_USERNAME: "helsinkikuvia"
+        K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
+        K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
+        K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
+
+production:
+    variables:
+        K8S_SECRET_ALLOWED_HOSTS: "*"
+        K8S_SECRET_DEBUG: 0
+        K8S_SECRET_SKIP_DATABASE_CHECK: 1
+        K8S_SECRET_SECRET_KEY: "$GL_STABLE_DJANGO_SECRET_KEY"
+        K8S_SECRET_VERSION: "$CI_COMMIT_SHORT_SHA"
+        K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.fi"
+        # TODO: Configure production feedback recipient
+        K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
+        K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+        K8S_SECRET_MAIL_MAILGUN_KEY: "$GL_MAILGUN_API_KEY"
+        K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+        K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
+        # TODO: Configure production PayByWay
+        K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://dev-payform.bambora.com/pbwapi"
+        K8S_SECRET_HKM_PBW_API_KEY: "$GL_QA_PBW_API_KEY"
+        K8S_SECRET_HKM_PBW_SECRET_KEY: "$GL_QA_PBW_SECRET_KEY"
+        K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.fi"
+        # TODO: Configure production Printmotor
+        K8S_SECRET_HKM_PRINTMOTOR_USERNAME: "helsinkikuvia"
+        K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
+        K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
+        K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
+

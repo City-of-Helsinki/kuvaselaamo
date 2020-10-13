@@ -18,11 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
+#: hkm/templates/hkm/home_page.html:12
+msgid "Welcome title"
+msgstr "Välkommen till skattkammaren från Helsingfors-teman"
+
+#: hkm/templates/hkm/home_page.html:13
+msgid "Welcome text"
+msgstr "Över 65 000 bilder gratis! Du kan ladda ner utskrivbara bilder till din dator eller beställa betalda bilder."
+
+#: hkm/templates/hkm/home_page.html:18
+msgid "Search description"
+msgstr "Sök i museets arkiv med valfritt nyckelord, t.ex. platsen eller året:"
+
 #: hkm/forms.py:75 hkm/models/models.py:505
 #, fuzzy
 #| msgid "Order ended"
 msgid "Orderer's name"
 msgstr "Beställningen har avslutats"
+
+#: hkm/forms.py:127
+msgid "Max amount of albums is three"
+msgstr "Max antal album är tre"
 
 #: hkm/models/campaigns.py:66 hkm/models/campaigns.py:154
 msgid "Tila"
@@ -150,6 +166,10 @@ msgstr "Utställt"
 msgid "Show in landing page"
 msgstr "Visa på första sidan"
 
+#:hkm/models/models.py:128
+msgid "Use in Showcases"
+msgstr "Använd i utställningsfönster"
+
 #: hkm/models/models.py:124
 msgid "Type"
 msgstr "Typ"
@@ -174,6 +194,18 @@ msgstr "Redigera bild med full upplösning"
 #: hkm/models/models.py:185
 msgid "Edited preview image"
 msgstr "Redigera bild i förhandsvisning"
+
+#: hkm/models/models.py:259
+msgid "Showcase title"
+msgstr "Showcase-titel"
+
+#: hkm/models/models.py:260
+msgid "Albums"
+msgstr "Album"
+
+#: hkm/models/models.py:261
+msgid "Show on Home page"
+msgstr "Visa på hemsidan"
 
 #: hkm/models/models.py:254 hkm/models/models.py:279 hkm/models/models.py:445
 #: hkm/models/models.py:473 hkm/templates/hkm/emails/feedback.txt:2
@@ -625,20 +657,9 @@ msgstr "Inkl. moms"
 msgid "Log in"
 msgstr "Logga in"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:4
-msgid "The cart contains"
-msgstr "Kundvagnen innehåller"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-msgid "photo"
-msgid_plural "photos"
-msgstr[0] "foto"
-msgstr[1] "fotos"
-
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:7
-#: hkm/templates/hkm/views/basket.html:41
-msgid "Your cart is empty"
-msgstr "Din vagn är tom"
+#: hmk/templates/hkm/snippets/nav_basket_counter.html:5
+msgid "Shopping cart"
+msgstr "Kundvagn"
 
 #: hkm/templates/hkm/snippets/navigation.html:23
 #: hkm/templates/hkm/snippets/navigation.html:26
@@ -647,6 +668,14 @@ msgstr "Din vagn är tom"
 #: hkm/templates/hkm/views/search_record.html:22
 msgid "Search"
 msgstr "Sök"
+
+#: hkm/templates/hmk/views/home_page.html
+msgid "Find"
+msgstr "Sök"
+
+#: hmk/templates/hkm/snippets/navigation.html:31
+msgid "Search pictures"
+msgstr "Sök bilder"
 
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
@@ -660,17 +689,17 @@ msgstr "Mina album"
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "In English"
+msgstr "EN"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "På svenska"
+msgstr "SV"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "Suomeksi"
+msgstr "FI"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
@@ -1002,8 +1031,8 @@ msgid ""
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
 
 #: hkm/templates/hkm/views/public_collections.html:11
-msgid "Featured collections"
-msgstr "Museets album "
+msgid "Browse albums"
+msgstr "Bläddra i album"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
