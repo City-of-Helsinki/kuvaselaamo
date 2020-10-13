@@ -10,7 +10,9 @@ argh==0.26.2              # via -r requirements.in, watchdog
 babel==2.4.0              # via -r requirements.in, django-phonenumber-field
 bcrypt==3.1.3             # via paramiko
 billiard==3.3.0.23        # via -r requirements.in
+certifi==2020.6.20        # via requests
 cffi==1.10.0              # via -r requirements.in, bcrypt, cryptography, pynacl
+chardet==3.0.4            # via requests
 contextlib2==0.5.4        # via raven
 coverage==4.3.4           # via -r requirements.in
 cryptography==2.8         # via -r requirements.in, paramiko, pyopenssl
@@ -34,7 +36,7 @@ enum34==1.1.6             # via -r requirements.in, cryptography, pyscss
 factory-boy==2.12.0       # via -r requirements.in
 faker==0.7.11             # via factory-boy
 funcsigs==1.0.2           # via mock
-idna==2.5                 # via -r requirements.in
+idna==2.5                 # via -r requirements.in, requests
 ipaddress==1.0.18         # via -r requirements.in, cryptography, faker
 jinja2==2.9.6             # via -r requirements.in
 kombu==3.0.37             # via -r requirements.in
@@ -48,7 +50,7 @@ paramiko==2.3.1           # via -r requirements.in
 pathlib==1.0.1            # via -r requirements.in, pyscss
 pathtools==0.1.2          # via -r requirements.in, watchdog
 pbr==2.1.0                # via mock
-phonenumberslite==8.4.1   # via -r requirements.in
+phonenumberslite==8.4.1   # via -r requirements.in, django-phonenumber-field
 pillow==4.1.0             # via -r requirements.in
 psycopg2==2.8.4           # via -r requirements.in
 pyasn1==0.2.3             # via -r requirements.in, paramiko
@@ -63,8 +65,9 @@ pyyaml==3.12              # via -r requirements.in, watchdog
 raven==6.0.0              # via -r requirements.in
 rcssmin==1.0.6            # via django-compressor
 redis==2.10.5             # via django-redis-sessions
-requests==2.13.0          # via -r requirements.in, django-anymail
+requests==2.20.0          # via -r requirements.in, django-anymail
 rjsmin==1.1.0             # via django-compressor
 six==1.10.0               # via -r requirements.in, bcrypt, cryptography, django-anymail, django-bower, django-extensions, faker, mock, pynacl, pyopenssl, pyscss, python-dateutil, python-memcached
 supervisor==3.3.1         # via -r requirements.in, django-supervisor
+urllib3==1.24.3           # via requests
 watchdog==0.8.3           # via -r requirements.in, django-supervisor
