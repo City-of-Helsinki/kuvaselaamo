@@ -1321,6 +1321,12 @@ class SiteinfoAboutView(TranslatableContentView):
     def get(self, request, *args, **kwargs):
         return super(SiteinfoAboutView, self).get(request, *args, **kwargs)
 
+class SiteinfoAccessibilityView(TranslatableContentView):
+    template_name = 'hkm/views/siteinfo_accessibility.html'
+    url_name = 'hkm_siteinfo_accessibility'
+
+    def get(self, request, *args, **kwargs):
+        return super(SiteinfoAccessibilityView, self).get(request, *args, **kwargs)
 
 class SiteinfoPrivacyView(TranslatableContentView):
     template_name = 'hkm/views/siteinfo_privacy.html'
