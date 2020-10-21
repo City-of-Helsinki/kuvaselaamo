@@ -528,6 +528,9 @@ class SearchView(BaseView):
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
         records = session_search_result.get('records', []) if self.search_term != request.GET.get('search', '') else []
 
+        # If we don't hit any checks below this point search_results end up being empty
+        self.search_result = session_search_result
+
         search_term_changed = self.search_term != request.session.get('search')
         page_changed = self.page != request.session.get('page')
         author_facets_changed = len(self.author_facets) != len(request.session.get('author_facets', []))
@@ -607,8 +610,10 @@ class SearchView(BaseView):
                     if favorite_records:
                         record['is_favorite'] = record['id'] in favorite_records
                 # If user is loading more pictures add them to session.
-                # Otherwise set session to equal self.search_result
-                if request.session.get('search_result'):
+                # Check for page changed, this will prevent session duplicating itself
+                # endlessly if search button is pressed over and over again.
+                # Otherwise set session to equal self.search_result.
+                if request.session.get('search_result') and page_changed:
                     request.session['search_result']['records'].extend(self.search_result.get('records'))
                 else:
                     request.session['search_result'] = self.search_result
