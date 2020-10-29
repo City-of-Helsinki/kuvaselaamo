@@ -71,5 +71,5 @@ def front_page_url(collection):
 
 @register.filter
 def showcase_collections(showcase):
-    albums = showcase.albums.all().order_by('created')
+    albums = showcase.albums.select_related('owner').all().order_by('created')
     return albums
