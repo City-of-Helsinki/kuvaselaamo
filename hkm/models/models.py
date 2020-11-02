@@ -198,7 +198,7 @@ class Record(OrderedModel, BaseModel):
         data = DEFAULT_CACHE.get(cache_key, None)
         if data == None:
             data = FINNA.get_record(self.record_id)
-            if data:
+            if data and 'records' in data:
                 data = data['records'][0]
                 DEFAULT_CACHE.set(cache_key, data, 60 * 15)
         else:

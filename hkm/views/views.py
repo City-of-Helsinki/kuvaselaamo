@@ -29,6 +29,8 @@ from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
+MAX_RECORDS_PER_FINNA_QUERY = 200
+
 LOG = logging.getLogger(__name__)
 
 RESULTS_PER_PAGE = 40
@@ -202,11 +204,15 @@ class MyCollectionsView(BaseCollectionListView):
         return Collection.objects.filter(owner=request.user)
 
 
-def ensure_collections_records_are_in_cache(request, collection_id):
-    record_ids_in_collection = Collection.objects. \
-        user_can_view(request.user). \
-        get(id=collection_id). \
-        records.all(). \
+def ensure_collections_records_are_in_cache(request, collection):
+    """Fetch the given collection's Records from Finna and store them
+    in the cache, if they are not already found in the cache.
+
+    Fetching from Finna is done in multiple calls in case the Collection
+    contains a lot of Records. This is done to avoid a 414 error from Finna.
+    """
+    record_ids_in_collection = collection. \
+        records. \
         values_list('record_id', flat=True)
 
     record_ids_not_in_cache = []
@@ -216,17 +222,24 @@ def ensure_collections_records_are_in_cache(request, collection_id):
             record_ids_not_in_cache.append(id)
 
     if record_ids_not_in_cache:
-        records_from_finna = FINNA.get_record(record_ids_not_in_cache)
+        for chunk in chunks(record_ids_not_in_cache, MAX_RECORDS_PER_FINNA_QUERY):
+            records_from_finna = FINNA.get_record(chunk)
 
-        for finna_record in records_from_finna['records']:
-            cache_key = '%s-details' % finna_record['id']
-            DEFAULT_CACHE.set(cache_key, finna_record, 60 * 15)
+            if records_from_finna and 'records' in records_from_finna:
+                for finna_record in records_from_finna['records']:
+                    cache_key = '%s-details' % finna_record['id']
+                    DEFAULT_CACHE.set(cache_key, finna_record, 60 * 15)
+
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
 
 # CODEBASE HAD TWO DIFFERENT USES FOR SAME VARIABLE 'record', RENAMED THEM IN THIS CONTEXT SO THAT
 # collection_record REFERS TO RECORD IN A COLLECTION, record TO A RECORD IN FINNA/HKM DATABASE
 # STILL NEED TO DO SOME FURTHER RENAMING IN FUTURE TO CLEAR CONFUSION
-
 class CollectionDetailView(BaseView):
     template_name = 'hkm/views/collection.html'
     url_name = 'hkm_collection'
@@ -269,7 +282,7 @@ class CollectionDetailView(BaseView):
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
         else:
-            ensure_collections_records_are_in_cache(request, collection_id)
+            ensure_collections_records_are_in_cache(request, self.collection)
 
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
@@ -798,7 +811,7 @@ class BaseFinnaRecordDetailView(BaseView):
         self.record_finna_id = kwargs.get('finna_id', None)
         if self.record_finna_id:
             record_data = FINNA.get_record(self.record_finna_id)
-            if record_data:
+            if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
                 self.record['full_res_url'] = HKM.get_full_res_image_url(
                     self.record['rawData']['thumbnail'])
