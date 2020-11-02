@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
+from django.core.cache import caches
 
 from hkm import forms, image_utils, email
 import copy
@@ -31,6 +32,7 @@ from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, Tm
 LOG = logging.getLogger(__name__)
 
 RESULTS_PER_PAGE = 40
+DEFAULT_CACHE = caches['default']
 
 class AuthForm(django_forms.AuthenticationForm):
     username = django_forms.UsernameField(
@@ -200,9 +202,31 @@ class MyCollectionsView(BaseCollectionListView):
         return Collection.objects.filter(owner=request.user)
 
 
+def ensure_collections_records_are_in_cache(request, collection_id):
+    record_ids_in_collection = Collection.objects. \
+        user_can_view(request.user). \
+        get(id=collection_id). \
+        records.all(). \
+        values_list('record_id', flat=True)
+
+    record_ids_not_in_cache = []
+    for id in record_ids_in_collection:
+        cache_key = '%s-details' % id
+        if DEFAULT_CACHE.get(cache_key) is None:
+            record_ids_not_in_cache.append(id)
+
+    if record_ids_not_in_cache:
+        records_from_finna = FINNA.get_record(record_ids_not_in_cache)
+
+        for finna_record in records_from_finna['records']:
+            cache_key = '%s-details' % finna_record['id']
+            DEFAULT_CACHE.set(cache_key, finna_record, 60 * 15)
+
+
 # CODEBASE HAD TWO DIFFERENT USES FOR SAME VARIABLE 'record', RENAMED THEM IN THIS CONTEXT SO THAT
 # collection_record REFERS TO RECORD IN A COLLECTION, record TO A RECORD IN FINNA/HKM DATABASE
 # STILL NEED TO DO SOME FURTHER RENAMING IN FUTURE TO CLEAR CONFUSION
+
 class CollectionDetailView(BaseView):
     template_name = 'hkm/views/collection.html'
     url_name = 'hkm_collection'
@@ -244,6 +268,8 @@ class CollectionDetailView(BaseView):
             except Record.DoesNotExist:
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
+        else:
+            ensure_collections_records_are_in_cache(request, collection_id)
 
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
@@ -316,15 +342,6 @@ class CollectionDetailView(BaseView):
         kwargs['feedback_form'] = form
         return self.get(request, *args, **kwargs)
 
-    # def get_context_data(self, **kwargs):
-    #	context = super(CollectionDetailView, self).get_context_data(**kwargs)
-    #	if self.collection_record:
-    #		context['hkm_id'] = self.collection_record.record_id
-    #	if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
-    #		self.open_popup = False
-    #	context['open_popup'] = self.open_popup
-    #	return context
-
     def get_context_data(self, **kwargs):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
         context['collection'] = self.collection
@@ -342,20 +359,18 @@ class CollectionDetailView(BaseView):
             context['record_web_url'] = FINNA.get_image_url(
                 self.collection_record.record_id)
 
-            finnaRecord = FINNA.get_record(self.collection_record.record_id)
-            if finnaRecord:
-                context['record'] = finnaRecord['records'][0]
+            context['record'] = self.collection_record.get_details()
 
-                # Also check if record is in user's favorite collection
-                if self.request.user.is_authenticated():
-                    try:
-                        favorites_collection = Collection.objects.get(
-                            owner=self.request.user, collection_type=Collection.TYPE_FAVORITE)
-                    except Collection.DoesNotExist:
-                        pass
-                    else:
-                        context['is_favorite'] = favorites_collection.records.filter(
-                            record_id=context['record']['id']).exists()
+            # Also check if record is in user's favorite collection
+            if self.request.user.is_authenticated():
+                try:
+                    favorites_collection = Collection.objects.get(
+                        owner=self.request.user, collection_type=Collection.TYPE_FAVORITE)
+                except Collection.DoesNotExist:
+                    pass
+                else:
+                    context['is_favorite'] = favorites_collection.records.filter(
+                        record_id=context['record']['id']).exists()
 
             related_collections_ids = Record.objects.filter(
                 record_id=self.collection_record.record_id).values_list('collection', flat=True)
