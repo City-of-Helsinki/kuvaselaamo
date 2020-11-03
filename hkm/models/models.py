@@ -190,16 +190,20 @@ class Record(OrderedModel, BaseModel):
     edited_preview_image = models.ImageField(verbose_name=_(u'Edited preview image'), null=True, blank=True,
                                              upload_to=get_collection_upload_path)
 
+    """This is populated by view logic if the Record needs
+    its matching Finna data."""
+    finna_entry = None
+
     class Meta(OrderedModel.Meta):
         pass
 
     def get_details(self):
         cache_key = '%s-details' % self.record_id
         data = DEFAULT_CACHE.get(cache_key, None)
-        if data == None:
-            data = FINNA.get_record(self.record_id)
-            if data and 'records' in data:
-                data = data['records'][0]
+        if data is None:
+            finna_results = FINNA.get_record(self.record_id)
+            if finna_results and 'records' in finna_results:
+                data = finna_results['records'][0]
                 DEFAULT_CACHE.set(cache_key, data, 60 * 15)
         else:
             LOG.debug('Got record details from cache', extra={

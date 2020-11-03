@@ -204,31 +204,32 @@ class MyCollectionsView(BaseCollectionListView):
         return Collection.objects.filter(owner=request.user)
 
 
-def ensure_collections_records_are_in_cache(request, collection):
-    """Fetch the given collection's Records from Finna and store them
-    in the cache, if they are not already found in the cache.
+def get_records_with_finna_data(request, collection):
+    """Fetch the given Collection's Records' matching Finna entries and add
+    the entries to the Records, if a matching entry was found from Finna.
 
     Fetching from Finna is done in multiple calls in case the Collection
     contains a lot of Records. This is done to avoid a 414 error from Finna.
     """
-    record_ids_in_collection = collection. \
-        records. \
-        values_list('record_id', flat=True)
+    records = collection.records.all()
+    record_ids_in_collection = [r.id for r in records]
 
-    record_ids_not_in_cache = []
-    for id in record_ids_in_collection:
-        cache_key = '%s-details' % id
-        if DEFAULT_CACHE.get(cache_key) is None:
-            record_ids_not_in_cache.append(id)
+    finna_entries_by_id = {}
+    for chunk in chunks(record_ids_in_collection, MAX_RECORDS_PER_FINNA_QUERY):
+        entries_from_finna = FINNA.get_record(chunk)
 
-    if record_ids_not_in_cache:
-        for chunk in chunks(record_ids_not_in_cache, MAX_RECORDS_PER_FINNA_QUERY):
-            records_from_finna = FINNA.get_record(chunk)
+        if entries_from_finna and 'records' in entries_from_finna:
+            finna_dict = dict((e['id'], e) for e in entries_from_finna['records'])
+            finna_entries_by_id.update(finna_dict)
 
-            if records_from_finna and 'records' in records_from_finna:
-                for finna_record in records_from_finna['records']:
-                    cache_key = '%s-details' % finna_record['id']
-                    DEFAULT_CACHE.set(cache_key, finna_record, 60 * 15)
+    records_with_finna_data = []
+    if finna_entries_by_id:
+        for record in records:
+            if record.record_id in finna_entries_by_id:
+                record.finna_entry = finna_entries_by_id[record.record_id]
+                records_with_finna_data.append(record)
+
+    return records_with_finna_data
 
 
 def chunks(lst, n):
@@ -246,6 +247,7 @@ class CollectionDetailView(BaseView):
 
     collection = None
     collection_record = None
+    collections_records_to_display = None
     permissions = {
         'can_edit': False,
     }
@@ -282,7 +284,7 @@ class CollectionDetailView(BaseView):
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
         else:
-            ensure_collections_records_are_in_cache(request, self.collection)
+            self.collections_records_to_display = get_records_with_finna_data(request, self.collection)
 
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
@@ -357,11 +359,13 @@ class CollectionDetailView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
+
         context['collection'] = self.collection
         context['collection_record_count'] = self.collection.records.all().count()
         context['permissions'] = self.permissions
-
+        context['collections_records_to_display'] = self.collections_records_to_display
         context['collection_record'] = self.collection_record
+
         if self.collection_record:
             context['hkm_id'] = self.collection_record.record_id
             context['current_record_order_number'] = self.collection_record.order + 1
@@ -383,7 +387,7 @@ class CollectionDetailView(BaseView):
                     pass
                 else:
                     context['is_favorite'] = favorites_collection.records.filter(
-                        record_id=context['record']['id']).exists()
+                        record_id=self.collection_record.record_id).exists()
 
             related_collections_ids = Record.objects.filter(
                 record_id=self.collection_record.record_id).values_list('collection', flat=True)
