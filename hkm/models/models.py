@@ -207,32 +207,28 @@ class Record(OrderedModel, BaseModel):
         return data
 
     def get_full_res_image_absolute_url(self):
-        if self.edited_full_res_image:
-            return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_full_res_image.url)
-        else:
-            record_data = self.get_details()
-            if record_data:
-                record_url = record_data['rawData']['thumbnail']
-                cache_key = '%s-record-preview-url' % record_url
-                full_res_url = DEFAULT_CACHE.get(cache_key, None)
-                if full_res_url == None:
-                    full_res_url = HKM.get_full_res_image_url(
-                        record_data['rawData']['thumbnail'])
-                    DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
-                else:
-                    LOG.debug('Got record full res url from cache', extra={
-                              'data': {'full_res_url': repr(full_res_url)}})
-                return full_res_url
+        record_data = self.get_details()
+        if record_data:
+            record_url = record_data['rawData']['thumbnail']
+            cache_key = '%s-record-preview-url' % record_url
+            full_res_url = DEFAULT_CACHE.get(cache_key, None)
+            if full_res_url is None:
+                full_res_url = HKM.get_full_res_image_url(
+                    record_data['rawData']['thumbnail'])
+                DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
             else:
-                LOG.debug('Could not get image from Finna API')
+                LOG.debug('Got record full res url from cache', extra={
+                          'data': {'full_res_url': repr(full_res_url)}})
+            return full_res_url
+        else:
+            LOG.debug('Could not get image from Finna API')
 
     def get_preview_image_absolute_url(self):
         LOG.debug('Getting web image absolute url', extra={
                   'data': {'finna_id': self.record_id}})
-        # if self.edited_preview_image:
-        #	return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_preview_image.url)
-        # else:
+
         url = FINNA.get_image_url(self.record_id)
+
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
 
