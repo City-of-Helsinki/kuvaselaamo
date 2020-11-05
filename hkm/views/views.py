@@ -212,7 +212,7 @@ def get_records_with_finna_data(request, collection):
     contains a lot of Records. This is done to avoid a 414 error from Finna.
     """
     records = collection.records.all()
-    record_ids_in_collection = [r.id for r in records]
+    record_ids_in_collection = [r.record_id for r in records]
 
     finna_entries_by_id = {}
     for chunk in chunks(record_ids_in_collection, MAX_RECORDS_PER_FINNA_QUERY):
