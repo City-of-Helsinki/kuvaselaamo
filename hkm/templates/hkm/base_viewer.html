@@ -125,6 +125,7 @@
           <p class="record-meta__paragraph">{{ record.imageRights.copyright }}</p>
           <p class="record-meta__paragraph">{% trans 'Photographer:' %} {% for photographer in record.rawData.photographer_str_mv %}{{ photographer }}, {% endfor %}</p>
           <p class="record-meta__paragraph">{% trans 'Image pick-up year:' %} {{ record.rawData.era.0|default:"" }}</p>
+          <p class="record-meta__paragraph">{% trans 'Address:' %} {{ record.rawData.geographic.0|default:"" }}</p>
         </div>
 
         <div class="col-md-4 col-sm-6">
