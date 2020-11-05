@@ -569,6 +569,9 @@ msgstr "Tekijä:"
 msgid "Image pick-up year:"
 msgstr "Ajankohta:"
 
+msgid "Address:"
+msgstr "Osoite:"
+
 #: hkm/templates/hkm/base_viewer.html:138
 msgid "Property information"
 msgstr "Tallenteen tiedot"
