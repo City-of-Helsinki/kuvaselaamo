@@ -562,6 +562,9 @@ msgstr "Upphovsman:"
 msgid "Image pick-up year:"
 msgstr "Tidpunkt:"
 
+msgid "Address:"
+msgstr "Adress:"
+
 #: hkm/templates/hkm/base_viewer.html:138
 msgid "Property information"
 msgstr "Bildens egenskaper"

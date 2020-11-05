@@ -6396,11 +6396,14 @@ span.no-postal-fee {
   background-color: #f1f1f1;
   display: grid;
   width: 100%;
-  padding: 40px 20px; }
+  padding: 20px 20px; }
   .public-collections__content h2,
   .home-page__featured h2 {
     color: #5268C2;
     margin: 30px 0 15px 0; }
+
+.home-page__featured {
+  padding-top: 45px; }
 
 .public-collections__wrapper,
 .featured__wrapper {
@@ -6509,6 +6512,7 @@ span.no-postal-fee {
 .public-collections__title {
   font: 48px "Signe", sans-serif;
   color: #5268C2;
+  margin-top: 0;
   margin-left: 17px; }
   @media (max-width: 400px) {
     .public-collections__title {
