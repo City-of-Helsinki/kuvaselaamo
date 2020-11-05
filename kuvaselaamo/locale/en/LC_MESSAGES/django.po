@@ -1449,7 +1449,7 @@ msgstr "Your favorite images are collected here"
 #~ "hairdryers and works of art. In Finna you can also find information about "
 #~ "the buildings of Helsinki."
 
-msgid "About the service paragraph 1"
+msgid "OGDescription"
 msgstr "Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use."
 
 #~ msgid "About the service paragraph 2"

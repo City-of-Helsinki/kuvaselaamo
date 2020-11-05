@@ -1412,7 +1412,7 @@ msgstr "Dina favoritbilder finns samlade här"
 #~ "plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan "
 #~ "också söka information om byggnadernas historia i Helsingfors."
 
-msgid "About the service paragraph 1"
+msgid "OGDescription"
 msgstr "Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet."
 
 #~ msgid "About the service paragraph 2"
