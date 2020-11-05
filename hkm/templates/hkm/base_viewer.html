@@ -2,13 +2,6 @@
 {% load hkm_tags %}
 {% load i18n %}
 
-{% block facebook_meta_tags %}
-  {% if record %}
-  <meta property="og:image" content="{% finna_image record.id %}">
-  <meta property="og:title" content="{{ record.title }}">
-  {% endif %}
-{% endblock %}
-
 {% block body_class %}viewer-view{% endblock %}
 {% block nav_class %}nav_viewer{% endblock %}
 

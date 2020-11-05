@@ -2,6 +2,12 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block image_meta_tags %}
+  {% with image_url=frontpage_image_collection|front_page_url %}
+    <meta property="og:image" content="{{ image_url }}}" />
+    <meta property="twitter:image" content="{{ image_url }}" />
+  {% endwith %}
+{% endblock %}
 
 {% block main_content %}
   <div class="home-page">
