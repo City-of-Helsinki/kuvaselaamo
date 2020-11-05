@@ -113,8 +113,6 @@
   {% if collection_record %}
     {% include 'hkm/snippets/popover_cart.html' with finna_id=collection_record.record_id full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url cropped_web_image_url=record_web_url finna_id=record.id %}
     {% include 'hkm/snippets/popover_favorite.html'%}
-    {% include 'hkm/snippets/popover_info.html' with record_year=collection_record.get_details.year record_measures=collection_record.get_details.rawData.measurements record_geo=collection_record.get_details.rawData.geographic record_description=collection_record.get_details.rawData.description record_authors=collection_record.get_details.rawData.author record_title=collection_record.get_details.title finna_id=collection_record.record_id %}
-
     {% include 'hkm/snippets/popover_share.html' with finna_id=collection_record.record_id %}
     {% include 'hkm/snippets/popover_add.html' with finna_id=collection_record.record_id full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url %}
   {% endif %}

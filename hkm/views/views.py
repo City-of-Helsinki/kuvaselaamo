@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
+from django.core.cache import caches
 
 from hkm import forms, image_utils, email
 import copy
@@ -28,9 +29,12 @@ from hkm.forms import ProductOrderCollectionForm
 from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
+MAX_RECORDS_PER_FINNA_QUERY = 200
+
 LOG = logging.getLogger(__name__)
 
 RESULTS_PER_PAGE = 40
+DEFAULT_CACHE = caches['default']
 
 class AuthForm(django_forms.AuthenticationForm):
     username = django_forms.UsernameField(
@@ -200,6 +204,40 @@ class MyCollectionsView(BaseCollectionListView):
         return Collection.objects.filter(owner=request.user)
 
 
+def get_records_with_finna_data(request, collection):
+    """Fetch the given Collection's Records' matching Finna entries and add
+    the entries to the Records, if a matching entry was found from Finna.
+
+    Fetching from Finna is done in multiple calls in case the Collection
+    contains a lot of Records. This is done to avoid a 414 error from Finna.
+    """
+    records = collection.records.all()
+    record_ids_in_collection = [r.id for r in records]
+
+    finna_entries_by_id = {}
+    for chunk in chunks(record_ids_in_collection, MAX_RECORDS_PER_FINNA_QUERY):
+        entries_from_finna = FINNA.get_record(chunk)
+
+        if entries_from_finna and 'records' in entries_from_finna:
+            finna_dict = dict((e['id'], e) for e in entries_from_finna['records'])
+            finna_entries_by_id.update(finna_dict)
+
+    records_with_finna_data = []
+    if finna_entries_by_id:
+        for record in records:
+            if record.record_id in finna_entries_by_id:
+                record.finna_entry = finna_entries_by_id[record.record_id]
+                records_with_finna_data.append(record)
+
+    return records_with_finna_data
+
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
 # CODEBASE HAD TWO DIFFERENT USES FOR SAME VARIABLE 'record', RENAMED THEM IN THIS CONTEXT SO THAT
 # collection_record REFERS TO RECORD IN A COLLECTION, record TO A RECORD IN FINNA/HKM DATABASE
 # STILL NEED TO DO SOME FURTHER RENAMING IN FUTURE TO CLEAR CONFUSION
@@ -209,6 +247,7 @@ class CollectionDetailView(BaseView):
 
     collection = None
     collection_record = None
+    collections_records_to_display = None
     permissions = {
         'can_edit': False,
     }
@@ -244,6 +283,8 @@ class CollectionDetailView(BaseView):
             except Record.DoesNotExist:
                 LOG.warning(
                     'Record does not exist or does not belong to this collection')
+        else:
+            self.collections_records_to_display = get_records_with_finna_data(request, self.collection)
 
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
@@ -316,22 +357,15 @@ class CollectionDetailView(BaseView):
         kwargs['feedback_form'] = form
         return self.get(request, *args, **kwargs)
 
-    # def get_context_data(self, **kwargs):
-    #	context = super(CollectionDetailView, self).get_context_data(**kwargs)
-    #	if self.collection_record:
-    #		context['hkm_id'] = self.collection_record.record_id
-    #	if 'rid' in self.request.GET.keys() and not 'search' in self.request.GET.keys():
-    #		self.open_popup = False
-    #	context['open_popup'] = self.open_popup
-    #	return context
-
     def get_context_data(self, **kwargs):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
+
         context['collection'] = self.collection
         context['collection_record_count'] = self.collection.records.all().count()
         context['permissions'] = self.permissions
-
+        context['collections_records_to_display'] = self.collections_records_to_display
         context['collection_record'] = self.collection_record
+
         if self.collection_record:
             context['hkm_id'] = self.collection_record.record_id
             context['current_record_order_number'] = self.collection_record.order + 1
@@ -342,20 +376,18 @@ class CollectionDetailView(BaseView):
             context['record_web_url'] = FINNA.get_image_url(
                 self.collection_record.record_id)
 
-            finnaRecord = FINNA.get_record(self.collection_record.record_id)
-            if finnaRecord:
-                context['record'] = finnaRecord['records'][0]
+            context['record'] = self.collection_record.get_details()
 
-                # Also check if record is in user's favorite collection
-                if self.request.user.is_authenticated():
-                    try:
-                        favorites_collection = Collection.objects.get(
-                            owner=self.request.user, collection_type=Collection.TYPE_FAVORITE)
-                    except Collection.DoesNotExist:
-                        pass
-                    else:
-                        context['is_favorite'] = favorites_collection.records.filter(
-                            record_id=context['record']['id']).exists()
+            # Also check if record is in user's favorite collection
+            if self.request.user.is_authenticated():
+                try:
+                    favorites_collection = Collection.objects.get(
+                        owner=self.request.user, collection_type=Collection.TYPE_FAVORITE)
+                except Collection.DoesNotExist:
+                    pass
+                else:
+                    context['is_favorite'] = favorites_collection.records.filter(
+                        record_id=self.collection_record.record_id).exists()
 
             related_collections_ids = Record.objects.filter(
                 record_id=self.collection_record.record_id).values_list('collection', flat=True)
@@ -783,7 +815,7 @@ class BaseFinnaRecordDetailView(BaseView):
         self.record_finna_id = kwargs.get('finna_id', None)
         if self.record_finna_id:
             record_data = FINNA.get_record(self.record_finna_id)
-            if record_data:
+            if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
                 self.record['full_res_url'] = HKM.get_full_res_image_url(
                     self.record['rawData']['thumbnail'])
