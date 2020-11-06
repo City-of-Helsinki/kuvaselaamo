@@ -21,7 +21,7 @@
 
   <!-- Page title & description (important for SEO). -->
   <title>{% trans 'Kuvaselaamo' %}</title>
-  <meta name="description" content="{% trans 'Kuvaselaamo' %}">
+  <meta name="description" content="{% trans 'OGDescription' %}" />
 
   <!-- Window Phone - Better font rendering with cleartpye activated. -->
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on" /><![endif]-->
@@ -33,8 +33,22 @@
   <!-- Windows Phone - Turn off tap highlight on windows 8 IE. -->
   <meta name="msapplication-tap-highlight" content="no">
 
-  {% block facebook_meta_tags %}
+  <!-- og - meta tags -->
+  {% block image_meta_tags %}
   {% endblock %}
+  <meta property="og:title" content="{% trans 'Kuvaselaamo' %}" />
+  <meta
+    property="og:description"
+    content="{% trans 'OGDescription' %}"
+  />
+  <meta property="og:type" content="website" />
+  <meta id="meta-url" property="og:url" content="" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="800" />
+  <meta property="twitter:card" content="summary_large_image">
+
+
   <!--
     Format detection for mobile devices.
     https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html#//apple_ref/doc/uid/TP40008193-SW5
@@ -126,6 +140,9 @@
   {% endblock %}
     
   {% block js %}
+    <script>
+      document.querySelector('#meta-url').setAttribute('content', location.href)
+    </script>
     <script src="/static/hkm/js/jquery.js"></script>
     <script src="/static/hkm/js/jquery.csrf.js"></script>
     <script src="/static/hkm/js/velocity.js"></script>
