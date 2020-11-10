@@ -58,7 +58,8 @@
                         </span>
                         <span class="card-meta__owner">
                           {% if collection.owner.is_staff %}
-                            <img src="/static/hkm/svg/Kaupunginmuseo.svg" alt="museum" class="public-collections__svg">
+                            {% include 'hkm/snippets/museum_logo.html' with alt="museum" class="public-collections__svg" %}
+
                           {% else %}
                             <img src="/static/hkm/svg/Person.svg" alt="museum" class="public-collections__svg-person">
                             {{ collection.owner }}

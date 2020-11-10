@@ -1,0 +1,9 @@
+{% if language == 'fi' %}
+  <img src="/static/hkm/svg/Logo_fi.svg" alt="{{ alt }}" class="{{ class }}">
+
+{% elif language == 'en' %}
+  <img src="/static/hkm/svg/Logo_en.svg" alt="{{ alt }}" class="{{ class }}">
+
+{% elif language == 'sv' %}
+  <img src="/static/hkm/svg/Logo_sv.svg" alt="{{ alt }}}" class="{{ class }}">
+{% endif %}
