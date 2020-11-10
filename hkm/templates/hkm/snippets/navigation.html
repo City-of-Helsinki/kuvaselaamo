@@ -3,9 +3,16 @@
 <nav class="navigation">
   <div class="navigation-header">
     <a class="navigation-brand" href="{% url 'hkm_index' %}?search=true">
-      <svg class="svg-icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logo-full"></use>
-      </svg>
+      {% if language == 'fi' %}
+        <img src="/static/hkm/svg/Kuvia_fi.svg" class="svg-icon">
+
+      {% elif language == 'en' %}
+        <img src="/static/hkm/svg/Kuvia_en.svg" class="svg-icon">
+
+      {% elif language == 'sv' %}
+        <img src="/static/hkm/svg/Kuvia_sv.svg" class="svg-icon">
+
+      {% endif %}
     </a>
   </div>
 
