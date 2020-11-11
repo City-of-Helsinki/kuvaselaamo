@@ -3,6 +3,14 @@
     background-color: $color-white;
     display: block;
     font-size: 18px;
+    padding-left: 30px;
+
+    &__logo {
+        display: block;
+        width: 200px;
+        height: 100%;
+        max-height: 60px;
+    }
 }
 
 .navigation-header {
