@@ -179,7 +179,9 @@ INSTALLED_APPS = (
 
     'django.contrib.admin.apps.SimpleAdminConfig',
 
-    'anymail'
+    'anymail',
+
+    'storages'
 )
 
 # Bower
