@@ -24,6 +24,7 @@ env = environ.Env(
     HKM_PRINTMOTOR_API_ENDPOINT = (str, ''),
     HKM_POSTAL_FEES = (float, 0.0),
     HKM_MY_DOMAIN = (str, 'http://localhost:8080'),
+    LOG_LEVEL=(str, 'ERROR'),
 )
 
 DEBUG=env.bool('DEBUG')
@@ -230,18 +231,26 @@ MUSEUM_GROUP = 'museum'
 
 WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
 
+LOG_LEVEL = env('LOG_LEVEL')
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s',
+        },
+    },
     "handlers": {
         "console": {
-            "class": "logging.StreamHandler"
+            "class": "logging.StreamHandler",
+            "formatter": "simple"
         }
     },
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": "ERROR"
+            "level": LOG_LEVEL
         },
     },
 }
