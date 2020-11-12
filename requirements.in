@@ -51,4 +51,4 @@ django-parler
 django-bower
 django-anymail~=3.0
 django-storages==1.6.5
-django-gcloud-storage==0.2.1
+google-cloud-storage==1.12.1

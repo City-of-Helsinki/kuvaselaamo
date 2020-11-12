@@ -10,7 +10,10 @@ argh==0.26.2              # via -r requirements.in, watchdog
 babel==2.4.0              # via -r requirements.in, django-phonenumber-field
 bcrypt==3.1.3             # via paramiko
 billiard==3.3.0.23        # via -r requirements.in
+cachetools==3.1.1         # via google-auth
+certifi==2020.11.8        # via requests
 cffi==1.10.0              # via -r requirements.in, bcrypt, cryptography, pynacl
+chardet==3.0.4            # via requests
 contextlib2==0.5.4        # via raven
 coverage==4.3.4           # via -r requirements.in
 cryptography==2.8         # via -r requirements.in, paramiko, pyopenssl
@@ -36,7 +39,13 @@ enum34==1.1.6             # via -r requirements.in, cryptography, pyscss
 factory-boy==2.12.0       # via -r requirements.in
 faker==0.7.11             # via factory-boy
 funcsigs==1.0.2           # via mock
-google-cloud==0.34.0      # via django-gcloud-storage
+futures==3.3.0            # via google-api-core
+google-api-core==1.23.0   # via google-cloud-core, google-cloud-storage
+google-auth==1.23.0       # via google-api-core
+google-cloud-core==0.28.1  # via google-cloud-storage
+google-cloud-storage==1.12.1  # via -r requirements.in
+google-resumable-media==0.4.1  # via google-cloud-storage
+googleapis-common-protos==1.52.0  # via google-api-core
 idna==2.5                 # via -r requirements.in
 ipaddress==1.0.18         # via -r requirements.in, cryptography, faker
 jinja2==2.9.6             # via -r requirements.in
@@ -53,21 +62,28 @@ pathtools==0.1.2          # via -r requirements.in, watchdog
 pbr==2.1.0                # via mock
 phonenumberslite==8.4.1   # via -r requirements.in
 pillow==4.1.0             # via -r requirements.in
+protobuf==3.13.0          # via google-api-core, googleapis-common-protos
 psycopg2==2.8.4           # via -r requirements.in
-pyasn1==0.2.3             # via -r requirements.in, paramiko
+pyasn1-modules==0.2.8     # via google-auth
+pyasn1==0.4.8             # via -r requirements.in, paramiko, pyasn1-modules, rsa
 pycparser==2.17           # via -r requirements.in, cffi
 pynacl==1.1.2             # via paramiko
 pyopenssl==16.2.0         # via -r requirements.in
 pyscss==1.3.5             # via -r requirements.in
 python-dateutil==2.6.0    # via faker
 python-memcached==1.58    # via -r requirements.in
-pytz==2017.2              # via -r requirements.in, babel
+pytz==2017.2              # via -r requirements.in, babel, google-api-core
 pyyaml==3.12              # via -r requirements.in, watchdog
 raven==6.0.0              # via -r requirements.in
 rcssmin==1.0.6            # via django-compressor
 redis==2.10.5             # via django-redis-sessions
-requests==2.13.0          # via -r requirements.in, django-anymail
+requests==2.25.0          # via -r requirements.in, django-anymail, google-api-core
 rjsmin==1.1.0             # via django-compressor
-six==1.10.0               # via -r requirements.in, bcrypt, cryptography, django-anymail, django-bower, django-extensions, faker, mock, pynacl, pyopenssl, pyscss, python-dateutil, python-memcached
+rsa==4.5                  # via google-auth
+six==1.15.0               # via -r requirements.in, bcrypt, cryptography, django-anymail, django-bower, django-extensions, faker, google-api-core, google-auth, google-resumable-media, mock, protobuf, pynacl, pyopenssl, pyscss, python-dateutil, python-memcached
 supervisor==3.3.1         # via -r requirements.in, django-supervisor
+urllib3==1.26.1           # via requests
 watchdog==0.8.3           # via -r requirements.in, django-supervisor
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
