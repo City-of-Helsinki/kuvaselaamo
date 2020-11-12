@@ -108,7 +108,12 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
 if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
     GS_BUCKET_NAME = env("GS_BUCKET_NAME")
-    GS_CREDENTIALS = env("STAGING_GCS_BUCKET_CREDENTIALS")
+    
+    from google.oauth2 import service_account
+
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        env("STAGING_GCS_BUCKET_CREDENTIALS")
+    )
 # For prod, it's Azure Storage
 elif DEFAULT_FILE_STORAGE == "storages.backends.azure_storage.AzureStorage":
     AZURE_ACCOUNT_NAME = env("AZURE_ACCOUNT_NAME")
