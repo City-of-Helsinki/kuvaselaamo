@@ -108,7 +108,7 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
 if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
     GS_BUCKET_NAME = env("GS_BUCKET_NAME")
-
+    
     from google.oauth2 import service_account
 
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
