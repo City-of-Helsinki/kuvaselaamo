@@ -29,10 +29,6 @@ review:
         K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
         K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
         K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
-        # TODO: Remove the bucket stuff from review envs once it is working
-        K8S_SECRET_DEFAULT_FILE_STORAGE: "storages.backends.gcloud.GoogleCloudStorage"
-        K8S_SECRET_GS_BUCKET_NAME: "$STORAGE_BUCKET_STAGING_NAME"
-        K8S_SECRET_GOOGLE_APPLICATION_CREDENTIALS: "$STORAGE_BUCKET_STAGING_CREDENTIALS"
 
 
 staging:
@@ -59,10 +55,6 @@ staging:
         K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: "$GL_QA_PRINTMOTOR_PASSWORD"
         K8S_SECRET_HKM_PRINTMOTOR_API_KEY: "$GL_QA_PRINTMOTOR_API_KEY"
         K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
-        K8S_SECRET_DEFAULT_FILE_STORAGE: "storages.backends.gcloud.GoogleCloudStorage"
-        K8S_SECRET_GS_BUCKET_NAME: "$STAGING_GCS_BUCKET_NAME"
-        K8S_SECRET_GOOGLE_APPLICATION_CREDENTIALS: "$STAGING_GCS_BUCKET_CREDENTIALS"
-
 
 production:
     variables:

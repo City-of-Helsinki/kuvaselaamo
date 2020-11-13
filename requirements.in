@@ -50,5 +50,3 @@ watchdog
 django-parler
 django-bower
 django-anymail~=3.0
-django-storages==1.6.5
-google-cloud-storage==1.12.1
