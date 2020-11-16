@@ -1015,6 +1015,7 @@ class BaseOrderView(BaseView):
                                          self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
         crop_io = StringIO.StringIO()
         cropped_image.save(crop_io, format=full_res_image.format)
+        crop_io.seek(0)
         filename = u'%s.%s' % (record['title'], full_res_image.format.lower())
         LOG.debug('Cropped image', extra={
                   'data': {'size': repr(cropped_image.size)}})
@@ -1023,8 +1024,10 @@ class BaseOrderView(BaseView):
 
     def handle_crop(self, record):
         crop_file = self._get_cropped_full_res_file(record)
-        tmp_image = TmpImage(record_id=self.order.record_finna_id,
-                             edited_image=crop_file)
+        tmp_image = TmpImage(record_id=self.order.record_finna_id)
+        # TODO When saving the image to Google (and maybe Azure), the image won't get a random ID suffix,
+        # so the user will get only the image which was cropped first. Locally this works, find out why.
+        tmp_image.edited_image.save(crop_file.name, crop_file)
         tmp_image.save()
         LOG.debug('Cropped image', extra={
                   'data': {'url': tmp_image.edited_image.url}})
@@ -1062,11 +1065,9 @@ class OrderProductView(BaseOrderView):
             order.unit_price = printproduct_type.price
             order.total_price = order.unit_price * order.amount
             order.total_price_with_postage = order.total_price + order.postal_fees
-            #if request.user.is_authenticated() and request.user.profile.is_museum:
-            order.crop_image_url = '%s%s' % (
-                settings.HKM_MY_DOMAIN,
-                self.handle_crop(self.record),
-            )
+
+            order.crop_image_url = self.handle_crop(self.record)
+
             order.save()
             line_data = {
                 'hkm_id': self.order.record_finna_id,
@@ -1152,10 +1153,9 @@ class OrderContactInformationView(BaseOrderView):
                 context['record'] = record_data['records'][0]
                 context['record']['full_res_url'] = HKM.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
-                self.order.crop_image_url = '%s%s' % (
-                    settings.HKM_MY_DOMAIN,
-                    self.handle_crop(context['record']),
-                )
+
+                self.order.crop_image_url = self.handle_crop(context['record'])
+
                 self.order.save()
         return context
 
@@ -1285,10 +1285,12 @@ class AjaxCropRecordView(View):
                                          self.crop_width, self.crop_height, self.img_width, self.img_height)
         crop_io = StringIO.StringIO()
         cropped_image.save(crop_io, format=full_res_image.format)
+        crop_io.seek(0)
         filename = u'%s.%s' % (
             self.record['title'], full_res_image.format.lower())
         LOG.debug('Cropped image', extra={
                   'data': {'size': repr(cropped_image.size)}})
+
         return InMemoryUploadedFile(crop_io, None, filename, full_res_image.format,
                                     crop_io.len, None)
 
@@ -1298,6 +1300,7 @@ class AjaxCropRecordView(View):
                                          self.crop_width, self.crop_height, self.img_width, self.img_height)
         crop_io = StringIO.StringIO()
         cropped_image.save(crop_io, format=full_res_image.format)
+        crop_io.seek(0)
         filename = u'%s.%s' % (
             self.record['title'], full_res_image.format.lower())
         LOG.debug('Cropped image', extra={
@@ -1309,10 +1312,15 @@ class AjaxCropRecordView(View):
         crop_file = self._get_cropped_full_res_file()
         if not crop_file:
             crop_file = self._get_cropped_preview_file()
-        tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'],
-                             edited_image=crop_file)
+
+        tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'])
+        # TODO When saving the image to Google (and maybe Azure), the image won't get a random ID suffix,
+        # so the user will get only the image which was cropped first. Locally this works, find out why.
+        tmp_image.edited_image.save(crop_file.name, crop_file)
+
         if request.user.is_authenticated():
             tmp_image.creator = request.user
+
         tmp_image.save()
         LOG.debug('Cropped image', extra={
                   'data': {'url': tmp_image.edited_image.url}})
