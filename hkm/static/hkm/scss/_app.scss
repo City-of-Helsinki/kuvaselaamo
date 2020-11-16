@@ -290,8 +290,8 @@ span.no-postal-fee {
 
 
 .row {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 .footer-row {
@@ -747,6 +747,10 @@ span.no-postal-fee {
   display: inline-block;
   color: $color-hkm-blue;
   font: 48px $font-signe;
+}
+.banner__description {
+  padding: 10px 0 0 15px;
+  font-size: 20px;
 }
 .banner__form {
   float: left;

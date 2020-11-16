@@ -6240,8 +6240,8 @@ span.no-postal-fee {
 
 /* SITE FOOTER */
 .row {
-  margin-left: 20px;
-  margin-right: 20px; }
+  margin-left: 12px;
+  margin-right: 12px; }
 
 .footer-row {
   display: grid;
@@ -6608,6 +6608,10 @@ span.no-postal-fee {
   display: inline-block;
   color: #5268C2;
   font: 48px "Signe", sans-serif; }
+
+.banner__description {
+  padding: 10px 0 0 15px;
+  font-size: 20px; }
 
 .banner__form {
   float: left;
