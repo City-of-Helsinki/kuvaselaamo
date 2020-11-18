@@ -6122,8 +6122,8 @@ span.no-postal-fee {
 .fullsize-container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px; }
+  padding-left: 30px;
+  padding-right: 30px; }
 
 /* Container - small & large */
 @media (min-width: 768px) {
@@ -6182,21 +6182,10 @@ span.no-postal-fee {
 #price-indicator {
   font-weight: bold; }
 
-.brand-img__helsinkimuseum {
+.brand-img {
   height: 60px;
-  width: auto;
+  width: 100%;
   margin-bottom: 20px; }
-  @media (max-width: 400px) {
-    .brand-img__helsinkimuseum {
-      width: 100%; } }
-
-.brand-img__kuvaselaamo {
-  height: 60px;
-  width: auto;
-  margin-bottom: 20px; }
-  @media (max-width: 290px) {
-    .brand-img__kuvaselaamo {
-      width: 100%; } }
 
 .public-collections-padding {
   padding-left: 15px; }
@@ -6207,7 +6196,7 @@ span.no-postal-fee {
   float: left;
   position: absolute;
   bottom: 60px;
-  left: 0;
+  left: 30px;
   z-index: 500;
   margin: 5px;
   opacity: 0.8;
@@ -6251,8 +6240,25 @@ span.no-postal-fee {
 
 /* SITE FOOTER */
 .row {
-  margin-left: 15px;
-  margin-right: 15px; }
+  margin-left: 12px;
+  margin-right: 12px; }
+
+.footer-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 30px; }
+  @media (min-width: 630px) {
+    .footer-row {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr; } }
+
+.links-box {
+  width: 100%;
+  margin: 0 auto; }
+  @media (min-width: 315px) {
+    .links-box {
+      width: 315px; } }
 
 .site-footer {
   clear: both;
@@ -6334,7 +6340,7 @@ span.no-postal-fee {
       min-height: 550px; } }
 
 .center-content {
-  width: 96%;
+  width: 88%;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -6396,11 +6402,14 @@ span.no-postal-fee {
   background-color: #f1f1f1;
   display: grid;
   width: 100%;
-  padding: 40px 20px; }
+  padding: 45px 20px; }
   .public-collections__content h2,
   .home-page__featured h2 {
     color: #5268C2;
     margin: 30px 0 15px 0; }
+
+.home-page__featured {
+  padding: 45px; }
 
 .public-collections__wrapper,
 .featured__wrapper {
@@ -6509,6 +6518,7 @@ span.no-postal-fee {
 .public-collections__title {
   font: 48px "Signe", sans-serif;
   color: #5268C2;
+  margin-top: 0;
   margin-left: 17px; }
   @media (max-width: 400px) {
     .public-collections__title {
@@ -6594,9 +6604,14 @@ span.no-postal-fee {
 .banner__h1 {
   line-height: 40px;
   margin: 0;
+  padding-left: 15px;
   display: inline-block;
   color: #5268C2;
   font: 48px "Signe", sans-serif; }
+
+.banner__description {
+  padding: 10px 0 0 15px;
+  font-size: 20px; }
 
 .banner__form {
   float: left;
@@ -6723,7 +6738,8 @@ span.no-postal-fee {
   position: relative;
   bottom: 0;
   background-color: transparent;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  padding: 0 30px; }
 
 .actions ul {
   margin: 0; }
@@ -6841,6 +6857,9 @@ span.no-postal-fee {
 #detail-section {
   max-width: 100%;
   padding: 20px; }
+
+.record-meta {
+  margin: 0 10px; }
 
 .record-meta__image {
   height: auto;
@@ -7356,7 +7375,7 @@ div.grid__fav.active {
 
 .search-form--banner {
   margin: 0;
-  padding: 15px 0 0 0;
+  padding: 15px 0 0 15px;
   width: 100%; }
 
 .search-form__field {
@@ -7615,7 +7634,13 @@ a.welcome-modal__clarification {
   height: 60px;
   background-color: #fff;
   display: block;
-  font-size: 18px; }
+  font-size: 18px;
+  padding-left: 30px; }
+  .navigation__logo {
+    display: block;
+    width: 200px;
+    height: 100%;
+    max-height: 60px; }
 
 .navigation-header {
   margin-right: auto;

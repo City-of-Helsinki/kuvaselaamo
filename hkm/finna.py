@@ -121,7 +121,7 @@ class FinnaClient(object):
     def get_record(self, record_id):
         url = FinnaClient.API_ENDPOINT + 'record'
         payload = {
-            'id': record_id,
+            'id[]': record_id,
             'field[]': ['id', 'authors', 'buildings', 'formats', 'genres', 'humanReadablePublicationDates',
                         'imageRights', 'images', 'institutions', 'languages', 'originalLanguages', 'presenters',
                         'publicationDates', 'rating', 'series', 'subjects', 'summary', 'title', 'year', 'rawData', ],

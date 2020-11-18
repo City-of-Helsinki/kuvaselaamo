@@ -24,6 +24,12 @@ env = environ.Env(
     HKM_PRINTMOTOR_API_ENDPOINT = (str, ''),
     HKM_POSTAL_FEES = (float, 0.0),
     HKM_MY_DOMAIN = (str, 'http://localhost:8080'),
+    LOG_LEVEL=(str, 'ERROR'),
+    DEFAULT_FILE_STORAGE=(str, "django.core.files.storage.FileSystemStorage"),
+    GS_BUCKET_NAME=(str, ""),
+    AZURE_ACCOUNT_NAME=(str, ""),
+    AZURE_ACCOUNT_KEY=(str, ""),
+    AZURE_CONTAINER=(str, ""),
 )
 
 DEBUG=env.bool('DEBUG')
@@ -97,6 +103,22 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASEDIR, '..', 'media')
 MEDIA_URL = '/media/'
 
+# For staging env, we use Google Cloud Storage
+DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
+if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
+    GS_BUCKET_NAME = env("GS_BUCKET_NAME")
+
+    from google.oauth2 import service_account
+
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        env("STAGING_GCS_BUCKET_CREDENTIALS")
+    )
+# For prod, it's Azure Storage
+elif DEFAULT_FILE_STORAGE == "storages.backends.azure_storage.AzureStorage":
+    AZURE_ACCOUNT_NAME = env("AZURE_BUCKET_ACCOUNT_NAME")
+    AZURE_ACCOUNT_KEY = env("AZURE_BUCKET_CREDENTIALS")
+    AZURE_CONTAINER = env("AZURE_BUCKET_NAME")
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -161,7 +183,9 @@ INSTALLED_APPS = (
 
     'django.contrib.admin.apps.SimpleAdminConfig',
 
-    'anymail'
+    'anymail',
+
+    'storages'
 )
 
 # Bower
@@ -230,18 +254,26 @@ MUSEUM_GROUP = 'museum'
 
 WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
 
+LOG_LEVEL = env('LOG_LEVEL')
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s',
+        },
+    },
     "handlers": {
         "console": {
-            "class": "logging.StreamHandler"
+            "class": "logging.StreamHandler",
+            "formatter": "simple"
         }
     },
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": "ERROR"
+            "level": LOG_LEVEL
         },
     },
 }

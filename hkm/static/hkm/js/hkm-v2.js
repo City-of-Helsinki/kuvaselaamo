@@ -616,14 +616,7 @@ palikka
     })
     .done(function(data){
       if (data.url) {
-        // creates anchor element and forces download
-        var a = document.createElement('a');
-        a.href = window.location.origin + data.url;
-        a.id = 'crop-dl';
-        a.download = data.url;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
+        window.open(data.url);
         $('#crop-dl').remove();
         $('.my-modal--crop').modal('hide');
       }

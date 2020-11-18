@@ -190,16 +190,20 @@ class Record(OrderedModel, BaseModel):
     edited_preview_image = models.ImageField(verbose_name=_(u'Edited preview image'), null=True, blank=True,
                                              upload_to=get_collection_upload_path)
 
+    """This is populated by view logic if the Record needs
+    its matching Finna data."""
+    finna_entry = None
+
     class Meta(OrderedModel.Meta):
         pass
 
     def get_details(self):
         cache_key = '%s-details' % self.record_id
         data = DEFAULT_CACHE.get(cache_key, None)
-        if data == None:
-            data = FINNA.get_record(self.record_id)
-            if data:
-                data = data['records'][0]
+        if data is None:
+            finna_results = FINNA.get_record(self.record_id)
+            if finna_results and 'records' in finna_results:
+                data = finna_results['records'][0]
                 DEFAULT_CACHE.set(cache_key, data, 60 * 15)
         else:
             LOG.debug('Got record details from cache', extra={
@@ -207,32 +211,28 @@ class Record(OrderedModel, BaseModel):
         return data
 
     def get_full_res_image_absolute_url(self):
-        if self.edited_full_res_image:
-            return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_full_res_image.url)
-        else:
-            record_data = self.get_details()
-            if record_data:
-                record_url = record_data['rawData']['thumbnail']
-                cache_key = '%s-record-preview-url' % record_url
-                full_res_url = DEFAULT_CACHE.get(cache_key, None)
-                if full_res_url == None:
-                    full_res_url = HKM.get_full_res_image_url(
-                        record_data['rawData']['thumbnail'])
-                    DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
-                else:
-                    LOG.debug('Got record full res url from cache', extra={
-                              'data': {'full_res_url': repr(full_res_url)}})
-                return full_res_url
+        record_data = self.get_details()
+        if record_data:
+            record_url = record_data['rawData']['thumbnail']
+            cache_key = '%s-record-preview-url' % record_url
+            full_res_url = DEFAULT_CACHE.get(cache_key, None)
+            if full_res_url is None:
+                full_res_url = HKM.get_full_res_image_url(
+                    record_data['rawData']['thumbnail'])
+                DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
             else:
-                LOG.debug('Could not get image from Finna API')
+                LOG.debug('Got record full res url from cache', extra={
+                          'data': {'full_res_url': repr(full_res_url)}})
+            return full_res_url
+        else:
+            LOG.debug('Could not get image from Finna API')
 
     def get_preview_image_absolute_url(self):
         LOG.debug('Getting web image absolute url', extra={
                   'data': {'finna_id': self.record_id}})
-        # if self.edited_preview_image:
-        #	return u'%s%s' % (settings.HKM_MY_DOMAIN, self.edited_preview_image.url)
-        # else:
+
         url = FINNA.get_image_url(self.record_id)
+
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
 

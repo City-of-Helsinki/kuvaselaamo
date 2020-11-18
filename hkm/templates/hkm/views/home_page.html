@@ -2,6 +2,12 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block image_meta_tags %}
+  {% with image_url=frontpage_image_collection|front_page_url %}
+    <meta property="og:image" content="{{ image_url }}">
+    <meta property="twitter:image" content="{{ image_url }}" />
+  {% endwith %}
+{% endblock %}
 
 {% block main_content %}
   <div class="home-page">
@@ -51,8 +57,9 @@
                           {{ collection.title }}
                         </span>
                         <span class="card-meta__owner">
-                          {% if collection.is_featured %}
-                            <img src="/static/hkm/svg/Kaupunginmuseo.svg" alt="museum" class="public-collections__svg">
+                          {% if collection.owner.is_staff %}
+                            {% include 'hkm/snippets/museum_logo.html' with alt="museum" class="public-collections__svg" %}
+
                           {% else %}
                             <img src="/static/hkm/svg/Person.svg" alt="museum" class="public-collections__svg-person">
                             {{ collection.owner }}

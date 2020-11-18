@@ -587,6 +587,9 @@ msgstr "Creator:"
 msgid "Image pick-up year:"
 msgstr "Date:"
 
+msgid "Address:"
+msgstr "Address:"
+
 #: hkm/templates/hkm/base_viewer.html:138
 msgid "Property information"
 msgstr "Property information"
@@ -1065,7 +1068,7 @@ msgstr ""
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"
-msgstr "Browse albums"
+msgstr "Explore albums"
 
 #: hkm/templates/hkm/views/record_feedback.html:9
 msgid "Send feedback"
@@ -1446,13 +1449,8 @@ msgstr "Your favorite images are collected here"
 #~ "hairdryers and works of art. In Finna you can also find information about "
 #~ "the buildings of Helsinki."
 
-#~ msgid "About the service paragraph 1"
-#~ msgstr ""
-#~ "Helsinkiphotos.fi is an image service that provides a user-friendly way "
-#~ "to access the Helsinki City Museum’s vast collection of photographs. At "
-#~ "Helsinkiphotos.fi, anyone can browse, search and download detailed, high "
-#~ "resolution photographs suitable for print materials or lower resolution "
-#~ "images more suitable for web and social media use."
+msgid "OGDescription"
+msgstr "Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use."
 
 #~ msgid "About the service paragraph 2"
 #~ msgstr ""
