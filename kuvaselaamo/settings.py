@@ -115,9 +115,9 @@ if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
     )
 # For prod, it's Azure Storage
 elif DEFAULT_FILE_STORAGE == "storages.backends.azure_storage.AzureStorage":
-    AZURE_ACCOUNT_NAME = env("AZURE_ACCOUNT_NAME")
-    AZURE_ACCOUNT_KEY = env("AZURE_ACCOUNT_KEY")
-    AZURE_CONTAINER = env("AZURE_CONTAINER")
+    AZURE_ACCOUNT_NAME = env("AZURE_BUCKET_ACCOUNT_NAME")
+    AZURE_ACCOUNT_KEY = env("AZURE_BUCKET_CREDENTIALS")
+    AZURE_CONTAINER = env("AZURE_BUCKET_NAME")
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
