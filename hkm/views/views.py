@@ -1317,9 +1317,11 @@ class AjaxCropRecordView(View):
             crop_file = self._get_cropped_preview_file()
 
         tmp_image = TmpImage(record_id=self.record_id, record_title=self.record['title'])
-        # TODO When saving the image to Google (and maybe Azure), the image won't get a random ID suffix,
-        # so the user will get only the image which was cropped first. Locally this works, find out why.
-        tmp_image.edited_image.save(crop_file.name, crop_file)
+
+        # Remove non-english letters from file name to prevent a crash when saving to Azure storage
+
+        file_name = unidecode(crop_file.name.encode("utf-8").decode('utf-8'))
+        tmp_image.edited_image.save(file_name, crop_file)
 
         if request.user.is_authenticated():
             tmp_image.creator = request.user
