@@ -1336,12 +1336,9 @@ class AjaxCropRecordView(View):
             collection = Collection.objects.filter(
                 owner=request.user).get(id=request.POST['collection_id'])
         except KeyError, Collection.DoesNotExist:
-            LOG.error('Couldn not get collection')
+            LOG.error('Could not get collection')
         else:
-            cropped_full_res_file = self._get_cropped_full_res_file()
-            cropped_preview_file = self._get_cropped_preview_file()
-            record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-                            edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
+            record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
             record.save()
             return http.HttpResponse()
         return http.HttpResponseBadRequest()
@@ -1350,10 +1347,7 @@ class AjaxCropRecordView(View):
         collection = Collection(
             owner=request.user, title=request.POST['collection_title'])
         collection.save()
-        cropped_full_res_file = self._get_cropped_full_res_file()
-        cropped_preview_file = self._get_cropped_preview_file()
-        record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-                        edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
+        record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
         record.save()
         return http.HttpResponse()
 
