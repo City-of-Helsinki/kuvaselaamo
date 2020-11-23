@@ -175,6 +175,7 @@ scandir==1.10.0           # via pathlib2
 six==1.15.0               # via -r requirements.in, bcrypt, cryptography, django-anymail, django-bower, django-extensions, faker, google-api-core, google-auth, google-resumable-media, isodate, mock, msrestazure, pathlib2, protobuf, pynacl, pyopenssl, pyscss, python-dateutil, python-memcached
 supervisor==3.3.1         # via -r requirements.in, django-supervisor
 typing==3.7.4.3           # via msrest
+unidecode==1.1.1          # via -r requirements.in
 urllib3==1.26.2           # via requests
 watchdog==0.8.3           # via -r requirements.in, django-supervisor
 

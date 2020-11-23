@@ -110,6 +110,7 @@ if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
 
     from google.oauth2 import service_account
 
+    GS_FILE_OVERWRITE = False
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
         env("STAGING_GCS_BUCKET_CREDENTIALS")
     )
