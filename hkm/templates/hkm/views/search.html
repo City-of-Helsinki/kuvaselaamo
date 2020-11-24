@@ -5,7 +5,7 @@
 {% block banner %}
 
   <div class="page-header bittersweet">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <div class="banner__title">
         {% if search_term %}
         <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'Records' %}</h1>
@@ -28,7 +28,7 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
 
     {% if search_result.records %}
 

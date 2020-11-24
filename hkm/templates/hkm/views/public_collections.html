@@ -5,7 +5,7 @@
 {% block banner %}
 
   <div class="page-header">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <h1 class="public-collections__title">{% trans 'Browse albums' %}</h1>
       <div class=public-collections__content>
         <div class="public-collections__wrapper">
@@ -41,7 +41,7 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
       <div class="public-collections__wrapper">
         {% for collection in collections %}
           {% if collection.records.all %}

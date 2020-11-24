@@ -126,26 +126,13 @@ span.no-postal-fee {
 }
 
 /* Container */
-@media (min-width: 1200px) {
-  .fullsize-container {
-    width: 100%;
-  }
-}
-@media (min-width: 992px) {
-  .fullsize-container {
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .fullsize-container {
-    width: 100%;
-  }
-}
+
 .fullsize-container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 20px;
+
+  @media (min-width: 650px) {
+    padding: 20px 45px;
+  }
 }
 /* Container - small & large */
 @media (min-width: 768px) {
@@ -289,11 +276,6 @@ span.no-postal-fee {
 /* SITE FOOTER */
 
 
-.row {
-    margin-left: 12px;
-    margin-right: 12px;
-}
-
 .footer-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -425,9 +407,9 @@ span.no-postal-fee {
 }
 
 .center-content {
-  width: 88%;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -435,6 +417,7 @@ span.no-postal-fee {
 
   @media (min-width: 650px) {
     align-items: normal;
+    padding: 0 45px;
   }
 }
 
@@ -501,7 +484,7 @@ span.no-postal-fee {
   background-color: $color-gray-background;
   display: grid;
   width: 100%;
-  padding: 45px 20px;
+  padding: 20px 0;
 
   h2 {
     color: #5268C2;
@@ -510,7 +493,11 @@ span.no-postal-fee {
 }
 
 .home-page__featured {
-  padding: 45px;
+  padding: 45px 20px;
+
+  @media (min-width: 650px) {
+    padding: 45px;
+  }
 }
 
 .public-collections__wrapper,
@@ -534,6 +521,10 @@ span.no-postal-fee {
   @media (min-width: 1000px) {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.featured__wrapper {
+  margin-top: 10px;
 }
 
 .public-collections__wrapper {
@@ -648,7 +639,6 @@ span.no-postal-fee {
     font: 48px $font-signe;
     color: #5268C2;
     margin-top: 0;
-    margin-left: 17px;
 
     @media (max-width: 400px) {
       font-size: 30px;
@@ -743,13 +733,12 @@ span.no-postal-fee {
 .banner__h1 {
   line-height: 40px;
   margin: 0;
-  padding-left: 15px;
   display: inline-block;
   color: $color-hkm-blue;
   font: 48px $font-signe;
 }
 .banner__description {
-  padding: 10px 0 0 15px;
+  padding-top: 10px;
   font-size: 20px;
 }
 .banner__form {
@@ -894,7 +883,7 @@ span.no-postal-fee {
 
 /* Actions */
 .actions {
-  z-index: 200;
+  z-index: 550;
   display: inline-block;
   position: relative;
   bottom: 0;
@@ -1160,6 +1149,7 @@ span.no-postal-fee {
   box-sizing: content-box;
   overflow: hidden;
   position: relative;
+  min-height: 200px;
 
   &:hover {
     .grid__item--buy {
@@ -1690,7 +1680,7 @@ div.grid__fav.active {
 }
 .search-form--banner {
   margin: 0;
-  padding: 15px 0 0 15px;
+  padding-top: 15px;
   width: 100%;
 }
 .search-form__field {
