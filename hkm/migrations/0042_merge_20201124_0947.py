@@ -8,8 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0040_auto_20200903_0708'),
         ('hkm', '0040_remove_obsolete_image_fields_from_record'),
+        ('hkm', '0041_update_showcase_albums_description'),
     ]
 
     operations = [
