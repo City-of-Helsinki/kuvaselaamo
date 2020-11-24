@@ -7625,12 +7625,15 @@ a.welcome-modal__clarification {
   background-color: #fff;
   display: block;
   font-size: 18px;
-  padding-left: 30px; }
+  padding-left: 5px; }
   .navigation__logo {
     display: block;
     width: 200px;
     height: 100%;
     max-height: 60px; }
+  @media (min-width: 650px) {
+    .navigation {
+      padding-left: 30px; } }
 
 .navigation-header {
   margin-right: auto;
