@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0039_collection_is_showcaseable'),
+        ('hkm', '0040_remove_obsolete_image_fields_from_record'),
     ]
 
     operations = [
