@@ -523,6 +523,10 @@ span.no-postal-fee {
   }
 }
 
+.featured__wrapper {
+  margin-top: 10px;
+}
+
 .public-collections__wrapper {
   flex-wrap: wrap;
 }
@@ -734,7 +738,7 @@ span.no-postal-fee {
   font: 48px $font-signe;
 }
 .banner__description {
-  padding: 10px 0 0 15px;
+  padding-top: 10px;
   font-size: 20px;
 }
 .banner__form {
@@ -879,7 +883,7 @@ span.no-postal-fee {
 
 /* Actions */
 .actions {
-  z-index: 200;
+  z-index: 550;
   display: inline-block;
   position: relative;
   bottom: 0;
@@ -1145,6 +1149,7 @@ span.no-postal-fee {
   box-sizing: content-box;
   overflow: hidden;
   position: relative;
+  min-height: 200px;
 
   &:hover {
     .grid__item--buy {

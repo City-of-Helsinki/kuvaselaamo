@@ -6420,6 +6420,9 @@ span.no-postal-fee {
     .featured__wrapper {
       grid-template-columns: repeat(3, 1fr); } }
 
+.featured__wrapper {
+  margin-top: 10px; }
+
 .public-collections__wrapper {
   flex-wrap: wrap; }
 
@@ -6596,7 +6599,7 @@ span.no-postal-fee {
   font: 48px "Signe", sans-serif; }
 
 .banner__description {
-  padding: 10px 0 0 15px;
+  padding-top: 10px;
   font-size: 20px; }
 
 .banner__form {
@@ -6719,7 +6722,7 @@ span.no-postal-fee {
 
 /* Actions */
 .actions {
-  z-index: 200;
+  z-index: 550;
   display: inline-block;
   position: relative;
   bottom: 0;
@@ -6936,7 +6939,8 @@ span.no-postal-fee {
   border: 1px solid #eee;
   box-sizing: content-box;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  min-height: 200px; }
   .grid__item:hover .grid__item--buy {
     opacity: 1; }
 
