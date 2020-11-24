@@ -4,7 +4,7 @@
 {% block banner %}
 
   <div class="page-header white">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <div class="banner__title">
         <h1 class="banner__h1">{{ collection.title }}
           <span class="edit-btn">
@@ -55,7 +55,7 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
 
     {% if not collections_records_to_display %}
       <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add images' %}</a>
