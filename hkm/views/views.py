@@ -407,7 +407,7 @@ class CollectionDetailView(BaseView):
 
 class HomeView(BaseView):
     template_name = 'hkm/views/home_page.html'
-    url_name = 'hkm_index'
+    url_name = 'hkm_home'
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -419,96 +419,6 @@ class HomeView(BaseView):
             prefetch_related('albums').\
             filter(show_on_home_page=True).\
             order_by('-created')
-        return context
-
-
-# using collection_record here also instead of record (see
-# CollectionDetailView naming confusion)
-class IndexView(CollectionDetailView):
-    template_name = 'hkm/views/index.html'
-    url_name = 'hkm_index'
-    open_popup = True
-
-    def get_template_names(self):
-        return self.template_name
-
-    def get_url(self):
-        return reverse(self.url_name)
-
-    def setup(self, request, *args, **kwargs):
-        collections = Collection.objects.filter(show_in_landing_page=True)
-        if collections.exists():
-            self.collection = collections[0]
-        else:
-            LOG.warning('Co collections to show in landing page')
-
-        record_id = request.GET.get('rid', None)
-        if record_id:
-            try:
-                self.collection_record = self.collection.records.get(
-                    id=record_id)
-            except Record.DoesNotExist:
-                LOG.warning(
-                    'Record does not exist or does not belong to this collection')
-        if not self.collection_record and self.collection:
-            self.collection_record = self.collection.records.order_by('?').first()
-
-        self.permissions = {
-            'can_edit': False
-        }
-
-        return True
-
-    def get_empty_forms(self, request):
-        context_forms = super(IndexView, self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(IndexView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.record_id = self.collection_record.record_id
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(self.url_name)
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        if self.collection_record:
-            context['hkm_id'] = self.collection_record.record_id
-        if 'seen_welcome_modal' in self.request.session and self.request.session['seen_welcome_modal'] == True:
-            context['open_popup'] = False
-        else:
-            self.request.session['seen_welcome_modal'] = True
-            context['open_popup'] = True
-
-        # try to get modal contents
-        try:
-            context["page_content"] = PageContent.objects.get(identifier=self.url_name)
-        except PageContent.DoesNotExist:
-            context["page_content"] = None
-
         return context
 
 
