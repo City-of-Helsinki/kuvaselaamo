@@ -59,7 +59,7 @@ def localized_decimal(value, arg=-1):
 def front_page_url(collection):
     img_url = ""
     record_count = collection.records.count() if collection else 0
-    print("COLLECTION", collection)
+
     if not record_count:
         img_url = '/static/hkm/img/front_page_default.jpg'
     else:
