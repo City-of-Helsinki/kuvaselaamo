@@ -741,6 +741,9 @@ msgstr "Detta är en bild med låg upplösning. Produkterna kan inte beställas.
 msgid "Add to favorites"
 msgstr "Lägg till i favoriter"
 
+msgid "Remove from favorites"
+msgstr "Ta bort från favoriter"
+
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
 msgstr "Kopiera bildens adress till klippbordet"

@@ -35,32 +35,34 @@
         </button>
         {% if user.is_authenticated %}
           {% if collection_record %}
-          <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+            <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if is_favorite %}Poista suosikeista{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% else %}
-          <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+            <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if record.is_favorite %}Poista suosikeista{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% endif %}
-          <i class="actions__icon">
-              <svg class="svg-icon nav__fav--heart">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
-              </svg>
-          </i>
-          </button>
-          <button class="has-popover actions__btn actions__btn--right" id="popover-add">
+              <i class="actions__icon">
+                <svg class="svg-icon nav__fav--heart">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
+                </svg>
+              </i>
+            </button>
+          {% with web_image_url=record.id|finna_default_image_url %}
+          <button class="actions__btn actions__btn--right actions_crop" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ web_image_url }}" data-toggle="modal" data-record-id="{{ record.id }}" data-target="#crop-and-add">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-plus"></use>
               </svg>
             </i>
           </button>
+          {% endwith %}
         {% endif %}
-        <button class="has-popover actions__btn actions__btn--right" id="popover-share" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
+        <button class="actions__btn actions__btn--right" id="actions-share" data-clipboard-text="{{ my_domain_url }}{% url 'hkm_record' finna_id=record.id %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
             </svg>
           </i>
         </button>
-        <button class="actions__btn actions__btn--right" id="popover-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
+        <button class="actions__btn actions__btn--right" id="actions-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
@@ -92,7 +94,7 @@
         <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
           {% csrf_token %}
           <input type="hidden" name="action" value="order">
-          <button name="orderbutton" class="has-popover actions__btn actions__btn pull-left" type="submit">
+          <button name="orderbutton" class="actions__btn actions__btn pull-left" type="submit">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>

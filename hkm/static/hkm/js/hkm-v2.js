@@ -276,36 +276,13 @@ palikka
   });
 
   // scroll down to detail section when info button clicked
-  $("#popover-info").click(function(){
+  $("#actions-info").click(function(){
     $("html, body").animate({
       scrollTop: $("#detail-section").offset().top
     }, 500);
   })
 
-  var clipboard = new Clipboard('.popover-list__btn--share');
-  $("#popover-share").popover({
-    html: true,
-    toggle: 'popover',
-    container: '.actions',
-    placement: 'top',
-    trigger: 'click',
-    html: true,
-    content: function() {
-      return $('#popover-share-content').html();
-    }
-  });
-
-  $("#popover-add").popover({
-    html: true,
-    toggle: 'popover',
-    container: '.actions',
-    placement: 'top',
-    trigger: 'click',
-    html: true,
-    content: function() {
-      return $('#popover-add-content').html();
-    }
-  });
+  var clipboard = new Clipboard('#actions-share');
 
   $('.has-popover').on('click', function() {
       var clickedButton = this;
@@ -585,9 +562,10 @@ palikka
     cropper.destroy();
   });
 
-  $(document).on('click', '.popover-list__btn--crop', function() {
+  $(document).on('click', '.actions_crop', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
+    console.log("URL", url);
     recordId = this.getAttribute('data-record-id')
     image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
