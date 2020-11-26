@@ -565,7 +565,6 @@ palikka
   $(document).on('click', '.actions_crop', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
-    console.log("URL", url);
     recordId = this.getAttribute('data-record-id')
     image = target.getElementsByClassName('crop__image')[0];
     image.src = url;
