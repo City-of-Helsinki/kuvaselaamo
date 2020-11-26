@@ -748,6 +748,9 @@ msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
 
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
+
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
 msgstr "Kopioi kuvan osoite leikepöydälle"

@@ -661,7 +661,7 @@ msgstr "New album"
 #: hkm/templates/hkm/base_viewer.html:303
 #: hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
-msgstr "Add to album"
+msgstr "Add to an album"
 
 #: hkm/templates/hkm/emails/feedback.txt:9
 msgid "Message"
@@ -769,6 +769,9 @@ msgstr "This is a low resolution image, products cannot be ordered."
 #: hkm/templates/hkm/snippets/popover_favorite.html:3
 msgid "Add to favorites"
 msgstr "Add to favorites"
+
+msgid "Remove from favorites"
+msgstr "Remove from favorites"
 
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
