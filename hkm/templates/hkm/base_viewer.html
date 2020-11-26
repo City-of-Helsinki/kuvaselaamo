@@ -35,9 +35,9 @@
         </button>
         {% if user.is_authenticated %}
           {% if collection_record %}
-            <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if is_favorite %}Poista suosikeista{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
+            <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if is_favorite %}{% trans 'Remove from favorites' %}{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% else %}
-            <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if record.is_favorite %}Poista suosikeista{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
+            <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if record.is_favorite %}{% trans 'Remove from favorites' %}{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% endif %}
               <i class="actions__icon">
                 <svg class="svg-icon nav__fav--heart">
