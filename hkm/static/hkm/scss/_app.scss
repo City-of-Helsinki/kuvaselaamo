@@ -282,7 +282,7 @@ span.no-postal-fee {
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 30px;
 
-  @media (min-width: 630px) {
+  @media (min-width: 650px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
   }
@@ -292,7 +292,7 @@ span.no-postal-fee {
   width: 100%;
   margin: 0 auto;
 
-  @media (min-width: 315px) {
+  @media (min-width: 350px) {
     width: 315px;
   }
 }
@@ -402,7 +402,7 @@ span.no-postal-fee {
   }
 
   @media (min-width: 300px) {
-    min-height: 550px;
+    min-height: 650px;
   }
 }
 
