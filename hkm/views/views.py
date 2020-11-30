@@ -546,6 +546,8 @@ class SearchView(BaseView):
                         collection__owner=request.user,
                         collection__collection_type=Collection.TYPE_FAVORITE
                     ).values_list("record_id", flat=True)
+                    if self.record:
+                        self.record['is_favorite'] = self.record['id'] in favorite_records
                 except Record.DoesNotExist:
                     pass
 
@@ -556,7 +558,7 @@ class SearchView(BaseView):
                     record['index'] = p * self.search_result['limit'] + i
                     i += 1
                     # Check also if this record is one of user's favorites
-                    if favorite_records:
+                    if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
                 # If user is loading more pictures add them to session.
                 # Check for page changed, this will prevent session duplicating itself
