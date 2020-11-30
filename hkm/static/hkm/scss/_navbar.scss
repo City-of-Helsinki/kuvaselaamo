@@ -133,7 +133,7 @@ button.navbar-toggle {
         }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 944px) {
         position: absolute;
         background-color: $color-white;
         top: 60px;
@@ -188,7 +188,7 @@ button.navbar-toggle {
     top: 11px;
     right: -14px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 945px) {
         top: 7px;
     }
 }
@@ -208,7 +208,7 @@ button.navbar-toggle {
         position: absolute;
         top: -13px;
 
-        @media (max-width: 900px) {
+        @media (max-width: 945px) {
             margin-left: 15px;
             top: -10px;
             right: -15px;
@@ -216,13 +216,13 @@ button.navbar-toggle {
     }
 
     &_text {
-        @media (min-width: 900px) {
+        @media (min-width: 945px) {
             visibility: hidden;
             width: 0;
             height: 0;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 945px) {
             position: absolute;
             top: -8px;
             left: -20px;
@@ -239,7 +239,7 @@ button.navbar-toggle {
         top: -11px;
         right: -3px;
 
-        @media (max-width: 900px) {
+        @media (max-width: 945px) {
             right: -45px;
             top: -9px;
         }
@@ -272,7 +272,7 @@ button.navbar-toggle {
         order: 5;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 944px) {
         &_lang-wrapper {
             order: 5;
             margin: 0 auto;
@@ -297,7 +297,7 @@ button.navbar-toggle {
     }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 946px) {
     .navigation {
         .collapse {
             display: block;
