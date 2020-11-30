@@ -45,15 +45,13 @@
                 </svg>
               </i>
             </button>
-          {% with web_image_url=record.id|finna_default_image_url %}
-          <button class="actions__btn actions__btn--right actions_crop" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ web_image_url }}" data-toggle="modal" data-record-id="{{ record.id }}" data-target="#crop-and-add">
+          <button class="actions__btn actions__btn--right actions_crop" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ record_web_url }}" data-toggle="modal" data-record-id="{{ record.id }}" data-target="#crop-and-add">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-plus"></use>
               </svg>
             </i>
           </button>
-          {% endwith %}
         {% endif %}
         <button class="actions__btn actions__btn--right" id="actions-share" data-clipboard-text="{{ my_domain_url }}{% url 'hkm_record' finna_id=record.id %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
           <i class="actions__icon">
