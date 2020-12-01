@@ -1308,14 +1308,14 @@ class BasketView(TemplateView):
         if action == 'checkout' and kwargs.get('phase') == 'checkout':
             return self.handle_checkout(request)
 
-class RecordFeedback(View):
+class RecordFeedbackView(View):
     name='hkm_record_feedback'
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action', None)
         if action == 'feedback':
             return self.handle_feedback(request, *args, **kwargs)
-        return super(RecordFeedback, self).post(request, *args, **kwargs)
+        return super(RecordFeedbackView, self).post(request, *args, **kwargs)
 
     def handle_feedback(self, request, *args, **kwargs):
         response_data = {}
