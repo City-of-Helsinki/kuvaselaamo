@@ -358,7 +358,6 @@ palikka
         $('#id_feedback-form-email').val('');
         // Uncover success message
         $("#fb-success").removeClass("hidden")
-
       }
       else {
         // Uncover error message
