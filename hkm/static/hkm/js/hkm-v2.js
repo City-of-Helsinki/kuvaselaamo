@@ -359,10 +359,9 @@ palikka
         // Uncover success message
         $("#fb-success").removeClass("hidden")
       }
-      else {
-        // Uncover error message
-        $("#fb-error").removeClass("hidden")
-      }
+    }).fail(function() {
+      // Uncover error message
+      $("#fb-error").removeClass("hidden")
     })
   })
 })
