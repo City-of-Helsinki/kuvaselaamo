@@ -7624,12 +7624,12 @@ a.welcome-modal__clarification {
 .feedback-message {
   width: 100%;
   padding: 10px;
-  color: #FFF;
+  color: #fff;
   font-size: 16px; }
   .feedback-message.success {
-    background-color: #00C87B; }
+    background-color: #00C281; }
   .feedback-message.error {
-    background-color: #ff7865; }
+    background-color: #FF7865; }
 
 .navigation {
   height: 60px;
