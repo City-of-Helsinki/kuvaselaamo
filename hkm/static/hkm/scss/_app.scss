@@ -1986,3 +1986,23 @@ a.welcome-modal__clarification {
     transform: rotate(360deg);
   }
 }
+
+/* FEEDBACK */
+.feedback-message {
+  width: 100%;
+  padding: 10px;
+  color: #FFF;
+  font-size: 16px;
+
+  &.success {
+    background-color: #00C87B;
+  }
+
+  &.error {
+    background-color: #ff7865;
+  }
+}
+
+
+
+

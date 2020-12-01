@@ -603,6 +603,12 @@ msgstr "Lähetä palautetta kuvasta"
 msgid "Submit"
 msgstr "Lähetä"
 
+msgid "Feedback success"
+msgstr "Palaute lähetetty onnistuneesti!"
+
+msgid "Feedback error"
+msgstr "Lähetyksessä tapahtui virhe. Yritä hetken kuluttua uudestaan"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Rajaa ja tilaa"
