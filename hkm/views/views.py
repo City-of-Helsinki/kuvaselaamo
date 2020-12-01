@@ -13,7 +13,6 @@ from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
@@ -1335,13 +1334,13 @@ class RecordFeedback(View):
             email.send_feedback_notification(feedback.id)
 
             response_data['result'] = "Success"
-            return HttpResponse(
+            return http.HttpResponse(
                 json.dumps(response_data),
                 content_type="application/json"
             )
         else:
             response_data['result'] = "Error"
-            return HttpResponse(
+            return http.HttpResponse(
                 json.dumps(response_data),
                 content_type="application/json"
             )
