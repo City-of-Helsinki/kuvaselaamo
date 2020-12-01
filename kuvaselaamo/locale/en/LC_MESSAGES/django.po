@@ -621,6 +621,12 @@ msgstr "Send feedback about the image"
 msgid "Submit"
 msgstr "Submit"
 
+msgid "Feedback success"
+msgstr "Feedback submitted successfully"
+
+msgid "Feedback error"
+msgstr "Error occurred while submitting. Try again after a while"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Crop and order"

@@ -596,6 +596,12 @@ msgstr "Skicka respons om bilden"
 msgid "Submit"
 msgstr "Skicka"
 
+msgid "Feedback success"
+msgstr "Feedback skickad!"
+
+msgid "Feedback error"
+msgstr "Ett fel inträffade när du skickade in. Försök igen efter ett tag."
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Avgränsa och beställ"

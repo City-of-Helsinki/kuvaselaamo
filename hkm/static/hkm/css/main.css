@@ -7620,6 +7620,17 @@ a.welcome-modal__clarification {
   100% {
     transform: rotate(360deg); } }
 
+/* FEEDBACK */
+.feedback-message {
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  font-size: 16px; }
+  .feedback-message.success {
+    background-color: #00C281; }
+  .feedback-message.error {
+    background-color: #FF7865; }
+
 .navigation {
   height: 60px;
   background-color: #fff;

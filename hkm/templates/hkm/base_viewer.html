@@ -53,13 +53,6 @@
             </i>
           </button>
         {% endif %}
-        <button class="actions__btn actions__btn--right" id="actions-share" data-clipboard-text="{{ my_domain_url }}{% url 'hkm_record' finna_id=record.id %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
-          <i class="actions__icon">
-            <svg class="svg-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
-            </svg>
-          </i>
-        </button>
         <button class="actions__btn actions__btn--right" id="actions-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
@@ -170,16 +163,18 @@
         {% endif %}
         {% if not user.profile.is_museum %}
         <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <form method="POST">
-            <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
-            {% csrf_token %}
-            {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
-            <input type="hidden" name="action" value="feedback" />
-            <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
-            <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
-          </form>
-        </div>
+          <div class="col-md-offset-2 col-md-8">
+            <form method="POST" id="feedback-form">
+              <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
+              {% csrf_token %}
+              {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
+              <input type="hidden" name="action" value="feedback" />
+              <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
+              <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
+              <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
+              <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+            </form>
+          </div>
         </div>
         {% endif %}
       </div>

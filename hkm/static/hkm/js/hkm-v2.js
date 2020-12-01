@@ -339,6 +339,32 @@ palikka
   }
 
 })
+.define('app.feedback', ['jQuery', 'docReady'], function() {
+  $('#feedback-form').on('submit', function(event) {
+    event.preventDefault();
+
+    $.post('/record/feedback/', {
+      action: 'feedback',
+      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      content: $('#id_feedback-form-content').val(),
+      full_name: $('#id_feedback-form-full_name').val(),
+      email: $('#id_feedback-form-email').val(),
+      hkm_id: $('input[name="hkm_id"]').val(),
+    }).done(function(response) {
+      if (response.result === "Success") {
+        // Empty form fields
+        $('#id_feedback-form-content').val('');
+        $('#id_feedback-form-full_name').val('');
+        $('#id_feedback-form-email').val('');
+        // Uncover success message
+        $("#fb-success").removeClass("hidden")
+      }
+    }).fail(function() {
+      // Uncover error message
+      $("#fb-error").removeClass("hidden")
+    })
+  })
+})
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   var $btn = $('.popover-list__btn');

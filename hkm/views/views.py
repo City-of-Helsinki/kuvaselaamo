@@ -4,6 +4,7 @@ import StringIO
 import datetime
 import logging
 
+import json
 import math
 from django import http
 from django.conf import settings
@@ -308,8 +309,6 @@ class CollectionDetailView(BaseView):
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
         if self.permissions['can_edit']:
             if action == 'edit':
                 return self.handle_edit(request, *args, **kwargs)
@@ -339,24 +338,6 @@ class CollectionDetailView(BaseView):
                 collection_record.delete()
                 return http.HttpResponse()
         return http.HttpResponseBadRequest()
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.collection_record.record_id
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(self.get_url())
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
@@ -691,32 +672,8 @@ class SearchRecordDetailView(SearchView):
             prefix='feedback-form', user=user)
         return context_forms
 
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(SearchRecordDetailView, self).post(request, *args, **kwargs)
 
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            record = request.POST.get("hkm_id", "")
-            feedback = form.save(commit=False)
-            feedback.record_id = record
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': record}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-
+# This is needed for CreateOrderView
 class BaseFinnaRecordDetailView(BaseView):
     record_finna_id = None
     record = None
@@ -746,103 +703,6 @@ class BaseFinnaRecordDetailView(BaseView):
             context['my_collections'] = Collection.objects.none()
 
         return context
-
-
-class FinnaRecordDetailView(BaseFinnaRecordDetailView):
-    template_name = 'hkm/views/record.html'
-    url_name = 'hkm_record'
-
-    # def get(self, request, *args, **kwargs):
-    #   if not self.record:
-    #     return http.HttpResponse()
-    #   return super(FinnaRecordDetailView, self).get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(FinnaRecordDetailView, self).get_context_data(**kwargs)
-        if not self.record:
-            return context
-        related_collections_ids = Record.objects.filter(record_id=self.record['id']).values_list(
-            'collection', flat=True)  # WAT... no objects in Record model
-        related_collections = Collection.objects.user_can_view(
-            self.request.user).filter(id__in=related_collections_ids).distinct()
-        context['related_collections'] = related_collections
-        return context
-
-    def get_empty_forms(self, request):
-        context_forms = super(FinnaRecordDetailView,
-                              self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(FinnaRecordDetailView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.record['id']
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-
-class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
-    template_name = 'hkm/views/record_feedback.html'
-    # automatically redirect back to detail view after post
-    url_name = 'hkm_record_feedback'
-
-    def get_empty_forms(self, request):
-        context_forms = super(FinnaRecordFeedbackView,
-                              self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(FinnaRecordFeedbackView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.record['id']
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
 
 
 class SignUpView(BaseView):
@@ -1448,7 +1308,46 @@ class BasketView(TemplateView):
         if action == 'checkout' and kwargs.get('phase') == 'checkout':
             return self.handle_checkout(request)
 
+class RecordFeedbackView(View):
+    name='hkm_record_feedback'
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action', None)
+        if action == 'feedback':
+            return self.handle_feedback(request, *args, **kwargs)
+        return super(RecordFeedbackView, self).post(request, *args, **kwargs)
+
+    def handle_feedback(self, request, *args, **kwargs):
+        response_data = {}
+        if request.user.is_authenticated():
+            user = request.user
+        else:
+            user = None
+        form = forms.FeedbackForm(
+            request.POST, user=user)
+        if form.is_valid():
+            record = request.POST.get("hkm_id", "")
+            feedback = form.save(commit=False)
+            feedback.record_id = record
+            feedback.sent_from = "".join([request.get_host(), '/search/record/?image_id=', record])
+            feedback.save()
+            email.send_feedback_notification(feedback.id)
+
+            response_data['result'] = "Success"
+            return http.HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+            response_data['result'] = "Error"
+            return http.HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+
+
 # ERROR HANDLERS
+
 
 def handler404(request):
     context = {}
