@@ -417,8 +417,6 @@ class SearchView(BaseView):
     next_record = None
 
     search_term = None
-    author_facets = None
-    date_facets = None
     page = 1
 
     def get(self, request, *args, **kwargs):
@@ -437,22 +435,11 @@ class SearchView(BaseView):
         # Session expires after browser is closed
         request.session.set_expiry(0)
         self.search_term = request.GET.get('search', '')
-        self.author_facets = filter(
-            None, request.GET.getlist('author[]', None))
-        self.date_facets = filter(
-            None, request.GET.getlist('main_date_str[]', None))
         self.page = int(request.GET.get('page', 1))
         return True
 
     def handle_search(self, request, *args, **kwargs):
-        LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'author_facets': repr(self.author_facets),
-                                            'date_facets': repr(self.date_facets), 'page': self.page}})
-        self.facet_result = self.get_facet_result(self.search_term)
-        facets = {}
-        if self.author_facets:
-            facets['author_facet'] = self.author_facets
-        if self.date_facets:
-            facets['main_date_str'] = self.date_facets
+        LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'page': self.page}})
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
@@ -463,13 +450,11 @@ class SearchView(BaseView):
 
         search_term_changed = self.search_term != request.session.get('search')
         page_changed = self.page != request.session.get('page')
-        author_facets_changed = len(self.author_facets) != len(request.session.get('author_facets', []))
-        date_facets_changed = len(self.date_facets) != len(request.session.get('date_facets', []))
 
         # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            if search_term_changed or page_changed or author_facets_changed or date_facets_changed:
-                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+            if search_term_changed or page_changed:
+                results = self.get_search_result(self.search_term, self.page, self.page_size)
                 if results:
                     self.search_result = results
                     records += results.get('records', [])
@@ -507,12 +492,10 @@ class SearchView(BaseView):
                     # This is required for "Back to search results" link to work
                     self.search_term = request.session.get('search', '')
                     self.page = request.session.get('page')
-                    self.author_facets = request.session.get('author_facets', [])
-                    self.date_facets = request.session.get('date_facets', [])
 
             # This else statement is executed when "Load more" is pressed
             else:
-                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+                results = self.get_search_result(self.search_term, self.page, self.page_size)
                 self.search_result = results
 
         # calculate global index for the record, this is used to form links to search detail view
@@ -549,8 +532,6 @@ class SearchView(BaseView):
                     request.session['search_result']['records'].extend(self.search_result.get('records'))
                 else:
                     request.session['search_result'] = self.search_result
-                request.session['author_facets'] = self.author_facets
-                request.session['date_facets'] = self.date_facets
                 request.session['search'] = self.search_term
                 request.session['page'] = self.page
             elif 'records' not in self.search_result:
@@ -558,20 +539,12 @@ class SearchView(BaseView):
                 if self.request.is_ajax():
                     return http.HttpResponseBadRequest()
 
-    def get_facet_result(self, search_term):
-        if self.request.is_ajax():
-            return None
-        else:
-            return FINNA.get_facets(self.search_term)
-
-    def get_search_result(self, search_term, facets, page, limit):
-        return FINNA.search(search_term, facets=facets, page=page, limit=limit, detailed=self.use_detailed_query)
+    def get_search_result(self, search_term, page, limit):
+        return FINNA.search(search_term, page=page, limit=limit, detailed=self.use_detailed_query)
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['facet_result'] = self.facet_result
-        context['author_facets'] = self.author_facets
-        context['date_facets'] = self.date_facets
         context['search_result'] = self.search_result
         context['search_term'] = self.search_term
         context['current_page'] = self.page
@@ -587,9 +560,6 @@ class SearchRecordDetailView(SearchView):
 
     def get(self, request, *args, **kwargs):
         return super(SearchRecordDetailView, self).get(request, record=True, *args, **kwargs)
-
-    def get_facet_result(self, search_term):
-        return None
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action', None)
@@ -626,8 +596,7 @@ class SearchRecordDetailView(SearchView):
         record.save()
 
         url = reverse('hkm_search_record')
-        url += '?search=%s&ft=%s&fv=%s&page=%d' % (self.search_term, self.facet_type, self.facet_value,
-                                                   self.page)
+        url += '?search=%s&page=%d' % (self.search_term, self.page)
         return redirect(url)
 
     def get_context_data(self, **kwargs):

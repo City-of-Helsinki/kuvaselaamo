@@ -1060,14 +1060,6 @@ msgstr "Lähetä palautetta kuvasta"
 msgid "Records"
 msgstr "Kuvaa"
 
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Tekijä"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "Vuosi"
-
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
 msgstr "Lataa lisää... "
