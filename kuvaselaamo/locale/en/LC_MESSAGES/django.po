@@ -1087,14 +1087,6 @@ msgstr "Send feedback about the image"
 msgid "Records"
 msgstr "Images"
 
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Creator"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "Year"
-
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
 msgstr "Load more..."

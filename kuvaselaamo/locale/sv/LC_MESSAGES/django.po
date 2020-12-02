@@ -1054,14 +1054,6 @@ msgstr "Skicka respons om bilden"
 msgid "Records"
 msgstr "Beskriv"
 
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Upphovsman"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "År"
-
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
 msgstr "Ladda mer... "
