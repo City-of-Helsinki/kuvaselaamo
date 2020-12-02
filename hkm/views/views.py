@@ -65,7 +65,23 @@ class BaseView(TemplateView):
         if not self.url_name:
             raise Exception(
                 'Subview must define url_name or overwrire get_url method')
-        return reverse(self.url_name)
+        image_id = self.request.GET.get('image_id', '')
+        search = self.request.GET.get('search', '')
+        page = self.request.GET.get('page', '')
+        url = reverse(self.url_name)
+        # Not the most elegant solution, but if user is at /search/record/ + search is empty
+        # and language is changed, the application crashes
+        if search:
+            url += '?search=' + search
+        if not search and image_id:
+            url += '?image_id=' + image_id
+        elif image_id:
+            url += '&image_id=' + image_id
+        if not search and not image_id and page:
+            url += '?page=' + page
+        elif page:
+            url += '&page=' + page
+        return url
 
     def handle_invalid_post_action(self, request, *args, **kwargs):
         LOG.error('Invalid POST action', extra={
