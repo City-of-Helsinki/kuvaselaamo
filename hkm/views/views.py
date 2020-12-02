@@ -21,6 +21,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 from django.core.cache import caches
 from unidecode import unidecode
+from urllib import urlencode
 
 from hkm import forms, image_utils, email
 import copy
@@ -65,22 +66,11 @@ class BaseView(TemplateView):
         if not self.url_name:
             raise Exception(
                 'Subview must define url_name or overwrire get_url method')
-        image_id = self.request.GET.get('image_id', '')
-        search = self.request.GET.get('search', '')
-        page = self.request.GET.get('page', '')
+        params = {key: self.request.GET[key] for key in ("image_id", "search", "page") if key in self.request.GET}
+        encoded_params = urlencode(params)
         url = reverse(self.url_name)
-        # Not the most elegant solution, but if user is at /search/record/ + search is empty
-        # and language is changed, the application crashes
-        if search:
-            url += '?search=' + search
-        if not search and image_id:
-            url += '?image_id=' + image_id
-        elif image_id:
-            url += '&image_id=' + image_id
-        if not search and not image_id and page:
-            url += '?page=' + page
-        elif page:
-            url += '&page=' + page
+        if encoded_params:
+            url = "{}?{}".format(url, encoded_params)
         return url
 
     def handle_invalid_post_action(self, request, *args, **kwargs):
