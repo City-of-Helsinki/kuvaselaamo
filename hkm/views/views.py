@@ -21,6 +21,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 from django.core.cache import caches
 from unidecode import unidecode
+from urllib import urlencode
 
 from hkm import forms, image_utils, email
 import copy
@@ -65,7 +66,12 @@ class BaseView(TemplateView):
         if not self.url_name:
             raise Exception(
                 'Subview must define url_name or overwrire get_url method')
-        return reverse(self.url_name)
+        params = {key: self.request.GET[key] for key in ("image_id", "search", "page") if key in self.request.GET}
+        encoded_params = urlencode(params)
+        url = reverse(self.url_name)
+        if encoded_params:
+            url = "{}?{}".format(url, encoded_params)
+        return url
 
     def handle_invalid_post_action(self, request, *args, **kwargs):
         LOG.error('Invalid POST action', extra={
