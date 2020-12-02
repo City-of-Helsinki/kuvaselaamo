@@ -72,7 +72,7 @@
               </a>
             <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ record.id }}">
               {% if user.is_authenticated %}
-                <div class="grid__fav {% if record|is_favorite:user %}active{% endif %}" data-record-id="{{ record.record_id }}">
+                <div class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.record_id }}">
                   <i class="grid__fav-icon">
                     <svg class="svg-icon">
                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
@@ -86,7 +86,7 @@
               <span class="grid__meta--title">{{ record.finna_entry.title }}</span>
               <span class="grid__meta--other"></span>
               {% if user.is_authenticated %}
-                <button class="grid__fav {% if record|is_favorite:user %}active{% endif %}" data-record-id="{{ record.record_id }}">
+                <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.record_id }}">
                     <i class="grid__fav-icon">
                       <svg class="svg-icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>

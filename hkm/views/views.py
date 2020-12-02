@@ -206,6 +206,22 @@ class MyCollectionsView(BaseCollectionListView):
         return Collection.objects.filter(owner=request.user)
 
 
+def tag_favorites_if_necessary(request, records_to_tag):
+    """Fetch the currently authenticated user's favorite records and tag
+    them in the given record list."""
+    if request.user.is_authenticated():
+        try:
+            favorite_records = Record.objects.filter(
+                collection__owner=request.user,
+                collection__collection_type=Collection.TYPE_FAVORITE
+            ).values_list("record_id", flat=True)
+
+            for record in records_to_tag:
+                record.is_favorite = record.record_id in favorite_records
+        except Record.DoesNotExist:
+            pass
+
+
 def get_records_with_finna_data(request, collection):
     """Fetch the given Collection's Records' matching Finna entries and add
     the entries to the Records, if a matching entry was found from Finna.
@@ -287,6 +303,8 @@ class CollectionDetailView(BaseView):
                     'Record does not exist or does not belong to this collection')
         else:
             self.collections_records_to_display = get_records_with_finna_data(request, self.collection)
+
+            tag_favorites_if_necessary(request, self.collections_records_to_display)
 
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),

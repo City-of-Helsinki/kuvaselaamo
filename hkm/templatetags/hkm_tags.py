@@ -45,11 +45,6 @@ def display_images(collection):
     return image_urls
 
 
-@register.filter
-def is_favorite(record, user):
-    return record.is_favorite(user)
-
-
 @register.filter(is_safe=True)
 def localized_decimal(value, arg=-1):
     formatted_value = floatformat(value, arg)

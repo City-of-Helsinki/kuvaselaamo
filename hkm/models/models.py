@@ -232,17 +232,6 @@ class Record(OrderedModel, BaseModel):
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
 
-    def is_favorite(self, user):
-        if user.is_authenticated():
-            try:
-                favorites_collection = Collection.objects.get(
-                    owner=user, collection_type=Collection.TYPE_FAVORITE)
-            except Collection.DoesNotExist:
-                pass
-            else:
-                return favorites_collection.records.filter(record_id=self.record_id).exists()
-        return False
-
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, *args, **kwargs):
