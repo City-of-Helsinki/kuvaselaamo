@@ -681,6 +681,7 @@ palikka
   $title = $('.banner__title');
   $description = $('.banner__description');
   $collectionForm = $('.banner__form');
+  $buyButton = $('.grid__item--buy')
 
   $removeItem.on('click', function() {
     var confirmRemove = confirm($(this).attr('data-confirm'));
@@ -701,6 +702,7 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
+    $buyButton.toggle();
   });
 
   $editBtn.on('click', function() {
@@ -708,6 +710,7 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
+    $buyButton.toggle();
   });
 
 })
