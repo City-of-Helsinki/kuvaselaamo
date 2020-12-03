@@ -3,18 +3,21 @@
     background-color: $color-white;
     display: block;
     font-size: 18px;
-    padding-left: 5px;
 
     &__logo {
         display: block;
         width: 200px;
         height: 100%;
         max-height: 60px;
+        margin-left: 5px;
     }
 
     @media (min-width: 650px) {
-        padding-left: 30px;
+        &__logo {
+            margin-left: 30px;
+        }
     }
+
 }
 
 .navigation-header {
@@ -275,7 +278,7 @@ button.navbar-toggle {
     @media (max-width: 944px) {
         &_lang-wrapper {
             order: 5;
-            margin: 0 auto;
+            margin: 10px auto;
         }
 
         &_search {
@@ -291,10 +294,18 @@ button.navbar-toggle {
             order: 3;
         }
 
+        &_user {
+            margin-left: -20px;
+        }
+
         &_cart {
             order: 4;
         }
     }
+}
+
+.navbar-collapse {
+    padding: 0;
 }
 
 @media (min-width: 946px) {
