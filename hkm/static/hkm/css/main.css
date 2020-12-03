@@ -7843,6 +7843,12 @@ button.navbar-toggle {
 .navbar-collapse {
   padding: 0; }
 
+.navbar-toggle {
+  right: 0; }
+  @media (min-width: 650px) {
+    .navbar-toggle {
+      right: 30px; } }
+
 @media (min-width: 946px) {
   .navigation .collapse {
     display: block;

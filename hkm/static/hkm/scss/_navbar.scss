@@ -308,6 +308,14 @@ button.navbar-toggle {
     padding: 0;
 }
 
+.navbar-toggle {
+    right: 0;
+
+    @media (min-width: 650px) {
+        right: 30px;
+    }
+}
+
 @media (min-width: 946px) {
     .navigation {
         .collapse {
