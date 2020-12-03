@@ -7635,16 +7635,16 @@ a.welcome-modal__clarification {
   height: 60px;
   background-color: #fff;
   display: block;
-  font-size: 18px;
-  padding-left: 5px; }
+  font-size: 18px; }
   .navigation__logo {
     display: block;
     width: 200px;
     height: 100%;
-    max-height: 60px; }
+    max-height: 60px;
+    margin-left: 5px; }
   @media (min-width: 650px) {
-    .navigation {
-      padding-left: 30px; } }
+    .navigation__logo {
+      margin-left: 30px; } }
 
 .navigation-header {
   margin-right: auto;
@@ -7828,15 +7828,26 @@ button.navbar-toggle {
 @media (max-width: 944px) {
   .list-item_lang-wrapper {
     order: 5;
-    margin: 0 auto; }
+    margin: 10px auto; }
   .list-item_search {
     order: 1; }
   .list-item_collection {
     order: 2; }
   .list-item_user, .list-item_login {
     order: 3; }
+  .list-item_user {
+    margin-left: -20px; }
   .list-item_cart {
     order: 4; } }
+
+.navbar-collapse {
+  padding: 0; }
+
+.navbar-toggle {
+  right: 0; }
+  @media (min-width: 650px) {
+    .navbar-toggle {
+      right: 30px; } }
 
 @media (min-width: 946px) {
   .navigation .collapse {
