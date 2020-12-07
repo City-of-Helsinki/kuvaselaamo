@@ -200,21 +200,11 @@ button.navbar-toggle {
     &_wrapper {
         display: flex;
         flex-direction: row;
-        width: 70px;
-        justify-content: center;
-        position: relative;
-    }
+        justify-content: space-between;
 
-    &_svg {
-        width: 23px;
-        height: 23px;
-        position: absolute;
-        top: -13px;
-
-        @media (max-width: 945px) {
-            margin-left: 15px;
-            top: -10px;
-            right: -15px;
+        @media(min-width: 945px) {
+            margin-left: 20px;
+            width: 55px;
         }
     }
 
@@ -226,26 +216,32 @@ button.navbar-toggle {
         }
 
         @media (max-width: 945px) {
-            position: absolute;
-            top: -8px;
-            left: -20px;
+            width: auto;
+            max-width: 120px;
+            margin-top: 3px;
+            margin-right: 15px;
         }
+    }
+
+    &_icons {
+        width: 55px;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &_svg {
+        width: 23px;
+        height: 23px;
     }
 
     &_counter {
         background-color: #01C97E;
         color: $color-white;
+        margin-top: 3px;
         padding: 1px 9px;
         border-radius: 50%;
         font-size: 10px;
-        position: absolute;
-        top: -11px;
-        right: -3px;
-
-        @media (max-width: 945px) {
-            right: -45px;
-            top: -9px;
-        }
     }
 }
 
