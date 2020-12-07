@@ -5880,29 +5880,30 @@ a.btn-delete-row {
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 30% 50% 10% 10%;
+  grid-template-rows: 2fr 4fr 1fr 1fr;
   height: 410px;
   background-color: #fff;
   margin-bottom: 15px; }
   @media (min-width: 450px) {
     .basket-row {
       height: 300px;
-      grid-template-columns: 175px auto;
-      grid-template-rows: 30% 25% 25%; } }
+      grid-template-columns: 1fr 3fr;
+      grid-template-rows: 1fr 1fr 1fr; } }
   @media (min-width: 850px) {
     .basket-row {
       height: 200px;
-      grid-template-columns: 175px 43% 43%;
+      grid-template-columns: 1fr 2fr 2fr;
       grid-column-gap: 2%;
-      grid-template-rows: 50% 50%; } }
+      grid-template-rows: 1fr 1fr; } }
   @media (min-width: 1050px) {
     .basket-row {
-      grid-template-columns: 175px 46% 17% 15%;
+      grid-template-columns: 1fr 3fr 1fr 1fr;
       grid-template-rows: 1fr;
       grid-column-gap: 2%; } }
 
 .basket-thumbnail {
-  grid-row-start: 2; }
+  grid-row-start: 2;
+  max-width: 175px; }
   .basket-thumbnail_figure {
     height: 125px; }
   .basket-thumbnail figcaption {
