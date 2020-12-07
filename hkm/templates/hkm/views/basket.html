@@ -8,16 +8,16 @@
 {% endblock %}
 {% block main_content %}
     {% if basket.product_lines %}
-        <div class="container-medium container-center">
+        <div class="fullsize-container">
             <div class="btn-container">
                 <a href="/" class="btn btn-normal-green">{% trans 'Back to Homepage' %}</a>
             </div>
                 <section class="basket">
                     {% include "hkm/views/_basket_content.html" %}
                             </section>
-                    <form method="post" action="{% url "checkout" %}">
+                    <form method="post" action="{% url 'checkout' %}">
                         {% csrf_token %}
-                        <div class="basket-footer basket-row">
+                        <div class="basket-footer-row">
                             <div>
                                 {% if request.user.is_authenticated and request.user.profile.is_museum %}
                                     <label>{{ form.orderer_name.label }}:&nbsp;</label>{{ form.orderer_name }}
@@ -29,7 +29,7 @@
 
                                 </div>
                                 {{ form.action }}
-                                <button type="submit" class="btn btn-primary btn-lg pull-right">{% trans 'Proceed to Checkout' %}</button>
+                                <button type="submit" class="btn btn-primary btn-lg pull-right basket-footer-button">{% trans 'Proceed to Checkout' %}</button>
                             </div>
                         </div>
                     </form>
