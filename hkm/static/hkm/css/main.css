@@ -6037,7 +6037,8 @@ a.btn-delete-row {
   margin-top: 10px; }
   @media (min-width: 450px) {
     .basket-footer-button {
-      width: 90px;
+      width: auto;
+      max-width: 200px;
       margin-top: 0; } }
 
 .btn-normal-green {

@@ -220,8 +220,10 @@ a.btn-delete-row {
         width: 100%;
         margin-top: 10px;
 
+
         @media(min-width: 450px) {
-            width: 90px;
+            width: auto;
+            max-width: 200px;
             margin-top: 0;
         }
     }
