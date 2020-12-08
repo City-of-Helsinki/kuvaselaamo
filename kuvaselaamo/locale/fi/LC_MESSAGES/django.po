@@ -603,6 +603,12 @@ msgstr "Lähetä palautetta kuvasta"
 msgid "Submit"
 msgstr "Lähetä"
 
+msgid "Feedback success"
+msgstr "Palaute lähetetty onnistuneesti!"
+
+msgid "Feedback error"
+msgstr "Lähetyksessä tapahtui virhe. Yritä hetken kuluttua uudestaan"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Rajaa ja tilaa"
@@ -747,6 +753,9 @@ msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
 #: hkm/templates/hkm/snippets/popover_favorite.html:3
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
+
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
 
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
@@ -1050,14 +1059,6 @@ msgstr "Lähetä palautetta kuvasta"
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
 msgstr "Kuvaa"
-
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Tekijä"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "Vuosi"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."

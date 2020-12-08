@@ -621,6 +621,12 @@ msgstr "Send feedback about the image"
 msgid "Submit"
 msgstr "Submit"
 
+msgid "Feedback success"
+msgstr "Feedback submitted successfully"
+
+msgid "Feedback error"
+msgstr "Error occurred while submitting. Try again after a while"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Crop and order"
@@ -661,7 +667,7 @@ msgstr "New album"
 #: hkm/templates/hkm/base_viewer.html:303
 #: hkm/templates/hkm/snippets/popover_add.html:4
 msgid "Add to collection"
-msgstr "Add to album"
+msgstr "Add to an album"
 
 #: hkm/templates/hkm/emails/feedback.txt:9
 msgid "Message"
@@ -769,6 +775,9 @@ msgstr "This is a low resolution image, products cannot be ordered."
 #: hkm/templates/hkm/snippets/popover_favorite.html:3
 msgid "Add to favorites"
 msgstr "Add to favorites"
+
+msgid "Remove from favorites"
+msgstr "Remove from favorites"
 
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
@@ -1077,14 +1086,6 @@ msgstr "Send feedback about the image"
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
 msgstr "Images"
-
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Creator"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "Year"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."

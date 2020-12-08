@@ -5,7 +5,7 @@
 {% block banner %}
 
   <div class="page-header white">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <div class="banner__title">
         <h1 class="banner__h1">{% trans 'My collections' %}</h1>
       </div>
@@ -16,7 +16,7 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
 
     {% if not collections %}
       <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add images' %}</a>

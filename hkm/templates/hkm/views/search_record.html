@@ -24,7 +24,7 @@
       <div class="back-to">
         <span class="back-to__title">{{ record.title }}</span><br>
         <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
-        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}{% for facet in author_facets %}&author[]={{ facet }}{% endfor %}{% for facet in date_facets %}&main_date_str[]={{ facet }}{% endfor %}">
+        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}">
           <i class="back-to__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
@@ -48,8 +48,6 @@
   {% block hidden %}
     {% if record %}
       {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}
-      {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
-      {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
     {% endif %}
   {% endblock %}
 {% block extra_js %}

@@ -185,10 +185,6 @@ class Record(OrderedModel, BaseModel):
         u'Collection'), related_name='records')
     record_id = models.CharField(verbose_name=_(
         u'Finna record ID'), max_length=1024)
-    edited_full_res_image = models.ImageField(verbose_name=_(u'Edited full resolution image'), null=True, blank=True,
-                                              upload_to=get_collection_upload_path)
-    edited_preview_image = models.ImageField(verbose_name=_(u'Edited preview image'), null=True, blank=True,
-                                             upload_to=get_collection_upload_path)
 
     """This is populated by view logic if the Record needs
     its matching Finna data."""
@@ -235,17 +231,6 @@ class Record(OrderedModel, BaseModel):
 
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
-
-    def is_favorite(self, user):
-        if user.is_authenticated():
-            try:
-                favorites_collection = Collection.objects.get(
-                    owner=user, collection_type=Collection.TYPE_FAVORITE)
-            except Collection.DoesNotExist:
-                pass
-            else:
-                return favorites_collection.records.filter(record_id=self.record_id).exists()
-        return False
 
 
 @receiver(post_save, sender=User)

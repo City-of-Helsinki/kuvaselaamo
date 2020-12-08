@@ -596,6 +596,12 @@ msgstr "Skicka respons om bilden"
 msgid "Submit"
 msgstr "Skicka"
 
+msgid "Feedback success"
+msgstr "Feedback skickad!"
+
+msgid "Feedback error"
+msgstr "Ett fel inträffade när du skickade in. Försök igen efter ett tag."
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Avgränsa och beställ"
@@ -740,6 +746,9 @@ msgstr "Detta är en bild med låg upplösning. Produkterna kan inte beställas.
 #: hkm/templates/hkm/snippets/popover_favorite.html:3
 msgid "Add to favorites"
 msgstr "Lägg till i favoriter"
+
+msgid "Remove from favorites"
+msgstr "Ta bort från favoriter"
 
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
@@ -1044,14 +1053,6 @@ msgstr "Skicka respons om bilden"
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
 msgstr "Beskriv"
-
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Upphovsman"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "År"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."

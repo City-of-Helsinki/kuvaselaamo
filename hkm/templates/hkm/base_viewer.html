@@ -35,17 +35,17 @@
         </button>
         {% if user.is_authenticated %}
           {% if collection_record %}
-          <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+            <button class="actions__btn actions__btn--right nav__fav {% if is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if is_favorite %}{% trans 'Remove from favorites' %}{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% else %}
-          <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite">
+            <button class="actions__btn actions__btn--right nav__fav {% if record.is_favorite %}active{% endif %}" data-toggle="tooltip" data-placement="top" tooltip-title="{% if record.is_favorite %}{% trans 'Remove from favorites' %}{% else %}{% trans 'Add to favorites' %}{% endif %}" data-record-id="{{ hkm_id }}" id="popover-favorite" >
           {% endif %}
-          <i class="actions__icon">
-              <svg class="svg-icon nav__fav--heart">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
-              </svg>
-          </i>
-          </button>
-          <button class="has-popover actions__btn actions__btn--right" id="popover-add">
+              <i class="actions__icon">
+                <svg class="svg-icon nav__fav--heart">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
+                </svg>
+              </i>
+            </button>
+          <button class="actions__btn actions__btn--right actions_crop" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ record_web_url }}" data-toggle="modal" data-record-id="{{ record.id }}" data-target="#crop-and-add">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-plus"></use>
@@ -53,14 +53,7 @@
             </i>
           </button>
         {% endif %}
-        <button class="has-popover actions__btn actions__btn--right" id="popover-share" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
-          <i class="actions__icon">
-            <svg class="svg-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
-            </svg>
-          </i>
-        </button>
-        <button class="actions__btn actions__btn--right" id="popover-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
+        <button class="actions__btn actions__btn--right" id="actions-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
@@ -92,7 +85,7 @@
         <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
           {% csrf_token %}
           <input type="hidden" name="action" value="order">
-          <button name="orderbutton" class="has-popover actions__btn actions__btn pull-left" type="submit">
+          <button name="orderbutton" class="actions__btn actions__btn pull-left" type="submit">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
@@ -170,16 +163,18 @@
         {% endif %}
         {% if not user.profile.is_museum %}
         <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <form method="POST">
-            <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
-            {% csrf_token %}
-            {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
-            <input type="hidden" name="action" value="feedback" />
-            <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
-            <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
-          </form>
-        </div>
+          <div class="col-md-offset-2 col-md-8">
+            <form method="POST" id="feedback-form">
+              <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
+              {% csrf_token %}
+              {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
+              <input type="hidden" name="action" value="feedback" />
+              <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
+              <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
+              <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
+              <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+            </form>
+          </div>
         </div>
         {% endif %}
       </div>
@@ -261,7 +256,7 @@
         <div class="my-modal__content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{% trans 'Crop and add to collection' %}</h4>
+            <h4 class="modal-title">{% trans 'Add to collection' %}</h4>
           </div>
           <div class="my-modal__body modal-body row">
             <div class="col-md-4">
@@ -278,7 +273,7 @@
                   <span class="input-group-addon">
                     <input type="radio" checked="checked" name="collection" data-action="add-create-collection">
                   </span>
-                  <input type="text" class="form-control" id="add-collection-input" value="{% trans 'New collection' %}">
+                  <input type="text" class="form-control" id="add-collection-input" placeholder="{% trans 'New collection' %}">
                 </div>
               </div>
             </div>
