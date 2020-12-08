@@ -1,13 +1,14 @@
 {% load i18n l10n hkm_tags %}
-<div class="basket-row" data-campaignId="{{ line.campaign_id }}">
+<div class="basket-discount-row" data-campaignId="{{ line.campaign_id }}">
     {% if line.can_remove %}
         <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
     {% endif %}
-    <div class="basket-metadata discount">
+    <div class="discount-metadata">
         <h3>{{ line.text }} {% if line.code %} - {{ line.code }}{% endif %}</h3>
     </div>
 
-    <div class="basket-price basket-price-item">
-        <span class="basket-price-value">{{ line.total_price|localized_decimal:2 }} </span>
+    <div class="discount-price">
+        <span class="basket-price-value">{{ line.total_price|localized_decimal:2 }} € </span>
     </div>
+
 </div>

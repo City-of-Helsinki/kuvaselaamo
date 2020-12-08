@@ -200,15 +200,18 @@ button.navbar-toggle {
     &_wrapper {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        width: 100%;
 
         @media(min-width: 945px) {
             margin-left: 20px;
-            width: 55px;
         }
     }
 
     &_text {
+        white-space: nowrap;
+        text-align: center;
+
         @media (min-width: 945px) {
             visibility: hidden;
             width: 0;
@@ -216,10 +219,10 @@ button.navbar-toggle {
         }
 
         @media (max-width: 945px) {
-            width: auto;
-            max-width: 120px;
             margin-top: 3px;
             margin-right: 15px;
+            min-width: 120px;
+            text-align: center;
         }
     }
 
@@ -296,6 +299,7 @@ button.navbar-toggle {
 
         &_cart {
             order: 4;
+            width: 180px;
         }
     }
 }
