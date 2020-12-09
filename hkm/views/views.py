@@ -1181,6 +1181,7 @@ class BasketView(TemplateView):
         context["page_content"] = kwargs.get('page_content')
         context["order"] = kwargs.get('order')
         context['include_base'] = kwargs.get('include_base')
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         return context
 
     def handle_add(self, request):

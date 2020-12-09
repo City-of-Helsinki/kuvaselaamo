@@ -1,10 +1,12 @@
 import logging
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.views import View
 from django.views.generic import TemplateView
 
@@ -47,6 +49,7 @@ class OrderContactFormView(TemplateView):
         order = ProductOrder.objects.filter(
             pk__in=[line.order_pk for line in self.request.basket.product_lines]
         ).first()
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         context['order'] = order
         context['order_contact_information_form'] = OrderContactInformationForm(
             prefix='order-contact-information-form',
@@ -93,6 +96,7 @@ class OrderSummaryView(TemplateView):
         order = ProductOrder.objects.filter(
             pk__in=[line.order_pk for line in self.request.basket.product_lines]
         ).first()
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         context['order'] = order
         return context
 
