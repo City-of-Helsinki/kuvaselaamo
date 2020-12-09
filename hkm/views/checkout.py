@@ -17,7 +17,16 @@ from hkm.models.models import ProductOrder, ProductOrderCollection
 LOG = logging.getLogger(__name__)
 
 
-class OrderContactFormView(TemplateView):
+class BaseCheckoutView(TemplateView):
+    url_name = None
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        return context
+
+
+class OrderContactFormView(BaseCheckoutView):
     template_name = 'hkm/views/order_contact_information.html'
     url_name = 'hkm_order_contact_information'
 
@@ -49,7 +58,6 @@ class OrderContactFormView(TemplateView):
         order = ProductOrder.objects.filter(
             pk__in=[line.order_pk for line in self.request.basket.product_lines]
         ).first()
-        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         context['order'] = order
         context['order_contact_information_form'] = OrderContactInformationForm(
             prefix='order-contact-information-form',
@@ -58,7 +66,7 @@ class OrderContactFormView(TemplateView):
         return context
 
 
-class OrderSummaryView(TemplateView):
+class OrderSummaryView(BaseCheckoutView):
     template_name = 'hkm/views/order_summary.html'
     url_name = 'hkm_order_summary'
 
@@ -96,7 +104,6 @@ class OrderSummaryView(TemplateView):
         order = ProductOrder.objects.filter(
             pk__in=[line.order_pk for line in self.request.basket.product_lines]
         ).first()
-        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         context['order'] = order
         return context
 
