@@ -66,7 +66,7 @@ class BaseView(TemplateView):
         if not self.url_name:
             raise Exception(
                 'Subview must define url_name or overwrire get_url method')
-        params = {key: self.request.GET[key] for key in ("image_id", "search", "page") if key in self.request.GET}
+        params = {key: unidecode(self.request.GET[key].encode("utf-8").decode("utf-8")) for key in ("image_id", "search", "page") if key in self.request.GET}
         encoded_params = urlencode(params)
         url = reverse(self.url_name)
         if encoded_params:
