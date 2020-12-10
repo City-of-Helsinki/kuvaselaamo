@@ -29,7 +29,6 @@ from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
-from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
@@ -628,7 +627,7 @@ class SearchRecordDetailView(SearchView):
                         self).get_context_data(**kwargs)
         if self.record:
             record = self.record
-            record['full_res_url'] = HKM.get_full_res_image_url(
+            record['full_res_url'] = FINNA.get_full_res_image_url(
                 record['rawData']['thumbnail'])
             related_collections_ids = Record.objects.filter(
                 record_id=record['id']).values_list('collection', flat=True)
@@ -680,7 +679,7 @@ class BaseFinnaRecordDetailView(BaseView):
             record_data = FINNA.get_record(self.record_finna_id)
             if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
                     self.record['rawData']['thumbnail'])
         return True
 
@@ -725,7 +724,7 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     def handle_order(self, request, *args, **kwargs):
         order = ProductOrder(record_finna_id=self.record['id'])
 
-        full_res_image = HKM.download_image(self.record['full_res_url'])
+        full_res_image = FINNA.download_image(self.record['full_res_url'])
         width, height = full_res_image.size
         order.fullimg_original_width = width
         order.fullimg_original_height = height
@@ -776,7 +775,7 @@ class BaseOrderView(BaseView):
         return context
 
     def _get_cropped_full_res_file(self, record):
-        full_res_image = HKM.download_image(self.order.image_url)
+        full_res_image = FINNA.download_image(self.order.image_url)
         cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
                                          self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
         crop_io = StringIO.StringIO()
@@ -875,7 +874,7 @@ class OrderProductView(BaseOrderView):
         context['form_page'] = 1
         if self.record:
             context['record'] = self.record
-            self.order.image_url = HKM.get_full_res_image_url(
+            self.order.image_url = FINNA.get_full_res_image_url(
                 context['record']['rawData']['thumbnail'])
             self.order.save()
 
@@ -919,7 +918,7 @@ class OrderContactInformationView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
 
                 self.order.crop_image_url = self.handle_crop(context['record'])
@@ -953,7 +952,7 @@ class OrderSummaryView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
                     context['record']['rawData']['thumbnail'])
         return context
 
@@ -1027,7 +1026,7 @@ class AjaxCropRecordView(View):
             record_data = FINNA.get_record(self.record_id)
             if record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
                     self.record['rawData']['thumbnail'])
                 return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
             else:
@@ -1046,7 +1045,7 @@ class AjaxCropRecordView(View):
 
     def _get_cropped_full_res_file(self):
         try:
-            full_res_image = HKM.download_image(self.record['full_res_url'])
+            full_res_image = FINNA.download_image(self.record['full_res_url'])
         except:
             return None
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
