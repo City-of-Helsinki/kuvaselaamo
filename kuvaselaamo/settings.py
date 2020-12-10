@@ -30,9 +30,12 @@ env = environ.Env(
     AZURE_ACCOUNT_NAME=(str, ""),
     AZURE_ACCOUNT_KEY=(str, ""),
     AZURE_CONTAINER=(str, ""),
+    ENABLE_ANALYTICS=(bool, False),
 )
 
-DEBUG=env.bool('DEBUG')
+DEBUG = env.bool('DEBUG')
+
+ENABLE_ANALYTICS = env.bool('ENABLE_ANALYTICS')
 
 SECRET_KEY = env.str("SECRET_KEY")
 if DEBUG and not SECRET_KEY:
@@ -154,6 +157,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'kuvaselaamo.context_processors.global_settings',
             ),
         }
     },

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 # [Unreleased]
+### Added
+- Analytics usage may now be switched on/off with an environment variable
 
 ### Fixed
 - Logos disappearing when user entered shopping cart and checkout views.
