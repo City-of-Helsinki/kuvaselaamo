@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Removed extra linefeed symbols from feedback email.
 
 ## [2.0.0] - 2020-12-08
+### Fixed
+- Fixed issue where using scandinavian letters on search would crash the application.
+
+## [2.0.0] - 2020-12-08
 ### Added
 - Configurations for running the application using Docker and Kubernetes in the new Culture and Leisure 
 environment, including Gitlab configurations for running the CI/CD pipeline.
