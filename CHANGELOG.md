@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
+- Removed extra linefeed symbols from feedback email.
+
+## [2.0.1] - 2020-12-09
+### Fixed
+- Fixed issue where using scandinavian letters on search would crash the application.
 
 ## [2.0.0] - 2020-12-08
 ### Added
