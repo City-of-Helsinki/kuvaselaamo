@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
 
+### Changed
+- Full resolution image is fetched from Finna instead of the proxy server.
+
 ## [2.0.0] - 2020-12-08
 ### Added
 - Configurations for running the application using Docker and Kubernetes in the new Culture and Leisure 

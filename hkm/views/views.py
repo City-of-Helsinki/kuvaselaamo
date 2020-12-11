@@ -627,8 +627,8 @@ class SearchRecordDetailView(SearchView):
                         self).get_context_data(**kwargs)
         if self.record:
             record = self.record
-            record['full_res_url'] = FINNA.get_full_res_image_url(
-                record['rawData']['thumbnail'])
+            record['full_res_url'] = FINNA.get_image_url(
+                record['id'])
             related_collections_ids = Record.objects.filter(
                 record_id=record['id']).values_list('collection', flat=True)
             related_collections = Collection.objects.user_can_view(
@@ -679,8 +679,8 @@ class BaseFinnaRecordDetailView(BaseView):
             record_data = FINNA.get_record(self.record_finna_id)
             if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = FINNA.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_image_url(
+                    self.record['id'])
         return True
 
     def get_context_data(self, **kwargs):
@@ -874,8 +874,8 @@ class OrderProductView(BaseOrderView):
         context['form_page'] = 1
         if self.record:
             context['record'] = self.record
-            self.order.image_url = FINNA.get_full_res_image_url(
-                context['record']['rawData']['thumbnail'])
+            self.order.image_url = FINNA.get_image_url(
+                context['record']['id'])
             self.order.save()
 
         return context
@@ -918,8 +918,8 @@ class OrderContactInformationView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_image_url(
+                    context['record']['id'])
 
                 self.order.crop_image_url = self.handle_crop(context['record'])
 
@@ -952,8 +952,8 @@ class OrderSummaryView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_image_url(
+                    context['record']['id'])
         return context
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
@@ -1026,8 +1026,8 @@ class AjaxCropRecordView(View):
             record_data = FINNA.get_record(self.record_id)
             if record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = FINNA.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_image_url(
+                    self.record['id'])
                 return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
             else:
                 LOG.error('Could not get record data')
