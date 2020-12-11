@@ -724,7 +724,7 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     def handle_order(self, request, *args, **kwargs):
         order = ProductOrder(record_finna_id=self.record['id'])
 
-        full_res_image = FINNA.download_image(self.record['full_res_url'])
+        full_res_image = FINNA.download_image(self.record['id'])
         width, height = full_res_image.size
         order.fullimg_original_width = width
         order.fullimg_original_height = height
@@ -775,7 +775,7 @@ class BaseOrderView(BaseView):
         return context
 
     def _get_cropped_full_res_file(self, record):
-        full_res_image = FINNA.download_image(self.order.image_url)
+        full_res_image = FINNA.download_image(record['id'])
         cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
                                          self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
         crop_io = StringIO.StringIO()
@@ -1045,7 +1045,7 @@ class AjaxCropRecordView(View):
 
     def _get_cropped_full_res_file(self):
         try:
-            full_res_image = FINNA.download_image(self.record['full_res_url'])
+            full_res_image = FINNA.download_image(self.record['id'])
         except:
             return None
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
