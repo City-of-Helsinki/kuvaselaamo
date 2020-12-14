@@ -365,6 +365,69 @@ palikka
     })
   })
 })
+.define('app.addToCollection', ['jQuery', 'docReady'], function() {
+  $('#add-to-collection').on('click', function() {
+    const $action = $('input[name=collection]:checked').attr('data-action');
+    const $collectionTitle = $('#add-collection-input').val();
+    const $collectionId = $('input[name=collection]:checked').val();
+    const recordId = this.getAttribute('data-record-id');
+
+    console.log("ACTION", $action);
+    console.log("TITLE", $collectionTitle);
+    console.log("COLLECTION_ID", $collectionId);
+    console.log("RECORD_ID", recordId);
+
+    $.post('/ajax/collection/', {
+      action: $action,
+      collection_id: $collectionId,
+      collection_title: $collectionTitle,
+      record_id: recordId,
+    })
+      .done(function(data) {
+      console.log("DONE")
+    })
+      .fail(function(data) {
+        console.log("UTTER FAIL")
+      })
+
+    /*
+    *     var $action = $(this).val();
+    if ($action == 'add') {
+      $action = $('input[name=collection]:checked').attr('data-action');
+    }
+    var $collectionTitle = $('#add-collection-input').val();
+    var $collectionId = $('input[name=collection]:checked').val();
+    var imageData = cropper.getImageData();
+    var boxData = cropper.getCropBoxData();
+    $.post('/ajax/crop/', {
+      action: $action,
+      x: boxData.left,
+      y: boxData.top,
+      width: boxData.width,
+      height: boxData.height,
+      original_width: imageData.width,
+      original_height: imageData.height,
+      collection_id: $collectionId,
+      collection_title: $collectionTitle,
+      record_id: recordId,
+    })
+    .done(function(data){
+      if (data.url) {
+        window.open(data.url);
+        $('#crop-dl').remove();
+        $('.my-modal--crop').modal('hide');
+      }
+      else {
+        location.reload();
+      }
+    })
+    .fail(function(data){
+      alert('Crop failed.');
+    });
+    * */
+    console.log("ADD COLLECTION CLICKED")
+  })
+})
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   var $btn = $('.popover-list__btn');

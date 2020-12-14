@@ -1117,6 +1117,41 @@ class AjaxCropRecordView(View):
         return http.HttpResponse()
 
 
+class AjaxAddToCollection(View):
+    name = 'hkm_add_to_collection'
+
+    user = None
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST['action']
+        user = request.user
+        if action == 'add':
+            return self.handle_add_to_collection(self, request)
+        elif action == 'add-create-collection':
+            return self.handle_add_to_new_collection(self, request)
+        return http.HttpResponseBadRequest()
+
+    def handle_add_to_collection(self, request):
+        try:
+            collection = Collection.objects.filter(
+                owner=request.user).get(id=request.POST['collection_id'])
+        except KeyError, Collection.DoesNotExist:
+            LOG.error('Could not get collection')
+        else:
+            record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
+            record.save()
+            return http.HttpResponse()
+        return http.HttpResponseBadRequest()
+
+    def handle_add_to_new_collection(self, request):
+        print('REQUEST USER', request)
+        collection = Collection(owner=self.user, title=request.POST['collection_title'])
+        collection.save()
+        record = Record(creator=self.user, collection=collection, record_id=request.POST['record_id'])
+        record.save()
+        return http.HttpResponse()
+
+
 # VIEWS THAT SITE FOOTER LINKS TO
 class TranslatableContentView(BaseView):
 
