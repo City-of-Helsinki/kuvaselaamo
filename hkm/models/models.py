@@ -217,7 +217,7 @@ class Record(OrderedModel, BaseModel):
         LOG.debug('Getting web image absolute url', extra={
                   'data': {'finna_id': self.record_id}})
 
-        url = FINNA.get_image_url(self.record_id)
+        url = FINNA.get_full_res_image_url(self.record_id)
 
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
