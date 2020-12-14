@@ -196,7 +196,7 @@ class Record(OrderedModel, BaseModel):
         cache_key = '%s-details' % self.record_id
         data = DEFAULT_CACHE.get(cache_key, None)
         if data is None:
-            finna_results = FINNA.get_record(self.record_id)
+            finna_results = FINNA.get_full_res_image_url(self.record_id)
             if finna_results and 'records' in finna_results:
                 data = finna_results['records'][0]
                 DEFAULT_CACHE.set(cache_key, data, 60 * 15)
@@ -217,7 +217,7 @@ class Record(OrderedModel, BaseModel):
         LOG.debug('Getting web image absolute url', extra={
                   'data': {'finna_id': self.record_id}})
 
-        url = FINNA.get_full_res_image_url(self.record_id)
+        url = FINNA.get_image_url(self.record_id)
 
         LOG.debug('Got web image absolute url', extra={'data': {'url': url}})
         return url
