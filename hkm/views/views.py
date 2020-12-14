@@ -874,7 +874,7 @@ class OrderProductView(BaseOrderView):
         context['form_page'] = 1
         if self.record:
             context['record'] = self.record
-            self.order.image_url = FINNA.get_image_url(
+            self.order.image_url = FINNA.get_full_res_image_url(
                 context['record']['id'])
             self.order.save()
 
@@ -918,7 +918,7 @@ class OrderContactInformationView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = FINNA.get_image_url(
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
                     context['record']['id'])
 
                 self.order.crop_image_url = self.handle_crop(context['record'])
