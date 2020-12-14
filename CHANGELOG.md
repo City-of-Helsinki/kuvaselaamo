@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
 - Removed extra linefeed symbols from feedback email.
+- Fixed "out of index" error that occurred when user was browsing images and last image was reached.
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
