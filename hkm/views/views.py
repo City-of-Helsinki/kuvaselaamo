@@ -504,15 +504,9 @@ class SearchView(BaseView):
                     # Save previous - selected - next records to corresponding variables
                     record_index = records.index(record)
                     if record_index > 0:
-                        try:
-                            self.previous_record = records[record_index - 1]
-                        except:
-                            self.previous_record = None
+                        self.previous_record = records[record_index - 1]
                     if record_index < len(records) - 1:
-                        try:
-                            self.next_record = records[record_index + 1]
-                        except:
-                            self.next_record = None
+                        self.next_record = records[record_index + 1]
 
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
                     self.record = copy.deepcopy(record)
