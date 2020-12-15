@@ -26,7 +26,7 @@ urlpatterns = [
         views.CollectionDetailView.as_view(), name='hkm_collection'),
 
     url(r'^search/$', views.SearchView.as_view(), name='hkm_search'),
-    url(r'^search/record/$', views.SearchRecordDetailView.as_view(),
+    url(r'^search/details/$', views.SearchRecordDetailView.as_view(),
         name='hkm_search_record'),
 
     url(r'^record/feedback/$', views.RecordFeedbackView.as_view(), name='hkm_record_feedback'),

@@ -1323,7 +1323,7 @@ class RecordFeedbackView(View):
             record = request.POST.get("hkm_id", "")
             feedback = form.save(commit=False)
             feedback.record_id = record
-            path = "/info/" if not record else '/search/record/?image_id=' + record
+            path = "/info/" if not record else '/search/details/?image_id=' + record
             feedback.sent_from = "".join([request.get_host(), path])
             feedback.save()
             email.send_feedback_notification(feedback.id)
