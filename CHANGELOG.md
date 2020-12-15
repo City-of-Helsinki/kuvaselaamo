@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Analytics usage may now be switched on/off with an environment variable
 - Old-style links to image details are now supported.
+- Log configuration is now set up so that it ensures that the extra `data` parameter is present,
+thus allowing for more detailed logging.
 
 ### Fixed
 - Logos disappearing when user entered shopping cart and checkout views.
