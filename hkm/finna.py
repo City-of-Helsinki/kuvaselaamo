@@ -76,6 +76,10 @@ class FinnaClient(object):
         return result_data
 
     def get_record(self, record_id):
+        if record_id is None:
+            LOG.warn('Record id was None, cannot call Finna')
+            return None
+
         url = FinnaClient.API_ENDPOINT + 'record'
         payload = {
             'id[]': record_id,
