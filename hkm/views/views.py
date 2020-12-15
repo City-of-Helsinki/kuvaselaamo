@@ -1341,6 +1341,21 @@ class RecordFeedbackView(View):
             )
 
 
+class LegacyRecordDetailView(RedirectView):
+    """This class provides backward compatibility for links to Finna images written
+    as /record/<finna_id>/. It just redirects to the current implementation of the
+    details view using a 301 redirect."""
+
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        base_url = reverse('hkm_search_record')
+        query_string = urlencode({'image_id': kwargs['finna_id']})
+        url = '{}?{}'.format(base_url, query_string)
+
+        return url
+
+
 # ERROR HANDLERS
 
 
