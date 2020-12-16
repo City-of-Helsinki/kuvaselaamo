@@ -141,7 +141,7 @@ class OrderPBWNotify(View):
 # be sent to print
 
 
-class OrderConfirmation(TemplateView):
+class OrderConfirmation(BaseCheckoutView):
     template_name = 'hkm/views/order_show_result.html'
     url_name = 'hkm_order_confirmation'
     result = {}
