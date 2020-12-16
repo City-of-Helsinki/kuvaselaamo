@@ -119,7 +119,35 @@ class FinnaClient(object):
         return url
 
     def get_full_res_image_url(self, record_id):
-        return 'https://finna.fi/Cover/Show?id=%s&size=master&index=0' % record_id
+        timeout = 6
+
+        url_components = urlparse.urlparse('https://finna.fi/Cover/Show?id=hkm.HKMS000005:000003pf&fullres=1&index=0')
+        qs_params = dict(urlparse.parse_qsl(url_components.query))
+        qs_params['dataType'] = 'org'
+
+        url_components = list(url_components)
+        url_components[4] = urllib.urlencode(qs_params)
+        url = urlparse.urlunparse(url_components)
+
+        try:
+            r = requests.head(url, timeout=timeout)
+        except:
+            return None
+        else:
+            try:
+                r.raise_for_status()
+            except:
+                return None
+
+        try:
+            content_type = r.headers['content-type']
+            if 'image' in content_type:
+                return 'https://finna.fi/Cover/Show?id=%s&size=master&index=0' % record_id
+
+        except KeyError:
+            pass
+
+        return None
 
     def download_image(self, record_id):
         r = requests.get(self.get_full_res_image_url(record_id), stream=True)
