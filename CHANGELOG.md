@@ -14,15 +14,16 @@ thus allowing for more detailed logging.
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
 - Removed extra linefeed symbols from feedback email.
+- Fixed "out of index" error that occurred when user was browsing images and last image was reached.
 - "Browse albums" view no longer displays duplicate collections when a collection is both
 public and featured
+
+### Changed
+- Full resolution image is fetched from Finna instead of the proxy server.
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
 - Fixed issue where using scandinavian letters on search would crash the application.
-
-### Changed
-- Full resolution image is fetched from Finna instead of the proxy server.
 
 ## [2.0.0] - 2020-12-08
 ### Added

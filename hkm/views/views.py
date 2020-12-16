@@ -501,11 +501,11 @@ class SearchView(BaseView):
                 # If user came from list view, get selected image from session
                 else:
                     # Save previous - selected - next records to corresponding variables
-                    record_index = record.get('index')
-                    if record_index > 1:
-                        self.previous_record = records[record_index - 2]
-                    if record_index < len(records):
-                        self.next_record = records[record_index]
+                    record_index = records.index(record)
+                    if record_index > 0:
+                        self.previous_record = records[record_index - 1]
+                    if record_index < len(records) - 1:
+                        self.next_record = records[record_index + 1]
 
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
                     self.record = copy.deepcopy(record)
@@ -521,9 +521,6 @@ class SearchView(BaseView):
                 results = self.get_search_result(self.search_term, self.page, self.page_size)
                 self.search_result = results
 
-        # calculate global index for the record, this is used to form links to search detail view
-        # which is technically same view as this, it only shows one image per
-        # page
         if self.search_result:
             favorite_records = None
             if request.user.is_authenticated():
@@ -538,13 +535,10 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get('record'):
-                i = 1  # record's index in current page
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
+                    'record'):
+                # Check also if this record is one of user's favorites
                 for record in self.search_result['records']:
-                    p = self.search_result['page'] - 1  # zero indexed page
-                    record['index'] = p * self.search_result['limit'] + i
-                    i += 1
-                    # Check also if this record is one of user's favorites
                     if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
                 # If user is loading more pictures add them to session.
