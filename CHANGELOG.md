@@ -19,6 +19,9 @@ thus allowing for more detailed logging.
 ### Fixed
 - Fixed issue where using scandinavian letters on search would crash the application.
 
+### Changed
+- Full resolution image is fetched from Finna instead of the proxy server.
+
 ## [2.0.0] - 2020-12-08
 ### Added
 - Configurations for running the application using Docker and Kubernetes in the new Culture and Leisure 
