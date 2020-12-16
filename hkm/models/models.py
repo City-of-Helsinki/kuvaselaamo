@@ -196,7 +196,7 @@ class Record(OrderedModel, BaseModel):
         cache_key = '%s-details' % self.record_id
         data = DEFAULT_CACHE.get(cache_key, None)
         if data is None:
-            finna_results = FINNA.get_full_res_image_url(self.record_id)
+            finna_results = FINNA.get_record(self.record_id)
             if finna_results and 'records' in finna_results:
                 data = finna_results['records'][0]
                 DEFAULT_CACHE.set(cache_key, data, 60 * 15)
@@ -208,7 +208,7 @@ class Record(OrderedModel, BaseModel):
     def get_full_res_image_absolute_url(self):
         record_data = self.get_details()
         if record_data:
-            return FINNA.get_image_url(
+            return FINNA.get_full_res_image_url(
                              record_data['id'])
         else:
             LOG.debug('Could not get image from Finna API')

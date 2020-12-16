@@ -121,7 +121,8 @@ class FinnaClient(object):
     def get_full_res_image_url(self, record_id):
         timeout = 6
 
-        url_components = urlparse.urlparse('https://finna.fi/Cover/Show?id=hkm.HKMS000005:000003pf&fullres=1&index=0')
+        # Form url here. If get_image_url is used, urlparse will parse id part really weirdly and query will fail.
+        url_components = urlparse.urlparse('https://finna.fi/Cover/Show?id=' + record_id + '&fullres=1&index=0')
         qs_params = dict(urlparse.parse_qsl(url_components.query))
         qs_params['dataType'] = 'org'
 
