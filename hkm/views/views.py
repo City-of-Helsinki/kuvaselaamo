@@ -194,12 +194,11 @@ class PublicCollectionsView(BaseCollectionListView):
     def get_collection_qs(self, request, *args, **kwargs):
         if request.user.is_authenticated() and request.user.profile.is_museum:
             return request.user.profile.albums.all()
-        return Collection.objects.filter(is_public=True).order_by('created')
+        return Collection.objects.filter(is_public=True, is_featured=False).order_by('created')
 
     def get_context_data(self, **kwargs):
         context = super(PublicCollectionsView, self).get_context_data(**kwargs)
-        context['featured_collections'] = self.collection_qs.filter(
-            is_featured=True)
+        context['featured_collections'] = Collection.objects.filter(is_featured=True).order_by('created')
         return context
 
 
