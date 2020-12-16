@@ -28,10 +28,9 @@ urlpatterns = [
     url(r'^search/$', views.SearchView.as_view(), name='hkm_search'),
     url(r'^search/details/$', views.SearchRecordDetailView.as_view(),
         name='hkm_search_record'),
+    url(r'^record/feedback/$', views.RecordFeedbackView.as_view(), name='hkm_record_feedback'),
     url(r'^record/(?P<finna_id>[a-zA-Z0-9:.]+)/$', views.LegacyRecordDetailView.as_view(),
         name='hkm_legacy_record_details'),
-
-    url(r'^record/feedback/$', views.RecordFeedbackView.as_view(), name='hkm_record_feedback'),
 
     url(r'^signup/$', restrict_for_museum(views.SignUpView.as_view()), name='hkm_signup'),
     url(r'^language/$', views.LanguageView.as_view(), name='hkm_language'),
