@@ -264,14 +264,20 @@ LOG_LEVEL = env('LOG_LEVEL')
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    'filters': {
+        'extra_data_filter': {
+            '()': 'hkm.log_filters.ExtraDataFilter'
+        },
+    },
     'formatters': {
         'simple': {
-            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s',
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s %(data)s',
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
+            "filters": ["extra_data_filter"],
             "formatter": "simple"
         }
     },

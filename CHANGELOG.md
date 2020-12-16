@@ -6,12 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 # [Unreleased]
 ### Added
 - Analytics usage may now be switched on/off with an environment variable
+- Old-style links to image details are now supported.
+- Log configuration is now set up so that it ensures that the extra `data` parameter is present,
+thus allowing for more detailed logging.
 
 ### Fixed
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
 - Removed extra linefeed symbols from feedback email.
 - Fixed "out of index" error that occurred when user was browsing images and last image was reached.
+- "Browse albums" view no longer displays duplicate collections when a collection is both
+public and featured
+
+### Changed
+- Full resolution image is fetched from Finna instead of the proxy server.
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
