@@ -437,6 +437,7 @@ class SearchView(BaseView):
     previous_record = None
     record = None
     next_record = None
+    single_image = False
 
     search_term = None
     page = 1
@@ -497,6 +498,7 @@ class SearchView(BaseView):
                 if not record:
                     result = FINNA.get_record(finna_id)
                     self.search_result = result
+                    self.single_image = True
                     self.record = result.get('records')[0] if result else None
                 # If user came from list view, get selected image from session
                 else:
@@ -633,6 +635,7 @@ class SearchRecordDetailView(SearchView):
             context['record'] = record
             context['next_record'] = self.next_record
             context['hkm_id'] = record['id']
+            context['single_image'] = self.single_image
             LOG.debug('record id', extra={'data': {'finnaid': record['id']}})
             context['record_web_url'] = FINNA.get_image_url(record['id'])
         if self.request.user.is_authenticated():

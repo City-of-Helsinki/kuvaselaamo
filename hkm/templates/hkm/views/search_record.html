@@ -20,7 +20,7 @@
 {% block content %}
 
   {% if search_result %}
-    {% if previous_record or next_record %}
+    {% if not single_image %}
       <div class="back-to">
         <span class="back-to__title">{{ record.title }}</span><br>
         <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
