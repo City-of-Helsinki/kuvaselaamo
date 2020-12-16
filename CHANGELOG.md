@@ -14,6 +14,8 @@ thus allowing for more detailed logging.
 - Logos disappearing when user entered shopping cart and checkout views.
 - Record details should no longer show extra commas after end of the line.
 - Removed extra linefeed symbols from feedback email.
+- "Browse albums" view no longer displays duplicate collections when a collection is both
+public and featured
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
