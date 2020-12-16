@@ -492,6 +492,7 @@ class SearchView(BaseView):
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
                 finna_id = request.GET.get('image_id')
+                LOG.debug('Displaying image details', extra={'data': {'finna_id': finna_id}})
                 # Check if record is found in session, if not, get it from finna
                 records = session_search_result.get('records', [])
                 record = next((x for x in records if x['id'] == finna_id), None)
