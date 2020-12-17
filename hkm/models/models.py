@@ -27,7 +27,6 @@ from parler.models import TranslatableModel, TranslatedFields
 from phonenumber_field.modelfields import PhoneNumberField
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.campaigns import Campaign, CampaignStatus, CampaignCode, CodeUsage
 from hkm.paybyway_client import client as PBW
 from hkm.printmotor_client import client as PRINTMOTOR
@@ -209,17 +208,8 @@ class Record(OrderedModel, BaseModel):
     def get_full_res_image_absolute_url(self):
         record_data = self.get_details()
         if record_data:
-            record_url = record_data['rawData']['thumbnail']
-            cache_key = '%s-record-preview-url' % record_url
-            full_res_url = DEFAULT_CACHE.get(cache_key, None)
-            if full_res_url is None:
-                full_res_url = HKM.get_full_res_image_url(
-                    record_data['rawData']['thumbnail'])
-                DEFAULT_CACHE.set(cache_key, full_res_url, 60 * 15)
-            else:
-                LOG.debug('Got record full res url from cache', extra={
-                          'data': {'full_res_url': repr(full_res_url)}})
-            return full_res_url
+            return FINNA.get_full_res_image_url(
+                             record_data['id'])
         else:
             LOG.debug('Could not get image from Finna API')
 

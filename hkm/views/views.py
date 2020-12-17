@@ -29,7 +29,6 @@ from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
-from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
@@ -195,12 +194,11 @@ class PublicCollectionsView(BaseCollectionListView):
     def get_collection_qs(self, request, *args, **kwargs):
         if request.user.is_authenticated() and request.user.profile.is_museum:
             return request.user.profile.albums.all()
-        return Collection.objects.filter(is_public=True).order_by('created')
+        return Collection.objects.filter(is_public=True, is_featured=False).order_by('created')
 
     def get_context_data(self, **kwargs):
         context = super(PublicCollectionsView, self).get_context_data(**kwargs)
-        context['featured_collections'] = self.collection_qs.filter(
-            is_featured=True)
+        context['featured_collections'] = Collection.objects.filter(is_featured=True).order_by('created')
         return context
 
 
@@ -439,6 +437,7 @@ class SearchView(BaseView):
     previous_record = None
     record = None
     next_record = None
+    single_image = False
 
     search_term = None
     page = 1
@@ -492,21 +491,23 @@ class SearchView(BaseView):
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
                 finna_id = request.GET.get('image_id')
+                LOG.debug('Displaying image details', extra={'data': {'finna_id': finna_id}})
                 # Check if record is found in session, if not, get it from finna
                 records = session_search_result.get('records', [])
                 record = next((x for x in records if x['id'] == finna_id), None)
                 if not record:
                     result = FINNA.get_record(finna_id)
                     self.search_result = result
+                    self.single_image = True
                     self.record = result.get('records')[0] if result else None
                 # If user came from list view, get selected image from session
                 else:
                     # Save previous - selected - next records to corresponding variables
-                    record_index = record.get('index')
-                    if record_index > 1:
-                        self.previous_record = records[record_index - 2]
-                    if record_index < len(records):
-                        self.next_record = records[record_index]
+                    record_index = records.index(record)
+                    if record_index > 0:
+                        self.previous_record = records[record_index - 1]
+                    if record_index < len(records) - 1:
+                        self.next_record = records[record_index + 1]
 
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
                     self.record = copy.deepcopy(record)
@@ -522,9 +523,6 @@ class SearchView(BaseView):
                 results = self.get_search_result(self.search_term, self.page, self.page_size)
                 self.search_result = results
 
-        # calculate global index for the record, this is used to form links to search detail view
-        # which is technically same view as this, it only shows one image per
-        # page
         if self.search_result:
             favorite_records = None
             if request.user.is_authenticated():
@@ -539,15 +537,14 @@ class SearchView(BaseView):
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get('record'):
-                i = 1  # record's index in current page
-                for record in self.search_result['records']:
-                    p = self.search_result['page'] - 1  # zero indexed page
-                    record['index'] = p * self.search_result['limit'] + i
-                    i += 1
-                    # Check also if this record is one of user's favorites
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
+                    'record'):
+                # Check also if this record is one of user's favorites
+                for idx, record in enumerate(self.search_result['records'], 1):
+                    record['index'] = idx
                     if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
+
                 # If user is loading more pictures add them to session.
                 # Check for page changed, this will prevent session duplicating itself
                 # endlessly if search button is pressed over and over again.
@@ -628,8 +625,8 @@ class SearchRecordDetailView(SearchView):
                         self).get_context_data(**kwargs)
         if self.record:
             record = self.record
-            record['full_res_url'] = HKM.get_full_res_image_url(
-                record['rawData']['thumbnail'])
+            record['full_res_url'] = FINNA.get_full_res_image_url(
+                record['id'])
             related_collections_ids = Record.objects.filter(
                 record_id=record['id']).values_list('collection', flat=True)
             related_collections = Collection.objects.user_can_view(
@@ -640,6 +637,7 @@ class SearchRecordDetailView(SearchView):
             context['record'] = record
             context['next_record'] = self.next_record
             context['hkm_id'] = record['id']
+            context['single_image'] = self.single_image
             LOG.debug('record id', extra={'data': {'finnaid': record['id']}})
             context['record_web_url'] = FINNA.get_image_url(record['id'])
         if self.request.user.is_authenticated():
@@ -680,8 +678,8 @@ class BaseFinnaRecordDetailView(BaseView):
             record_data = FINNA.get_record(self.record_finna_id)
             if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
+                    self.record['id'])
         return True
 
     def get_context_data(self, **kwargs):
@@ -725,7 +723,7 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     def handle_order(self, request, *args, **kwargs):
         order = ProductOrder(record_finna_id=self.record['id'])
 
-        full_res_image = HKM.download_image(self.record['full_res_url'])
+        full_res_image = FINNA.download_image(self.record['id'])
         width, height = full_res_image.size
         order.fullimg_original_width = width
         order.fullimg_original_height = height
@@ -776,7 +774,7 @@ class BaseOrderView(BaseView):
         return context
 
     def _get_cropped_full_res_file(self, record):
-        full_res_image = HKM.download_image(self.order.image_url)
+        full_res_image = FINNA.download_image(record['id'])
         cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
                                          self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
         crop_io = StringIO.StringIO()
@@ -875,8 +873,8 @@ class OrderProductView(BaseOrderView):
         context['form_page'] = 1
         if self.record:
             context['record'] = self.record
-            self.order.image_url = HKM.get_full_res_image_url(
-                context['record']['rawData']['thumbnail'])
+            self.order.image_url = FINNA.get_full_res_image_url(
+                context['record']['id'])
             self.order.save()
 
         return context
@@ -919,8 +917,8 @@ class OrderContactInformationView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
+                    context['record']['id'])
 
                 self.order.crop_image_url = self.handle_crop(context['record'])
 
@@ -953,8 +951,8 @@ class OrderSummaryView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
+                    context['record']['id'])
         return context
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
@@ -1027,8 +1025,8 @@ class AjaxCropRecordView(View):
             record_data = FINNA.get_record(self.record_id)
             if record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
+                    self.record['id'])
                 return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
             else:
                 LOG.error('Could not get record data')
@@ -1046,7 +1044,7 @@ class AjaxCropRecordView(View):
 
     def _get_cropped_full_res_file(self):
         try:
-            full_res_image = HKM.download_image(self.record['full_res_url'])
+            full_res_image = FINNA.download_image(self.record['id'])
         except:
             return None
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
@@ -1167,8 +1165,9 @@ class SiteinfoTermsView(TranslatableContentView):
         return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
 
 
-class BasketView(TemplateView):
+class BasketView(BaseView):
     template_name = 'hkm/views/basket.html'
+    url_name = 'basket'
 
     def get_context_data(self, **kwargs):
         context = super(BasketView, self).get_context_data(**kwargs)
@@ -1322,7 +1321,7 @@ class RecordFeedbackView(View):
             record = request.POST.get("hkm_id", "")
             feedback = form.save(commit=False)
             feedback.record_id = record
-            path = "/info/" if not record else '/search/record/?image_id=' + record
+            path = "/info/" if not record else '/search/details/?image_id=' + record
             feedback.sent_from = "".join([request.get_host(), path])
             feedback.save()
             email.send_feedback_notification(feedback.id)
@@ -1338,6 +1337,21 @@ class RecordFeedbackView(View):
                 json.dumps(response_data),
                 content_type="application/json"
             )
+
+
+class LegacyRecordDetailView(RedirectView):
+    """This class provides backward compatibility for links to Finna images written
+    as /record/<finna_id>/. It just redirects to the current implementation of the
+    details view using a 301 redirect."""
+
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        base_url = reverse('hkm_search_record')
+        query_string = urlencode({'image_id': kwargs['finna_id']})
+        url = '{}?{}'.format(base_url, query_string)
+
+        return url
 
 
 # ERROR HANDLERS

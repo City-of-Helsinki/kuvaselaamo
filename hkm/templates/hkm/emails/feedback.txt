@@ -1,11 +1,11 @@
 {% load i18n %}
-{% trans 'Name' %}: {{ feedback.full_name|default:"No name" }}\n
-{% trans 'Email' %}: {{ feedback.email|default:"No email" }}\n\n
+{% trans 'Name' %}: {{ feedback.full_name|default:"No name" }}
+{% trans 'Email' %}: {{ feedback.email|default:"No email" }}
 
 {% if feedback.record_id %}
     {% trans 'Record' %}: {{ MY_DOMAIN }}{% url 'hkm_search_record' %}?image_id={{ feedback.record_id }}
 {% endif %}
 
-{% trans 'Message' %}: {{ feedback.content }}\n\n
+{% trans 'Message' %}: {{ feedback.content }}
 
 
