@@ -286,6 +286,8 @@
             </div>
           </div>
           <div class="modal-footer">
+            <p class="add-to-collection success hidden" id="ac-success">{% trans 'Feedback success' %}</p>
+            <p class="add-to-collection error hidden" id="ac-error">{% trans 'Feedback error' %}</p>
             <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
             <button class="hkm-btn hkm-btn--default btn btn-primary" type="button" id="add-to-collection" value="add" data-record-id="{{ hkm_id }}">{% trans 'Add to collection' %}</button>
           </div>

@@ -1037,11 +1037,6 @@ class AjaxCropRecordView(View):
     def post(self, request, *args, **kwargs):
         if self.action == 'download':
             return self.handle_download(request, *args, **kwargs)
-        if request.user.is_authenticated():
-            if self.action == 'add':
-                return self.handle_add_to_collection(request, *args, **kwargs)
-            elif self.action == 'add-create-collection':
-                return self.handle_add_to_new_collection(request, *args, **kwargs)
         return http.HttpResponseBadRequest()
 
     def _get_cropped_full_res_file(self):
@@ -1096,42 +1091,19 @@ class AjaxCropRecordView(View):
                   'data': {'url': tmp_image.edited_image.url}})
         return http.JsonResponse({'url': tmp_image.edited_image.url})
 
-    def handle_add_to_collection(self, request, *args, **kwargs):
-        try:
-            collection = Collection.objects.filter(
-                owner=request.user).get(id=request.POST['collection_id'])
-        except KeyError, Collection.DoesNotExist:
-            LOG.error('Could not get collection')
-        else:
-            record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
-            record.save()
-            return http.HttpResponse()
-        return http.HttpResponseBadRequest()
-
-    def handle_add_to_new_collection(self, request, *args, **kwargs):
-        collection = Collection(
-            owner=request.user, title=request.POST['collection_title'])
-        collection.save()
-        record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
-        record.save()
-        return http.HttpResponse()
-
 
 class AjaxAddToCollection(View):
     name = 'hkm_add_to_collection'
 
-    user = None
-
     def post(self, request, *args, **kwargs):
         action = request.POST['action']
-        user = request.user
         if action == 'add':
-            return self.handle_add_to_collection(self, request)
+            return self.handle_add_to_collection(request, *args, **kwargs)
         elif action == 'add-create-collection':
-            return self.handle_add_to_new_collection(self, request)
+            return self.handle_add_to_new_collection(request, *args, **kwargs)
         return http.HttpResponseBadRequest()
 
-    def handle_add_to_collection(self, request):
+    def handle_add_to_collection(self, request, *args, **kwargs):
         try:
             collection = Collection.objects.filter(
                 owner=request.user).get(id=request.POST['collection_id'])
@@ -1143,11 +1115,10 @@ class AjaxAddToCollection(View):
             return http.HttpResponse()
         return http.HttpResponseBadRequest()
 
-    def handle_add_to_new_collection(self, request):
-        print('REQUEST USER', request)
-        collection = Collection(owner=self.user, title=request.POST['collection_title'])
+    def handle_add_to_new_collection(self, request, *args, **kwargs):
+        collection = Collection(owner=request.user, title=request.POST['collection_title'])
         collection.save()
-        record = Record(creator=self.user, collection=collection, record_id=request.POST['record_id'])
+        record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
         record.save()
         return http.HttpResponse()
 
