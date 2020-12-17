@@ -378,14 +378,12 @@ palikka
       collection_title: collectionTitle,
       record_id: recordId,
     })
-      .done(function(data) {
-        $("#ac-success").removeClass("hidden")
-        setTimeout(() => {
-            $('#collection-add').modal('hide');
-        }, 2000)
+      .done(function() {
+        $('#collection-add').modal('hide');
     })
-      .fail(function(data) {
-        $("#ac-error").removeClass("hidden")
+      .fail(function() {
+        // At the moment there is no better way to display errors.
+        alert('Add to collection failed.')
       })
   })
 })
