@@ -540,9 +540,11 @@ class SearchView(BaseView):
             if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
                     'record'):
                 # Check also if this record is one of user's favorites
-                for record in self.search_result['records']:
+                for idx, record in enumerate(self.search_result['records'], 1):
+                    record['index'] = idx
                     if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
+
                 # If user is loading more pictures add them to session.
                 # Check for page changed, this will prevent session duplicating itself
                 # endlessly if search button is pressed over and over again.
