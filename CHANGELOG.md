@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-# [Unreleased]
+# [2.1.0] - 2020-12-17
 ### Added
 - Analytics usage may now be switched on/off with an environment variable
 - Old-style links to image details are now supported.
@@ -17,9 +17,12 @@ thus allowing for more detailed logging.
 - Fixed "out of index" error that occurred when user was browsing images and last image was reached.
 - "Browse albums" view no longer displays duplicate collections when a collection is both
 public and featured
+- Language switcher links are now available in the shopping cart views.
 
 ### Changed
 - Full resolution image is fetched from Finna instead of the proxy server.
+- Image details view is now located at `/search/details` so that any old links from search engines or 
+other places will get a `404 Not found` from `/search/record`.
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
