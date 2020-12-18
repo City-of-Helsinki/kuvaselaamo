@@ -49,8 +49,8 @@ urlpatterns = [
         name='hkm_ajax_record_fav'),
     url(r'^ajax/crop/$', views.AjaxCropRecordView.as_view(),
         name='hkm_ajax_crop'),
-        url(r'^ajax/collection/$', views.AjaxAddToCollection.as_view(),
-            name='hkm_add_to_collection'),
+    url(r'^ajax/collection/$', views.AjaxAddToCollection.as_view(),
+        name='hkm_add_to_collection'),
     url(r'^basket/$', views.BasketView.as_view(), name='basket'),
     url(r'^basket/checkout/$', views.BasketView.as_view(), {"phase": "checkout"}, name='checkout'),
 ]
