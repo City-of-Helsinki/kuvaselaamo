@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Remove HEAD query and cache from get_full_res_image_url method.
 
+### Fixed
+- When "Load more" is pressed record index counting should start at correct place.
+
 # [2.1.0] - 2020-12-17
 ### Added
 - Analytics usage may now be switched on/off with an environment variable
