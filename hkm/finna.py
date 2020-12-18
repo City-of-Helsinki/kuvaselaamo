@@ -2,10 +2,7 @@
 
 import logging
 import math
-import urllib
-import urlparse
 from StringIO import StringIO
-from django.core.cache import cache
 
 import requests
 from PIL import Image
@@ -124,57 +121,7 @@ class FinnaClient(object):
         return url
 
     def get_full_res_image_url(self, record_id):
-        timeout = 6
-
-        cache_key = 'hkm_%s' % record_id
-        cached_value = cache.get(cache_key)
-        if cached_value:
-            return cached_value
-
-        # Form url here. If get_image_url is used, urlparse will parse id part really weirdly and query will fail.
-        url_components = urlparse.urlparse('https://finna.fi/Cover/Show?id=' + record_id + '&fullres=1&index=0')
-        qs_params = dict(urlparse.parse_qsl(url_components.query))
-        qs_params['dataType'] = 'org'
-
-        url_components = list(url_components)
-        url_components[4] = urllib.urlencode(qs_params)
-        url = urlparse.urlunparse(url_components)
-
-        try:
-            r = requests.head(url, timeout=timeout)
-        except requests.exceptions.RequestException:
-            LOG.error('Failed to communicate with FINNA image server',
-                      exc_info=True)
-
-            # Cache negative result for an hour
-            cache.set(cache_key, None, 3600)
-            return None
-        else:
-            try:
-                r.raise_for_status()
-            except requests.exceptions.HTTPError:
-                LOG.error('Failed to communicate with FINNA image server', exc_info=True,
-                          extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
-
-                # Cache negative result for an hour
-                cache.set(cache_key, None, 3600)
-                return None
-
-        LOG.debug('Got result from FINNA image server',
-                  extra={'data': {'url': url, 'result_headers': repr(r.headers)}})
-
-        try:
-            content_type = r.headers['content-type']
-            if 'image' in content_type:
-                # Store value to cache for a week
-                full_res_url = 'https://finna.fi/Cover/Show?id=%s&size=master&index=0' % record_id
-                cache.set(cache_key, full_res_url, 7 * 24 * 3600)
-                return full_res_url
-
-        except KeyError:
-            pass
-
-        return None
+        return 'https://finna.fi/Cover/Show?id=%s&size=master&index=0' % record_id
 
     def download_image(self, record_id):
         r = requests.get(self.get_full_res_image_url(record_id), stream=True)
