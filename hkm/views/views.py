@@ -1102,7 +1102,7 @@ class AjaxAddToCollection(View):
                 return self.handle_add_to_collection(request, *args, **kwargs)
             elif action == 'add-create-collection':
                 return self.handle_add_to_new_collection(request, *args, **kwargs)
-        return http.HttpResponseBadRequest()
+        return http.HttpResponseForbidden()
 
     def handle_add_to_collection(self, request, *args, **kwargs):
         try:
