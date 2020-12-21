@@ -1093,7 +1093,6 @@ class AjaxCropRecordView(View):
 
 
 class AjaxAddToCollection(View):
-    name = 'hkm_add_to_collection'
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -1102,7 +1101,7 @@ class AjaxAddToCollection(View):
                 return self.handle_add_to_collection(request, *args, **kwargs)
             elif action == 'add-create-collection':
                 return self.handle_add_to_new_collection(request, *args, **kwargs)
-        return http.HttpResponseForbidden()
+        return http.HttpResponseBadRequest()
 
     def handle_add_to_collection(self, request, *args, **kwargs):
         try:
