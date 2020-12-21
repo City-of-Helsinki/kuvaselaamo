@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [Unreleased]
+### Added
+- Added lang attribute to language menu.
+
+### Changed
+- Add to collection modal no longer shows cropper.
+
 # [2.2.0] - 2020-12-21
 ### Changed
 - Remove HEAD query and cache from get_full_res_image_url method.
@@ -31,9 +38,6 @@ public and featured
 - Full resolution image is fetched from Finna instead of the proxy server.
 - Image details view is now located at `/search/details` so that any old links from search engines or 
 other places will get a `404 Not found` from `/search/record`.
-
-### Changed
-- Add to collection modal no longer shows cropper.
 
 ## [2.0.1] - 2020-12-09
 ### Fixed
