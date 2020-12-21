@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added lang attribute to language menu.
 
 ### Changed
+- Add to collection modal no longer shows cropper.
+
+# [2.2.0] - 2020-12-21
+### Changed
 - Remove HEAD query and cache from get_full_res_image_url method.
 
 ### Fixed

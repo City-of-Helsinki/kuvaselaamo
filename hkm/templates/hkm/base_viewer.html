@@ -45,7 +45,7 @@
                 </svg>
               </i>
             </button>
-          <button class="actions__btn actions__btn--right actions_crop" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ record_web_url }}" data-toggle="modal" data-record-id="{{ record.id }}" data-target="#crop-and-add">
+          <button class="actions__btn actions__btn--right" id="actions-add" tooltip-title="{% trans 'Add to collection' %}" data-img-url="{{ record_web_url }}" data-toggle="modal" data-target="#collection-add">
             <i class="actions__icon">
               <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-plus"></use>
@@ -253,7 +253,7 @@
       </div>
     </div>
 
-    <div class="my-modal my-modal--crop modal fade" id="crop-and-add" tabindex="-1" role="dialog">
+    <div class="my-modal modal fade" id="collection-add" tabindex="-1" role="dialog">
       <div class="my-modal__dialog my-modal__dialog--crop-lg modal-dialog modal-lg" role="document">
         <div class="my-modal__content modal-content">
           <div class="modal-header">
@@ -280,14 +280,14 @@
               </div>
             </div>
             <div class="col-md-8">
-              <div class="crop__container">
-                <img class="crop__image"></img>
+              <div class="modal-image__container">
+                <img class="modal__image" src="{{ record_web_url }}"></img>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button class="hkm-btn hkm-btn--cancel btn btn-default" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
-            <button class="hkm-btn hkm-btn--default crop__submit btn btn-primary" type="button" id="crop-add-submit" value="add">{% trans 'Add to collection' %}</button>
+            <button class="hkm-btn hkm-btn--default btn btn-primary" type="button" id="add-to-collection" value="add" data-record-id="{{ hkm_id }}">{% trans 'Add to collection' %}</button>
           </div>
         </div>
       </div>

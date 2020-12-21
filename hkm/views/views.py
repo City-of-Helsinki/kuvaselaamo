@@ -1039,11 +1039,6 @@ class AjaxCropRecordView(View):
     def post(self, request, *args, **kwargs):
         if self.action == 'download':
             return self.handle_download(request, *args, **kwargs)
-        if request.user.is_authenticated():
-            if self.action == 'add':
-                return self.handle_add_to_collection(request, *args, **kwargs)
-            elif self.action == 'add-create-collection':
-                return self.handle_add_to_new_collection(request, *args, **kwargs)
         return http.HttpResponseBadRequest()
 
     def _get_cropped_full_res_file(self):
@@ -1098,6 +1093,18 @@ class AjaxCropRecordView(View):
                   'data': {'url': tmp_image.edited_image.url}})
         return http.JsonResponse({'url': tmp_image.edited_image.url})
 
+
+class AjaxAddToCollection(View):
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            action = request.POST['action']
+            if action == 'add':
+                return self.handle_add_to_collection(request, *args, **kwargs)
+            elif action == 'add-create-collection':
+                return self.handle_add_to_new_collection(request, *args, **kwargs)
+        return http.HttpResponseBadRequest()
+
     def handle_add_to_collection(self, request, *args, **kwargs):
         try:
             collection = Collection.objects.filter(
@@ -1105,16 +1112,15 @@ class AjaxCropRecordView(View):
         except KeyError, Collection.DoesNotExist:
             LOG.error('Could not get collection')
         else:
-            record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
+            record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
             record.save()
             return http.HttpResponse()
         return http.HttpResponseBadRequest()
 
     def handle_add_to_new_collection(self, request, *args, **kwargs):
-        collection = Collection(
-            owner=request.user, title=request.POST['collection_title'])
+        collection = Collection(owner=request.user, title=request.POST['collection_title'])
         collection.save()
-        record = Record(creator=request.user, collection=collection, record_id=self.record['id'])
+        record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
         record.save()
         return http.HttpResponse()
 
