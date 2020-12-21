@@ -32,6 +32,9 @@ public and featured
 - Image details view is now located at `/search/details` so that any old links from search engines or 
 other places will get a `404 Not found` from `/search/record`.
 
+### Changed
+- Add to collection modal no longer shows cropper.
+
 ## [2.0.1] - 2020-12-09
 ### Fixed
 - Fixed issue where using scandinavian letters on search would crash the application.

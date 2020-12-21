@@ -1794,11 +1794,13 @@ div.grid__fav.active {
   text-decoration: none;
 }
 /* Crop */
+.modal-image__container,
 .crop__container {
   display: table;
   margin: 0 auto;
   max-width: 100%;
 }
+.modal__image,
 .crop__image {
   max-width: 100%;
   height: auto;
