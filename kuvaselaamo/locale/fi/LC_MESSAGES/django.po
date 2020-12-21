@@ -705,17 +705,17 @@ msgstr "Omat albumit"
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "EN"
+msgstr "In English"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "SV"
+msgstr "På svenska"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "FI"
+msgstr "Suomeksi"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"

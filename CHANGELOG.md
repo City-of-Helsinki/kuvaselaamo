@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 # [Unreleased]
+### Added
+- Added lang attribute to language menu.
+
 ### Changed
 - Remove HEAD query and cache from get_full_res_image_url method.
 
