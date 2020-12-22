@@ -40,6 +40,7 @@ jobs:
         env:
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STABLE }}
           ENVIRONMENT_URL: https://${{ secrets.ENVIRONMENT_URL_STABLE }}
+          K8S_ADDITIONAL_HOSTNAMES: ${{ secrets.ADDITIONAL_HOSTNAMES }}
           K8S_SECRET_ALLOWED_HOSTS: "*"
           K8S_SECRET_DEBUG: 0
           K8S_SECRET_SKIP_DATABASE_CHECK: 1
