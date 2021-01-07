@@ -702,6 +702,9 @@ msgstr "Selaa albumeita"
 msgid "My collections"
 msgstr "Omat albumit"
 
+msgid "Profile menu"
+msgstr "Profiili valikko"
+
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
@@ -1072,6 +1075,12 @@ msgstr "Ei enempää tuloksia"
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"
+
+msgid "Zoom in"
+msgstr "Suurenna"
+
+msgid "Zoom out"
+msgstr "Pienennä"
 
 #: hkm/views/views.py:1096
 msgid "Favorites"

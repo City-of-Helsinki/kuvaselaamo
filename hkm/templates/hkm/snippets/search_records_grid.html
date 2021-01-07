@@ -3,31 +3,23 @@
 
 <div class="grid__group item-slider invisible">
 {% for record in search_result.records %}
-  <div class="grid__item item" data-w="" data-h="" name="{{ search_term }}_{{ record.index }}">
+  <div lang="fi" class="grid__item item" data-w="" data-h="" name="{{ search_term }}_{{ record.index }}">
     <a class="grid__item--buy" href="#" data-toggle="tooltip" title="{% trans 'Buy' %}" aria-label="{% trans 'Buy this as a poster' %}" data-action="{% url 'hkm_order_create' finna_id=record.id %}">
       <svg class="svg-icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
         </svg>
     </a>
     <a href="{% url 'hkm_search_record' %}?image_id={{ record.id }}">
-      {% if user.is_authenticated %}
-        <div class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}">
-          <i class="grid__fav-icon">
-            <svg class="svg-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
-            </svg>
-          </i>
-        </div>
-      {% endif %}
-      <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}"></img>
+      <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}" alt="{{ record.title }}"></img>
     </a>
     <div class="grid__meta">
       <span class="grid__meta--title">{{ record.title }}</span>
       <span class="grid__meta--other">{% for author in record.rawData.author %}{{ author }}{% endfor %} {{ record.rawData.era.0|default:"" }}</span>
       {% if user.is_authenticated %}
-        <button class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}">
+        <button aria-label="{% trans 'Add to favorites' %}" class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.id }}">
             <i class="grid__fav-icon">
               <svg class="svg-icon">
+                <title>{% trans 'Add to favorites' %}</title>
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-stroke"></use>
               </svg>
             </i>

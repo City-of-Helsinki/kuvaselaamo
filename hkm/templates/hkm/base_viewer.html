@@ -19,14 +19,14 @@
   {% block actions %}
     {% if record and not user.profile.is_museum %}
       <div class="actions">
-        <button class="actions__btn actions__btn--left" id="zoom-in-btn">
+        <button aria-label="{% trans 'Zoom in' %}" class="actions__btn actions__btn--left" id="zoom-in-btn">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-in"></use>
             </svg>
           </i>
         </button>
-        <button class="actions__btn actions__btn--left" id="zoom-out-btn">
+        <button aria-label="{% trans 'Zoom out' %}" class="actions__btn actions__btn--left" id="zoom-out-btn">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zoom-out"></use>

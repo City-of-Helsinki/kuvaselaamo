@@ -5,7 +5,7 @@
 {% block banner %}
 
   <div class="page-header bittersweet">
-    <div class="fullsize-container">
+    <div lang="fi" class="fullsize-container">
       <div class="banner__title">
         {% if search_term %}
         <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'Records' %}</h1>
@@ -17,7 +17,7 @@
         <div class="search-form__content input-group">
           <input class="search-form__field form-control" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
           <span class="search-form__btn-container input-group-btn">
-            <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+            <button aria-label="{% trans 'Search' %}" class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
           </span>
         </div>
       </form>

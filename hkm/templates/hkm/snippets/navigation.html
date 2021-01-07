@@ -2,15 +2,15 @@
 
 <nav class="navigation">
   <div class="navigation-header">
-    <a class="navigation-brand" href="{% url 'hkm_home' %}?search=true">
+    <a class="navigation-brand" href="{% url 'hkm_home' %}">
       {% if language == 'fi' %}
-        <img src="/static/hkm/svg/Kuvia_fi.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_fi.svg" class="navigation__logo">
 
       {% elif language == 'en' %}
-        <img src="/static/hkm/svg/Kuvia_en.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_en.svg" class="navigation__logo">
 
       {% elif language == 'sv' %}
-        <img src="/static/hkm/svg/Kuvia_sv.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi Logotyp"  src="/static/hkm/svg/Kuvia_sv.svg" class="navigation__logo">
 
       {% endif %}
     </a>
@@ -49,7 +49,7 @@
       {% if not user.profile.is_museum %}
       {% if user.is_authenticated %}
       <li class="list-item_user">
-        <a id="profile-dropdown" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a id="profile-dropdown" aria-label="{% trans 'Profile menu' %}" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span>{{ user }}</span>
           <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="person-svg" >
         </a>

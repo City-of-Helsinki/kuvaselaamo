@@ -695,6 +695,9 @@ msgstr "Bläddra i album"
 msgid "My collections"
 msgstr "Mina album"
 
+msgid "Profile menu"
+msgstr "Profilmeny"
+
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
@@ -1061,6 +1064,12 @@ msgstr "Ladda mer... "
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Tillbaka till sökningen"
+
+msgid "Zoom in"
+msgstr "Zooma in"
+
+msgid "Zoom out"
+msgstr "Zooma ut"
 
 #: hkm/views/views.py:1090
 msgid "Favorites"
