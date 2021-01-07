@@ -791,6 +791,15 @@ msgstr "Använd rabattkod"
 msgid "Back to Homepage"
 msgstr "Tillbaka till startsidan"
 
+msgid "Remove row"
+msgstr "Ta bort raden"
+
+msgid "Increase"
+msgstr "Öka mängden produkt"
+
+msgid "Decrease"
+msgstr "Minska mängden produkt"
+
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
 msgstr "Fortsätt till utcheckningen"

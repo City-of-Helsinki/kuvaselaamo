@@ -824,6 +824,15 @@ msgstr "Postal code"
 msgid "Back to Homepage"
 msgstr "Back to search"
 
+msgid "Remove row"
+msgstr "Remove row"
+
+msgid "Increase"
+msgstr "Increase the amount of product"
+
+msgid "Decrease"
+msgstr "Decrease the amount of product"
+
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
 msgstr ""

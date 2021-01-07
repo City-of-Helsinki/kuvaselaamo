@@ -798,6 +798,15 @@ msgstr "Käytä"
 msgid "Back to Homepage"
 msgstr "Takaisin etusivulle"
 
+msgid "Remove row"
+msgstr "Poista rivi"
+
+msgid "Increase"
+msgstr "Lisää tuotteen määrää"
+
+msgid "Decrease"
+msgstr "Vähennä tuotteen määrää"
+
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
 msgstr "Tilaa"

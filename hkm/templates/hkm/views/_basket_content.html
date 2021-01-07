@@ -1,7 +1,7 @@
 {% load i18n l10n hkm_tags %}
 {% for line in basket.product_lines %}
 <div class="basket-row" data-lineId="{{ line.line_id }}">
-    <a class="btn-delete-row" href="#" alt="Remove row"><span></span></a>
+    <a class="btn-delete-row" href="#" aria-label="{% trans 'Remove row' %}"><span></span></a>
 
     <div class="basket-thumbnail">
         <figure class="basket-thumbnail_figure">
@@ -13,13 +13,13 @@
     <h3 class="basket-title">{{ line.text }}</h3>
 
     <div class="basket-quantity">
-        <a class="btn-down" href="#" data-toggle="tooltip" data-placement="top" title="Vähennä">
+        <a class="btn-down" href="#" data-toggle="tooltip" data-placement="top" aria-label="{% trans 'Decrease' %}">
             <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
             </svg>
         </a>
         <h3 class="basket-quantity_value">{{ line.quantity }}</h3>
-        <a class="btn-up" href="#" data-toggle="tooltip" data-placement="top" title="Lisää">
+        <a class="btn-up" href="#" data-toggle="tooltip" data-placement="top" aria-label="{% trans 'Increase' %}">
             <svg class="svg-icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-angle"></use>
             </svg>
@@ -40,7 +40,7 @@
     <div class="basket-footer-row">
         <div class="basket-footer-input-wrapper">
             <label>{% trans "Discount code" %}:&nbsp;</label>
-            <input id="discount-code" name="discount_code" type="text">
+            <input aria-label="{% trans 'Discount code' %}" id="discount-code" name="discount_code" type="text">
         </div>
         <button class="btn btn-primary btn-lg pull-right basket-footer-button add-discount">{% trans 'Use code' %}</button>
     </div>
