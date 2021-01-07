@@ -49,9 +49,9 @@
       {% if not user.profile.is_museum %}
       {% if user.is_authenticated %}
       <li class="list-item_user">
-        <a id="profile-dropdown" aria-label="{% trans 'Profile menu' %}" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a id="profile-dropdown" aria-label="{{ user }} {% trans 'Profile menu' %}" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span>{{ user }}</span>
-          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="person-svg" >
+          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="" >
         </a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My collections' %}</a></li>
