@@ -1,17 +1,17 @@
 {% load i18n %}
-<a href="{% url 'basket' %}">
+<a href="{% url 'basket' %}" aria-label="{% trans 'Shopping cart' %}">
   <div class="cart_wrapper">
     {% if request.basket.lines %}
     <div class="cart_text">{% trans 'Shopping cart' %}</div>
     <div class="cart_icons">
-      <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="shopping">
+      <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="">
       <div class="cart_counter">{{ request.basket.product_count }}</div>
     </div>
 
     {% else %}
     <div class="cart_text">{% trans 'Shopping cart' %}</div>
     <div class="cart_icons">
-      <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="shopping">
+      <img class="cart_svg" src="/static/hkm/svg/ShoppingCart.svg" alt="">
     </div>
     {% endif %}
   </div>

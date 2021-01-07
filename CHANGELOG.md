@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Added lang attribute to language menu.
 - Login attempts (success/failure) are now logged.
+- Added descriptive names to buttons accross the application.
 
 ### Changed
 - Add to collection modal no longer shows cropper.
