@@ -23,24 +23,12 @@ class Command(BaseCommand):
         counted_date = timezone.now() - timedelta(days=days)
 
         # Find and delete unused users
-        unused_users = User.objects.filter(last_login__lte=counted_date)
-        unused_users_count = unused_users.count()
-        unused_users.delete()
+        users = User.objects.filter(last_login__lte=counted_date).delete()
 
         # Find and delete old TmpImages, Feedbacks and Orders
-        unused_temps = TmpImage.objects.filter(modified__lte=counted_date)
-        unused_temps_count = unused_temps.count()
-        unused_feedbacks = Feedback.objects.filter(modified__lte=counted_date)
-        unused_feedbacks_count = unused_feedbacks.count()
-        unused_orders = ProductOrder.objects.filter(modified__lte=counted_date)
-        unused_orders_count = unused_orders.count()
+        temps = TmpImage.delete_old_data(counted_date)
+        feedbacks = Feedback.delete_old_data(counted_date)
+        orders = ProductOrder.delete_old_data(counted_date)
 
-        unused_temps.delete()
-        unused_feedbacks.delete()
-        unused_orders.delete()
-
-        self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_users_count) + ' user(s)'))
-        self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_temps_count) + ' tmp_image(s)'))
-        self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_feedbacks_count) + ' feedback(s)'))
-        self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_orders_count) + ' product_order(s)'))
-        self.stdout.write(self.style.SUCCESS('Old data cleaning finished!'))
+        self.stdout.write(self.style.SUCCESS('Old data cleaning finished! Removed %s user(s), %s temp(s), '
+                                             '%s feedback(s), %s order(s)' % (users, temps, feedbacks, orders)))
