@@ -31,4 +31,4 @@ class Command(BaseCommand):
         orders = ProductOrder.delete_old_data(counted_date)
 
         self.stdout.write(self.style.SUCCESS('Old data cleaning finished! Removed %s user(s), %s temp(s), '
-                                             '%s feedback(s), %s order(s)' % (users, temps, feedbacks, orders)))
+                                             '%s feedback(s), %s order(s)' % (users[0], temps[0], feedbacks[0], orders[0])))
