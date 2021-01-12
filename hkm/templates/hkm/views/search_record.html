@@ -6,11 +6,11 @@
 
   {% if search_result %}
     {% if previous_record %}
-      <a href="{% url 'hkm_search_record' %}?image_id={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+      <a href="{% url 'hkm_search_record' %}?image_id={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img alt="{% trans 'Previous image' %}" src="/static/hkm/img/arrow_left.png"></img></a>
     {% endif %}
 
     {% if next_record %}
-      <a href="{% url 'hkm_search_record' %}?image_id={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
+      <a href="{% url 'hkm_search_record' %}?image_id={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img alt="{% trans 'Next image' %}" src="/static/hkm/img/arrow_right.png"></img></a>
     {% endif %}
 
   {% endif%}
@@ -44,7 +44,7 @@
 
   {% endif %}
 {% endblock %}
-  
+
   {% block hidden %}
     {% if record %}
       {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}

@@ -702,20 +702,23 @@ msgstr "Selaa albumeita"
 msgid "My collections"
 msgstr "Omat albumit"
 
+msgid "Profile menu"
+msgstr "Profiili valikko"
+
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "EN"
+msgstr "In English"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "SV"
+msgstr "På svenska"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "FI"
+msgstr "Suomeksi"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
@@ -794,6 +797,15 @@ msgstr "Käytä"
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Back to Homepage"
 msgstr "Takaisin etusivulle"
+
+msgid "Remove row"
+msgstr "Poista rivi"
+
+msgid "Increase"
+msgstr "Lisää tuotteen määrää"
+
+msgid "Decrease"
+msgstr "Vähennä tuotteen määrää"
 
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
@@ -1072,6 +1084,12 @@ msgstr "Ei enempää tuloksia"
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"
+
+msgid "Zoom in"
+msgstr "Suurenna"
+
+msgid "Zoom out"
+msgstr "Pienennä"
 
 #: hkm/views/views.py:1096
 msgid "Favorites"

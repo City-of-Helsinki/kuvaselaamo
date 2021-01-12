@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.3.0] 2021-01-12
+### Added
+- Added lang attribute to language menu.
+- Login attempts (success/failure) are now logged.
+- Added descriptive names to buttons accross the application.
+
+### Changed
+- Add to collection modal no longer shows cropper.
+
+### Fixed
+- Error related to missing ios-icon.
+
 # [2.2.0] - 2020-12-21
 ### Changed
 - Remove HEAD query and cache from get_full_res_image_url method.

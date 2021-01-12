@@ -2,15 +2,15 @@
 
 <nav class="navigation">
   <div class="navigation-header">
-    <a class="navigation-brand" href="{% url 'hkm_home' %}?search=true">
+    <a class="navigation-brand" href="{% url 'hkm_home' %}">
       {% if language == 'fi' %}
-        <img src="/static/hkm/svg/Kuvia_fi.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_fi.svg" class="navigation__logo">
 
       {% elif language == 'en' %}
-        <img src="/static/hkm/svg/Kuvia_en.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_en.svg" class="navigation__logo">
 
       {% elif language == 'sv' %}
-        <img src="/static/hkm/svg/Kuvia_sv.svg" class="navigation__logo">
+        <img alt="Helsinkikuvia.fi Logotyp"  src="/static/hkm/svg/Kuvia_sv.svg" class="navigation__logo">
 
       {% endif %}
     </a>
@@ -27,20 +27,20 @@
     <ul class="nav navbar-nav">
       {% if language == 'fi' %}
         <div class="list-item_lang-wrapper">
-          <li><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a> </li>
-          <li><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+          <li><a class="lang" lang="en" aria-label="{% trans 'In English' %}" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">EN</a> </li>
+          <li><a class="lang" lang="sv" aria-label="{% trans 'På svenska' %}" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">SV</a></li>
         </div>
 
       {% elif language == 'en' %}
       <div class="list-item_lang-wrapper">
-        <li><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
-        <li><a class="lang" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">{% trans 'På svenska' %}</a></li>
+        <li><a class="lang" lang="fi" aria-label="{% trans 'Suomeksi' %}" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">FI</a> </li>
+        <li><a class="lang" lang="sv" aria-label="{% trans 'På svenska' %}" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">SV</a></li>
       </div>
 
       {% elif language == 'sv' %}
       <div class="list-item_lang-wrapper">
-        <li><a class="lang" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">{% trans 'Suomeksi' %}</a> </li>
-        <li><a class="lang" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">{% trans 'In English' %}</a></li>
+        <li><a class="lang" lang="fi" aria-label="{% trans 'Suomeksi' %}" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">FI</a> </li>
+        <li><a class="lang" lang="en" aria-label="{% trans 'In English' %}" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">EN</a></li>
       </div>
 
       {% endif %}
@@ -49,9 +49,9 @@
       {% if not user.profile.is_museum %}
       {% if user.is_authenticated %}
       <li class="list-item_user">
-        <a id="profile-dropdown" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a id="profile-dropdown" aria-label="{{ user }} {% trans 'Profile menu' %}" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span>{{ user }}</span>
-          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="person-svg" >
+          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="" >
         </a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My collections' %}</a></li>

@@ -282,7 +282,12 @@ LOGGING = {
         }
     },
     "loggers": {
-        "": {
+        'hkm.auditlog_signals': {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False
+        },
+        '': {
             "handlers": ["console"],
             "level": LOG_LEVEL
         },

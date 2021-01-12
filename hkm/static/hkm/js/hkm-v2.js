@@ -365,6 +365,28 @@ palikka
     })
   })
 })
+.define('app.addToCollection', ['jQuery', 'docReady'], function() {
+  $('#add-to-collection').on('click', function() {
+    const action = $('input[name=collection]:checked').attr('data-action');
+    const collectionTitle = $('#add-collection-input').val();
+    const collectionId = $('input[name=collection]:checked').val();
+    const recordId = this.getAttribute('data-record-id');
+
+    $.post('/ajax/collection/', {
+      action: action,
+      collection_id: collectionId,
+      collection_title: collectionTitle,
+      record_id: recordId,
+    })
+      .done(function() {
+        $('#collection-add').modal('hide');
+    })
+      .fail(function() {
+        // At the moment there is no better way to display errors.
+        alert('Add to collection failed.')
+      })
+  })
+})
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
   var $btn = $('.popover-list__btn');

@@ -65,12 +65,6 @@
   <!-- iOS web app: Specifies a splash image to use when the page is loading. -->
   <link rel="apple-touch-startup-image" href="ios-splash.png">
 
-  <!-- iOS web app: icons. -->
-  <link rel="apple-touch-icon-precomposed" href="ios-app-icon-57.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ios-app-icon-72.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ios-app-icon-114.png">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ios-app-icon-144.png">
-
   <!-- Favicon, optionally place favicon.ico in the root of website. -->
   <link rel="shortcut icon" href="/static/favicon.ico">
 
@@ -85,7 +79,7 @@
 <body class="{% block body_class %}{% endblock %}">
 
   {% include 'hkm/snippets/svg_icons.html' %}
-  
+
   {% include 'hkm/snippets/navigation.html' %}
 
   <div class="login-modal modal fade {% if login_form.errors %}error{% endif %}" id="login" tabindex="-1" role="dialog">
@@ -158,7 +152,7 @@
       </div> <!--endrow-->
   </div>
   {% endblock %}
-    
+
   {% block js %}
     <script>
       document.querySelector('#meta-url').setAttribute('content', location.href)
