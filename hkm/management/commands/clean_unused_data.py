@@ -43,4 +43,4 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_temps_count) + ' tmp_image(s)'))
         self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_feedbacks_count) + ' feedback(s)'))
         self.stdout.write(self.style.SUCCESS('Removed ' + str(unused_orders_count) + ' product_order(s)'))
-        self.stdout.write(self.style.SUCCESS('Old data cleaned finished!'))
+        self.stdout.write(self.style.SUCCESS('Old data cleaning finished!'))
