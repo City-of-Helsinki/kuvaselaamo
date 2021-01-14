@@ -423,6 +423,10 @@ class ProductOrder(BaseModel):
             self.order_hash = get_random_string(20)
         return super(ProductOrder, self).save(*args, **kwargs)
 
+    @classmethod
+    def delete_old_data(self, date):
+        return self.objects.filter(user__isnull=True, modified__lte=date).delete()
+
     def __unicode__(self):
         return self.order_hash
 
@@ -441,6 +445,10 @@ class Feedback(BaseModel):
         verbose_name=_(u'Notification sent'), default=False)
     sent_from = models.CharField(verbose_name=_(u"Sent from"), max_length=500, null=True, blank=True)
 
+    @classmethod
+    def delete_old_data(self, date):
+        return self.objects.filter(user__isnull=True, modified__lte=date).delete()
+
 
 def get_tmp_upload_path(instance, filename):
     return 'tmp/%s' % filename
@@ -454,6 +462,10 @@ class TmpImage(BaseModel):
     record_title = models.CharField(verbose_name=_(u'Title'), max_length=1024)
     edited_image = models.ImageField(verbose_name=_(
         u'Edited image'), upload_to=get_tmp_upload_path)
+
+    @classmethod
+    def delete_old_data(self, date):
+        return self.objects.filter(modified__lte=date).delete()
 
     def __unicode__(self):
         return self.record_title
