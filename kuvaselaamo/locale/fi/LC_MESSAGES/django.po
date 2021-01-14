@@ -517,6 +517,9 @@ msgstr "Tämän palvelun tarjoaa"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
 
+msgid "Image view"
+msgstr "Kuvanäkymä"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Edellinen kuva"
@@ -949,6 +952,9 @@ msgstr "Hinta yht."
 #: hkm/templates/hkm/views/order.html:59
 msgid "Add to cart"
 msgstr "Lisää koriin"
+
+msgid "Order contact information"
+msgstr "Tilauksen yhteystiedot"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"

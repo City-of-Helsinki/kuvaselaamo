@@ -535,6 +535,9 @@ msgstr "This service is provided by"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Picture Browsery at Helsinki City Museum"
 
+msgid "Image view"
+msgstr "Image view"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Previous image"
@@ -975,6 +978,9 @@ msgstr "Total price"
 #: hkm/templates/hkm/views/order.html:59
 msgid "Add to cart"
 msgstr "Add to cart"
+
+msgid "Order contact information"
+msgstr "Order contact information"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"

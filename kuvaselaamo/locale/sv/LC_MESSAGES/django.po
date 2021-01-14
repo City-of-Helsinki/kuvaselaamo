@@ -510,6 +510,9 @@ msgstr "Denna tjänst erbjuds av"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
 
+msgid "Image view"
+msgstr "Bildvy"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Föregående bild"
@@ -941,6 +944,9 @@ msgstr "Totalpris"
 #: hkm/templates/hkm/views/order.html:59
 msgid "Add to cart"
 msgstr "Lägg i korgen"
+
+msgid "Order contact information"
+msgstr "Beställ kontaktinformation"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
