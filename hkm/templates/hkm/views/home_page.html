@@ -41,7 +41,7 @@
           <div class="featured__wrapper">
             {% with collections=showcase|showcase_collections %}
               {% for collection in collections %}
-                <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+                <a lang="fi" aria-label="{{ collection.title }} omistaja Helsingin kaupunginmuseo" class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
                   <div class="card">
                     {% with images=collection|display_images %}
                       {% if images|length == 1 %}
