@@ -8,7 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added script that deletes old and unused data.
 
 ### Fixed
+- Added lang attribute to all collections. It will force screen reader language to finnish.
 - Fixed missing title tags to all unique pages.
+
+### Changed
+- Moved CGS / Azure dependencies to environment specific requirements.in files.
+
 
 # [2.3.0] 2021-01-12
 ### Added
