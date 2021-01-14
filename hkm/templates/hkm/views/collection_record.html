@@ -2,6 +2,11 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block page_title %}
+<!--- TODO FIX THIS TITLE TO UNIQUE --->
+<title>{% trans 'Kuvan tarkastelu' %}</title>
+{% endblock %}
+
 {% block viewer_arrows %}
 
   {% if previous_record %}

@@ -2,6 +2,10 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% page_title %}
+  <title>{% trans 'Kuvaselaamo' %}</title>
+{% endblock %}
+
 {% block image_meta_tags %}
   {% with image_url=frontpage_image_collection|front_page_url %}
     <meta property="og:image" content="{{ image_url }}">

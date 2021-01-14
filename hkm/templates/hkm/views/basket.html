@@ -1,6 +1,10 @@
 {% extends 'hkm/base.html' %}
 {% load i18n hkm_tags %}
 
+{% block page_title %}
+    <title>{% trans 'Shopping cart' %}</title>
+{% endblock %}
+
 {% block body_class %}basket-page{% endblock %}
 {% block nav_class %}nav_collection{% endblock %}
 {% block extra_js %}
