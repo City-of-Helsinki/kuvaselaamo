@@ -12,8 +12,6 @@ RUN apt-install.sh \
     libpq-dev \
     && pip install --no-cache-dir \
     -r /app/requirements.txt \
-    && pip install --no-cache-dir \
-    -r /app/requirements-prod.txt \
     && apt-cleanup.sh \
     build-essential \
     pkg-config
@@ -50,6 +48,9 @@ FROM appbase as production
 # ==============================
 
 COPY --from=staticbuilder --chown=appuser:appuser /app/static /app/static
+COPY --chown=appuser:appuser requirements-prod.txt /app/requirements-prod.txt
+RUN pip install --no-cache-dir -r /app/requirements-prod.txt \
+    && pip install --no-cache-dir pip-tools
 COPY --chown=appuser:appuser . /app/
 
 USER appuser
