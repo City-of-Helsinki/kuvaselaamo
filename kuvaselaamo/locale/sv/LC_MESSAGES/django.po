@@ -1036,6 +1036,9 @@ msgstr "Produkt"
 msgid "Product selection"
 msgstr "Produktsortiment"
 
+msgid "Order summary"
+msgstr "Order Ordersammanfattning"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1059,6 +1062,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
+
+msgid "Order payment confirmed"
+msgstr "Orderbetalning bekräftad"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"

@@ -1042,6 +1042,9 @@ msgstr "Tuote"
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
+msgid "Order summary"
+msgstr "Tilauksen yhteenveto"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1065,6 +1068,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
+
+msgid "Order payment confirmed"
+msgstr "Tilauksen maksu vahvistettu"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"

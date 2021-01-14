@@ -1067,6 +1067,9 @@ msgstr "Product"
 msgid "Product selection"
 msgstr "Product selection"
 
+msgid "Order summary"
+msgstr "Order summary"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1076,6 +1079,9 @@ msgstr "Summary"
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
 msgstr ""
 "By pressing the Order-button, you will be redirected to the payment site."
+
+msgid "Order payment confirmed"
+msgstr "Order payment confirmed"
 
 #: hkm/templates/hkm/views/order_summary.html:23
 #: hkm/templates/hkm/views/order_summary.html:39
