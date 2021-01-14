@@ -26,7 +26,7 @@
       <div class="grid__group item-slider invisible" data-grid-type="collection">
         {% for collection in collections %}
           <div class="grid__item item" data-w="550" data-h="400">
-            <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <a lang="fi" aria-label="{{ collection.title }}" href="{% url 'hkm_collection' collection_id=collection.id %}">
               {% with images=collection|display_images %}
                 {% if images|length == 1 %}
                   <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>
