@@ -517,6 +517,9 @@ msgstr "Tämän palvelun tarjoaa"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
 
+msgid "Image view"
+msgstr "Kuvanäkymä"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Edellinen kuva"
@@ -950,6 +953,9 @@ msgstr "Hinta yht."
 msgid "Add to cart"
 msgstr "Lisää koriin"
 
+msgid "Order contact information"
+msgstr "Tilauksen yhteystiedot"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr "Kiitos tilauksestasi"
@@ -1036,6 +1042,9 @@ msgstr "Tuote"
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
+msgid "Order summary"
+msgstr "Tilauksen yhteenveto"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1059,6 +1068,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
+
+msgid "Order payment confirmed"
+msgstr "Tilauksen maksu vahvistettu"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"
