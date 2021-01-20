@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 #[Unreleased]
 ### Added
 - Added script that deletes old and unused data.
+- Added kubernetes cron job that executes clean_unused_data script and clearsessions.
 
 ### Fixed
 - Added lang attribute to all collections. It will force screen reader language to finnish.
