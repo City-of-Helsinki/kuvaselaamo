@@ -71,3 +71,15 @@ jobs:
           K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STAGING }}
           K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STAGING }}
           K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STAGING }}
+
+      - name: Deploy Cronjob
+        uses: City-of-Helsinki/setup-cronjob-action@main
+        with:
+          image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+          image_tag:  ${{ github.sha }}
+          secret_name: develop-staging-kuvaselaamo-secret
+          kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
+          target_namespace: ${{ env.K8S_NAMESPACE }}
+          schedule: '0 0 * * *'
+          command: "{/bin/sh}"
+          args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
