@@ -122,6 +122,6 @@ Production: https://helsinkikuvia.fi
 
 ## CI/CD builds
 
-Project is using [Gitlab](https://gitlab.com/City-of-Helsinki/KuVa/github-mirrors/kuvaselaamo/pipelines)
+Project is using [GitHub Actions](https://github.com/City-of-Helsinki/kuvaselaamo/actions)
 for automated builds and deployment into the test environment.
 The test environment is built automatically from the `develop` branch.
