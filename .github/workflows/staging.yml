@@ -79,7 +79,7 @@ jobs:
           image_tag:  ${{ github.sha }}
           secret_name: develop-staging-kuvaselaamo-secret
           kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
-          target_namespace: ${{ env.K8S_NAMESPACE }}
+          target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
           schedule: '0 0 * * *'
           command: "{/bin/sh}"
           args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
