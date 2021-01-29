@@ -6,4 +6,4 @@ pip-tools
 pytest
 pytest-cov
 pytest-django
-google-cloud-storage==1.12.1
+
