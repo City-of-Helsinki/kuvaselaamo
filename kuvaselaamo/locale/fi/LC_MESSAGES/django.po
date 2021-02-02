@@ -696,6 +696,9 @@ msgstr "Etsi"
 msgid "Search pictures"
 msgstr "Etsi kuvia"
 
+msgid "With word"
+msgstr "sanalla"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Selaa albumeita"
@@ -953,8 +956,8 @@ msgstr "Hinta yht."
 msgid "Add to cart"
 msgstr "Lisää koriin"
 
-msgid "Order contact information"
-msgstr "Tilauksen yhteystiedot"
+msgid "Contact information"
+msgstr "Tilauksesi yhteystiedot"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"

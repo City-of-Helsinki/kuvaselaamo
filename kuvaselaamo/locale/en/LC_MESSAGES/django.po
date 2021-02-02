@@ -716,6 +716,9 @@ msgstr "Search"
 msgid "Search pictures"
 msgstr "Search pictures"
 
+msgid "With word"
+msgstr "with word"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Explore albums"
@@ -979,8 +982,8 @@ msgstr "Total price"
 msgid "Add to cart"
 msgstr "Add to cart"
 
-msgid "Order contact information"
-msgstr "Order contact information"
+msgid "Contact information"
+msgstr "Contact information for your order"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"

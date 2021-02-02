@@ -689,6 +689,9 @@ msgstr "Sök"
 msgid "Search pictures"
 msgstr "Sök bilder"
 
+msgid "With word"
+msgstr "med ord"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
@@ -945,8 +948,8 @@ msgstr "Totalpris"
 msgid "Add to cart"
 msgstr "Lägg i korgen"
 
-msgid "Order contact information"
-msgstr "Beställ kontaktinformation"
+msgid "Contact information"
+msgstr "Kontaktinformation för din beställning"
 
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
