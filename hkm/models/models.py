@@ -465,7 +465,7 @@ class TmpImage(BaseModel):
 
     @classmethod
     def delete_old_data(self, date):
-        return self.objects.filter(modified__lte=date).delete()
+        return self.objects.filter(modified__lte=date, creator__isnull=True).delete()
 
     def __unicode__(self):
         return self.record_title
