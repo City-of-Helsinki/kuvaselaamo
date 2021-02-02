@@ -1,6 +1,10 @@
 {% extends 'hkm/base_browse.html' %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{{ page_content.title|safe }}</title>
+{% endblock %}
+
 {% block banner %}
 
   <div class="page-header">
