@@ -22,8 +22,9 @@ class Command(BaseCommand):
         self.stdout.write("Old data cleaning started! Removing data older than " + str(days) + " days.")
         counted_date = timezone.now() - timedelta(days=days)
 
-        # Find and delete unused users
-        users = User.objects.filter(last_login__lte=counted_date).delete()
+        # Find and delete unused users. Do not delete superusers or staff users.
+        users = User.objects.filter(last_login__lte=counted_date, is_superuser=False, is_staff=False,
+                                    profile__is_museum=False, profile__is_admin=False).delete()
 
         # Find and delete old TmpImages, Feedbacks and Orders
         temps = TmpImage.delete_old_data(counted_date)
