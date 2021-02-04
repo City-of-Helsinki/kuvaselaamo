@@ -1,0 +1,11 @@
+{% extends 'hkm/base.html' %}
+{% load i18n %}
+
+{% block main_content %}
+
+  <div class="status-page">
+    <img class="status-page__image" src="/static/hkm/img/no-results-image.jpg"></img>
+    <h1 class="status-page__title">{% trans '#error-404-image-not-found' %}</h1>
+  </div>
+
+{% endblock %}

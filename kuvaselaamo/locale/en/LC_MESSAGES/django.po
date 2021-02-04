@@ -805,6 +805,9 @@ msgstr "404 - Page not found"
 msgid "#error-404-paragraph"
 msgstr "The page you are looking for cannot be found"
 
+msgid "#error-404-image-not-found"
+msgstr "The image you were looking for was not found"
+
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
 msgstr "500 - Internal Server Error"
