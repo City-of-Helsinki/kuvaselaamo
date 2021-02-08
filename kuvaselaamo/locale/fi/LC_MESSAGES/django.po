@@ -783,6 +783,9 @@ msgstr "404 - Sivua ei löydy"
 msgid "#error-404-paragraph"
 msgstr "Etsimääsi sivua ei löydy"
 
+msgid "#error-404-image-not-found"
+msgstr "Etsimääsi kuvaa ei löytynyt"
+
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
 msgstr "500 - Palvelinvirhe"

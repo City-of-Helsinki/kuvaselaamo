@@ -776,6 +776,9 @@ msgstr "404 - Sidan hittades inte"
 msgid "#error-404-paragraph"
 msgstr "Tyvärr kunde vi inte hitta den sida du letar efter."
 
+msgid "#error-404-image-not-found"
+msgstr "Bilden du letade efter hittades inte"
+
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
 msgstr "500 - Internt fel på webbservern"

@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Added lang attribute to all collections. It will force screen reader language to finnish.
 - Fixed missing title tags to all unique pages.
+- If image is not found with image_id, correct error is shown.
 
 ### Changed
 - Moved CGS / Azure dependencies to environment specific requirements.in files.

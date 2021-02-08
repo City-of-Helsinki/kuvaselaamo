@@ -13,7 +13,7 @@ from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
@@ -497,6 +497,10 @@ class SearchView(BaseView):
                 record = next((x for x in records if x['id'] == finna_id), None)
                 if not record:
                     result = FINNA.get_record(finna_id)
+                    if result and result.get('resultCount', 0) == 0:
+                        # If image was not found we want to show different 404 page
+                        context = self.get_context_data(**kwargs)
+                        return render(request, 'hkm/views/404_image.html', context, status=404)
                     self.search_result = result
                     self.single_image = True
                     self.record = result.get('records')[0] if result else None
