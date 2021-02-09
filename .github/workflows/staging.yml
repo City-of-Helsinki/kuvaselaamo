@@ -78,6 +78,8 @@ jobs:
           image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
           image_tag:  ${{ github.sha }}
           secret_name: project-staging-kuvaselaamo-secret
+          file_secret_name: project-staging-kuvaselaamo-file-secret
+          file_secret_mount_path: /tmp/secrets
           kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
           target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
           schedule: '0 0 * * *'
