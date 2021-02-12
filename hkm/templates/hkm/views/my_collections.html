@@ -2,10 +2,14 @@
 {% load i18n %}
 {% load hkm_tags %}
 
+{% block page_title %}
+  <title>{% trans 'My collections' %}</title>
+{% endblock %}
+
 {% block banner %}
 
   <div class="page-header white">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <div class="banner__title">
         <h1 class="banner__h1">{% trans 'My collections' %}</h1>
       </div>
@@ -16,7 +20,7 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
 
     {% if not collections %}
       <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add images' %}</a>
@@ -26,7 +30,7 @@
       <div class="grid__group item-slider invisible" data-grid-type="collection">
         {% for collection in collections %}
           <div class="grid__item item" data-w="550" data-h="400">
-            <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <a lang="{% if collection.collection_type == 'favorite' %}{{ language }}{% else %}fi{% endif %}" aria-label="{{ collection.title }}" href="{% url 'hkm_collection' collection_id=collection.id %}">
               {% with images=collection|display_images %}
                 {% if images|length == 1 %}
                   <div class="grid__item grid__item--collection" style="background-image:url('{{ images.0 }}')"></div>

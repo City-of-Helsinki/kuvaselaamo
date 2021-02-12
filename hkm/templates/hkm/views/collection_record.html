@@ -2,13 +2,17 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{% trans 'Image view' %}</title>
+{% endblock %}
+
 {% block viewer_arrows %}
 
   {% if previous_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img alt="{% trans 'Previous image' %}" src="/static/hkm/img/arrow_left.png"></img></a>
   {% endif %}
   {% if next_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
+    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img alt="{% trans 'Next image' %}" src="/static/hkm/img/arrow_right.png"></img></a>
   {% endif %}
 
 {% endblock %}
@@ -37,6 +41,4 @@
 
 {% block hidden %}
   {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url cropped_web_image_url=collection_record.get_preview_image_absolute_url finna_id=collection_record.record_id %}
-  {% include 'hkm/snippets/popover_share.html' with finna_id=collection_record.record_id %}
-  {% include 'hkm/snippets/popover_add.html' with finna_id=collection_record.record_id full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url %}
 {% endblock %}

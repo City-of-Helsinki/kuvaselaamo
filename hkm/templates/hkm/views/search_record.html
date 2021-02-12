@@ -2,15 +2,19 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{% trans 'Image view' %}</title>
+{% endblock %}
+
 {% block viewer_arrows %}
 
   {% if search_result %}
     {% if previous_record %}
-      <a href="{% url 'hkm_search_record' %}?image_id={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img src="/static/hkm/img/arrow_left.png"></img></a>
+      <a href="{% url 'hkm_search_record' %}?image_id={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img alt="{% trans 'Previous image' %}" src="/static/hkm/img/arrow_left.png"></img></a>
     {% endif %}
 
     {% if next_record %}
-      <a href="{% url 'hkm_search_record' %}?image_id={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img src="/static/hkm/img/arrow_right.png"></img></a>
+      <a href="{% url 'hkm_search_record' %}?image_id={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img alt="{% trans 'Next image' %}" src="/static/hkm/img/arrow_right.png"></img></a>
     {% endif %}
 
   {% endif%}
@@ -20,11 +24,11 @@
 {% block content %}
 
   {% if search_result %}
-    {% if record.index %}
+    {% if not single_image %}
       <div class="back-to">
         <span class="back-to__title">{{ record.title }}</span><br>
         <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
-        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}{% for facet in author_facets %}&author[]={{ facet }}{% endfor %}{% for facet in date_facets %}&main_date_str[]={{ facet }}{% endfor %}">
+        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}">
           <i class="back-to__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
@@ -44,12 +48,10 @@
 
   {% endif %}
 {% endblock %}
-  
+
   {% block hidden %}
     {% if record %}
       {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}
-      {% include 'hkm/snippets/popover_share.html' with finna_id=record.id %}
-      {% include 'hkm/snippets/popover_add.html' with finna_id=record.id full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url %}
     {% endif %}
   {% endblock %}
 {% block extra_js %}
