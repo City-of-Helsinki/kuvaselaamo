@@ -4,6 +4,7 @@ import StringIO
 import datetime
 import logging
 
+import json
 import math
 from django import http
 from django.conf import settings
@@ -12,7 +13,7 @@ from django.contrib.auth import login as auth_login
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
 from django.utils.translation import LANGUAGE_SESSION_KEY
@@ -20,6 +21,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 from django.core.cache import caches
 from unidecode import unidecode
+from urllib import urlencode
 
 from hkm import forms, image_utils, email
 import copy
@@ -27,7 +29,6 @@ from hkm.basket.order_creator import OrderCreator
 from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
-from hkm.hkm_client import DEFAULT_CLIENT as HKM
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
@@ -64,7 +65,12 @@ class BaseView(TemplateView):
         if not self.url_name:
             raise Exception(
                 'Subview must define url_name or overwrire get_url method')
-        return reverse(self.url_name)
+        params = {key: unidecode(self.request.GET[key].encode("utf-8").decode("utf-8")) for key in ("image_id", "search", "page") if key in self.request.GET}
+        encoded_params = urlencode(params)
+        url = reverse(self.url_name)
+        if encoded_params:
+            url = "{}?{}".format(url, encoded_params)
+        return url
 
     def handle_invalid_post_action(self, request, *args, **kwargs):
         LOG.error('Invalid POST action', extra={
@@ -188,12 +194,11 @@ class PublicCollectionsView(BaseCollectionListView):
     def get_collection_qs(self, request, *args, **kwargs):
         if request.user.is_authenticated() and request.user.profile.is_museum:
             return request.user.profile.albums.all()
-        return Collection.objects.filter(is_public=True).order_by('created')
+        return Collection.objects.filter(is_public=True, is_featured=False).order_by('created')
 
     def get_context_data(self, **kwargs):
         context = super(PublicCollectionsView, self).get_context_data(**kwargs)
-        context['featured_collections'] = self.collection_qs.filter(
-            is_featured=True)
+        context['featured_collections'] = Collection.objects.filter(is_featured=True).order_by('created')
         return context
 
 
@@ -203,6 +208,22 @@ class MyCollectionsView(BaseCollectionListView):
 
     def get_collection_qs(self, request, *args, **kwargs):
         return Collection.objects.filter(owner=request.user)
+
+
+def tag_favorites_if_necessary(request, records_to_tag):
+    """Fetch the currently authenticated user's favorite records and tag
+    them in the given record list."""
+    if request.user.is_authenticated():
+        try:
+            favorite_records = Record.objects.filter(
+                collection__owner=request.user,
+                collection__collection_type=Collection.TYPE_FAVORITE
+            ).values_list("record_id", flat=True)
+
+            for record in records_to_tag:
+                record.is_favorite = record.record_id in favorite_records
+        except Record.DoesNotExist:
+            pass
 
 
 def get_records_with_finna_data(request, collection):
@@ -287,6 +308,8 @@ class CollectionDetailView(BaseView):
         else:
             self.collections_records_to_display = get_records_with_finna_data(request, self.collection)
 
+            tag_favorites_if_necessary(request, self.collections_records_to_display)
+
         self.permissions = {
             'can_edit': self.request.user.is_authenticated() and (self.request.user == self.collection.owner or self.request.user.profile.is_admin),
         }
@@ -308,8 +331,6 @@ class CollectionDetailView(BaseView):
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
         if self.permissions['can_edit']:
             if action == 'edit':
                 return self.handle_edit(request, *args, **kwargs)
@@ -339,24 +360,6 @@ class CollectionDetailView(BaseView):
                 collection_record.delete()
                 return http.HttpResponse()
         return http.HttpResponseBadRequest()
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.collection_record.record_id
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(self.get_url())
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionDetailView, self).get_context_data(**kwargs)
@@ -407,7 +410,7 @@ class CollectionDetailView(BaseView):
 
 class HomeView(BaseView):
     template_name = 'hkm/views/home_page.html'
-    url_name = 'hkm_index'
+    url_name = 'hkm_home'
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -419,96 +422,6 @@ class HomeView(BaseView):
             prefetch_related('albums').\
             filter(show_on_home_page=True).\
             order_by('-created')
-        return context
-
-
-# using collection_record here also instead of record (see
-# CollectionDetailView naming confusion)
-class IndexView(CollectionDetailView):
-    template_name = 'hkm/views/index.html'
-    url_name = 'hkm_index'
-    open_popup = True
-
-    def get_template_names(self):
-        return self.template_name
-
-    def get_url(self):
-        return reverse(self.url_name)
-
-    def setup(self, request, *args, **kwargs):
-        collections = Collection.objects.filter(show_in_landing_page=True)
-        if collections.exists():
-            self.collection = collections[0]
-        else:
-            LOG.warning('Co collections to show in landing page')
-
-        record_id = request.GET.get('rid', None)
-        if record_id:
-            try:
-                self.collection_record = self.collection.records.get(
-                    id=record_id)
-            except Record.DoesNotExist:
-                LOG.warning(
-                    'Record does not exist or does not belong to this collection')
-        if not self.collection_record and self.collection:
-            self.collection_record = self.collection.records.order_by('?').first()
-
-        self.permissions = {
-            'can_edit': False
-        }
-
-        return True
-
-    def get_empty_forms(self, request):
-        context_forms = super(IndexView, self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(IndexView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.record_id = self.collection_record.record_id
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(self.url_name)
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        if self.collection_record:
-            context['hkm_id'] = self.collection_record.record_id
-        if 'seen_welcome_modal' in self.request.session and self.request.session['seen_welcome_modal'] == True:
-            context['open_popup'] = False
-        else:
-            self.request.session['seen_welcome_modal'] = True
-            context['open_popup'] = True
-
-        # try to get modal contents
-        try:
-            context["page_content"] = PageContent.objects.get(identifier=self.url_name)
-        except PageContent.DoesNotExist:
-            context["page_content"] = None
-
         return context
 
 
@@ -524,10 +437,9 @@ class SearchView(BaseView):
     previous_record = None
     record = None
     next_record = None
+    single_image = False
 
     search_term = None
-    author_facets = None
-    date_facets = None
     page = 1
 
     def get(self, request, *args, **kwargs):
@@ -546,22 +458,11 @@ class SearchView(BaseView):
         # Session expires after browser is closed
         request.session.set_expiry(0)
         self.search_term = request.GET.get('search', '')
-        self.author_facets = filter(
-            None, request.GET.getlist('author[]', None))
-        self.date_facets = filter(
-            None, request.GET.getlist('main_date_str[]', None))
         self.page = int(request.GET.get('page', 1))
         return True
 
     def handle_search(self, request, *args, **kwargs):
-        LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'author_facets': repr(self.author_facets),
-                                            'date_facets': repr(self.date_facets), 'page': self.page}})
-        self.facet_result = self.get_facet_result(self.search_term)
-        facets = {}
-        if self.author_facets:
-            facets['author_facet'] = self.author_facets
-        if self.date_facets:
-            facets['main_date_str'] = self.date_facets
+        LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'page': self.page}})
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
@@ -572,13 +473,11 @@ class SearchView(BaseView):
 
         search_term_changed = self.search_term != request.session.get('search')
         page_changed = self.page != request.session.get('page')
-        author_facets_changed = len(self.author_facets) != len(request.session.get('author_facets', []))
-        date_facets_changed = len(self.date_facets) != len(request.session.get('date_facets', []))
 
         # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            if search_term_changed or page_changed or author_facets_changed or date_facets_changed:
-                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+            if search_term_changed or page_changed:
+                results = self.get_search_result(self.search_term, self.page, self.page_size)
                 if results:
                     self.search_result = results
                     records += results.get('records', [])
@@ -592,21 +491,27 @@ class SearchView(BaseView):
             if kwargs.get('record'):
                 # Check if user came from list view or from direct link
                 finna_id = request.GET.get('image_id')
+                LOG.debug('Displaying image details', extra={'data': {'finna_id': finna_id}})
                 # Check if record is found in session, if not, get it from finna
                 records = session_search_result.get('records', [])
                 record = next((x for x in records if x['id'] == finna_id), None)
                 if not record:
                     result = FINNA.get_record(finna_id)
+                    if result and result.get('resultCount', 0) == 0:
+                        # If image was not found we want to show different 404 page
+                        context = self.get_context_data(**kwargs)
+                        return render(request, 'hkm/views/404_image.html', context, status=404)
                     self.search_result = result
+                    self.single_image = True
                     self.record = result.get('records')[0] if result else None
                 # If user came from list view, get selected image from session
                 else:
                     # Save previous - selected - next records to corresponding variables
-                    record_index = record.get('index')
-                    if record_index > 1:
-                        self.previous_record = records[record_index - 2]
-                    if record_index < len(records):
-                        self.next_record = records[record_index]
+                    record_index = records.index(record)
+                    if record_index > 0:
+                        self.previous_record = records[record_index - 1]
+                    if record_index < len(records) - 1:
+                        self.next_record = records[record_index + 1]
 
                     # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
                     self.record = copy.deepcopy(record)
@@ -616,17 +521,12 @@ class SearchView(BaseView):
                     # This is required for "Back to search results" link to work
                     self.search_term = request.session.get('search', '')
                     self.page = request.session.get('page')
-                    self.author_facets = request.session.get('author_facets', [])
-                    self.date_facets = request.session.get('date_facets', [])
 
             # This else statement is executed when "Load more" is pressed
             else:
-                results = self.get_search_result(self.search_term, facets, self.page, self.page_size)
+                results = self.get_search_result(self.search_term, self.page, self.page_size)
                 self.search_result = results
 
-        # calculate global index for the record, this is used to form links to search detail view
-        # which is technically same view as this, it only shows one image per
-        # page
         if self.search_result:
             favorite_records = None
             if request.user.is_authenticated():
@@ -636,18 +536,23 @@ class SearchView(BaseView):
                         collection__owner=request.user,
                         collection__collection_type=Collection.TYPE_FAVORITE
                     ).values_list("record_id", flat=True)
+                    if self.record:
+                        self.record['is_favorite'] = self.record['id'] in favorite_records
                 except Record.DoesNotExist:
                     pass
 
-            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get('record'):
-                i = 1  # record's index in current page
-                for record in self.search_result['records']:
-                    p = self.search_result['page'] - 1  # zero indexed page
-                    record['index'] = p * self.search_result['limit'] + i
-                    i += 1
-                    # Check also if this record is one of user's favorites
-                    if favorite_records:
+            if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
+                    'record'):
+                # Loop through records and set index (it is used in "back to search" part) to
+                # display image number / total images, e.g 1/10 000
+                # Check also if this record is one of user's favorites
+                session_length = len(session_search_result.get('records', []))
+                start_number = session_length + 1 if search_term_changed or page_changed else 1
+                for idx, record in enumerate(self.search_result['records'], start_number):
+                    record['index'] = idx
+                    if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
+
                 # If user is loading more pictures add them to session.
                 # Check for page changed, this will prevent session duplicating itself
                 # endlessly if search button is pressed over and over again.
@@ -656,8 +561,6 @@ class SearchView(BaseView):
                     request.session['search_result']['records'].extend(self.search_result.get('records'))
                 else:
                     request.session['search_result'] = self.search_result
-                request.session['author_facets'] = self.author_facets
-                request.session['date_facets'] = self.date_facets
                 request.session['search'] = self.search_term
                 request.session['page'] = self.page
             elif 'records' not in self.search_result:
@@ -665,20 +568,12 @@ class SearchView(BaseView):
                 if self.request.is_ajax():
                     return http.HttpResponseBadRequest()
 
-    def get_facet_result(self, search_term):
-        if self.request.is_ajax():
-            return None
-        else:
-            return FINNA.get_facets(self.search_term)
-
-    def get_search_result(self, search_term, facets, page, limit):
-        return FINNA.search(search_term, facets=facets, page=page, limit=limit, detailed=self.use_detailed_query)
+    def get_search_result(self, search_term, page, limit):
+        return FINNA.search(search_term, page=page, limit=limit, detailed=self.use_detailed_query)
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['facet_result'] = self.facet_result
-        context['author_facets'] = self.author_facets
-        context['date_facets'] = self.date_facets
         context['search_result'] = self.search_result
         context['search_term'] = self.search_term
         context['current_page'] = self.page
@@ -694,9 +589,6 @@ class SearchRecordDetailView(SearchView):
 
     def get(self, request, *args, **kwargs):
         return super(SearchRecordDetailView, self).get(request, record=True, *args, **kwargs)
-
-    def get_facet_result(self, search_term):
-        return None
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action', None)
@@ -733,8 +625,7 @@ class SearchRecordDetailView(SearchView):
         record.save()
 
         url = reverse('hkm_search_record')
-        url += '?search=%s&ft=%s&fv=%s&page=%d' % (self.search_term, self.facet_type, self.facet_value,
-                                                   self.page)
+        url += '?search=%s&page=%d' % (self.search_term, self.page)
         return redirect(url)
 
     def get_context_data(self, **kwargs):
@@ -742,8 +633,8 @@ class SearchRecordDetailView(SearchView):
                         self).get_context_data(**kwargs)
         if self.record:
             record = self.record
-            record['full_res_url'] = HKM.get_full_res_image_url(
-                record['rawData']['thumbnail'])
+            record['full_res_url'] = FINNA.get_full_res_image_url(
+                record['id'])
             related_collections_ids = Record.objects.filter(
                 record_id=record['id']).values_list('collection', flat=True)
             related_collections = Collection.objects.user_can_view(
@@ -754,6 +645,7 @@ class SearchRecordDetailView(SearchView):
             context['record'] = record
             context['next_record'] = self.next_record
             context['hkm_id'] = record['id']
+            context['single_image'] = self.single_image
             LOG.debug('record id', extra={'data': {'finnaid': record['id']}})
             context['record_web_url'] = FINNA.get_image_url(record['id'])
         if self.request.user.is_authenticated():
@@ -779,32 +671,8 @@ class SearchRecordDetailView(SearchView):
             prefix='feedback-form', user=user)
         return context_forms
 
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(SearchRecordDetailView, self).post(request, *args, **kwargs)
 
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            record = request.POST.get("hkm_id", "")
-            feedback = form.save(commit=False)
-            feedback.record_id = record
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': record}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-
+# This is needed for CreateOrderView
 class BaseFinnaRecordDetailView(BaseView):
     record_finna_id = None
     record = None
@@ -818,8 +686,8 @@ class BaseFinnaRecordDetailView(BaseView):
             record_data = FINNA.get_record(self.record_finna_id)
             if record_data and 'records' in record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
+                    self.record['id'])
         return True
 
     def get_context_data(self, **kwargs):
@@ -834,103 +702,6 @@ class BaseFinnaRecordDetailView(BaseView):
             context['my_collections'] = Collection.objects.none()
 
         return context
-
-
-class FinnaRecordDetailView(BaseFinnaRecordDetailView):
-    template_name = 'hkm/views/record.html'
-    url_name = 'hkm_record'
-
-    # def get(self, request, *args, **kwargs):
-    #   if not self.record:
-    #     return http.HttpResponse()
-    #   return super(FinnaRecordDetailView, self).get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(FinnaRecordDetailView, self).get_context_data(**kwargs)
-        if not self.record:
-            return context
-        related_collections_ids = Record.objects.filter(record_id=self.record['id']).values_list(
-            'collection', flat=True)  # WAT... no objects in Record model
-        related_collections = Collection.objects.user_can_view(
-            self.request.user).filter(id__in=related_collections_ids).distinct()
-        context['related_collections'] = related_collections
-        return context
-
-    def get_empty_forms(self, request):
-        context_forms = super(FinnaRecordDetailView,
-                              self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(FinnaRecordDetailView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.record['id']
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
-
-
-class FinnaRecordFeedbackView(BaseFinnaRecordDetailView):
-    template_name = 'hkm/views/record_feedback.html'
-    # automatically redirect back to detail view after post
-    url_name = 'hkm_record_feedback'
-
-    def get_empty_forms(self, request):
-        context_forms = super(FinnaRecordFeedbackView,
-                              self).get_empty_forms(request)
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        context_forms['feedback_form'] = forms.FeedbackForm(
-            prefix='feedback-form', user=user)
-        return context_forms
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', None)
-        if action == 'feedback':
-            return self.handle_feedback(request, *args, **kwargs)
-        return super(FinnaRecordFeedbackView, self).post(request, *args, **kwargs)
-
-    def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            user = None
-        form = forms.FeedbackForm(
-            request.POST, prefix='feedback-form', user=user)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.record_id = self.record['id']
-            feedback.sent_from = "".join([request.get_host(), request.get_full_path()])
-            feedback.save()
-            email.send_feedback_notification(feedback.id)
-            # TODO: redirect to success page?
-            return redirect(reverse('hkm_record', kwargs={'finna_id': self.record['id']}))
-        kwargs['feedback_form'] = form
-        return self.get(request, *args, **kwargs)
 
 
 class SignUpView(BaseView):
@@ -960,7 +731,7 @@ class CreateOrderView(BaseFinnaRecordDetailView):
     def handle_order(self, request, *args, **kwargs):
         order = ProductOrder(record_finna_id=self.record['id'])
 
-        full_res_image = HKM.download_image(self.record['full_res_url'])
+        full_res_image = FINNA.download_image(self.record['id'])
         width, height = full_res_image.size
         order.fullimg_original_width = width
         order.fullimg_original_height = height
@@ -1011,7 +782,7 @@ class BaseOrderView(BaseView):
         return context
 
     def _get_cropped_full_res_file(self, record):
-        full_res_image = HKM.download_image(self.order.image_url)
+        full_res_image = FINNA.download_image(record['id'])
         cropped_image = image_utils.crop(full_res_image, self.order.crop_x, self.order.crop_y,
                                          self.order.crop_width, self.order.crop_height, self.order.original_width, self.order.original_height)
         crop_io = StringIO.StringIO()
@@ -1110,8 +881,8 @@ class OrderProductView(BaseOrderView):
         context['form_page'] = 1
         if self.record:
             context['record'] = self.record
-            self.order.image_url = HKM.get_full_res_image_url(
-                context['record']['rawData']['thumbnail'])
+            self.order.image_url = FINNA.get_full_res_image_url(
+                context['record']['id'])
             self.order.save()
 
         return context
@@ -1154,8 +925,8 @@ class OrderContactInformationView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
+                    context['record']['id'])
 
                 self.order.crop_image_url = self.handle_crop(context['record'])
 
@@ -1188,8 +959,8 @@ class OrderSummaryView(BaseOrderView):
             record_data = FINNA.get_record(self.order.record_finna_id)
             if record_data:
                 context['record'] = record_data['records'][0]
-                context['record']['full_res_url'] = HKM.get_full_res_image_url(
-                    context['record']['rawData']['thumbnail'])
+                context['record']['full_res_url'] = FINNA.get_full_res_image_url(
+                    context['record']['id'])
         return context
 
 ### END VIEWS RELATED TO ORDERING PRODUCTS ###
@@ -1262,8 +1033,8 @@ class AjaxCropRecordView(View):
             record_data = FINNA.get_record(self.record_id)
             if record_data:
                 self.record = record_data['records'][0]
-                self.record['full_res_url'] = HKM.get_full_res_image_url(
-                    self.record['rawData']['thumbnail'])
+                self.record['full_res_url'] = FINNA.get_full_res_image_url(
+                    self.record['id'])
                 return super(AjaxCropRecordView, self).dispatch(request, *args, **kwargs)
             else:
                 LOG.error('Could not get record data')
@@ -1272,16 +1043,11 @@ class AjaxCropRecordView(View):
     def post(self, request, *args, **kwargs):
         if self.action == 'download':
             return self.handle_download(request, *args, **kwargs)
-        if request.user.is_authenticated():
-            if self.action == 'add':
-                return self.handle_add_to_collection(request, *args, **kwargs)
-            elif self.action == 'add-create-collection':
-                return self.handle_add_to_new_collection(request, *args, **kwargs)
         return http.HttpResponseBadRequest()
 
     def _get_cropped_full_res_file(self):
         try:
-            full_res_image = HKM.download_image(self.record['full_res_url'])
+            full_res_image = FINNA.download_image(self.record['id'])
         except:
             return None
         cropped_image = image_utils.crop(full_res_image, self.crop_x, self.crop_y,
@@ -1331,29 +1097,34 @@ class AjaxCropRecordView(View):
                   'data': {'url': tmp_image.edited_image.url}})
         return http.JsonResponse({'url': tmp_image.edited_image.url})
 
+
+class AjaxAddToCollection(View):
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            action = request.POST['action']
+            if action == 'add':
+                return self.handle_add_to_collection(request, *args, **kwargs)
+            elif action == 'add-create-collection':
+                return self.handle_add_to_new_collection(request, *args, **kwargs)
+        return http.HttpResponseBadRequest()
+
     def handle_add_to_collection(self, request, *args, **kwargs):
         try:
             collection = Collection.objects.filter(
                 owner=request.user).get(id=request.POST['collection_id'])
         except KeyError, Collection.DoesNotExist:
-            LOG.error('Couldn not get collection')
+            LOG.error('Could not get collection')
         else:
-            cropped_full_res_file = self._get_cropped_full_res_file()
-            cropped_preview_file = self._get_cropped_preview_file()
-            record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-                            edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
+            record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
             record.save()
             return http.HttpResponse()
         return http.HttpResponseBadRequest()
 
     def handle_add_to_new_collection(self, request, *args, **kwargs):
-        collection = Collection(
-            owner=request.user, title=request.POST['collection_title'])
+        collection = Collection(owner=request.user, title=request.POST['collection_title'])
         collection.save()
-        cropped_full_res_file = self._get_cropped_full_res_file()
-        cropped_preview_file = self._get_cropped_preview_file()
-        record = Record(creator=request.user, collection=collection, record_id=self.record['id'],
-                        edited_full_res_image=cropped_full_res_file, edited_preview_image=cropped_preview_file)
+        record = Record(creator=request.user, collection=collection, record_id=request.POST['record_id'])
         record.save()
         return http.HttpResponse()
 
@@ -1408,8 +1179,9 @@ class SiteinfoTermsView(TranslatableContentView):
         return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
 
 
-class BasketView(TemplateView):
+class BasketView(BaseView):
     template_name = 'hkm/views/basket.html'
+    url_name = 'basket'
 
     def get_context_data(self, **kwargs):
         context = super(BasketView, self).get_context_data(**kwargs)
@@ -1542,7 +1314,62 @@ class BasketView(TemplateView):
         if action == 'checkout' and kwargs.get('phase') == 'checkout':
             return self.handle_checkout(request)
 
+class RecordFeedbackView(View):
+    name='hkm_record_feedback'
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action', None)
+        if action == 'feedback':
+            return self.handle_feedback(request, *args, **kwargs)
+        return super(RecordFeedbackView, self).post(request, *args, **kwargs)
+
+    def handle_feedback(self, request, *args, **kwargs):
+        response_data = {}
+        if request.user.is_authenticated():
+            user = request.user
+        else:
+            user = None
+        form = forms.FeedbackForm(
+            request.POST, user=user)
+        if form.is_valid():
+            record = request.POST.get("hkm_id", "")
+            feedback = form.save(commit=False)
+            feedback.record_id = record
+            path = "/info/" if not record else '/search/details/?image_id=' + record
+            feedback.sent_from = "".join([request.get_host(), path])
+            feedback.save()
+            email.send_feedback_notification(feedback.id)
+
+            response_data['result'] = "Success"
+            return http.HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+            response_data['result'] = "Error"
+            return http.HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+
+
+class LegacyRecordDetailView(RedirectView):
+    """This class provides backward compatibility for links to Finna images written
+    as /record/<finna_id>/. It just redirects to the current implementation of the
+    details view using a 301 redirect."""
+
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        base_url = reverse('hkm_search_record')
+        query_string = urlencode({'image_id': kwargs['finna_id']})
+        url = '{}?{}'.format(base_url, query_string)
+
+        return url
+
+
 # ERROR HANDLERS
+
 
 def handler404(request):
     context = {}

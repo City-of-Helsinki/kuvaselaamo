@@ -517,6 +517,9 @@ msgstr "Tämän palvelun tarjoaa"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
 
+msgid "Image view"
+msgstr "Kuvanäkymä"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Edellinen kuva"
@@ -603,6 +606,12 @@ msgstr "Lähetä palautetta kuvasta"
 msgid "Submit"
 msgstr "Lähetä"
 
+msgid "Feedback success"
+msgstr "Palaute lähetetty onnistuneesti!"
+
+msgid "Feedback error"
+msgstr "Lähetyksessä tapahtui virhe. Yritä hetken kuluttua uudestaan"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Rajaa ja tilaa"
@@ -687,6 +696,9 @@ msgstr "Etsi"
 msgid "Search pictures"
 msgstr "Etsi kuvia"
 
+msgid "With word"
+msgstr "sanalla"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Selaa albumeita"
@@ -696,20 +708,23 @@ msgstr "Selaa albumeita"
 msgid "My collections"
 msgstr "Omat albumit"
 
+msgid "Profile menu"
+msgstr "Profiili valikko"
+
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "EN"
+msgstr "In English"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "SV"
+msgstr "På svenska"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "FI"
+msgstr "Suomeksi"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
@@ -748,6 +763,9 @@ msgstr "Tämä on pieniresoluutioinen kuva. Tuotteita ei voi tilata."
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
 
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
+
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
 msgstr "Kopioi kuvan osoite leikepöydälle"
@@ -764,6 +782,9 @@ msgstr "404 - Sivua ei löydy"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Etsimääsi sivua ei löydy"
+
+msgid "#error-404-image-not-found"
+msgstr "Etsimääsi kuvaa ei löytynyt"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -785,6 +806,15 @@ msgstr "Käytä"
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Back to Homepage"
 msgstr "Takaisin etusivulle"
+
+msgid "Remove row"
+msgstr "Poista rivi"
+
+msgid "Increase"
+msgstr "Lisää tuotteen määrää"
+
+msgid "Decrease"
+msgstr "Vähennä tuotteen määrää"
 
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
@@ -929,6 +959,9 @@ msgstr "Hinta yht."
 msgid "Add to cart"
 msgstr "Lisää koriin"
 
+msgid "Contact information"
+msgstr "Tilauksesi yhteystiedot"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr "Kiitos tilauksestasi"
@@ -1015,6 +1048,9 @@ msgstr "Tuote"
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
+msgid "Order summary"
+msgstr "Tilauksen yhteenveto"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1039,6 +1075,9 @@ msgid ""
 "service."
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
 
+msgid "Order payment confirmed"
+msgstr "Tilauksen maksu vahvistettu"
+
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"
 msgstr "Selaa albumeita"
@@ -1050,14 +1089,6 @@ msgstr "Lähetä palautetta kuvasta"
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
 msgstr "Kuvaa"
-
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Tekijä"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "Vuosi"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
@@ -1071,6 +1102,12 @@ msgstr "Ei enempää tuloksia"
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Takaisin hakuun"
+
+msgid "Zoom in"
+msgstr "Suurenna"
+
+msgid "Zoom out"
+msgstr "Pienennä"
 
 #: hkm/views/views.py:1096
 msgid "Favorites"

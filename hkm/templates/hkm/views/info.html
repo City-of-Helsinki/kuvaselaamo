@@ -1,6 +1,10 @@
 {% extends 'hkm/base_browse.html' %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{% trans 'Feedback' %}</title>
+{% endblock %}
+
 {% block banner %}
 
   <div class="page-header">
@@ -17,10 +21,12 @@
 
   <div class="container-small container">
 
-    <form method="POST">
+    <form id="feedback-form" method="POST">
       {% csrf_token %}
       {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
       <input type="hidden" name="action" value="feedback" />
+      <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
+      <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
       <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Submit' %}</button>
     </form>
 

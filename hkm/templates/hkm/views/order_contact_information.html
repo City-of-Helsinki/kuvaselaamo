@@ -1,13 +1,17 @@
 {% extends 'hkm/base_browse.html' %}
 {% load i18n hkm_tags %}
 
+{% block page_title %}
+  <title>{% trans 'Contact information' %}</title>
+{% endblock %}
+
 {% block banner %}
 
 {% endblock %}
 
 {% block content %}
 
-  <div class="record-meta container-medium container-center">
+  <div class="fullsize-container">
 
     {% if order %}
 

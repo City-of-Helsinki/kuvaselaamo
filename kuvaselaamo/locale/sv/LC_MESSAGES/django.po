@@ -510,6 +510,9 @@ msgstr "Denna tjänst erbjuds av"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
 
+msgid "Image view"
+msgstr "Bildvy"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Föregående bild"
@@ -596,6 +599,12 @@ msgstr "Skicka respons om bilden"
 msgid "Submit"
 msgstr "Skicka"
 
+msgid "Feedback success"
+msgstr "Feedback skickad!"
+
+msgid "Feedback error"
+msgstr "Ett fel inträffade när du skickade in. Försök igen efter ett tag."
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Avgränsa och beställ"
@@ -680,6 +689,9 @@ msgstr "Sök"
 msgid "Search pictures"
 msgstr "Sök bilder"
 
+msgid "With word"
+msgstr "med ord"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
@@ -689,20 +701,23 @@ msgstr "Bläddra i album"
 msgid "My collections"
 msgstr "Mina album"
 
+msgid "Profile menu"
+msgstr "Profilmeny"
+
 #: hkm/templates/hkm/snippets/navigation.html:41
 #: hkm/templates/hkm/snippets/navigation.html:48
 msgid "In English"
-msgstr "EN"
+msgstr "In English"
 
 #: hkm/templates/hkm/snippets/navigation.html:42
 #: hkm/templates/hkm/snippets/navigation.html:45
 msgid "På svenska"
-msgstr "SV"
+msgstr "På svenska"
 
 #: hkm/templates/hkm/snippets/navigation.html:44
 #: hkm/templates/hkm/snippets/navigation.html:47
 msgid "Suomeksi"
-msgstr "FI"
+msgstr "Suomeksi"
 
 #: hkm/templates/hkm/snippets/navigation.html:54
 msgid "Logout"
@@ -741,6 +756,9 @@ msgstr "Detta är en bild med låg upplösning. Produkterna kan inte beställas.
 msgid "Add to favorites"
 msgstr "Lägg till i favoriter"
 
+msgid "Remove from favorites"
+msgstr "Ta bort från favoriter"
+
 #: hkm/templates/hkm/snippets/popover_share.html:4
 msgid "Copy share url to clipboard"
 msgstr "Kopiera bildens adress till klippbordet"
@@ -757,6 +775,9 @@ msgstr "404 - Sidan hittades inte"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Tyvärr kunde vi inte hitta den sida du letar efter."
+
+msgid "#error-404-image-not-found"
+msgstr "Bilden du letade efter hittades inte"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -778,6 +799,15 @@ msgstr "Använd rabattkod"
 #: hkm/templates/hkm/views/basket.html:40
 msgid "Back to Homepage"
 msgstr "Tillbaka till startsidan"
+
+msgid "Remove row"
+msgstr "Ta bort raden"
+
+msgid "Increase"
+msgstr "Öka mängden produkt"
+
+msgid "Decrease"
+msgstr "Minska mängden produkt"
 
 #: hkm/templates/hkm/views/basket.html:32
 msgid "Proceed to Checkout"
@@ -921,6 +951,9 @@ msgstr "Totalpris"
 msgid "Add to cart"
 msgstr "Lägg i korgen"
 
+msgid "Contact information"
+msgstr "Kontaktinformation för din beställning"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr ""
@@ -1009,6 +1042,9 @@ msgstr "Produkt"
 msgid "Product selection"
 msgstr "Produktsortiment"
 
+msgid "Order summary"
+msgstr "Order Ordersammanfattning"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1033,6 +1069,9 @@ msgid ""
 "service."
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
 
+msgid "Order payment confirmed"
+msgstr "Orderbetalning bekräftad"
+
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"
 msgstr "Bläddra i album"
@@ -1045,14 +1084,6 @@ msgstr "Skicka respons om bilden"
 msgid "Records"
 msgstr "Beskriv"
 
-#: hkm/templates/hkm/views/search.html:40
-msgid "Author"
-msgstr "Upphovsman"
-
-#: hkm/templates/hkm/views/search.html:49
-msgid "Year"
-msgstr "År"
-
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more..."
 msgstr "Ladda mer... "
@@ -1060,6 +1091,12 @@ msgstr "Ladda mer... "
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
 msgstr "Tillbaka till sökningen"
+
+msgid "Zoom in"
+msgstr "Zooma in"
+
+msgid "Zoom out"
+msgstr "Zooma ut"
 
 #: hkm/views/views.py:1090
 msgid "Favorites"
