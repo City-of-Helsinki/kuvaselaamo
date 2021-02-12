@@ -12,8 +12,6 @@ RUN apt-install.sh \
     libpq-dev \
     && pip install --no-cache-dir \
     -r /app/requirements.txt \
-    && pip install --no-cache-dir \
-    -r /app/requirements-prod.txt \
     && apt-cleanup.sh \
     build-essential \
     pkg-config
@@ -34,7 +32,8 @@ FROM appbase as development
 # ==============================
 
 COPY --chown=appuser:appuser requirements-dev.txt /app/requirements-dev.txt
-RUN pip install --no-cache-dir -r /app/requirements-dev.txt \
+RUN pip install --no-cache-dir \
+    -r /app/requirements-dev.txt \
     && pip install --no-cache-dir pip-tools
 
 ENV DEV_SERVER=1
@@ -50,6 +49,17 @@ FROM appbase as production
 # ==============================
 
 COPY --from=staticbuilder --chown=appuser:appuser /app/static /app/static
+
+COPY --chown=appuser:appuser requirements-prod.txt /app/requirements-prod.txt
+RUN apt-install.sh \
+    build-essential \
+    libpq-dev \
+    && pip install --no-cache-dir \
+    -r /app/requirements-prod.txt \
+    && apt-cleanup.sh \
+    build-essential \
+    pkg-config
+
 COPY --chown=appuser:appuser . /app/
 
 USER appuser

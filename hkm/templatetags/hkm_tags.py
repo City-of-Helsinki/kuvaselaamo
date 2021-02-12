@@ -26,6 +26,22 @@ def finna_image(img_id, w=0, h=0):
 def finna_default_image_url(img_id):
     return FINNA.get_image_url(img_id)
 
+@register.filter
+def record_detail(record):
+    array_fields = {}
+    translated = []
+
+    photographer = record.get('rawData').get('photographer_str_mv', [])
+    format = record.get('rawData').get('format', [])
+    measures = record.get('rawData').get('measurements', [])
+
+    for type in format:
+        translated.append(type.get('translated'))
+
+    array_fields['photographer'] = ", ".join(photographer) if photographer else ""
+    array_fields['image_types'] = ', '.join(translated) if translated else ""
+    array_fields['measures'] = ', '.join(measures) if measures else ""
+    return array_fields
 
 @register.filter
 def display_images(collection):
@@ -43,11 +59,6 @@ def display_images(collection):
             image_urls.append(record.get_preview_image_absolute_url())
         return image_urls
     return image_urls
-
-
-@register.filter
-def is_favorite(record, user):
-    return record.is_favorite(user)
 
 
 @register.filter(is_safe=True)

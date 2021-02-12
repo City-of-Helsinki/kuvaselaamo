@@ -7,6 +7,7 @@ from StringIO import StringIO
 import requests
 from PIL import Image
 
+
 LOG = logging.getLogger(__name__)
 
 
@@ -21,41 +22,7 @@ class FinnaClient(object):
         self.organisation = organisation
         self.material_type = material_type
 
-    def get_facets(self, search_term, language='fi'):
-        url = FinnaClient.API_ENDPOINT + 'search'
-        payload = {
-            'lookfor': search_term,
-            'filter[]': ['format:' + self.material_type, 'building:' + self.organisation, 'online_boolean:"1"'],
-            'limit': 0,
-            'lng': language,
-            'facet[]': ['author_facet', 'collection', 'genre_facet', 'main_date_str', 'category_str_mv']
-        }
-        try:
-            r = requests.get(url, params=payload, timeout=self.timeout)
-        except requests.exceptions.RequestException:
-            LOG.error('Failed to communicate with Finna API', exc_info=True)
-            return None
-        else:
-            try:
-                r.raise_for_status()
-                # raise requests.exceptions.HTTPError()
-            except requests.exceptions.HTTPError:
-                LOG.error('Failed to communicate with Finna API', exc_info=True,
-                          extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
-                return None
-
-        result_data = r.json()
-        if not 'status' in result_data or result_data['status'] != 'OK':
-            LOG.error('Finna query was not succesfull', extra={
-                      'data': {'result_data': repr(result_data)}})
-            return None
-
-        LOG.debug('Got result from Finna', extra={
-                  'data': {'result_data': repr(result_data)}})
-        return result_data
-
-    def search(self, search_term, facets=None, page=1, limit=20, language='fi',
-               detailed=False):
+    def search(self, search_term, page=1, limit=20, language='fi', detailed=False):
         url = FinnaClient.API_ENDPOINT + 'search'
         payload = {
             'lookfor': search_term,
@@ -64,15 +31,6 @@ class FinnaClient(object):
             'limit': limit,
             'lng': language,
         }
-        if facets:
-            # Idea is to OR parameters within facet scope and AND facet filters with each other
-            # Like this: (Authors A OR B) AND year 1920
-            # However this code uses OR in all facets and this seems to work in
-            # desired way
-            for facet_type, facet_values in facets.iteritems():
-                for facet_value in facet_values:
-                    payload['filter[]'].append(
-                        '~' + facet_type + ":" + facet_value)
 
         if detailed:
             payload['field[]'] = ['id', 'authors', 'buildings', 'formats', 'genres', 'humanReadablePublicationDates',
@@ -119,6 +77,10 @@ class FinnaClient(object):
         return result_data
 
     def get_record(self, record_id):
+        if record_id is None:
+            LOG.warn('Record id was None, cannot call Finna')
+            return None
+
         url = FinnaClient.API_ENDPOINT + 'record'
         payload = {
             'id[]': record_id,
@@ -158,8 +120,11 @@ class FinnaClient(object):
             url = 'https://finna.fi/Cover/Show?id=%s&fullres=1&index=0' % record_id
         return url
 
+    def get_full_res_image_url(self, record_id):
+        return 'https://finna.fi/Cover/Show?id=%s&size=master&index=0' % record_id
+
     def download_image(self, record_id):
-        r = requests.get(self.get_image_url(record_id), stream=True)
+        r = requests.get(self.get_full_res_image_url(record_id), stream=True)
         try:
             r.raise_for_status()
         except requests.exceptions.RequestException:

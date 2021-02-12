@@ -1,8 +1,9 @@
 $(document).ready(function() {
     // Basket page add remove quantity
+    let selectedRow = null;
 
     function getValues(selector) {
-      var count = parseInt(selector.closest('.basket-row').find('.basket-quantity-value').text(), 10);
+      var count = parseInt(selector.closest('.basket-row').find('.basket-quantity_value').text(), 10);
 
       return {
           count: count
@@ -13,6 +14,8 @@ $(document).ready(function() {
     function handleCount(e) {
       e.preventDefault();
       var currentCount = getValues($(this)).count;
+      let line = $(this).closest('.shopping-cart-row').data("lineid")
+      selectedRow = line;
 
       if ($(this).hasClass('btn-up')) {
         currentCount += 1;
@@ -63,7 +66,7 @@ $(document).ready(function() {
     function updateBaketView(data) {
         $('.tooltip').tooltip('destroy');
         $("section.basket").html(data.html);
-        $(".product-counter").html(data.nav_counter);
+        $(".list-item_cart").html(data.nav_counter);
         $(".basket-price-total").html(data.basket_total_price_row);
     }
 

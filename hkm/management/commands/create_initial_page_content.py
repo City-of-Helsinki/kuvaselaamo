@@ -11,7 +11,7 @@ from hkm.models.models import PrintProduct
 
 pages = [{
     "name": u"Welcome",
-    "identifier": u"hkm_index",
+    "identifier": u"hkm_home",
     "texts": [
         {
             "language": u"fi",

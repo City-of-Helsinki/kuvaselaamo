@@ -2,10 +2,14 @@
 {% load i18n %}
 {% load hkm_tags %}
 
+{% block page_title %}
+  <title>{% trans 'Search pictures' %} {% if search_term %}{% trans 'With word' %} {{ search_term }}{% endif %}</title>
+{% endblock %}
+
 {% block banner %}
 
   <div class="page-header bittersweet">
-    <div class="fullsize-container container">
+    <div class="fullsize-container">
       <div class="banner__title">
         {% if search_term %}
         <h1 class="banner__h1">{{ search_result.resultCount }} {% trans 'Records' %}</h1>
@@ -17,7 +21,7 @@
         <div class="search-form__content input-group">
           <input class="search-form__field form-control" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
           <span class="search-form__btn-container input-group-btn">
-            <button class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png"></img></button>
+            <button aria-label="{% trans 'Search' %}" class="search-form__btn btn btn-default" type="submit"><img src="/static/hkm/img/suurennuslasi.png" alt=""></img></button>
           </span>
         </div>
       </form>
@@ -28,68 +32,16 @@
 
 {% block content %}
 
-  <div class="fullsize-container container">
+  <div class="fullsize-container">
 
     {% if search_result.records %}
 
-    <div class="sidebar col-md-2">
 
-      <ul class="list-group list-group-root" id="accordion" data-search="{{ search_term }}" data-author-facets="{{ author_facets }}" data-date-facets="{{ date_facets }}">
-        <li class="list-group__item list-group-item">
-          <span class="caret"></span>
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-author">{% trans 'Author' %}</a>
-          <ul id="collapse-author" class="list-group panel-collapse collapse {% if author_facets %}in{% endif %}">
-            {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
-              <li class="list-group__item list-group-item"><a href="#" class="list-group__link {% if author.value in author_facets %}active{% endif %}" data-author-value="{{ author.value }}">{{ author.translated }} - ({{ author.count }})</a></li>
-            {% endfor %}
-          </ul>
-        </li>
-        <li class="list-group__item list-group-item">
-          <span class="caret"></span>
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-year">{% trans 'Year' %}</a>
-          <ul id="collapse-year" class="list-group panel-collapse collapse {% if date_facets %}in{% endif %}">
-            {% for date_facet in facet_result.facets.main_date_str|dictsort:"translated" %}
-              <li class="list-group__item list-group-item"><a href="#" class="list-group__link {% if date_facet.value in date_facets %}active{% endif %}" data-date-value="{{ date_facet.value }}">{{ date_facet.translated }} - ({{ date_facet.count }})</a></li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
-
+    <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
+      {% include 'hkm/snippets/search_records_grid.html' %}
     </div>
+    <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block" data-current-page="{{ current_page }}">{% trans 'Load more...' %}</button>
 
-    <div class="article col-md-10">
-      <div class="search-filter">
-        {% for facet in author_facets %}
-          <div class="search-filter__item" data-facet-type="author">
-            <span class="search-filter__text" data-author-facet="{{ facet }}">{{ facet }}</span>
-            <a href="#" class="search-filter__delete" data-author-facet="{{ facet }}">
-              <i class="search-filter__delete-icon">
-                <svg class="svg-icon">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
-                </svg>
-              </i>
-            </a>
-          </div>
-        {% endfor %}
-        {% for facet in date_facets %}
-          <div class="search-filter__item" data-facet-type="date">
-            <span class="search-filter__text" data-date-facet="{{ facet }}">{{ facet }}</span>
-            <a href="#" class="search-filter__delete" data-date-facet="{{ facet }}">
-              <i class="search-filter__delete-icon">
-                <svg class="svg-icon">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
-                </svg>
-              </i>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
-        {% include 'hkm/snippets/search_records_grid.html' %}
-      </div>
-      <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block" data-current-page="{{ current_page }}">{% trans 'Load more...' %}</button>
-    </div>
 
     {% else %}
 
