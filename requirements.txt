@@ -149,7 +149,7 @@ pathlib2==2.3.5           # via azure-datalake-store
 pathlib==1.0.1            # via -r requirements.in, pyscss
 pathtools==0.1.2          # via -r requirements.in, watchdog
 pbr==2.1.0                # via mock
-phonenumberslite==8.4.1   # via -r requirements.in
+phonenumberslite==8.4.1   # via -r requirements.in, django-phonenumber-field
 pillow==4.1.0             # via -r requirements.in
 protobuf==3.13.0          # via google-api-core, googleapis-common-protos
 psycopg2==2.8.4           # via -r requirements.in
@@ -163,7 +163,7 @@ pyscss==1.3.5             # via -r requirements.in
 python-dateutil==2.6.0    # via adal, azure-cosmosdb-table, azure-storage, azure-storage-common, faker
 python-memcached==1.58    # via -r requirements.in
 pytz==2017.2              # via -r requirements.in, babel, google-api-core
-pyyaml==3.12              # via -r requirements.in, watchdog
+pyyaml==5.1               # via -r requirements.in, watchdog
 raven==6.0.0              # via -r requirements.in
 rcssmin==1.0.6            # via django-compressor
 redis==2.10.5             # via django-redis-sessions
