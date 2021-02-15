@@ -15,6 +15,11 @@ env:
   SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
   APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
   SERVICE_PORT: "8080"
+  K8S_REQUEST_CPU: 100m
+  K8S_REQUEST_RAM: 200Mi
+  K8S_LIMIT_CPU: 800m
+  K8S_LIMIT_RAM: 1Gi
+  K8S_REPLICACOUNT: 2
 
 jobs:
   build:
