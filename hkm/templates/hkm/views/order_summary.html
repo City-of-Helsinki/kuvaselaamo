@@ -1,17 +1,21 @@
 {% extends 'hkm/base_browse.html' %}
 {% load i18n hkm_tags %}
 
+{% block page_title %}
+  <title>{% trans 'Order summary' %}</title>
+{% endblock %}
+
 {% block banner %}
 
 {% endblock %}
 
 {% block content %}
 
-  <div class="record-meta container-medium container-center">
+  <div class="fullsize-container">
 
     {% if order %}
 
-      
+
       <div class="record-meta__col record-meta__col--left col-md-12">
         <h1 class="order-preview__text">{% trans 'Kuvan tilaaminen' %}</h1>
         <h1 class="order-meta__title-small">{{ record.title }}</h1>

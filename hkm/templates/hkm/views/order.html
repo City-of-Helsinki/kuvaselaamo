@@ -4,15 +4,18 @@
 {% block banner %}
 
 {% endblock %}
+{% block page_title %}
+  <title>{% trans 'Kuvan tilaaminen' %}</title>
+{% endblock %}
 
 {% block content %}
 
-  <div class="record-meta">
+  <div class="fullsize-container">
 
-    
+
     {% if order and record %}
 
-      
+
       <div class="record-meta__col record-meta__col--left col-md-5">
         <h1 class="order-preview__title">{% trans 'Kuvan tilaaminen' %}</h1>
         <h2 class="order-meta__title-small">{{ record.title }}</h2>
@@ -34,7 +37,7 @@
           {% endfor %}
           </div>
           {% include 'hkm/snippets/form_fields.html' with form=order_product_form %}
-          
+
           <input type="hidden" name="crop_x" value="{{ order.crop_x }}" />
           <input type="hidden" name="crop_y" value="{{ order.crop_y }}" />
           <input type="hidden" name="crop_width" value="{{ order.crop_width }}" />
@@ -63,7 +66,7 @@
       <div class="record-meta__col record-meta__col--right col-md-7">
         <div><img id="order-preview__image" data-img-url="{% finna_image order.record_finna_id %}" src="{% finna_image order.record_finna_id %}"></img></div>
       </div>
-     
+
   </div>
 
     {% else %}

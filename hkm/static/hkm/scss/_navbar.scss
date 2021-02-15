@@ -3,14 +3,21 @@
     background-color: $color-white;
     display: block;
     font-size: 18px;
-    padding-left: 30px;
 
     &__logo {
         display: block;
         width: 200px;
         height: 100%;
         max-height: 60px;
+        margin-left: 5px;
     }
+
+    @media (min-width: 650px) {
+        &__logo {
+            margin-left: 30px;
+        }
+    }
+
 }
 
 .navigation-header {
@@ -30,7 +37,7 @@ button.navbar-toggle {
     span {
         background-color: $color-hkm-purple;
         transition: all 0.15s ease;
-        
+
         &:nth-child(2) {
             transform: rotate(40deg);
             transform-origin: left;
@@ -67,6 +74,7 @@ button.navbar-toggle {
 
 .navigation-links {
     float: right;
+    max-height: 70px;
 
     ul {
         margin: 0;
@@ -74,6 +82,7 @@ button.navbar-toggle {
         display: flex;
         flex-direction: row;
         align-items: center;
+        max-height: 70px;
 
         li {
             list-style: none;
@@ -100,6 +109,7 @@ button.navbar-toggle {
             &.open {
                 > .dropdown-menu {
                     display: block;
+                    max-height: 140px;
                 }
             }
         }
@@ -129,17 +139,19 @@ button.navbar-toggle {
         }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 944px) {
         position: absolute;
         background-color: $color-white;
         top: 60px;
         width: 100%;
         z-index: 150;
+        max-height: 400px;
 
         ul {
             width: 100%;
             text-align: center;
             flex-direction: column;
+            max-height: 400px;
 
             li {
                 display: block;
@@ -184,7 +196,7 @@ button.navbar-toggle {
     top: 11px;
     right: -14px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 945px) {
         top: 7px;
     }
 }
@@ -193,52 +205,50 @@ button.navbar-toggle {
     &_wrapper {
         display: flex;
         flex-direction: row;
-        width: 70px;
         justify-content: center;
-        position: relative;
-    }
+        width: 100%;
 
-    &_svg {
-        width: 23px;
-        height: 23px;
-        position: absolute;
-        top: -13px;
-
-        @media (max-width: 900px) {
-            margin-left: 15px;
-            top: -10px;
-            right: -15px;
+        @media(min-width: 945px) {
+            margin-left: 20px;
         }
     }
 
     &_text {
-        @media (min-width: 900px) {
+        white-space: nowrap;
+        text-align: center;
+
+        @media (min-width: 945px) {
             visibility: hidden;
             width: 0;
             height: 0;
         }
 
-        @media (max-width: 900px) {
-            position: absolute;
-            top: -8px;
-            left: -20px;
+        @media (max-width: 945px) {
+            margin-top: 3px;
+            min-width: 130px;
+            text-align: center;
         }
+    }
+
+    &_icons {
+        min-width: 55px;
+        display: flex;
+        height: 25px;
+        justify-content: space-between;
+    }
+
+    &_svg {
+        width: 23px;
+        height: 23px;
     }
 
     &_counter {
         background-color: #01C97E;
         color: $color-white;
+        margin-top: 3px;
         padding: 1px 9px;
         border-radius: 50%;
         font-size: 10px;
-        position: absolute;
-        top: -11px;
-        right: -3px;
-
-        @media (max-width: 900px) {
-            right: -45px;
-            top: -9px;
-        }
     }
 }
 
@@ -268,10 +278,10 @@ button.navbar-toggle {
         order: 5;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 944px) {
         &_lang-wrapper {
             order: 5;
-            margin: 0 auto;
+            margin: 10px auto;
         }
 
         &_search {
@@ -287,13 +297,30 @@ button.navbar-toggle {
             order: 3;
         }
 
+        &_user {
+            margin-left: -20px;
+        }
+
         &_cart {
             order: 4;
+            width: 180px;
         }
     }
 }
 
-@media (min-width: 901px) {
+.navbar-collapse {
+    padding: 0;
+}
+
+.navbar-toggle {
+    right: 0;
+
+    @media (min-width: 650px) {
+        right: 30px;
+    }
+}
+
+@media (min-width: 946px) {
     .navigation {
         .collapse {
             display: block;

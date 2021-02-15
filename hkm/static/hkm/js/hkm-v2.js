@@ -276,36 +276,13 @@ palikka
   });
 
   // scroll down to detail section when info button clicked
-  $("#popover-info").click(function(){
+  $("#actions-info").click(function(){
     $("html, body").animate({
       scrollTop: $("#detail-section").offset().top
     }, 500);
   })
 
-  var clipboard = new Clipboard('.popover-list__btn--share');
-  $("#popover-share").popover({
-    html: true,
-    toggle: 'popover',
-    container: '.actions',
-    placement: 'top',
-    trigger: 'click',
-    html: true,
-    content: function() {
-      return $('#popover-share-content').html();
-    }
-  });
-
-  $("#popover-add").popover({
-    html: true,
-    toggle: 'popover',
-    container: '.actions',
-    placement: 'top',
-    trigger: 'click',
-    html: true,
-    content: function() {
-      return $('#popover-add-content').html();
-    }
-  });
+  var clipboard = new Clipboard('#actions-share');
 
   $('.has-popover').on('click', function() {
       var clickedButton = this;
@@ -361,6 +338,54 @@ palikka
     }
   }
 
+})
+.define('app.feedback', ['jQuery', 'docReady'], function() {
+  $('#feedback-form').on('submit', function(event) {
+    event.preventDefault();
+
+    $.post('/record/feedback/', {
+      action: 'feedback',
+      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      content: $('#id_feedback-form-content').val(),
+      full_name: $('#id_feedback-form-full_name').val(),
+      email: $('#id_feedback-form-email').val(),
+      hkm_id: $('input[name="hkm_id"]').val(),
+    }).done(function(response) {
+      if (response.result === "Success") {
+        // Empty form fields
+        $('#id_feedback-form-content').val('');
+        $('#id_feedback-form-full_name').val('');
+        $('#id_feedback-form-email').val('');
+        // Uncover success message
+        $("#fb-success").removeClass("hidden")
+      }
+    }).fail(function() {
+      // Uncover error message
+      $("#fb-error").removeClass("hidden")
+    })
+  })
+})
+.define('app.addToCollection', ['jQuery', 'docReady'], function() {
+  $('#add-to-collection').on('click', function() {
+    const action = $('input[name=collection]:checked').attr('data-action');
+    const collectionTitle = $('#add-collection-input').val();
+    const collectionId = $('input[name=collection]:checked').val();
+    const recordId = this.getAttribute('data-record-id');
+
+    $.post('/ajax/collection/', {
+      action: action,
+      collection_id: collectionId,
+      collection_title: collectionTitle,
+      record_id: recordId,
+    })
+      .done(function() {
+        $('#collection-add').modal('hide');
+    })
+      .fail(function() {
+        // At the moment there is no better way to display errors.
+        alert('Add to collection failed.')
+      })
+  })
 })
 .define('app.crop', ['jQuery', 'docReady'], function () {
 
@@ -585,7 +610,7 @@ palikka
     cropper.destroy();
   });
 
-  $(document).on('click', '.popover-list__btn--crop', function() {
+  $(document).on('click', '.actions_crop', function() {
     target = document.getElementById(this.getAttribute('data-target').substring(1));
     url = this.getAttribute('data-img-url');
     recordId = this.getAttribute('data-record-id')
@@ -678,6 +703,7 @@ palikka
   $title = $('.banner__title');
   $description = $('.banner__description');
   $collectionForm = $('.banner__form');
+  $buyButton = $('.grid__item--buy')
 
   $removeItem.on('click', function() {
     var confirmRemove = confirm($(this).attr('data-confirm'));
@@ -698,6 +724,7 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
+    $buyButton.toggle();
   });
 
   $editBtn.on('click', function() {
@@ -705,6 +732,7 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
+    $buyButton.toggle();
   });
 
 })

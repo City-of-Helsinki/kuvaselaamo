@@ -2,6 +2,10 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{% trans 'Kuvaselaamo' %}</title>
+{% endblock %}
+
 {% block image_meta_tags %}
   {% with image_url=frontpage_image_collection|front_page_url %}
     <meta property="og:image" content="{{ image_url }}">
@@ -23,7 +27,7 @@
           <div class="center-content">
             <p class="search__description">{% trans 'Search description' %}</p>
             <form action="/search/" class="search-components">
-              <input name="search" type="text" class="search-components__input" {% if search_term %} value="{{ search_term }}" {% endif %}/>
+              <input id="search" placeholder="{% trans 'Search' %}" name="search" type="text" class="search-components__input" {% if search_term %} value="{{ search_term }}" {% endif %}/>
               <button type="submit" class="search-components__button">
                 {% trans 'Find' %}
               </button>
@@ -41,7 +45,7 @@
           <div class="featured__wrapper">
             {% with collections=showcase|showcase_collections %}
               {% for collection in collections %}
-                <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+                <a lang="fi" aria-label="{{ collection.title }} omistaja Helsingin kaupunginmuseo" class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
                   <div class="card">
                     {% with images=collection|display_images %}
                       {% if images|length == 1 %}

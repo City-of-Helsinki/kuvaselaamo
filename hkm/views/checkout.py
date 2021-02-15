@@ -1,10 +1,12 @@
 import logging
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.views import View
 from django.views.generic import TemplateView
 
@@ -15,7 +17,16 @@ from hkm.models.models import ProductOrder, ProductOrderCollection
 LOG = logging.getLogger(__name__)
 
 
-class OrderContactFormView(TemplateView):
+class BaseCheckoutView(TemplateView):
+    url_name = None
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['language'] = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        return context
+
+
+class OrderContactFormView(BaseCheckoutView):
     template_name = 'hkm/views/order_contact_information.html'
     url_name = 'hkm_order_contact_information'
 
@@ -55,7 +66,7 @@ class OrderContactFormView(TemplateView):
         return context
 
 
-class OrderSummaryView(TemplateView):
+class OrderSummaryView(BaseCheckoutView):
     template_name = 'hkm/views/order_summary.html'
     url_name = 'hkm_order_summary'
 
@@ -130,7 +141,7 @@ class OrderPBWNotify(View):
 # be sent to print
 
 
-class OrderConfirmation(TemplateView):
+class OrderConfirmation(BaseCheckoutView):
     template_name = 'hkm/views/order_show_result.html'
     url_name = 'hkm_order_confirmation'
     result = {}

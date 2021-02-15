@@ -30,9 +30,12 @@ env = environ.Env(
     AZURE_ACCOUNT_NAME=(str, ""),
     AZURE_ACCOUNT_KEY=(str, ""),
     AZURE_CONTAINER=(str, ""),
+    ENABLE_ANALYTICS=(bool, False),
 )
 
-DEBUG=env.bool('DEBUG')
+DEBUG = env.bool('DEBUG')
+
+ENABLE_ANALYTICS = env.bool('ENABLE_ANALYTICS')
 
 SECRET_KEY = env.str("SECRET_KEY")
 if DEBUG and not SECRET_KEY:
@@ -110,6 +113,7 @@ if DEFAULT_FILE_STORAGE == "storages.backends.gcloud.GoogleCloudStorage":
 
     from google.oauth2 import service_account
 
+    GS_FILE_OVERWRITE = False
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
         env("STAGING_GCS_BUCKET_CREDENTIALS")
     )
@@ -153,6 +157,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'kuvaselaamo.context_processors.global_settings',
             ),
         }
     },
@@ -259,19 +264,30 @@ LOG_LEVEL = env('LOG_LEVEL')
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    'filters': {
+        'extra_data_filter': {
+            '()': 'hkm.log_filters.ExtraDataFilter'
+        },
+    },
     'formatters': {
         'simple': {
-            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s',
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s %(data)s',
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
+            "filters": ["extra_data_filter"],
             "formatter": "simple"
         }
     },
     "loggers": {
-        "": {
+        'hkm.auditlog_signals': {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False
+        },
+        '': {
             "handlers": ["console"],
             "level": LOG_LEVEL
         },

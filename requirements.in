@@ -1,6 +1,6 @@
 paramiko
 Pillow
-django==1.10.8
+django==1.11.29
 amqp
 anyjson
 argh
@@ -51,6 +51,4 @@ django-parler
 django-bower
 django-anymail~=3.0
 django-storages==1.6.5
-google-cloud-storage==1.12.1
-azure==4.0.0
-azure-storage==0.20.0
+Unidecode

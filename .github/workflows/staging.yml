@@ -1,0 +1,92 @@
+name: Build & Staging
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  CONTAINER_REGISTRY: ghcr.io
+  CONTAINER_REGISTRY_USER: ${{ secrets.GHCR_CONTAINER_REGISTRY_USER }}
+  CONTAINER_REGISTRY_PASSWORD: ${{ secrets.GHCR_TOKEN }}
+  CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+  REPO_NAME: ${{ github.event.repository.name }}
+  KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW_STAGING }}
+  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
+  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
+  SERVICE_PORT: "8080"
+  K8S_REQUEST_CPU: 100m
+  K8S_REQUEST_RAM: 200Mi
+  K8S_LIMIT_CPU: 800m
+  K8S_LIMIT_RAM: 1Gi
+  K8S_REPLICACOUNT: 2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        uses: andersinno/kolga-build-action@v2
+
+  staging:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Staging
+    steps:
+      - uses: actions/checkout@v2
+      - uses: andersinno/kolga-setup-action@v2
+
+      - name: Deploy
+        uses: andersinno/kolga-deploy-action@v2
+        with:
+          track: 'staging'
+        env:
+          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STAGING }}
+          ENVIRONMENT_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING }}
+          K8S_SECRET_ALLOWED_HOSTS: "*"
+          K8S_SECRET_DEBUG: 1
+          K8S_SECRET_SKIP_DATABASE_CHECK: 1
+          K8S_SECRET_SECRET_KEY: ${{ secrets.GH_QA_DJANGO_SECRET_KEY }}
+          K8S_SECRET_ADMIN_USER_PASSWORD: ${{ secrets.STAGING_ADMIN_USER_PASSWORD }}
+          K8S_SECRET_VERSION: ${{ github.sha }}
+          K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+          K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: ${{ secrets.STAGING_HKM_FEEDBACK_NOTIFICATION_EMAILS }}
+          K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
+          K8S_SECRET_MAIL_MAILGUN_KEY: ${{ secrets.GH_MAILGUN_API_KEY }}
+          K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+          K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
+          K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://payform.bambora.com/pbwapi"
+          K8S_SECRET_HKM_PBW_API_KEY: ${{ secrets.GH_QA_PBW_API_KEY }}
+          K8S_SECRET_HKM_PBW_SECRET_KEY: ${{ secrets.GH_QA_PBW_SECRET_KEY }}
+          K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.test.kuva.hel.ninja"
+          K8S_SECRET_HKM_PRINTMOTOR_USERNAME: "helsinkikuvia"
+          K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: ${{ secrets.GH_QA_PRINTMOTOR_PASSWORD }}
+          K8S_SECRET_HKM_PRINTMOTOR_API_KEY: ${{ secrets.GH_QA_PRINTMOTOR_API_KEY }}
+          K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
+          K8S_SECRET_DEFAULT_FILE_STORAGE: "storages.backends.gcloud.GoogleCloudStorage"
+          K8S_FILE_SECRET_STAGING_GCS_BUCKET_CREDENTIALS: ${{ secrets.STAGING_GCS_BUCKET_CREDENTIALS }}
+          K8S_SECRET_GS_BUCKET_NAME: ${{ secrets.STAGING_GCS_BUCKET_NAME }}
+          K8S_SECRET_HKM_POSTAL_FEES: ${{ secrets.HKM_POSTAL_FEES }}
+          K8S_SECRET_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          K8S_SECRET_DATABASE_HOST: ${{ secrets.K8S_SECRET_DATABASE_HOST_STAGING }}
+          K8S_SECRET_DATABASE_URL: ${{ secrets.K8S_SECRET_DATABASE_URL_STAGING }}
+          K8S_SECRET_DATABASE_PORT: ${{ secrets.K8S_SECRET_DATABASE_PORT_STAGING }}
+          K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STAGING }}
+          K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STAGING }}
+          K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STAGING }}
+
+      - name: Deploy Cronjob
+        uses: City-of-Helsinki/setup-cronjob-action@main
+        with:
+          image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+          image_tag:  ${{ github.sha }}
+          secret_name: project-staging-kuvaselaamo-secret
+          file_secret_name: project-staging-kuvaselaamo-file-secret
+          file_secret_mount_path: /tmp/secrets
+          kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
+          target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
+          schedule: '0 0 * * *'
+          command: "{/bin/sh}"
+          args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
