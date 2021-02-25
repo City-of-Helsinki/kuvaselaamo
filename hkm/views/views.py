@@ -30,6 +30,8 @@ from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
+from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth.views import PasswordResetConfirmView
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
 
@@ -81,6 +83,7 @@ class BaseView(TemplateView):
         return {
             'login_form': AuthForm(),
             'sign_up_form': forms.RegistrationForm(),
+            'password_reset_form': PasswordResetForm(),
         }
 
     def get(self, request, *args, **kwargs):
@@ -101,6 +104,8 @@ class BaseView(TemplateView):
             return self.handle_login(request, *args, **kwargs)
         if action == 'signup':
             return self.handle_signup(request, *args, **kwargs)
+        if action == 'password_reset':
+            return self.handle_password_reset(request, *args, **kwargs)
         return self.handle_invalid_post_action(request, *args, **kwargs)
 
     def handle_login(self, request, *args, **kwargs):
@@ -130,6 +135,22 @@ class BaseView(TemplateView):
             return self.get(request, *args, **kwargs)
         kwargs['sign_up_form'] = form
         return self.get(request, *args, **kwargs)
+
+    def handle_password_reset(self, request, *args, **kwargs):
+        form = PasswordResetForm(request.POST)
+        response_data = {}
+        if form.is_valid():
+            print("VALID FORM")
+            response_data['result'] = "Succ"
+            form.save(
+                request=request,
+                use_https=True,
+            )
+            return http.HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+
 
 
 class InfoView(BaseView):
@@ -1385,3 +1406,40 @@ def handler500(request):
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
+
+
+class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
+    url_name = 'reset_pwd'
+    template_name = 'hkm/views/home_page.html'
+
+    def get_empty_forms(self, request, **kwargs):
+        return {
+            'login_form': AuthForm(),
+            'sign_up_form': forms.RegistrationForm(),
+            'password_set_form': SetPasswordForm(user=kwargs.get('user'))
+        }
+
+    def get(self, request, *args, **kwargs):
+        _kwargs = self.get_form_kwargs()
+        _kwargs = self.get_empty_forms(request, **kwargs)
+        _kwargs.update(kwargs)
+        return self.render_to_response(self.get_context_data(**_kwargs))
+
+    def post(self, request, *args, **kwargs):
+        response_data = {}
+
+        _kwargs = self.get_form_kwargs()
+        user = _kwargs.get('user')
+
+        form = SetPasswordForm(data=request.POST, user=user)
+        if form.is_valid():
+            form.save()
+            response_data['result'] = "Success"
+            return http.HttpResponse(json.dumps(response_data), content_type="application/json")
+
+        response_data['result'] = "Error, something went wrong"
+        return http.HttpResponse(json.dumps(response_data), content_type="application/json")
+
+    def get_context_data(self, **kwargs):
+        return super(PasswordResetConfirmViewNew, self).get_context_data(**kwargs)
+

@@ -20,7 +20,10 @@ palikka
 
   $('#login-btn').on('click', hideModal);
 
-  // In addition to hiding the modal, hide the bottom green search modal 
+  // Hide login modal if user want's to reset password.
+  $('#reset-pwd-btn').on('click', hideModal);
+
+  // In addition to hiding the modal, hide the bottom green search modal
   // and make more space for signup to expand
 
   $('#signup-btn').on('click', function() {
@@ -176,7 +179,7 @@ palikka
     }
   }
 
-  // Make ajax calls to the api server on button click 
+  // Make ajax calls to the api server on button click
 
   loadMoreButton.on('click', function() {
     fetchingMoreImages = true;
@@ -198,7 +201,7 @@ palikka
           queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
         }
         queryParameters['page'] = page;
-  
+
         window.history.replaceState("", "", "?"+$.param(queryParameters));
         $container.append(data);
         $container.imagesLoaded().progress(onProgress);
@@ -219,7 +222,7 @@ palikka
 
       else if (buttonText === "Load more...") {
         loadMoreButton.text('No more results');
-      } 
+      }
 
       else {
         loadMoreButton.text('Inga fler resultat');
@@ -337,7 +340,49 @@ palikka
       });
     }
   }
+})
+.define('app.reset-password', ['jQuery', 'docReady'], function() {
+  $('#password-reset-email').on('submit', function(event) {
+    event.preventDefault();
 
+    $.post('/', {
+      action: 'password_reset',
+      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      email: $(this).find('input[name="email"]').val(),
+    }).done(function (response) {
+        $('.modal-body').find('#password-reset-email').remove()
+        $('#message-email-sent').removeClass('hidden')
+    }).fail(function (response) {
+      $('.modal-body').find('#password-reset-email').remove()
+      // TODO Add error message to uncover here
+      console.log("Tättärää jotain meni vinoon")
+    })
+  })
+
+  // Logic for opening the password reset modal automatically
+  const url = window.location.pathname;
+  const passwordChange = url.search('set-password') > -1
+
+  if (passwordChange) {
+    $('#password-change').modal('toggle')
+  }
+
+  // POST password reset form data
+  $('#password-set-new').on('submit', function (event) {
+    event.preventDefault();
+
+    $.post(url, {
+      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      new_password1: $('#id_new_password1').val(),
+      new_password2: $('#id_new_password2').val()
+    }).done(function (response) {
+      console.log("SUCC")
+
+    }).fail(function (response) {
+      console.log("FAAL")
+    })
+
+  })
 })
 .define('app.feedback', ['jQuery', 'docReady'], function() {
   $('#feedback-form').on('submit', function(event) {
@@ -364,6 +409,7 @@ palikka
       $("#fb-error").removeClass("hidden")
     })
   })
+
 })
 .define('app.addToCollection', ['jQuery', 'docReady'], function() {
   $('#add-to-collection').on('click', function() {
@@ -427,7 +473,7 @@ palikka
         if ($crop_width.val() === "None" || $crop_width.val() === "") return false;
         if ($crop_height.val() === "None" || $crop_height.val() === "") return false;
         return true;
-      } 
+      }
 
       function setCropCoordinatesToFormFields () {
         var imageData = cropper.getImageData();
@@ -474,7 +520,7 @@ palikka
         var finalHeight = cropArea.height * heightMultiplier;
 
         var $PPIBox = $('#ppi-box');
-        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) / 
+        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) /
           Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
 
         var language = $ppiIndicator.attr('data-language');
@@ -483,7 +529,7 @@ palikka
           'fi': 'Liian alhainen. Rajaa alue suuremmaksi!',
           'en': 'Too low. Increase the crop area!',
           'sv': 'För låg. Öka storleken på den beskärda bilden!'
-        }      
+        }
 
         if (isNaN(PPI)) {
           $('#ppi-indicator').text('?');
@@ -496,7 +542,7 @@ palikka
 
           }
           if (PPI >= 120) {
-            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');  
+            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
             $ppiIndicator.text(PPI_OK);
           }
         }
@@ -520,7 +566,7 @@ palikka
       var savedAspectRatio = $inputChecked.attr('data-xsize') / $inputChecked.attr('data-ysize');
       options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
       cropperInit();
-     
+
 
       // whenever print product type is reselected, change form values and show in UI
       $('.ordertype').click(function() {
@@ -534,7 +580,7 @@ palikka
           calculateNewPrice();
           calculatePPI();
           //setCropCoordinatesToFormFields();
-      }); 
+      });
 
       // why not work LöL
       var amountField = document.querySelector('#id_order-product-form-amount');
@@ -550,12 +596,12 @@ palikka
         if (e.action === 'crop') {
           e.preventDefault();
         }  */
-      }); 
+      });
 
       window.onresize = function () {
         console.log('canvas area resizing...');
         var imageData = cropper.getImageData();
-        var boxData = cropper.getCropBoxData();  
+        var boxData = cropper.getCropBoxData();
         setCropCoordinatesToFormFields();
         /* Prevent to start cropping, moving, etc if necessary
         if (e.action === 'crop') {
@@ -576,15 +622,15 @@ palikka
             height: parseInt($crop_height.val())
           });
           setCropCoordinatesToFormFields();
-        } 
+        }
         if (!productSettingsExistInForm()) {
           console.log('settings dont exist');
           setCropCoordinatesToFormFields();
         }
 
-        calculatePPI();  
+        calculatePPI();
       });
-      
+
     }
 
     // Initialize tooltips
@@ -594,7 +640,7 @@ palikka
 
 
   });
-  
+
 
   // modal related cropper stuff begins here
 
@@ -776,7 +822,7 @@ palikka
 
   function zoomInit(w, h, url, fullResUrl) {
     // debugger;
-    
+
     var initialZoom = 3;
 
     var imageContainer = L.map('zoomable-image-container', {
@@ -822,7 +868,7 @@ palikka
       imageContainer.zoomOut();
     });
 
-  
+
     $image.on('mousedown', function(e) {
 
       clickedAt = new Date().getTime();
@@ -844,7 +890,7 @@ palikka
           default:
             break;
         }
-      }  
+      }
     });
 
    imageContainer.on('movestart', function() {
@@ -858,8 +904,8 @@ palikka
     $image.on('contextmenu', function(e) {
       e.preventDefault();
     });
-    
-    
+
+
 
   }
 });
