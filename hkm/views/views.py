@@ -1404,6 +1404,7 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
         _kwargs = self.get_form_kwargs()
         _kwargs = self.get_empty_forms(request, **kwargs)
         _kwargs.update(kwargs)
+        print("KWARGS", _kwargs)
         return self.render_to_response(self.get_context_data(**_kwargs))
 
     def post(self, request, *args, **kwargs):

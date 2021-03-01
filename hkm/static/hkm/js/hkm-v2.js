@@ -363,7 +363,7 @@ palikka
 
   // Logic for opening the password reset modal automatically
   const url = window.location.pathname;
-  const passwordChange = url.search('set-password') > -1
+  const passwordChange = url.search('reset') > -1
 
   if (passwordChange) {
     $('#password-change').modal('toggle')

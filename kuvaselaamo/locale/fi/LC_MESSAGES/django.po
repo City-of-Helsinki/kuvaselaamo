@@ -507,6 +507,9 @@ msgstr "Salasanan vaihtaminen"
 msgid "Password change instructions"
 msgstr "Kirjoita alle uusi salasanasi. Salasanan pitää olla vähintään 6 merkkiä pitkä ja sisältää sekä kirjaimia, että numeroita."
 
+msgid "Invalid link"
+msgstr "Salasanan palautuslinkki oli virheellinen, mahdollisesti koska se on jo käytetty. Pyydä uusi salasanan vaihto."
+
 msgid "Password changing success"
 msgstr "Salasana vaihdettu"
 

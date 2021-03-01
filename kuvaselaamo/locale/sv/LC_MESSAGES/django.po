@@ -500,6 +500,9 @@ msgstr "Ändra lösenord"
 msgid "Password change instructions"
 msgstr "Ange ditt nya lösenord nedan. Lösenordet måste innehålla minst 6 tecken och innehålla både bokstäver och siffror."
 
+msgid "Invalid link"
+msgstr "Länken för återställning av lösenord var ogiltig, möjligen för att den redan har använts. Begär en ny återställning av lösenordet."
+
 msgid "Password changing success"
 msgstr "Lösenordet ändrat"
 

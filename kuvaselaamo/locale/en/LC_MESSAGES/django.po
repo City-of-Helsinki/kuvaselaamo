@@ -525,6 +525,9 @@ msgstr "Changing password"
 msgid "Password change instructions"
 msgstr "Enter your new password below. The password must be at least 6 characters long and contain both letters and numbers."
 
+msgid "Invalid link"
+msgstr "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
+
 msgid "Password changing success"
 msgstr "Password changed"
 

@@ -56,9 +56,9 @@ urlpatterns = [
     url(r'^basket/$', views.BasketView.as_view(), name='basket'),
     url(r'^basket/checkout/$', views.BasketView.as_view(), {"phase": "checkout"}, name='checkout'),
 
-    url(r'^resetpwd/$',
+    url(r'^reset/$',
         views.PasswordResetConfirmViewNew.as_view(), name='reset_pwd'),
-    url(r'^resetpwd/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.PasswordResetConfirmViewNew.as_view(), name='reset_pwd'),
 ]
 

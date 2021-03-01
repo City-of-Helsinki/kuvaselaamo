@@ -43,7 +43,7 @@ if DEBUG and not SECRET_KEY:
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND=env.str('EMAIL_BACKEND')
 if env("MAIL_MAILGUN_KEY"):
     ANYMAIL = {
         "MAILGUN_API_KEY": env("MAIL_MAILGUN_KEY"),
