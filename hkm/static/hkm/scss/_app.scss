@@ -28,17 +28,17 @@ img {
 input[type="text"]::-webkit-input-placeholder {
 color: #555 !important;
 }
- 
+
 input[type="text"]:-moz-placeholder { /* Firefox 18- */
-color: #555  !important;  
+color: #555  !important;
 }
- 
+
 input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
-color: #555 !important;  
+color: #555 !important;
 }
- 
-input[type="text"]:-ms-input-placeholder {  
-color: #555 !important;  
+
+input[type="text"]:-ms-input-placeholder {
+color: #555 !important;
 }
 span.no-postal-fee {
     text-decoration: line-through;
@@ -63,7 +63,7 @@ span.no-postal-fee {
   margin-top: 30px;
 }
 
-/* Colors */ 
+/* Colors */
 .bittersweet {
   background-color: $color-white; // changed from $color-bittersweet (orange)
 }
@@ -316,40 +316,66 @@ span.no-postal-fee {
 
 
 /* Login */
+
 .login-modal__dialog {
-  margin: -179px auto auto -149px;
+  margin: -179px 0 0 0;
   position: absolute;
   top: 50%;
-  left: 50%;
+  width: 100%;
 }
 .login-modal__content {
   border-radius: 0;
 }
-.login-modal__signup-link {
-  font-family: $font-brownbold;
-  color: $color-funblue;
-}
+
 .login-modal__body {
-  padding: 15 25px;
-  .login-modal__btn {
-    margin: 0 0 15px 0;
+  padding: 15px 75px;
+
+  &_title {
+    color: $color-hkm-blue;
+    font: 18px $font-signe;
+    margin-bottom: 25px;
   }
-  .btn {
-    width: 100%;
+
+  &_description {
+    font: 16px $font-brownlight;
+    margin-bottom: 25px;
   }
+
+  &_back-to,
+  &_link {
+    color: $color-hkm-blue;
+    margin-top: 20px;
+    display: block;
+    font-family: $font-brownbold;
+  }
+
+  &_svg {
+    margin-top: -3px;
+  }
+
+  &_back-to {
+    color: $color-darktext;
+  }
+
+  &_hr {
+    margin-top: 10px;
+  }
+
+  &_btn {
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+
 }
-@media (max-width: 768px) {
+
+@media (min-width: 500px) {
   .login-modal__dialog {
     margin: -179px auto auto -198px;
+    left: 50%;
+    width: 450px;
   }
-}
-@media (max-width: 400px) {
-  .login-modal__dialog {
-    left: 0;
-    margin: -179px 15px auto 15px;
-  }
-  .login-modal {
-    width: 100%;
+  .login-modal__body {
+    padding: 15px 100px;
   }
 }
 
@@ -913,7 +939,7 @@ span.no-postal-fee {
 }
 .actions__btn:active,
 .actions__btn:focus {
-  
+
 }
 .actions__btn--left {
   float: left;
@@ -1533,7 +1559,7 @@ div.grid__fav.active {
 }
 
 @media (max-width: 566px) {
-  
+
   .modal-search-form__field {
     font-size: 12px;
   }
@@ -1547,7 +1573,7 @@ div.grid__fav.active {
 }
 
 .zoom-instructions {
-  
+
   display: block;
   background: white;
   border: 1px solid black;
@@ -1637,17 +1663,17 @@ div.grid__fav.active {
   color: $color-hkm-blue !important;
   fill: $color-white;
   svg {
-    fill: inherit;  
+    fill: inherit;
   }
 }
 
 .nav__fav.active {
-  
+
   color: $color-hkm-blue !important;
   fill: $color-hkm-orange;
-  
+
   svg {
-    
+
     fill: inherit;
   }
 }
@@ -1657,12 +1683,12 @@ div.grid__fav.active {
 /* SECONDARY MENU STYLING ON NON CELLPHONE SCREENS */
 @media (min-width: 900px) {
   li.nav-small-link {
-    
+
     padding: 0px 8px 0px 8px;
 
     a {
       font-size: 11px;
-    } 
+    }
   }
 }
 
@@ -1952,7 +1978,7 @@ a.welcome-modal__clarification {
   .welcome-modal__clarification {
     margin-top: 20px;
     font-style: italic;
-  }  
+  }
 
   a.welcome-modal__clarification {
     color: $color-darktext !important;
@@ -2006,3 +2032,34 @@ a.welcome-modal__clarification {
     background-color: $color-hkm-orange;
   }
 }
+
+/* GENERAL NEW STYLES 2021 */
+.hkm-button {
+  border-radius: 0;
+  color: $color-theme;
+  padding: 10px;
+  outline: 0;
+  font-family: $font-brownlight;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+
+  &__filled {
+    border: 0;
+    background-color: $color-hkm-purple;
+    color: $color-theme;
+  }
+
+  &__outlined {
+    border: 1px solid $color-hkm-purple;
+    background-color: $color-theme;
+    color: $color-hkm-purple;
+
+    &:hover {
+      color: $color-hkm-purple;
+      text-decoration: none;
+    }
+  }
+}
+

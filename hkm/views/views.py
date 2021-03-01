@@ -1389,25 +1389,6 @@ class LegacyRecordDetailView(RedirectView):
         return url
 
 
-# ERROR HANDLERS
-
-
-def handler404(request):
-    context = {}
-    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
-    response = render_to_response('hkm/views/404.html', context)
-    response.status_code = 404
-    return response
-
-
-def handler500(request):
-    context = {}
-    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
-    response = render_to_response('hkm/views/500.html', context)
-    response.status_code = 500
-    return response
-
-
 class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
     url_name = 'reset_pwd'
     template_name = 'hkm/views/home_page.html'
@@ -1437,9 +1418,29 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
             response_data['result'] = "Success"
             return http.HttpResponse(json.dumps(response_data), content_type="application/json")
 
-        response_data['result'] = "Error, something went wrong"
+        response_data['result'] = "Error"
         return http.HttpResponse(json.dumps(response_data), content_type="application/json")
 
     def get_context_data(self, **kwargs):
         return super(PasswordResetConfirmViewNew, self).get_context_data(**kwargs)
+
+
+# ERROR HANDLERS
+
+
+def handler404(request):
+    context = {}
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+    response = render_to_response('hkm/views/404.html', context)
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    context = {}
+    context['language'] = request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+    response = render_to_response('hkm/views/500.html', context)
+    response.status_code = 500
+    return response
+
 

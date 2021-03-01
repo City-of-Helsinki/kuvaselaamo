@@ -23,6 +23,9 @@ palikka
   // Hide login modal if user want's to reset password.
   $('#reset-pwd-btn').on('click', hideModal);
 
+  // Hide password reset modal if user is navigating back to log in.
+  $('#back-to-login-btn').on('click', hideModal);
+
   // In addition to hiding the modal, hide the bottom green search modal
   // and make more space for signup to expand
 
@@ -349,13 +352,12 @@ palikka
       action: 'password_reset',
       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
       email: $(this).find('input[name="email"]').val(),
-    }).done(function (response) {
-        $('.modal-body').find('#password-reset-email').remove()
-        $('#message-email-sent').removeClass('hidden')
-    }).fail(function (response) {
-      $('.modal-body').find('#password-reset-email').remove()
-      // TODO Add error message to uncover here
-      console.log("Tättärää jotain meni vinoon")
+    }).done(function () {
+        $('#password-reset-form').addClass('hidden');
+        $('#password-reset-response-success').removeClass('hidden');
+    }).fail(function () {
+      $('#password-reset-form').addClass('hidden');
+      $('#password-reset-response-error').removeClass('hidden');
     })
   })
 
@@ -375,13 +377,13 @@ palikka
       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
       new_password1: $('#id_new_password1').val(),
       new_password2: $('#id_new_password2').val()
-    }).done(function (response) {
-      console.log("SUCC")
-
-    }).fail(function (response) {
-      console.log("FAAL")
+    }).done(function () {
+      $('#password-set-form').addClass('hidden');
+      $('#password-set-success').removeClass('hidden');
+    }).fail(function () {
+      $('#password-set-form').addClass('hidden');
+      $('#password-set-error').removeClass('hidden');
     })
-
   })
 })
 .define('app.feedback', ['jQuery', 'docReady'], function() {

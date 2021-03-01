@@ -87,12 +87,11 @@
     <div class="login-modal__dialog modal-dialog modal-sm" role="document">
       <div class="login-modal__content modal-content">
         <div class="login-modal__body modal-body">
-          <!--<button class="hkm-btn hkm-btn--default login-modal__btn btn btn-default">{% trans 'Facebook login' %}</button>
-          <button class="hkm-btn hkm-btn--default login-modal__btn btn btn-default">{% trans 'Google login' %}</button>-->
-          <h4>{% trans 'Login with credentials' %}</h4>
+          <h1 class="login-modal__body_title">{% trans 'Login with credentials' %}</h1>
           {% include 'hkm/snippets/login.html' %}
-          <a href="#" id="reset-pwd-btn" class="login-modal__signup-link" data-toggle="modal" data-target="#password-reset">RESETTAA SALASANA</a>
-          <a href="#" id="signup-btn" class="login-modal__signup-link" data-toggle="modal" data-target="#sign-up">{% trans 'Sign up' %}</a>
+          <a href="#" id="reset-pwd-btn" class="login-modal__body_link" data-toggle="modal" data-target="#password-reset">Unohditko salasanasi?</a>
+          <hr class="login-modal__body_hr">
+          <a href="#" id="signup-btn" class="hkm-button hkm-button__outlined login-modal__body_btn" data-toggle="modal" data-target="#sign-up">{% trans 'Sign up' %}</a>
         </div>
       </div>
     </div>
@@ -102,7 +101,7 @@
     <div class="login-modal__dialog modal-dialog modal-sm" role="document">
       <div class="login-modal__content modal-content">
         <div class="login-modal__body modal-body">
-          <h4>{% trans 'Sign up' %}</h4>
+          <h1 class="login-modal__body_title">{% trans 'Sign up' %}</h1>
           {% include 'hkm/snippets/signup.html' %}
         </div>
       </div>
@@ -112,15 +111,7 @@
   <div class="login-modal modal fade" id="password-reset" tabindex="-1" role="dialog">
     <div class="login-modal__dialog modal-dialog modal-sm" role="document">
       <div class="login-modal__content modal-content">
-        <div class="login-modal__body modal-body">
-          <form method="POST" id="password-reset-email">
-            {% csrf_token %}
-            {% include 'hkm/snippets/form_fields.html' with form=password_reset_form %}
-            <input type="hidden" name="action" value="password_reset" />
-            <button type="submit">Submit</button>
-          </form>
-          <p id="message-email-sent" class="hidden">{% trans 'Email sent' %}</p>
-        </div>
+        {% include 'hkm/snippets/password_reset_email.html' %}
       </div>
     </div>
   </div>
@@ -129,14 +120,7 @@
   <div class="login-modal modal fade" id="password-change" tabindex="-1" role="dialog">
     <div class="login-modal__dialog modal-dialog modal-sm" role="document">
       <div class="login-modal__content modal-content">
-        <div class="login-modal__body modal-body">
-          <form method="POST" id="password-set-new">
-            {% csrf_token %}
-            {% include 'hkm/snippets/form_fields.html' with form=password_set_form %}
-            <input type="hidden" name="action" value="password_reset" />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+        {% include 'hkm/snippets/password_reset_set.html' %}
       </div>
     </div>
   </div>
