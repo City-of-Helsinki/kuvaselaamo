@@ -515,6 +515,9 @@ msgstr "Fel"
 msgid "Password reset error description"
 msgstr "Något gick fel, försök igen efter ett tag."
 
+msgid "Reset password email title"
+msgstr "Ändra lösenord"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information om tjänsten"

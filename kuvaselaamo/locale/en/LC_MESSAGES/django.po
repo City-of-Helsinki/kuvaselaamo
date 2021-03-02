@@ -540,6 +540,9 @@ msgstr "Error"
 msgid "Password reset error description"
 msgstr "Something went wrong, please try again after a while."
 
+msgid "Reset password email title"
+msgstr "Changing the password"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information about the service"

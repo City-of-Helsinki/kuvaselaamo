@@ -139,9 +139,13 @@ class BaseView(TemplateView):
     def handle_password_reset(self, request, *args, **kwargs):
         form = PasswordResetForm(request.POST)
         response_data = {}
+        language = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        template = "registration/password_reset_email_%s.html" % language
+
         if form.is_valid():
             response_data['result'] = "Success"
             form.save(
+                email_template_name=template,
                 request=request,
                 use_https=True,
             )

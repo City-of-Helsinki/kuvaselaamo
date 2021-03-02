@@ -522,6 +522,9 @@ msgstr "Virhe"
 msgid "Password reset error description"
 msgstr "Jotain meni vikaan, yritä hetken kuluttua uudestaan."
 
+msgid "Reset password email title"
+msgstr "Salasanan vaihtaminen"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Tietoa palvelusta"

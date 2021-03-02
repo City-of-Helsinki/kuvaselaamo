@@ -2,7 +2,6 @@
 
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetConfirmView
 
 from hkm.views import views
 from hkm.decorators import restrict_for_museum
