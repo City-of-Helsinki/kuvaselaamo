@@ -9,6 +9,7 @@ env = environ.Env(
     SECRET_KEY=(str, ''),
     ALLOWED_HOSTS=(list, []),
     DATABASE_URL=(str, ''),
+    DEFAULT_FROM_EMAIL=(str, 'helsinkikuvia@example.fi'),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
     MAIL_MAILGUN_KEY=(str, ""),
     MAIL_MAILGUN_DOMAIN=(str, ""),
@@ -42,6 +43,9 @@ if DEBUG and not SECRET_KEY:
     SECRET_KEY = "xxx"
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+
+if env("DEFAULT_FROM_EMAIL"):
+    DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
 
 EMAIL_BACKEND=env.str('EMAIL_BACKEND')
 if env("MAIL_MAILGUN_KEY"):

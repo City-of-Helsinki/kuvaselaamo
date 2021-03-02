@@ -140,8 +140,7 @@ class BaseView(TemplateView):
         form = PasswordResetForm(request.POST)
         response_data = {}
         if form.is_valid():
-            print("VALID FORM")
-            response_data['result'] = "Succ"
+            response_data['result'] = "Success"
             form.save(
                 request=request,
                 use_https=True,
@@ -1404,7 +1403,6 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
         _kwargs = self.get_form_kwargs()
         _kwargs = self.get_empty_forms(request, **kwargs)
         _kwargs.update(kwargs)
-        print("KWARGS", _kwargs)
         return self.render_to_response(self.get_context_data(**_kwargs))
 
     def post(self, request, *args, **kwargs):
