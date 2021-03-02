@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - Moved CGS / Azure dependencies to environment specific requirements.in files.
+- Disabled logging for /healthz and /readiness endpoints.
 
 
 # [2.3.0] 2021-01-12
