@@ -148,6 +148,7 @@ class BaseView(TemplateView):
                 email_template_name=template,
                 request=request,
                 use_https=True,
+                extra_email_context={'HKM_MY_DOMAIN': settings.HKM_MY_DOMAIN}
             )
             return http.HttpResponse(
                 json.dumps(response_data),
