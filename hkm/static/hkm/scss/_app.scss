@@ -366,6 +366,11 @@ span.no-postal-fee {
     margin-bottom: 10px;
   }
 
+  &_error {
+    margin-top: 10px;
+    color: red;
+  }
+
 }
 
 @media (min-width: 500px) {

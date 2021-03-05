@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import SetPasswordForm
 
 from hkm.models.campaigns import CampaignCode
 from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase
@@ -126,3 +127,48 @@ class ShowcaseForm(forms.ModelForm):
             if albums.count() > 3:
                 raise ValidationError(_(u'Max amount of albums is three'))
         return self.cleaned_data
+
+
+class ValidationSetPasswordForm(SetPasswordForm):
+    MIN_LENGTH = 6
+
+    error_messages = {}
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+
+        if password1 and password2 and password1 != password2:
+            self.error_messages = {
+                'password_mismatch': _('Password miss match')
+            }
+
+            raise ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+
+        if len(password1) < self.MIN_LENGTH:
+            self.error_messages = {
+                'password_too_short': _("Password too short")
+            }
+
+            raise ValidationError(
+                self.error_messages['password_too_short'],
+                code='password_too_short',
+            )
+
+        first_isalpha = password1[0].isalpha()
+        if all(c.isalpha() == first_isalpha for c in password1):
+            self.error_messages = {
+                'password_missing_special_character': _("Password restrictions")
+            }
+
+            raise forms.ValidationError(
+                self.error_messages['password_missing_special_character'],
+                code='password_missing_special_character'
+            )
+
+        return password2
+
+

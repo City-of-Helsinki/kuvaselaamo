@@ -47,7 +47,8 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 if env("DEFAULT_FROM_EMAIL"):
     DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
 
-EMAIL_BACKEND=env.str('EMAIL_BACKEND')
+#EMAIL_BACKEND=env.str('EMAIL_BACKEND')
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 if env("MAIL_MAILGUN_KEY"):
     ANYMAIL = {
         "MAILGUN_API_KEY": env("MAIL_MAILGUN_KEY"),

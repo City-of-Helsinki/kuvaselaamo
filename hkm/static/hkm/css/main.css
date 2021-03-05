@@ -6391,6 +6391,9 @@ span.no-postal-fee {
   .login-modal__body_btn {
     min-width: 100%;
     margin-bottom: 10px; }
+  .login-modal__body_error {
+    margin-top: 10px;
+    color: red; }
 
 @media (min-width: 500px) {
   .login-modal__dialog {

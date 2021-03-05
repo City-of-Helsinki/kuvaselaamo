@@ -138,22 +138,17 @@ class BaseView(TemplateView):
 
     def handle_password_reset(self, request, *args, **kwargs):
         form = PasswordResetForm(request.POST)
-        response_data = {}
         language = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
         template = "registration/password_reset_email_%s.html" % language
 
         if form.is_valid():
-            response_data['result'] = "Success"
             form.save(
                 email_template_name=template,
                 request=request,
                 use_https=True,
                 extra_email_context={'HKM_MY_DOMAIN': settings.HKM_MY_DOMAIN}
             )
-            return http.HttpResponse(
-                json.dumps(response_data),
-                content_type="application/json"
-            )
+            return http.HttpResponse()
 
 
 
@@ -1399,31 +1394,27 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
 
     def get_empty_forms(self, request, **kwargs):
         return {
-            'login_form': AuthForm(),
-            'sign_up_form': forms.RegistrationForm(),
             'password_set_form': SetPasswordForm(user=kwargs.get('user'))
         }
 
     def get(self, request, *args, **kwargs):
-        _kwargs = self.get_form_kwargs()
         _kwargs = self.get_empty_forms(request, **kwargs)
         _kwargs.update(kwargs)
         return self.render_to_response(self.get_context_data(**_kwargs))
 
     def post(self, request, *args, **kwargs):
-        response_data = {}
-
+        request_data = {}
         _kwargs = self.get_form_kwargs()
         user = _kwargs.get('user')
 
-        form = SetPasswordForm(data=request.POST, user=user)
+        form = forms.ValidationSetPasswordForm(data=request.POST, user=user)
         if form.is_valid():
             form.save()
-            response_data['result'] = "Success"
-            return http.HttpResponse(json.dumps(response_data), content_type="application/json")
-
-        response_data['result'] = "Error"
-        return http.HttpResponse(json.dumps(response_data), content_type="application/json")
+            return http.HttpResponse()
+        else:
+            for key in form.error_messages:
+                request_data['error_message'] = str(form.error_messages[key])
+            return http.HttpResponseBadRequest(json.dumps(request_data), 'application/json')
 
     def get_context_data(self, **kwargs):
         return super(PasswordResetConfirmViewNew, self).get_context_data(**kwargs)

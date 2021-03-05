@@ -377,12 +377,14 @@ palikka
       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
       new_password1: $('#id_new_password1').val(),
       new_password2: $('#id_new_password2').val()
-    }).done(function () {
+    }).done(function (response) {
       $('#password-set-form').addClass('hidden');
       $('#password-set-success').removeClass('hidden');
-    }).fail(function () {
-      $('#password-set-form').addClass('hidden');
-      $('#password-set-error').removeClass('hidden');
+    }).fail(function (response) {
+      // Remove old error
+      $('#password-set-validation-error').remove()
+      const error_message = response.responseJSON.error_message;
+      $('#id_new_password2').after(`<p id="password-set-validation-error" class="login-modal__body_error">${error_message}</p>`)
     })
   })
 })

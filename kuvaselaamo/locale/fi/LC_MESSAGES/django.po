@@ -505,7 +505,7 @@ msgid "Changing password"
 msgstr "Salasanan vaihtaminen"
 
 msgid "Password change instructions"
-msgstr "Kirjoita alle uusi salasanasi. Salasanan pitää olla vähintään 6 merkkiä pitkä ja sisältää sekä kirjaimia, että numeroita."
+msgstr "Kirjoita alle uusi salasanasi. Salasanan pitää olla vähintään 6 merkkiä pitkä ja sisältää sekä kirjaimia, että numeroita tai erikoismerkkejä."
 
 msgid "Invalid link"
 msgstr "Salasanan palautuslinkki oli virheellinen, mahdollisesti koska se on jo käytetty. Pyydä uusi salasanan vaihto."
@@ -524,6 +524,15 @@ msgstr "Jotain meni vikaan, yritä hetken kuluttua uudestaan."
 
 msgid "Reset password email title"
 msgstr "Salasanan vaihtaminen"
+
+msgid "Password miss match"
+msgstr "Salasanat eivät täsmää"
+
+msgid "Password too short"
+msgstr "Salasana on liian lyhyt"
+
+msgid "Password restrictions"
+msgstr "The password must contain letters, numbers, and special characters"
 
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
