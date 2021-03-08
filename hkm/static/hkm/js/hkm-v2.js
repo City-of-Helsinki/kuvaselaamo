@@ -350,15 +350,23 @@ palikka
 
     $.post('/', {
       action: 'password_reset',
-      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      csrfmiddlewaretoken: event.target.elements.csrfmiddlewaretoken.value,
       email: event.target.elements.email.value,
     }).done(function () {
         $('#password-reset-form').addClass('hidden');
         $('#password-reset-response-success').removeClass('hidden');
+        $('#password-reset-success-title').focus();
     }).fail(function () {
       $('#password-reset-form').addClass('hidden');
       $('#password-reset-response-error').removeClass('hidden');
+      $('#password-reset-error-title').focus();
     })
+  })
+
+  // When user closes the modal after success message. Reset content to previos state.
+  $('#password-reset').on('hidden.bs.modal', function () {
+    $('#password-reset-form').removeClass('hidden');
+    $('#password-reset-response-success').addClass('hidden');
   })
 
   // Logic for opening the password reset modal automatically
@@ -372,19 +380,22 @@ palikka
   // POST password reset form data
   $('#password-set-new').on('submit', function (event) {
     event.preventDefault();
-    console.log(event.target.elements);
+
     $.post(pathname, {
-      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      csrfmiddlewaretoken: event.target.elements.csrfmiddlewaretoken.value,
       new_password1: event.target.elements.new_password1.value,
       new_password2: event.target.elements.new_password2.value
     }).done(function (response) {
       $('#password-set-form').addClass('hidden');
       $('#password-set-success').removeClass('hidden');
+      $('#password-set-success-title').focus();
+
     }).fail(function (response) {
       // Remove old error
       $('#password-set-validation-error').remove()
       const error_message = response.responseJSON.error_message;
       $('#id_new_password2').after(`<p id="password-set-validation-error" class="login-modal__body_error">${error_message}</p>`)
+      $('#password-set-error-title').focus();
     })
   })
 })
