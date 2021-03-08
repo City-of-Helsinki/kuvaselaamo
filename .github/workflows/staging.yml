@@ -51,7 +51,7 @@ jobs:
           K8S_SECRET_SECRET_KEY: ${{ secrets.GH_QA_DJANGO_SECRET_KEY }}
           K8S_SECRET_ADMIN_USER_PASSWORD: ${{ secrets.STAGING_ADMIN_USER_PASSWORD }}
           K8S_SECRET_VERSION: ${{ github.sha }}
-          K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+          K8S_SECRET_HKM_DEFAULT_FROM_EMAIL: "no-reply@hel.ninja"
           K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: ${{ secrets.STAGING_HKM_FEEDBACK_NOTIFICATION_EMAILS }}
           K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
           K8S_SECRET_MAIL_MAILGUN_KEY: ${{ secrets.GH_MAILGUN_API_KEY }}

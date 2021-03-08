@@ -9,12 +9,11 @@ env = environ.Env(
     SECRET_KEY=(str, ''),
     ALLOWED_HOSTS=(list, []),
     DATABASE_URL=(str, ''),
-    DEFAULT_FROM_EMAIL=(str, 'helsinkikuvia@example.fi'),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
     MAIL_MAILGUN_KEY=(str, ""),
     MAIL_MAILGUN_DOMAIN=(str, ""),
     MAIL_MAILGUN_API=(str, ""),
-    HKM_FEEDBACK_FROM_EMAIL=(str, 'system@localhost'),
+    HKM_DEFAULT_FROM_EMAIL=(str, 'no-reply@hel.fi'),
     HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
     HKM_PBW_API_ENDPOINT = (str, ''),
     HKM_PBW_API_KEY = (str, ''),
@@ -43,8 +42,6 @@ if DEBUG and not SECRET_KEY:
     SECRET_KEY = "xxx"
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-
-DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
 
 EMAIL_BACKEND=env.str('EMAIL_BACKEND')
 if env("MAIL_MAILGUN_KEY"):
@@ -239,7 +236,7 @@ PHONENUMBER_DEFAULT_REGION = 'FI'
 
 HKM_MY_DOMAIN = env.str('HKM_MY_DOMAIN')
 HKM_FEEDBACK_NOTIFICATION_EMAILS = env.list('HKM_FEEDBACK_NOTIFICATION_EMAILS')
-HKM_FEEDBACK_FROM_EMAIL=env.str('HKM_FEEDBACK_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = env.str('HKM_DEFAULT_FROM_EMAIL')
 HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
 
 # Paybyway

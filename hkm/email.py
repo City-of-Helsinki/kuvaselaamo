@@ -27,7 +27,7 @@ def send_feedback_notification(feedback_id, force=False):
             count_sent_message = send_mail(
                 title,
                 message,
-                settings.HKM_FEEDBACK_FROM_EMAIL,
+                settings.DEFAULT_FROM_EMAIL,
                 settings.HKM_FEEDBACK_NOTIFICATION_EMAILS,
                 fail_silently=False,
             )

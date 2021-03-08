@@ -51,7 +51,7 @@ jobs:
           K8S_SECRET_ALLOWED_HOSTS: "*"
           K8S_SECRET_DEBUG: 1
           K8S_SECRET_VERSION: ${{ github.sha }}
-          K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+          K8S_SECRET_HKM_DEFAULT_FROM_EMAIL: "no-reply@hel.ninja"
           K8S_SECRET_ADMIN_USER_PASSWORD: ${{ secrets.STAGING_ADMIN_USER_PASSWORD }}
           K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
           K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
