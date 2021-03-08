@@ -1437,5 +1437,3 @@ def handler500(request):
     response = render_to_response('hkm/views/500.html', context)
     response.status_code = 500
     return response
-
-
