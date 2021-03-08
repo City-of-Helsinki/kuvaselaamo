@@ -20,7 +20,7 @@ palikka
 
   $('#login-btn').on('click', hideModal);
 
-  // Hide login modal if user want's to reset password.
+  // Hide login modal if user wants to reset password.
   $('#reset-pwd-btn').on('click', hideModal);
 
   // Hide password reset modal if user is navigating back to log in.
@@ -351,7 +351,7 @@ palikka
     $.post('/', {
       action: 'password_reset',
       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-      email: $(this).find('input[name="email"]').val(),
+      email: event.target.elements.email.value,
     }).done(function () {
         $('#password-reset-form').addClass('hidden');
         $('#password-reset-response-success').removeClass('hidden');
@@ -362,21 +362,21 @@ palikka
   })
 
   // Logic for opening the password reset modal automatically
-  const url = window.location.pathname;
-  const passwordChange = url.search('reset') > -1
+  const pathname = window.location.pathname;
+  const showPasswordChangeModal = pathname.includes('reset');
 
-  if (passwordChange) {
+  if (showPasswordChangeModal) {
     $('#password-change').modal('toggle')
   }
 
   // POST password reset form data
   $('#password-set-new').on('submit', function (event) {
     event.preventDefault();
-
-    $.post(url, {
+    console.log(event.target.elements);
+    $.post(pathname, {
       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-      new_password1: $('#id_new_password1').val(),
-      new_password2: $('#id_new_password2').val()
+      new_password1: event.target.elements.new_password1.value,
+      new_password2: event.target.elements.new_password2.value
     }).done(function (response) {
       $('#password-set-form').addClass('hidden');
       $('#password-set-success').removeClass('hidden');

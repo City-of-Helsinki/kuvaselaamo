@@ -6383,7 +6383,9 @@ span.no-postal-fee {
     display: block;
     font-family: "brownbold", sans-serif; }
   .login-modal__body_svg {
-    margin-top: -3px; }
+    margin-top: -3px;
+    height: 20px;
+    width: 20px; }
   .login-modal__body_back-to {
     color: #000; }
   .login-modal__body_hr {
@@ -7765,6 +7767,9 @@ a.welcome-modal__clarification {
     border: 0;
     background-color: #935379;
     color: #fff; }
+    .hkm-button__filled:hover {
+      color: #fff;
+      text-decoration: none; }
   .hkm-button__outlined {
     border: 1px solid #935379;
     background-color: #fff;

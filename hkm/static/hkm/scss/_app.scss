@@ -351,6 +351,8 @@ span.no-postal-fee {
 
   &_svg {
     margin-top: -3px;
+    height: 20px;
+    width: 20px;
   }
 
   &_back-to {
@@ -2054,6 +2056,11 @@ a.welcome-modal__clarification {
     border: 0;
     background-color: $color-hkm-purple;
     color: $color-theme;
+
+    &:hover {
+      color: $color-theme;
+      text-decoration: none;
+    }
   }
 
   &__outlined {
