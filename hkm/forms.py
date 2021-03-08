@@ -158,8 +158,7 @@ class ValidationSetPasswordForm(SetPasswordForm):
                 code='password_too_short',
             )
 
-        first_isalpha = password1[0].isalpha()
-        if all(c.isalpha() == first_isalpha for c in password1):
+        if all(c.isalpha() for c in password1):
             self.error_messages = {
                 'password_missing_special_character': _("Password restrictions")
             }

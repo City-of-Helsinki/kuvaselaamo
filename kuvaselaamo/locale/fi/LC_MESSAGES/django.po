@@ -532,7 +532,7 @@ msgid "Password too short"
 msgstr "Salasana on liian lyhyt"
 
 msgid "Password restrictions"
-msgstr "The password must contain letters, numbers, and special characters"
+msgstr "Salasanan tulee sisältää kirjaimia, numeroita ja erikoismerkkejä"
 
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
