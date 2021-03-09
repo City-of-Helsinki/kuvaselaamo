@@ -1234,21 +1234,21 @@ class BasketView(BaseView):
     def render_basket_total_row(self):
         html = loader.render_to_string(
             "hkm/snippets/_basket_total_row.html",
-            context=RequestContext(self.request, self.get_context_data())
+            context=RequestContext(self.request, self.get_context_data()).flatten()
         )
         return html
 
     def render_nav_product_counter(self):
         html = loader.render_to_string(
             "hkm/snippets/nav_basket_counter.html",
-            context=RequestContext(self.request, self.get_context_data())
+            context=RequestContext(self.request, self.get_context_data()).flatten()
         )
         return html
 
     def render_basket_html(self):
         html = loader.render_to_string(
             "hkm/views/_basket_content.html",
-            context=RequestContext(self.request, self.get_context_data(include_base=True))
+            context=RequestContext(self.request, self.get_context_data(include_base=True)).flatten()
         )
         return html
 
