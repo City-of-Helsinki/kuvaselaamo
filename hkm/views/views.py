@@ -1311,7 +1311,7 @@ class BasketView(BaseView):
         subject = u"Print order# %d" % order.pk
         order_line = order.product_orders.first()
         message = render_to_string("hkm/emails/print_order.html", context={"order": order})
-        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [order_line.user.email])
 
     def handle_discount(self, request):
         request.basket.set_discount_campaigns(request.POST.get('discount_code'))
