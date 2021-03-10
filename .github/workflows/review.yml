@@ -51,8 +51,8 @@ jobs:
           K8S_SECRET_ADMIN_USER_PASSWORD: ${{ secrets.STAGING_ADMIN_USER_PASSWORD }}
           K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: "dummy-address@hel.ninja"
           K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
-          K8S_SECRET_MAIL_MAILGUN_KEY: ${{ secrets.GH_MAILGUN_API_KEY }}
-          K8S_SECRET_MAIL_MAILGUN_DOMAIN: "mail.hel.ninja"
+          K8S_SECRET_MAIL_MAILGUN_KEY: ${{ secrets.GH_STAGING_MAILGUN_API_KEY }}
+          K8S_SECRET_MAIL_MAILGUN_DOMAIN: "hel.fi"
           K8S_SECRET_MAIL_MAILGUN_API: "https://api.eu.mailgun.net/v3"
           K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://payform.bambora.com/pbwapi"
           K8S_SECRET_HKM_PBW_API_KEY: ${{ secrets.GH_QA_PBW_API_KEY }}
