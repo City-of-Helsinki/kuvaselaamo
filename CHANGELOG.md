@@ -20,6 +20,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Disabled logging for /healthz and /readiness endpoints.
 
 
+# [2.3.1] 2021-02-01
+### Added
+- Temporary message stating that feedback processing is congested.
+
 # [2.3.0] 2021-01-12
 ### Added
 - Added lang attribute to language menu.
