@@ -1,1 +1,4 @@
 uwsgi<3
+google-cloud-storage==1.12.1
+azure==4.0.0
+azure-storage==0.20.0

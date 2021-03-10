@@ -10,7 +10,7 @@
         </svg>
     </a>
     <a href="{% url 'hkm_search_record' %}?image_id={{ record.id }}">
-      <img class="flex-img" src="{% finna_image record.id w=400 h=400 %}" alt="{{ record.title }}"></img>
+      <img class="flex-img" src="{% finna_image record.id %}" alt="{{ record.title }}"></img>
     </a>
     <div class="grid__meta">
       <span class="grid__meta--title">{{ record.title }}</span>

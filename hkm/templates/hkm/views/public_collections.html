@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load hkm_tags %}
 
+{% block page_title %}
+  <title>{% trans 'Browse albums' %}</title>
+{% endblock %}
+
 {% block banner %}
 
   <div class="page-header">
@@ -10,7 +14,7 @@
       <div class=public-collections__content>
         <div class="public-collections__wrapper">
           {% for collection in featured_collections %}
-          <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+          <a lang="fi" aria-label="{{ collection.title }} omistaja Helsingin kaupunginmuseo" class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
             <div class="card">
               {% with images=collection|display_images %}
               {% if images|length == 1 %}
@@ -45,7 +49,7 @@
       <div class="public-collections__wrapper">
         {% for collection in collections %}
           {% if collection.records.all %}
-            <a class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
+            <a lang="fi" aria-label="{{ collection.title }} omistaja {{ collection.owner }}" class="card-link" href="{% url 'hkm_collection' collection_id=collection.id %}">
               <div class="card">
                 {% with images=collection|display_images %}
                 {% if images|length == 1 %}

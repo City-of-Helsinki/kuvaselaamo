@@ -510,6 +510,9 @@ msgstr "Denna tjänst erbjuds av"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
 
+msgid "Image view"
+msgstr "Bildvy"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Föregående bild"
@@ -690,6 +693,9 @@ msgstr "Sök"
 msgid "Search pictures"
 msgstr "Sök bilder"
 
+msgid "With word"
+msgstr "med ord"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
@@ -773,6 +779,9 @@ msgstr "404 - Sidan hittades inte"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Tyvärr kunde vi inte hitta den sida du letar efter."
+
+msgid "#error-404-image-not-found"
+msgstr "Bilden du letade efter hittades inte"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -946,6 +955,9 @@ msgstr "Totalpris"
 msgid "Add to cart"
 msgstr "Lägg i korgen"
 
+msgid "Contact information"
+msgstr "Kontaktinformation för din beställning"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr ""
@@ -1034,6 +1046,9 @@ msgstr "Produkt"
 msgid "Product selection"
 msgstr "Produktsortiment"
 
+msgid "Order summary"
+msgstr "Order Ordersammanfattning"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1057,6 +1072,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
+
+msgid "Order payment confirmed"
+msgstr "Orderbetalning bekräftad"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"

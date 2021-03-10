@@ -535,6 +535,9 @@ msgstr "This service is provided by"
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Picture Browsery at Helsinki City Museum"
 
+msgid "Image view"
+msgstr "Image view"
+
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
 msgstr "Previous image"
@@ -717,6 +720,9 @@ msgstr "Search"
 msgid "Search pictures"
 msgstr "Search pictures"
 
+msgid "With word"
+msgstr "with word"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Explore albums"
@@ -802,6 +808,9 @@ msgstr "404 - Page not found"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "The page you are looking for cannot be found"
+
+msgid "#error-404-image-not-found"
+msgstr "The image you were looking for was not found"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -980,6 +989,9 @@ msgstr "Total price"
 msgid "Add to cart"
 msgstr "Add to cart"
 
+msgid "Contact information"
+msgstr "Contact information for your order"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr ""
@@ -1065,6 +1077,9 @@ msgstr "Product"
 msgid "Product selection"
 msgstr "Product selection"
 
+msgid "Order summary"
+msgstr "Order summary"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1074,6 +1089,9 @@ msgstr "Summary"
 msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
 msgstr ""
 "By pressing the Order-button, you will be redirected to the payment site."
+
+msgid "Order payment confirmed"
+msgstr "Order payment confirmed"
 
 #: hkm/templates/hkm/views/order_summary.html:23
 #: hkm/templates/hkm/views/order_summary.html:39

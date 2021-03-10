@@ -18,8 +18,8 @@ register = template.Library()
 
 
 @register.simple_tag
-def finna_image(img_id, w=0, h=0):
-    return FINNA.get_image_url(img_id, w=w, h=h)
+def finna_image(img_id):
+    return finna_default_image_url(img_id)
 
 
 @register.filter
