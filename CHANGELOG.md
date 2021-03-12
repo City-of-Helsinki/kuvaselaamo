@@ -7,15 +7,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Added script that deletes old and unused data.
 - Added kubernetes cron job that executes clean_unused_data script and clearsessions.
+- Request a new password functionality.
 
 ### Fixed
 - Added lang attribute to all collections. It will force screen reader language to finnish.
 - Fixed missing title tags to all unique pages.
 - If image is not found with image_id, correct error is shown.
+- Shopping cart buttons (increase, decrease, delete)
+- The shopping basket view now displays images based on the crop selection made by the user.
 
 ### Changed
 - Moved CGS / Azure dependencies to environment specific requirements.in files.
+- Disabled logging for /healthz and /readiness endpoints.
 
+
+# [2.3.1] 2021-02-01
+### Added
+- Temporary message stating that feedback processing is congested.
 
 # [2.3.0] 2021-01-12
 ### Added

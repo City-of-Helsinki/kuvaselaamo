@@ -656,6 +656,10 @@ msgstr "Feedback skickad!"
 msgid "Feedback error"
 msgstr "Ett fel inträffade när du skickade in. Försök igen efter ett tag."
 
+msgid "Feedback temp"
+msgstr "Tyvärr är behandlingen av feedback för närvarande mycket överbelastad på grund av volymen av feedback och "
+       "svarstiderna är längre än normalt. Vi ber om ursäkt för situationen!"
+
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
 msgstr "Avgränsa och beställ"
