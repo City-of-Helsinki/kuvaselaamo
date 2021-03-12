@@ -30,7 +30,7 @@ from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
-from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetConfirmView
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
@@ -1394,7 +1394,7 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
 
     def get_empty_forms(self, request, **kwargs):
         return {
-            'password_set_form': SetPasswordForm(user=kwargs.get('user'))
+            'password_set_form': self.form_class(user=kwargs.get('user'))
         }
 
     def get(self, request, *args, **kwargs):
@@ -1403,21 +1403,16 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
         return self.render_to_response(self.get_context_data(**_kwargs))
 
     def post(self, request, *args, **kwargs):
-        request_data = {}
-        _kwargs = self.get_form_kwargs()
-        user = _kwargs.get('user')
+        errors = {}
 
-        form = forms.ValidationSetPasswordForm(data=request.POST, user=user)
+        form = self.form_class(data=request.POST, user=self.user)
         if form.is_valid():
             form.save()
             return http.HttpResponse()
         else:
-            for key in form.error_messages:
-                request_data['error_message'] = str(form.error_messages[key])
-            return http.HttpResponseBadRequest(json.dumps(request_data), 'application/json')
-
-    def get_context_data(self, **kwargs):
-        return super(PasswordResetConfirmViewNew, self).get_context_data(**kwargs)
+            for key in form.errors:
+                errors['error_message'] = str(form.errors[key])
+            return http.HttpResponseBadRequest(json.dumps(errors), 'application/json')
 
 
 # ERROR HANDLERS

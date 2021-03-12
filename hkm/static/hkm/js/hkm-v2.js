@@ -394,7 +394,7 @@ palikka
       // Remove old error
       $('#password-set-validation-error').remove()
       const error_message = response.responseJSON.error_message;
-      $('#id_new_password2').after(`<p id="password-set-validation-error" class="login-modal__body_error">${error_message}</p>`)
+      $('#id_new_password2').after(`<div id="password-set-validation-error" class="login-modal__body_error">${error_message}</div>`)
       $('#password-set-error-title').focus();
     })
   })

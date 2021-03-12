@@ -47,7 +47,7 @@
         <div class="help-block error">{% for error in field.errors %}{{ error }}{% endfor %}</div>
       {% endif %}
 
-      {% if field.help_text %}
+      {% if field.help_text and "password1" not in field.name %}
         <div class="help-block">{% trans field.help_text %}</div>
       {% endif %}
 
