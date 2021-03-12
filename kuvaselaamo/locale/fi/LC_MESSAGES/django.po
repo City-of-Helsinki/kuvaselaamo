@@ -815,6 +815,9 @@ msgstr "Vähennä tuotteen määrää"
 msgid "Proceed to Checkout"
 msgstr "Tilaa"
 
+msgid "Ordering disabled"
+msgstr "Julistetilausten tekeminen on toistaiseksi pois käytöstä järjestelmäpäivityksen vuoksi. Pahoittelemme tilannetta!"
+
 #: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr "Aseta julkiseksi"

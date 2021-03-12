@@ -29,9 +29,10 @@
 
                                 </div>
                                 {{ form.action }}
-                                <button type="submit" class="btn btn-primary btn-lg pull-right basket-footer-button">{% trans 'Proceed to Checkout' %}</button>
+                                <button type="submit" class="btn btn-primary btn-lg pull-right basket-footer-button" disabled>{% trans 'Proceed to Checkout' %}</button>
                             </div>
                         </div>
+                        <div class="temp_checkout">{% trans 'Ordering disabled' %}</div>
                     </form>
 
         </div>

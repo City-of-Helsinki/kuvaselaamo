@@ -808,6 +808,9 @@ msgstr "Minska mängden produkt"
 msgid "Proceed to Checkout"
 msgstr "Fortsätt till utcheckningen"
 
+msgid "Ordering disabled"
+msgstr "För tillfället går det inte att beställa affischer. Vi beklagar situationen!"
+
 #: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr "Ställ in som offentlig"

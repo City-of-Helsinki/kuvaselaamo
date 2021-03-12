@@ -841,6 +841,9 @@ msgstr "Decrease the amount of product"
 msgid "Proceed to Checkout"
 msgstr ""
 
+msgid "Ordering disabled"
+msgstr "Print orders are temporarily disabled. We apologise for the inconvenience!"
+
 #: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr "Set as public"
