@@ -483,6 +483,57 @@ msgstr "Kirjaudu sisään tunnuksilla"
 msgid "Sign up"
 msgstr "Luo tunnus"
 
+msgid "Forgot your password"
+msgstr "Unohditko salasanasi?"
+
+msgid "Enter email description"
+msgstr "Ei hätää. Täytä sähköpostiosoitteesi, niin lähetämme sinulle ohjeet salasanan vaihtamiseksi."
+
+msgid "Back to login"
+msgstr "Takaisin kirjautumiseen"
+
+msgid "Email sent title"
+msgstr "Lähetetty"
+
+msgid "Email sent link"
+msgstr "Antamaasi osoitteeseen on lähetetty sähköposti, jossa on linkki salasanan vaihtamiseen."
+
+msgid "Email sent spam"
+msgstr "Ellei viesti tule perille, tarkista vielä roskapostikansiosi."
+
+msgid "Changing password"
+msgstr "Salasanan vaihtaminen"
+
+msgid "Password change instructions"
+msgstr "Kirjoita alle uusi salasanasi. Salasanan pitää olla vähintään 6 merkkiä pitkä ja sisältää sekä kirjaimia, että numeroita tai erikoismerkkejä."
+
+msgid "Invalid link"
+msgstr "Salasanan palautuslinkki oli virheellinen, mahdollisesti koska se on jo käytetty. Pyydä uusi salasanan vaihto."
+
+msgid "Password changing success"
+msgstr "Salasana vaihdettu"
+
+msgid "Password changing description"
+msgstr "Salasana on vaihdettu ja voit kirjautua palveluun."
+
+msgid "Password reset error title"
+msgstr "Virhe"
+
+msgid "Password reset error description"
+msgstr "Jotain meni vikaan, yritä hetken kuluttua uudestaan."
+
+msgid "Reset password email title"
+msgstr "Salasanan vaihtaminen"
+
+msgid "Password miss match"
+msgstr "Salasanat eivät täsmää"
+
+msgid "Password too short"
+msgstr "Salasana on liian lyhyt"
+
+msgid "Password restrictions"
+msgstr "Salasanan tulee sisältää kirjaimia, numeroita ja erikoismerkkejä"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Tietoa palvelusta"

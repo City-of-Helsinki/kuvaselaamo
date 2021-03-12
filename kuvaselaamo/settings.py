@@ -13,7 +13,7 @@ env = environ.Env(
     MAIL_MAILGUN_KEY=(str, ""),
     MAIL_MAILGUN_DOMAIN=(str, ""),
     MAIL_MAILGUN_API=(str, ""),
-    HKM_FEEDBACK_FROM_EMAIL=(str, 'system@localhost'),
+    HKM_DEFAULT_FROM_EMAIL=(str, 'no-reply@hel.fi'),
     HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
     HKM_PBW_API_ENDPOINT = (str, ''),
     HKM_PBW_API_KEY = (str, ''),
@@ -236,7 +236,7 @@ PHONENUMBER_DEFAULT_REGION = 'FI'
 
 HKM_MY_DOMAIN = env.str('HKM_MY_DOMAIN')
 HKM_FEEDBACK_NOTIFICATION_EMAILS = env.list('HKM_FEEDBACK_NOTIFICATION_EMAILS')
-HKM_FEEDBACK_FROM_EMAIL=env.str('HKM_FEEDBACK_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = env.str('HKM_DEFAULT_FROM_EMAIL')
 HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
 
 # Paybyway
@@ -293,3 +293,21 @@ LOGGING = {
         },
     },
 }
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 6,
+        },
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]

@@ -316,40 +316,73 @@ span.no-postal-fee {
 
 
 /* Login */
+
 .login-modal__dialog {
-  margin: -179px auto auto -149px;
+  margin: -179px 0 0 0;
   position: absolute;
   top: 50%;
-  left: 50%;
+  width: 100%;
 }
 .login-modal__content {
   border-radius: 0;
 }
-.login-modal__signup-link {
-  font-family: $font-brownbold;
-  color: $color-funblue;
-}
+
 .login-modal__body {
-  padding: 15 25px;
-  .login-modal__btn {
-    margin: 0 0 15px 0;
+  padding: 15px 75px;
+
+  &_title {
+    color: $color-hkm-blue;
+    font: 18px $font-signe;
+    margin-bottom: 25px;
   }
-  .btn {
-    width: 100%;
+
+  &_description {
+    font: 16px $font-brownlight;
+    margin-bottom: 25px;
   }
+
+  &_back-to,
+  &_link {
+    color: $color-hkm-blue;
+    margin-top: 20px;
+    display: block;
+    font-family: $font-brownbold;
+  }
+
+  &_svg {
+    margin-top: -3px;
+    height: 20px;
+    width: 20px;
+  }
+
+  &_back-to {
+    color: $color-darktext;
+  }
+
+  &_hr {
+    margin-top: 10px;
+  }
+
+  &_btn {
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  &_error {
+    margin-top: 10px;
+    color: red;
+  }
+
 }
-@media (max-width: 768px) {
+
+@media (min-width: 500px) {
   .login-modal__dialog {
     margin: -179px auto auto -198px;
+    left: 50%;
+    width: 450px;
   }
-}
-@media (max-width: 400px) {
-  .login-modal__dialog {
-    left: 0;
-    margin: -179px 15px auto 15px;
-  }
-  .login-modal {
-    width: 100%;
+  .login-modal__body {
+    padding: 15px 100px;
   }
 }
 
@@ -2011,3 +2044,41 @@ a.welcome-modal__clarification {
   margin: 20px 0 40px;
   font-size: 16px;
 }
+
+/* GENERAL NEW STYLES 2021 */
+.hkm-button {
+  border-radius: 0;
+  color: $color-theme;
+  padding: 10px;
+  outline: 0;
+  font-family: $font-brownlight;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+
+  &__filled {
+    border: 0;
+    background-color: $color-hkm-purple;
+    color: $color-theme;
+
+    &:hover {
+      color: $color-theme;
+      text-decoration: none;
+    }
+  }
+
+  &__outlined {
+    border: 1px solid $color-hkm-purple;
+    background-color: $color-theme;
+    color: $color-hkm-purple;
+
+    &:hover {
+      color: $color-hkm-purple;
+      text-decoration: none;
+    }
+  }
+}
+
+
+

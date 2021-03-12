@@ -30,6 +30,8 @@ from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetConfirmView
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
 
@@ -81,6 +83,7 @@ class BaseView(TemplateView):
         return {
             'login_form': AuthForm(),
             'sign_up_form': forms.RegistrationForm(),
+            'password_reset_form': PasswordResetForm(),
         }
 
     def get(self, request, *args, **kwargs):
@@ -101,6 +104,8 @@ class BaseView(TemplateView):
             return self.handle_login(request, *args, **kwargs)
         if action == 'signup':
             return self.handle_signup(request, *args, **kwargs)
+        if action == 'password_reset':
+            return self.handle_password_reset(request, *args, **kwargs)
         return self.handle_invalid_post_action(request, *args, **kwargs)
 
     def handle_login(self, request, *args, **kwargs):
@@ -130,6 +135,21 @@ class BaseView(TemplateView):
             return self.get(request, *args, **kwargs)
         kwargs['sign_up_form'] = form
         return self.get(request, *args, **kwargs)
+
+    def handle_password_reset(self, request, *args, **kwargs):
+        form = PasswordResetForm(request.POST)
+        language = self.request.session.get(LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE)
+        template = "registration/password_reset_email_%s.html" % language
+
+        if form.is_valid():
+            form.save(
+                email_template_name=template,
+                request=request,
+                use_https=True,
+                extra_email_context={'HKM_MY_DOMAIN': settings.HKM_MY_DOMAIN}
+            )
+            return http.HttpResponse()
+
 
 
 class InfoView(BaseView):
@@ -1291,7 +1311,7 @@ class BasketView(BaseView):
         subject = u"Print order# %d" % order.pk
         order_line = order.product_orders.first()
         message = render_to_string("hkm/emails/print_order.html", context={"order": order})
-        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [order_line.user.email])
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [order_line.user.email])
 
     def handle_discount(self, request):
         request.basket.set_discount_campaigns(request.POST.get('discount_code'))
@@ -1366,6 +1386,33 @@ class LegacyRecordDetailView(RedirectView):
         url = '{}?{}'.format(base_url, query_string)
 
         return url
+
+
+class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
+    url_name = 'reset_pwd'
+    template_name = 'hkm/views/home_page.html'
+
+    def get_empty_forms(self, request, **kwargs):
+        return {
+            'password_set_form': self.form_class(user=kwargs.get('user'))
+        }
+
+    def get(self, request, *args, **kwargs):
+        _kwargs = self.get_empty_forms(request, **kwargs)
+        _kwargs.update(kwargs)
+        return self.render_to_response(self.get_context_data(**_kwargs))
+
+    def post(self, request, *args, **kwargs):
+        errors = {}
+
+        form = self.form_class(data=request.POST, user=self.user)
+        if form.is_valid():
+            form.save()
+            return http.HttpResponse()
+        else:
+            for key in form.errors:
+                errors['error_message'] = str(form.errors[key])
+            return http.HttpResponseBadRequest(json.dumps(errors), 'application/json')
 
 
 # ERROR HANDLERS

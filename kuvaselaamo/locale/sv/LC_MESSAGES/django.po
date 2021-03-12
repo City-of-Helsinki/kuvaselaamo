@@ -476,6 +476,57 @@ msgstr "Logga in med koder"
 msgid "Sign up"
 msgstr "Skapa kod"
 
+msgid "Forgot your password"
+msgstr "Glömt ditt lösenord?"
+
+msgid "Enter email description"
+msgstr "Oroa dig inte. Fyll i din e-postadress så skickar vi instruktioner om hur du byter lösenord."
+
+msgid "Back to login"
+msgstr "Tillbaka till login"
+
+msgid "Email sent title"
+msgstr "Skickat"
+
+msgid "Email sent link"
+msgstr "Ett e-postmeddelande har skickats till adressen du angav med en länk för att ändra ditt lösenord."
+
+msgid "Email sent spam"
+msgstr "Om meddelandet inte kommer in, kontrollera din skräppostmapp."
+
+msgid "Changing password"
+msgstr "Ändra lösenord"
+
+msgid "Password change instructions"
+msgstr "Ange ditt nya lösenord nedan. Lösenordet måste innehålla minst 6 tecken och innehålla bokstäver och siffror eller specialtecken."
+
+msgid "Invalid link"
+msgstr "Länken för återställning av lösenord var ogiltig, möjligen för att den redan har använts. Begär en ny återställning av lösenordet."
+
+msgid "Password changing success"
+msgstr "Lösenordet ändrat"
+
+msgid "Password changing description"
+msgstr "Lösenordet har ändrats och du kan logga in på tjänsten."
+
+msgid "Password reset error title"
+msgstr "Fel"
+
+msgid "Password reset error description"
+msgstr "Något gick fel, försök igen efter ett tag."
+
+msgid "Reset password email title"
+msgstr "Ändra lösenord"
+
+msgid "Password miss match"
+msgstr "Lösenorden matchar inte"
+
+msgid "Password too short"
+msgstr "Lösenordet är för kort"
+
+msgid "Password restrictions"
+msgstr "Lösenordet måste innehålla bokstäver, siffror och specialtecken"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information om tjänsten"

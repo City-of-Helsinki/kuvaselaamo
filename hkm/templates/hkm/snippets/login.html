@@ -11,5 +11,8 @@
   {% csrf_token %}
   {% include 'hkm/snippets/form_fields.html' with form=login_form %}
   <input type="hidden" name="action" value="login" />
-  <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Log in' %}</button>
+  <button class="hkm-button hkm-button__filled login-modal__body_btn" type="submit">{% trans 'Log in' %}</button>
+  <a href="#" id="reset-pwd-btn" class="login-modal__body_link" data-toggle="modal" data-target="#password-reset">{% trans 'Forgot your password' %}</a>
+  <hr class="login-modal__body_hr">
+  <a href="#" id="signup-btn" class="hkm-button hkm-button__outlined login-modal__body_btn" data-toggle="modal" data-target="#sign-up">{% trans 'Sign up' %}</a>
 </form>

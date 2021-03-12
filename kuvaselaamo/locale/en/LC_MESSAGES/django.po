@@ -501,6 +501,57 @@ msgstr "Login with credentials"
 msgid "Sign up"
 msgstr "Sign up"
 
+msgid "Forgot your password"
+msgstr "Forgot your password?"
+
+msgid "Enter email description"
+msgstr "Worry not. Fill in your email address and we will send you instructions on how to change your password."
+
+msgid "Back to login"
+msgstr "Back to login"
+
+msgid "Email sent title"
+msgstr "Sent"
+
+msgid "Email sent link"
+msgstr "An email has been sent to the address you provided with a link to change your password."
+
+msgid "Email sent spam"
+msgstr "If the message doesn't arrive, check your spam folder."
+
+msgid "Changing password"
+msgstr "Changing password"
+
+msgid "Password change instructions"
+msgstr "Enter your new password below. The password must be at least 6 characters long and contain letters and numbers or special characters."
+
+msgid "Invalid link"
+msgstr "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
+
+msgid "Password changing success"
+msgstr "Password changed"
+
+msgid "Password changing description"
+msgstr "The password has been changed and you can log in to the service."
+
+msgid "Password reset error title"
+msgstr "Error"
+
+msgid "Password reset error description"
+msgstr "Something went wrong, please try again after a while."
+
+msgid "Reset password email title"
+msgstr "Changing the password"
+
+msgid "Password miss match"
+msgstr "Passwords do not match"
+
+msgid "Password too short"
+msgstr "Password is too short"
+
+msgid "Password restrictions"
+msgstr "The password must contain at least one special character or number"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information about the service"
