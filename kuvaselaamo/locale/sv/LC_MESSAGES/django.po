@@ -518,14 +518,8 @@ msgstr "Något gick fel, försök igen efter ett tag."
 msgid "Reset password email title"
 msgstr "Ändra lösenord"
 
-msgid "Password miss match"
-msgstr "Lösenorden matchar inte"
-
-msgid "Password too short"
-msgstr "Lösenordet är för kort"
-
 msgid "Password restrictions"
-msgstr "Lösenordet måste innehålla bokstäver, siffror och specialtecken"
+msgstr "Lösenordet innehåller endast bokstäver"
 
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
