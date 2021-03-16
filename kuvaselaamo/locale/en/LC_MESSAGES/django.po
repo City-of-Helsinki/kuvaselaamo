@@ -532,7 +532,7 @@ msgid "Password changing success"
 msgstr "Password changed"
 
 msgid "Password changing description"
-msgstr "The password has been changed and you can log in to the service."
+msgstr "Your password has been changed successfully."
 
 msgid "Password reset error title"
 msgstr "Error"
