@@ -525,14 +525,8 @@ msgstr "Jotain meni vikaan, yritä hetken kuluttua uudestaan."
 msgid "Reset password email title"
 msgstr "Salasanan vaihtaminen"
 
-msgid "Password miss match"
-msgstr "Salasanat eivät täsmää"
-
-msgid "Password too short"
-msgstr "Salasana on liian lyhyt"
-
-msgid "Password restrictions"
-msgstr "Salasanan tulee sisältää kirjaimia, numeroita ja erikoismerkkejä"
+msgid "Password alphabetic"
+msgstr "Salasana sisältää pelkkiä kirjaimia"
 
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"

@@ -543,14 +543,8 @@ msgstr "Something went wrong, please try again after a while."
 msgid "Reset password email title"
 msgstr "Changing the password"
 
-msgid "Password miss match"
-msgstr "Passwords do not match"
-
-msgid "Password too short"
-msgstr "Password is too short"
-
-msgid "Password restrictions"
-msgstr "The password must contain at least one special character or number"
+msgid "Password alphabetic"
+msgstr "Password contains only letters"
 
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
