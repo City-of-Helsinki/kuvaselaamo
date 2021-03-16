@@ -1,9 +1,15 @@
 {
   "name": "hkm",
   "version": "0.0.1",
+  "scripts": {
+    "browser-test": "testcafe \"chrome --window-size='1920,1080'\" browser-tests/enable-dotenv.js browser-tests/ --live",
+    "browser-test:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1920,1080'\" browser-tests/ -s takeOnFails=true"
+  },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.1.0"
+    "gulp-sass": "^4.1.0",
+    "testcafe": "^1.12.0"
   },
   "dependencies": {
     "gulp-livereload": "^4.0.2"
