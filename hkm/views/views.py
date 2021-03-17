@@ -1407,7 +1407,7 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
 
         form = self.form_class(data=request.POST, user=self.user)
         if form.is_valid():
-            form.save()
+            auth_login(request, form.save())
             return http.HttpResponse()
         else:
             for key in form.errors:

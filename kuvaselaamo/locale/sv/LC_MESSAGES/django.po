@@ -507,7 +507,7 @@ msgid "Password changing success"
 msgstr "Lösenordet ändrat"
 
 msgid "Password changing description"
-msgstr "Lösenordet har ändrats och du kan logga in på tjänsten."
+msgstr "Ditt lösenord har ändrats."
 
 msgid "Password reset error title"
 msgstr "Fel"

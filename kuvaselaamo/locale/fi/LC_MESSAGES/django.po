@@ -514,7 +514,7 @@ msgid "Password changing success"
 msgstr "Salasana vaihdettu"
 
 msgid "Password changing description"
-msgstr "Salasana on vaihdettu ja voit kirjautua palveluun."
+msgstr "Salasanasi on vaihdettu onnistuneesti."
 
 msgid "Password reset error title"
 msgstr "Virhe"
