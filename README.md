@@ -1,3 +1,5 @@
+[![Build & Staging & Accept](https://github.com/City-of-Helsinki/kuvaselaamo/actions/workflows/staging.yml/badge.svg)](https://github.com/City-of-Helsinki/kuvaselaamo/actions/workflows/staging.yml)
+
 # Kuvaselaamo / Helsinkikuvia.fi
 
 ## Summary
