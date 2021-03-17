@@ -31,6 +31,7 @@ env = environ.Env(
     AZURE_ACCOUNT_KEY=(str, ""),
     AZURE_CONTAINER=(str, ""),
     ENABLE_ANALYTICS=(bool, False),
+    PASSWORD_RESET_TIMEOUT_DAYS=(int, 1),
 )
 
 DEBUG = env.bool('DEBUG')
@@ -314,3 +315,5 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "kuvaselaamo.validators.AlphabeticPasswordValidator",
     },
 ]
+
+PASSWORD_RESET_TIMEOUT_DAYS = env('PASSWORD_RESET_TIMEOUT_DAYS')
