@@ -3,10 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-#[Unreleased]
+# [2.4.0] 2021-03-17
 ### Added
 - Added script that deletes old and unused data.
-- Added kubernetes cron job that executes clean_unused_data script and clearsessions.
+- Added kubernetes cron job that executes clean_unused_data script and clearsessions (currently active only in 
+  staging environment).
 - Request a new password functionality.
 
 ### Fixed
@@ -19,7 +20,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Moved CGS / Azure dependencies to environment specific requirements.in files.
 - Disabled logging for /healthz and /readiness endpoints.
-
 
 # [2.3.1] 2021-02-01
 ### Added
