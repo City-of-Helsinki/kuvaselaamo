@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import JSONField
+
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -83,6 +83,9 @@ class UserProfile(BaseModel):
         blank=True,
         null=True
     )
+
+    removal_notification_sent = models.DateTimeField(
+        verbose_name=_(u'Removal notification sent'), blank=True, null=True)
 
     def __unicode__(self):
         return self.user.username
