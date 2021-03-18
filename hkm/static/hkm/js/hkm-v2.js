@@ -20,7 +20,13 @@ palikka
 
   $('#login-btn').on('click', hideModal);
 
-  // In addition to hiding the modal, hide the bottom green search modal 
+  // Hide login modal if user wants to reset password.
+  $('#reset-pwd-btn').on('click', hideModal);
+
+  // Hide password reset modal if user is navigating back to log in.
+  $('#back-to-login-btn').on('click', hideModal);
+
+  // In addition to hiding the modal, hide the bottom green search modal
   // and make more space for signup to expand
 
   $('#signup-btn').on('click', function() {
@@ -176,7 +182,7 @@ palikka
     }
   }
 
-  // Make ajax calls to the api server on button click 
+  // Make ajax calls to the api server on button click
 
   loadMoreButton.on('click', function() {
     fetchingMoreImages = true;
@@ -198,7 +204,7 @@ palikka
           queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
         }
         queryParameters['page'] = page;
-  
+
         window.history.replaceState("", "", "?"+$.param(queryParameters));
         $container.append(data);
         $container.imagesLoaded().progress(onProgress);
@@ -219,7 +225,7 @@ palikka
 
       else if (buttonText === "Load more...") {
         loadMoreButton.text('No more results');
-      } 
+      }
 
       else {
         loadMoreButton.text('Inga fler resultat');
@@ -337,7 +343,61 @@ palikka
       });
     }
   }
+})
+.define('app.reset-password', ['jQuery', 'docReady'], function() {
+  $('#password-reset-email').on('submit', function(event) {
+    event.preventDefault();
 
+    $.post('/', {
+      action: 'password_reset',
+      csrfmiddlewaretoken: event.target.elements.csrfmiddlewaretoken.value,
+      email: event.target.elements.email.value,
+    }).done(function () {
+        $('#password-reset-form').addClass('hidden');
+        $('#password-reset-response-success').removeClass('hidden');
+        $('#password-reset-success-title').focus();
+    }).fail(function () {
+      $('#password-reset-form').addClass('hidden');
+      $('#password-reset-response-error').removeClass('hidden');
+      $('#password-reset-error-title').focus();
+    })
+  })
+
+  // When user closes the modal after success message. Reset content to previos state.
+  $('#password-reset').on('hidden.bs.modal', function () {
+    $('#password-reset-form').removeClass('hidden');
+    $('#password-reset-response-success').addClass('hidden');
+  })
+
+  // Logic for opening the password reset modal automatically
+  const pathname = window.location.pathname;
+  const showPasswordChangeModal = pathname.includes('reset');
+
+  if (showPasswordChangeModal) {
+    $('#password-change').modal('toggle')
+  }
+
+  // POST password reset form data
+  $('#password-set-new').on('submit', function (event) {
+    event.preventDefault();
+
+    $.post(pathname, {
+      csrfmiddlewaretoken: event.target.elements.csrfmiddlewaretoken.value,
+      new_password1: event.target.elements.new_password1.value,
+      new_password2: event.target.elements.new_password2.value
+    }).done(function (response) {
+      $('#password-set-form').addClass('hidden');
+      $('#password-set-success').removeClass('hidden');
+      $('#password-set-success-title').focus();
+
+    }).fail(function (response) {
+      // Remove old error
+      $('#password-set-validation-error').remove()
+      const error_message = response.responseJSON.error_message;
+      $('#id_new_password2').after(`<div id="password-set-validation-error" class="login-modal__body_error">${error_message}</div>`)
+      $('#password-set-error-title').focus();
+    })
+  })
 })
 .define('app.feedback', ['jQuery', 'docReady'], function() {
   $('#feedback-form').on('submit', function(event) {
@@ -364,6 +424,7 @@ palikka
       $("#fb-error").removeClass("hidden")
     })
   })
+
 })
 .define('app.addToCollection', ['jQuery', 'docReady'], function() {
   $('#add-to-collection').on('click', function() {
@@ -427,7 +488,7 @@ palikka
         if ($crop_width.val() === "None" || $crop_width.val() === "") return false;
         if ($crop_height.val() === "None" || $crop_height.val() === "") return false;
         return true;
-      } 
+      }
 
       function setCropCoordinatesToFormFields () {
         var imageData = cropper.getImageData();
@@ -474,7 +535,7 @@ palikka
         var finalHeight = cropArea.height * heightMultiplier;
 
         var $PPIBox = $('#ppi-box');
-        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) / 
+        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) /
           Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
 
         var language = $ppiIndicator.attr('data-language');
@@ -483,7 +544,7 @@ palikka
           'fi': 'Liian alhainen. Rajaa alue suuremmaksi!',
           'en': 'Too low. Increase the crop area!',
           'sv': 'För låg. Öka storleken på den beskärda bilden!'
-        }      
+        }
 
         if (isNaN(PPI)) {
           $('#ppi-indicator').text('?');
@@ -496,7 +557,7 @@ palikka
 
           }
           if (PPI >= 120) {
-            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');  
+            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
             $ppiIndicator.text(PPI_OK);
           }
         }
@@ -520,7 +581,7 @@ palikka
       var savedAspectRatio = $inputChecked.attr('data-xsize') / $inputChecked.attr('data-ysize');
       options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
       cropperInit();
-     
+
 
       // whenever print product type is reselected, change form values and show in UI
       $('.ordertype').click(function() {
@@ -534,7 +595,7 @@ palikka
           calculateNewPrice();
           calculatePPI();
           //setCropCoordinatesToFormFields();
-      }); 
+      });
 
       // why not work LöL
       var amountField = document.querySelector('#id_order-product-form-amount');
@@ -550,12 +611,12 @@ palikka
         if (e.action === 'crop') {
           e.preventDefault();
         }  */
-      }); 
+      });
 
       window.onresize = function () {
         console.log('canvas area resizing...');
         var imageData = cropper.getImageData();
-        var boxData = cropper.getCropBoxData();  
+        var boxData = cropper.getCropBoxData();
         setCropCoordinatesToFormFields();
         /* Prevent to start cropping, moving, etc if necessary
         if (e.action === 'crop') {
@@ -576,15 +637,15 @@ palikka
             height: parseInt($crop_height.val())
           });
           setCropCoordinatesToFormFields();
-        } 
+        }
         if (!productSettingsExistInForm()) {
           console.log('settings dont exist');
           setCropCoordinatesToFormFields();
         }
 
-        calculatePPI();  
+        calculatePPI();
       });
-      
+
     }
 
     // Initialize tooltips
@@ -594,7 +655,7 @@ palikka
 
 
   });
-  
+
 
   // modal related cropper stuff begins here
 
@@ -776,7 +837,7 @@ palikka
 
   function zoomInit(w, h, url, fullResUrl) {
     // debugger;
-    
+
     var initialZoom = 3;
 
     var imageContainer = L.map('zoomable-image-container', {
@@ -822,7 +883,7 @@ palikka
       imageContainer.zoomOut();
     });
 
-  
+
     $image.on('mousedown', function(e) {
 
       clickedAt = new Date().getTime();
@@ -844,7 +905,7 @@ palikka
           default:
             break;
         }
-      }  
+      }
     });
 
    imageContainer.on('movestart', function() {
@@ -858,8 +919,8 @@ palikka
     $image.on('contextmenu', function(e) {
       e.preventDefault();
     });
-    
-    
+
+
 
   }
 });

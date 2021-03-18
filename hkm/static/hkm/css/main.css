@@ -6360,35 +6360,50 @@ span.no-postal-fee {
 
 /* Login */
 .login-modal__dialog {
-  margin: -179px auto auto -149px;
+  margin: -179px 0 0 0;
   position: absolute;
   top: 50%;
-  left: 50%; }
+  width: 100%; }
 
 .login-modal__content {
   border-radius: 0; }
 
-.login-modal__signup-link {
-  font-family: "brownbold", sans-serif;
-  color: #005cab; }
-
 .login-modal__body {
-  padding: 15 25px; }
-  .login-modal__body .login-modal__btn {
-    margin: 0 0 15px 0; }
-  .login-modal__body .btn {
-    width: 100%; }
+  padding: 15px 75px; }
+  .login-modal__body_title {
+    color: #5268C2;
+    font: 18px "Signe", sans-serif;
+    margin-bottom: 25px; }
+  .login-modal__body_description {
+    font: 16px "brownlight", sans-serif;
+    margin-bottom: 25px; }
+  .login-modal__body_back-to, .login-modal__body_link {
+    color: #5268C2;
+    margin-top: 20px;
+    display: block;
+    font-family: "brownbold", sans-serif; }
+  .login-modal__body_svg {
+    margin-top: -3px;
+    height: 20px;
+    width: 20px; }
+  .login-modal__body_back-to {
+    color: #000; }
+  .login-modal__body_hr {
+    margin-top: 10px; }
+  .login-modal__body_btn {
+    min-width: 100%;
+    margin-bottom: 10px; }
+  .login-modal__body_error {
+    margin-top: 10px;
+    color: red; }
 
-@media (max-width: 768px) {
+@media (min-width: 500px) {
   .login-modal__dialog {
-    margin: -179px auto auto -198px; } }
-
-@media (max-width: 400px) {
-  .login-modal__dialog {
-    left: 0;
-    margin: -179px 15px auto 15px; }
-  .login-modal {
-    width: 100%; } }
+    margin: -179px auto auto -198px;
+    left: 50%;
+    width: 450px; }
+  .login-modal__body {
+    padding: 15px 100px; } }
 
 /* Main */
 .home-page {
@@ -7740,6 +7755,32 @@ a.welcome-modal__clarification {
 .feedback-message-temp {
   margin: 20px 0 40px;
   font-size: 16px; }
+
+/* GENERAL NEW STYLES 2021 */
+.hkm-button {
+  border-radius: 0;
+  color: #fff;
+  padding: 10px;
+  outline: 0;
+  font-family: "brownlight", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  text-align: center; }
+  .hkm-button__filled {
+    border: 0;
+    background-color: #935379;
+    color: #fff; }
+    .hkm-button__filled:hover {
+      color: #fff;
+      text-decoration: none; }
+  .hkm-button__outlined {
+    border: 1px solid #935379;
+    background-color: #fff;
+    color: #935379; }
+    .hkm-button__outlined:hover {
+      color: #935379;
+      text-decoration: none; }
 
 .navigation {
   height: 60px;

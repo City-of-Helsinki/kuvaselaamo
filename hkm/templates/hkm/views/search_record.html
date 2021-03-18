@@ -2,6 +2,10 @@
 {% load hkm_tags %}
 {% load i18n %}
 
+{% block page_title %}
+  <title>{% trans 'Image view' %}</title>
+{% endblock %}
+
 {% block viewer_arrows %}
 
   {% if search_result %}

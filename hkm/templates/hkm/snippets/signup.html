@@ -11,5 +11,5 @@
   {% csrf_token %}
   {% include 'hkm/snippets/form_fields.html' with form=sign_up_form %}
   <input type="hidden" name="action" value="signup" />
-  <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Sign up' %}</button>
+  <button class="hkm-button hkm-button__filled login-modal__body_btn" type="submit">{% trans 'Sign up' %}</button>
 </form>

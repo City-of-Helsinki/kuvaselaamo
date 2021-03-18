@@ -54,6 +54,11 @@ urlpatterns = [
         name='hkm_add_to_collection'),
     url(r'^basket/$', views.BasketView.as_view(), name='basket'),
     url(r'^basket/checkout/$', views.BasketView.as_view(), {"phase": "checkout"}, name='checkout'),
+
+    url(r'^reset/$',
+        views.PasswordResetConfirmViewNew.as_view(), name='reset_pwd'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.PasswordResetConfirmViewNew.as_view(), name='reset_pwd'),
 ]
 
 

@@ -476,6 +476,51 @@ msgstr "Logga in med koder"
 msgid "Sign up"
 msgstr "Skapa kod"
 
+msgid "Forgot your password"
+msgstr "Glömt ditt lösenord?"
+
+msgid "Enter email description"
+msgstr "Oroa dig inte. Fyll i din e-postadress så skickar vi instruktioner om hur du byter lösenord."
+
+msgid "Back to login"
+msgstr "Tillbaka till login"
+
+msgid "Email sent title"
+msgstr "Skickat"
+
+msgid "Email sent link"
+msgstr "Ett e-postmeddelande har skickats till adressen du angav med en länk för att ändra ditt lösenord."
+
+msgid "Email sent spam"
+msgstr "Om meddelandet inte kommer in, kontrollera din skräppostmapp."
+
+msgid "Changing password"
+msgstr "Ändra lösenord"
+
+msgid "Password change instructions"
+msgstr "Ange ditt nya lösenord nedan. Lösenordet måste innehålla minst 6 tecken och innehålla bokstäver och siffror eller specialtecken."
+
+msgid "Invalid link"
+msgstr "Länken för återställning av lösenord var ogiltig, möjligen för att den redan har använts. Begär en ny återställning av lösenordet."
+
+msgid "Password changing success"
+msgstr "Lösenordet ändrat"
+
+msgid "Password changing description"
+msgstr "Ditt lösenord har ändrats."
+
+msgid "Password reset error title"
+msgstr "Fel"
+
+msgid "Password reset error description"
+msgstr "Något gick fel, försök igen efter ett tag."
+
+msgid "Reset password email title"
+msgstr "Ändra lösenord"
+
+msgid "Password restrictions"
+msgstr "Lösenordet innehåller endast bokstäver"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Information om tjänsten"
@@ -509,6 +554,9 @@ msgstr "Denna tjänst erbjuds av"
 #: hkm/templates/hkm/base.html:118
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingfors stadsmuseums Bildapotek"
+
+msgid "Image view"
+msgstr "Bildvy"
 
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
@@ -690,6 +738,9 @@ msgstr "Sök"
 msgid "Search pictures"
 msgstr "Sök bilder"
 
+msgid "With word"
+msgstr "med ord"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Bläddra i album"
@@ -773,6 +824,9 @@ msgstr "404 - Sidan hittades inte"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Tyvärr kunde vi inte hitta den sida du letar efter."
+
+msgid "#error-404-image-not-found"
+msgstr "Bilden du letade efter hittades inte"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -946,6 +1000,9 @@ msgstr "Totalpris"
 msgid "Add to cart"
 msgstr "Lägg i korgen"
 
+msgid "Contact information"
+msgstr "Kontaktinformation för din beställning"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr ""
@@ -1034,6 +1091,9 @@ msgstr "Produkt"
 msgid "Product selection"
 msgstr "Produktsortiment"
 
+msgid "Order summary"
+msgstr "Order Ordersammanfattning"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1057,6 +1117,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Genom att klicka på Beställ går du till betalningstjänsten Bambora"
+
+msgid "Order payment confirmed"
+msgstr "Orderbetalning bekräftad"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"

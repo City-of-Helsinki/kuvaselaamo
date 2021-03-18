@@ -483,6 +483,51 @@ msgstr "Kirjaudu sisään tunnuksilla"
 msgid "Sign up"
 msgstr "Luo tunnus"
 
+msgid "Forgot your password"
+msgstr "Unohditko salasanasi?"
+
+msgid "Enter email description"
+msgstr "Ei hätää. Täytä sähköpostiosoitteesi, niin lähetämme sinulle ohjeet salasanan vaihtamiseksi."
+
+msgid "Back to login"
+msgstr "Takaisin kirjautumiseen"
+
+msgid "Email sent title"
+msgstr "Lähetetty"
+
+msgid "Email sent link"
+msgstr "Antamaasi osoitteeseen on lähetetty sähköposti, jossa on linkki salasanan vaihtamiseen."
+
+msgid "Email sent spam"
+msgstr "Ellei viesti tule perille, tarkista vielä roskapostikansiosi."
+
+msgid "Changing password"
+msgstr "Salasanan vaihtaminen"
+
+msgid "Password change instructions"
+msgstr "Kirjoita alle uusi salasanasi. Salasanan pitää olla vähintään 6 merkkiä pitkä ja sisältää sekä kirjaimia, että numeroita tai erikoismerkkejä."
+
+msgid "Invalid link"
+msgstr "Salasanan palautuslinkki oli virheellinen, mahdollisesti koska se on jo käytetty. Pyydä uusi salasanan vaihto."
+
+msgid "Password changing success"
+msgstr "Salasana vaihdettu"
+
+msgid "Password changing description"
+msgstr "Salasanasi on vaihdettu onnistuneesti."
+
+msgid "Password reset error title"
+msgstr "Virhe"
+
+msgid "Password reset error description"
+msgstr "Jotain meni vikaan, yritä hetken kuluttua uudestaan."
+
+msgid "Reset password email title"
+msgstr "Salasanan vaihtaminen"
+
+msgid "Password alphabetic"
+msgstr "Salasana sisältää pelkkiä kirjaimia"
+
 #: hkm/templates/hkm/base.html:109
 msgid "Information about the service"
 msgstr "Tietoa palvelusta"
@@ -516,6 +561,9 @@ msgstr "Tämän palvelun tarjoaa"
 #: hkm/templates/hkm/base.html:118
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Helsingin kaupunginmuseon Kuvaselaamo"
+
+msgid "Image view"
+msgstr "Kuvanäkymä"
 
 #: hkm/templates/hkm/base_browse.html:19
 msgid "Previous image"
@@ -697,6 +745,9 @@ msgstr "Etsi"
 msgid "Search pictures"
 msgstr "Etsi kuvia"
 
+msgid "With word"
+msgstr "sanalla"
+
 #: hkm/templates/hkm/snippets/navigation.html:30
 msgid "Explore collections"
 msgstr "Selaa albumeita"
@@ -780,6 +831,9 @@ msgstr "404 - Sivua ei löydy"
 #: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "Etsimääsi sivua ei löydy"
+
+msgid "#error-404-image-not-found"
+msgstr "Etsimääsi kuvaa ei löytynyt"
 
 #: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
@@ -954,6 +1008,9 @@ msgstr "Hinta yht."
 msgid "Add to cart"
 msgstr "Lisää koriin"
 
+msgid "Contact information"
+msgstr "Tilauksesi yhteystiedot"
+
 #: hkm/templates/hkm/views/order_complete.html:5
 msgid "Thank you for purchase"
 msgstr "Kiitos tilauksestasi"
@@ -1040,6 +1097,9 @@ msgstr "Tuote"
 msgid "Product selection"
 msgstr "Tuotevalikoima"
 
+msgid "Order summary"
+msgstr "Tilauksen yhteenveto"
+
 #: hkm/templates/hkm/views/order_steps_menu.html:22
 #: hkm/templates/hkm/views/order_steps_menu.html:24
 msgid "Summary"
@@ -1063,6 +1123,9 @@ msgid ""
 "By pressing Order (verb) you will be redirected to the secure payment "
 "service."
 msgstr "Painamalla Tilaa-painiketta siirryt Bamboran maksuvälityspalveluun."
+
+msgid "Order payment confirmed"
+msgstr "Tilauksen maksu vahvistettu"
 
 #: hkm/templates/hkm/views/public_collections.html:11
 msgid "Browse albums"

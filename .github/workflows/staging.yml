@@ -15,6 +15,11 @@ env:
   SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
   APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
   SERVICE_PORT: "8080"
+  K8S_REQUEST_CPU: 100m
+  K8S_REQUEST_RAM: 200Mi
+  K8S_LIMIT_CPU: 800m
+  K8S_LIMIT_RAM: 1Gi
+  K8S_REPLICACOUNT: 2
 
 jobs:
   build:
@@ -46,7 +51,7 @@ jobs:
           K8S_SECRET_SECRET_KEY: ${{ secrets.GH_QA_DJANGO_SECRET_KEY }}
           K8S_SECRET_ADMIN_USER_PASSWORD: ${{ secrets.STAGING_ADMIN_USER_PASSWORD }}
           K8S_SECRET_VERSION: ${{ github.sha }}
-          K8S_SECRET_HKM_FEEDBACK_FROM_EMAIL: "no-reply@hel.ninja"
+          K8S_SECRET_HKM_DEFAULT_FROM_EMAIL: "no-reply@hel.ninja"
           K8S_SECRET_HKM_FEEDBACK_NOTIFICATION_EMAILS: ${{ secrets.STAGING_HKM_FEEDBACK_NOTIFICATION_EMAILS }}
           K8S_SECRET_EMAIL_BACKEND: "anymail.backends.mailgun.EmailBackend"
           K8S_SECRET_MAIL_MAILGUN_KEY: ${{ secrets.GH_STAGING_MAILGUN_API_KEY }}
@@ -71,3 +76,17 @@ jobs:
           K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STAGING }}
           K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STAGING }}
           K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STAGING }}
+
+      - name: Deploy Cronjob
+        uses: City-of-Helsinki/setup-cronjob-action@main
+        with:
+          image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+          image_tag:  ${{ github.sha }}
+          secret_name: project-staging-kuvaselaamo-secret
+          file_secret_name: project-staging-kuvaselaamo-file-secret
+          file_secret_mount_path: /tmp/secrets
+          kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
+          target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
+          schedule: '0 0 * * *'
+          command: "{/bin/sh}"
+          args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
