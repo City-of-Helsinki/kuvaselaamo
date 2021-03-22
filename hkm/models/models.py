@@ -725,7 +725,7 @@ class ProductOrderCollection(models.Model):
             subject = 'Helsinkikuvia.fi - tilaus toimitettu painoon'
             message = 'Hei! Tilauksesi on onnistuneesti toimitettu painotalo Printmotorille. Valmis tilaus lähetetään Matkahuollon lähipakettina viimeistään kolmantena arkipäivänä tästä päivästä lukien. Tilaukseen liittyvät yhteydenotot sähköpostitse: support@printmotor.io (mainitse viestissä, että tilaus on tehty Helsinkikuvia.fi-palvelussa).\n\n Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa'
 
-        send_mail(subject, message, settings.HKM_FEEDBACK_FROM_EMAIL, [self.customer_email])
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.customer_email])
         return True
 
     @property
