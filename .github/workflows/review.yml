@@ -8,8 +8,8 @@ env:
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW }}
-  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
-  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BUILD_ARTIFACT_FOLDER: "build_artifacts"
+  SERVICE_ARTIFACT_FOLDER: "service_artifacts"
   BASE_DOMAIN: ${{ secrets.BASE_DOMAIN_STAGING }}
   DATABASE_USER: user
   DATABASE_PASSWORD: testing-password

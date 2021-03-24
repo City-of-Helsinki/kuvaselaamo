@@ -2,7 +2,7 @@ name: Build & Production
 on:
   push:
     tags:
-      - 'release-*'
+      - "release-*"
 
 env:
   CONTAINER_REGISTRY: ghcr.io
@@ -11,8 +11,8 @@ env:
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW_STABLE }}
-  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
-  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BUILD_ARTIFACT_FOLDER: "build_artifacts"
+  SERVICE_ARTIFACT_FOLDER: "service_artifacts"
   APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
   SERVICE_PORT: "8080"
   K8S_REQUEST_CPU: 100m
@@ -41,7 +41,7 @@ jobs:
       - name: Deploy
         uses: andersinno/kolga-deploy-action@v2
         with:
-          track: 'stable'
+          track: "stable"
         env:
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STABLE }}
           K8S_ADDITIONAL_HOSTNAMES: ${{ secrets.K8S_ADDITIONAL_HOSTNAMES }}
