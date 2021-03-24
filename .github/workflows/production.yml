@@ -61,7 +61,7 @@ jobs:
           K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://payform.bambora.com/pbwapi"
           K8S_SECRET_HKM_PBW_API_KEY: ${{ secrets.GH_STABLE_PBW_API_KEY }}
           K8S_SECRET_HKM_PBW_SECRET_KEY: ${{ secrets.GH_STABLE_PBW_SECRET_KEY }}
-          K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.prod.kuva.hel.ninja"
+          K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.fi"
           K8S_SECRET_HKM_PRINTMOTOR_USERNAME: ${{ secrets.GH_STABLE_PRINTMOTOR_USERNAME }}
           K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: ${{ secrets.GH_STABLE_PRINTMOTOR_PASSWORD }}
           K8S_SECRET_HKM_PRINTMOTOR_API_KEY: ${{ secrets.GH_STABLE_PRINTMOTOR_API_KEY }}
