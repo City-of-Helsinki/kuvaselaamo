@@ -11,8 +11,8 @@ env:
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW_STAGING }}
-  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
-  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BUILD_ARTIFACT_FOLDER: "build_artifacts"
+  SERVICE_ARTIFACT_FOLDER: "service_artifacts"
   APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
   SERVICE_PORT: "8080"
   K8S_REQUEST_CPU: 100m
@@ -41,7 +41,7 @@ jobs:
       - name: Deploy
         uses: andersinno/kolga-deploy-action@v2
         with:
-          track: 'staging'
+          track: "staging"
         env:
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STAGING }}
           ENVIRONMENT_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING }}
@@ -111,12 +111,12 @@ jobs:
         uses: City-of-Helsinki/setup-cronjob-action@main
         with:
           image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
-          image_tag:  ${{ github.sha }}
+          image_tag: ${{ github.sha }}
           secret_name: project-staging-kuvaselaamo-secret
           file_secret_name: project-staging-kuvaselaamo-file-secret
           file_secret_mount_path: /tmp/secrets
           kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
           target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
-          schedule: '0 0 * * *'
+          schedule: "0 0 * * *"
           command: "{/bin/sh}"
           args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
