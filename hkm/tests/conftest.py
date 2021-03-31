@@ -1,11 +1,13 @@
 import pytest
-
-from hkm.models.models import Collection
+from datetime import datetime, timedelta
+from hkm.management.commands.clean_unused_data import DEFAULT_DAYS
 
 
 @pytest.fixture
-def default_collection(admin_user):
-    return Collection.objects.create(
-        owner=admin_user,
-        show_in_landing_page=True,
-    )
+def day_older_than_removal_date():
+    return datetime.today() - timedelta(days=DEFAULT_DAYS + 1)
+
+
+@pytest.fixture
+def day_newer_than_removal_date():
+    return datetime.today() - timedelta(days=DEFAULT_DAYS - 1)
