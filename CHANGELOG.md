@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.4.1] 2021-04-01
+
+### Fixed
+- Swedish translations in landing page
+
+### Changed
+- English translations in landing page
+
 # [2.4.0] 2021-03-17
 ### Added
 - Added script that deletes old and unused data.

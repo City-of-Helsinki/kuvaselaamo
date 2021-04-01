@@ -25,7 +25,7 @@ msgstr "Welcome to the treasure trove of Helsinki-themed photos"
 
 #: hkm/templates/hkm/home_page.html:13
 msgid "Welcome text"
-msgstr "Over 65 000 images for free! You can download printable images to your computer or order paid image prints."
+msgstr "Over 65 000 images available for free use! You can download image files and order image prints."
 
 #: hkm/templates/hkm/home_page.html:18
 msgid "Search description"
