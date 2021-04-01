@@ -11,6 +11,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.signals import user_logged_in
 
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
@@ -33,6 +34,17 @@ from hkm.printmotor_client import client as PRINTMOTOR
 
 LOG = logging.getLogger(__name__)
 DEFAULT_CACHE = caches['default']
+
+
+def _update_removal_notification_sent(sender, user, **kwargs):
+    """
+    A signal receiver which clears the value of removal_notification_sent of the user logging in.
+    """
+    user.profile.removal_notification_sent = None
+    user.profile.save(update_fields=['removal_notification_sent'])
+
+
+user_logged_in.connect(_update_removal_notification_sent)
 
 
 class BaseModel(models.Model):
