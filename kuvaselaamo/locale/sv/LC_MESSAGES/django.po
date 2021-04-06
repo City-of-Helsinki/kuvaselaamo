@@ -20,15 +20,15 @@ msgstr ""
 
 #: hkm/templates/hkm/home_page.html:12
 msgid "Welcome title"
-msgstr "Välkommen till skattkammaren från Helsingfors-teman"
+msgstr "Välkommen till Helsingforsbildernas skattkammare!"
 
 #: hkm/templates/hkm/home_page.html:13
 msgid "Welcome text"
-msgstr "Över 65 000 bilder gratis! Du kan ladda ner utskrivbara bilder till din dator eller beställa betalda bilder."
+msgstr "Över 65 000 bilder gratis! Du kan ladda ned utskrivbara bilder till din dator eller beställa avgiftsbelagda bilder."
 
 #: hkm/templates/hkm/home_page.html:18
 msgid "Search description"
-msgstr "Sök i museets arkiv med valfritt nyckelord, t.ex. platsen eller året:"
+msgstr "Sök i museets arkiv med valfria sökord, t.ex. plats eller årtal:"
 
 #: hkm/forms.py:75 hkm/models/models.py:505
 #, fuzzy
