@@ -119,4 +119,4 @@ jobs:
           target_namespace: ${{ secrets.K8S_NAMESPACE_STAGING }}
           schedule: "0 0 * * *"
           command: "{/bin/sh}"
-          args: "{-c,cd /app && python manage.py clean_unused_data --days 365 && python manage.py clearsessions}"
+          args: "{-c,cd /app && python manage.py clean_unused_data && python manage.py clearsessions}"
