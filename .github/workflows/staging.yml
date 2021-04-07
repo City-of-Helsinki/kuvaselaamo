@@ -20,6 +20,9 @@ env:
   K8S_LIMIT_CPU: 800m
   K8S_LIMIT_RAM: 1Gi
   K8S_REPLICACOUNT: 2
+  VAULT_JWT_PRIVATE_KEY: ${{ secrets.VAULT_ACCESS_PRIVATE_KEY_STAGING }}
+  VAULT_ADDR: ${{ secrets.VAULT_URL }}
+  VAULT_KV_VERSION: "2"
 
 jobs:
   build:
@@ -76,6 +79,8 @@ jobs:
           K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STAGING }}
           K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STAGING }}
           K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STAGING }}
+          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-${{ matrix.service }}-staging
+          VAULT_KV_SECRET_MOUNT_POINT: staging
 
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
