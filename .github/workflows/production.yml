@@ -81,5 +81,5 @@ jobs:
           K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STABLE }}
           K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STABLE }}
           K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STABLE }}
-          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-${{ matrix.service }}-stable
+          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-stable
           VAULT_KV_SECRET_MOUNT_POINT: stable
