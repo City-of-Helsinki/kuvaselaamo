@@ -8,12 +8,8 @@ from datetime import datetime, timedelta
 
 @pytest.mark.django_db
 def test_that_login_clears_removal_notification_timestamp():
-    user = UserFactory()
+    user = UserFactory(profile__removal_notification_sent=datetime.today() - timedelta(days=1))
 
-    up = user.profile
-    up.removal_notification_sent = datetime.today() - timedelta(days=1)
-    up.save()
-    
     assert UserProfile.objects.first().removal_notification_sent
 
     request = RequestFactory().get("/login")
