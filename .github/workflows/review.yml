@@ -19,6 +19,9 @@ env:
   K8S_REQUEST_RAM: 200Mi
   K8S_LIMIT_CPU: 800m
   K8S_LIMIT_RAM: 1Gi
+  VAULT_JWT_PRIVATE_KEY: ${{ secrets.VAULT_ACCESS_PRIVATE_KEY_REVIEW }}
+  VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+  VAULT_KV_VERSION: "2"
 
 jobs:
   build:
@@ -68,6 +71,8 @@ jobs:
           K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
           K8S_SECRET_HKM_POSTAL_FEES: ${{ secrets.HKM_POSTAL_FEES }}
           K8S_SECRET_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-review
+          VAULT_KV_SECRET_MOUNT_POINT: review
 
       - name: Setup kubectl
         run: |
