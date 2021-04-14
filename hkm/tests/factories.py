@@ -29,6 +29,7 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
 @factory.django.mute_signals(post_save)
 class UserFactory(factory.django.DjangoModelFactory):
     username = factory.Faker('email')
+    email = factory.LazyAttribute(lambda user: user.username)
     profile = factory.RelatedFactory(UserProfileFactory, factory_related_name='user')
 
     class Meta:
