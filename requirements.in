@@ -7,7 +7,6 @@ argh
 Babel
 billiard
 cffi
-coverage
 cryptography
 django-appconf
 django-apptemplates
@@ -22,7 +21,6 @@ django-ordered-model
 django-phonenumber-field
 django-widget-tweaks
 enum34
-factory-boy
 idna
 ipaddress
 Jinja2
