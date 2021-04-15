@@ -113,3 +113,18 @@ jobs:
         with:
           name: screenshots
           path: screenshots/
+
+      - name: Deploy cleanup jobs
+        uses: City-of-Helsinki/setup-cronjob-action@main
+        with:
+          name: municipality-and-address-import-cronjob
+          image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+          image_tag: ${{ github.sha }}
+          kubeconfig_raw: ${{ env.KUBECONFIG_RAW}}
+          target_namespace: ${{ env.K8S_NAMESPACE }}
+          single_run: true
+          secret_name: "-file-secret"
+          command: "{/bin/sh}"
+          args: "{-c,cd /app && python manage.py send_removal_notifications && python manage.py clean_unused_data && python manage.py clearsessions}"
+          limit_memory: 4096Mi
+          max_duration: 900 # 15min
