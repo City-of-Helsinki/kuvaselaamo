@@ -125,3 +125,4 @@ jobs:
           schedule: "0 0 * * *"
           command: "{/bin/sh}"
           args: "{-c,cd /app && python manage.py send_removal_notifications && python manage.py clean_unused_data && python manage.py clearsessions}"
+          max_duration: 900 # 15 minutes
