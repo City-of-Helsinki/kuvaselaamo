@@ -97,7 +97,7 @@ ipaddress==1.0.18
     # via
     #   -r requirements.in
     #   cryptography
-jinja2==2.9.6
+jinja2==2.11.3
     # via -r requirements.in
 kombu==3.0.37
     # via -r requirements.in
@@ -130,7 +130,9 @@ pathtools==0.1.2
 pbr==2.1.0
     # via mock
 phonenumberslite==8.4.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-phonenumber-field
 pillow==4.1.0
     # via -r requirements.in
 psycopg2==2.8.4
