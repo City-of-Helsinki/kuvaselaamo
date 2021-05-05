@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.5.0] 2021-05-05
+
+### Added
+- Management command which sends email notifications to users whose accounts are going to be removed soon.
+- Production environment scheduling for the notification and removal.
+- Automated tests for the scheduled commands using pytest.
+- Vault configuration in the workflows for handling secrets.
+- Automated browser tests which ensure that the main user flows are functioning.
+
+### Changed
+- The scheduled cleanup job now waits until 30 days after an email notification has been sent before deleting 
+  any user data.
+- Removed a dummy test which acted as a placeholder.
+- Moved some testing related dependencies from requirements.in to requirements-dev.in.
+  
 # [2.4.1] 2021-04-01
 
 ### Fixed
