@@ -1,4 +1,4 @@
-name: Build & Review
+name: Build & Review & Accept
 on: [pull_request]
 
 env:
@@ -8,8 +8,8 @@ env:
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW }}
-  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
-  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BUILD_ARTIFACT_FOLDER: "build_artifacts"
+  SERVICE_ARTIFACT_FOLDER: "service_artifacts"
   BASE_DOMAIN: ${{ secrets.BASE_DOMAIN_STAGING }}
   DATABASE_USER: user
   DATABASE_PASSWORD: testing-password
@@ -19,6 +19,9 @@ env:
   K8S_REQUEST_RAM: 200Mi
   K8S_LIMIT_CPU: 800m
   K8S_LIMIT_RAM: 1Gi
+  VAULT_JWT_PRIVATE_KEY: ${{ secrets.VAULT_ACCESS_PRIVATE_KEY_REVIEW }}
+  VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+  VAULT_KV_VERSION: "2"
 
 jobs:
   build:
@@ -32,7 +35,7 @@ jobs:
   review:
     runs-on: ubuntu-latest
     needs: build
-    name: Review
+    name: Review and Accept
     steps:
       - uses: actions/checkout@v2
       - uses: andersinno/kolga-setup-action@v2
@@ -68,3 +71,45 @@ jobs:
           K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
           K8S_SECRET_HKM_POSTAL_FEES: ${{ secrets.HKM_POSTAL_FEES }}
           K8S_SECRET_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-review
+          VAULT_KV_SECRET_MOUNT_POINT: review
+
+      - name: Setup kubectl
+        run: |
+          echo "${{ env.KUBECONFIG_RAW }}" > $(pwd)/kubeconfig
+          echo "KUBECONFIG=$(pwd)/kubeconfig" >> $GITHUB_ENV
+        shell: bash
+      - name: Get Review Deploy URL
+        id: deploy-url
+        run: |
+          DEPLOY_URL=$(kubectl get ingress -n "${{ env.K8S_NAMESPACE }}" -o jsonpath='{.items[0].spec.rules[0].host}')
+          echo "BROWSER_TESTING_BASE_URL=https://$DEPLOY_URL" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        run: npm ci --prefer-offline
+
+      - name: Run Acceptance Tests
+        run: npm run browser-test:ci
+      - name: Upload screenshots of failed tests
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: screenshots
+          path: screenshots/

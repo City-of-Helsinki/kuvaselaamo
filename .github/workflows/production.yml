@@ -2,7 +2,7 @@ name: Build & Production
 on:
   push:
     tags:
-      - 'release-*'
+      - "release-*"
 
 env:
   CONTAINER_REGISTRY: ghcr.io
@@ -11,8 +11,8 @@ env:
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW_STABLE }}
-  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
-  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BUILD_ARTIFACT_FOLDER: "build_artifacts"
+  SERVICE_ARTIFACT_FOLDER: "service_artifacts"
   APP_MIGRATE_COMMAND: /app/.prod/on_deploy.sh
   SERVICE_PORT: "8080"
   K8S_REQUEST_CPU: 100m
@@ -20,6 +20,9 @@ env:
   K8S_LIMIT_CPU: 1000m
   K8S_LIMIT_RAM: 1Gi
   K8S_REPLICACOUNT: 2
+  VAULT_JWT_PRIVATE_KEY: ${{ secrets.VAULT_ACCESS_PRIVATE_KEY_STABLE }}
+  VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+  VAULT_KV_VERSION: "2"
 
 jobs:
   build:
@@ -41,7 +44,7 @@ jobs:
       - name: Deploy
         uses: andersinno/kolga-deploy-action@v2
         with:
-          track: 'stable'
+          track: "stable"
         env:
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STABLE }}
           K8S_ADDITIONAL_HOSTNAMES: ${{ secrets.K8S_ADDITIONAL_HOSTNAMES }}
@@ -61,7 +64,7 @@ jobs:
           K8S_SECRET_HKM_PBW_API_ENDPOINT: "https://payform.bambora.com/pbwapi"
           K8S_SECRET_HKM_PBW_API_KEY: ${{ secrets.GH_STABLE_PBW_API_KEY }}
           K8S_SECRET_HKM_PBW_SECRET_KEY: ${{ secrets.GH_STABLE_PBW_SECRET_KEY }}
-          K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.prod.kuva.hel.ninja"
+          K8S_SECRET_HKM_MY_DOMAIN: "https://helsinkikuvia.fi"
           K8S_SECRET_HKM_PRINTMOTOR_USERNAME: ${{ secrets.GH_STABLE_PRINTMOTOR_USERNAME }}
           K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: ${{ secrets.GH_STABLE_PRINTMOTOR_PASSWORD }}
           K8S_SECRET_HKM_PRINTMOTOR_API_KEY: ${{ secrets.GH_STABLE_PRINTMOTOR_API_KEY }}
@@ -78,3 +81,19 @@ jobs:
           K8S_SECRET_DATABASE_DB: ${{ secrets.K8S_SECRET_DATABASE_DB_STABLE }}
           K8S_SECRET_DATABASE_USERNAME: ${{ secrets.K8S_SECRET_DATABASE_USERNAME_STABLE }}
           K8S_SECRET_DATABASE_PASSWORD: ${{ secrets.K8S_SECRET_DATABASE_PASSWORD_STABLE }}
+          VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-stable
+          VAULT_KV_SECRET_MOUNT_POINT: stable
+
+      - name: Deploy Cronjob to send removal notifications and clean old data
+        uses: City-of-Helsinki/setup-cronjob-action@main
+        with:
+          name: send-reminders-and-clean-old-data-cronjob
+          image_repository: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+          image_tag: ${{ github.sha }}
+          kubeconfig_raw: ${{ env.KUBECONFIG_RAW }}
+          target_namespace: ${{ secrets.K8S_NAMESPACE_STABLE }}
+          schedule: "15 0 * * *" # Daily at quarter past midnight
+          secret_name: "project-kuvaselaamo-secret"
+          command: "{/bin/sh}"
+          args: "{-c,cd /app && python manage.py send_removal_notifications && python manage.py clean_unused_data && python manage.py clearsessions}"
+          max_duration: 900 # 15 minutes

@@ -35,3 +35,4 @@ docker-compose.env.yaml
 /venv/
 media/*
 static/*
+browser-tests/.env
