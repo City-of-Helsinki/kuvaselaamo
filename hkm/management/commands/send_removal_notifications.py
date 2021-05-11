@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from smtplib import SMTPException
 
+from anymail.exceptions import AnymailRequestsAPIError
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from datetime import timedelta
@@ -43,11 +45,31 @@ class Command(BaseCommand):
                                     profile__is_museum=False, profile__is_admin=False,
                                     profile__removal_notification_sent__isnull=True)
 
+        ok = 0
+        skipped = 0
         for user in users:
-            send_mail(NOTIFICATION_SUBJECT, NOTIFICATION_MESSAGE, settings.DEFAULT_FROM_EMAIL, [user.email],
-                      fail_silently=False)
+            try:
+                send_mail(NOTIFICATION_SUBJECT, NOTIFICATION_MESSAGE, settings.DEFAULT_FROM_EMAIL, [user.email],
+                          fail_silently=False)
+                ok += 1
+            except AnymailRequestsAPIError as e:
+                if e.status_code == 400:
+                    self.stdout.write(
+                        self.style.ERROR(
+                            "Email server responded with 400 error with response (%s). Interpreting this so that the "
+                            "email address (%s) is probably invalid. This user is marked as having been sent the "
+                            "notification." % (e.response.text if e.response is not None else 'N/A', user.email)
+                        )
+                    )
+                    skipped += 1
+                else:
+                    raise
+
             user.profile.removal_notification_sent = timezone.now()
             user.profile.save()
 
         self.stdout.write(
-            self.style.SUCCESS('Removal notification sending finished, %d notifications sent!' % len(users)))
+            self.style.SUCCESS(
+                'Removal notification sending finished, %d notifications sent, skipped %d.' % (ok, skipped)
+            )
+        )
