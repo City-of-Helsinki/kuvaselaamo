@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [Unreleased]
+
+### Fixed
+- When sending removal notifications via email, a 400 error from Mailgun is now interpreted so that the email 
+  address is invalid and the user is marked as having been sent the message. This allows the scheduled run to continue 
+  processing.
+
 # [2.5.0] 2021-05-05
 
 ### Added
