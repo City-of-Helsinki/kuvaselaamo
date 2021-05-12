@@ -1,4 +1,6 @@
 import pytest
+from anymail.exceptions import AnymailRequestsAPIError
+
 from factories import UserFactory
 from hkm.models.models import User
 from django.core.management import call_command
@@ -137,3 +139,22 @@ def test_error_during_email_sending(send_mail, day_older_than_notification_date)
         assert User.objects.get(pk=u1.id).profile.removal_notification_sent == now
         assert User.objects.get(pk=u2.id).profile.removal_notification_sent is None
         assert User.objects.get(pk=u3.id).profile.removal_notification_sent is None
+
+
+@pytest.mark.django_db
+@patch('django.core.mail.send_mail', side_effect=[DEFAULT, AnymailRequestsAPIError('ka-boom', status_code=400),
+                                                  DEFAULT])
+def test_invalid_email_error_during_email_sending(send_mail, day_older_than_notification_date):
+    now = timezone.now()
+    with freeze_time(now):
+        u1 = UserFactory(last_login=day_older_than_notification_date, profile__removal_notification_sent=None)
+        u2 = UserFactory(last_login=day_older_than_notification_date, profile__removal_notification_sent=None)
+        u3 = UserFactory(last_login=day_older_than_notification_date, profile__removal_notification_sent=None)
+
+        assert User.objects.count() == 3
+
+        call_command('send_removal_notifications')
+
+        assert User.objects.get(pk=u1.id).profile.removal_notification_sent == now
+        assert User.objects.get(pk=u2.id).profile.removal_notification_sent == now
+        assert User.objects.get(pk=u3.id).profile.removal_notification_sent == now
