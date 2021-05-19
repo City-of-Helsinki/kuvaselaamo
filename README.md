@@ -26,7 +26,7 @@ Prerequisites:
      * `ADMIN_USER_PASSWORD`, the admin user's password. If this is not given, a random password is generated
      and written into stdout when an admin user is created automatically.
      * `ADD_INITIAL_CONTENT`, bootstrap data import for divisions
-     * `HKM_PBW_*`, Bambora-related configuration. Used when the user is forwarded to Bambora for print payments.
+     * `HKM_PBW_*`, Visma Pay-related configuration. Used when the user is forwarded to Visma Pay for print payments.
      * `HKM_PRINTMOTOR_*`, Printmotor-related configuration. Used when ordering prints.
 
 2. Run `docker-compose up`
