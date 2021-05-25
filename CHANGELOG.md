@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-# [Unreleased]
+# [2.6.0] 2021-05-25
 
 ### Changed
 - Replaced any references to Bambora with Visma Pay, as our payment service provider has now rebranded the old Bambora 
