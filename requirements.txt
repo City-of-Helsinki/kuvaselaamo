@@ -6,19 +6,10 @@
 #
 babel==2.4.0
     # via django-phonenumber-field
-bcrypt==3.1.3
-    # via paramiko
 certifi==2020.11.8
     # via requests
-cffi==1.10.0
-    # via
-    #   bcrypt
-    #   cryptography
-    #   pynacl
 chardet==3.0.4
     # via requests
-cryptography==3.2
-    # via paramiko
 django-anymail==3.0
     # via -r requirements.in
 django-appconf==1.0.2
@@ -48,19 +39,13 @@ django==1.11.29
     #   django-bower
     #   django-phonenumber-field
 enum34==1.1.6
-    # via
-    #   cryptography
-    #   pyscss
+    # via pyscss
 idna==2.5
     # via requests
 ipaddress==1.0.18
-    # via
-    #   -r requirements.in
-    #   cryptography
+    # via -r requirements.in
 olefile==0.44
     # via pillow
-paramiko==2.3.3
-    # via -r requirements.in
 pathlib==1.0.1
     # via pyscss
 phonenumberslite==8.12.23
@@ -69,12 +54,6 @@ pillow==4.1.0
     # via -r requirements.in
 psycopg2==2.8.4
     # via -r requirements.in
-pyasn1==0.4.8
-    # via paramiko
-pycparser==2.17
-    # via cffi
-pynacl==1.1.2
-    # via paramiko
 pyscss==1.3.5
     # via -r requirements.in
 pytz==2017.2
@@ -91,11 +70,8 @@ rjsmin==1.1.0
     # via django-compressor
 six==1.15.0
     # via
-    #   bcrypt
-    #   cryptography
     #   django-anymail
     #   django-bower
-    #   pynacl
     #   pyscss
 unidecode==1.1.1
     # via -r requirements.in
