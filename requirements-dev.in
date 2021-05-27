@@ -10,3 +10,4 @@ pytest-django
 freezegun
 coverage
 factory-boy
+mock

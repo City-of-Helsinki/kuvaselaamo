@@ -25,8 +25,6 @@ from urllib import urlencode
 
 from hkm import forms, image_utils, email
 import copy
-from hkm.basket.order_creator import OrderCreator
-from hkm.basket.photo_printer import PhotoPrinter
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.forms import ProductOrderCollectionForm
 from hkm.models.models import Collection, PrintProduct, ProductOrder, Record, TmpImage, PageContent, Showcase
@@ -1273,34 +1271,7 @@ class BasketView(BaseView):
         return html
 
     def handle_checkout(self, request):
-        form = ProductOrderCollectionForm(request.POST)
-        page_content = None
-        if not (self.request.user.is_authenticated() and self.request.user.profile.is_museum):
-            return redirect(reverse('hkm_order_contact'))
-
-        if form.is_valid():
-            user = request.user
-            order_creator = OrderCreator()
-            if not order_creator.validate_basket(request.basket):
-                return self.clear_campaigns(form)
-            order_collection = order_creator.create_order_from_basket(request.basket)
-            order_collection.orderer_name = form.cleaned_data["orderer_name"]
-            order_collection.save()
-
-            self.template_name = 'hkm/views/order_complete.html'
-            #upload images and create a printer job.
-            printer = PhotoPrinter(
-                address=user.profile.printer_ip,
-                username=user.profile.printer_username,
-                password=user.profile.printer_password,
-            )
-            printer.print_order(order_collection)
-            self.send_notification_email(order_collection)
-
-            self.request.basket.clear_all()
-            page_content = PageContent.objects.get(identifier="checkout_complete")
-            return self.render_to_response(self.get_context_data(form=form, page_content=page_content, order=order_collection))
-        return self.render_to_response(self.get_context_data(form=form))
+        return redirect(reverse('hkm_order_contact'))
 
     def clear_campaigns(self, form):
         # somehting went very wrong with discount codes, so lets reset them from basket.
