@@ -130,7 +130,9 @@ pathtools==0.1.2
 pbr==2.1.0
     # via mock
 phonenumberslite==8.4.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-phonenumber-field
 pillow==4.1.0
     # via -r requirements.in
 psycopg2==2.8.4
@@ -191,7 +193,7 @@ supervisor==3.3.1
     #   django-supervisor
 unidecode==1.1.1
     # via -r requirements.in
-urllib3==1.26.2
+urllib3==1.26.4
     # via requests
 watchdog==0.8.3
     # via
