@@ -49,7 +49,9 @@ olefile==0.44
 pathlib==1.0.1
     # via pyscss
 phonenumberslite==8.12.23
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-phonenumber-field
 pillow==4.1.0
     # via -r requirements.in
 psycopg2==2.8.4
@@ -75,5 +77,5 @@ six==1.15.0
     #   pyscss
 unidecode==1.1.1
     # via -r requirements.in
-urllib3==1.26.2
+urllib3==1.26.4
     # via requests
