@@ -477,7 +477,7 @@ requests==2.25.1
     #   google-api-core
     #   msrest
     #   requests-oauthlib
-rsa==4.5
+rsa==4.7
     # via google-auth
 six==1.15.0
     # via
