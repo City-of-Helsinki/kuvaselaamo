@@ -69,6 +69,7 @@ jobs:
           K8S_SECRET_HKM_PRINTMOTOR_PASSWORD: ${{ secrets.GH_QA_PRINTMOTOR_PASSWORD }}
           K8S_SECRET_HKM_PRINTMOTOR_API_KEY: ${{ secrets.GH_QA_PRINTMOTOR_API_KEY }}
           K8S_SECRET_HKM_PRINTMOTOR_API_ENDPOINT: "https://test-api.printmotor.com/api/v1/order"
+          K8S_SECRET_ENABLE_FEEDBACK_CONGESTION_MSG: ${{ secrets.GH_QA_ENABLE_FEEDBACK_CONGESTION_MSG }}
           K8S_SECRET_HKM_POSTAL_FEES: ${{ secrets.HKM_POSTAL_FEES }}
           K8S_SECRET_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
           VAULT_JWT_AUTH_PATH: ${{ github.event.repository.name }}-review
