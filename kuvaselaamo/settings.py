@@ -32,11 +32,14 @@ env = environ.Env(
     AZURE_CONTAINER=(str, ""),
     ENABLE_ANALYTICS=(bool, False),
     PASSWORD_RESET_TIMEOUT_DAYS=(int, 1),
+    ENABLE_FEEDBACK_CONGESTION_MSG=(bool, False),
 )
 
 DEBUG = env.bool('DEBUG')
 
 ENABLE_ANALYTICS = env.bool('ENABLE_ANALYTICS')
+ENABLE_FEEDBACK_CONGESTION_MSG = env.bool('ENABLE_FEEDBACK_CONGESTION_MSG')
+print('--------------------- ' + str(ENABLE_FEEDBACK_CONGESTION_MSG))
 
 SECRET_KEY = env.str("SECRET_KEY")
 if DEBUG and not SECRET_KEY:

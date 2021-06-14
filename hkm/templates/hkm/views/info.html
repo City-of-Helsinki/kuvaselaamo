@@ -28,7 +28,11 @@
       <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
       <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
       <button class="hkm-btn hkm-btn--default btn btn-primary" type="submit">{% trans 'Submit' %}</button>
-      <p class="feedback-message-temp">{% trans 'Feedback temp' %}</p>
+
+      {% if ENABLE_FEEDBACK_CONGESTION_MSG %}
+        <p class="feedback-message-temp">{% trans 'Feedback temp' %}</p>
+      {% endif %}
+
     </form>
 
   </div>
