@@ -72,7 +72,7 @@ def front_page_url(collection):
     record_count = collection.records.count() if collection else 0
 
     if not record_count:
-        img_url = '/static/hkm/img/front_page_default.jpg'
+        img_url = '/static/hkm/img/front_page_default_image.jpg'
     else:
         records = collection.records.all()
         random_index = randrange(record_count)
