@@ -489,7 +489,7 @@ six==1.15.0
     #   msrestazure
     #   protobuf
     #   python-dateutil
-urllib3==1.26.4
+urllib3==1.26.5
     # via requests
 uwsgi==2.0.18
     # via -r requirements-prod.in
