@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.7.0] 2021-06-02
+
+### Changed
+- Cleaned up the requirements so that the application now has direct dependencies only to those libraries it 
+  actually uses. Earlier we had quite a lot of unused libraries which were triggering Dependabot alerts and/or 
+  causing other issues. Now things should be a bit more orderly.
+- Updated some libraries to newer versions as suggested by Dependabot.
+- Changed the development process to Gitflow. Our staging now gets a new deployment each time `master` gets updated.
+Earlier changes to `develop` were triggering the deployments to staging.
+  
+### Removed
+- Removed the old printer functionality which was at some point being used in the City Museum premises to print copies
+of images for visitors, but hasn't been in use for a long time. The reason for the removal was that the feature used
+  `paramiko` and some other libraries with vulnerabilities, so it was best to get rid of it.
+
 # [2.6.0] 2021-05-25
 
 ### Changed
