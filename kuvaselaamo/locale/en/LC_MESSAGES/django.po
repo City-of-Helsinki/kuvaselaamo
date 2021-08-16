@@ -675,9 +675,12 @@ msgstr "Feedback submitted successfully"
 msgid "Feedback error"
 msgstr "Error occurred while submitting. Try again after a while"
 
-msgid "Feedback temp"
+msgid "Feedback congested"
 msgstr "Unfortunately, the processing of feedback is currently very congested due to the volume of feedback and "
        "response times are longer than normal. We apologize for the inconvenience!"
+
+msgid "Feedback disabled"
+msgstr "Due to a change in our collection management system, we are unable to process image feedback at this time. We apologize for the situation!"
 
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
