@@ -2040,7 +2040,8 @@ a.welcome-modal__clarification {
   }
 }
 
-.feedback-message-temp {
+.feedback-disabled,
+.feedback-congested-message {
   margin: 20px 0 40px;
   font-size: 16px;
 }

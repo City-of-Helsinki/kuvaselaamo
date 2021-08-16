@@ -166,6 +166,7 @@
         {% if not user.profile.is_museum %}
         <div class="row">
           <div class="col-md-offset-2 col-md-8">
+            <!--
             <form method="POST" id="feedback-form">
               <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
               {% csrf_token %}
@@ -177,10 +178,13 @@
               <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
 
               {% if ENABLE_FEEDBACK_CONGESTION_MSG %}
-                <p class="feedback-message-temp">{% trans 'Feedback temp' %}</p>
+                <p class="feedback-congested-message">{% trans 'Feedback temp' %}</p>
               {% endif %}
 
             </form>
+            -->
+            <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
+            <p class="feedback-disabled">{% trans 'Feedback disabled' %}</p>
           </div>
         </div>
         {% endif %}

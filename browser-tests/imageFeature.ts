@@ -9,5 +9,5 @@ test("As a user I want to be able to see details of images", async (t) => {
   await imageDetailsPage.hasMainImage();
   await t.expect(imageDetailsPage.creator.exists).ok();
   await t.expect(imageDetailsPage.time.exists).ok();
-  await t.expect(imageDetailsPage.feedbackForm.exists).ok();
+  //await t.expect(imageDetailsPage.feedbackForm.exists).ok();
 });

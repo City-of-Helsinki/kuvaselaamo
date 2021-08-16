@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.7.1] 2021-08-16
+
+### Changed
+- Temporarily disabled single image feedback form. This will be turned back on when background system change is completed.
+
 # [2.7.0] 2021-06-02
 
 ### Changed

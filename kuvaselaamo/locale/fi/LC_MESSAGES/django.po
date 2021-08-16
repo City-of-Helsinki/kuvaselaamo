@@ -657,9 +657,12 @@ msgstr "Palaute lähetetty onnistuneesti!"
 msgid "Feedback error"
 msgstr "Lähetyksessä tapahtui virhe. Yritä hetken kuluttua uudestaan"
 
-msgid "Feedback temp"
+msgid "Feedback congested"
 msgstr "Palautteen käsittely on valitettavasti tällä hetkellä ruuhkautunut runsaan palautemäärän vuoksi ja "
        "vastausajat ovat toistaiseksi normaalia pidempiä. Pahoittelemme tilannetta!"
+
+msgid "Feedback disabled"
+msgstr "Kokoelmanhallintajärjestelmän vaihdon vuoksi emme toistaiseksi pysty käsittelemään kuviin liittyviä palautteita. Pahoittelemme tilannetta!"
 
 #: hkm/templates/hkm/base_viewer.html:214
 msgid "Crop and order"
