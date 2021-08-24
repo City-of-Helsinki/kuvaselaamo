@@ -26,6 +26,7 @@ def finna_image(img_id):
 def finna_default_image_url(img_id):
     return FINNA.get_image_url(img_id)
 
+
 @register.filter
 def record_detail(record):
     array_fields = {}
@@ -35,13 +36,15 @@ def record_detail(record):
     format = record.get('rawData').get('format', [])
     measures = record.get('rawData').get('measurements', [])
 
-    for type in format:
-        translated.append(type.get('translated'))
+    for data in format:
+        if isinstance(data, dict):
+            translated.append(data.get('translated'))
 
     array_fields['photographer'] = ", ".join(photographer) if photographer else ""
     array_fields['image_types'] = ', '.join(translated) if translated else ""
     array_fields['measures'] = ', '.join(measures) if measures else ""
     return array_fields
+
 
 @register.filter
 def display_images(collection):
@@ -66,6 +69,7 @@ def localized_decimal(value, arg=-1):
     formatted_value = floatformat(value, arg)
     return force_unicode(formats.localize(Decimal(formatted_value), use_l10n=True))
 
+
 @register.filter
 def front_page_url(collection):
     img_url = ""
@@ -79,6 +83,7 @@ def front_page_url(collection):
         img_url = records[random_index].get_preview_image_absolute_url()
 
     return img_url
+
 
 @register.filter
 def showcase_collections(showcase):
