@@ -37,7 +37,7 @@ def record_detail(record):
     measures = record.get('rawData').get('measurements', [])
 
     for data in format:
-        if type(data) is dict:
+        if isinstance(data, dict):
             translated.append(data.get('translated'))
 
     array_fields['photographer'] = ", ".join(photographer) if photographer else ""
