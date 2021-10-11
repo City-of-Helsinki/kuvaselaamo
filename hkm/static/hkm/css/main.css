@@ -7283,30 +7283,6 @@ div.grid__fav.active {
 .search-modal__close:hover {
   color: #F5C7B8; }
 
-.search-filter {
-  padding: 4px;
-  width: 100%; }
-
-.search-filter__item {
-  display: inline-block;
-  border: solid 1px #FF7865;
-  padding: 6px 8px;
-  background-color: #fff;
-  font-family: "falkmanbold", sans-serif; }
-
-.search-filter__text {
-  float: left; }
-
-.search-filter__delete {
-  float: left;
-  padding: 0;
-  background-color: transparent;
-  margin: 0 0 0 8px;
-  color: #FF7865;
-  border: 0;
-  height: 19px;
-  width: 19px; }
-
 .explore__icon {
   display: inline-block;
   height: 70px;
@@ -7476,39 +7452,151 @@ div.grid__fav.active {
   position: relative;
   top: 16px; }
 
-.search-form {
+.search-input {
+  height: 43px;
+  color: black;
+  padding: 5px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3); }
+  .search-input:focus-visible {
+    outline: none;
+    border: 2px solid black;
+    border-radius: 0; }
+
+.search-area-wrapper {
+  padding-top: 30px;
   width: 100%;
-  max-width: 500px !important;
-  margin: 0;
-  float: left; }
+  display: flex;
+  flex-direction: column; }
+  @media (min-width: 992px) {
+    .search-area-wrapper {
+      flex-direction: row; } }
 
-.search-form--banner {
-  margin: 0;
-  padding-top: 15px;
-  width: 100%; }
-
-.search-form__field {
-  font-family: "brownlight", sans-serif;
-  color: #00C281;
-  font-size: 18px;
-  padding: 0 15px;
+.search-term-wrapper {
+  display: flex;
+  font: "Signe", sans-serif;
   width: 100%;
-  max-width: 500px !important;
-  height: 40px;
-  border: solid 2px #00C281;
-  border-radius: 20px; }
+  padding-right: 10px; }
+  .search-term-wrapper input {
+    width: 80%; }
+  .search-term-wrapper button {
+    width: 20%;
+    margin-left: -2px; }
+  @media (min-width: 992px) {
+    .search-term-wrapper {
+      width: 300px; } }
 
-.search-form__field:focus {
-  border: solid 2px #00C281; }
+.extra-filters-wrapper-desktop {
+  visibility: hidden;
+  overflow: hidden;
+  width: 0;
+  height: 0; }
+  @media (min-width: 576px) {
+    .extra-filters-wrapper-desktop {
+      width: 100%;
+      height: initial;
+      visibility: visible; } }
 
-.search-form__btn,
-.search-form__btn:hover {
-  background-color: #fff;
-  height: 40px;
-  border: solid 2px #00C281;
-  border-left: 0;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px; }
+.extra-filters-wrapper-mobile {
+  width: 100%;
+  visibility: visible;
+  height: 33px;
+  overflow: hidden; }
+  @media (min-width: 576px) {
+    .extra-filters-wrapper-mobile {
+      visibility: hidden;
+      overflow: hidden;
+      width: 0;
+      height: 0; } }
+  .extra-filters-wrapper-mobile button {
+    border: 2px solid rgba(0, 0, 0, 0);
+    color: black;
+    padding: 5px 0;
+    font-weight: 700; }
+    .extra-filters-wrapper-mobile button:focus-visible {
+      outline: none;
+      border: 2px solid black;
+      border-radius: 0; }
+
+.extra-filters-open {
+  overflow: visible;
+  height: auto; }
+
+.extra-filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column; }
+  @media (min-width: 768px) {
+    .extra-filters {
+      flex-direction: row; } }
+  @media (min-width: 992px) {
+    .extra-filters {
+      justify-content: space-between; } }
+  .extra-filters .date-range {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    justify-content: space-between; }
+    .extra-filters .date-range select {
+      width: 45%; }
+    .extra-filters .date-range .dash {
+      height: 43px;
+      display: flex;
+      align-items: center; }
+      .extra-filters .date-range .dash .bar {
+        background-color: black;
+        height: 2px;
+        width: 10px;
+        margin: 0 10px; }
+    @media (min-width: 768px) {
+      .extra-filters .date-range {
+        justify-content: flex-start; }
+        .extra-filters .date-range select {
+          width: 115px; } }
+  .extra-filters .author-year {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column; }
+    .extra-filters .author-year select {
+      margin-bottom: 10px; }
+    @media (min-width: 576px) {
+      .extra-filters .author-year {
+        flex-direction: row;
+        justify-content: space-between; }
+        .extra-filters .author-year select {
+          width: 45%; } }
+    @media (min-width: 768px) {
+      .extra-filters .author-year {
+        justify-content: flex-end;
+        width: 100%; }
+        .extra-filters .author-year select {
+          width: auto; }
+        .extra-filters .author-year select:first-child {
+          margin-right: 20px; } }
+
+.keyword-wrapper {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap; }
+
+.keyword {
+  background-color: #F5C7B8;
+  color: black;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-bottom: 10px; }
+  .keyword:not(:last-child) {
+    margin-right: 10px; }
+  .keyword-icon {
+    margin-left: 10px;
+    min-width: 20px;
+    fill: black;
+    width: 18px;
+    height: 18px; }
 
 .status-page {
   margin-top: 30px; }

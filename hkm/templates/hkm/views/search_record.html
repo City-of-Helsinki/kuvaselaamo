@@ -28,7 +28,8 @@
       <div class="back-to">
         <span class="back-to__title">{{ record.title }}</span><br>
         <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
-        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}">
+        <a href="{% return_link %}"></a>
+         <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}&date_from={{ date_from }}&date_to={{ date_to }}{% for author in author_facets %}&author={{ author }}{% endfor %}{% for date in date_facets %}&date={{ date }}{% endfor %}">
           <i class="back-to__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>

@@ -22,7 +22,40 @@ class FinnaClient(object):
         self.organisation = organisation
         self.material_type = material_type
 
-    def search(self, search_term, page=1, limit=20, language='fi', detailed=False):
+    def get_facets(self, search_term, language='fi'):
+        url = FinnaClient.API_ENDPOINT + 'search'
+        payload = {
+            'lookfor': search_term,
+            'filter[]': ['format:' + self.material_type, 'building:' + self.organisation, 'online_boolean:"1"'],
+            'limit': 0,
+            'lng': language,
+            'facet[]': ['author_facet', 'collection', 'genre_facet', 'main_date_str', 'category_str_mv']
+        }
+        try:
+            r = requests.get(url, params=payload, timeout=self.timeout)
+        except requests.exceptions.RequestException:
+            LOG.error('Failed to communicate with Finna API', exc_info=True)
+            return None
+        else:
+            try:
+                r.raise_for_status()
+                # raise requests.exceptions.HTTPError()
+            except requests.exceptions.HTTPError:
+                LOG.error('Failed to communicate with Finna API', exc_info=True,
+                          extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
+                return None
+
+        result_data = r.json()
+        if not 'status' in result_data or result_data['status'] != 'OK':
+            LOG.error('Finna query was not succesfull', extra={
+                      'data': {'result_data': repr(result_data)}})
+            return None
+
+        LOG.debug('Got result from Finna', extra={
+                  'data': {'result_data': repr(result_data)}})
+        return result_data
+
+    def search(self, search_term, facets=None, page=1, limit=20, language='fi', detailed=False):
         url = FinnaClient.API_ENDPOINT + 'search'
         payload = {
             'lookfor': search_term,
@@ -31,6 +64,19 @@ class FinnaClient(object):
             'limit': limit,
             'lng': language,
         }
+
+        if facets:
+            # Idea is to OR parameters within facet scope and AND facet filters with each other
+            # Like this: (Authors A OR B) AND year 1920
+            # However this code uses OR in all facets and this seems to work in
+            # desired way
+            for facet_type, facet_values in facets.iteritems():
+                if facet_type == "search_daterange_mv":
+                    payload['filter[]'].append('search_daterange_mv:"[1950 TO 1970]"')
+                else:
+                    for facet_value in facet_values:
+                        payload['filter[]'].append(
+                            '~' + facet_type + ":" + facet_value)
 
         if detailed:
             payload['field[]'] = ['id', 'authors', 'buildings', 'formats', 'genres', 'humanReadablePublicationDates',

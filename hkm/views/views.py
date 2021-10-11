@@ -457,6 +457,10 @@ class SearchView(BaseView):
     next_record = None
     single_image = False
 
+    date_from = None
+    date_to = None
+    author_facets = None
+    date_facets = None
     search_term = None
     page = 1
 
@@ -477,10 +481,30 @@ class SearchView(BaseView):
         request.session.set_expiry(0)
         self.search_term = request.GET.get('search', '')
         self.page = int(request.GET.get('page', 1))
+        self.date_from = request.GET.get('date_from', '')
+        self.date_to = request.GET.get('date_to', '')
+        self.author_facets = filter(None, request.GET.getlist('author', None))
+        self.date_facets = filter(None, request.GET.getlist('date', None))
         return True
 
     def handle_search(self, request, *args, **kwargs):
         LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'page': self.page}})
+
+        # Facet stuff
+        session_facet_result = request.session.get('facet_result', None)
+        if session_facet_result:
+            self.facet_result = session_facet_result
+        else:
+            self.facet_result = self.get_facet_result(self.search_term)
+        facets = {}
+        if self.author_facets:
+            facets['author_facet'] = self.author_facets
+        if self.date_facets:
+            facets['main_date_str'] = self.date_facets
+        if self.date_from or self.date_to:
+            facets['search_daterange_mv'] = "[%s TO %s]" % (self.date_from, self.date_to)
+
+         # Facet stuff
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
@@ -491,11 +515,15 @@ class SearchView(BaseView):
 
         search_term_changed = self.search_term != request.session.get('search')
         page_changed = self.page != request.session.get('page')
+        author_changed = self.author_facets != request.session.get('author_facets')
+        date_changed = self.date_facets != request.session.get('date_facets')
+        date_from_changed = self.date_from != request.session.get('date_from')
+        date_to_changed = self.date_to != request.session.get('date_to')
 
         # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            if search_term_changed or page_changed:
-                results = self.get_search_result(self.search_term, self.page, self.page_size)
+            if search_term_changed or page_changed or author_changed or date_changed or date_from_changed or date_to_changed:
+                results = self.get_search_result(self.search_term, self.page, self.page_size, facets)
                 if results:
                     self.search_result = results
                     records += results.get('records', [])
@@ -539,10 +567,14 @@ class SearchView(BaseView):
                     # This is required for "Back to search results" link to work
                     self.search_term = request.session.get('search', '')
                     self.page = request.session.get('page')
+                    self.author_facets = request.session.get('author_facets', [])
+                    self.date_facets = request.session.get('date_facets', [])
+                    self.date_from = request.session.get('date_from', '')
+                    self.date_to = request.session.get('date_to', '')
 
             # This else statement is executed when "Load more" is pressed
             else:
-                results = self.get_search_result(self.search_term, self.page, self.page_size)
+                results = self.get_search_result(self.search_term, self.page, self.page_size, facets)
                 self.search_result = results
 
         if self.search_result:
@@ -581,20 +613,35 @@ class SearchView(BaseView):
                     request.session['search_result'] = self.search_result
                 request.session['search'] = self.search_term
                 request.session['page'] = self.page
+                request.session['facet_result'] = self.facet_result
+                request.session['author_facets'] = self.author_facets
+                request.session['date_facets'] = self.date_facets
+                request.session['date_from'] = self.date_from
+                request.session['date_to'] = self.date_to
             elif 'records' not in self.search_result:
                 # No more records available for the next page
                 if self.request.is_ajax():
                     return http.HttpResponseBadRequest()
 
-    def get_search_result(self, search_term, page, limit):
-        return FINNA.search(search_term, page=page, limit=limit, detailed=self.use_detailed_query)
+    def get_facet_result(self, search_term):
+        if self.request.is_ajax():
+            return None
+        else:
+            return FINNA.get_facets(self.search_term)
+
+    def get_search_result(self, search_term, page, limit, facets):
+        return FINNA.search(search_term, page=page, limit=limit, facets=facets, detailed=self.use_detailed_query)
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['facet_result'] = self.facet_result
+        context['author_facets'] = self.author_facets
+        context['date_facets'] = self.date_facets
         context['search_result'] = self.search_result
         context['search_term'] = self.search_term
         context['current_page'] = self.page
+        context['date_from'] = self.date_from
+        context['date_to'] = self.date_to
         return context
 
 

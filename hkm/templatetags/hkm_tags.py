@@ -10,7 +10,7 @@ from django.utils import formats
 from django.utils.encoding import force_unicode
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from kuvaselaamo import settings
+from urllib import urlencode
 
 LOG = logging.getLogger(__name__)
 
@@ -89,3 +89,19 @@ def front_page_url(collection):
 def showcase_collections(showcase):
     albums = showcase.albums.select_related('owner').all().order_by('created')
     return albums
+
+
+@register.simple_tag(takes_context=True)
+def return_link(context):
+    params = {
+        "search": context.get('search', ''),
+        "page": context.get('page'),
+        "authors": context.get('author_facets', []),
+        "dates": context.get('date_facets', []),
+        "date_from": context.get('date_from', ''),
+        "date_to": context.get('date_to', ''),
+    }
+    encoded_params = urlencode(params)
+
+    print("Authors", encoded_params)
+    return '?%s' % encoded_params

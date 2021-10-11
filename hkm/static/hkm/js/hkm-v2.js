@@ -67,56 +67,73 @@ palikka
 
 })
 .define('app.search-filter', ['jQuery', 'docReady'], function () {
-  var $accordion = $('#accordion');
-  var $filterLink = $('.list-group__link');
-  var $searchTerm = $accordion.attr('data-search');
-  var authors = [];
-  var dates = [];
+  var $filterLink = $('.facet-filter');
   var $deleteBtns = $('.search-filter__delete');
-  var searchParams = '?search=' + $searchTerm;
+  const $extraFilterToggleMore = $('#extra-filter-toggle-more');
+  const $extraFilterToggleLess = $('#extra-filter-toggle-less');
+  const extraFilterMobile = $('.extra-filters-wrapper-mobile');
+  const urlParams = new URLSearchParams(window.location.search)
+  let toggleMenu = false;
 
-  $('.search-filter__text').each(function() {
-    authors.push($(this).attr('data-author-facet'));
-    dates.push($(this).attr('data-date-facet'));
-  });
+  if (urlParams.get('toggleMenu')) {
+    toggleMenu = true;
+    extraFilterMobile.addClass('extra-filters-open');
+    $extraFilterToggleLess.removeClass('hidden');
+    $extraFilterToggleMore.addClass('hidden');
+  }
 
-  $filterLink.on('click', function() {
-    var authorParam = $(this).attr('data-author-value');
-    var dateParam = $(this).attr('data-date-value');
-    if (typeof authorParam != 'undefined') {
-      searchParams += '&author[]=' + authorParam;
+  $filterLink.on('change', function() {
+    const facetName = $(this).attr('data-facet-type');
+    const facetValue = $(this).val();
+
+    if (!facetValue) {
+      return;
     }
-    if (typeof dateParam != 'undefined') {
-      searchParams += '&main_date_str[]=' + dateParam;
+
+    // Allow only one date range selection for now
+    if (facetName === "date_from" || facetName === "date_to") {
+      urlParams.set(facetName, facetValue)
     }
-    for (var i = 0; i < authors.length; i++) {
-      if (typeof authors[i] != 'undefined') {
-        searchParams += '&author[]=' + authors[i];
-      }
+    else {
+      urlParams.append(facetName, facetValue)
     }
-    for (var i = 0; i < dates.length; i++) {
-      if (typeof dates[i] != 'undefined') {
-        searchParams += '&main_date_str[]=' + dates[i];
-      }
-    }
-    window.open(searchParams, '_self');
+
+    window.open('?' + urlParams.toString(), '_self');
   });
 
   $deleteBtns.on('click', function() {
-    searchParams = '?search=' + $searchTerm;
-    authors.splice(authors.indexOf($(this).attr('data-author-facet')), 1);
-    dates.splice(dates.indexOf($(this).attr('data-date-facet')), 1);
-    for (var i = 0; i < authors.length; i++) {
-      if (typeof authors[i] != 'undefined') {
-        searchParams += '&author[]=' + authors[i];
-      }
+    const facetName = $(this).attr('data-facet-type');
+    const facetValue = $(this).attr('data-author-facet');
+
+    const values = urlParams.getAll(facetName)
+
+    const index = values.indexOf(facetValue);
+
+    values.splice(index, 1);
+
+    if (values.length === 0) {
+      urlParams.delete(facetName);
+    } else {
+      urlParams.set(facetName, values.toString());
     }
-    for (var i = 0; i < dates.length; i++) {
-      if (typeof dates[i] != 'undefined') {
-        searchParams += '&main_date_str[]=' + dates[i];
-      }
-    }
-    window.open(searchParams, '_self');
+
+    window.open('?' + urlParams.toString(), '_self');
+  });
+
+  $extraFilterToggleMore.on('click', function() {
+    toggleMenu = true;
+    extraFilterMobile.addClass('extra-filters-open');
+    $extraFilterToggleLess.removeClass('hidden');
+    $(this).addClass('hidden');
+    urlParams.set('toggleMenu', toggleMenu.toString());
+  });
+
+  $extraFilterToggleLess.on('click', function() {
+    toggleMenu = false;
+    extraFilterMobile.removeClass('extra-filters-open');
+    $extraFilterToggleMore.removeClass('hidden');
+    $(this).addClass('hidden');
+    urlParams.delete('toggleMenu')
   });
 
 })
