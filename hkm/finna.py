@@ -2,7 +2,7 @@
 
 import logging
 import math
-from StringIO import StringIO
+import io
 
 import requests
 from PIL import Image
@@ -74,7 +74,7 @@ class FinnaClient(object):
             # Like this: (Authors A OR B) AND year 1920
             # However this code uses OR in all facets and this seems to work in
             # desired way
-            for facet_type, facet_values in facets.iteritems():
+            for facet_type, facet_values in facets.items():
                 if facet_type == "search_daterange_mv":
                     # Value needs to be inside double quotes, insert value manually to make sure its correct.
                     payload['filter[]'].append('search_daterange_mv:"%s"' % facet_values)
@@ -178,7 +178,7 @@ class FinnaClient(object):
             LOG.error('Could not download a full res url',
                       extra={'data': {'record_id': record_id}})
         else:
-            return Image.open(StringIO(r.content))
+            return Image.open(io.BytesIO(r.content))
         return None
 
 

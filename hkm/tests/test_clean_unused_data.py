@@ -1,5 +1,5 @@
 import pytest
-from factories import FeedbackFactory, TmpImageFactory, ProductOrderFactory, UserFactory
+from .factories import FeedbackFactory, TmpImageFactory, ProductOrderFactory, UserFactory
 from hkm.models.models import Feedback, TmpImage, ProductOrder, UserProfile, User, Collection, Record
 from django.core.management import call_command
 from freezegun import freeze_time

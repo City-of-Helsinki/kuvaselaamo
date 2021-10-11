@@ -31,7 +31,7 @@ class CollectionForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        return super(FeedbackForm, self).__init__(*args, **kwargs)
+        super(FeedbackForm, self).__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         commit = kwargs.get('commit', True)
@@ -74,7 +74,7 @@ class RegistrationForm(UserCreationForm):
 class ProductOrderCollectionForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
     orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}),
-                                   label=_(u"Orderer's name"))
+                                   label=_("Orderer's name"))
 
     class Meta:
         model = ProductOrderCollection
@@ -124,5 +124,5 @@ class ShowcaseForm(forms.ModelForm):
 
         if albums:
             if albums.count() > 3:
-                raise ValidationError(_(u'Max amount of albums is three'))
+                raise ValidationError(_('Max amount of albums is three'))
         return self.cleaned_data

@@ -7,10 +7,10 @@ from decimal import Decimal
 from django import template
 from django.template.defaultfilters import floatformat
 from django.utils import formats
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from urllib import urlencode
+from urllib.parse import urlencode
 
 from hkm.utils import encoded_dict
 
@@ -69,7 +69,7 @@ def display_images(collection):
 @register.filter(is_safe=True)
 def localized_decimal(value, arg=-1):
     formatted_value = floatformat(value, arg)
-    return force_unicode(formats.localize(Decimal(formatted_value), use_l10n=True))
+    return force_text(formats.localize(Decimal(formatted_value), use_l10n=True))
 
 
 @register.filter

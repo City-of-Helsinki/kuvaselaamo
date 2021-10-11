@@ -18,8 +18,8 @@ class CampaignUsageType(object):
     CODELESS = "CODELESS"
 
     choices = (
-        (SINGLE_USE, (u"Kertakäyttöinen")),
-        (CODELESS, (u"Kooditon")),
+        (SINGLE_USE, ("Kertakäyttöinen")),
+        (CODELESS, ("Kooditon")),
     )
 
 
@@ -28,8 +28,8 @@ class CodeUsage(object):
     MULTI_USE = "MULTI_USE"
 
     choices = (
-        (SINGLE_USE, (u"Kertakäyttöinen")),
-        (MULTI_USE, (u"Monikäyttöinen"))
+        (SINGLE_USE, ("Kertakäyttöinen")),
+        (MULTI_USE, ("Monikäyttöinen"))
     )
 
 
@@ -38,8 +38,8 @@ class CampaignStatus(object):
     ENABLED = "ENABLED"
 
     choices = (
-        (DISABLED, (u"Ei käytössä")),
-        (ENABLED, (u"Aktiivinen"))
+        (DISABLED, ("Ei käytössä")),
+        (ENABLED, ("Aktiivinen"))
     )
 
 
@@ -49,9 +49,9 @@ class CampaignUserGroup(object):
     NORMAL = "NORMAL"
 
     choices = (
-        (ALL, (u"Kaikki")),
-        (MUSEUM, (u"Kioskikäyttäjät")),
-        (NORMAL, (u"Normaalikäyttäjät"))
+        (ALL, ("Kaikki")),
+        (MUSEUM, ("Kioskikäyttäjät")),
+        (NORMAL, ("Normaalikäyttäjät"))
     )
 
 
@@ -94,7 +94,7 @@ class Campaign(TranslatableModel, _UsageMixin):
     )
     status = models.CharField(
         default=CampaignStatus.ENABLED,
-        verbose_name=_(u"Tila"),
+        verbose_name=_("Tila"),
         db_index=True,
         max_length=20,
         choices=CampaignStatus.choices
@@ -105,72 +105,72 @@ class Campaign(TranslatableModel, _UsageMixin):
     usable_from = models.DateField(
         null=True,
         blank=True,
-        verbose_name=_(u'Alkupäivämäärä')
+        verbose_name=_('Alkupäivämäärä')
     )
     usable_to = models.DateField(
         null=True,
         blank=True,
-        verbose_name=_(u'Loppupäivämäärä')
+        verbose_name=_('Loppupäivämäärä')
     )
     usage_type = models.CharField(
         default=CampaignUsageType.SINGLE_USE,
         max_length=20,
-        verbose_name=_(u"Tyyppi"),
+        verbose_name=_("Tyyppi"),
         choices=CampaignUsageType.choices
     )
     user_group = models.CharField(
         default=CampaignUserGroup.ALL,
-        verbose_name=_(u"Käyttäjäryhmä"),
+        verbose_name=_("Käyttäjäryhmä"),
         max_length=20,
         choices=CampaignUserGroup.choices,
-        help_text=u"Käyttäjäryhmä, jolle tarjous on voimassa"
+        help_text="Käyttäjäryhmä, jolle tarjous on voimassa"
     )
     module = models.CharField(
         max_length=128,
         blank=True,
-        verbose_name=_(u"Kampanjamoduuli")
+        verbose_name=_("Kampanjamoduuli")
     )
     mutex_group = models.CharField(
         max_length=32,
         blank=True,
-        verbose_name=_(u"Yhteiskäyttöestoryhmä"),
-        help_text=u"Mikäli asetettu, useampaa saman ryhmän kampanjaa ei voi käyttää yhdessä tilauksessa"
+        verbose_name=_("Yhteiskäyttöestoryhmä"),
+        help_text="Mikäli asetettu, useampaa saman ryhmän kampanjaa ei voi käyttää yhdessä tilauksessa"
     )
 
     percentage_discount = models.DecimalField(
         decimal_places=2,
-        verbose_name=_(u"Prosentuaalinen alennus"),
+        verbose_name=_("Prosentuaalinen alennus"),
         max_digits=10,
         null=True,
         blank=True,
     )
     fixed_discount = models.DecimalField(
         decimal_places=2,
-        verbose_name=_(u"Absoluuttinen alennus (veroton)"),
+        verbose_name=_("Absoluuttinen alennus (veroton)"),
         max_digits=10,
         null=True,
         blank=True,
     )
-    free_shipping = models.BooleanField(default=False, verbose_name=_(u'Free shipping'))
+    free_shipping = models.BooleanField(default=False, verbose_name=_('Free shipping'))
     translations = TranslatedFields(
         name=models.CharField(
             max_length=256,
             blank=True,
-            verbose_name=_(u"Nimi")
+            verbose_name=_("Nimi")
         )
     )
 
     objects = CampaignQuerySet.as_manager()
 
     class Meta:
-        verbose_name = _(u"kampanja")
-        verbose_name_plural = _(u"kampanjat")
+        verbose_name = _("kampanja")
+        verbose_name_plural = _("kampanjat")
 
     def __unicode__(self):
         try:
-            return unicode(self.name)
+            return str(self.name)
         except:
-            return "%s %s" % (unicode(self._meta.verbose_name), self.pk)
+            return "%s %s" % (str(self._meta.verbose_name), self.pk)
 
     def get_discount_value(self, basket_lines):
         total_price = sum(l.total_price for l in basket_lines if l.type != 4)
@@ -185,32 +185,32 @@ class Campaign(TranslatableModel, _UsageMixin):
 
 
 class CampaignCode(models.Model, _UsageMixin):
-    campaign = models.ForeignKey(Campaign, related_name="campaign_codes", verbose_name=(u"Kampanja"))
+    campaign = models.ForeignKey(Campaign, related_name="campaign_codes", verbose_name=("Kampanja"))
     code = models.CharField(max_length=40, db_index=True)
     created_on = models.DateTimeField(auto_now_add=True)
     use_type = models.CharField(
         max_length=20,
         default=CodeUsage.SINGLE_USE,
-        verbose_name=_(u"Käyttö"),
+        verbose_name=_("Käyttö"),
         db_index=True,
         choices=CodeUsage.choices
     )
     status = models.CharField(
         max_length=20,
         default=CampaignStatus.ENABLED,
-        verbose_name=_(u"Tila"),
+        verbose_name=_("Tila"),
         db_index=True,
         choices=CampaignStatus.choices
     )
 
     class Meta:
-        verbose_name = _(u"kampanjakoodi")
-        verbose_name_plural = _(u"kampanjakoodit")
+        verbose_name = _("kampanjakoodi")
+        verbose_name_plural = _("kampanjakoodit")
 
     def generate_code(self, length=10, prefix="", unique=True):
         while True:
             self.code = prefix + "".join(
-                random.choice(CAMPAIGN_CODE_KEYSPACE) for x in xrange(length)
+                random.choice(CAMPAIGN_CODE_KEYSPACE) for x in range(length)
             ).upper()
             if unique and CampaignCode.objects.filter(code=self.code).exists():
                 continue

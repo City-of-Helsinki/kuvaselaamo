@@ -9,4 +9,4 @@ def encoded_dict(in_dict):
             # Recursive call
             return [handle_encoding(vv) for vv in v]
         return v
-    return {k: handle_encoding(v) for k, v in in_dict.iteritems()}
+    return {k: handle_encoding(v) for k, v in in_dict.items()}

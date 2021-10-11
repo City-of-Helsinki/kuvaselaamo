@@ -6,12 +6,12 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from datetime import timedelta
 from django.utils import timezone
-from clean_unused_data import DEFAULT_DAYS_UNTIL_NOTIFICATION
+from .clean_unused_data import DEFAULT_DAYS_UNTIL_NOTIFICATION
 from django.core.mail import send_mail
 from django.conf import settings
 
-NOTIFICATION_SUBJECT = u"Helsinkikuvia.fi: Käyttäjätunnuksesi poistetaan pian"
-NOTIFICATION_MESSAGE = u"""Hei! Et ole kirjautunut Helsinkikuvia.fi -palveluun pitkään aikaan. Käyttäjätunnuksesi ja siihen liittyvät tiedot poistetaan palvelusta 30 päivän kuluttua.
+NOTIFICATION_SUBJECT = "Helsinkikuvia.fi: Käyttäjätunnuksesi poistetaan pian"
+NOTIFICATION_MESSAGE = """Hei! Et ole kirjautunut Helsinkikuvia.fi -palveluun pitkään aikaan. Käyttäjätunnuksesi ja siihen liittyvät tiedot poistetaan palvelusta 30 päivän kuluttua.
 
 Jos haluat jatkaa palvelun käyttöä ja säilyttää tietosi, käy kirjautumassa osoitteessa https://helsinkikuvia.fi.
 

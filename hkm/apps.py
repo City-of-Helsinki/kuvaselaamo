@@ -8,4 +8,4 @@ class DefaultConfig(AppConfig):
     verbose_name = 'hkm'
 
     def ready(self):
-        import auditlog_signals
+        import hkm.auditlog_signals  # noqa

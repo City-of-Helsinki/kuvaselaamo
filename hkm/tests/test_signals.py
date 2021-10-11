@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import signals
-from factories import UserFactory
+from .factories import UserFactory
 from django.test.client import RequestFactory
 from hkm.models.models import UserProfile
 from datetime import datetime, timedelta

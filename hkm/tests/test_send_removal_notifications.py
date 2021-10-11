@@ -1,7 +1,7 @@
 import pytest
 from anymail.exceptions import AnymailRequestsAPIError
 
-from factories import UserFactory
+from .factories import UserFactory
 from hkm.models.models import User
 from django.core.management import call_command
 from freezegun import freeze_time

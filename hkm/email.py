@@ -21,7 +21,7 @@ def send_feedback_notification(feedback_id, force=False):
         return False
     else:
         if not feedback.is_notification_sent or force:
-            title = _(u'Kuvaselaamopalaute')
+            title = _('Kuvaselaamopalaute')
             message = render_to_string(
                 'hkm/emails/feedback.txt', {'feedback': feedback, 'MY_DOMAIN': settings.HKM_MY_DOMAIN})
             count_sent_message = send_mail(
