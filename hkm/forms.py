@@ -17,7 +17,7 @@ LOG = logging.getLogger(__name__)
 class CollectionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        super(CollectionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if not self.user.is_authenticated() or not self.user.profile.is_admin:
             del self.fields['show_in_landing_page']
             del self.fields['is_featured']
@@ -31,12 +31,12 @@ class CollectionForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        super(FeedbackForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         commit = kwargs.get('commit', True)
         kwargs['commit'] = False
-        feedback = super(FeedbackForm, self).save(*args, **kwargs)
+        feedback = super().save(*args, **kwargs)
         feedback.user = self.user
         if commit:
             feedback.save()
@@ -62,7 +62,7 @@ class OrderContactInformationForm(forms.ModelForm):
 
 class RegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['email'].required = True
 

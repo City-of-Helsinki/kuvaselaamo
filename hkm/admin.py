@@ -20,7 +20,7 @@ class CampaignAdmin(TranslatableAdmin):
     readonly_fields = ["campaign_code_actions"]
 
     def get_urls(self):
-        urls = super(CampaignAdmin, self).get_urls()
+        urls = super().get_urls()
         custom_urls = [
             url(
                 r'^(?P<campaign_id>.+)/generate/$',

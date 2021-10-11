@@ -219,7 +219,7 @@ class CampaignCode(models.Model, _UsageMixin):
     def save(self, *args, **kwargs):
         if not self.code:
             self.generate_code()
-        return super(CampaignCode, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def __unicode__(self):
         return self.code

@@ -51,7 +51,7 @@ class BaseView(TemplateView):
             if isinstance(result, http.HttpResponse):
                 return result
             else:
-                return super(BaseView, self).dispatch(request, *args, **kwargs)
+                return super().dispatch(request, *args, **kwargs)
         return http.HttpResponseBadRequest()
 
     def setup(self, request, *args, **kwargs):
@@ -93,7 +93,7 @@ class BaseView(TemplateView):
         return self.render_to_response(self.get_context_data(**_kwargs))
 
     def get_context_data(self, **kwargs):
-        context = super(BaseView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["language"] = self.request.session.get(
             LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
         )
@@ -161,7 +161,7 @@ class InfoView(BaseView):
     url_name = "hkm_info"
 
     def get_empty_forms(self, request):
-        context_forms = super(InfoView, self).get_empty_forms(request)
+        context_forms = super().get_empty_forms(request)
         if request.user.is_authenticated():
             user = request.user
         else:
@@ -175,7 +175,7 @@ class InfoView(BaseView):
         action = request.POST.get("action", None)
         if action == "feedback":
             return self.handle_feedback(request, *args, **kwargs)
-        return super(InfoView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def handle_feedback(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -205,7 +205,7 @@ class BaseCollectionListView(BaseView):
         raise NotImplementedError("Subclasses must implement this method")
 
     def get_context_data(self, **kwargs):
-        context = super(BaseCollectionListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["collections"] = self.collection_qs
         return context
 
@@ -222,7 +222,7 @@ class PublicCollectionsView(BaseCollectionListView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(PublicCollectionsView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["featured_collections"] = Collection.objects.filter(
             is_featured=True
         ).order_by("created")
@@ -351,7 +351,7 @@ class CollectionDetailView(BaseView):
         return True
 
     def get_empty_forms(self, request):
-        context_forms = super(CollectionDetailView, self).get_empty_forms(request)
+        context_forms = super().get_empty_forms(request)
         if request.user.is_authenticated():
             user = request.user
             context_forms["collection_form"] = forms.CollectionForm(
@@ -371,7 +371,7 @@ class CollectionDetailView(BaseView):
                 return self.handle_edit(request, *args, **kwargs)
             if action == "remove-record":
                 return self.ajax_handle_remove_record(request, *args, **kwargs)
-        return super(CollectionDetailView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def handle_edit(self, request, *args, **kwargs):
         form = forms.CollectionForm(
@@ -402,7 +402,7 @@ class CollectionDetailView(BaseView):
         return http.HttpResponseBadRequest()
 
     def get_context_data(self, **kwargs):
-        context = super(CollectionDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         context["collection"] = self.collection
         context["collection_record_count"] = self.collection.records.all().count()
@@ -464,7 +464,7 @@ class HomeView(BaseView):
     url_name = "hkm_home"
 
     def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["frontpage_image_collection"] = (
             Collection.objects.prefetch_related("records")
             .filter(show_in_landing_page=True)
@@ -500,7 +500,7 @@ class SearchView(BaseView):
         result = self.handle_search(request, *args, **kwargs)
         if isinstance(result, http.HttpResponse):
             return result
-        return super(SearchView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_template_names(self):
         if self.request.is_ajax():
@@ -734,7 +734,7 @@ class SearchView(BaseView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(SearchView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["facet_result"] = self.facet_result
         context["author_facets"] = self.url_params["author"]
         context["date_facets"] = self.url_params["date"]
@@ -756,7 +756,7 @@ class SearchRecordDetailView(SearchView):
     use_detailed_query = True
 
     def get(self, request, *args, **kwargs):
-        return super(SearchRecordDetailView, self).get(
+        return super().get(
             request, record=True, *args, **kwargs
         )
 
@@ -765,7 +765,7 @@ class SearchRecordDetailView(SearchView):
         if request.user.is_authenticated():
             if action == "add-to-collection":
                 return self.handle_add_to_collection(request, *args, **kwargs)
-        return super(SearchRecordDetailView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def handle_add_to_collection(self, request, *args, **kwargs):
         record_id = request.POST.get("record_id", None)
@@ -804,7 +804,7 @@ class SearchRecordDetailView(SearchView):
         return redirect(url)
 
     def get_context_data(self, **kwargs):
-        context = super(SearchRecordDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         if self.record:
             record = self.record
             record["full_res_url"] = FINNA.get_full_res_image_url(record["id"])
@@ -841,7 +841,7 @@ class SearchRecordDetailView(SearchView):
         return context
 
     def get_empty_forms(self, request):
-        context_forms = super(SearchRecordDetailView, self).get_empty_forms(request)
+        context_forms = super().get_empty_forms(request)
         if request.user.is_authenticated():
             user = request.user
         else:
@@ -872,7 +872,7 @@ class BaseFinnaRecordDetailView(BaseView):
         return True
 
     def get_context_data(self, **kwargs):
-        context = super(BaseFinnaRecordDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["record"] = self.record
 
         if self.request.user.is_authenticated():
@@ -901,7 +901,7 @@ class LanguageView(RedirectView):
             profile.save()
         request.session[LANGUAGE_SESSION_KEY] = lang
         self.request.session["seen_welcome_modal"] = False
-        return super(LanguageView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
         return self.request.GET.get("next", "/")
@@ -970,7 +970,7 @@ class AjaxCropRecordView(View):
                 self.record["full_res_url"] = FINNA.get_full_res_image_url(
                     self.record["id"]
                 )
-                return super(AjaxCropRecordView, self).dispatch(
+                return super().dispatch(
                     request, *args, **kwargs
                 )
             else:
@@ -1092,7 +1092,7 @@ class AjaxAddToCollection(View):
 # VIEWS THAT SITE FOOTER LINKS TO
 class TranslatableContentView(BaseView):
     def get_context_data(self, **kwargs):
-        context = super(TranslatableContentView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         try:
             context["page_content"] = PageContent.objects.get(identifier=self.url_name)
         except PageContent.DoesNotExist:
@@ -1105,7 +1105,7 @@ class SiteinfoAboutView(TranslatableContentView):
     url_name = "hkm_siteinfo_about"
 
     def get(self, request, *args, **kwargs):
-        return super(SiteinfoAboutView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class SiteinfoAccessibilityView(TranslatableContentView):
@@ -1113,7 +1113,7 @@ class SiteinfoAccessibilityView(TranslatableContentView):
     url_name = "hkm_siteinfo_accessibility"
 
     def get(self, request, *args, **kwargs):
-        return super(SiteinfoAccessibilityView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class SiteinfoPrivacyView(TranslatableContentView):
@@ -1121,7 +1121,7 @@ class SiteinfoPrivacyView(TranslatableContentView):
     url_name = "hkm_siteinfo_privacy"
 
     def get(self, request, *args, **kwargs):
-        return super(SiteinfoPrivacyView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class SiteinfoQAView(TranslatableContentView):
@@ -1129,7 +1129,7 @@ class SiteinfoQAView(TranslatableContentView):
     url_name = "hkm_siteinfo_QA"
 
     def get(self, request, *args, **kwargs):
-        return super(SiteinfoQAView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class SiteinfoTermsView(TranslatableContentView):
@@ -1137,7 +1137,7 @@ class SiteinfoTermsView(TranslatableContentView):
     url_name = "hkm_siteinfo_terms"
 
     def get(self, request, *args, **kwargs):
-        return super(SiteinfoTermsView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class RecordFeedbackView(View):
@@ -1147,7 +1147,7 @@ class RecordFeedbackView(View):
         action = request.POST.get("action", None)
         if action == "feedback":
             return self.handle_feedback(request, *args, **kwargs)
-        return super(RecordFeedbackView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def handle_feedback(self, request, *args, **kwargs):
         response_data = {}

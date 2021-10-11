@@ -181,7 +181,7 @@ class Collection(BaseModel):
                     show_in_landing_page=False
                 )
             self.is_public = True
-        return super(Collection, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def __unicode__(self):
         return self.title
@@ -497,7 +497,7 @@ class ProductOrder(BaseModel):
     def save(self, *args, **kwargs):
         if not self.order_hash:
             self.order_hash = get_random_string(20)
-        return super(ProductOrder, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     @classmethod
     def delete_old_data(self, date):
@@ -613,7 +613,7 @@ class ProductOrderCollection(models.Model):
     def save(self, *args, **kwargs):
         if not self.order_hash:
             self.order_hash = get_random_string(20)
-        return super(ProductOrderCollection, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     @property
     def customer_email(self):
