@@ -1,4 +1,6 @@
-uwsgi<3
+-c requirements.txt
+
+uwsgi
 google-cloud-storage==1.12.1
 azure==4.0.0
 azure-storage==0.20.0
