@@ -4,6 +4,10 @@ import logging
 import os
 import environ
 
+checkout_dir = environ.Path(__file__) - 2
+assert os.path.exists(checkout_dir("manage.py"))
+env_file = checkout_dir(".env")
+
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, ''),
@@ -15,15 +19,15 @@ env = environ.Env(
     MAIL_MAILGUN_API=(str, ""),
     HKM_DEFAULT_FROM_EMAIL=(str, 'no-reply@hel.fi'),
     HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
-    HKM_PBW_API_ENDPOINT = (str, ''),
-    HKM_PBW_API_KEY = (str, ''),
-    HKM_PBW_SECRET_KEY = (str, ''),
-    HKM_PRINTMOTOR_USERNAME = (str, ''),
-    HKM_PRINTMOTOR_PASSWORD = (str, ''),
-    HKM_PRINTMOTOR_API_KEY = (str, ''),
-    HKM_PRINTMOTOR_API_ENDPOINT = (str, ''),
-    HKM_POSTAL_FEES = (float, 0.0),
-    HKM_MY_DOMAIN = (str, 'http://localhost:8080'),
+    HKM_PBW_API_ENDPOINT=(str, ''),
+    HKM_PBW_API_KEY=(str, ''),
+    HKM_PBW_SECRET_KEY=(str, ''),
+    HKM_PRINTMOTOR_USERNAME=(str, ''),
+    HKM_PRINTMOTOR_PASSWORD=(str, ''),
+    HKM_PRINTMOTOR_API_KEY=(str, ''),
+    HKM_PRINTMOTOR_API_ENDPOINT=(str, ''),
+    HKM_POSTAL_FEES=(float, 0.0),
+    HKM_MY_DOMAIN=(str, 'http://localhost:8080'),
     LOG_LEVEL=(str, 'ERROR'),
     DEFAULT_FILE_STORAGE=(str, "django.core.files.storage.FileSystemStorage"),
     GS_BUCKET_NAME=(str, ""),
@@ -34,6 +38,9 @@ env = environ.Env(
     PASSWORD_RESET_TIMEOUT_DAYS=(int, 1),
     ENABLE_FEEDBACK_CONGESTION_MSG=(bool, False),
 )
+
+if os.path.exists(env_file):
+    env.read_env(env_file)
 
 DEBUG = env.bool('DEBUG')
 
@@ -46,7 +53,7 @@ if DEBUG and not SECRET_KEY:
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-EMAIL_BACKEND=env.str('EMAIL_BACKEND')
+EMAIL_BACKEND = env.str('EMAIL_BACKEND')
 if env("MAIL_MAILGUN_KEY"):
     ANYMAIL = {
         "MAILGUN_API_KEY": env("MAIL_MAILGUN_KEY"),
@@ -208,9 +215,9 @@ PARLER_DEFAULT_LANGUAGE_CODE = 'fi'
 
 PARLER_LANGUAGES = {
     1: (
-        {'code': 'fi',},
-        {'code': 'en',},
-        {'code': 'sv',},
+        {'code': 'fi', },
+        {'code': 'en', },
+        {'code': 'sv', },
     ),
     'default': {
         'fallback': 'fi',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE

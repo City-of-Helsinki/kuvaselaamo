@@ -38,3 +38,5 @@ static/*
 browser-tests/.env
 
 .vscode/
+
+.env
