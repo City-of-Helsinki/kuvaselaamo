@@ -103,20 +103,25 @@ palikka
 
   $deleteBtns.on('click', function() {
     const facetName = $(this).attr('data-facet-type');
-    const facetValue = $(this).attr('data-author-facet');
+    const facetValue = $(this).attr('data-facet-value');
 
+    if (facetName === "date_range") {
+      urlParams.delete('date_from');
+      urlParams.delete('date_to');
+    }
     const values = urlParams.getAll(facetName)
 
-    const index = values.indexOf(facetValue);
+    if (Array.isArray(values)) {
+      const index = values.indexOf(facetValue);
 
-    values.splice(index, 1);
+      values.splice(index, 1);
 
-    if (values.length === 0) {
-      urlParams.delete(facetName);
-    } else {
-      urlParams.set(facetName, values.toString());
+      if (values.length === 0) {
+        urlParams.delete(facetName);
+      } else {
+        urlParams.set(facetName, values.toString());
+      }
     }
-
     window.open('?' + urlParams.toString(), '_self');
   });
 

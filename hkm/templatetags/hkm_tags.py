@@ -91,6 +91,32 @@ def showcase_collections(showcase):
     return albums
 
 
+@register.filter
+def search_keywords(url_params):
+    keywords = []
+    banned = ["date_from", "date_to", "page"]
+
+    for key, value in url_params.items():
+        if key in banned or len(value) == 0:
+            continue
+
+        if isinstance(value, list):
+            for item in value:
+                keywords.append({"value": item, "facet_type": key})
+        else:
+            keywords.append({"value": value, "facet_type": key})
+
+    # Manually check date_from and date_to to combine them into one keyword
+    date_from = url_params.get('date_from', '')
+    date_to = url_params.get('date_to', '')
+
+    if date_from or date_to:
+        combined = "%s - %s" % (date_from, date_to)
+        keywords.append({"value": combined, "facet_type": "date_range"})
+
+    return keywords
+
+
 @register.simple_tag(takes_context=True)
 def return_link(context):
     params = {

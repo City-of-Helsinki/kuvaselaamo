@@ -22,7 +22,7 @@ class FinnaClient(object):
         self.organisation = organisation
         self.material_type = material_type
 
-    def get_facets(self, search_term, language='fi'):
+    def get_facets(self, search_term, language='fi', date_from=None, date_to=None):
         url = FinnaClient.API_ENDPOINT + 'search'
         payload = {
             'lookfor': search_term,
@@ -31,6 +31,9 @@ class FinnaClient(object):
             'lng': language,
             'facet[]': ['author_facet', 'collection', 'genre_facet', 'main_date_str', 'category_str_mv']
         }
+        if date_from or date_to:
+            payload['filter[]'].append('search_daterange_mv:"[%s TO %s]"' % (date_from, date_to))
+
         try:
             r = requests.get(url, params=payload, timeout=self.timeout)
         except requests.exceptions.RequestException:
@@ -72,7 +75,7 @@ class FinnaClient(object):
             # desired way
             for facet_type, facet_values in facets.iteritems():
                 if facet_type == "search_daterange_mv":
-                    payload['filter[]'].append('search_daterange_mv:"[1950 TO 1970]"')
+                    payload['filter[]'].append(facet_type + ":" + facet_values)
                 else:
                     for facet_value in facet_values:
                         payload['filter[]'].append(

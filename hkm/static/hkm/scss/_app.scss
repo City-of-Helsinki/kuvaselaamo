@@ -1698,6 +1698,7 @@ div.grid__fav.active {
 
 .search-area-wrapper {
   padding-top: 30px;
+  padding-right: 5px;
   width: 100%;
   display:flex;
   flex-direction: column;
@@ -1707,93 +1708,44 @@ div.grid__fav.active {
   }
 }
 
-.search-term-wrapper {
-  display: flex;
-  font: $font-signe;
-  width: 100%;
-  padding-right: 10px;
-
-  input {
-    width: 80%;
-  }
-
-  button {
-    width: 20%;
-    margin-left: -2px;
-  }
-
-  @media(min-width: $breakpoint-l) {
-    width: 300px;
-  }
-}
-
-.extra-filters-wrapper {
-  &-desktop{
-    visibility: hidden;
-    overflow: hidden;
-    width: 0;
-    height: 0;
-
-    @media(min-width: $breakpoint-s) {
-      width: 100%;
-      height: initial;
-      visibility: visible;
-    }
-  }
-
-  &-mobile {
-    width: 100%;
-    visibility: visible;
-    height: 33px;
-    overflow: hidden;
-
-    @media(min-width: $breakpoint-s) {
-      visibility: hidden;
-      overflow: hidden;
-      width: 0;
-      height: 0;
-    }
-
-    button {
-      // Invisible border to stop content from shifting after button gets focus
-      border: 2px solid rgba(0, 0, 0, 0);
-      color: black;
-      padding: 5px 0;
-      font-weight: 700;
-
-      &:focus-visible {
-        outline: none;
-        border: 2px solid black;
-        border-radius: 0;
-      }
-    }
-  }
-}
-
-.extra-filters-open {
-  overflow: visible;
-  height: auto;
-}
-
-.extra-filters {
-  width: 100%;
+.search-form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0;
 
   @media(min-width: $breakpoint-m) {
     flex-direction: row;
   }
 
-  @media(min-width: $breakpoint-l) {
-    justify-content: space-between;
+  .search-term-wrapper {
+    display: flex;
+    font: $font-signe;
+    width: 100%;
+    height: 43px;
+    margin-bottom: 10px;
+
+    input {
+      width: 80%;
+    }
+
+    button {
+      width: 20%;
+      margin-left: -2px;
+    }
+
+    @media(min-width: $breakpoint-m) {
+      width: 320px;
+    }
+
+    @media(min-width: $breakpoint-l) {
+      width: 300px;
+    }
   }
 
   .date-range {
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin-bottom: 10px;
-    padding-right: 10px;
     justify-content: space-between;
 
     select {
@@ -1814,44 +1766,49 @@ div.grid__fav.active {
     }
 
     @media(min-width: $breakpoint-m) {
-      justify-content: flex-start;
+      margin-left: 10px;
+      justify-content: initial;
 
       select {
         width: 115px;
       }
     }
   }
+}
 
-  .author-year {
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
+.author-year {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  select:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  @media(min-width: $breakpoint-s) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0;
 
     select {
-      margin-bottom: 10px;
+      width: 45%;
+    }
+  }
+
+  @media(min-width: $breakpoint-m) {
+    justify-content: flex-start;
+
+    select {
+      width: auto;
     }
 
-    @media (min-width: $breakpoint-s) {
-      flex-direction: row;
-      justify-content: space-between;
-
-      select {
-        width: 45%;
-      }
+    select:not(:last-child) {
+      margin-right: 10px;
     }
+  }
 
-    @media(min-width: $breakpoint-m) {
-      justify-content: flex-end;
-      width: 100%;
-
-      select {
-        width: auto;
-      }
-
-      select:first-child {
-        margin-right: 20px;
-      }
-    }
+  @media(min-width: $breakpoint-l) {
+    margin-left: 10px;
   }
 }
 
@@ -1859,6 +1816,7 @@ div.grid__fav.active {
   margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
+  padding-right: 5px;
 }
 
 .keyword {

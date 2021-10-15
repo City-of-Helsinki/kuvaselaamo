@@ -18,49 +18,72 @@
         {% endif %}
       </div>
       <div class="search-area-wrapper">
-        <form>
+        <form class="search-form">
           <div class="search-term-wrapper">
             <input class="search-input" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
             <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled" type="submit">{% trans 'Search' %}</button>
           </div>
+
+          <div class="date-range">
+            <select class="search-input" name="date_from" id="date_from">
+              <option value="" {% if not date_from %}selected{% endif %}>Vuodesta</option>
+              {% for date in dates|dictsort:"translated" %}
+              <option value="{{ date.value }}" {% if date.value == date_from %}selected{% endif %}>
+                {{ date.translated }}
+              </option>
+              {% endfor %}
+            </select>
+
+            <div class="dash">
+              <span class="bar"></span>
+            </div>
+
+            <select class="search-input" name="date_to" id="date_to">
+              <option value="" {% if not date_to %}selected{% endif %}>Vuoteen</option>
+              {% for date in dates|dictsort:"translated" %}
+              <option value="{{ date.value }}" {% if date.value == date_to %}selected{% endif %}>
+                {{ date.translated }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
         </form>
 
-        <div class="extra-filters-wrapper-desktop">
-          {% include 'hkm/snippets/search_extra_filters.html' %}
-        </div>
-        <div class="extra-filters-wrapper-mobile">
-          <button id="extra-filter-toggle-more">Enemmän hakuehtoja</button>
-          <button id="extra-filter-toggle-less" class="hidden">Vähemmän hakuehtoja</button>
-          {% include 'hkm/snippets/search_extra_filters.html' %}
-        </div>
+        <div class="author-year">
+          <select class="search-input facet-filter" name="date" id="date"  data-facet-type="date">
+            <option value="" selected>Tietty vuosi</option>
+            {% for date in facet_result.facets.main_date_str|dictsort:"translated" %}
+            <option value="{{ date.value }}">
+              {{ date.translated }}
+            </option>
+            {% endfor %}
+          </select>
 
+          <select class="search-input facet-filter" name="author" id="author" data-facet-type="author">
+            <option value="" selected>Valokuvaaja</option>
+            {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
+            <option value="{{ author.value }}">
+              {{ author.translated }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
 
       <div class="keyword-wrapper">
-        {% for author in author_facets %}
-        <div class="keyword">
-          {{ author }}
-          <a href="#" class="search-filter__delete" data-facet-type="author" data-author-facet="{{ author }}">
-            <svg class="keyword-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
-            </svg>
-          </a>
-        </div>
-        {% endfor %}
-        {% for date in date_facets %}
-        <div class="keyword">
-          {{ date }}
-          <a href="#" class="search-filter__delete" data-facet-type="date" data-author-facet="{{ date }}">
-            <svg class="keyword-icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
-            </svg>
-          </a>
-        </div>
-        {% endfor %}
+        {% with keywords=url_params|search_keywords %}
+          {% for keyword in keywords %}
+            <div class="keyword">
+              {{ keyword.value }}
+              <a href="#" class="search-filter__delete" data-facet-value="{{ keyword.value }}" data-facet-type="{{ keyword.facet_type }}">
+                <svg class="keyword-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+                </svg>
+              </a>
+          </div>
+          {% endfor %}
+        {% endwith %}
       </div>
-
-    </div>
-
   </div>
 
 {% endblock %}
