@@ -69,18 +69,7 @@ palikka
 .define('app.search-filter', ['jQuery', 'docReady'], function () {
   var $filterLink = $('.facet-filter');
   var $deleteBtns = $('.search-filter__delete');
-  const $extraFilterToggleMore = $('#extra-filter-toggle-more');
-  const $extraFilterToggleLess = $('#extra-filter-toggle-less');
-  const extraFilterMobile = $('.extra-filters-wrapper-mobile');
   const urlParams = new URLSearchParams(window.location.search)
-  let toggleMenu = false;
-
-  if (urlParams.get('toggleMenu')) {
-    toggleMenu = true;
-    extraFilterMobile.addClass('extra-filters-open');
-    $extraFilterToggleLess.removeClass('hidden');
-    $extraFilterToggleMore.addClass('hidden');
-  }
 
   $filterLink.on('change', function() {
     const facetName = $(this).attr('data-facet-type');
@@ -124,23 +113,6 @@ palikka
     }
     window.open('?' + urlParams.toString(), '_self');
   });
-
-  $extraFilterToggleMore.on('click', function() {
-    toggleMenu = true;
-    extraFilterMobile.addClass('extra-filters-open');
-    $extraFilterToggleLess.removeClass('hidden');
-    $(this).addClass('hidden');
-    urlParams.set('toggleMenu', toggleMenu.toString());
-  });
-
-  $extraFilterToggleLess.on('click', function() {
-    toggleMenu = false;
-    extraFilterMobile.removeClass('extra-filters-open');
-    $extraFilterToggleMore.removeClass('hidden');
-    $(this).addClass('hidden');
-    urlParams.delete('toggleMenu')
-  });
-
 })
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
