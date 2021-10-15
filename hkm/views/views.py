@@ -498,7 +498,7 @@ class SearchView(BaseView):
         session_facet_result = request.session.get('facet_result', None)
 
         if not session_facet_result:
-            self.facet_result = self.get_facet_result(self.search_term)
+            self.facet_result = self.get_facet_result(self.url_params['search'])
             # date_from & date_to require full list of dates
             self.all_dates = self.facet_result.get('facets', {}).get('main_date_str', [])
         # If search term or year to year changed => fetch facets again
@@ -575,7 +575,7 @@ class SearchView(BaseView):
 
             # This else statement is executed when "Load more" is pressed
             else:
-                results = self.get_search_result(self.search_term, self.page, self.page_size, facets)
+                results = self.get_search_result(self.url_params['search'], self.url_params['page'], self.page_size, facets)
                 self.search_result = results
 
         if self.search_result:
