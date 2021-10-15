@@ -7456,7 +7456,8 @@ div.grid__fav.active {
   height: 43px;
   color: black;
   padding: 5px 10px;
-  border: 2px solid rgba(0, 0, 0, 0.3); }
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  background-color: white; }
   .search-input:focus-visible {
     outline: none;
     border: 2px solid black;

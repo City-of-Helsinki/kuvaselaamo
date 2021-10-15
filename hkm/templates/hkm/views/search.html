@@ -27,7 +27,7 @@
           <div class="date-range">
             <select class="search-input" name="date_from" id="date_from">
               <option value="" {% if not date_from %}selected{% endif %}>Vuodesta</option>
-              {% for date in dates|dictsort:"translated" %}
+              {% for date in all_dates|dictsort:"translated" %}
               <option value="{{ date.value }}" {% if date.value == date_from %}selected{% endif %}>
                 {{ date.translated }}
               </option>
@@ -40,7 +40,7 @@
 
             <select class="search-input" name="date_to" id="date_to">
               <option value="" {% if not date_to %}selected{% endif %}>Vuoteen</option>
-              {% for date in dates|dictsort:"translated" %}
+              {% for date in all_dates|dictsort:"translated" %}
               <option value="{{ date.value }}" {% if date.value == date_to %}selected{% endif %}>
                 {{ date.translated }}
               </option>

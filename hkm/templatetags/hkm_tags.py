@@ -117,17 +117,13 @@ def search_keywords(url_params):
     return keywords
 
 
-@register.simple_tag(takes_context=True)
-def return_link(context):
-    params = {
-        "search": context.get('search', ''),
-        "page": context.get('page'),
-        "authors": context.get('author_facets', []),
-        "dates": context.get('date_facets', []),
-        "date_from": context.get('date_from', ''),
-        "date_to": context.get('date_to', ''),
-    }
-    encoded_params = urlencode(params)
+@register.filter()
+def return_link(url_params):
+    cleaned_params = {}
 
-    print("Authors", encoded_params)
-    return '?%s' % encoded_params
+    for key, value in url_params.items():
+        if value and key != "page":
+            cleaned_params[key] = value
+
+    encoded_params = urlencode(cleaned_params)
+    return '?%s' % encoded_params if encoded_params else ''
