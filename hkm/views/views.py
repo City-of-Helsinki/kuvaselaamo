@@ -504,10 +504,10 @@ class SearchView(BaseView):
         # If search term or year to year changed => fetch facets again
         elif search_term_changed or date_from_changed or date_to_changed:
             self.facet_result = self.get_facet_result(self.url_params['search'], self.url_params['date_from'], self.url_params['date_to'])
-            self.all_dates = request.session.get('dates')
+            self.all_dates = request.session.get('all_dates')
         else:
             self.facet_result = request.session.get('facet_result')
-            self.all_dates = request.session.get('dates')
+            self.all_dates = request.session.get('all_dates')
 
         facets = {}
         if self.url_params['author']:
