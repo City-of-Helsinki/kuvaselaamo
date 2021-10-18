@@ -33,6 +33,7 @@ class FinnaClient(object):
         }
         if date_from or date_to:
             payload['filter[]'].append('search_daterange_mv:"[%s TO %s]"' % (date_from, date_to))
+            payload['search_daterange_mv_type'] = "within"
 
         try:
             r = requests.get(url, params=payload, timeout=self.timeout)
@@ -75,7 +76,9 @@ class FinnaClient(object):
             # desired way
             for facet_type, facet_values in facets.iteritems():
                 if facet_type == "search_daterange_mv":
-                    payload['filter[]'].append(facet_type + ":" + facet_values)
+                    # Value needs to be inside double quotes, insert value manually to make sure its correct.
+                    payload['filter[]'].append('search_daterange_mv:"%s"' % facet_values)
+                    payload['search_daterange_mv_type'] = "within"
                 else:
                     for facet_value in facet_values:
                         payload['filter[]'].append(
