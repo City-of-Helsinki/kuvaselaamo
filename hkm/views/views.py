@@ -571,7 +571,7 @@ class SearchView(BaseView):
                     # Take search parameters from session.
                     # This is required for "Back to search results" link to work
                     self.url_params = request.session.get('url_params', {})
-                    self.dates = request.session.get('dates')
+                    self.all_dates = request.session.get('all_dates')
 
             # This else statement is executed when "Load more" is pressed
             else:
