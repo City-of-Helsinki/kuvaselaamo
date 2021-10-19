@@ -125,5 +125,5 @@ def return_link(url_params):
         if value and key != "page":
             cleaned_params[key] = value
 
-    encoded_params = urlencode(cleaned_params)
+    encoded_params = urlencode(cleaned_params, doseq=True)
     return '?%s' % encoded_params if encoded_params else ''
