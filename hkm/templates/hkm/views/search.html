@@ -18,7 +18,7 @@
         {% endif %}
       </div>
       <div class="search-area-wrapper">
-        <form class="search-form">
+        <form class="search-form" id="search-form">
           <div class="search-term-wrapper">
             <input class="search-input" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
             <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled" type="submit">{% trans 'Search' %}</button>

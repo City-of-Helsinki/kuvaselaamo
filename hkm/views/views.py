@@ -488,12 +488,13 @@ class SearchView(BaseView):
     def handle_search(self, request, *args, **kwargs):
         LOG.debug('Search', extra={'data': {'search_term': self.url_params['search'], 'page': self.url_params['page']}})
 
-        search_term_changed = self.url_params['search'] != request.session.get('search', '')
-        page_changed = self.url_params['page'] != request.session.get('page')
-        author_changed = self.url_params['author'] != request.session.get('author_facets')
-        date_changed = self.url_params['date'] != request.session.get('date_facets')
-        date_from_changed = self.url_params['date_from'] != request.session.get('date_from')
-        date_to_changed = self.url_params['date_to'] != request.session.get('date_to')
+        url_params = request.session.get('url_params')
+        search_term_changed = self.url_params['search'] != url_params.get('search', '')
+        page_changed = self.url_params['page'] != url_params.get('page')
+        author_changed = self.url_params['author'] != url_params.get('author')
+        date_changed = self.url_params['date'] != url_params.get('date')
+        date_from_changed = self.url_params['date_from'] != url_params.get('date_from')
+        date_to_changed = self.url_params['date_to'] != url_params.get('date_to')
 
         session_facet_result = request.session.get('facet_result', None)
 

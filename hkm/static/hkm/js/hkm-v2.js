@@ -66,6 +66,27 @@ palikka
   });
 
 })
+.define('app.search-form', ['jQuery', 'docReady'], function () {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  $('#search-form').on('submit', function(event) {
+    event.preventDefault();
+
+    const formValues = $(this).serializeArray();
+
+    // We want to keep date and author parameters on form submit, so overwrite only the following
+    const fieldsToReplace = ['search', 'date_from', 'date_to'];
+
+    formValues.forEach(formVal => {
+      if (formVal.value && fieldsToReplace.includes(formVal.name)) {
+        // Add to url params
+        urlParams.set(formVal.name, formVal.value);
+      }
+    });
+
+    window.open('?' + urlParams.toString(), '_self');
+  });
+})
 .define('app.search-filter', ['jQuery', 'docReady'], function () {
   var $filterLink = $('.facet-filter');
   var $deleteBtns = $('.search-filter__delete');
@@ -108,7 +129,13 @@ palikka
       if (values.length === 0) {
         urlParams.delete(facetName);
       } else {
-        urlParams.set(facetName, values.toString());
+        // Delete all values from to object
+        urlParams.delete(facetName);
+        // Construct key value pairs again, this results url params being in a "correct" format
+        // E.g date=1940&date=1950 instead of date=1940,1950
+        values.forEach(val => {
+          urlParams.append(facetName, val)
+        });
       }
     }
     window.open('?' + urlParams.toString(), '_self');
