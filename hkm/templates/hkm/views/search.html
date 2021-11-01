@@ -17,40 +17,40 @@
         <h1 class="banner__h1">{% trans 'Search pictures' %}</h1>
         {% endif %}
       </div>
-      <div class="search-area-wrapper">
-        <form class="search-form" id="search-form">
-          <div class="search-term-wrapper">
-            <input class="search-input" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
-            <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled" type="submit">{% trans 'Search' %}</button>
+      <form class="search-form" id="search-form">
+        <p class="form-text-info">Voit etsiä kuvia vapaalla tekstillä tai tarkentamalla ajanjaksoa</p>
+        <input class="search-input" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+
+        <div class="date-range">
+          <select class="search-input" name="date_from" id="date_from">
+            <option value="" {% if not date_from %}selected{% endif %}>Vuodesta</option>
+            {% for date in all_dates|dictsort:"translated" %}
+            <option value="{{ date.value }}" {% if date.value == date_from %}selected{% endif %}>
+              {{ date.translated }}
+            </option>
+            {% endfor %}
+          </select>
+
+          <div class="dash">
+            <span class="bar"></span>
           </div>
 
-          <div class="date-range">
-            <select class="search-input" name="date_from" id="date_from">
-              <option value="" {% if not date_from %}selected{% endif %}>Vuodesta</option>
-              {% for date in all_dates|dictsort:"translated" %}
-              <option value="{{ date.value }}" {% if date.value == date_from %}selected{% endif %}>
-                {{ date.translated }}
-              </option>
-              {% endfor %}
-            </select>
+          <select class="search-input" name="date_to" id="date_to">
+            <option value="" {% if not date_to %}selected{% endif %}>Vuoteen</option>
+            {% for date in all_dates|dictsort:"translated" %}
+            <option value="{{ date.value }}" {% if date.value == date_to %}selected{% endif %}>
+              {{ date.translated }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
 
-            <div class="dash">
-              <span class="bar"></span>
-            </div>
+        <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled search-submit" type="submit">{% trans 'Search' %}</button>
 
-            <select class="search-input" name="date_to" id="date_to">
-              <option value="" {% if not date_to %}selected{% endif %}>Vuoteen</option>
-              {% for date in all_dates|dictsort:"translated" %}
-              <option value="{{ date.value }}" {% if date.value == date_to %}selected{% endif %}>
-                {{ date.translated }}
-              </option>
-              {% endfor %}
-            </select>
-          </div>
-        </form>
+        <p class="form-text-filter">Rajaa hakua</p>
 
-        <div class="author-year">
-          <select class="search-input facet-filter" name="date" id="date"  data-facet-type="date">
+
+          <select class="search-input facet-filter select-year" name="date" id="date"  data-facet-type="date">
             <option value="" selected>Tietty vuosi</option>
             {% for date in facet_result.facets.main_date_str|dictsort:"translated" %}
             <option value="{{ date.value }}">
@@ -59,7 +59,7 @@
             {% endfor %}
           </select>
 
-          <select class="search-input facet-filter" name="author" id="author" data-facet-type="author">
+          <select class="search-input facet-filter select-photographer" name="author" id="author" data-facet-type="author">
             <option value="" selected>Valokuvaaja</option>
             {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
             <option value="{{ author.value }}">
@@ -67,8 +67,8 @@
             </option>
             {% endfor %}
           </select>
-        </div>
-      </div>
+
+      </form>
 
       <div class="keyword-wrapper">
         {% with keywords=url_params|search_keywords %}
