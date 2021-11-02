@@ -1170,8 +1170,8 @@ msgid "Records"
 msgstr "Images"
 
 #: hkm/templates/hkm/views/search.html:91
-msgid "Load more..."
-msgstr "Load more..."
+msgid "Load more"
+msgstr "Load more"
 
 # no_results.html
 #: hkm/templates/hkm/views/search.html:109
@@ -1198,3 +1198,25 @@ msgstr "Your favorite images are collected here"
 
 msgid "OGDescription"
 msgstr "Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use."
+
+#Search form
+msgid "Search info"
+msgstr "You can search for images with text or by time period"
+
+msgid "Search input"
+msgstr "Search by any word"
+
+msgid "From year"
+msgstr "From year"
+
+msgid "To year"
+msgstr "To year"
+
+msgid "Narrow results"
+msgstr "Narrow results"
+
+msgid "Specific year"
+msgstr "Specific year"
+
+msgid "Specific photographer"
+msgstr "Specific photographer"

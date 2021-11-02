@@ -18,12 +18,12 @@
         {% endif %}
       </div>
       <form class="search-form" id="search-form">
-        <p class="form-text-info">Voit etsiä kuvia vapaalla tekstillä tai tarkentamalla ajanjaksoa</p>
-        <input class="search-input" placeholder="{% trans 'Search' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
+        <p class="form-text-info">{% trans 'Search info' %}</p>
+        <input class="search-input" placeholder="{% trans 'Search input' %}" type="text" name="search" {% if search_term %} value="{{ search_term }}"{% endif %} />
 
         <div class="date-range">
           <select class="search-input" name="date_from" id="date_from">
-            <option value="" {% if not date_from %}selected{% endif %}>Vuodesta</option>
+            <option value="" {% if not date_from %}selected{% endif %}>{% trans 'From year' %}</option>
             {% for date in all_dates|dictsort:"translated" %}
             <option value="{{ date.value }}" {% if date.value == date_from %}selected{% endif %}>
               {{ date.translated }}
@@ -36,7 +36,7 @@
           </div>
 
           <select class="search-input" name="date_to" id="date_to">
-            <option value="" {% if not date_to %}selected{% endif %}>Vuoteen</option>
+            <option value="" {% if not date_to %}selected{% endif %}>{% trans 'To year' %}</option>
             {% for date in all_dates|dictsort:"translated" %}
             <option value="{{ date.value }}" {% if date.value == date_to %}selected{% endif %}>
               {{ date.translated }}
@@ -45,13 +45,16 @@
           </select>
         </div>
 
-        <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled search-submit" type="submit">{% trans 'Search' %}</button>
+        <button aria-label="{% trans 'Search' %}" class="hkm-button hkm-button__filled search-submit" type="submit">
+          <img src="/static/hkm/svg/Search_white.svg" alt="" aria-hidden="true"/>
+          {% trans 'Find' %}
+        </button>
 
-        <p class="form-text-filter">Rajaa hakua</p>
+        <p class="form-text-filter">{% trans 'Narrow results' %}</p>
 
 
           <select class="search-input facet-filter select-year" name="date" id="date"  data-facet-type="date">
-            <option value="" selected>Tietty vuosi</option>
+            <option value="" selected>{% trans 'Specific year' %}</option>
             {% for date in facet_result.facets.main_date_str|dictsort:"translated" %}
             <option value="{{ date.value }}">
               {{ date.translated }}
@@ -60,7 +63,7 @@
           </select>
 
           <select class="search-input facet-filter select-photographer" name="author" id="author" data-facet-type="author">
-            <option value="" selected>Valokuvaaja</option>
+            <option value="" selected>{% trans 'Specific photographer' %}</option>
             {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
             <option value="{{ author.value }}">
               {{ author.translated }}
@@ -98,7 +101,7 @@
     <div class="grid flex-images infinite-scroll" data-pages="{{ search_result.pages }}">
       {% include 'hkm/snippets/search_records_grid.html' %}
     </div>
-    <button id="btn-load-more" class="btn-load-more btn btn-primary btn-lg btn-block" data-current-page="{{ current_page }}">{% trans 'Load more...' %}</button>
+    <button id="btn-load-more" class="hkm-button hkm-button__filled search-load-more" data-current-page="{{ current_page }}">{% trans 'Load more' %}</button>
 
 
     {% else %}

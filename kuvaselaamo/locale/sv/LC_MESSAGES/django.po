@@ -1137,8 +1137,8 @@ msgid "Records"
 msgstr "Beskriv"
 
 #: hkm/templates/hkm/views/search.html:91
-msgid "Load more..."
-msgstr "Ladda mer... "
+msgid "Load more"
+msgstr "Ladda mer"
 
 #: hkm/templates/hkm/views/search_record.html:29
 msgid "Back to search"
@@ -1160,3 +1160,25 @@ msgstr "Dina favoritbilder finns samlade här"
 
 msgid "OGDescription"
 msgstr "Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet."
+
+#Search form
+msgid "Search info"
+msgstr "Du kan söka efter bilder med text eller efter tidsperiod"
+
+msgid "Search input"
+msgstr "Sök med valfritt ord"
+
+msgid "From year"
+msgstr "Från år"
+
+msgid "To year"
+msgstr "Till år"
+
+msgid "Narrow results"
+msgstr "Snäva resultat"
+
+msgid "Specific year"
+msgstr "Specifikt år"
+
+msgid "Specific photographer"
+msgstr "Specifik fotograf"
