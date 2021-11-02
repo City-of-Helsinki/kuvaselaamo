@@ -488,7 +488,7 @@ class SearchView(BaseView):
     def handle_search(self, request, *args, **kwargs):
         LOG.debug('Search', extra={'data': {'search_term': self.url_params['search'], 'page': self.url_params['page']}})
 
-        url_params = request.session.get('url_params')
+        url_params = request.session.get('url_params', {})
         search_term_changed = self.url_params['search'] != url_params.get('search', '')
         page_changed = self.url_params['page'] != url_params.get('page')
         author_changed = self.url_params['author'] != url_params.get('author')
