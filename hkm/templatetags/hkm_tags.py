@@ -94,10 +94,10 @@ def showcase_collections(showcase):
 @register.filter
 def search_keywords(url_params):
     keywords = []
-    banned = ["date_from", "date_to", "page"]
+    ignored_params = ["date_from", "date_to", "page"]
 
     for key, value in url_params.items():
-        if key in banned or len(value) == 0:
+        if key in ignored_params or len(value) == 0:
             continue
 
         if isinstance(value, list):
@@ -122,7 +122,7 @@ def return_link(url_params):
     cleaned_params = {}
 
     for key, value in url_params.items():
-        if value and key != "page":
+        if value:
             cleaned_params[key] = value
 
     encoded_params = urlencode(cleaned_params, doseq=True)

@@ -32,7 +32,8 @@ class FinnaClient(object):
             'facet[]': ['author_facet', 'collection', 'genre_facet', 'main_date_str', 'category_str_mv']
         }
         if date_from or date_to:
-            payload['filter[]'].append('search_daterange_mv:"[%s TO %s]"' % (date_from, date_to))
+            payload['filter[]'].append('search_daterange_mv:"[%s TO %s]"' % (date_from
+                 if date_from else "*", date_to if date_to else "*"))
             payload['search_daterange_mv_type'] = "within"
 
         try:
@@ -43,7 +44,6 @@ class FinnaClient(object):
         else:
             try:
                 r.raise_for_status()
-                # raise requests.exceptions.HTTPError()
             except requests.exceptions.HTTPError:
                 LOG.error('Failed to communicate with Finna API', exc_info=True,
                           extra={'data': {'status_code': r.status_code, 'response': repr(r.text)}})
