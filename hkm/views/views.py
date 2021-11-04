@@ -584,15 +584,8 @@ class SearchView(BaseView):
 
             if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
                     'record'):
-                # Loop through records and set index (it is used in "back to search" part) to
-                # display image number / total images, e.g 1/10 000
                 # Check also if this record is one of user's favorites
-                session_length = len(session_search_result.get('records', []))
-
-                start_number = (session_length + 1 if self.__url_params_changed(url_params,
-                        ["search", "author", "date", "date_from", "date_to", "page"]) else 1)
-                for idx, record in enumerate(self.search_result['records'], start_number):
-                    record['index'] = idx
+                for record in self.search_result['records']:
                     if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
 

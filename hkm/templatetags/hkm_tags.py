@@ -127,3 +127,13 @@ def return_link(url_params):
 
     encoded_params = urlencode(cleaned_params, doseq=True)
     return '?%s' % encoded_params if encoded_params else ''
+
+
+@register.filter()
+def record_index(record, search_result):
+    records_in_sr = search_result.get('records', [])
+
+    record_in_sr = next((x for x in records_in_sr if x['id'] == record.get('id')), None)
+
+    index = records_in_sr.index(record_in_sr) + 1
+    return "%s / %s" % (index, search_result.get('resultCount'))

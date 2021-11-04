@@ -77,6 +77,10 @@ palikka
     // We want to keep date and author parameters on form submit, so overwrite only the following
     const fieldsToReplace = ['search', 'date_from', 'date_to'];
 
+    // Remove page param when submitting form. Without this application might run into a problem where
+    // title says there is e.g. 88 images found, but at the same "No images found" message is displayed
+    urlParams.delete('page');
+
     formValues.forEach(formVal => {
       if (formVal.value && fieldsToReplace.includes(formVal.name)) {
         // Add to url params
@@ -138,6 +142,9 @@ palikka
         });
       }
     }
+    // Delete "page" parameter to make sure everything is in sync
+    urlParams.delete("page")
+
     window.open('?' + urlParams.toString(), '_self');
   });
 })
@@ -240,11 +247,11 @@ palikka
       loadMoreButton.addClass('disabled').find('.icon-spinner').remove();
       var buttonText = loadMoreButton.text();
 
-      if (buttonText === "Lataa lisää... ") {
+      if (buttonText === "Lataa lisää") {
         loadMoreButton.text('Ei tuloksia');
       }
 
-      else if (buttonText === "Load more...") {
+      else if (buttonText === "Load more") {
         loadMoreButton.text('No more results');
       }
 
