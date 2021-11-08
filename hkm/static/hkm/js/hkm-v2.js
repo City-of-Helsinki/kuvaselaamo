@@ -67,28 +67,35 @@ palikka
 
 })
 .define('app.search-form', ['jQuery', 'docReady'], function () {
-  const urlParams = new URLSearchParams(window.location.search);
+  const formErrorMessage = $('.search-form-message');
+  const urlParams = new URLSearchParams();
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
 
     const formValues = $(this).serializeArray();
 
-    // We want to keep date and author parameters on form submit, so overwrite only the following
-    const fieldsToReplace = ['search', 'date_from', 'date_to'];
-
-    // Remove page param when submitting form. Without this application might run into a problem where
-    // title says there is e.g. 88 images found, but at the same "No images found" message is displayed
-    urlParams.delete('page');
+    // Use only the following fields for url params
+    const urlParamFields = ['search', 'date_from', 'date_to'];
 
     formValues.forEach(formVal => {
-      if (formVal.value && fieldsToReplace.includes(formVal.name)) {
+      if (formVal.value && urlParamFields.includes(formVal.name)) {
         // Add to url params
         urlParams.set(formVal.name, formVal.value);
       }
     });
 
-    window.open('?' + urlParams.toString(), '_self');
+    const date_from = formValues.find(fv => fv.name === "date_from")?.value ?? 0;
+    const date_to = formValues.find(fv => fv.name === "date_to")?.value ?? 0;
+
+    // Do not allow date_from being larger / after date_to. Show message instead.
+    if (date_from > 0 && date_to > 0 && Number(date_from) > Number(date_to)) {
+      $(formErrorMessage).removeClass('hidden');
+    }
+    else {
+      window.open('?' + urlParams.toString(), '_self');
+    }
+
   });
 })
 .define('app.search-filter', ['jQuery', 'docReady'], function () {

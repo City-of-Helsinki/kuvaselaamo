@@ -1186,7 +1186,7 @@ msgstr "Vuodesta"
 msgid "To year"
 msgstr "Vuoteen"
 
-msgid "Narrow results"
+msgid "Filter results"
 msgstr "Rajaa tuloksia"
 
 msgid "Specific year"
@@ -1194,3 +1194,6 @@ msgstr "Tietty vuosi"
 
 msgid "Specific photographer"
 msgstr "Tietty valokuvaaja"
+
+msgid "Year range info"
+msgstr "Alkamisvuosi ei voi olla myöhemmin kuin loppumisvuosi."

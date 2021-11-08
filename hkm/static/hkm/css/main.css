@@ -7548,6 +7548,10 @@ div.grid__fav.active {
       grid-row: 2;
       grid-column: 5; } }
 
+.search-form-message {
+  color: red;
+  font-size: 16px; }
+
 .keyword-wrapper {
   margin-top: 5px;
   display: flex;

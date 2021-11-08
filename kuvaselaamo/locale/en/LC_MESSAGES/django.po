@@ -1212,11 +1212,14 @@ msgstr "From year"
 msgid "To year"
 msgstr "To year"
 
-msgid "Narrow results"
-msgstr "Narrow results"
+msgid "Filter results"
+msgstr "Filter results"
 
 msgid "Specific year"
-msgstr "Specific year"
+msgstr "Year"
 
 msgid "Specific photographer"
-msgstr "Specific photographer"
+msgstr "Photographer"
+
+msgid "Year range info"
+msgstr "The start year cannot be after the end year."

@@ -50,28 +50,29 @@
           {% trans 'Find' %}
         </button>
 
-        <p class="form-text-filter">{% trans 'Narrow results' %}</p>
+        <p class="form-text-filter">{% trans 'Filter results' %}</p>
 
 
-          <select class="search-input facet-filter select-year" name="date" id="date"  data-facet-type="date">
-            <option value="" selected>{% trans 'Specific year' %}</option>
-            {% for date in facet_result.facets.main_date_str|dictsort:"translated" %}
-            <option value="{{ date.value }}">
-              {{ date.translated }}
-            </option>
-            {% endfor %}
-          </select>
+        <select class="search-input facet-filter select-year" name="date" id="date"  data-facet-type="date">
+          <option value="" selected>{% trans 'Specific year' %}</option>
+          {% for date in facet_result.facets.main_date_str|dictsort:"translated" %}
+          <option value="{{ date.value }}">
+            {{ date.translated }}
+          </option>
+          {% endfor %}
+        </select>
 
-          <select class="search-input facet-filter select-photographer" name="author" id="author" data-facet-type="author">
-            <option value="" selected>{% trans 'Specific photographer' %}</option>
-            {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
-            <option value="{{ author.value }}">
-              {{ author.translated }}
-            </option>
-            {% endfor %}
-          </select>
+        <select class="search-input facet-filter select-photographer" name="author" id="author" data-facet-type="author">
+          <option value="" selected>{% trans 'Specific photographer' %}</option>
+          {% for author in facet_result.facets.author_facet|dictsort:"translated" %}
+          <option value="{{ author.value }}">
+            {{ author.translated }}
+          </option>
+          {% endfor %}
+        </select>
 
       </form>
+      <p class="search-form-message hidden">{% trans 'Year range info' %}</p>
 
       <div class="keyword-wrapper">
         {% with keywords=url_params|search_keywords %}

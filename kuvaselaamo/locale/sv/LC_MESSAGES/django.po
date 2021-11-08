@@ -1163,10 +1163,10 @@ msgstr "Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors 
 
 #Search form
 msgid "Search info"
-msgstr "Du kan söka efter bilder med text eller efter tidsperiod"
+msgstr "Du kan söka bilder med fritext eller med bestämd tidsperiod"
 
 msgid "Search input"
-msgstr "Sök med valfritt ord"
+msgstr "Sök med valfritt sökord"
 
 msgid "From year"
 msgstr "Från år"
@@ -1174,11 +1174,14 @@ msgstr "Från år"
 msgid "To year"
 msgstr "Till år"
 
-msgid "Narrow results"
-msgstr "Snäva resultat"
+msgid "Filter results"
+msgstr "Filtrera resultaten"
 
 msgid "Specific year"
-msgstr "Specifikt år"
+msgstr "År"
 
 msgid "Specific photographer"
-msgstr "Specifik fotograf"
+msgstr "Fotograf"
+
+msgid "Year range info"
+msgstr "Startåret kan inte vara senare än slutåret."
