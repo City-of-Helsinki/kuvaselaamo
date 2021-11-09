@@ -27,8 +27,9 @@
     {% if not single_image %}
       <div class="back-to">
         <span class="back-to__title">{{ record.title }}</span><br>
-        <span>{% trans 'Search' %}: {{ search_term }} ({{ record.index }}/{{search_result.resultCount}})</span><br>
-        <a href="{% url 'hkm_search' %}?search={{search_term}}&page={{ current_page }}">
+        <span>{% trans 'Search' %}: {{ search_term }} ({{ record|record_index:search_result }})</span><br>
+
+         <a href="{% url 'hkm_search' %}{{ url_params|return_link }}">
           <i class="back-to__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
@@ -36,6 +37,7 @@
           </i>
           <span class="back-to__text">{% trans 'Back to search' %}</span>
         </a>
+
       </div>
     {% endif%}
 

@@ -1452,31 +1452,7 @@ div.grid__fav.active {
 .search-modal__close:hover {
   color: $color-hkm-pink;
 }
-.search-filter {
-  padding: 4px;
-  width: 100%;
-}
-.search-filter__item {
-  display: inline-block;
-  border: solid 1px $color-hkm-orange;
-  padding: 6px 8px;
-  background-color: $color-white;
-  font-family: $font-falkmanbold;
-}
-.search-filter__text {
-  float: left;
 
-}
-.search-filter__delete {
-  float: left;
-  padding: 0;
-  background-color: transparent;
-  margin: 0 0 0 8px;
-  color: $color-hkm-orange;
-  border: 0;
-  height: 19px;
-  width: 19px;
-}
 .explore__icon {
   display: inline-block;
   height: 70px;
@@ -1704,43 +1680,193 @@ div.grid__fav.active {
 #nav-search {
   position: relative;
   top: 16px;
+}
 
+.search-input {
+  height: 43px;
+  color: black;
+  padding: 5px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  background-color: white;
+
+  &:focus-visible {
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 1);
+    border-radius: 0;
+  }
 }
 
 .search-form {
   width: 100%;
-  max-width: 500px !important;
-  margin: 0;
-  float: left;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  padding-right: 10px;
+  padding-top: 20px;
+  grid-row-gap: 10px;
+
+  @media (min-width: $breakpoint-s) {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+  }
+
+  @media (min-width: $breakpoint-m) {
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-column-gap: 10px;
+  }
+
+  @media (min-width: $breakpoint-l) {
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    width: 80%;
+  }
+
+  .form-text {
+    &-info,
+    &-filter {
+      color: black;
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+
+    @media (min-width: $breakpoint-s) {
+      &-info,
+      &-filter {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: $breakpoint-m) {
+      &-info,
+      &-filter {
+        grid-column: span 3;
+      }
+    }
+
+    @media(min-width: $breakpoint-l) {
+      &-year {
+        grid-column: 1 / span 4;
+        grid-row: 1;
+      }
+      &-filter {
+        grid-column: 4 / span 2;
+        grid-row: 1;
+      }
+    }
+  }
+
+  .search-submit {
+    img {
+      transform: rotateZ(90deg);
+      margin-top: -5px;
+    }
+
+    @media (min-width: $breakpoint-s) {
+      grid-column: span 2;
+    }
+
+    @media (min-width: $breakpoint-m) {
+      grid-column: initial;
+      height: 42px;
+    }
+
+    @media (min-width: $breakpoint-l) {
+      grid-row: 2;
+      grid-column: 3;
+    }
+  }
+
+  .search-input {
+    @media (min-width: $breakpoint-l) {
+      grid-row: 2;
+      grid-column: 1;
+    }
+  }
+
+  .date-range {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    select {
+      width: 45%;
+    }
+
+    .dash {
+      height: 43px;
+      display: flex;
+      align-items: center;
+
+      .bar {
+        background-color: black;
+        height: 2px;
+        width: 10px;
+        margin: 0 10px;
+      }
+    }
+
+    @media (min-width: $breakpoint-l) {
+      grid-row: 2;
+      grid-column: 2;
+    }
+  }
+
+  @media (min-width: $breakpoint-l) {
+    .select-year {
+      grid-row: 2;
+      grid-column: 4;
+    }
+
+    .select-photographer {
+      grid-row: 2;
+      grid-column: 5;
+    }
+  }
 }
-.search-form--banner {
-  margin: 0;
-  padding-top: 15px;
-  width: 100%;
+
+.search-form-message {
+  color: red;
+  font-size: 16px;
 }
-.search-form__field {
-  font-family: $font-brownlight;
-  color: $color-hkm-green;
-  font-size: 18px;
-  padding: 0 15px;
-  width: 100%;
-  max-width: 500px !important;
-  height: 40px;
-  border: solid 2px $color-hkm-green;
-  border-radius: 20px;
+
+.keyword-wrapper {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 5px;
 }
-.search-form__field:focus {
-  border: solid 2px $color-hkm-green;
+
+.keyword {
+  background-color: $color-hkm-pink;
+  color: black;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &-icon {
+    margin-left: 10px;
+    min-width: 20px;
+    fill: black;
+    width: 18px;
+    height: 18px;
+  }
 }
-.search-form__btn,
-.search-form__btn:hover {
-  background-color: $color-white;
-  height: 40px;
-  border: solid 2px  $color-hkm-green;
-  border-left: 0;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+
+.search-load-more {
+  margin-top: 15px;
+  margin-left: 45%
 }
+
 .status-page {
   margin-top: 30px;
 }

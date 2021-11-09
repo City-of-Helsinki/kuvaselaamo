@@ -1143,8 +1143,8 @@ msgid "Records"
 msgstr "Kuvaa"
 
 #: hkm/templates/hkm/views/search.html:91
-msgid "Load more..."
-msgstr "Lataa lisää... "
+msgid "Load more"
+msgstr "Lataa lisää"
 
 # no_results.html
 #: hkm/templates/hkm/views/search.html:109
@@ -1171,3 +1171,29 @@ msgstr "Suosikkikuvasi on kerätty tänne"
 
 msgid "OGDescription"
 msgstr "Helsinkikuvia.fi-palvelu tarjoaa Helsinki-aiheisia valokuvia Helsingin kaupunginmuseon kokoelmista. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painokelpoisina tai pienempinä, verkkoon sopivina kuvina."
+
+
+#Search form
+msgid "Search info"
+msgstr "Voit etsiä kuvia vapaalla tekstillä tai tarkentamalla ajanjaksoa"
+
+msgid "Search input"
+msgstr "Etsi millä tahansa hakusanalla"
+
+msgid "From year"
+msgstr "Vuodesta"
+
+msgid "To year"
+msgstr "Vuoteen"
+
+msgid "Filter results"
+msgstr "Rajaa tuloksia"
+
+msgid "Specific year"
+msgstr "Tietty vuosi"
+
+msgid "Specific photographer"
+msgstr "Tietty valokuvaaja"
+
+msgid "Year range info"
+msgstr "Alkamisvuosi ei voi olla myöhemmin kuin loppumisvuosi."

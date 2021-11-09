@@ -10,7 +10,7 @@ from django.utils import formats
 from django.utils.encoding import force_unicode
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from kuvaselaamo import settings
+from urllib import urlencode
 
 LOG = logging.getLogger(__name__)
 
@@ -89,3 +89,51 @@ def front_page_url(collection):
 def showcase_collections(showcase):
     albums = showcase.albums.select_related('owner').all().order_by('created')
     return albums
+
+
+@register.filter
+def search_keywords(url_params):
+    keywords = []
+    ignored_params = ["date_from", "date_to", "page"]
+
+    for key, value in url_params.items():
+        if key in ignored_params or len(value) == 0:
+            continue
+
+        if isinstance(value, list):
+            for item in value:
+                keywords.append({"value": item, "facet_type": key})
+        else:
+            keywords.append({"value": value, "facet_type": key})
+
+    # Manually check date_from and date_to to combine them into one keyword
+    date_from = url_params.get('date_from', '')
+    date_to = url_params.get('date_to', '')
+
+    if date_from or date_to:
+        combined = "%s - %s" % (date_from, date_to)
+        keywords.append({"value": combined, "facet_type": "date_range"})
+
+    return keywords
+
+
+@register.filter()
+def return_link(url_params):
+    cleaned_params = {}
+
+    for key, value in url_params.items():
+        if value:
+            cleaned_params[key] = value
+
+    encoded_params = urlencode(cleaned_params, doseq=True)
+    return '?%s' % encoded_params if encoded_params else ''
+
+
+@register.filter()
+def record_index(record, search_result):
+    records_in_sr = search_result.get('records', [])
+
+    record_in_sr = next((x for x in records_in_sr if x['id'] == record.get('id')), None)
+
+    index = records_in_sr.index(record_in_sr) + 1
+    return "%s / %s" % (index, search_result.get('resultCount'))

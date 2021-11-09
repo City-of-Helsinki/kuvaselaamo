@@ -66,59 +66,94 @@ palikka
   });
 
 })
-.define('app.search-filter', ['jQuery', 'docReady'], function () {
-  var $accordion = $('#accordion');
-  var $filterLink = $('.list-group__link');
-  var $searchTerm = $accordion.attr('data-search');
-  var authors = [];
-  var dates = [];
-  var $deleteBtns = $('.search-filter__delete');
-  var searchParams = '?search=' + $searchTerm;
+.define('app.search-form', ['jQuery', 'docReady'], function () {
+  const formErrorMessage = $('.search-form-message');
+  const urlParams = new URLSearchParams();
 
-  $('.search-filter__text').each(function() {
-    authors.push($(this).attr('data-author-facet'));
-    dates.push($(this).attr('data-date-facet'));
+  $('#search-form').on('submit', function(event) {
+    event.preventDefault();
+
+    const formValues = $(this).serializeArray();
+
+    // Use only the following fields for url params
+    const urlParamFields = ['search', 'date_from', 'date_to'];
+
+    formValues.forEach(formVal => {
+      if (formVal.value && urlParamFields.includes(formVal.name)) {
+        // Add to url params
+        urlParams.set(formVal.name, formVal.value);
+      }
+    });
+
+    const date_from = formValues.find(fv => fv.name === "date_from")?.value ?? 0;
+    const date_to = formValues.find(fv => fv.name === "date_to")?.value ?? 0;
+
+    // Do not allow date_from being larger / after date_to. Show message instead.
+    if (date_from > 0 && date_to > 0 && Number(date_from) > Number(date_to)) {
+      $(formErrorMessage).removeClass('hidden');
+    }
+    else {
+      window.open('?' + urlParams.toString(), '_self');
+    }
+
   });
+})
+.define('app.search-filter', ['jQuery', 'docReady'], function () {
+  var $filterLink = $('.facet-filter');
+  var $deleteBtns = $('.search-filter__delete');
+  const urlParams = new URLSearchParams(window.location.search)
 
-  $filterLink.on('click', function() {
-    var authorParam = $(this).attr('data-author-value');
-    var dateParam = $(this).attr('data-date-value');
-    if (typeof authorParam != 'undefined') {
-      searchParams += '&author[]=' + authorParam;
+  $filterLink.on('change', function() {
+    const facetName = $(this).attr('data-facet-type');
+    const facetValue = $(this).val();
+
+    if (!facetValue) {
+      return;
     }
-    if (typeof dateParam != 'undefined') {
-      searchParams += '&main_date_str[]=' + dateParam;
+
+    // Allow only one date range selection for now
+    if (facetName === "date_from" || facetName === "date_to") {
+      urlParams.set(facetName, facetValue)
     }
-    for (var i = 0; i < authors.length; i++) {
-      if (typeof authors[i] != 'undefined') {
-        searchParams += '&author[]=' + authors[i];
-      }
+    else {
+      urlParams.append(facetName, facetValue)
     }
-    for (var i = 0; i < dates.length; i++) {
-      if (typeof dates[i] != 'undefined') {
-        searchParams += '&main_date_str[]=' + dates[i];
-      }
-    }
-    window.open(searchParams, '_self');
+
+    window.open('?' + urlParams.toString(), '_self');
   });
 
   $deleteBtns.on('click', function() {
-    searchParams = '?search=' + $searchTerm;
-    authors.splice(authors.indexOf($(this).attr('data-author-facet')), 1);
-    dates.splice(dates.indexOf($(this).attr('data-date-facet')), 1);
-    for (var i = 0; i < authors.length; i++) {
-      if (typeof authors[i] != 'undefined') {
-        searchParams += '&author[]=' + authors[i];
-      }
-    }
-    for (var i = 0; i < dates.length; i++) {
-      if (typeof dates[i] != 'undefined') {
-        searchParams += '&main_date_str[]=' + dates[i];
-      }
-    }
-    window.open(searchParams, '_self');
-  });
+    const facetName = $(this).attr('data-facet-type');
+    const facetValue = $(this).attr('data-facet-value');
 
+    if (facetName === "date_range") {
+      urlParams.delete('date_from');
+      urlParams.delete('date_to');
+    }
+    const values = urlParams.getAll(facetName)
+
+    if (Array.isArray(values)) {
+      const index = values.indexOf(facetValue);
+
+      values.splice(index, 1);
+
+      if (values.length === 0) {
+        urlParams.delete(facetName);
+      } else {
+        // Delete all values from to object
+        urlParams.delete(facetName);
+        // Construct key value pairs again, this results url params being in a "correct" format
+        // E.g date=1940&date=1950 instead of date=1940,1950
+        values.forEach(val => {
+          urlParams.append(facetName, val)
+        });
+      }
+    }
+    // Delete "page" parameter to make sure everything is in sync
+    urlParams.delete("page")
+
+    window.open('?' + urlParams.toString(), '_self');
+  });
 })
 .define('app.grid', ['jQuery', 'docReady', 'winReady'], function () {
 
@@ -219,11 +254,11 @@ palikka
       loadMoreButton.addClass('disabled').find('.icon-spinner').remove();
       var buttonText = loadMoreButton.text();
 
-      if (buttonText === "Lataa lisää... ") {
+      if (buttonText === "Lataa lisää") {
         loadMoreButton.text('Ei tuloksia');
       }
 
-      else if (buttonText === "Load more...") {
+      else if (buttonText === "Load more") {
         loadMoreButton.text('No more results');
       }
 

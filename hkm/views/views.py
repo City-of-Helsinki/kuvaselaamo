@@ -457,8 +457,8 @@ class SearchView(BaseView):
     next_record = None
     single_image = False
 
-    search_term = None
-    page = 1
+    url_params = None
+    all_dates = None
 
     def get(self, request, *args, **kwargs):
         result = self.handle_search(request, *args, **kwargs)
@@ -475,27 +475,50 @@ class SearchView(BaseView):
     def setup(self, request, *args, **kwargs):
         # Session expires after browser is closed
         request.session.set_expiry(0)
-        self.search_term = request.GET.get('search', '')
-        self.page = int(request.GET.get('page', 1))
+        self.url_params = {
+            "search": request.GET.get('search', ''),
+            "page": int(request.GET.get('page', 1)),
+            "date_from": request.GET.get('date_from', ''),
+            "date_to": request.GET.get('date_to', ''),
+            "author": filter(None, request.GET.getlist('author', None)),
+            "date": filter(None, request.GET.getlist('date', None))
+        }
         return True
 
     def handle_search(self, request, *args, **kwargs):
-        LOG.debug('Search', extra={'data': {'search_term': self.search_term, 'page': self.page}})
+        LOG.debug('Search', extra={'data': {'search_term': self.url_params['search'], 'page': self.url_params['page']}})
+
+        url_params = request.session.get('url_params', {})
+
+        session_facet_result = request.session.get('facet_result', None)
+
+        if not session_facet_result:
+            self.facet_result = self.get_facet_result(self.url_params['search'])
+            # date_from & date_to require full list of dates
+            self.all_dates = self.facet_result.get('facets', {}).get('main_date_str', [])
+        # If search term or year to year changed => fetch facets again
+        elif self.__url_params_changed(url_params, ["search", "date_from", "date_to"]):
+            self.facet_result = self.get_facet_result(self.url_params['search'], self.url_params['date_from'], self.url_params['date_to'])
+            self.all_dates = request.session.get('all_dates')
+        else:
+            self.facet_result = request.session.get('facet_result')
+            self.all_dates = request.session.get('all_dates')
+
+        facets = self.__form_facet_object()
+
         load_all_pages = bool(int(request.GET.get('loadallpages', 1)))
 
         session_search_result = copy.deepcopy(request.session.get('search_result', {}))
-        records = session_search_result.get('records', []) if self.search_term != request.GET.get('search', '') else []
+        records = ([] if self.__url_params_changed(url_params, ["search", "author", "date", "date_from", "date_to"])
+                   else session_search_result.get('records', []))
 
         # If we don't hit any checks below this point search_results end up being empty
         self.search_result = session_search_result
 
-        search_term_changed = self.search_term != request.session.get('search')
-        page_changed = self.page != request.session.get('page')
-
         # This if statement is true when user makes search with new term or parameters in list view
         if load_all_pages and not kwargs.get('record'):
-            if search_term_changed or page_changed:
-                results = self.get_search_result(self.search_term, self.page, self.page_size)
+            if self.__url_params_changed(url_params, ["search", "author", "date", "date_from", "date_to"]):
+                results = self.get_search_result(self.url_params['search'], self.url_params['page'], self.page_size, facets)
                 if results:
                     self.search_result = results
                     records += results.get('records', [])
@@ -537,12 +560,12 @@ class SearchView(BaseView):
 
                     # Take search parameters from session.
                     # This is required for "Back to search results" link to work
-                    self.search_term = request.session.get('search', '')
-                    self.page = request.session.get('page')
+                    self.url_params = request.session.get('url_params', {})
+                    self.all_dates = request.session.get('all_dates')
 
             # This else statement is executed when "Load more" is pressed
             else:
-                results = self.get_search_result(self.search_term, self.page, self.page_size)
+                results = self.get_search_result(self.url_params['search'], self.url_params['page'], self.page_size, facets)
                 self.search_result = results
 
         if self.search_result:
@@ -561,13 +584,8 @@ class SearchView(BaseView):
 
             if not self.search_result.get('resultCount') == 0 and 'records' in self.search_result and not kwargs.get(
                     'record'):
-                # Loop through records and set index (it is used in "back to search" part) to
-                # display image number / total images, e.g 1/10 000
                 # Check also if this record is one of user's favorites
-                session_length = len(session_search_result.get('records', []))
-                start_number = session_length + 1 if search_term_changed or page_changed else 1
-                for idx, record in enumerate(self.search_result['records'], start_number):
-                    record['index'] = idx
+                for record in self.search_result['records']:
                     if favorite_records is not None:
                         record['is_favorite'] = record['id'] in favorite_records
 
@@ -575,26 +593,69 @@ class SearchView(BaseView):
                 # Check for page changed, this will prevent session duplicating itself
                 # endlessly if search button is pressed over and over again.
                 # Otherwise set session to equal self.search_result.
-                if request.session.get('search_result') and page_changed:
+                if request.session.get('search_result') and self.__url_params_changed(url_params, ["page"]):
                     request.session['search_result']['records'].extend(self.search_result.get('records'))
                 else:
                     request.session['search_result'] = self.search_result
-                request.session['search'] = self.search_term
-                request.session['page'] = self.page
+                request.session['facet_result'] = self.facet_result
+                request.session['all_dates'] = self.all_dates
+                request.session['url_params'] = self.url_params
             elif 'records' not in self.search_result:
                 # No more records available for the next page
                 if self.request.is_ajax():
                     return http.HttpResponseBadRequest()
 
-    def get_search_result(self, search_term, page, limit):
-        return FINNA.search(search_term, page=page, limit=limit, detailed=self.use_detailed_query)
+    def __url_params_changed(self, url_params, selected_fields):
+        is_changed = {
+            "search": self.url_params['search'] != url_params.get('search', ''),
+            "page": self.url_params['page'] != url_params.get('page', ''),
+            "author": self.url_params['author'] != url_params.get('author', None),
+            "date": self.url_params['date'] != url_params.get('date', None),
+            "date_from": self.url_params['date_from'] != url_params.get('date_from', ''),
+            "date_to": self.url_params['date_to'] != url_params.get('date_to', '')
+        }
+
+        re_fetch = False
+
+        for field in selected_fields:
+            if is_changed[field]:
+                re_fetch = True
+
+        return re_fetch
+
+    def __form_facet_object(self):
+        facets = {}
+        if self.url_params['author']:
+            facets['author_facet'] = self.url_params['author']
+        if self.url_params['date']:
+            facets['main_date_str'] = self.url_params['date']
+        if self.url_params['date_from'] or self.url_params['date_to']:
+            date_from = self.url_params['date_from'] if self.url_params['date_from'] else "*"
+            date_to = self.url_params['date_to'] if self.url_params['date_to'] else "*"
+            facets['search_daterange_mv'] = "[%s TO %s]" % (date_from, date_to)
+        return facets
+
+    def get_facet_result(self, search_term, date_from=None, date_to=None):
+        if self.request.is_ajax():
+            return None
+        else:
+            return FINNA.get_facets(search_term, date_from=date_from, date_to=date_to)
+
+    def get_search_result(self, search_term, page, limit, facets):
+        return FINNA.search(search_term, page=page, limit=limit, facets=facets, detailed=self.use_detailed_query)
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['facet_result'] = self.facet_result
+        context['author_facets'] = self.url_params['author']
+        context['date_facets'] = self.url_params['date']
         context['search_result'] = self.search_result
-        context['search_term'] = self.search_term
-        context['current_page'] = self.page
+        context['search_term'] = self.url_params['search']
+        context['current_page'] = self.url_params['page']
+        context['date_from'] = self.url_params['date_from']
+        context['date_to'] = self.url_params['date_to']
+        context['all_dates'] = self.all_dates
+        context['url_params'] = self.url_params
         return context
 
 
@@ -643,7 +704,7 @@ class SearchRecordDetailView(SearchView):
         record.save()
 
         url = reverse('hkm_search_record')
-        url += '?search=%s&page=%d' % (self.search_term, self.page)
+        url += '?search=%s&page=%d' % (self.url_params['search'], self.url_params['page'])
         return redirect(url)
 
     def get_context_data(self, **kwargs):
@@ -675,7 +736,7 @@ class SearchRecordDetailView(SearchView):
         if self.record is None:
             context['search_result'] = None
             context['record'] = None
-        context['search_result_page'] = int(math.ceil(float(self.page)/RESULTS_PER_PAGE))
+        context['search_result_page'] = int(math.ceil(float(self.url_params['page'])/RESULTS_PER_PAGE))
         return context
 
     def get_empty_forms(self, request):
