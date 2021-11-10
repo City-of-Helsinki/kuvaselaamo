@@ -890,7 +890,7 @@ msgstr "Peruuta"
 
 #: hkm/templates/hkm/views/collection.html:61
 #: hkm/templates/hkm/views/my_collections.html:22
-msgid "Add images"
+msgid "Add pictures"
 msgstr "Lisää kuvia"
 
 #: hkm/templates/hkm/views/collection.html:98
@@ -1166,7 +1166,7 @@ msgid "Favorites"
 msgstr "Suosikit"
 
 #: hkm/views/views.py:1096
-msgid "Your favorite images are collected here"
+msgid "Your favorite pictures are collected here"
 msgstr "Suosikkikuvasi on kerätty tänne"
 
 msgid "OGDescription"
