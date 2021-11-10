@@ -1066,7 +1066,7 @@ class AjaxUserFavoriteRecordView(View):
         record_id = request.POST.get('record_id', None)
         action = request.POST.get('action', 'add')
         favorites_collection, created = Collection.objects.get_or_create(owner=request.user, collection_type=Collection.TYPE_FAVORITE,
-                                                                         defaults={'title': _(u'Favorites'), 'description': _(u'Your favorite images are collected here')})
+                                                                         defaults={'title': _(u'Favorites'), 'description': _(u'Your favorite pictures are collected here')})
 
         if record_id:
             if action == 'add':

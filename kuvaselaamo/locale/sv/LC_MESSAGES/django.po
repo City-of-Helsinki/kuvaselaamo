@@ -883,7 +883,7 @@ msgstr "Ångra"
 
 #: hkm/templates/hkm/views/collection.html:61
 #: hkm/templates/hkm/views/my_collections.html:22
-msgid "Add images"
+msgid "Add pictures"
 msgstr "Lägg till bilderna"
 
 #: hkm/templates/hkm/views/collection.html:98
@@ -1155,7 +1155,7 @@ msgid "Favorites"
 msgstr "Favoriter"
 
 #: hkm/views/views.py:1090
-msgid "Your favorite images are collected here"
+msgid "Your favorite pictures are collected here"
 msgstr "Dina favoritbilder finns samlade här"
 
 msgid "OGDescription"

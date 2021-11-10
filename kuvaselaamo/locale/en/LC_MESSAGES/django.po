@@ -1193,7 +1193,7 @@ msgid "Favorites"
 msgstr "Favorites"
 
 #: hkm/views/views.py:1096
-msgid "Your favorite images are collected here"
+msgid "Your favorite pictures are collected here"
 msgstr "Your favorite pictures are collected here"
 
 msgid "OGDescription"
