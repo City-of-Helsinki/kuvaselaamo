@@ -21,11 +21,11 @@ msgstr ""
 
 #: hkm/templates/hkm/home_page.html:12
 msgid "Welcome title"
-msgstr "Welcome to the treasure trove of Helsinki-themed photos"
+msgstr "Welcome to the treasure trove of Helsinki-themed pictures"
 
 #: hkm/templates/hkm/home_page.html:13
 msgid "Welcome text"
-msgstr "Over 65 000 images available for free use! You can download image files and order image prints."
+msgstr "Over 65 000 pictures available for free use! You can download picture files and order picture prints."
 
 #: hkm/templates/hkm/home_page.html:18
 msgid "Search description"
@@ -1167,7 +1167,7 @@ msgstr "Send feedback about the image"
 
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
-msgstr "Images"
+msgstr "Pictures"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more"
@@ -1201,7 +1201,7 @@ msgstr "Helsinkiphotos.fi is an image service that provides a user-friendly way 
 
 #Search form
 msgid "Search info"
-msgstr "You can search for images with text or by time period"
+msgstr "You can search for pictures with text or by time period"
 
 msgid "Search input"
 msgstr "Search by any word"

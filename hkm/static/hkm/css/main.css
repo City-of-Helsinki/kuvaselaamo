@@ -6428,7 +6428,7 @@ span.no-postal-fee {
   width: 100%;
   height: 60%;
   flex-direction: row;
-  min-height: 700px; }
+  min-height: 800px; }
   .welcome-area__left {
     width: 50%;
     height: 100%;
@@ -6439,7 +6439,7 @@ span.no-postal-fee {
     height: 100%; }
   @media (min-width: 300px) {
     .welcome-area {
-      min-height: 650px; } }
+      min-height: 700px; } }
 
 .center-content {
   width: 100%;
@@ -7526,6 +7526,7 @@ div.grid__fav.active {
     flex-direction: row;
     justify-content: space-between; }
     .search-form .date-range select {
+      min-width: 115px;
       width: 45%; }
     .search-form .date-range .dash {
       height: 43px;
