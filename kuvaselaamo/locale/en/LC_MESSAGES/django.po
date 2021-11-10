@@ -916,7 +916,7 @@ msgstr "Cancel"
 
 #: hkm/templates/hkm/views/collection.html:61
 #: hkm/templates/hkm/views/my_collections.html:22
-msgid "Add images"
+msgid "Add pictures"
 msgstr "Add pictures"
 
 #: hkm/templates/hkm/views/collection.html:98
