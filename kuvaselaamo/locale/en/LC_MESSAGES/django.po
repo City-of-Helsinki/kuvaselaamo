@@ -21,11 +21,11 @@ msgstr ""
 
 #: hkm/templates/hkm/home_page.html:12
 msgid "Welcome title"
-msgstr "Welcome to the treasure trove of Helsinki-themed photos"
+msgstr "Welcome to the treasure trove of Helsinki-themed pictures"
 
 #: hkm/templates/hkm/home_page.html:13
 msgid "Welcome text"
-msgstr "Over 65 000 images available for free use! You can download image files and order image prints."
+msgstr "Over 65 000 pictures available for free use! You can download picture files and order picture prints."
 
 #: hkm/templates/hkm/home_page.html:18
 msgid "Search description"
@@ -916,8 +916,8 @@ msgstr "Cancel"
 
 #: hkm/templates/hkm/views/collection.html:61
 #: hkm/templates/hkm/views/my_collections.html:22
-msgid "Add images"
-msgstr "Add images"
+msgid "Add pictures"
+msgstr "Add pictures"
 
 #: hkm/templates/hkm/views/collection.html:98
 msgid "Are you sure you want to delete this item?"
@@ -957,7 +957,7 @@ msgstr "- Browse or search a collection of over 40,000 photographs "
 #: hkm/templates/hkm/views/index.html:39 hkm/templates/hkm/views/index.html:149
 msgid "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
 msgstr ""
-"- Download high resolution, print-quality images or smaller images for "
+"- Download high resolution, print-quality pictures or smaller pictures for "
 "online use on your device – free of charge*"
 
 #: hkm/templates/hkm/views/index.html:40 hkm/templates/hkm/views/index.html:150
@@ -966,19 +966,19 @@ msgstr "- Browse the museum’s curated albums"
 
 #: hkm/templates/hkm/views/index.html:41 hkm/templates/hkm/views/index.html:151
 msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
-msgstr "- Create your own albums and add your favorite images to them "
+msgstr "- Create your own albums and add your favorite pictures to them "
 
 #: hkm/templates/hkm/views/index.html:42 hkm/templates/hkm/views/index.html:152
 msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
 msgstr ""
 "- Order customized photographic products such as posters from the "
-"collection’s images"
+"collection’s pictures"
 
 #: hkm/templates/hkm/views/index.html:43 hkm/templates/hkm/views/index.html:154
 msgid ""
 "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
 msgstr ""
-"*You may use the downloaded images freely as long as you credit Helsinki "
+"*You may use the downloaded pictures freely as long as you credit Helsinki "
 "City Museum and the photographer."
 
 # index.html welcome-modal
@@ -992,7 +992,7 @@ msgstr "Add to a new album"
 
 #: hkm/templates/hkm/views/index.html:108
 msgid "Search for images from the museum archive"
-msgstr "Search for images from the museum archive"
+msgstr "Search for pictures from the museum archive"
 
 #: hkm/templates/hkm/views/order.html:17
 #: hkm/templates/hkm/views/order_contact_information.html:15
@@ -1167,7 +1167,7 @@ msgstr "Send feedback about the image"
 
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
-msgstr "Images"
+msgstr "Pictures"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more"
@@ -1194,14 +1194,14 @@ msgstr "Favorites"
 
 #: hkm/views/views.py:1096
 msgid "Your favorite images are collected here"
-msgstr "Your favorite images are collected here"
+msgstr "Your favorite pictures are collected here"
 
 msgid "OGDescription"
 msgstr "Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use."
 
 #Search form
 msgid "Search info"
-msgstr "You can search for images with text or by time period"
+msgstr "You can search for pictures with text or by time period"
 
 msgid "Search input"
 msgstr "Search by any word"

@@ -17,8 +17,8 @@
                 </i>
               </button>
             {% endif %}
-          </span>    
-        </h1>  
+          </span>
+        </h1>
       </div>
       <div class="banner__description">{{ collection.description|default:"" }}</div>
       <form class="banner__form form-inline" method="POST">
@@ -58,7 +58,7 @@
   <div class="fullsize-container">
 
     {% if not collections_records_to_display %}
-      <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add images' %}</a>
+      <a href="{% url 'hkm_search' %}" class="hkm-btn hkm-btn--default btn btn-default">{% trans 'Add pictures' %}</a>
     {% endif %}
 
     <div class="grid flex-images">
