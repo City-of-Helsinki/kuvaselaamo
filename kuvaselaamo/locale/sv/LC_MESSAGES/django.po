@@ -1134,7 +1134,7 @@ msgstr "Skicka respons om bilden"
 
 #: hkm/templates/hkm/views/search.html:11
 msgid "Records"
-msgstr "Beskriv"
+msgstr "Bilder"
 
 #: hkm/templates/hkm/views/search.html:91
 msgid "Load more"
