@@ -93,6 +93,9 @@ palikka
       $(formErrorMessage).removeClass('hidden');
     }
     else {
+      // Delete "page" parameter to make sure everything is in sync
+      urlParams.delete("page")
+
       window.open('?' + urlParams.toString(), '_self');
     }
 
@@ -118,6 +121,9 @@ palikka
     else {
       urlParams.append(facetName, facetValue)
     }
+
+    // Delete "page" parameter to make sure everything is in sync
+    urlParams.delete("page")
 
     window.open('?' + urlParams.toString(), '_self');
   });
