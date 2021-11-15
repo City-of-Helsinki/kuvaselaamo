@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [2.8.0] 2021-11-15
+
+### Added
+- Reverted the change that removed year and photographer facets. In addition to those added a new facet, 
+  user is now able to filter images with a year range.
+
 # [2.7.2] 2021-08-24
 
 ### Fixed
