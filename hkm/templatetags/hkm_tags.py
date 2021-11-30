@@ -12,6 +12,8 @@ from django.utils.encoding import force_unicode
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from urllib import urlencode
 
+from hkm.utils import encoded_dict
+
 LOG = logging.getLogger(__name__)
 
 register = template.Library()
@@ -125,7 +127,8 @@ def return_link(url_params):
         if value:
             cleaned_params[key] = value
 
-    encoded_params = urlencode(cleaned_params, doseq=True)
+    encoded_cleaned_params = encoded_dict(cleaned_params)
+    encoded_params = urlencode(encoded_cleaned_params, doseq=True)
     return '?%s' % encoded_params if encoded_params else ''
 
 
