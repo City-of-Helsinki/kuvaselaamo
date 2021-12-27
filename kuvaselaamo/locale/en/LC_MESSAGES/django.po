@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 10:06+0200\n"
+"POT-Creation-Date: 2021-12-27 12:48+0200\n"
 "PO-Revision-Date: 2017-07-04 15:15+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: English (United States) (https://www.transifex.com/haltu/"
@@ -19,457 +19,337 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: hkm/email.py:24
 msgid "Kuvaselaamopalaute"
 msgstr "Helsinkiphotos.fi feedback"
 
-#: hkm/forms.py:77 hkm/models/models.py:501
 #, fuzzy
 #| msgid "Order ended"
 msgid "Orderer's name"
 msgstr "Order ended"
 
-#: hkm/forms.py:127
 msgid "Max amount of albums is three"
 msgstr "Max amount of albums is three"
 
-#: hkm/models/campaigns.py:97 hkm/models/campaigns.py:201
 msgid "Tila"
 msgstr ""
 
-#: hkm/models/campaigns.py:108
 msgid "Alkupäivämäärä"
 msgstr ""
 
-#: hkm/models/campaigns.py:113
 msgid "Loppupäivämäärä"
 msgstr ""
 
-#: hkm/models/campaigns.py:118
 #, fuzzy
 #| msgid "Tuotetyyppi"
 msgid "Tyyppi"
 msgstr "Product type"
 
-#: hkm/models/campaigns.py:123
 msgid "Käyttäjäryhmä"
 msgstr ""
 
-#: hkm/models/campaigns.py:131
 msgid "Kampanjamoduuli"
 msgstr ""
 
-#: hkm/models/campaigns.py:136
 msgid "Yhteiskäyttöestoryhmä"
 msgstr ""
 
-#: hkm/models/campaigns.py:142
 msgid "Prosentuaalinen alennus"
 msgstr ""
 
-#: hkm/models/campaigns.py:149
 msgid "Absoluuttinen alennus (veroton)"
 msgstr ""
 
-#: hkm/models/campaigns.py:154
 msgid "Free shipping"
 msgstr ""
 
-#: hkm/models/campaigns.py:159
 msgid "Nimi"
 msgstr ""
 
-#: hkm/models/campaigns.py:166
 msgid "kampanja"
 msgstr ""
 
-#: hkm/models/campaigns.py:167
 msgid "kampanjat"
 msgstr ""
 
-#: hkm/models/campaigns.py:194
 msgid "Käyttö"
 msgstr ""
 
-#: hkm/models/campaigns.py:207
 msgid "kampanjakoodi"
 msgstr ""
 
-#: hkm/models/campaigns.py:208
 msgid "kampanjakoodit"
 msgstr ""
 
-#: hkm/models/models.py:49
 msgid "Created"
 msgstr "Created"
 
-#: hkm/models/models.py:50
 msgid "Modified"
 msgstr "Modified"
 
-#: hkm/models/models.py:62
 msgid "Finnish"
 msgstr "Finnish"
 
-#: hkm/models/models.py:63
 msgid "English"
 msgstr "English"
 
-#: hkm/models/models.py:64
 msgid "Swedish"
 msgstr "Swedish"
 
-#: hkm/models/models.py:68 hkm/models/models.py:303 hkm/models/models.py:429
 msgid "User"
 msgstr "Användare"
 
-#: hkm/models/models.py:69
 msgid "Is admin"
 msgstr "Is admin"
 
-#: hkm/models/models.py:70
 msgid "Language"
 msgstr "Suomeksi / På svenska"
 
-#: hkm/models/models.py:72
 msgid "Is museum"
 msgstr ""
 
-#: hkm/models/models.py:97
 #, fuzzy
 #| msgid "Notification sent"
 msgid "Removal notification sent"
 msgstr "Notification sent"
 
-#: hkm/models/models.py:126
 msgid "Normal"
 msgstr "Normal"
 
-#: hkm/models/models.py:127
 msgid "Favorite"
 msgstr "Favorite"
 
-#: hkm/models/models.py:130
 msgid "Owner"
 msgstr "Owner"
 
-#: hkm/models/models.py:131 hkm/models/models.py:455 hkm/models/models.py:479
 msgid "Title"
 msgstr "Title"
 
-#: hkm/models/models.py:133 hkm/models/models.py:257
 msgid "Description"
 msgstr "Description"
 
-#: hkm/models/models.py:134
 msgid "Public"
 msgstr "Public"
 
-#: hkm/models/models.py:136
 msgid "Featured"
 msgstr "Featured"
 
-#: hkm/models/models.py:138 hkm/templates/hkm/views/collection.html:38
 msgid "Show in landing page"
 msgstr "Show in landing page"
 
-#: hkm/models/models.py:139
 msgid "Use in Showcases"
 msgstr "Use in Showcases"
 
-#: hkm/models/models.py:140
 msgid "Type"
 msgstr "Type"
 
-#: hkm/models/models.py:194 hkm/models/models.py:452
 msgid "Creator"
 msgstr "Creator"
 
-#: hkm/models/models.py:196 hkm/templates/hkm/views/collection_record.html:24
 msgid "Collection"
 msgstr "Album"
 
-#: hkm/models/models.py:198 hkm/models/models.py:331 hkm/models/models.py:431
-#: hkm/models/models.py:454
 msgid "Finna record ID"
 msgstr "Finna record ID"
 
-#: hkm/models/models.py:246
 msgid "Showcase title"
 msgstr "Showcase title"
 
-#: hkm/models/models.py:247
 msgid "Albums"
 msgstr "Albums"
 
-#: hkm/models/models.py:248
 msgid "Show on Home page"
 msgstr "Show on Home page"
 
-#: hkm/models/models.py:255 hkm/models/models.py:282 hkm/models/models.py:433
-#: hkm/models/models.py:469 hkm/templates/hkm/emails/feedback.txt:2
-#: hkm/templates/hkm/views/order_show_result.html:39
-#: hkm/templates/hkm/views/order_summary.html:29
 msgid "Name"
 msgstr "Name"
 
-#: hkm/models/models.py:259 hkm/templates/hkm/views/order_show_result.html:57
-#: hkm/templates/hkm/views/order_summary.html:47
 msgid "Price"
 msgstr "Price"
 
-#: hkm/models/models.py:271
 msgid "api-poster-gloss-30x40"
 msgstr "30x40 cm, Semi-Gloss 240g"
 
-#: hkm/models/models.py:272
 msgid "api-poster-gloss-40x30"
 msgstr "40x30 cm, Semi-Gloss 240g"
 
-#: hkm/models/models.py:273
 #, fuzzy
 #| msgid "api-poster-50x70"
 msgid "api-poster-30x40"
 msgstr "50x70 cm, Matt 180g"
 
-#: hkm/models/models.py:274
 #, fuzzy
 #| msgid "api-poster-50x70"
 msgid "api-poster-40x30"
 msgstr "50x70 cm, Matt 180g"
 
-#: hkm/models/models.py:275
 msgid "api-poster-50x70"
 msgstr "50x70 cm, Matt 180g"
 
-#: hkm/models/models.py:276
 msgid "api-poster-70x50"
 msgstr "70x50 cm, Matt 180g"
 
-#: hkm/models/models.py:277
 msgid "api-poster-gloss-A4-horizontal"
 msgstr "A4 Landscape, Semi-Gloss 240g"
 
-#: hkm/models/models.py:278
 msgid "api-poster-gloss-A4"
 msgstr "A4 Portrait, Semi-Gloss 240g"
 
-#: hkm/models/models.py:283
 msgid "Width"
 msgstr "Width"
 
-#: hkm/models/models.py:284
 msgid "Height"
 msgstr "Height"
 
-#: hkm/models/models.py:286
 msgid "Paper quality"
 msgstr "Paper quality"
 
-#: hkm/models/models.py:287
 msgid "Museum purchase only"
 msgstr ""
 
-#: hkm/models/models.py:304
 msgid "Session"
 msgstr "Session"
 
-#: hkm/models/models.py:306
 msgid "First name"
 msgstr "First name"
 
-#: hkm/models/models.py:308
 msgid "Last name"
 msgstr "Last name"
 
-#: hkm/models/models.py:310 hkm/models/models.py:435
-#: hkm/templates/hkm/emails/feedback.txt:3
-#: hkm/templates/hkm/views/order_show_result.html:42
-#: hkm/templates/hkm/views/order_summary.html:32
 msgid "Email"
 msgstr "Email"
 
-#: hkm/models/models.py:312 hkm/templates/hkm/views/order_show_result.html:45
-#: hkm/templates/hkm/views/order_summary.html:35
 msgid "Phone number"
 msgstr "Phone number"
 
-#: hkm/models/models.py:314
 msgid "Street adress"
 msgstr "Street address"
 
-#: hkm/models/models.py:316
 msgid "Postal code"
 msgstr "Postal code"
 
-#: hkm/models/models.py:318
 msgid "City"
 msgstr "City"
 
-#: hkm/models/models.py:333
 msgid "Crop x coordinate from left"
 msgstr "Crop x coordinate from left"
 
-#: hkm/models/models.py:335
 msgid "Crop y coordinate from top"
 msgstr "Crop y coordinate from top"
 
-#: hkm/models/models.py:337
 msgid "Crop width"
 msgstr "Crop width"
 
-#: hkm/models/models.py:339
 msgid "Crop height"
 msgstr "Crop height"
 
-#: hkm/models/models.py:341
 msgid "Original image width"
 msgstr "Original image width"
 
-#: hkm/models/models.py:343
 msgid "Original image height"
 msgstr "Original image height"
 
-#: hkm/models/models.py:345
 msgid "Full res original image width"
 msgstr "Full res original image width"
 
-#: hkm/models/models.py:347
 msgid "Full res original image height"
 msgstr "Full res original image height"
 
-#: hkm/models/models.py:353
 msgid "Image URL"
 msgstr "Image URL"
 
-#: hkm/models/models.py:355
 msgid "Cropped Image URL"
 msgstr "Cropped image URL"
 
-#: hkm/models/models.py:359 hkm/templates/hkm/emails/feedback.txt:6
 msgid "Record"
 msgstr "Image"
 
-#: hkm/models/models.py:362
 msgid "Order form phase"
 msgstr "Order form phase"
 
-#: hkm/models/models.py:364
 msgid "Randomized order identifier phrase"
 msgstr "Randomized order identifier phrase"
 
-#: hkm/models/models.py:366
 msgid "Product type"
 msgstr "Product type"
 
-#: hkm/models/models.py:368
 msgid "Product Name"
 msgstr "Product name"
 
-#: hkm/models/models.py:372 hkm/templates/hkm/views/order_show_result.html:56
-#: hkm/templates/hkm/views/order_summary.html:46
 msgid "Amount"
 msgstr "Amount"
 
-#: hkm/models/models.py:374 hkm/templates/hkm/snippets/_basket_total_row.html:5
-#: hkm/templates/hkm/snippets/_basket_total_row.html:7
-#: hkm/templates/hkm/views/order.html:60
-#: hkm/templates/hkm/views/order_summary.html:65
-#: hkm/templates/hkm/views/order_summary.html:67
 msgid "Shipping fees"
 msgstr "shipping fees"
 
-#: hkm/models/models.py:376
 msgid "Unit price"
 msgstr "Unit price"
 
-#: hkm/models/models.py:378
 msgid "Total price"
 msgstr "Total price"
 
-#: hkm/models/models.py:380
 #, fuzzy
 #| msgid "Total price"
 msgid "Total price with postage"
 msgstr "Total price"
 
-#: hkm/models/models.py:384
 msgid "Confirmed"
 msgstr "Confirmed"
 
-#: hkm/models/models.py:388
 msgid "Checkout started"
 msgstr "Checkout started"
 
-#: hkm/models/models.py:390
 msgid "Checkout ended"
 msgstr "Checkout ended"
 
-#: hkm/models/models.py:392 hkm/models/models.py:506
 msgid "Checkout successful"
 msgstr "Checkout successful"
 
-#: hkm/models/models.py:396
 msgid "Payment processed at"
 msgstr "Payment processed at"
 
-#: hkm/models/models.py:398 hkm/models/models.py:508
 msgid "Payment successful"
 msgstr "Payment successful"
 
-#: hkm/models/models.py:403
 msgid "Order started"
 msgstr "Order started"
 
-#: hkm/models/models.py:405
 msgid "Order ended"
 msgstr "Order ended"
 
-#: hkm/models/models.py:407 hkm/models/models.py:511
 msgid "Order successful"
 msgstr "Order successful"
 
-#: hkm/models/models.py:436 hkm/models/models.py:483
 msgid "Content"
 msgstr "Content"
 
-#: hkm/models/models.py:438
 msgid "Notification sent"
 msgstr "Notification sent"
 
-#: hkm/models/models.py:439
 msgid "Sent from"
 msgstr ""
 
-#: hkm/models/models.py:457
 msgid "Edited image"
 msgstr "Edited image"
 
-#: hkm/models/models.py:473
 msgid "Identifier"
 msgstr ""
 
-#: hkm/models/models.py:495
 msgid "Used discount code"
 msgstr ""
 
-#: hkm/models/models.py:502
 #, fuzzy
 #| msgid "Total price"
 msgid "Total order price"
 msgstr "Total price"
 
-#: hkm/models/models.py:503
 #, fuzzy
 #| msgid "Set to public"
 msgid "Sent to printer"
 msgstr "Set as public"
 
-#: hkm/models/models.py:514
 msgid "Randomized order collection identifier phrase"
 msgstr "Randomized order collection identifier phrase"
 
-#: hkm/templates/hkm/base.html:25 hkm/templates/hkm/base.html:43
 msgid "OGDescription"
 msgstr ""
 "Helsinkiphotos.fi is an image service that provides a user-friendly way to "
@@ -478,804 +358,354 @@ msgstr ""
 "resolution photographs suitable for print materials or lower resolution "
 "images more suitable for web and social media use."
 
-#: hkm/templates/hkm/base.html:40 hkm/templates/hkm/views/home_page.html:6
 msgid "Kuvaselaamo"
 msgstr "Helsinkiphotos.fi"
 
-#: hkm/templates/hkm/base.html:90
 msgid "Login with credentials"
 msgstr "Login with credentials"
 
-#: hkm/templates/hkm/base.html:101 hkm/templates/hkm/snippets/login.html:17
-#: hkm/templates/hkm/snippets/signup.html:14
 msgid "Sign up"
 msgstr "Sign up"
 
-#: hkm/templates/hkm/base.html:141
 msgid "Information about the service"
 msgstr "Information about the service"
 
-#: hkm/templates/hkm/base.html:142
 msgid "Frequently asked questions"
 msgstr "Questions & answers"
 
-#: hkm/templates/hkm/base.html:143
 msgid "Terms of use"
 msgstr "Terms of use"
 
-#: hkm/templates/hkm/base.html:144
 msgid "Privacy policy"
 msgstr "Privacy and register details"
 
-#: hkm/templates/hkm/base.html:145
 msgid "Accessibility statement"
 msgstr "Accessibility statement"
 
-#: hkm/templates/hkm/base.html:146 hkm/templates/hkm/views/info.html:5
-#: hkm/templates/hkm/views/info.html:13
 msgid "Feedback"
 msgstr "Feedback"
 
-#: hkm/templates/hkm/base.html:149
 msgid "This service is provided by"
 msgstr "This service is provided by"
 
-#: hkm/templates/hkm/base.html:162
 msgid "Kuvaselaamo of Helsinki City Museum"
 msgstr "Picture Browsery at Helsinki City Museum"
 
-#: hkm/templates/hkm/base_browse.html:17
-#: hkm/templates/hkm/views/collection_record.html:12
-#: hkm/templates/hkm/views/search_record.html:13
 msgid "Previous image"
 msgstr "Previous image"
 
-#: hkm/templates/hkm/base_browse.html:20
-#: hkm/templates/hkm/views/collection_record.html:15
-#: hkm/templates/hkm/views/search_record.html:17
 msgid "Next image"
 msgstr "Next image"
 
-#: hkm/templates/hkm/base_viewer.html:22
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: hkm/templates/hkm/base_viewer.html:29
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: hkm/templates/hkm/base_viewer.html:38 hkm/templates/hkm/base_viewer.html:40
 msgid "Remove from favorites"
 msgstr "Remove from favorites"
 
-#: hkm/templates/hkm/base_viewer.html:38 hkm/templates/hkm/base_viewer.html:40
-#: hkm/templates/hkm/snippets/search_records_grid.html:14
-#: hkm/templates/hkm/snippets/search_records_grid.html:17
 msgid "Add to favorites"
 msgstr "Add to favorites"
 
-#: hkm/templates/hkm/base_viewer.html:48 hkm/templates/hkm/base_viewer.html:227
-#: hkm/templates/hkm/base_viewer.html:256
 msgid "Add to collection"
 msgstr "Add to an album"
 
-#: hkm/templates/hkm/base_viewer.html:56
 msgid "Show details"
 msgstr "Show details"
 
-#: hkm/templates/hkm/base_viewer.html:63
 msgid "Download picture"
 msgstr "Download picture"
 
-#: hkm/templates/hkm/base_viewer.html:87
 msgid "Photographer:"
 msgstr "Creator:"
 
-#: hkm/templates/hkm/base_viewer.html:88
 msgid "Image pick-up year:"
 msgstr "Date:"
 
-#: hkm/templates/hkm/base_viewer.html:89
 msgid "Address:"
 msgstr "Address:"
 
-#: hkm/templates/hkm/base_viewer.html:94
 msgid "Image type:"
 msgstr "Image type:"
 
-#: hkm/templates/hkm/base_viewer.html:96 hkm/templates/hkm/base_viewer.html:98
 msgid "Image ID:"
 msgstr "Image ID:"
 
-#: hkm/templates/hkm/base_viewer.html:100
 msgid "Measurements:"
 msgstr "Measurements:"
 
-#: hkm/templates/hkm/base_viewer.html:111
 msgid "Related collections"
 msgstr "Related albums"
 
-#: hkm/templates/hkm/base_viewer.html:130
 msgid "No description"
 msgstr "No description"
 
-#: hkm/templates/hkm/base_viewer.html:143
 msgid "Image feedback"
 msgstr "Send feedback about the image"
 
-#: hkm/templates/hkm/base_viewer.html:144 hkm/templates/hkm/views/info.html:36
 msgid "Feedback disabled"
 msgstr ""
 "Due to a change in our collection management system, we are unable to "
 "process image feedback at this time. We apologize for the situation!"
 
-#: hkm/templates/hkm/base_viewer.html:167
 msgid "Crop and order"
 msgstr "Crop and order"
 
-#: hkm/templates/hkm/base_viewer.html:193
-#: hkm/templates/hkm/base_viewer.html:215
-#: hkm/templates/hkm/base_viewer.html:255
-#: hkm/templates/hkm/snippets/password_reset_email.html:22
-#: hkm/templates/hkm/snippets/password_reset_email.html:28
-#: hkm/templates/hkm/snippets/password_reset_set.html:15
-#: hkm/templates/hkm/snippets/password_reset_set.html:26
 msgid "Close"
 msgstr "Close"
 
-#: hkm/templates/hkm/base_viewer.html:194
-#: hkm/templates/hkm/snippets/password_reset_email.html:9
-#: hkm/templates/hkm/snippets/password_reset_set.html:10
-#: hkm/templates/hkm/views/info.html:30
 msgid "Submit"
 msgstr "Submit"
 
-#: hkm/templates/hkm/base_viewer.html:205
-#: hkm/templates/hkm/snippets/popover_cart.html:25
 msgid "Crop and download"
 msgstr "Crop and download"
 
-#: hkm/templates/hkm/base_viewer.html:216
 msgid "Download"
 msgstr "Download"
 
-#: hkm/templates/hkm/base_viewer.html:232
 msgid "Add to an existing collection"
 msgstr "Add to an existing album"
 
-#: hkm/templates/hkm/base_viewer.html:239
 msgid "Create a new collection"
 msgstr "Create a new album"
 
-#: hkm/templates/hkm/base_viewer.html:244
 msgid "New collection"
 msgstr "New album"
 
-#: hkm/templates/hkm/emails/feedback.txt:9
 msgid "Message"
 msgstr "Message"
 
-#: hkm/templates/hkm/snippets/_basket_total_row.html:2
-#: hkm/templates/hkm/views/order_show_result.html:74
-#: hkm/templates/hkm/views/order_summary.html:61
-#, fuzzy
-#| msgid "Total price"
-msgid "Total"
-msgstr "Total price"
-
-#: hkm/templates/hkm/snippets/_basket_total_row.html:9
-#: hkm/templates/hkm/views/order.html:60
-#: hkm/templates/hkm/views/order_show_result.html:76
-#: hkm/templates/hkm/views/order_summary.html:69
-msgid "Incl. VAT"
-msgstr "Incl. VAT"
-
-#: hkm/templates/hkm/snippets/login.html:14
-#: hkm/templates/hkm/snippets/navigation.html:150
-#: hkm/templates/hkm/snippets/password_reset_set.html:21
 msgid "Log in"
 msgstr "Log in"
 
-#: hkm/templates/hkm/snippets/login.html:15
-#: hkm/templates/hkm/snippets/password_reset_email.html:4
 msgid "Forgot your password"
 msgstr "Forgot your password?"
 
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:2
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:5
-#: hkm/templates/hkm/snippets/nav_basket_counter.html:12
-#: hkm/templates/hkm/views/basket.html:5
-msgid "Shopping cart"
-msgstr "Shopping cart"
-
-#: hkm/templates/hkm/snippets/navigation.html:54
-#: hkm/templates/hkm/snippets/navigation.html:107
 msgid "In English"
 msgstr "In English"
 
-#: hkm/templates/hkm/snippets/navigation.html:63
-#: hkm/templates/hkm/snippets/navigation.html:85
 msgid "På svenska"
 msgstr "På svenska"
 
-#: hkm/templates/hkm/snippets/navigation.html:76
-#: hkm/templates/hkm/snippets/navigation.html:98
 msgid "Suomeksi"
 msgstr "Suomeksi"
 
-#: hkm/templates/hkm/snippets/navigation.html:116
-#: hkm/templates/hkm/views/search.html:6 hkm/templates/hkm/views/search.html:17
 msgid "Search pictures"
 msgstr "Search pictures"
 
-#: hkm/templates/hkm/snippets/navigation.html:121
 msgid "Explore collections"
 msgstr "Explore albums"
 
-#: hkm/templates/hkm/snippets/navigation.html:128
 msgid "Profile menu"
 msgstr "Profile menu"
 
-#: hkm/templates/hkm/snippets/navigation.html:141
-#: hkm/templates/hkm/views/my_collections.html:6
-#: hkm/templates/hkm/views/my_collections.html:14
 msgid "My collections"
 msgstr "My albums"
 
-#: hkm/templates/hkm/snippets/navigation.html:144
 msgid "Logout"
 msgstr "Log out"
 
 # no_results.html
-#: hkm/templates/hkm/snippets/no_results.html:5
 #, fuzzy
 #| msgid "No search results or error"
 msgid "No search results"
 msgstr "No search results (or connection to image server lost)"
 
-#: hkm/templates/hkm/snippets/no_results.html:7
 msgid "Oops, there was an error, try again soon."
 msgstr ""
 
-#: hkm/templates/hkm/snippets/not_responding.html:4
 msgid "Finnas material server is not responding"
 msgstr "Finnas material server is not responding"
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:5
 msgid "Enter email description"
 msgstr ""
 "Worry not. Fill in your email address and we will send you instructions on "
 "how to change your password."
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:14
 msgid "Back to login"
 msgstr "Back to login"
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:19
 msgid "Email sent title"
 msgstr "Sent"
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:20
 msgid "Email sent link"
 msgstr ""
 "An email has been sent to the address you provided with a link to change "
 "your password."
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:21
 msgid "Email sent spam"
 msgstr "If the message doesn't arrive, check your spam folder."
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:26
-#: hkm/templates/hkm/snippets/password_reset_set.html:13
-#: hkm/templates/hkm/snippets/password_reset_set.html:24
 msgid "Password reset error title"
 msgstr "Error"
 
-#: hkm/templates/hkm/snippets/password_reset_email.html:27
-#: hkm/templates/hkm/snippets/password_reset_set.html:25
 msgid "Password reset error description"
 msgstr "Something went wrong, please try again after a while."
 
-#: hkm/templates/hkm/snippets/password_reset_set.html:5
 msgid "Changing password"
 msgstr "Changing password"
 
-#: hkm/templates/hkm/snippets/password_reset_set.html:6
 msgid "Password change instructions"
 msgstr ""
 "Enter your new password below. The password must be at least 6 characters "
 "long and contain letters and numbers or special characters."
 
-#: hkm/templates/hkm/snippets/password_reset_set.html:14
 msgid "Invalid link"
 msgstr ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 
-#: hkm/templates/hkm/snippets/password_reset_set.html:19
 msgid "Password changing success"
 msgstr "Password changed"
 
-#: hkm/templates/hkm/snippets/password_reset_set.html:20
 msgid "Password changing description"
 msgstr "Your password has been changed successfully."
 
-#: hkm/templates/hkm/snippets/popover_cart.html:7
-msgid "Download printable image"
-msgstr "Download full resolution image"
-
-#: hkm/templates/hkm/snippets/popover_cart.html:13
-msgid "Download web-image"
-msgstr "Download web-image"
-
-#: hkm/templates/hkm/views/404.html:8
 msgid "#error-404-title"
 msgstr "404 - Page not found"
 
-#: hkm/templates/hkm/views/404.html:9
 msgid "#error-404-paragraph"
 msgstr "The page you are looking for cannot be found"
 
-#: hkm/templates/hkm/views/404_image.html:8
 msgid "#error-404-image-not-found"
 msgstr "The image you were looking for was not found"
 
-#: hkm/templates/hkm/views/500.html:8
 msgid "#error-500-title"
 msgstr "500 - Internal Server Error"
 
-#: hkm/templates/hkm/views/_basket_content.html:4
 msgid "Remove row"
 msgstr "Remove row"
 
-#: hkm/templates/hkm/views/_basket_content.html:16
 msgid "Decrease"
 msgstr "Decrease the amount of product"
 
-#: hkm/templates/hkm/views/_basket_content.html:22
 msgid "Increase"
 msgstr "Increase the amount of product"
 
-#: hkm/templates/hkm/views/_basket_content.html:27
 msgid "kpl"
 msgstr "pcs"
 
-#: hkm/templates/hkm/views/_basket_content.html:42
 msgid "Discount code"
 msgstr ""
 
-#: hkm/templates/hkm/views/_basket_content.html:45
 #, fuzzy
 #| msgid "Postal code"
 msgid "Use code"
 msgstr "Postal code"
 
-#: hkm/templates/hkm/views/basket.html:17
-#: hkm/templates/hkm/views/basket.html:44
-#, fuzzy
-#| msgid "Back to search"
-msgid "Back to Homepage"
-msgstr "Back to search"
-
-#: hkm/templates/hkm/views/basket.html:36
-msgid "Proceed to Checkout"
-msgstr ""
-
-#: hkm/templates/hkm/views/basket.html:45
-msgid "Your cart is empty"
-msgstr ""
-
-#: hkm/templates/hkm/views/collection.html:32
 msgid "Set to public"
 msgstr "Set as public"
 
-#: hkm/templates/hkm/views/collection.html:42
 msgid "Set to featured"
 msgstr "Set as featured"
 
-#: hkm/templates/hkm/views/collection.html:48
 msgid "Save"
 msgstr "Save"
 
-#: hkm/templates/hkm/views/collection.html:62
-#: hkm/templates/hkm/views/my_collections.html:26
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Add pictures"
 msgstr "Add pictures"
 
-#: hkm/templates/hkm/views/collection.html:96
 msgid "Are you sure you want to delete this item?"
 msgstr "Are you sure you want to delete this image from the album?"
 
-#: hkm/templates/hkm/views/collection_record.html:6
-#: hkm/templates/hkm/views/search_record.html:6
 msgid "Image view"
 msgstr "Image view"
 
-#: hkm/templates/hkm/views/collection_record.html:24
 msgid "Picture"
 msgstr "Image"
 
-#: hkm/templates/hkm/views/collection_record.html:31
 msgid "Back to collection"
 msgstr "Back to album"
 
-#: hkm/templates/hkm/views/collection_record.html:35
-#: hkm/templates/hkm/views/search_record.html:45
 msgid "Left and right click to zoom."
 msgstr "Left and right click to zoom."
 
-#: hkm/templates/hkm/views/home_page.html:22
 msgid "Welcome title"
 msgstr "Welcome to the treasure trove of Helsinki-themed pictures"
 
-#: hkm/templates/hkm/views/home_page.html:23
 msgid "Welcome text"
 msgstr "Over 65 000 pictures available for free use!"
 
-#: hkm/templates/hkm/views/home_page.html:28
 msgid "Search description"
 msgstr ""
 "Search the museum's archives with any keyword, such as the name of the place "
 "or the year:"
 
-#: hkm/templates/hkm/views/home_page.html:30
-#: hkm/templates/hkm/views/search.html:48
-#: hkm/templates/hkm/views/search_record.html:30
 msgid "Search"
 msgstr "Search"
 
-#: hkm/templates/hkm/views/home_page.html:32
-#: hkm/templates/hkm/views/search.html:50
 msgid "Find"
 msgstr "Search"
 
-#: hkm/templates/hkm/views/info.html:28
 msgid "Feedback success"
 msgstr "Feedback submitted successfully"
 
-#: hkm/templates/hkm/views/info.html:29
 msgid "Feedback error"
 msgstr "Error occurred while submitting. Try again after a while"
 
-#: hkm/templates/hkm/views/info.html:33
 msgid "Feedback congested"
 msgstr ""
 "Unfortunately, the processing of feedback is currently very congested due to "
 "the volume of feedback and response times are longer than normal. We "
 "apologize for the inconvenience!"
 
-#: hkm/templates/hkm/views/order.html:8 hkm/templates/hkm/views/order.html:20
-#: hkm/templates/hkm/views/order_contact_information.html:19
-#: hkm/templates/hkm/views/order_show_result.html:15
-#: hkm/templates/hkm/views/order_summary.html:20
-msgid "Kuvan tilaaminen"
-msgstr "Ordering an image"
-
-#: hkm/templates/hkm/views/order.html:27
-msgid ""
-"Valitse alta haluamasi painotuotetyyppi ja tilattavien tuotteiden lukumäärä."
-msgstr "Choose your desired product and the amount of products below."
-
-#: hkm/templates/hkm/views/order.html:27
-msgid ""
-"Rajaa kuva haluamasi suuruiseksi muuttamalla kuvan päällä oleva kehikon "
-"kokoa."
-msgstr "Crop the image by resizing the frame."
-
-#: hkm/templates/hkm/views/order.html:28
-msgid "Huomaathan, että rajaamalla kuvan kokoa laatu voi kärsiä."
-msgstr "Take note that the image quality may suffer from cropping."
-
-#: hkm/templates/hkm/views/order.html:28
-msgid "Palvelu ilmoittaa, mikäli kuvanlaatu on alle suositellun rajan."
-msgstr ""
-"The service will notify if the image quality is below the recommended size."
-
-#: hkm/templates/hkm/views/order.html:31
-msgid "Tuotetyyppi"
-msgstr "Product type"
-
-#: hkm/templates/hkm/views/order.html:49
-msgid "Valmiin tulosteen laatu:"
-msgstr "Quality of the finished print:"
-
-#: hkm/templates/hkm/views/order.html:50
-msgid "Hinta yht."
-msgstr "Total price"
-
-#: hkm/templates/hkm/views/order.html:62
-msgid "Add to cart"
-msgstr "Add to cart"
-
-#: hkm/templates/hkm/views/order_complete.html:5
-msgid "Thank you for purchase"
-msgstr ""
-
-#: hkm/templates/hkm/views/order_contact_information.html:5
-msgid "Contact information"
-msgstr "Contact information for your order"
-
-#: hkm/templates/hkm/views/order_contact_information.html:24
-msgid "Kirjoita alle nimesi, sähköpostisi, puhelinnumerosi ja tilausosoite."
-msgstr "Enter your name, email, phone number and delivery address below."
-
-#: hkm/templates/hkm/views/order_contact_information.html:24
-#: hkm/templates/hkm/views/order_summary.html:25
-msgid "Tarkistathan, että tiedot ovat oikein."
-msgstr "Make sure that the information is correct."
-
-#: hkm/templates/hkm/views/order_contact_information.html:29
-msgid "Jatka"
-msgstr "Continue"
-
-#: hkm/templates/hkm/views/order_show_result.html:5
-msgid "Order payment confirmed"
-msgstr "Order payment confirmed"
-
-#: hkm/templates/hkm/views/order_show_result.html:20
-msgid "Kiitos tilauksestasi - maksu on vahvistettu."
-msgstr "Thank you for your order – the payment has been confirmed."
-
-#: hkm/templates/hkm/views/order_show_result.html:20
-msgid "Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen."
-msgstr "A separate order confirmation email will be sent to you."
-
-#: hkm/templates/hkm/views/order_show_result.html:23
-msgid "Tilauksesi on lähetetty Printmotorille painoon."
-msgstr "Your order has been sent to Printmotor."
-
-#: hkm/templates/hkm/views/order_show_result.html:25
-msgid "Tilauksen lähettämisessä Printmotorille painoon tapahtui virhe."
-msgstr "An error has occurred in sending the order to Printmotor."
-
-#: hkm/templates/hkm/views/order_show_result.html:25
-#: hkm/templates/hkm/views/order_show_result.html:33
-msgid "Ota yhteyttä Helsinkikuvia.fi-sivuston ylläpitäjään."
-msgstr ""
-"Please contact the Helsinkikuvia.fi administrator at kuvakokoelmat@hel.fi / "
-"tel. +358 9 3103 6497"
-
-#: hkm/templates/hkm/views/order_show_result.html:29
-msgid "Kiitos tilauksestasi."
-msgstr "Thank you for your order."
-
-#: hkm/templates/hkm/views/order_show_result.html:29
-msgid ""
-"Saat tilauksesta vielä sähköpostilla erillisen tilausvahvistuksen, kun "
-"maksutapahtuma on vahvistettu. Tähän menee tyypillisesti muutama minuutti, "
-"kuitenkin maksimissaan puoli tuntia."
-msgstr ""
-"When the payment has been confirmed, you will receive a separate "
-"confirmation email. This may take from a couple of minutes to half an hour."
-
-#: hkm/templates/hkm/views/order_show_result.html:33
-msgid "Maksun käsittelyssä tapahtui virhe."
-msgstr "An error has occurred in processing the payment."
-
-#: hkm/templates/hkm/views/order_show_result.html:37
-#: hkm/templates/hkm/views/order_steps_menu.html:13
-#: hkm/templates/hkm/views/order_steps_menu.html:15
-#: hkm/templates/hkm/views/order_summary.html:27
-msgid "Contact details"
-msgstr "Contact details"
-
-#: hkm/templates/hkm/views/order_show_result.html:48
-#: hkm/templates/hkm/views/order_summary.html:38
-msgid "Address"
-msgstr "Address"
-
-#: hkm/templates/hkm/views/order_show_result.html:53
-#: hkm/templates/hkm/views/order_summary.html:43
-msgid "Order (noun)"
-msgstr "Order"
-
-#: hkm/templates/hkm/views/order_show_result.html:55
-#: hkm/templates/hkm/views/order_summary.html:45
-msgid "Product"
-msgstr "Product"
-
-#: hkm/templates/hkm/views/order_steps_menu.html:8
-msgid "Product selection"
-msgstr "Product selection"
-
-#: hkm/templates/hkm/views/order_steps_menu.html:22
-#: hkm/templates/hkm/views/order_steps_menu.html:24
-msgid "Summary"
-msgstr "Summary"
-
-#: hkm/templates/hkm/views/order_summary.html:5
-msgid "Order summary"
-msgstr "Order summary"
-
-#: hkm/templates/hkm/views/order_summary.html:25
-msgid "Tämän jälkeen painamalla Tilaa-nappia siirryt maksusivulle."
-msgstr ""
-"By pressing the Order-button, you will be redirected to the payment site."
-
-#: hkm/templates/hkm/views/order_summary.html:27
-#: hkm/templates/hkm/views/order_summary.html:43
-msgid "Change"
-msgstr "Change"
-
-#: hkm/templates/hkm/views/order_summary.html:76
-msgid "Order (verb)"
-msgstr "Order"
-
-#: hkm/templates/hkm/views/order_summary.html:78
-msgid ""
-"By pressing Order (verb) you will be redirected to the secure payment "
-"service."
-msgstr ""
-"By pressing Order you will be redirected to payment service provider Visma "
-"Pay"
-
-#: hkm/templates/hkm/views/public_collections.html:6
-#: hkm/templates/hkm/views/public_collections.html:13
 msgid "Browse albums"
 msgstr "Explore albums"
 
-#: hkm/templates/hkm/views/search.html:6
 msgid "With word"
 msgstr "with word"
 
-#: hkm/templates/hkm/views/search.html:15
 msgid "Records"
 msgstr "Pictures"
 
 # Search form
-#: hkm/templates/hkm/views/search.html:21
 msgid "Search info"
 msgstr "You can search for pictures with text or by time period"
 
-#: hkm/templates/hkm/views/search.html:22
 msgid "Search input"
 msgstr "Search by any word"
 
-#: hkm/templates/hkm/views/search.html:26
 msgid "From year"
 msgstr "From year"
 
-#: hkm/templates/hkm/views/search.html:39
 msgid "To year"
 msgstr "To year"
 
-#: hkm/templates/hkm/views/search.html:53
 msgid "Filter results"
 msgstr "Filter results"
 
-#: hkm/templates/hkm/views/search.html:57
 msgid "Specific year"
 msgstr "Year"
 
-#: hkm/templates/hkm/views/search.html:66
 msgid "Specific photographer"
 msgstr "Photographer"
 
-#: hkm/templates/hkm/views/search.html:75
 msgid "Year range info"
 msgstr "The start year cannot be after the end year."
 
-#: hkm/templates/hkm/views/search.html:106
 msgid "Load more"
 msgstr "Load more"
 
 # no_results.html
-#: hkm/templates/hkm/views/search.html:124
 msgid "No more results"
 msgstr "No more results"
 
-#: hkm/templates/hkm/views/search_record.html:38
 msgid "Back to search"
 msgstr "Back to search"
 
-#: hkm/templates/registration/password_reset_subject.txt:2
 msgid "Reset password email title"
 msgstr "Changing the password"
 
-#: hkm/views/views.py:812
 msgid "Favorites"
 msgstr "Favorites"
 
-#: hkm/views/views.py:812
 msgid "Your favorite pictures are collected here"
 msgstr "Your favorite pictures are collected here"
 
-#: kuvaselaamo/validators.py:9
 msgid "Password alphabetic"
 msgstr "Password contains only letters"
-
-#~ msgid "Edited full resolution image"
-#~ msgstr "Edited full resolution image"
-
-#~ msgid "Edited preview image"
-#~ msgstr "Edited preview image"
-
-#~ msgid "Facebook login"
-#~ msgstr "Facebook login"
-
-#~ msgid "Google login"
-#~ msgstr "Google login"
-
-#~ msgid "Share"
-#~ msgstr "Share"
-
-#~ msgid "Buy this as a poster"
-#~ msgstr "Buy this as a poster"
-
-#~ msgid "Identification information"
-#~ msgstr "Image details"
-
-#~ msgid "Creation information"
-#~ msgstr "Creation information"
-
-#~ msgid "Property information"
-#~ msgstr "Property information"
-
-#~ msgid "License information"
-#~ msgstr "License"
-
-#~ msgid "Crop and add to collection"
-#~ msgstr "Crop and add to album"
-
-#~ msgid "Order a product of the image"
-#~ msgstr "Order a product of the image"
-
-#~ msgid "This is a low resolution image, product orders are not available"
-#~ msgstr "This is a low resolution image, products cannot be ordered."
-
-#~ msgid "Copy share url to clipboard"
-#~ msgstr "Copy image URL to clipboard"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancel"
-
-#~ msgid ""
-#~ "Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. "
-#~ "Valokuvat tarjoaa Helsingin kaupunginmuseo."
-#~ msgstr ""
-#~ "Welcome! You have arrived at a treasure trove of Helsinki photographs, "
-#~ "courtesy of Helsinki City Museum."
-
-#~ msgid "Täällä voit"
-#~ msgstr "At Helsinkiphotos.fi, You can"
-
-#~ msgid ""
-#~ "Selata tai hakea erilaisilla hakusanoilla valokuvia yli 40 000 kuvan "
-#~ "joukosta"
-#~ msgstr "- Browse or search a collection of over 40,000 photographs "
-
-#~ msgid ""
-#~ "Ladata ilmaiseksi laitteellesi verkko- tai korkearesoluutioisia kuvia"
-#~ msgstr ""
-#~ "- Download high resolution, print-quality pictures or smaller pictures "
-#~ "for online use on your device – free of charge*"
-
-#~ msgid "Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista"
-#~ msgstr "- Browse the museum’s curated albums"
-
-#~ msgid "Luoda omia albumeita ja lisätä niihin suosikkikuviasi"
-#~ msgstr "- Create your own albums and add your favorite pictures to them "
-
-#~ msgid "Tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja"
-#~ msgstr ""
-#~ "- Order customized photographic products such as posters from the "
-#~ "collection’s pictures"
-
-#~ msgid ""
-#~ "Myös kaupallinen käyttö on sallittua, jos muu lainsäädäntö ei sitä estä."
-#~ msgstr ""
-#~ "*You may use the downloaded pictures freely as long as you credit "
-#~ "Helsinki City Museum and the photographer."
-
-# index.html welcome-modal
-#~ msgid "Katso tarkemmat tiedot käyttöehdoista"
-#~ msgstr "Read more on our Terms of Use page"
-
-#~ msgid "Add to a new collection"
-#~ msgstr "Add to a new album"
-
-#~ msgid "Search for images from the museum archive"
-#~ msgstr "Search for pictures from the museum archive"
-
-#~ msgid "Send feedback"
-#~ msgstr "Send feedback about the image"
