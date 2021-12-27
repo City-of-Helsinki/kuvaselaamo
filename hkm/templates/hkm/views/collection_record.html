@@ -25,8 +25,7 @@
 
 <div class="back-to">
   <span class="back-to__title">{{ record.title }}</span><br>
-  <span>{% trans 'Collection' %}: {{ collection.title }} ({% trans 'Picture' %} {{ current_record_order_number }}/{{
-    collection_record_count }})</span><br>
+  <span>{% trans 'Collection' %}: {{ collection.title }} ({% trans 'Picture' %} {{ current_record_order_number }}/{{collection_record_count }})</span><br>
   <a href="{% url 'hkm_collection' collection_id=collection.id %}">
     <i class="back-to__icon">
       <svg class="svg-icon">
