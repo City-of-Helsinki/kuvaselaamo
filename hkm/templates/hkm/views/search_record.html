@@ -53,7 +53,11 @@
 
 {% endif %}
 {% endblock %}
-
+{% block hidden %}
+{% if record %}
+{% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record.full_res_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}
+{% endif %}
+{% endblock %}
 {% block extra_js %}
 <script>
   localStorage.setItem("last_record_browsed", "{{ search_term }}_{{ record.index }}");

@@ -1,0 +1,29 @@
+{% load i18n %}
+<div id="popover-cart-content">
+  <ul class="popover-list">
+    {% if full_res_image_url %}
+    <li class="popover-list__item">
+      <a download class="popover-list__btn" href="{{ full_res_image_url }}"
+        >{% trans 'Download printable image' %}</a
+      >
+    </li>
+    {% endif %} {% if web_image_url %}
+    <li class="popover-list__item">
+      <a download class="popover-list__btn" href="{{ cropped_web_image_url }}"
+        >{% trans 'Download web-image' %}</a
+      >
+    </li>
+    {% endif %}
+    <li class="popover-list__item">
+      <button
+        class="popover-list__btn popover-list__btn--crop actions_crop"
+        data-img-url="{{ web_image_url }}"
+        data-record-id="{{ finna_id }}"
+        data-toggle="modal"
+        data-target="#crop-and-download"
+      >
+        {% trans 'Crop and download' %}
+      </button>
+    </li>
+  </ul>
+</div>

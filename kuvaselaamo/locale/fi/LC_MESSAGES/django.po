@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 12:48+0200\n"
+"POT-Creation-Date: 2021-12-27 15:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -552,6 +552,12 @@ msgstr "Salasana vaihdettu"
 
 msgid "Password changing description"
 msgstr "Salasanasi on vaihdettu onnistuneesti."
+
+msgid "Download printable image"
+msgstr "Lataa painokelpoinen kuva"
+
+msgid "Download web-image"
+msgstr "Lataa web-kuva"
 
 msgid "#error-404-title"
 msgstr "404 - Sivua ei löydy"

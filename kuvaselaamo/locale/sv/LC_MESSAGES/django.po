@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 12:48+0200\n"
+"POT-Creation-Date: 2021-12-27 15:48+0200\n"
 "PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -557,6 +557,12 @@ msgstr "Lösenordet ändrat"
 
 msgid "Password changing description"
 msgstr "Ditt lösenord har ändrats."
+
+msgid "Download printable image"
+msgstr "Ladda upp publikationsduglig bild"
+
+msgid "Download web-image"
+msgstr "Ladda upp en webbild"
 
 msgid "#error-404-title"
 msgstr "404 - Sidan hittades inte"
