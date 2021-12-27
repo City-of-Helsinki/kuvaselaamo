@@ -10,55 +10,6 @@ from hkm.models.models import User
 from hkm.models.models import PrintProduct
 
 pages = [{
-    "name": u"Welcome",
-    "identifier": u"hkm_home",
-    "texts": [
-        {
-            "language": u"fi",
-            "title": u"Tervetuloa",
-            "content": u"""
-                <h3><strong>Tervetuloa! Olet saapunut Helsinki-aiheisten valokuvien aarreaittaan. Valokuvat tarjoaa Helsingin kaupunginmuseo.<br>
-                <br>
-                Täällä voit:</strong></h3>
-                <p>- Selata tai hakea erilaisilla hakusanoilla valokuvia yli 50 000 kuvan joukosta</p>
-                <p>- Ladata ilmaiseksi laitteellesi painokelpoisia tai pienempiä, verkkokäyttöön sopivia kuvia*</p>
-                <p>- Selata Helsingin kaupunginmuseon luomia kuva-albumeita eri aiheista</p>
-                <p>- Luoda omia albumeita ja lisätä niihin suosikkikuviasi</p>
-                <p>- Tilata maksullisia kuvatuotteita, kuten julisteita</p>
-                <p>*Voit käyttää lataamiasi kuvia haluamaasi tarkoitukseen, kunhan muistat mainita kuvan ottajan nimen ja Helsingin kaupunginmuseon.</p>
-                <p><a href="https://www.helsinkikuvia.fi/terms/">Katso tarkemmat tiedot käyttöehdoista</a></p>
-            """
-        }, {
-            "language": u"en",
-            "title": u"Welcome",
-            "content": u"""
-                <h3><strong>Welcome! You have arrived at a treasure trove of Helsinki photographs, courtesy of Helsinki City Museum.</strong></h3>
-                <h3><strong>At Helsinkiphotos.fi, you can:</strong></h3>
-                <p>- Browse or search a collection of over 50,000 photographs</p>
-                <p>- Download high resolution, print-quality images or smaller images for online use on your device – free of charge*</p>
-                <p>- Browse the museum’s curated albums</p>
-                <p>- Create your own albums and add your favorite images to them</p>
-                <p>- Order customized photographic products such as posters from the collection’s images</p>
-                <p>*You may use the downloaded images freely as long as you credit Helsinki City Museum and the photographer.</p>
-                <p><a href="https://www.helsinkikuvia.fi/terms/">Read more on our Terms of Use page</a></p>
-            """
-        }, {
-            "language": u"sv",
-            "title": u"Vällkommen",
-            "content": u"""
-                <h3><strong>Välkommen! Du har anlänt till Helsingforsbildernas skattkammare. Bilderna erbjuds av Helsingfors stadsmuseum.</strong></h3>
-                <h3><strong>Här kan du:</strong></h3>
-                <p>- Bläddra bland över 50 000 foton eller söka efter foton med olika sökord</p>
-                <p>- Gratis ladda ned både tryckbara och mindre bilder, som lämpar sig t.ex. för webbanvändning*</p>
-                <p>- Bläddra i Helsingfors stadsmuseums album med olika teman</p>
-                <p>- Skapa egna album och lägga till dina favoritbilder i dem</p>
-                <p>- Beställa avgiftsbelagda bildprodukter såsom affischer och postkort.</p>
-                <p>Du kan fritt använda de bilder du laddat ned, bara du kommer ihåg att nämna fotografens namn och Helsingfors stadsmuseum.</p>
-                <p><a href="https://www.helsinkikuvia.fi/terms/">Läs mer om användsvillkoren</a></p>
-            """
-        }
-    ]
-}, {
     "name": u"About",
     "identifier": u"hkm_siteinfo_about",
     "texts": [
