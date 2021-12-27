@@ -59,12 +59,12 @@
         </ul>
       </li>
       {% else %}
-      <li class="list-item_login"><a href="#" id="login-btn" data-toggle="modal" data-target="#login">{% trans 'Log in' %}</a></li>
-      {% endif %}
-      {% endif %}
-      <li class="list-item_cart">
-        {% include 'hkm/snippets/nav_basket_counter.html' %}
+      <li class="list-item_login">
+        <a href="#" id="login-btn" data-toggle="modal" data-target="#login"
+          >{% trans 'Log in'%}</a
+        >
       </li>
+      {% endif %} {% endif %}
     </ul>
   </div>
 </nav>

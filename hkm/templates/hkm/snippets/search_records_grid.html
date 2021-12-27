@@ -4,11 +4,6 @@
 <div class="grid__group item-slider invisible">
 {% for record in search_result.records %}
   <div class="grid__item item" data-w="" data-h="" name="{{ search_term }}_{{ record.index }}">
-    <a class="grid__item--buy" href="#" data-toggle="tooltip" title="{% trans 'Buy' %}" aria-label="{% trans 'Buy this as a poster' %}" data-action="{% url 'hkm_order_create' finna_id=record.id %}">
-      <svg class="svg-icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-        </svg>
-    </a>
     <a href="{% url 'hkm_search_record' %}?image_id={{ record.id }}">
       <img class="flex-img" src="{% finna_image record.id %}" alt="{{ record.title }}"></img>
     </a>

@@ -65,11 +65,6 @@
       <div class="grid__group item-slider invisible">
         {% for record in collections_records_to_display %}
           <div class="grid__item item" data-w="" data-h="">
-            <a class="grid__item--buy" href="#" data-toggle="tooltip" title="{% trans 'Buy' %}"  aria-label="{% trans 'Buy this as a poster' %}" data-action="{% url 'hkm_order_create' finna_id=record.record_id %}">
-                <svg class="svg-icon">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-                  </svg>
-              </a>
             <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ record.id }}">
               {% if user.is_authenticated %}
                 <div class="grid__fav {% if record.is_favorite %}active{% endif %}" data-record-id="{{ record.record_id }}">
