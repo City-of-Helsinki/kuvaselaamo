@@ -116,6 +116,8 @@ pages = [{
                     <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa. </p>
                     <p class="question">Miksi kuvien jakaminen somessa on tehty palvelussa niin hankalaksi? Miksi voin ostaa vain yhden kuvatuotteen kerrallaan?</p>
                     <p>Kehitämme palvelua jatkuvasti. Ostoskoritoiminnallisuus ja somejakamisen helpottaminen eivät ehtineet ensimmäiseen versioon mukaan mutta ovat kehityslistallamme.</p>
+                    <p class="question">Miten voin tilata kuvatuotteen?</p>
+                    <p>Voit tilata kuvatuotteen Kuvaselaamon sivuilta löytävällä verkkolomakkeella. Kuvien toimitusaika on noin viikko.</p>
                 
                     <h1 class="section-title">Valokuvien käyttö</h1>
                 
@@ -166,6 +168,8 @@ pages = [{
                     <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use. </p>
                     <p class="question">Why is sharing an image from the service so inconvenient? Why can I only buy one photographic product at a time?</p>
                     <p>We are continuously developing the service. The shopping basket functionality and click-to-share on social media did not make it to our first version but they are on our to-do list!</p>
+                    <p class="question">How do I order picture prints?</p>
+                    <p>You can order picture prints using the online form found on City Museum’s website. The delivery time is about a week.</p>
                 
                     <h1 class="section-title">Using the photographs</h1>
                 
@@ -215,6 +219,8 @@ pages = [{
                     <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier. </p>
                     <p class="question">Varför är det så svårt att dela bilder i sociala medier? Varför kan jag köpa bara en bildprodukt åt gången?</p>
                     <p>Tjänsten utvecklas kontinuerligt. I kommande versioner ska vi lägga till en varukorgfunktion och göra det enklare att dela bilder i sociala medier.</p>
+                    <p class="question">Hur beställer jag en bildprodukt?</p>
+                    <p>Du kan beställa en bildprodukt med hjälp av formuläret som finns på stadsmuseets hemsida under rubriken Bildapoteket. Leveranstiden för bilderna är ca en vecka.</p>
                     
                     <h1 class="section-title">Användning av fotografier</h1>
                     
