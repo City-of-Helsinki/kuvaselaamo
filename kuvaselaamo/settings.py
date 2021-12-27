@@ -143,7 +143,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'hkm.middleware.BasketMiddleware',
 )
 
 ROOT_URLCONF = 'kuvaselaamo.urls'
