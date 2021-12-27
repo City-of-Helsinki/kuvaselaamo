@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 09:49+0200\n"
+"POT-Creation-Date: 2021-12-27 10:06+0200\n"
 "PO-Revision-Date: 2017-07-04 15:15+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: English (United States) (https://www.transifex.com/haltu/"
@@ -910,9 +910,7 @@ msgstr "Welcome to the treasure trove of Helsinki-themed pictures"
 
 #: hkm/templates/hkm/views/home_page.html:23
 msgid "Welcome text"
-msgstr ""
-"Over 65 000 pictures available for free use! You can download picture files "
-"and order picture prints."
+msgstr "Over 65 000 pictures available for free use!"
 
 #: hkm/templates/hkm/views/home_page.html:28
 msgid "Search description"

@@ -58,7 +58,7 @@ pages = [{
             """
         }
     ]
-    }, {
+}, {
     "name": u"About",
     "identifier": u"hkm_siteinfo_about",
     "texts": [
@@ -68,8 +68,8 @@ pages = [{
             "content": u"""
                 <p>Helsinkikuvia.fi-palvelu tarjoaa Helsinki-aiheisia valokuvia Helsingin kaupunginmuseon kokoelmista. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painokelpoisina tai pienempinä, verkkoon sopivina kuvina.</p>
                 <p>Kuvat on julkaistu CC BY 4.0 -lisenssillä. Se merkitsee, että kuvia voi käyttää haluamallaan tavalla maksutta, kunhan mainitsee kuvan yhteydessä kuvaajan nimen ja Helsingin kaupunginmuseon. Lisenssi sallii myös kuvien kaupallisen käytön, jos lainsäädäntö ei sitä estä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta.</p>
-                <p>Helsinkikuvia.fi-palvelussa voi hakea kuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan. Palvelusta voi myös tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja. </p>
-                <p>Helsinkikuvia.fi-palvelussa on julkaistu Helsingin kaupunginmuseon valokuvakokoelman kaikki digitoidut kuvat, tällä hetkellä noin 45 000 kuvaa. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Jos kaipaat kuvaa, jota ei löydy Helsinkikuvia.fi-palvelusta, ota yhteys Helsingin kaupunginmuseon Kuvaselaamoon.</p>
+                <p>Helsinkikuvia.fi-palvelussa voi hakea kuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan.</p>
+                <p>Helsinkikuvia.fi-palvelussa on julkaistu Helsingin kaupunginmuseon valokuvakokoelman kaikki digitoidut kuvat, tällä hetkellä noin 65 000 kuvaa. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Jos kaipaat kuvaa, jota ei löydy Helsinkikuvia.fi-palvelusta, ota yhteys Helsingin kaupunginmuseon Kuvaselaamoon.</p>
                 <p>Helsinkikuvia.fi-palvelun kuvat ovat saatavilla myös kansallisessa Finna-palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten rakennusten historiasta.</p>
             """
         }, {
@@ -78,8 +78,8 @@ pages = [{
             "content": u"""
                     <p>Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use.</p>
                     <p>The photographs in the service are published under Creative Commons BY 4.0 license. In brief, CC BY means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph, in this case Helsinki City Museum and the photographer. The photographs may be used commercially, with certain restrictions. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
-                    <p>The Helsinkiphotos.fi service also allows users to conduct Finnish-language searches, browse curated photo albums or create their own albums by logging into the service. Helsinkiphotos.fi also has an integrated web store, where users can customize and order printed photographic products, such as posters and postcards.</p>
-                    <p>Currently, the service has approximately 45,000 digitized photographs. More images are being digitized and added to the system constantly. If you need a digital image that is not currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture Browsery. </p>
+                    <p>The Helsinkiphotos.fi service also allows users to conduct Finnish-language searches, browse curated photo albums or create their own albums by logging into the service.</p>
+                    <p>Currently, the service has approximately 65,000 digitized photographs. More images are being digitized and added to the system constantly. If you need a digital image that is not currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture Browsery. </p>
                     <p>The photographs of the Helsinki City Museum collection are still available in the national Finna service at hkm.finna.fi. In addition to photographs, you can also browse other material related to Helsinki in Finna, everything from plastic bags to hairdryers and bus tickets to works of art. You can also search the history of the buildings of Helsinki.</p>
             """
         }, {
@@ -87,17 +87,17 @@ pages = [{
             "title": u"Information om tjänsten",
             "content": u"""
                     <p>Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet. </p>
-                    <p>Museet har bilder ända från 1840-talet, så det är till exempel möjligt att gå igenom spårvagnarnas historia i bilder ända från 1800-talet till 2000-talet. Nu presenteras cirka 45 000 bilder för allmänheten, och fler blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade.</p>
+                    <p>Museet har bilder ända från 1840-talet, så det är till exempel möjligt att gå igenom spårvagnarnas historia i bilder ända från 1800-talet till 2000-talet. Nu presenteras cirka 65 000 bilder för allmänheten, och fler blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade.</p>
                     <p>Museet lämnar ut bilderna med CC BY 4.0 licens. Man kan ladda ner bilder och använda dem fritt och utan avgift på nätet och i olika applikationer, och även till exempel i böcker, presentartiklar eller tryckta på tapet, bara man anger fotografens namn och Helsingfors stadsmuseum i samband med bilden. Licensen tillåter kommersiell användning av bilderna om lagstiftningen inte hindrar detta. Till exempel är det förbjudet att använda bilder på personer i marknadsföring och reklam utan tillåtelse av personer som är med på bilden.</p>
                     <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Om du behöver en digital version av en bild som inte har digitaliserats, kan du beställa den via stadsmuseets Bildapotek. För digitaliseringar uppbärs en avgift enligt museets prislista. Den bild som du beställt publiceras oftast med en liten fördröjning i tjänsten Helsingforsbilder.fi och är efter det tillgänglig för alla.</p>
                     <p>Helsingfors stadsmuseums bilder finns fortfarande också i den nationella tjänsten Finna på adressen hkm.finna.fi. Utöver bilder kan man i Finna även bekanta sig med annat material med Helsingfors som tema, från plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan också söka information om byggnadernas historia i Helsingfors.</p>
             """
         }
     ]
-    }, {
-        "name": u"QA",
-        "identifier": u"hkm_siteinfo_QA",
-        "texts": [
+}, {
+    "name": u"QA",
+    "identifier": u"hkm_siteinfo_QA",
+    "texts": [
             {
                 "language": "fi",
                 "title": u"Kysymyksiä ja vastauksia",
@@ -105,7 +105,7 @@ pages = [{
                     <h1 class="section-title">Helsinkikuvia.fi-palvelun käyttäminen</h1>
                 
                     <p class="question">Mitä Helsinkikuvia.fi-palvelussa voi tehdä?</p>
-                    <p>Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painolaatuisina tai pienempinä, verkkolaatuisina kuvina. Palvelusta voi myös tilata maksullisia kuvatuotteita, kuten julisteita ja postikortteja.</p>
+                    <p>Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painolaatuisina tai pienempinä, verkkolaatuisina kuvina.</p>
                     <p class="question">Mitä kuvia palvelussa on?</p>
                     <p>Helsinkikuvia.fi-palvelussa on kymmeniä tuhansia Helsinkiin liittyviä valokuvia 1840-luvulta nykypäivään asti. Kuvat ovat peräisin Helsingin kaupunginmuseon kokoelmista. </p>
                     <p class="question">Voiko palvelua käyttää muilla kielillä?</p>
@@ -116,17 +116,6 @@ pages = [{
                     <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa. </p>
                     <p class="question">Miksi kuvien jakaminen somessa on tehty palvelussa niin hankalaksi? Miksi voin ostaa vain yhden kuvatuotteen kerrallaan?</p>
                     <p>Kehitämme palvelua jatkuvasti. Ostoskoritoiminnallisuus ja somejakamisen helpottaminen eivät ehtineet ensimmäiseen versioon mukaan mutta ovat kehityslistallamme.</p>
-                
-                    <h1 class="section-title">Kuvatuotteiden tilaus</h1>
-                
-                    <p class="question">Mistä tilaamani kuvatuotteet toimitetaan ja missä ne tehdään?</p>
-                    <p>Kuvatuotteet valmistaa ja toimittaa yhteistyökumppanimme Printmotor, Helsingin Herttoniemessä toimiva digipainotalo.</p>
-                    <p class="question">Minulla on ongelmia kuvatuotteen tilaamisessa, mihin otan yhteyttä?</p>
-                    <p>Voit ottaa yhteyttä osoitteeseen kuvakokoelmat@hel.fi tai 09 3103 6497, niin autamme ratkaisemaan ongelman. </p>
-                    <p class="question">Kuinka nopeasti saan kuvatuotteen tilauksen jälkeen?</p>
-                    <p>Kuvatuotteet valmistetaan ja toimitetaan kuljetukseen normaalisti 48h kuluessa tilauksen tekemisestä (arkipäivisin). Toimitusaika-arvio vaihtelee maittain: Suomi ja muu Eurooppa 5–7 päivää, Pohjois-Amerikka 7–10 päivää, muut maat 10 –14 päivää. Huomaathan, että EU:n ulkopuolelle toimitettaessa tilaus voi viipyä ylimääräisiä päiviä tullissa.</p>
-                    <p class="question">Millaiselle paperille kuvatuotteet tehdään? </p>
-                    <p>20x30- ja 30x40-kokoiset kuvat painetaan korkealaatuiselle 240g puolikiiltävälle (Semi-Glossy) paperille. 50x70-juliste painetaan korkealaatuiselle 180g mattapaperille.</p>
                 
                     <h1 class="section-title">Valokuvien käyttö</h1>
                 
@@ -159,14 +148,14 @@ pages = [{
                     <p>Helsingin kaupunginmuseon valokuvat ovat edelleen myös kansallisessa Finna-palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivaajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten rakennusten historiasta.</p>
                 """
             },
-            {
+        {
                 "language": "en",
                 "title": u"Questions and answers",
                 "content": u"""
                     <h1 class="section-title">The use of Helsinkiphotos.fi service</h1>
                 
                     <p class="question">What can I do in the Helsinkiphotos.fi service?</p>
-                    <p>In the Helsinkiphotos.fi service, you can search for photographs with different search words, browse albums created by the museum or create albums of your own. You can download images on your own device in high resolution, or as smaller versions that are more convenient to use online. You can also order moderately priced, customized photographic products, such as posters and postcards based on any image within the collection.</p>
+                    <p>In the Helsinkiphotos.fi service, you can search for photographs with different search words, browse albums created by the museum or create albums of your own. You can download images on your own device in high resolution, or as smaller versions that are more convenient to use online.</p>
                     <p class="question">What kind of photographs can I find in the service?</p>
                     <p>The Helsinkiphotos.fi service includes tens of thousands of photographs related to Helsinki from the 1840s to modern days. The photographs are from the Helsinki City Museum’s collections. </p>
                     <p class="question">Can I use the service in a language other than Finnish?</p>
@@ -177,17 +166,6 @@ pages = [{
                     <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use. </p>
                     <p class="question">Why is sharing an image from the service so inconvenient? Why can I only buy one photographic product at a time?</p>
                     <p>We are continuously developing the service. The shopping basket functionality and click-to-share on social media did not make it to our first version but they are on our to-do list!</p>
-                
-                    <h1 class="section-title">Ordering photographic products</h1>
-                
-                    <p class="question">Where are the photographic products made?</p>
-                    <p>The photographic products are made and delivered by our partner Printmotor, a digital printing house operating in Herttoniemi, Helsinki.</p>
-                    <p class="question">I have a problem when ordering a photographic product, who should I contact?</p>
-                    <p>You can contact kuvakokoelmat@hel.fi or +358 (0)9 3103 6497 and we will help solve your issue.</p>
-                    <p class="question">How soon will my product be delivered after ordering?</p>
-                    <p>Usually the photographic products are made and sent out within 48 hours of the order (on weekdays). The delivery times vary between countries: Finland and the rest of Europe 5–7 days, North America 7–10 days, other countries 10–14 days. Please note that when ordering products from outside of the EU, the delivery may be held up at customs for additional days.</p>
-                    <p class="question">On what kind of paper are the photographic products printed?</p>
-                    <p>Photographs of the size 20x30 and 30x40 are printed on high-quality 240 g semi-glossy paper. The 50x70 posters are printed on high-quality 180 g matte paper.</p>
                 
                     <h1 class="section-title">Using the photographs</h1>
                 
@@ -226,7 +204,7 @@ pages = [{
                     <h1 class="section-title">Användning av tjänsten Helsingforsbilder.fi</h1>
                     
                     <p class="question">Vad kan man göra i tjänsten Helsingforsbilder.fi? </p>
-                    <p>I tjänsten Helsingforsbilder.fi kan man söka efter foton med olika sökord, bläddra i museets album med olika teman eller skapa egna album och lägga till sina egna favoritbilder i dem. Man kan också ladda ned bilder till sin egen enhet. Bilderna är tillgängliga både som högupplösta och som mindre versioner, vilket gör att de kan användas såväl i trycksaker som på webben. Dessutom kan man beställa avgiftsbelagda bildprodukter, såsom affischer och postkort, i tjänsten.</p>
+                    <p>I tjänsten Helsingforsbilder.fi kan man söka efter foton med olika sökord, bläddra i museets album med olika teman eller skapa egna album och lägga till sina egna favoritbilder i dem. Man kan också ladda ned bilder till sin egen enhet. Bilderna är tillgängliga både som högupplösta och som mindre versioner, vilket gör att de kan användas såväl i trycksaker som på webben.</p>
                     <p class="question">Vilka bilder finns i tjänsten?</p>
                     <p>I tjänsten Helsingforsbilder.fi finns tiotusentals foton med anknytning till Helsingfors, från 1840-talet till i dag. Bilderna hör till Helsingfors stadsmuseums samlingar. </p>
                     <p class="question">Kan man använda tjänsten på andra språk?</p>
@@ -237,17 +215,6 @@ pages = [{
                     <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier. </p>
                     <p class="question">Varför är det så svårt att dela bilder i sociala medier? Varför kan jag köpa bara en bildprodukt åt gången?</p>
                     <p>Tjänsten utvecklas kontinuerligt. I kommande versioner ska vi lägga till en varukorgfunktion och göra det enklare att dela bilder i sociala medier.</p>
-                    
-                    <h1 class="section-title">Beställning av bildprodukter</h1>
-                    
-                    <p class="question">Vem tillverkar och levererar de bildprodukter som jag beställt?</p>
-                    <p>Bildprodukterna tillverkas och levereras av vår samarbetspartner Printmotor, ett digitaltryckeri i Hertonäs i Helsingfors.</p>
-                    <p class="question">Jag har problem med att beställa en bildprodukt. Vem kan jag kontakta?</p>
-                    <p>Du kan kontakta oss på adressen kuvakokoelmat@hel.fi eller ringa 09 3103 6497 så hjälper vi dig att lösa problemet. </p>
-                    <p class="question">Hur snabbt får jag bildprodukten efter beställningen?</p>
-                    <p>Bildprodukterna tillverkas och levereras för transport vanligtvis inom 48 timmar efter beställning (på vardagar). Uppskattad leveranstid varierar beroende på land: Finland och övriga Europa 5–7 dagar, Nordamerika 7–10 dagar, övriga länder 10–14 dagar. Observera att vid leverans utanför EU kan tullbehandlingen av försändelsen ta flera dagar.</p>
-                    <p class="question">På vilket papper trycks bilderna? </p>
-                    <p>Bilder på 20 x 30 cm och 30 x 40 cm trycks på ett högklassigt, halvblankt (Semi-Glossy) 240 grams papper. Affischer på 50 x 70 cm trycks på ett högklassigt, matt 180 grams papper.</p>
                     
                     <h1 class="section-title">Användning av fotografier</h1>
                     
@@ -280,11 +247,11 @@ pages = [{
                     <p>Helsingfors stadsmuseums bilder finns fortfarande också i den nationella tjänsten Finna på adressen hkm.finna.fi. Utöver bilder kan man i Finna även bekanta sig med annat material med Helsingfors som tema, från plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan också söka information om byggnadernas historia i Helsingfors.</p>
                 """
             }
-        ]
-    }, {
-        "name": u"Terms",
-        "identifier": u"hkm_siteinfo_terms",
-        "texts": [
+    ]
+}, {
+    "name": u"Terms",
+    "identifier": u"hkm_siteinfo_terms",
+    "texts": [
             {
                 "language": "fi",
                 "title": u"Käyttöehdot",
@@ -292,63 +259,30 @@ pages = [{
                     <p>Aineistojen käyttöä koskevat seuraavat ehdot:</p>
                     <p><strong>Kuvat:</strong> Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja yksityisyyden suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Ota yhteys Helsingin kaupunginmuseoon, jos tieto kuvan käyttöoikeuksista puuttuu tai olet epävarma oikeudestasi käyttää kuvaa. </p>
                     <p><strong>Kuvailutiedot:</strong> Hakutulosten yhteydessä esitettäviä kuvailutietoja voi pääsääntöisesti käyttää vapaasti. Poikkeuksen muodostavat kuvailutietoihin sisältyvät henkilönimet, joiden julkaisemisessa käyttäjällä on vastuu yksityisyyden suojan kunnioittamisessa.</p>
-                    <p>Palvelu hyödyntää Bamboran rajapintaa maksujen välittämiseen ja Printmotorin rajapintaa kuvatuotteiden tilausta varten. Näitä tai muita linkitettyjä sivuja käytettäessä sovelletaan palvelun tarjoavan kolmannen osapuolen määrittelemiä käyttöehtoja.:</p>
-                    <p><strong>Tilaus ja maksaminen:</strong></p>
-                    <p>Tilattavat tuotteet valitaan kotisivuilla lisäämällä ne ostoskoriin. Tilaus lähetetään maksamalla ostoskorin sisältö verkkokaupan kassatoiminnossa. Tehdessäsi tilauksen hyväksyt nämä toimitusehdot, tuotteiden hinnat sekä toimituskulut. Mikäli tilaushetkellä annetaan sähköpostiosoite, tilauksesta lähetetään tilausvahvistus sähköpostitse. Tilausvahvistuksesta ilmenevät tilatut tuotteet sekä hinta.</p>
-                    <p>Verkkokaupan maksuvälittäjänä toimii Bambora PayForm (Paybyway Oy, y-tunnus 2486559-4), joka on rekisteröity Finanssivalvonnan ylläpitämään maksulaitosrekisteriin. Maksamiseen siirrytään Bamboran verkkopalvelun kautta ja tiliotteella ja laskulla maksun saajana näkyy Bambora tai Paybyway Oy. Bambora välittää maksut verkkokauppiaalle. Maksaminen on turvallista, sillä kaikki maksutapahtumaa koskevat tiedot välitetään salattua yhteyttä käyttäen niin ettei kukaan ulkopuolinen taho näe maksutapahtuman tietoja. Kauppa syntyy verkkokaupan asiakkaan ja verkkokaupan välille. Verkkokaupan vastuulla ovat kaikki kauppaan liittyvät velvoitteet.</p>
-                    <p>PayForm-palvelun kautta voit maksaa verkkopankkitunnuksilla ja maksukorteilla (credit/debit). Käytettävissä ovat seuraavat maksutavat: Osuuspankki, Nordea, Danske Bank, Oma Säästöpankki, Säästöpankki, Aktia, Paikallisosuuspankit, S-Pankki, Handelsbanken, Ålandsbanken, Visa-, Visa Debit-, Visa Electron-, MasterCard- ja Debit MasterCard –kortit.</p>
-                    <p><strong>Bambora PayForm -maksupalvelun yhteystiedot</strong></p>
-                    <p>Bambora PayForm, Paybyway Oy (Y-tunnus 2486559-4)
-                    Sähköposti: payform@bambora.com
-                    Puhelin: 029 300 5050 (arkisin klo 9-16)
-                    Postiosoite: Laserkatu 6, 53850 Lappeenranta</p>
-                    <p>Lue lisää Bamborasta: https://www.bambora.com</p>
                 """
             },
-            {
+        {
                 "language": "en",
                 "title": u"Terms of use",
                 "content": u"""
                     <p>The following terms and conditions apply to the use of material</p>
                     <p><strong>Images:</strong> The photographs published by Helsinki City Museum in the Helsinkiphotos.fi service have been licensed with the “Creative Commons Attribution 4.0 International” or CC BY 4.0 license. In brief, it means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph. The license does not remove the user’s responsibility. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
                     <p><strong>Metadata:</strong> The metadata and descriptions presented with the search results are as a rule freely available, with the the exception of personal information such as names. For instance, a person’s right to decide on the commercial use of their name or other identifiable part of their identity and privacy protection rights may limit the use of the material.</p>
-                    <p>Linked pages and third party APIs such as Printmotor.io, Bambora, and Finna are subject to their respective terms of use.:</p>
-                    <p><strong>Orders and Payment:</strong></p>
-                    <p>Orders are collected from the online shop selection by adding the products to the shopping basket. The order is confirmed by using the check-out functionality in the online shop to pay for the purchase. By confirming an order, you accept these terms and conditions, product pricing and shipping costs. An e-mail confirmation will be delivered in case an e-mail address is provided by the time of confirming the order. The e-mail confirmation lists the products ordered and the price breakdown.</p>
-                    <p>Bambora PayForm (Paybyway Oy, business-id FI24865594) is the payment facilitator of the online shop. The Paybyway Oy is a payment facilitator authorized by the Financial Supervisory Authority of Finland. The payment process is conducted in the online service of the Bambora. Bambora or Paybyway Oy is shown as the payment received in the bank account listing and in the invoice. Paying with Bambora is safe. All information is exchanged through secured connections. The trade happens between the online customer and the online shop. The online shop is responsible for all obligations related to the trade.</p>
-                    <p>With Bambora PayForm you can pay your order by an internet banking account and a payment card (credit/debit).</p>
-                    <p><strong>Contact Bambora PayForm</strong></p>
-                    <p>Bambora PayForm, Paybyway Oy (business-id FI24865594)
-                    E-mail: payform@bambora.com
-                    Telephone: +358 29 300 5050 (workdays 9-16)
-                    Address: Laserkatu 6, 53850 Lappeenranta, Finland</p>
-                    <p>Read more about Bambora: https://www.bambora.com</p>
                 """
-            },            {
+            }, {
                 "language": "sv",
                 "title": u"Användningsvillkor",
                 "content": u"""
                     <p>För användningen av materialet gäller följande villkor:</p>
                     <p><strong>Bilder:</strong> Bilderna är licensierade med licensen Creative Commons Attribution 4.0 Internationell (CC BY 4.0). Om du vill publicera en bild eller använda bilden i offentligheten måste du följa de användningsvillkor som anges. Om du använder en bild offentligt, bör du nämna upphovsman och källa. Licensen ger eller ger dig inte alla de nödvändiga villkoren för ditt tänkta användande av verket. Till exempel, andra rättigheter som publicitet, integritetslagstiftning, eller ideella rättigheter kan begränsa hur du kan använda verket. Om informationen om användningsrättigheter saknas eller om du är osäker på om du har rätt att använda en bild, ska du kontakta Helsingfors stadsmusem.</p>
                     <p><strong>Metadata:</strong> I regel kan metadata i anknytning till sökresultat användas fritt. Andra rättigheter som publicitet eller integritetslagstiftning kan begränsa hur du kan använda metadatan.</p>
-                    <p>Länkade sidor och tredjeparts API:er som Printmotor.io, Bambora och Finna har sina egna användarvillkor och sekretess.:</p>
-                    <p><strong>Beställning och Betalning:</strong></p>
-                    <p>För att beställa produkter, välj produkter på hemsidan och lägg dem i kundkorgen. Skicka beställningen genom att betala produkterna i webbutikens kassa. Genom att lägga din beställning godkänner du dessa leveransvillkor, produktpriser och leveranskostnader. Om du anger din e-postadress i beställningen, skickar vi dig en beställningsbekräftelse via e-post. Av beställningsbekräftelsen framgår produkterna som beställts samt priset.</p>
-                    <p>Betalningar i webbutiken förmedlas av Bambora PayForm (Paybyway Oy, FO-nummer 2486559-4) som är registrerat i det av Finansinspektionen övervakade registret över betalningsinstitut. Du går till betalningen via Bamboras webbtjänst och på ditt kontoutdrag är betalningsmottagaren Bambora eller Paybyway Oy. Bambora förmedlar betalningarna till webbutiken. Betalningen är trygg, då alla uppgifter om transaktionen förmedlas via en krypterad förbindelse så att ingen utomstående instans ser dem. Köpet uppstår mellan webbutikskunden och webbutiken. Webbutiken är ansvarig för samtliga skyldigheter rörande köpet.</p>
-                    <p>Via PayForm kan du betala med internetbankkoder och betalkort (credit/debit). Följande betalningssätt används: Andelsbanken, Nordea, Danske Bank, Sparbanken, Aktia, Lokala andelsbanker, S-banken, Handelsbanken, Visa-, Visa Debit-, Visa Electron-, MasterCard- och Debit MasterCard-kort.</p>
-                    <p><strong>Bamboras kontaktuppgifter</strong></p>
-                    <p>Bambora PayForm, Paybyway Oy (FO-nummer 2486559-4) 
-                    E-post: payform@bambora.com 
-                    Telefon: +358 29 300 5050 (vardagar kl. 9–16) 
-                    Postadress: Laserkatu 6, 53850 Villmanstrand</p>
-                    <p>Läs mer om Bambora: https://www.bambora.com</p>
                 """
             }
-        ]
-    }, {
-        "name": u"Privacy",
-        "identifier": u"hkm_siteinfo_privacy",
-        "texts": [
+    ]
+}, {
+    "name": u"Privacy",
+    "identifier": u"hkm_siteinfo_privacy",
+    "texts": [
             {
                 "language": "fi",
                 "title": u"Asiakastietojen käsittely palvelussa Helsinkikuvia.fi",
@@ -409,7 +343,7 @@ pages = [{
                     </div>
                 """
             },
-            {
+        {
                 "language": "en",
                 "title": u"Handling customer data in Helsinkiphotos.fi",
                 "content": u"""
@@ -469,7 +403,7 @@ pages = [{
                 </div>
                 """
             },
-            {
+        {
                 "language": "sv",
                 "title": u"Hantering av kunduppgifter i Helsingforsbilder.fi",
                 "content": u"""
@@ -529,8 +463,8 @@ pages = [{
                     </div>
                 """
             }
-        ]
-    }
+    ]
+}
 ]
 
 
@@ -567,7 +501,7 @@ class Command(BaseCommand):
         if PrintProduct.objects.count() == 0:
             self.stdout.write("Initializing first print product")
             print_product = PrintProduct.objects.create(name=PrintProduct.PRODUCT_LAYOUTS_LIST[0][0], width="12",
-                                                     height="21", paper_quality="Great", is_museum_only=False)
+                                                        height="21", paper_quality="Great", is_museum_only=False)
             print_product.save()
 
             self.stdout.write(self.style.SUCCESS("Initializing first print product - Done"))

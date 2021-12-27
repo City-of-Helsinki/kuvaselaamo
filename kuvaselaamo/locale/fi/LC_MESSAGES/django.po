@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 09:49+0200\n"
+"POT-Creation-Date: 2021-12-27 10:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/haltu/teams/69807/fi/)\n"
@@ -894,9 +894,7 @@ msgstr "Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!"
 
 #: hkm/templates/hkm/views/home_page.html:23
 msgid "Welcome text"
-msgstr ""
-"Yli 65 000 kuvaa käytössäsi ilmaiseksi! Voit ladata koneellesi "
-"painokelpoisia kuvia tai tilata maksullisia kuvatulosteita."
+msgstr "Yli 65 000 kuvaa käytössäsi ilmaiseksi!"
 
 #: hkm/templates/hkm/views/home_page.html:28
 msgid "Search description"

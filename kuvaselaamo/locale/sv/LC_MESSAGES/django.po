@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 09:49+0200\n"
+"POT-Creation-Date: 2021-12-27 10:06+0200\n"
 "PO-Revision-Date: 2017-07-06 13:51+0300\n"
 "Last-Translator: Aki Pohjankyrö <aki.pohjankyro@hel.fi>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/haltu/teams/69807/sv/)\n"
@@ -899,9 +899,7 @@ msgstr "Välkommen till Helsingforsbildernas skattkammare!"
 
 #: hkm/templates/hkm/views/home_page.html:23
 msgid "Welcome text"
-msgstr ""
-"Över 65 000 bilder gratis! Du kan ladda ned utskrivbara bilder till din "
-"dator eller beställa avgiftsbelagda bilder."
+msgstr "Över 65 000 bilder gratis!"
 
 #: hkm/templates/hkm/views/home_page.html:28
 msgid "Search description"
