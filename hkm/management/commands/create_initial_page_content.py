@@ -239,85 +239,24 @@ pages = [{
                 "title": u"Asiakastietojen käsittely palvelussa Helsinkikuvia.fi",
                 "content": u"""
                     <p class="privacy-bigtitle">Tietosuoja</p>
-                    <p>Kun käyttäjä kirjautuu Helsinkikuvia.fi-palveluun (jatkossa Palvelu) omalla tunnuksellaan, palveluun tallennetaan tunnus ja salasana. Tietoja käytetään seuraaviin käyttötarkoituksiin:</p>
-                    <table class="privacy-table">
-                        <tr>
-                            <td class="privacy-label">Tieto</td>
-                            <td class="privacy-label">Käyttötarkoitus</td>
-                        </tr>
-                        <tr>
-                            <td>Käyttäjätunnus</td>
-                            <td>Käyttäjän tunnistaminen</td>
-                        </tr>
-                        <tr>
-                            <td>Salasana</td>
-                            <td>Käyttäjän tunnistaminen</td>
-                        </tr>
-                    </table>
-                    <p>Edellä mainittujen tietojen lisäksi palveluun voidaan tallentaa tietoja, jotka seuraavat käyttäjän toiminnasta palvelussa. Tällaisia ovat mm. käyttökieli, suosikit, omat albumit ja omiin albumeihin tallennetut tietueet.</p>
-                    <p>Palvelu hyödyntää Bamboran rajapintaa maksujen välittämiseen ja Printmotorin rajapintaa kuvatuotteiden tilausta varten. Näitä tai muita linkitettyjä sivuja käytettäessä sovelletaan palvelun tarjoavan kolmannen osapuolen määrittelemiä käyttöehtoja.</p>
-                    <div class="client-register">
-                        <p class="privacy-bigtitle">Helsinkikuvia.fi-asiakasrekisterin seloste</p>
-                        <p class="privacy-smalltitle">Rekisterin ylläpitäjä</p>
-                        <p>Helsingin kaupunginmuseo</p>
-                        <p>Aleksanterinkatu 16</p>
-                        <p></p>
-                        <p>00170 HELSINKI</p>
-                        <p>puh. 09 3103 6497</p>
-                        <p>kuvakokoelmat@hel.fi</p>
-                
-                        <p class="privacy-smalltitle">Säännönmukaiset tietolähteet</p>
-                        <p>Personoitujen toimintojen tiedot tallentaa käyttäjä itse.</p>
-                        <p class="privacy-smalltitle">Säännönmukainen tietojen luovutus</p>
-                        <p>Tietoja ei luovuteta eteenpäin.</p>
-                        <p class="privacy-smalltitle">Rekisterin nimi</p>
-                        <p>Helsinkikuvia.fi-palvelun asiakasrekisteri.</p>
-                        <p class="privacy-smalltitle">Rekisterin pitämisen peruste</p>
-                        <p>Rekisteri on perustettu asiakkaiden yksikäsitteisyyden ylläpitämiseksi.</p>
-                        <p class="privacy-smalltitle">Rekisterin käyttötarkoitus</p>
-                        <p>Rekisteriä käytetään käyttäjien tunnistamiseen, jotta voidaan tarjota personoituja palveluita. Esimerkkinä Omat albumit -toiminto, jolla käyttäjä voi luoda ja halutessaan jakaa omia kokoelmia palvelun kuvista.</p>
-                        <p class="privacy-smalltitle">Rekisterin sisältämät tietotyypit</p>
-                        <p>Käyttäjän perustiedot</p>
-                        <p>- Käyttäjätunnus</p>
-                        <p>- Salasana</p>
-                        <p class="privacy-smalltitle">Personoituja toimintoja varten kerättävät tiedot</p>
-                        <p>- Suosikit</p>
-                        <p>- Omat albumit</p>
-                        <p class="privacy-smalltitle">Rekisterin suojausperiaatteet</p>
-                        <p>Tietoja säilytetään ainoastaan sähköisessä muodossa. Tietoihin pääsevät käsiksi ainoastaan järjestelmän ylläpitäjät, jotka tunnistetaan käyttäjätunnuksella ja salasanalla.</p>
-                        <p class="privacy-smalltitle">Henkilötietojen säilytysaika</p>
-                        <p>Henkilötietoja säilytetään palvelussa, kunnes viimeisestä kirjautumisesta on kulunut 12 kuukautta.</p>
-                        <p class="privacy-smalltitle">Rekisteröidyn tarkistusoikeus</p>
-                        <p>Tarkistaaksesi, mitä henkilötietoja käyttäjästä on kerätty palvelimeen, käyttäjän tulee ottaa yhteys Helsingin kaupunginmuseon kuvakokoelmiin, ks. yhteystiedot ylempänä.</p>
-                        <p class="privacy-smalltitle">Virheellisten tietojen oikaisu</p>
-                        <p>Käyttäjä voi ottaa yhteyttä Helsingin kaupunginmuseon kuvakokoelmiin.</p>
-                    </div>
+                    <p class="privacy-bigtitle">Helsinkikuvia.fi-asiakasrekisterin seloste</p>
+                    <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Kaupunginmuseon%20kuvapalvelurekisteri%20(Helsinkikuvia.fi).pdf">Linkki palvelun rekisteriselosteeseen</a></p>
+                    <p class="privacy-smalltitle">Rekisterin yll&auml;pit&auml;j&auml;</p>
+                    <p>Helsingin kaupunginmuseo</p>
+                    <p>Aleksanterinkatu 16</p>
+                    <p>&nbsp;</p>
+                    <p>00170 HELSINKI</p>
+                    <p>puh. 09 3103 6497</p>
+                    <p>kuvakokoelmat@hel.fi</p>
                 """
             },
         {
                 "language": "en",
                 "title": u"Handling customer data in Helsinkiphotos.fi",
                 "content": u"""
-                <p class="privacy-bigtitle">Privacy and register details</p>
-                <p>When logging in with Helsinkiphotos.fi username and password the username and password of the user are stored in the service. The information is used for the following purposes:</p>
-                <table class="privacy-table">
-                    <tr>
-                        <td class="privacy-label">Information</td>
-                        <td class="privacy-label">Purpose</td>
-                    </tr>
-                    <tr>
-                        <td>Username</td>
-                        <td>User authentication</td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>User authentication</td>
-                    </tr>
-                </table>
-                <p>In addition to the above information, Finna may store information about the user’s Finna activities. Such information includes the language of use and pictures saved in the user’s albums.</p>
-                <p>Linked pages and third party APIs such as Printmotor.io, Bambora, and Finna are subject to their respective terms of use.</p>
-                <div class="client-register">
+                    <p class="privacy-bigtitle">Privacy and register details</p>
                     <p class="privacy-bigtitle">Description of the client register data file for Helsinkiphotos.fi service</p>
+                    <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/City%20Museum%20image%20service%20data%20file%20(Helsinkiphotos.fi).pdf">Link to client register data file</a></p>
                     <p class="privacy-smalltitle">Data file controller</p>
                     <p>Helsinki City Museum</p>
                     <p>Aleksanterinkatu 16</p>
@@ -325,33 +264,6 @@ pages = [{
                     <p>00099 CITY OF HELSINKI</p>
                     <p>tel. 09 3103 6497</p>
                     <p>kuvakokoelmat@hel.fi</p>
-            
-                    <p class="privacy-smalltitle">Regular sources of data</p>
-                    <p>The information is recorded by the user.</p>
-                    <p class="privacy-smalltitle">Regular disclosure of information</p>
-                    <p>The information will not be disclosed to third parties.</p>
-                    <p class="privacy-smalltitle">Name of data file</p>
-                    <p>Client register for Helsinkiphotos.fi service</p>
-                    <p class="privacy-smalltitle">Reason for maintaining the data file</p>
-                    <p>This register has been established to maintain the unambiguity of client identities.</p>
-                    <p class="privacy-smalltitle">Data file usage</p>
-                    <p>This register will be used to identify users in order to enable personalised services, such as creating albums and adding pictures in them.</p>
-                    <p class="privacy-smalltitle">Data types included in the file</p>
-                    <p>Basic user information</p>
-                    <p>- Username</p>
-                    <p>- Password</p>
-                    <p class="privacy-smalltitle">Data collected for personalised services</p>
-                    <p>- Favourites</p>
-                    <p>- Own albums</p>
-                    <p class="privacy-smalltitle">Principles of data security</p>
-                    <p>The information is recorded exclusively in an electronic format. Only system administrators, authenticated by username and password, may access the information.</p>
-                    <p class="privacy-smalltitle">Archiving period for personal information</p>
-                    <p>Personal information will be stored in the service until 12 months have passed from the last login.</p>
-                    <p class="privacy-smalltitle">Right to inspect the data file</p>
-                    <p>Users may contact Helsinki City Museum’s Picture Archives to inspect their personal information stored on the server. See contact details above.</p>
-                    <p class="privacy-smalltitle">Rectifying inaccurate information</p>
-                    <p>If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact details above.</p>
-                </div>
                 """
             },
         {
@@ -359,59 +271,15 @@ pages = [{
                 "title": u"Hantering av kunduppgifter i Helsingforsbilder.fi",
                 "content": u"""
                     <p class="privacy-bigtitle">Dataskydd</p>
-                    <p>När användaren loggar in sparas användarnamnet och lösenordet i tjänsten. Uppgifterna används för följande ändamål:</p>
-                    <table class="privacy-table">
-                        <tr>
-                            <td class="privacy-label">Uppgift</td>
-                            <td class="privacy-label">Ändamål</td>
-                        </tr>
-                        <tr>
-                            <td>Användarnamnet</td>
-                            <td>Identifierar användaren</td>
-                        </tr>
-                        <tr>
-                            <td>Lösenordet</td>
-                            <td>Identifierar användaren</td>
-                        </tr>
-                    </table>
-                    <p>Förutom de ovan nämnda uppgifterna kan man också spara information om användarens aktiviteter i Helsingforsbilder.fi-tjänsten. Sådan information är bl.a. språk och poster som användaren har sparat i egna album.</p>
-                    <p>Länkade sidor och tredjeparts API:er som Printmotor.io, Bambora och Finna har sina egna användarvillkor och sekretess.</p>
-                    <div class="client-register">
-                        <p class="privacy-bigtitle">Registerbeskrivning för Helsingforsbilder.fi-tjänstens kundregister</p>
-                        <p class="privacy-smalltitle">Registeransvarig</p>
-                        <p>Helsingfors stadsmuseum</p>
-                        <p>Alexandersgatan 16</p>
-                        <p>PB 4300</p>
-                        <p>00999 HELSINGFORS STAD</p>
-                        <p>+358 9 3103 6497</p>
-                        <p>kuvakokoelmat@hel.fi</p>
-                
-                        <p class="privacy-smalltitle">Regelmässiga informationskällor</p>
-                        <p>Användarna sparar själva de uppgifter som behövs för de individualiserade funktionerna.</p>
-                        <p class="privacy-smalltitle">Regelmässigt överlåtande av uppgifter</p>
-                        <p>Uppgifterna lämnas inte ut.</p>
-                        <p class="privacy-smalltitle">Registrets namn</p>
-                        <p>Helsingforsbilder.fi-tjänstens kundregister.</p>
-                        <p class="privacy-smalltitle">Grund för förande av registret</p>
-                        <p>Registret har grundats för att upprätthålla kunduppgifternas entydighet.</p>
-                        <p class="privacy-smalltitle">Registrets ändamål</p>
-                        <p>Registret används för att identifiera användarna, i syfte att erbjuda dem individualiserade tjänster.</p>
-                        <p class="privacy-smalltitle">Typ av uppgifter i registret</p>
-                        <p>Användarens basuppgifter</p>
-                        <p>- Användarnamnet</p>
-                        <p>- Lösenordet</p>
-                        <p class="privacy-smalltitle">Uppgifter som sparas för de individualiserade funktionerna</p>
-                        <p>- Favoriter</p>
-                        <p>- Bilder som sparats i Mina album</p>
-                        <p class="privacy-smalltitle">Dataskyddsprinciper</p>
-                        <p>Uppgifterna sparas endast i elektronisk form. Endast administratörerna, som identifieras med hjälp av användarnamn och lösenord, har tillgång till uppgifterna.</p>
-                        <p class="privacy-smalltitle">Personuppgifternas förvaringstid</p>
-                        <p>Personuppgifterna sparas i 12 månader efter den senaste inloggningen.</p>
-                        <p class="privacy-smalltitle">Rätt till insyn</p>
-                        <p>Om en användare vill kontrollera vilka uppgifter om honom eller henne som har sparats i registret, ska han eller hon ta kontakt med stadsmuseet.</p>
-                        <p class="privacy-smalltitle">Korrigering av felaktiga uppgifter</p>
-                        <p>Vid behov kan användaren kontakta stadsmuseet.</p>
-                    </div>
+                    <p class="privacy-bigtitle">Registerbeskrivning f&ouml;r Helsingforsbilder.fi-tj&auml;nstens kundregister</p>
+                    <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Stadsmuseets%20bildtj%C3%A4nstregister%20(Helsinkikuvia.fi).pdf">L&auml;nken till registerbeskrivning</a></p>
+                    <p class="privacy-smalltitle">Registeransvarig</p>
+                    <p>Helsingfors stadsmuseum</p>
+                    <p>Alexandersgatan 16</p>
+                    <p>PB 4300</p>
+                    <p>00999 HELSINGFORS STAD</p>
+                    <p>+358 9 3103 6497</p>
+                    <p>kuvakokoelmat@hel.fi</p>
                 """
             }
     ]
