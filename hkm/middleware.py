@@ -5,7 +5,6 @@ import logging
 from django.conf import settings
 from django.utils.translation import LANGUAGE_SESSION_KEY
 
-from hkm.basket.basket import Basket
 
 LOG = logging.getLogger(__name__)
 
@@ -19,13 +18,3 @@ class LanguageMiddleware(object):
             else:
                 request.session[LANGUAGE_SESSION_KEY] = settings.LANGUAGE_CODE
             return None
-
-
-class BasketMiddleware(object):
-    def process_request(self, request):
-        request.basket = Basket(request)
-
-    def process_response(self, request, response):
-        if hasattr(request, "basket") and request.basket.dirty:
-            request.basket.save()
-        return response

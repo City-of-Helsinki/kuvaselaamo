@@ -4,19 +4,39 @@
   <div class="navigation-header">
     <a class="navigation-brand" href="{% url 'hkm_home' %}">
       {% if language == 'fi' %}
-        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_fi.svg" class="navigation__logo">
+      <img
+        alt="Helsinkikuvia.fi logo"
+        src="/static/hkm/svg/Kuvia_fi.svg"
+        class="navigation__logo"
+      />
 
       {% elif language == 'en' %}
-        <img alt="Helsinkikuvia.fi logo" src="/static/hkm/svg/Kuvia_en.svg" class="navigation__logo">
+      <img
+        alt="Helsinkikuvia.fi logo"
+        src="/static/hkm/svg/Kuvia_en.svg"
+        class="navigation__logo"
+      />
 
       {% elif language == 'sv' %}
-        <img alt="Helsinkikuvia.fi Logotyp"  src="/static/hkm/svg/Kuvia_sv.svg" class="navigation__logo">
+      <img
+        alt="Helsinkikuvia.fi Logotyp"
+        src="/static/hkm/svg/Kuvia_sv.svg"
+        class="navigation__logo"
+      />
 
       {% endif %}
     </a>
   </div>
 
-  <button id="nav-collapse-btn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation-toggle" aria-expanded="false" aria-controls="navbar">
+  <button
+    id="nav-collapse-btn"
+    type="button"
+    class="navbar-toggle collapsed"
+    data-toggle="collapse"
+    data-target="#navigation-toggle"
+    aria-expanded="false"
+    aria-controls="navbar"
+  >
     <span class="sr-only">Toggle navigation</span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -26,45 +46,111 @@
   <div id="navigation-toggle" class="navigation-links collapse navbar-collapse">
     <ul class="nav navbar-nav">
       {% if language == 'fi' %}
-        <div class="list-item_lang-wrapper">
-          <li><a class="lang" lang="en" aria-label="{% trans 'In English' %}" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">EN</a> </li>
-          <li><a class="lang" lang="sv" aria-label="{% trans 'På svenska' %}" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">SV</a></li>
-        </div>
+      <div class="list-item_lang-wrapper">
+        <li>
+          <a
+            class="lang"
+            lang="en"
+            aria-label="{% trans 'In English' %}"
+            href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}"
+            >EN</a
+          >
+        </li>
+        <li>
+          <a
+            class="lang"
+            lang="sv"
+            aria-label="{% trans 'På svenska' %}"
+            href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}"
+            >SV</a
+          >
+        </li>
+      </div>
 
       {% elif language == 'en' %}
       <div class="list-item_lang-wrapper">
-        <li><a class="lang" lang="fi" aria-label="{% trans 'Suomeksi' %}" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">FI</a> </li>
-        <li><a class="lang" lang="sv" aria-label="{% trans 'På svenska' %}" href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}">SV</a></li>
+        <li>
+          <a
+            class="lang"
+            lang="fi"
+            aria-label="{% trans 'Suomeksi' %}"
+            href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}"
+            >FI</a
+          >
+        </li>
+        <li>
+          <a
+            class="lang"
+            lang="sv"
+            aria-label="{% trans 'På svenska' %}"
+            href="{% url 'hkm_language' %}?lang=sv&next={{ current_url }}"
+            >SV</a
+          >
+        </li>
       </div>
 
       {% elif language == 'sv' %}
       <div class="list-item_lang-wrapper">
-        <li><a class="lang" lang="fi" aria-label="{% trans 'Suomeksi' %}" href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}">FI</a> </li>
-        <li><a class="lang" lang="en" aria-label="{% trans 'In English' %}" href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}">EN</a></li>
+        <li>
+          <a
+            class="lang"
+            lang="fi"
+            aria-label="{% trans 'Suomeksi' %}"
+            href="{% url 'hkm_language' %}?lang=fi&next={{ current_url }}"
+            >FI</a
+          >
+        </li>
+        <li>
+          <a
+            class="lang"
+            lang="en"
+            aria-label="{% trans 'In English' %}"
+            href="{% url 'hkm_language' %}?lang=en&next={{ current_url }}"
+            >EN</a
+          >
+        </li>
       </div>
 
       {% endif %}
-      <li class="list-item_search"><a href="{% url 'hkm_search' %}">{% trans 'Search pictures' %}</a><li>
-      <li class="list-item_collection"><a href="{% url 'hkm_public_collections' %}">{% trans 'Explore collections' %}</a></li>
-      {% if not user.profile.is_museum %}
-      {% if user.is_authenticated %}
+      <li class="list-item_search">
+        <a href="{% url 'hkm_search' %}">{% trans 'Search pictures' %}</a>
+      </li>
+      <li></li>
+      <li class="list-item_collection">
+        <a href="{% url 'hkm_public_collections' %}"
+          >{% trans 'Explore collections'%}</a
+        >
+      </li>
+      {% if not user.profile.is_museum %} {% if user.is_authenticated %}
       <li class="list-item_user">
-        <a id="profile-dropdown" aria-label="{{ user }} {% trans 'Profile menu' %}" class="nav-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a
+          id="profile-dropdown"
+          aria-label="{{ user }} {% trans 'Profile menu' %}"
+          class="nav-user"
+          href="#"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <span>{{ user }}</span>
-          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="" >
+          <img class="nav-svg" src="/static/hkm/svg/Person.svg" alt="" />
         </a>
         <ul class="dropdown-menu">
-          <li><a href="{% url 'hkm_my_collections' %}">{% trans 'My collections' %}</a></li>
+          <li>
+            <a href="{% url 'hkm_my_collections' %}"
+              >{% trans 'My collections' %}</a
+            >
+          </li>
           <li><a href="{% url 'logout' %}?next=/">{% trans 'Logout' %}</a></li>
         </ul>
       </li>
       {% else %}
-      <li class="list-item_login"><a href="#" id="login-btn" data-toggle="modal" data-target="#login">{% trans 'Log in' %}</a></li>
-      {% endif %}
-      {% endif %}
-      <li class="list-item_cart">
-        {% include 'hkm/snippets/nav_basket_counter.html' %}
+      <li class="list-item_login">
+        <a href="#" id="login-btn" data-toggle="modal" data-target="#login"
+          >{% trans 'Log in'%}</a
+        >
       </li>
+      {% endif %} {% endif %}
     </ul>
   </div>
 </nav>

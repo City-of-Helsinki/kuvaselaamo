@@ -11,3 +11,4 @@ freezegun
 coverage
 factory-boy
 mock
+funcsigs

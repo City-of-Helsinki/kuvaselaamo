@@ -3,42 +3,44 @@
 {% load i18n %}
 
 {% block page_title %}
-  <title>{% trans 'Image view' %}</title>
+<title>{% trans 'Image view' %}</title>
 {% endblock %}
 
 {% block viewer_arrows %}
 
-  {% if previous_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}" class="image-viewer-arrow arrow-left"><img alt="{% trans 'Previous image' %}" src="/static/hkm/img/arrow_left.png"></img></a>
-  {% endif %}
-  {% if next_record %}
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}" class="image-viewer-arrow arrow-right"><img alt="{% trans 'Next image' %}" src="/static/hkm/img/arrow_right.png"></img></a>
-  {% endif %}
+{% if previous_record %}
+<a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ previous_record.id }}"
+  class="image-viewer-arrow arrow-left"><img alt="{% trans 'Previous image' %}"
+    src="/static/hkm/img/arrow_left.png"></img></a>
+{% endif %}
+{% if next_record %}
+<a href="{% url 'hkm_collection' collection_id=collection.id %}?rid={{ next_record.id }}"
+  class="image-viewer-arrow arrow-right"><img alt="{% trans 'Next image' %}"
+    src="/static/hkm/img/arrow_right.png"></img></a>
+{% endif %}
 
 {% endblock %}
 
 {% block content %}
 
-  <div class="back-to">
-    <span class="back-to__title">{{ record.title }}</span><br>
-    <span>{% trans 'Collection' %}: {{ collection.title }} ({% trans 'Picture' %} {{ current_record_order_number }}/{{ collection_record_count }})</span><br>
-    <a href="{% url 'hkm_collection' collection_id=collection.id %}">
-      <i class="back-to__icon">
-        <svg class="svg-icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
-        </svg>
-      </i>
-      <span class="back-to__text">{% trans 'Back to collection' %}</span>
-    </a>
-  </div>
+<div class="back-to">
+  <span class="back-to__title">{{ record.title }}</span><br>
+  <span>{% trans 'Collection' %}: {{ collection.title }} ({% trans 'Picture' %} {{ current_record_order_number }}/{{collection_record_count }})</span><br>
+  <a href="{% url 'hkm_collection' collection_id=collection.id %}">
+    <i class="back-to__icon">
+      <svg class="svg-icon">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left"></use>
+      </svg>
+    </i>
+    <span class="back-to__text">{% trans 'Back to collection' %}</span>
+  </a>
+</div>
 
-  <div title="{% trans 'Left and right click to zoom.' %}" class="image-viewer">
-    <div id="zoomable-image-container" class="image-viewer__container">
-      <img id="zoomable-image" class="image-viewer__image" data-full-res-url="{{ collection_record.get_full_res_image_absolute_url }}" src="{{ collection_record.get_preview_image_absolute_url }}"></img>
-    </div>
+<div title="{% trans 'Left and right click to zoom.' %}" class="image-viewer">
+  <div id="zoomable-image-container" class="image-viewer__container">
+    <img id="zoomable-image" class="image-viewer__image"
+      data-full-res-url="{{ collection_record.get_full_res_image_absolute_url }}"
+      src="{{ collection_record.get_preview_image_absolute_url }}"></img>
   </div>
-{% endblock %}
-
-{% block hidden %}
-  {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=collection_record.get_full_res_image_absolute_url web_image_url=collection_record.record_id|finna_default_image_url cropped_web_image_url=collection_record.get_preview_image_absolute_url finna_id=collection_record.record_id %}
+</div>
 {% endblock %}

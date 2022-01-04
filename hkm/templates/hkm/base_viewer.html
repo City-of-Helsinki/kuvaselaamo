@@ -67,33 +67,7 @@
             </svg>
           </i>
         </button>
-        {% if record and record.full_res_url or collection_record and collection_record.get_full_res_image_absolute_url %}
-          <form method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="order" />
-            <button name="orderbutton" formaction="{% url 'hkm_order_create' finna_id=record.id %}" class="actions__btn actions__btn--right" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Buy this as a poster' %}">
-              <i class="actions__icon">
-                <svg class="svg-icon">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-                </svg>
-              </i>
-            </button>
-          </form>
-        {% endif %}
       </div>
-        {% elif record.id %}
-        <form method="post" action="{% url 'hkm_order_create' finna_id=record.id %}">
-          {% csrf_token %}
-          <input type="hidden" name="action" value="order">
-          <button name="orderbutton" class="actions__btn actions__btn pull-left" type="submit">
-            <i class="actions__icon">
-              <svg class="svg-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-shopping"></use>
-              </svg>
-            </i>
-          </button>
-        </form>
-
     {% endif %}
   {% endblock %}
   {% block detail %}
@@ -166,23 +140,6 @@
         {% if not user.profile.is_museum %}
         <div class="row">
           <div class="col-md-offset-2 col-md-8">
-            <!--
-            <form method="POST" id="feedback-form">
-              <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
-              {% csrf_token %}
-              {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
-              <input type="hidden" name="action" value="feedback" />
-              <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
-              <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
-              <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
-              <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
-
-              {% if ENABLE_FEEDBACK_CONGESTION_MSG %}
-                <p class="feedback-congested-message">{% trans 'Feedback temp' %}</p>
-              {% endif %}
-
-            </form>
-            -->
             <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
             <p class="feedback-disabled">{% trans 'Feedback disabled' %}</p>
           </div>
