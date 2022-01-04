@@ -30,14 +30,14 @@ pages = [{
                     <p>Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use.</p>
                     <p>The photographs in the service are published under Creative Commons BY 4.0 license. In brief, CC BY means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph, in this case Helsinki City Museum and the photographer. The photographs may be used commercially, with certain restrictions. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
                     <p>The Helsinkiphotos.fi service also allows users to conduct Finnish-language searches, browse curated photo albums or create their own albums by logging into the service.</p>
-                    <p>Currently, the service has approximately 65,000 digitized photographs. More images are being digitized and added to the system constantly. If you need a digital image that is not currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture Browsery. </p>
+                    <p>Currently, the service has approximately 65,000 digitized photographs. More images are being digitized and added to the system constantly. If you need a digital image that is not currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture Browsery.</p>
                     <p>The photographs of the Helsinki City Museum collection are still available in the national Finna service at hkm.finna.fi. In addition to photographs, you can also browse other material related to Helsinki in Finna, everything from plastic bags to hairdryers and bus tickets to works of art. You can also search the history of the buildings of Helsinki.</p>
             """
         }, {
             "language": u"sv",
             "title": u"Information om tjänsten",
             "content": u"""
-                    <p>Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet. </p>
+                    <p>Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet.</p>
                     <p>Museet har bilder ända från 1840-talet, så det är till exempel möjligt att gå igenom spårvagnarnas historia i bilder ända från 1800-talet till 2000-talet. Nu presenteras cirka 65 000 bilder för allmänheten, och fler blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade.</p>
                     <p>Museet lämnar ut bilderna med CC BY 4.0 licens. Man kan ladda ner bilder och använda dem fritt och utan avgift på nätet och i olika applikationer, och även till exempel i böcker, presentartiklar eller tryckta på tapet, bara man anger fotografens namn och Helsingfors stadsmuseum i samband med bilden. Licensen tillåter kommersiell användning av bilderna om lagstiftningen inte hindrar detta. Till exempel är det förbjudet att använda bilder på personer i marknadsföring och reklam utan tillåtelse av personer som är med på bilden.</p>
                     <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Om du behöver en digital version av en bild som inte har digitaliserats, kan du beställa den via stadsmuseets Bildapotek. För digitaliseringar uppbärs en avgift enligt museets prislista. Den bild som du beställt publiceras oftast med en liten fördröjning i tjänsten Helsingforsbilder.fi och är efter det tillgänglig för alla.</p>
@@ -58,39 +58,37 @@ pages = [{
                     <p class="question">Mitä Helsinkikuvia.fi-palvelussa voi tehdä?</p>
                     <p>Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painolaatuisina tai pienempinä, verkkolaatuisina kuvina.</p>
                     <p class="question">Mitä kuvia palvelussa on?</p>
-                    <p>Helsinkikuvia.fi-palvelussa on kymmeniä tuhansia Helsinkiin liittyviä valokuvia 1840-luvulta nykypäivään asti. Kuvat ovat peräisin Helsingin kaupunginmuseon kokoelmista. </p>
+                    <p>Helsinkikuvia.fi-palvelussa on kymmeniä tuhansia Helsinkiin liittyviä valokuvia 1840-luvulta nykypäivään asti. Kuvat ovat peräisin Helsingin kaupunginmuseon kokoelmista.</p>
                     <p class="question">Voiko palvelua käyttää muilla kielillä?</p>
                     <p>Kyllä, ruotsiksi ja englanniksi. Valokuvien kuvailutiedot ja asiasanat ovat kuitenkin ainoastaan suomeksi, mikä vaikeuttaa hakujen tekemistä muilla kielillä.</p>
                     <p class="question">Mitä hyödyn kirjautumisesta Helsinkikuvia.fi-palveluun?</p>
-                    <p>Kun kirjaudut, voit luoda palvelussa omia albumeja ja lisätä niihin suosikkikuviasi. </p>
+                    <p>Kun kirjaudut, voit luoda palvelussa omia albumeja ja lisätä niihin suosikkikuviasi.</p>
                     <p class="question">Mitä tarkoittaa korkearesoluutioinen kuva? Miten osaan valita, minkälaisen kuvan laitteelleni lataan?</p>
-                    <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa. </p>
-                    <p class="question">Miksi kuvien jakaminen somessa on tehty palvelussa niin hankalaksi? Miksi voin ostaa vain yhden kuvatuotteen kerrallaan?</p>
-                    <p>Kehitämme palvelua jatkuvasti. Ostoskoritoiminnallisuus ja somejakamisen helpottaminen eivät ehtineet ensimmäiseen versioon mukaan mutta ovat kehityslistallamme.</p>
+                    <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa.</p>
                     <p class="question">Miten voin tilata kuvatuotteen?</p>
                     <p>Voit tilata kuvatuotteen Kuvaselaamon sivuilta löytävällä verkkolomakkeella. Kuvien toimitusaika on noin viikko.</p>
                 
                     <h1 class="section-title">Valokuvien käyttö</h1>
                 
                     <p class="question">Paljonko kuvan lataaminen tai käyttö maksaa?</p>
-                    <p>Valokuvien lataaminen ja käyttö eivät maksa mitään. Helsinkikuvia.fi-palvelun kautta voi tilata myös kuvatuotteita, kuten julisteita, jotka ovat maksullisia.</p>
+                    <p>Valokuvien lataaminen ja käyttö eivät maksa mitään.</p>
                     <p class="question">Mitä kaikkea palvelusta löytyvillä valokuvilla voi tehdä?</p>
-                    <p>Melkein mitä vain! Kunhan muistaa mainita kuvan yhteydessä kuvaajan nimen ja Helsingin kaupunginmuseon, kuvia voi käyttää monipuolisesti. Kuvia voi esimerkiksi jakaa sosiaalisessa mediassa, käyttää verkkosivuilla tai sovelluksissa. Kuvista voi tehdä tai teettää vapaasti myös tauluja, kirjoja, lehtiä, lahjatavaroita tai vaikka tapetteja. Mahdollisuus tutkia hyvinkin tarkkoja yksityiskohtia helpottaa myös opetus- ja tutkimuskäyttöä. Myös kaupallinen käyttö on sallittua tietyin rajoituksin. </p>
+                    <p>Melkein mitä vain! Kunhan muistaa mainita kuvan yhteydessä kuvaajan nimen ja Helsingin kaupunginmuseon, kuvia voi käyttää monipuolisesti. Kuvia voi esimerkiksi jakaa sosiaalisessa mediassa, käyttää verkkosivuilla tai sovelluksissa. Kuvista voi tehdä tai teettää vapaasti myös tauluja, kirjoja, lehtiä, lahjatavaroita tai vaikka tapetteja. Mahdollisuus tutkia hyvinkin tarkkoja yksityiskohtia helpottaa myös opetus- ja tutkimuskäyttöä. Myös kaupallinen käyttö on sallittua tietyin rajoituksin.</p>
                     <p class="question">Millä tavalla kaupunginmuseo ja kuvaajan nimi on mainittava kuvan yhteydessä?</p>
                     <p>Vaikkapa näin: 'Kuva: Helsingin kaupunginmuseo / Kuvaajan Nimi'. Jos kuvaajan nimeä ei ole tiedossa, riittää pelkkä Helsingin kaupunginmuseo. Esimerkiksi Twitterissä riittää maininta @kaupunginmuseo sekä kuvaajan nimi, jos se on tiedossa.</p>
                     <p class="question">Eivätkö tekijänoikeudet tai henkilötietolaki aseta rajoituksia kuvien julkaisulle?</p>
-                    <p>Tekijänoikeudet, henkilötietolaki ja intimiteettisuoja otetaan huomioon kuvia julkaistaessa. Julkaisemme palvelussa vain valokuvia, joiden oikeuksista Helsingin kaupunginmuseo on sopinut tai jotka ovat jo niin vanhoja, että tekijänoikeuden rajoitukset eivät niitä koske. Lisäksi tietyt teemat arvioidaan perusteellisesti ennen verkossa julkaisemista. Tällaisia ovat esimerkiksi lapsikuvat, alastomuus tai henkilön poliittisen suuntautuneisuuden paljastavat kuvat. </p>
+                    <p>Tekijänoikeudet, henkilötietolaki ja intimiteettisuoja otetaan huomioon kuvia julkaistaessa. Julkaisemme palvelussa vain valokuvia, joiden oikeuksista Helsingin kaupunginmuseo on sopinut tai jotka ovat jo niin vanhoja, että tekijänoikeuden rajoitukset eivät niitä koske. Lisäksi tietyt teemat arvioidaan perusteellisesti ennen verkossa julkaisemista. Tällaisia ovat esimerkiksi lapsikuvat, alastomuus tai henkilön poliittisen suuntautuneisuuden paljastavat kuvat.</p>
                     <p class="question">Onko kuvien kaupalliseen käyttöön rajoituksia?</p>
-                    <p>Kyllä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Lisäksi on mainittava Helsingin kaupunginmuseo ja kuvaajan nimi. </p>
+                    <p>Kyllä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Lisäksi on mainittava Helsingin kaupunginmuseo ja kuvaajan nimi.</p>
                     <p class="question">Mitä tarkoittaa, että kuvat on julkaistu lisenssillä CC BY 4.0?</p>
                     <p>Helsingin kaupunginmuseon julkaisemat kuvat Helsinkikuvia.fi-palvelussa on lisensoitu 'Creative Commons Nimeä 4.0 Kansainvälinen' eli CC BY 4.0 -lisenssillä. Lyhyesti ilmaistuna se tarkoittaa, että kuvia voi käyttää ja muunnella missä tarkoituksessa tahansa, kunhan mainitsee kuvalähteen. Lisenssi ei poista käyttäjän vastuuta. Esimerkiksi henkilön oikeus määrätä nimensä, kuvansa tai henkilönsä muun tunnistettavan osan kaupallisesta käytöstä, yksityisyyden suojaa koskevat oikeudet tai moraaliset oikeudet voivat rajoittaa aineiston käyttöä.</p>
                 
                     <h1 class="section-title">Kaipaan lisätietoa tai lisää kuvia</h1>
                 
                     <p class="question">Mistä saan lisätietoa kuvista, tietystä aineistosta tai Helsingin historiasta?</p>
-                    <p>Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on varattava etukäteen. </p>
+                    <p>Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on varattava etukäteen.</p>
                     <p class="question">Mitä teen, jos en löydä sopivaa kuvaa Helsinkikuvia.fi-palvelusta?  Jos Helsinkikuvia.fi-palvelussa ei kerran ole kaikkia kuvianne, miten niitä muita pääsee tutkimaan?</p>
-                    <p>Palvelussa on käytännössä kaikki kaupunginmuseon digitoidut eli sähköiseen muotoon saatetut kuvat. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Museon kokoelmien kuvista on digitoitu vasta murto-osa. Jos et löydä Helsinkikuvia.fi-palvelusta sopivaa kuvaa, voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on varattava etukäteen. </p>
+                    <p>Palvelussa on käytännössä kaikki kaupunginmuseon digitoidut eli sähköiseen muotoon saatetut kuvat. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Museon kokoelmien kuvista on digitoitu vasta murto-osa. Jos et löydä Helsinkikuvia.fi-palvelusta sopivaa kuvaa, voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on varattava etukäteen.</p>
                     <p class="question">Lisäättekö palveluun pyynnöstä digitoimattomia kuvianne? Onko se maksullista?</p>
                     <p>Helsinkikuvia.fi-palvelussa on käytännössä kaikki Helsingin kaupunginmuseon digitoidut valokuvat. Jos tarvitset digitaalisen version kuvasta, jota ei ole digitoitu, voit tilata sen kaupunginmuseon Kuvaselaamoon. Asiakkaan tilaamista digitoinneista veloitetaan museon hinnaston mukainen maksu. Tilaamasi kuva tulee usein pienellä viiveellä Helsinkikuvia.fi-palveluun kaikkien nähtäväksi ja käytettäväksi.</p>
                     <p class="question">Kuvan tiedoissa on mielestäni virhe, mihin voin korjata sen?</p>
@@ -110,37 +108,35 @@ pages = [{
                     <p class="question">What can I do in the Helsinkiphotos.fi service?</p>
                     <p>In the Helsinkiphotos.fi service, you can search for photographs with different search words, browse albums created by the museum or create albums of your own. You can download images on your own device in high resolution, or as smaller versions that are more convenient to use online.</p>
                     <p class="question">What kind of photographs can I find in the service?</p>
-                    <p>The Helsinkiphotos.fi service includes tens of thousands of photographs related to Helsinki from the 1840s to modern days. The photographs are from the Helsinki City Museum’s collections. </p>
+                    <p>The Helsinkiphotos.fi service includes tens of thousands of photographs related to Helsinki from the 1840s to modern days. The photographs are from the Helsinki City Museum’s collections.</p>
                     <p class="question">Can I use the service in a language other than Finnish?</p>
                     <p>Yes, in Swedish and English. However, the descriptions and keywords of the photographs are only in Finnish, which will make searching for photographs difficult in other languages.</p>
                     <p class="question">What will I get from creating an account in the Helsinkiphotos.fi service?</p>
-                    <p>When you log in, you can create your own albums in the service and add your own favorite images to them. </p>
+                    <p>When you log in, you can create your own albums in the service and add your own favorite images to them.</p>
                     <p class="question">What do you mean by a high resolution image? How do I know what kind of an image I should download on my device?</p>
-                    <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use. </p>
-                    <p class="question">Why is sharing an image from the service so inconvenient? Why can I only buy one photographic product at a time?</p>
-                    <p>We are continuously developing the service. The shopping basket functionality and click-to-share on social media did not make it to our first version but they are on our to-do list!</p>
+                    <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use.</p>
                     <p class="question">How do I order picture prints?</p>
                     <p>You can order picture prints using the online form found on City Museum’s website. The delivery time is about a week.</p>
                 
                     <h1 class="section-title">Using the photographs</h1>
                 
                     <p class="question">How much does it cost to download or use the images?</p>
-                    <p>Downloading and using the images is free. You can also order photographic products, such as posters, directly from the Helsinkiphotos.fi service. They are subject to charge.</p>
+                    <p>Downloading and using the images is free.</p>
                     <p class="question">What can I do with the photographs I find from the service?</p>
-                    <p>Almost anything! As long as you remember to credit the photographer and Helsinki City Museum in connection with the photograph, you can use it in a variety of ways. You can share them on social media or use them on your website and in different applications. You can also freely use the photographs in your magazines, gift products or as posters or even wallpaper. The high level of detail in the images allows for research and teaching use. Commercial use of the images is allowed within certain restrictions. </p>
+                    <p>Almost anything! As long as you remember to credit the photographer and Helsinki City Museum in connection with the photograph, you can use it in a variety of ways. You can share them on social media or use them on your website and in different applications. You can also freely use the photographs in your magazines, gift products or as posters or even wallpaper. The high level of detail in the images allows for research and teaching use. Commercial use of the images is allowed within certain restrictions.</p>
                     <p class="question">How do I mention the Helsinki City Museum and the photographer’s name in connection with the photograph?</p>
                     <p>Here’s one way of doing it: 'Photo: Helsinki City Museum / Name of the photographer.' If the photographer’s name isn’t mentioned in the image data, you can simply credit Helsinki City Museum. On Twitter, for instance, it’s enough to mention @kaupunginmuseo / name of the photographer.</p>
                     <p class="question">Do copyright or the Personal Data Act limit publishing the photographs?</p>
-                    <p>Copyright, the Personal Data Act and Protection of Privacy are taken into consideration when publishing the photographs. In the service, we only publish photographs with copyright agreed upon with the Helsinki City Museum or photographs that are so old that the copyright restrictions no longer apply to them. In addition, certain themes are thoroughly assessed before publishing the photographs online. These themes include photographs of children, nudity or photographs revealing for example private political opinions. </p>
+                    <p>Copyright, the Personal Data Act and Protection of Privacy are taken into consideration when publishing the photographs. In the service, we only publish photographs with copyright agreed upon with the Helsinki City Museum or photographs that are so old that the copyright restrictions no longer apply to them. In addition, certain themes are thoroughly assessed before publishing the photographs online. These themes include photographs of children, nudity or photographs revealing for example private political opinions.</p>
                     <p class="question">Are there any restrictions on the commercial use of the images?</p>
-                    <p>Yes. For instance, it is prohibited to use portraits or other identity-depicting images in marketing and/or advertising without the person’s consent. In addition, you must always credit Helsinki City Museum and the photographer. </p>
+                    <p>Yes. For instance, it is prohibited to use portraits or other identity-depicting images in marketing and/or advertising without the person’s consent. In addition, you must always credit Helsinki City Museum and the photographer.</p>
                     <p class="question">What does it mean that the photographs have been published with a Creative Commons BY 4.0 license?</p>
                     <p>What does it mean that the photographs have been published with a Creative Commons BY 4.0 license? Answer</p>
                 
                     <h1 class="section-title">I need more information or more photographs</h1>
                 
                     <p class="question">Where can I get more information about the photographs or the history of Helsinki?</p>
-                    <p>You can contact Helsinki City Museum’s Picture Browsery. If you would like to look at specific material or you need other photo archive services, you must book an appointment and reserve the material in advance. </p>
+                    <p>You can contact Helsinki City Museum’s Picture Browsery. If you would like to look at specific material or you need other photo archive services, you must book an appointment and reserve the material in advance.</p>
                     <p class="question">What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi service? If the Helsinkiphotos.fi service does not have all your photographs, how can I study the rest?</p>
                     <p>This service contains practically all of the digitized photographs of the Helsinki City Museum. More photographs are digitized constantly. Thus far, only a fraction of the photographs in the entire museum collection has been digitized. If you can’t find the right photograph from the Helsinkiphotos.fi service, you can contact Helsinki City Museum’s Picture Browsery</p>
                     <p class="question">Will you add photographs that have not yet been digitised to the service upon request? Is that subject to a charge?</p>
@@ -158,42 +154,40 @@ pages = [{
                 "content": u"""            
                     <h1 class="section-title">Användning av tjänsten Helsingforsbilder.fi</h1>
                     
-                    <p class="question">Vad kan man göra i tjänsten Helsingforsbilder.fi? </p>
+                    <p class="question">Vad kan man göra i tjänsten Helsingforsbilder.fi?</p>
                     <p>I tjänsten Helsingforsbilder.fi kan man söka efter foton med olika sökord, bläddra i museets album med olika teman eller skapa egna album och lägga till sina egna favoritbilder i dem. Man kan också ladda ned bilder till sin egen enhet. Bilderna är tillgängliga både som högupplösta och som mindre versioner, vilket gör att de kan användas såväl i trycksaker som på webben.</p>
                     <p class="question">Vilka bilder finns i tjänsten?</p>
-                    <p>I tjänsten Helsingforsbilder.fi finns tiotusentals foton med anknytning till Helsingfors, från 1840-talet till i dag. Bilderna hör till Helsingfors stadsmuseums samlingar. </p>
+                    <p>I tjänsten Helsingforsbilder.fi finns tiotusentals foton med anknytning till Helsingfors, från 1840-talet till i dag. Bilderna hör till Helsingfors stadsmuseums samlingar.</p>
                     <p class="question">Kan man använda tjänsten på andra språk?</p>
                     <p>Ja, på finska och engelska. Eftersom bildernas metadata och nyckelord endast finns på finska, är det lättare att göra sökningar på finska.</p>
                     <p class="question">Varför lönar det sig att logga in i tjänsten Helsingforsbilder.fi?</p>
-                    <p>Om du loggar in kan du skapa egna album i tjänsten och lägga till dina favoritbilder i dem. </p>
+                    <p>Om du loggar in kan du skapa egna album i tjänsten och lägga till dina favoritbilder i dem.</p>
                     <p class="question">Vad betyder en högupplöst bild? Hur vet jag vilken version jag ska ladda ned?</p>
-                    <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier. </p>
-                    <p class="question">Varför är det så svårt att dela bilder i sociala medier? Varför kan jag köpa bara en bildprodukt åt gången?</p>
-                    <p>Tjänsten utvecklas kontinuerligt. I kommande versioner ska vi lägga till en varukorgfunktion och göra det enklare att dela bilder i sociala medier.</p>
+                    <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier.</p>
                     <p class="question">Hur beställer jag en bildprodukt?</p>
                     <p>Du kan beställa en bildprodukt med hjälp av formuläret som finns på stadsmuseets hemsida under rubriken Bildapoteket. Leveranstiden för bilderna är ca en vecka.</p>
                     
                     <h1 class="section-title">Användning av fotografier</h1>
                     
                     <p class="question">Vad kostar det att ladda ned eller använda en bild?</p>
-                    <p>Att ladda ned och använda bilder kostar ingenting. Via tjänsten Helsingforsbilder.fi kan man också beställa avgiftsbelagda bildprodukter såsom affischer.</p>
+                    <p>Att ladda ned och använda bilder kostar ingenting.</p>
                     <p class="question">Vad kan man göra med bilderna i tjänsten?</p>
-                    <p>Nästan vad som helst! Man kan fritt använda bilderna, bara man kommer ihåg att nämna fotografens namn och Helsingfors stadsmuseum i anslutning till bilden. Man kan till exempel dela bilder i sociala medier eller använda dem på webbplatser eller i applikationer. Bilderna kan också användas för att göra t.ex. tavlor, böcker, tidningar, presentartiklar eller tapeter. Tack vare möjligheten att undersöka mycket exakta detaljer lämpar sig bilderna också för undervisnings- och forskningsbruk. Även kommersiellt bruk är tillåtet med vissa begränsningar. </p>
+                    <p>Nästan vad som helst! Man kan fritt använda bilderna, bara man kommer ihåg att nämna fotografens namn och Helsingfors stadsmuseum i anslutning till bilden. Man kan till exempel dela bilder i sociala medier eller använda dem på webbplatser eller i applikationer. Bilderna kan också användas för att göra t.ex. tavlor, böcker, tidningar, presentartiklar eller tapeter. Tack vare möjligheten att undersöka mycket exakta detaljer lämpar sig bilderna också för undervisnings- och forskningsbruk. Även kommersiellt bruk är tillåtet med vissa begränsningar.</p>
                     <p class="question">Hur ska stadsmuseet och fotografens namn nämnas i anslutning till bilden?</p>
                     <p>Till exempel så här: 'Bild: Helsingfors stadsmuseum/Fotografens namn'. Om fotografens namn inte är känt, räcker det att man nämner Helsingfors stadsmuseum. Till exempel på Twitter räcker det med hänvisningen @kaupunginmuseo och fotografens namn (om detta är känt).</p>
                     <p class="question">Utgör inte upphovsrätten eller personuppgiftslagen begränsningar för publicering av bilder?</p>
-                    <p>Upphovsrätten, personuppgiftslagen och integritetsskyddet beaktas vid publicering av bilder. I tjänsten publicerar vi endast bilder som vi har rätt att använda eller som redan är så gamla att upphovsrätten har upphört. Dessutom finns det vissa teman som gör att vi noggrant överväger om bilden ska publiceras på nätet eller inte. Sådana är t.ex. bilder på barn eller nakna människor eller bilder som avslöjar en persons politiska ståndpunkt. </p>
+                    <p>Upphovsrätten, personuppgiftslagen och integritetsskyddet beaktas vid publicering av bilder. I tjänsten publicerar vi endast bilder som vi har rätt att använda eller som redan är så gamla att upphovsrätten har upphört. Dessutom finns det vissa teman som gör att vi noggrant överväger om bilden ska publiceras på nätet eller inte. Sådana är t.ex. bilder på barn eller nakna människor eller bilder som avslöjar en persons politiska ståndpunkt.</p>
                     <p class="question">Finns det några begränsningar gällande kommersiellt bruk av bilderna?</p>
-                    <p>Ja. Det är förbjudet att t.ex. använda bilder på personer i marknadsföring eller reklam utan att ha fått tillåtelse av personerna i fråga. Man ska också nämna Helsingfors stadsmuseum och fotografens namn. </p>
+                    <p>Ja. Det är förbjudet att t.ex. använda bilder på personer i marknadsföring eller reklam utan att ha fått tillåtelse av personerna i fråga. Man ska också nämna Helsingfors stadsmuseum och fotografens namn.</p>
                     <p class="question">Vad betyder att bilderna har publicerats med licensen CC BY 4.0?</p>
                     <p>Helsingfors stadsmuseums bilder i tjänsten Helsingforsbilder.fi är licensierade med licensen 'Creative Commons Erkännande 4.0 Internationellt', dvs. CC BY 4.0 . Kort sagt betyder det att man fritt kan använda och bearbeta bilderna, bara man anger källan. Licensen befriar inte användaren från ansvar. Till exempel personens rätt att bestämma om kommersiellt bruk av hans eller hennes namn, bild eller andra identifierbara uppgifter, rättigheter som gäller integritetsskydd samt moraliska rättigheter kan begränsa användningen av materialet.</p>
                     
                     <h1 class="section-title">Jag behöver mer information eller fler bilder</h1>
                     
                     <p class="question">Var får jag mer information om bilderna, ett visst material eller Helsingfors historia?</p>
-                    <p>Du kan kontakta Helsingfors stadsmuseums Bildapotek. Om du letar efter specifikt material eller behöver andra bildarkivstjänster måste du boka en besökstid och beställa materialet på förhand. </p>
+                    <p>Du kan kontakta Helsingfors stadsmuseums Bildapotek. Om du letar efter specifikt material eller behöver andra bildarkivstjänster måste du boka en besökstid och beställa materialet på förhand.</p>
                     <p class="question">Vad gör jag om jag inte hittar en lämplig bild i tjänsten Helsingforsbilder.fi? Hur får man tillgång till de bilder som ni inte har publicerat i tjänsten?</p>
-                    <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Fler bilder blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade. Om du inte hittar en lämplig bild i tjänsten Helsingforsbilder.fi, kan du kontakta Helsingfors stadsmuseums Bildapotek. Om du letar efter specifikt material eller behöver andra bildarkivstjänster måste du boka en besökstid och beställa materialet på förhand. </p>
+                    <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Fler bilder blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade. Om du inte hittar en lämplig bild i tjänsten Helsingforsbilder.fi, kan du kontakta Helsingfors stadsmuseums Bildapotek. Om du letar efter specifikt material eller behöver andra bildarkivstjänster måste du boka en besökstid och beställa materialet på förhand.</p>
                     <p class="question">Lägger ni till bilder som inte ännu digitaliserats i tjänsten på begäran? Kostar det någonting?</p>
                     <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Om du behöver en digital version av en bild som inte har digitaliserats, kan du beställa den via stadsmuseets Bildapotek. För digitaliseringar uppbärs en avgift enligt museets prislista. Den bild som du beställt publiceras oftast med en liten fördröjning i tjänsten Helsingforsbilder.fi och är efter det tillgänglig för alla.</p>
                     <p class="question">Jag tycker att det finns ett fel i bildens uppgifter, hur kan jag rätta det?</p>
@@ -214,7 +208,7 @@ pages = [{
                 "title": u"Käyttöehdot",
                 "content": u"""
                     <p>Aineistojen käyttöä koskevat seuraavat ehdot:</p>
-                    <p><strong>Kuvat:</strong> Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja yksityisyyden suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Ota yhteys Helsingin kaupunginmuseoon, jos tieto kuvan käyttöoikeuksista puuttuu tai olet epävarma oikeudestasi käyttää kuvaa. </p>
+                    <p><strong>Kuvat:</strong> Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja yksityisyyden suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Ota yhteys Helsingin kaupunginmuseoon, jos tieto kuvan käyttöoikeuksista puuttuu tai olet epävarma oikeudestasi käyttää kuvaa.</p>
                     <p><strong>Kuvailutiedot:</strong> Hakutulosten yhteydessä esitettäviä kuvailutietoja voi pääsääntöisesti käyttää vapaasti. Poikkeuksen muodostavat kuvailutietoihin sisältyvät henkilönimet, joiden julkaisemisessa käyttäjällä on vastuu yksityisyyden suojan kunnioittamisessa.</p>
                 """
             },
@@ -260,14 +254,14 @@ pages = [{
                             <td>Käyttäjän tunnistaminen</td>
                         </tr>
                     </table>
-                    <p>Edellä mainittujen tietojen lisäksi palveluun voidaan tallentaa tietoja, jotka seuraavat käyttäjän toiminnasta palvelussa. Tällaisia ovat mm. käyttökieli, suosikit, omat albumit ja omiin albumeihin tallennetut tietueet. </p>
+                    <p>Edellä mainittujen tietojen lisäksi palveluun voidaan tallentaa tietoja, jotka seuraavat käyttäjän toiminnasta palvelussa. Tällaisia ovat mm. käyttökieli, suosikit, omat albumit ja omiin albumeihin tallennetut tietueet.</p>
                     <p>Palvelu hyödyntää Bamboran rajapintaa maksujen välittämiseen ja Printmotorin rajapintaa kuvatuotteiden tilausta varten. Näitä tai muita linkitettyjä sivuja käytettäessä sovelletaan palvelun tarjoavan kolmannen osapuolen määrittelemiä käyttöehtoja.</p>
                     <div class="client-register">
                         <p class="privacy-bigtitle">Helsinkikuvia.fi-asiakasrekisterin seloste</p>
                         <p class="privacy-smalltitle">Rekisterin ylläpitäjä</p>
                         <p>Helsingin kaupunginmuseo</p>
                         <p>Aleksanterinkatu 16</p>
-                        <p> </p>
+                        <p></p>
                         <p>00170 HELSINKI</p>
                         <p>puh. 09 3103 6497</p>
                         <p>kuvakokoelmat@hel.fi</p>
@@ -364,7 +358,7 @@ pages = [{
                 "language": "sv",
                 "title": u"Hantering av kunduppgifter i Helsingforsbilder.fi",
                 "content": u"""
-                    <p class="privacy-bigtitle">Dataskydd </p>
+                    <p class="privacy-bigtitle">Dataskydd</p>
                     <p>När användaren loggar in sparas användarnamnet och lösenordet i tjänsten. Uppgifterna används för följande ändamål:</p>
                     <table class="privacy-table">
                         <tr>
