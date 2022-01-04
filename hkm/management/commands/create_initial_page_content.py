@@ -66,7 +66,7 @@ pages = [{
                     <p class="question">Mitä tarkoittaa korkearesoluutioinen kuva? Miten osaan valita, minkälaisen kuvan laitteelleni lataan?</p>
                     <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa.</p>
                     <p class="question">Miten voin tilata kuvatuotteen?</p>
-                    <p>Voit tilata kuvatuotteen Kuvaselaamon sivuilta löytävällä verkkolomakkeella. Kuvien toimitusaika on noin viikko.</p>
+                    <p>Voit tilata kuvatuotteen Kuvaselaamon sivuilta löytävällä <a href="https://www.helsinginkaupunginmuseo.fi/kuvia-esineita-helsinkia/kuva-arkisto/" target="_blank">verkkolomakkeella</a>. Kuvien toimitusaika on noin viikko.</p>
                 
                     <h1 class="section-title">Valokuvien käyttö</h1>
                 
@@ -116,7 +116,7 @@ pages = [{
                     <p class="question">What do you mean by a high resolution image? How do I know what kind of an image I should download on my device?</p>
                     <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use.</p>
                     <p class="question">How do I order picture prints?</p>
-                    <p>You can order picture prints using the online form found on City Museum’s website. The delivery time is about a week.</p>
+                    <p>You can order picture prints using <a href="https://www.helsinginkaupunginmuseo.fi/en/pictures-objects-helsinki/picture-browsery/" target="_blank">the online form</a> found on City Museum’s website. The delivery time is about a week.</p>
                 
                     <h1 class="section-title">Using the photographs</h1>
                 
@@ -165,7 +165,7 @@ pages = [{
                     <p class="question">Vad betyder en högupplöst bild? Hur vet jag vilken version jag ska ladda ned?</p>
                     <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier.</p>
                     <p class="question">Hur beställer jag en bildprodukt?</p>
-                    <p>Du kan beställa en bildprodukt med hjälp av formuläret som finns på stadsmuseets hemsida under rubriken Bildapoteket. Leveranstiden för bilderna är ca en vecka.</p>
+                    <p>Du kan beställa en bildprodukt med hjälp av <a href="https://www.helsinginkaupunginmuseo.fi/sv/bilder-foremal-helsingfors/fotoapoteket/" target="_blank">formuläret</a> som finns på stadsmuseets hemsida under rubriken Bildapoteket. Leveranstiden för bilderna är ca en vecka.</p>
                     
                     <h1 class="section-title">Användning av fotografier</h1>
                     
