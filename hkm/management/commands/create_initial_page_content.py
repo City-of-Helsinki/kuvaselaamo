@@ -148,7 +148,7 @@ pages = [{
                     <p class="question">Is the Finna service still in use? Can I still find images from Helsinki City Museum in Finna?</p>
                     <p>The photographs of Helsinki City Museum collection are still available in the national Finna service at hkm.finna.fi. In addition to photographs, you can browse the museum’s object collections, from plastic bags to hairdryers and works of art. In Finna you can also find information about the buildings of Helsinki.</p>
                 """
-            }, {
+                }, {
                 "language": "sv",
                 "title": u"Frågor och svar",
                 "content": u"""            
@@ -197,7 +197,7 @@ pages = [{
                     <p class="question">Finns era bilder fortfarande i tjänsten Finna? Finns samma bilder både i Finna och på Helsingforsbilder.fi?</p>
                     <p>Helsingfors stadsmuseums bilder finns fortfarande också i den nationella tjänsten Finna på adressen hkm.finna.fi. Utöver bilder kan man i Finna även bekanta sig med annat material med Helsingfors som tema, från plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan också söka information om byggnadernas historia i Helsingfors.</p>
                 """
-            }
+                }
     ]
 }, {
     "name": u"Terms",
@@ -220,7 +220,7 @@ pages = [{
                     <p><strong>Images:</strong> The photographs published by Helsinki City Museum in the Helsinkiphotos.fi service have been licensed with the “Creative Commons Attribution 4.0 International” or CC BY 4.0 license. In brief, it means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph. The license does not remove the user’s responsibility. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
                     <p><strong>Metadata:</strong> The metadata and descriptions presented with the search results are as a rule freely available, with the the exception of personal information such as names. For instance, a person’s right to decide on the commercial use of their name or other identifiable part of their identity and privacy protection rights may limit the use of the material.</p>
                 """
-            }, {
+                }, {
                 "language": "sv",
                 "title": u"Användningsvillkor",
                 "content": u"""
@@ -228,7 +228,7 @@ pages = [{
                     <p><strong>Bilder:</strong> Bilderna är licensierade med licensen Creative Commons Attribution 4.0 Internationell (CC BY 4.0). Om du vill publicera en bild eller använda bilden i offentligheten måste du följa de användningsvillkor som anges. Om du använder en bild offentligt, bör du nämna upphovsman och källa. Licensen ger eller ger dig inte alla de nödvändiga villkoren för ditt tänkta användande av verket. Till exempel, andra rättigheter som publicitet, integritetslagstiftning, eller ideella rättigheter kan begränsa hur du kan använda verket. Om informationen om användningsrättigheter saknas eller om du är osäker på om du har rätt att använda en bild, ska du kontakta Helsingfors stadsmusem.</p>
                     <p><strong>Metadata:</strong> I regel kan metadata i anknytning till sökresultat användas fritt. Andra rättigheter som publicitet eller integritetslagstiftning kan begränsa hur du kan använda metadatan.</p>
                 """
-            }
+                }
     ]
 }, {
     "name": u"Privacy",
@@ -353,7 +353,7 @@ pages = [{
                     <p>If necessary, the user may contact Helsinki City Museum’s Picture Archives. See contact details above.</p>
                 </div>
                 """
-            },
+        },
         {
                 "language": "sv",
                 "title": u"Hantering av kunduppgifter i Helsingforsbilder.fi",
@@ -413,7 +413,471 @@ pages = [{
                         <p>Vid behov kan användaren kontakta stadsmuseet.</p>
                     </div>
                 """
-            }
+        }
+    ]
+},
+    {
+    "name": u"Saavutettavuusseloste",
+    "identifier": u"hkm_siteinfo_accessibility",
+    "texts": [
+        {
+            "language": "fi",
+            "title": u"Saavutettavuusseloste",
+            "content": u"""
+                    <h1>Saavutettavuusseloste</h1>
+
+                    <p>Tämä saavutettavuusseloste koskee Helsingin kaupungin "Helsinkikuvia"-verkkosivustoa. Sivuston osoite on https://www.helsinkikuvia.fi.</p>
+
+                    <h2>Sivustoa koskevat lain säädökset</h2>
+
+                    <p>Tämä sivusto on julkaistu aiemmin kuin 23.9.2018. Sivuston tulee täyttää lain edellyttämät saavutettavuuden vaatimukset 23.9.2020 päättyvän siirtymäajan jälkeen.</p>
+
+                    <h2>Kaupungin tavoite</h2>
+
+                    <p>Digitaalisten palveluiden saavutettavuudessa Helsingin tavoitteena on pyrkiä vähintään WCAG ohjeiston mukaiseen AA- tai sitä parempaan tasoon, mikäli se on kohtuudella mahdollista.</p>
+
+                    <h1>Vaatimustenmukaisuustilanne</h1>
+
+                    <p>Tämä verkkosivusto täyttää lain asettamat kriittiset saavutettavuusvaatimukset WCAG v2.1 -tason AA mukaisesti seuraavin havaituin puuttein.</p>
+
+                    <h2>Ei-saavutettava sisältö</h2>
+
+                    <p>Jäljempänä mainittu sisältö ei vielä täytä kaikkia lain asettamia saavutettavuusvaatimuksia.</p>
+
+                    <h3>Havaitut puutteet</h3>
+
+                    <ol>
+                        <li>
+                        <p>Puutteellinen kielimääritys</p>
+
+                        <p>Kielivalikon kieliltä puuttuu kielimääritys, joka aiheuttaa tilanteen, jossa ruudunlukija lausuu kielet väärin. (WCAG2.1: 3.1.2 Osien kieli)</p>
+
+                        <p>Korjaustapa: Kielivalikon kielille ja sivuston hakukentälle tulee asettaa kieltä vastaava kielimääritys.</p>
+                        </li>
+                        <li>
+                        <p>Valokuva-albumien selaaminen englanninkielisellä sivustolla on haastavaa ruudunlukuohjelman käyttäjälle</p>
+
+                        <p>Sivuston valokuva-albumien ja kuvien tekstit ovat ainoastaan suomeksi, vaikka sivusto on muuten englanniksi. Ruudunlukuohjelma lausuu sisällön väärin. (WCAG2.1: 3.1.2 Osien kieli)</p>
+                        </li>
+                        <li>
+                        <p>Sivun title-elementtiä ei ole yksilöity kaikille sivuille</p>
+                        </li>
+                    </ol>
+
+                    <p>Korjaustapa: Valokuva-albumien nimet ja muut kuvien kuvaustekstit tulee joko</p>
+
+                    <p>kääntää sen kielen mukaiseksi, minkä käyttäjä on valinnut sivustolle tai</p>
+
+                    <p>vaihtoehtoisesti valokuva-albumisivun kielimääritys tulee asettaa suomenkielisten</p>
+
+                    <p>tekstien osalta aina suomeksi.</p>
+
+                    <p>Sivustolla oleva title-elementin nimiöinti ei aina päivity, kun uusi sivu ladataan. (WCAG2.1: 2.4.2 Sivuotsikot)</p>
+
+                    <p>Korjaustapa: Varmistetaan, että sivuston jokaiselle sivulle on asetettu sitä kuvaava title-elementti.</p>
+
+                    <ol>
+                        <li>
+                        <p>Epäloogista otsikointia</p>
+
+                        <p>Sivuston otsikointi ei etene kaikkialla loogisesti. (WCAG2.1: 1.3.1 Informaatio ja suhteet)</p>
+
+                        <p>Korjaustapa: Varmistetaan, että sivuston otsikointi etenee kaikkialla johdonmukaisesti. Otsikointi aloitetaan h1-tason otsikolla.</p>
+                        </li>
+                        <li>
+                        <p>Sivusto sisältää avustavalle teknologialle nimeämättömiä sekä puutteellisesti kuvattuja painikkeita</p>
+
+                        <p>Sivustolla on painikkeita, joita ei ole nimetty lainkaan avustavalle teknologialle, esimerkiksi ruudunlukuohjelmalle. (WCAG2.1: 4.1.2 Nimi, rooli, arvo)</p>
+
+                        <p>Korjaustapa: Varmistetaan, että kaikki sivuston painikkeet on nimetty teknisesti ruudunlukuohjelmia ja muita avustavan teknologian ratkaisuja varten.</p>
+                        </li>
+                        <li>
+                        <p>Heikkoja kontrasteja</p>
+                        </li>
+                    </ol>
+
+                    <h3>Puutteiden korjaus</h3>
+
+                    <p>Sivustolla on käytetty tekstin värejä, joiden kontrasti suhteessa pohjaväriin ei ole riittävä. (WCAG2: 1.4.3 Kontrasti (minimi))</p>
+
+                    <p>Korjaustapa: Tekstin ja sen taustan kontrastin suhde tulisi olla vähintään 4,5:1 ja suurempaa tekstikokoa käytettäessä 3:1.</p>
+
+                    <p>Havaitut puutteet pyritään korjaamaan siten, että sivuston käyttö ruudunlukijalla sekä avustavilla tekniikoilla, on mahdollista. Sivuston otsikointia tarkistetaan, sekä title-elementit määritetään kaikille elementeille. Sivuston ulkoasulle ollaan tekemässä uudistusta, missä värikontrastit on tarkastettu siten, että no ovat vähintään 4,5:1. Korjaus pyritään suorittamaan mahdollisimman pian järjestelmäpäivityksen yhteydessä 2020 loppuun mennessä.</p>
+
+                    <h2>Tiedon saanti saavutettavassa muodossa</h2>
+
+                    <p>Mainituista puutteista johtuen saavuttamatta jäävää sisältöä voi pyytää tämän sivuston ylläpitäjältä.</p>
+
+                    <p>Helsingin kaupunki, Kulttuuri ja vapaa-aika Ratkaisutoimisto<br />
+                    kuva-accessibility@hel.fi</p>
+
+                    <h2>Saavutettavuusselosteen laatiminen</h2>
+
+                    <p>Tämä seloste on laadittu 18.03.2020 ja päivitetty 4.9.2020</p>
+
+                    <h2>Saavutettavuuden arviointi</h2>
+
+                    <p>Saavutettavuuden arvioinnissa on noudatettu Helsingin kaupungin työohjetta ja menetelmiä, jotka pyrkivät varmistamaan sivuston saavutettavuuden kaikissa työvaiheissa.</p>
+
+                    <p>Saavutettavuus on tarkistettu ulkopuolisen asiantuntijan suorittamana auditointina sekä itsearviona.</p>
+
+                    <p>Saavutettavuus on tarkistettu käyttäen ohjelmallista saavutettavuustarkistusta sekä sivuston ja sisällön manuaalista tarkistusta. Ohjelmallinen tarkistus on suoritettu käyttäen Siteimproven saavutettavuuden automaattista testaustyökalua ja selainlaajennusta.</p>
+
+                    <p>Ulkopuolisen asiantuntija-auditoinnin on suorittanut Helsingin kaupungin palvelukeskus-liikelaitos.</p>
+
+                    <h2>Saavutettavuusselosteen päivittäminen</h2>
+
+                    <p>Sivuston saavutettavuudesta huolehditaan jatkuvalla valvonnalla tekniikan tai sisällön muuttuessa, sekä määräajoin suoritettavalla tarkistuksella. Tätä selostetta päivitetään sivuston muutosten ja saavutettavuuden tarkistusten yhteydessä.</p>
+
+                    <h2>Palaute ja yhteystiedot</h2>
+
+                    <p>Sivuston saavutettavuudesta vastaa Helsingin kaupunki, Kulttuuri ja vapaa-aika Ratkaisutoimisto</p>
+
+                    <h2>Ilmoittaminen ei-saavutettavasta sisällöstä</h2>
+
+                    <p>Mikäli käyttäjä kokee, etteivät saavutettavuuden vaatimukset kuitenkaan täyty, voi tästä tehdä ilmoituksen sähköpostilla helsinki.palaute@hel.fi tai palautelomakkeella www.hel.fi/palaute.</p>
+
+                    <h2>Tietojen pyytäminen saavutettavassa muodossa</h2>
+
+                    <p>Mikäli käyttäjä ei koe saavansa sivuston sisältöä saavutettavassa muodossa, voi käyttäjä pyytää näitä tietoja sähköpostilla helsinki.palaute@hel.fi tai palautelomakkeella www.hel.fi/palaute. Tiedusteluun pyritään vastaamaan kohtuullisessa ajassa.</p>
+
+                    <h2>Saavutettavuuden oikeussuoja, Täytäntöönpanomenettely</h2>
+
+                    <p>Mikäli henkilö kokee, ettei hänen ilmoitukseensa tai tiedusteluunsa ole vastattu tai vastaus ei ole tyydyttävä, voi asiasta tehdä ilmoituksen Etelä-Suomen aluehallintovirastoon. Etelä-Suomen aluehallintoviraston sivulla kerrotaan tarkasti, miten asia käsitellään.</p>
+
+                    <p><strong>Etelä-Suomen aluehallintovirasto</strong><br>
+                    Saavutettavuuden valvonnan yksikko<br>
+                    www.saavutettavuusvaatimukset.fi<br>
+                    saavutettavuus@avi.fi
+                    </p>
+
+                    <p>Puhelinvaihde: 0295 016 000 Avoinna: ma-pe klo 8.00 &ndash; 16.15</p>
+
+                    <p>Helsingin kaupunki ja saavutettavuus</p>
+
+                    <p>Helsingin kaupungin tavoitteena on olla kaikille esteetön ja saavutettava kaupunki. Kaupungin tavoitteena on, että Helsingissä on kaikkien kaupunkilaisten mahdollisimman helppo liikkua ja toimia ja että kaikki sisältö ja palvelut olisivat kaikkien saavutettavissa.</p>
+
+                    <p>Kaupunki edistää digitaalisten palveluiden saavutettavuutta yhdenmukaistamalla julkaisutyötä ja järjestämällä saavutettavuuteen keskittyvää koulutusta henkilökunnalleen.</p>
+
+                    <p>Sivustojen saavutettavuuden tasoa seurataan jatkuvasti sivustoja ylläpidettäessä. Havaittuihin puutteisiin reagoidaan välittömästi. Tarvittavat muutokset pyritään suorittamaan mahdollisimman nopeasti.</p>
+
+                    <h2>Vammaiset ja avustavien teknologioiden käyttäjät</h2>
+
+                    <p>Kaupunki tarjoaa neuvontaa ja tukea vammaisille ja avustavien teknologioiden käyttäjille. Tukea on saatavilla kaupungin sivuilla ilmoitetuista neuvontasivuilta sekä puhelinneuvonnasta.</p>
+
+                    <h2>Saavutettavuusselosteen hyväksyntä</h2>
+
+                    <p>Tämän selosteen on hyväksynyt 4.9.2020</p>
+
+                    <p>Kulttuurin ja Vapaa-aja toimiala Helsingin kaupunki</p>
+                """
+        },
+        {
+            "language": "sv",
+            "title": u"Tillgänglighetsutlåtande",
+            "content": u"""
+                    <h1>Tillg&auml;nglighetsutl&aring;tande</h1>
+
+                    <p>Detta tillg&auml;nglighetsutl&aring;tande g&auml;ller Helsingfors stads webbplats &rdquo;Helsinkikuvia&rdquo;. Webbplatsens adress &auml;r http://www.helsinkikuvia.fi</p>
+
+                    <h2>Lagbest&auml;mmelser som g&auml;ller webbplatsen</h2>
+
+                    <p>Denna webbplats har offentliggjorts tidigare &auml;n 23.9.2018. Webbplatsen ska uppfylla lagens krav p&aring; tillg&auml;nglighet efter &ouml;verg&aring;ngstiden som slutar 23.9.2020.</p>
+
+                    <h2>Stadens m&aring;l</h2>
+
+                    <p>N&auml;r det g&auml;ller tillg&auml;nglighet till digitala tj&auml;nster har Helsingfors stad som m&aring;l att uppn&aring; minst niv&aring; AA eller b&auml;ttre enligt WCAG-anvisningarna, om det &auml;r rimligt.</p>
+
+                    <h2>Fullg&ouml;randestatus</h2>
+
+                    <p>Denna webbplats uppfyller lagstadgade kritiska tillg&auml;nglighetskrav enligt niv&aring; AA i WCAG v2.1 med f&ouml;ljande observerade brister.</p>
+
+                    <h2>Icke tillg&auml;ngligt inneh&aring;ll</h2>
+
+                    <p>Nedan angivet inneh&aring;ll uppfyller &auml;nnu ej alla lagstadgade tillg&auml;nglighetskrav.</p>
+
+                    <h3>Observerade brister</h3>
+
+                    <p>1. Bristande spr&aring;kinst&auml;llning</p>
+
+                    <p>Spr&aring;ken i spr&aring;kmenyn saknar spr&aring;kinst&auml;llningar med f&ouml;ljden att sk&auml;rml&auml;sare l&auml;ser spr&aring;ken fel. (WCAG2.1: 3.1.2 Spr&aring;k i olika avsnitt)</p>
+
+                    <p>Korrigeringss&auml;tt: Spr&aring;ken i spr&aring;kmenyn samt s&ouml;kf&auml;lten p&aring; sidorna ska f&ouml;rses med spr&aring;kinst&auml;llningar som motsvarar spr&aring;ket.</p>
+
+                    <p>2. Bl&auml;ddring i fotoalbum p&aring; de engelska sidorna st&auml;ller problem f&ouml;r anv&auml;ndare av sk&auml;rml&auml;sningsprogram.</p>
+
+                    <p>Texter i fotoalbum och p&aring; bilder finns endast p&aring; finska fast sidan i &ouml;vrigt &auml;r p&aring; engelska. Sk&auml;rml&auml;sningsprogrammet uttrycker inneh&aring;llet fel. (WCAG2.1: 3.1.2 Spr&aring;k i olika avsnitt)</p>
+
+                    <p>Korrigeringss&auml;tt: Namn p&aring; fotoalbum samt &ouml;vriga beskrivande texter f&ouml;r bilder ska antingen &ouml;vers&auml;ttas till spr&aring;ket som anv&auml;ndaren valt f&ouml;r sidorna eller annars ska spr&aring;kinst&auml;llningen f&ouml;r sidan med fotoalbum visavi texter p&aring; finska alltid st&auml;llas f&ouml;r finska.</p>
+
+                    <p>3. Sidans titleelement har inte specifierats f&ouml;r alla sidor</p>
+
+                    <p>Etiketten f&ouml;r titleelement p&aring; sidan uppdateras inte alltid n&auml;r en ny sida laddas. (WCAG2.1: 2.4.2 Sidrubriker)</p>
+
+                    <p>Korrigeringss&auml;tt: Det ska kontrolleras att det f&ouml;r varje sida p&aring; webbplatsen har speciferats ett titleelement som beskriver sidan i fr&aring;ga.</p>
+
+                    <p>4. Ologiska rubriker</p>
+
+                    <p>Rubrikerna p&aring; sidorna l&ouml;per inte logiskt &ouml;verallt. (WCAG2.1: 1.3.1 Information och relationer)</p>
+
+                    <p>Korrigeringss&auml;tt: Det ska kontrolleras att rubrikerna p&aring; sidorna l&ouml;per konsekvent &ouml;verallt. Rubrikerna b&ouml;rjar med en rubrik p&aring; h1-niv&aring;.</p>
+
+                    <p>5. Sidorna har knappar som b&aring;de saknar specifikation f&ouml;r assisterande teknologi och &auml;r bristf&auml;lligt beskrivna.</p>
+
+                    <p>Sidorna har knappar som inte alls har specifierats f&ouml;r assisterande teknologi, s&aring;som sk&auml;rml&auml;sningsprogram. (WCAG2.1: 4.1.2 Namn, roll, v&auml;rde)</p>
+
+                    <p>Korrigeringss&auml;tt: Det ska kontrolleras att knapparna p&aring; alla sidor tekniskt har specifierats f&ouml;r sk&auml;rml&auml;sningsprogram och &ouml;vriga l&ouml;sningar med assisterande teknologi.</p>
+
+                    <p>6. D&aring;liga kontraster</p>
+
+                    <p>Textf&auml;rger med otillr&auml;cklig kontrast i relation till bakgrundsf&auml;rgen har anv&auml;nts p&aring; sidorna. (WCAG2: 1.4.3 Kontrast (minimum))</p>
+
+                    <p>Korrigeringss&auml;tt: F&ouml;rh&aring;llandet mellan texten och bakgrunden ska vara minst 4,5:1, och f&ouml;r st&ouml;rre textstorlek 3:1.</p>
+
+                    <h3>&nbsp;</h3>
+
+                    <h3>&nbsp;</h3>
+
+                    <h3>R&auml;ttning av brister</h3>
+
+                    <p>Vi str&auml;var efter att &aring;tg&auml;rda observerade brister s&aring; att det blir m&ouml;jligt att anv&auml;nda webbplatsen med sk&auml;rml&auml;sare och assisterande teknologi. Rubrikerna p&aring; sidorna ska kontrolleras och titlelement definieras f&ouml;r alla element. Sidornas utseende kommer att f&ouml;rnyas och d&aring; kontrolleras f&auml;rgkontrasterna s&aring; att f&ouml;rh&aring;llandet &auml;r minst 4,5:1. Vi str&auml;var efter att g&ouml;ra korrigeringen s&aring; snart som m&ouml;jligt vid systemuppdateringar f&ouml;re slutet av 2020.</p>
+
+                    <h3>&nbsp;</h3>
+
+                    <h3>F&aring; uppgifter i tillg&auml;nglig form</h3>
+
+                    <p>Inneh&aring;ll som inte kan n&aring;s p&aring; grund av n&auml;mnda brister kan beg&auml;ras fr&aring;n uppr&auml;tth&aring;llaren av denna webbplats.</p>
+
+                    <p>Kultur- och fritidssektorn, Helsingfors stad</p>
+
+                    <p>ville.sjofarare@hel.fi</p>
+
+                    <p>&nbsp;</p>
+
+                    <h2>Utarbetande av tillg&auml;nglighetsutl&aring;tande</h2>
+
+                    <p>Detta utl&aring;tande har utarbetats 18.3.2020 och &auml;r senast uppdaterad 4.9.2020.</p>
+
+                    <h3>Bed&ouml;mning av tillg&auml;nglighet</h3>
+
+                    <p>Vid bed&ouml;mning av tillg&auml;nglighet har f&ouml;ljts Helsingfors stads arbetsanvisning och metoder som siktar till att s&auml;kerst&auml;lla webbplatsens tillg&auml;nglighet i alla arbetsfaser.</p>
+
+                    <p>Tillg&auml;ngligheten &auml;r kontrollerad genom revision av en extern expert samt som egen bed&ouml;mning.</p>
+
+                    <p>Tillg&auml;ngligheten &auml;r kontrollerad med hj&auml;lp av automatisk tillg&auml;nglighetskontroll samt manuell kontroll av webbplatsen och inneh&aring;llet. Automatiska kontroller har utf&ouml;rts med anv&auml;ndning av bed&ouml;mningsverktyget Lighthouse i webbl&auml;saren Google Chrome, webbl&auml;sartill&auml;gget axe fr&aring;n Deque Systems Inc. samt webbl&auml;sartill&auml;gget Siteimprove.</p>
+
+                    <p>Missf&ouml;rh&aring;llanden som bed&ouml;mningsverktygen rapporterat har kontrollerats och vid behov korrigerats.</p>
+
+                    <p>Den externa expertrevisionen har utf&ouml;rts av Servicecentralen Helsinki.</p>
+
+                    <h3>Uppdatering av tillg&auml;nglighetsutl&aring;tande</h3>
+
+                    <p>Webbplatsens tillg&auml;nglighet kontrolleras genom kontinuerlig tillsyn n&auml;r tekniken eller inneh&aring;llet f&ouml;r&auml;ndras, samt granskning med regelbundna intervall. Detta utl&aring;tande uppdateras i samband med &auml;ndringar av webbplatsen samt granskningar av tillg&auml;nglighet.</p>
+
+                    <h2>&Aring;terkoppling och kontaktuppgifter</h2>
+
+                    <p>F&ouml;r webbplatsens tillg&auml;nglighet svarar</p>
+
+                    <p>Kultur- och fritidssektorn, Helsingfors stad</p>
+
+                    <p>ville.sjofarare@hel.fi</p>
+
+                    <h3>&nbsp;</h3>
+
+                    <h3>Anm&auml;lan om ej tillg&auml;ngligt inneh&aring;ll</h3>
+
+                    <p>Om anv&auml;ndaren upplever att kraven p&aring; tillg&auml;nglighet &auml;nd&aring; inte uppfylls kan detta anm&auml;las per e-post <a href="mailto:helsinki.palaute@hel.fi">helsinki.palaute@hel.fi</a> eller med responsformul&auml;r p&aring; <a href="https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback">www.hel.fi/palaute</a> .</p>
+
+                    <h3>Beg&auml;ran om uppgifter i tillg&auml;nglig form</h3>
+
+                    <p>Om anv&auml;ndaren inte upplever sig f&aring; webbplatsens inneh&aring;ll i tillg&auml;nglig form, kan anv&auml;ndaren beg&auml;ra dessa uppgifter per e-post <a href="mailto:helsinki.palaute@hel.fi">helsinki.palaute@hel.fi</a> eller med responsformul&auml;r p&aring; <a href="https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback">www.hel.fi/palaute</a> . Str&auml;van &auml;r att svara p&aring; f&ouml;rfr&aring;gan inom rimlig tid.</p>
+
+                    <h2>R&auml;ttsskydd f&ouml;r tillg&auml;nglighet, Verkst&auml;llighetsf&ouml;rfarande</h2>
+
+                    <p>Om en person upplever att svar inte har erh&aring;llits p&aring; hans eller hennes anm&auml;lan eller f&ouml;rfr&aring;gan, eller om svaret inte &auml;r tillfredsst&auml;llande, kan saken anm&auml;las till regionf&ouml;rvaltningsverket i S&ouml;dra Finland. P&aring; webbplatsen f&ouml;r regionf&ouml;rvaltningsverket i S&ouml;dra Finland finns detaljerad information om hur saken behandlas.</p>
+
+                    <p>Regionf&ouml;rvaltningsverket i S&ouml;dra Finland<br />
+                    Enheten f&ouml;r tillg&auml;nglighetstillsyn<br />
+                    <a href="https://www.xn--tillgnglighetskrav-ptb.fi/">https://www.xn--tillgnglighetskrav-ptb.fi/</a><br />
+                    <a href="mailto:webbtillganglighet@rfv.fi">webbtillganglighet@rfv.fi</a><br />
+                    Telefonv&auml;xel 0295 016&nbsp;000<br />
+                    &Ouml;ppet: m&aring;&ndash;fr kl. 8.00&ndash;16.15</p>
+
+                    <h2>Helsingfors stad och tillg&auml;nglighet</h2>
+
+                    <p>Helsingfors stad har som m&aring;l att vara en tillg&auml;nglig stad f&ouml;r alla. Stadens m&aring;l &auml;r att det ska vara s&aring; l&auml;tt som m&ouml;jligt f&ouml;r alla stadsbor att r&ouml;ra sig och verka i Helsingfors och att alla inneh&aring;ll och tj&auml;nster ska vara tillg&auml;ngliga f&ouml;r alla.</p>
+
+                    <p>Staden fr&auml;mjar tillg&auml;ngligheten f&ouml;r digitala tj&auml;nster genom att f&ouml;renhetliga publiceringsarbetet och ordna utbildning om tillg&auml;nglighet f&ouml;r sin personal.</p>
+
+                    <p>Tillg&auml;nglighetsniv&aring;n f&ouml;r webbplatser f&ouml;ljs upp kontinuerligt n&auml;r webbplatserna underh&aring;lls. Observerade brister hanteras omedelbart. V&aring;r str&auml;van &auml;r att genomf&ouml;ra n&ouml;dv&auml;ndiga &auml;ndringar s&aring; snabbt som m&ouml;jligt.</p>
+
+                    <h3>Handikappade och hj&auml;lpmedelsanv&auml;ndare</h3>
+
+                    <p>Staden erbjuder r&aring;dgivning och st&ouml;d f&ouml;r handikappade och hj&auml;lpmedelsanv&auml;ndare. St&ouml;d kan f&aring;s p&aring; de r&aring;dgivningssidor som anges p&aring; stadens sidor och p&aring; telefonr&aring;dgivningen.</p>
+
+                    <h2>Godk&auml;nnande av tillg&auml;nglighetsutl&aring;tande</h2>
+
+                    <p>Detta utl&aring;tande har godk&auml;nts 4.9.2020.</p>
+
+                    <p>&nbsp;</p>
+
+                    <p>Kultur- och fritidssektorn</p>
+
+                    <p>Helsingfors stad</p>
+
+                    <p>&nbsp;</p>
+                """
+        },
+        {
+            "language": "en",
+            "title": u"Accessibility statement",
+            "content": u"""
+                <h1>Accessibility statement</h1>
+
+                <p>This accessibility statement applies to the website &rdquo;Helsinkikuvia&rdquo; of the City of Helsinki. The site address is http://www.helsinkikuvia.fi</p>
+
+                <h2>Statutory provisions applicable to the website</h2>
+
+                <p>This website was published prior to 23 September 2018. The website must fulfil the statutory accessibility requirements after the transitional period ending on 23 September 2020.</p>
+
+                <h2>The objective of the city</h2>
+
+                <p>As regards the accessibility of digital services, Helsinki aims to reach at least Level AA or above as set forth in the WCAG guidelines in so far as is reasonably practical.</p>
+
+                <h2>Compliance status</h2>
+
+                <p>This website meets the statutory critical accessibility requirements in accordance with Level AA of the WCAG v2.1 with the following deficiencies.</p>
+
+                <h2>Non-accessible content</h2>
+
+                <p>The content mentioned below does not yet meet all of the statutory accessibility requirements.</p>
+
+                <h3>Deficiencies found</h3>
+
+                <p>1. Insufficient language determination</p>
+
+                <p>The languages in the language menu are missing language determinations, which causes the screen reader to pronounce the words incorrectly. (WCAG2.1: 3.1.2 Language of Parts)</p>
+
+                <p>Corrective measures: The languages of the language menu and the search field of the site must have a corresponding language determination.</p>
+
+                <p>2. Browsing the photo albums on the English version of the site is challenging for users of screen readers.</p>
+
+                <p>The texts on the photo albums and photos on the site are only in Finnish, even though the site is otherwise in English. The screen reader pronounces the content incorrectly. (WCAG2.1: 3.1.2 Language of Parts)</p>
+
+                <p>Corrective measures: The names of the photo albums and the descriptive texts of the other photos must be translated according to the language the user has selected for the website. Alternatively, the language determined for the photo album page should always be Finnish when the texts are in Finnish.</p>
+
+                <p>3. The site&rsquo;s title element has not been identified for all pages.</p>
+
+                <p>The label of the title element is not always updated when a new page is loaded. (WCAG2.1: 2.4.2 Page Titled)</p>
+
+                <p>Corrective measures: Ensuring that each page on the site has a descriptive title element.</p>
+
+                <p>4. Illogical titles</p>
+
+                <p>The titles of the site are not proceeding logically in all parts. (WCAG2.1: 1.3.1 Info and Relationships)</p>
+
+                <p>Corrective measures: Ensuring that the site&rsquo;s titles proceed consistently everywhere. The titles should start with an h1 level title.</p>
+
+                <p>5. The site has buttons that are unnamed for assistive technology and insufficiently described.</p>
+
+                <p>The site has buttons that have not been named at all for assistive technology, such as screen readers. (WCAG2.1: 4.1.2 Name, Role, Value)</p>
+
+                <p>Corrective measures: Ensuring that all buttons on the site have been named technically for screen readers and other assistive solutions.</p>
+
+                <p>6. Weak contrast</p>
+
+                <p>The site has text colours in which the contrast is insufficient in relation to the background colour. (WCAG2: 1.4.3 Contrast (Minimum))</p>
+
+                <p>Corrective measures: The contrast ratio between the text and its background should be at least 4.5:1, and 3:1 when using large-scale text.</p>
+
+                <h3>&nbsp;</h3>
+
+                <h3>Correcting deficiencies</h3>
+
+                <p>The aim is to correct any shortcomings detected by ensuring that accessing the website with screen readers and assistive technologies is possible. The titles of the site will be revised and title elements will be determined for all elements. The website&rsquo;s layout will undergo changes where the contrasts will have been revised so that they are at least at 4.5:1. The changes will be made as soon as possible in connection with a system update by the end of 2020.</p>
+
+                <h3>&nbsp;</h3>
+
+                <h3>Obtaining information in an accessible form</h3>
+
+                <p>Due to these deficiencies, you can request the non-accessible content from the administrator of this website.</p>
+
+                <p>Culture and Leisure Division, City of Helsinki</p>
+
+                <p>kuva-accessibility@hel.fi</p>
+
+                <p>&nbsp;</p>
+
+                <h2>Preparing an accessibility statement</h2>
+
+                <p>This statement was prepared on 18/3/2020 and was last updated on 4/9/2020.</p>
+
+                <h3>Assessment of accessibility</h3>
+
+                <p>The working instruction and procedures of the City of Helsinki were followed when evaluating the accessibility of the site, with the aim of ensuring that websites are accessible in all stages of the work process.</p>
+
+                <p>Accessibility was evaluated by means of an audit by a third-party expert as well as self-evaluation.</p>
+
+                <p>Accessibility was evaluated using a programmatic accessibility auditing tool as well as by manually reviewing the site and content. Programmatic evaluations were carried out using the Siteimprove browser extension.</p>
+
+                <p>Defects reported by the evaluation tools were reviewed and, if necessary, corrected.</p>
+
+                <p>The third-party expert audit was carried out by Service Centre Helsinki.</p>
+
+                <h3>Updating the accessibility statement</h3>
+
+                <p>When website technology or content changes, its accessibility must be ensured through constant monitoring and periodic checks. This statement will be updated in conjunction with website changes and accessibility evaluations.</p>
+
+                <h2>Feedback and contact information</h2>
+
+                <p>The entity responsible for site accessibility:</p>
+
+                <p>Culture and Leisure Division, City of Helsinki</p>
+
+                <p>kuva-accessibility@hel.fi</p>
+
+                <p>&nbsp;</p>
+
+                <h3>Reporting non-accessible content</h3>
+
+                <p>If a user feels that accessibility requirements have not been met, they can report the issue by e-mail to <a href="mailto:helsinki.palaute@hel.fi">helsinki.palaute@hel.fi</a> or through the feedback form at <a href="https://www.hel.fi/helsinki/en/administration/participate/feedback">https://www.hel.fi/helsinki/en/administration/participate/feedback</a> .</p>
+
+                <h3>Requesting information in an accessible format</h3>
+
+                <p>If a user feels that content on a website is not available in an accessible format, they can request for this information by e-mail at <a href="mailto:helsinki.palaute@hel.fi">helsinki.palaute@hel.fi</a> or through the feedback form at <a href="https://www.hel.fi/helsinki/en/administration/participate/feedback">https://www.hel.fi/helsinki/en/administration/participate/feedback</a> . The aim is to reply to the enquiry within a reasonable time frame.</p>
+
+                <h2>Legal protection of accessibility,<br />
+                Enforcement procedure</h2>
+
+                <p>If a user feels that their report or enquiry has not received a response or that the response is unsatisfactory, they can report the issue to the Regional State Administrative Agency of Southern Finland. The website of the Regional State Administrative Agency of Southern Finland explains in detail how the matter will be processed.</p>
+
+                <p>Regional State Administrative Agency of Southern Finland<br />
+                Accessibility monitoring unit<br />
+                <a href="http://www.saavutettavuusvaatimukset.fi">www.saavutettavuusvaatimukset.fi</a> (in Finnish)<br />
+                <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a><br />
+                Telephone exchange +358 295 016&nbsp;000<br />
+                Open: Mon-Fri at 8:00&ndash;16:15</p>
+
+                <h2>The City of Helsinki and accessibility</h2>
+
+                <p>The objective of the city of Helsinki is to be an accessible city to all. Helsinki aims to ensure that all residents are able to move about and act as effortlessly as possible and that all content and services are accessible to all.</p>
+
+                <p>The city promotes accessibility of digital services by streamlining publishing work and organising accessibility-related training for its staff.</p>
+
+                <p>The accessibility level of websites is monitored constantly during their maintenance. Immediate action will be taken if deficiencies are found. The aim is to carry out the necessary amendments as quickly as possible.</p>
+
+                <h3>The disabled and users of assistive technologies</h3>
+
+                <p>The city provides counselling and support for the disabled and users of assistive technologies. Support is available on guidance sites announced on the city&rsquo;s website and through telephone counselling.</p>
+
+                <h2>Approval of the accessibility statement</h2>
+
+                <p>This statement was approved by 4/9/2020</p>
+
+                <p>Culture and Leisure Division<br />
+                City of Helsinki</p>
+                """
+        }
     ]
 }
 ]
