@@ -8,7 +8,7 @@ from freezegun import freeze_time
 from datetime import timedelta
 from django.utils import timezone
 from hkm.management.commands.clean_unused_data import DEFAULT_DAYS_UNTIL_NOTIFICATION
-from mock import patch, DEFAULT
+from unittest.mock import DEFAULT, patch
 
 CUSTOM_DAYS_UNTIL_NOTIFICATION = 5
 
