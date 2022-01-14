@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 from decimal import Decimal
 from random import randrange
