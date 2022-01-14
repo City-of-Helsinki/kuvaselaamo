@@ -114,7 +114,7 @@ class GenerateCampaignCodesActionForm(forms.Form):
     )
 
     def form_action(self, campaign):
-        for i in range(0, self.cleaned_data["amount"]):
+        for _i in range(0, self.cleaned_data["amount"]):
             code = CampaignCode(campaign=campaign)
             code.generate_code(
                 length=self.cleaned_data["code_length"],

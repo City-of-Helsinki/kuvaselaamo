@@ -155,7 +155,7 @@ class Campaign(TranslatableModel, _UsageMixin):
             return "%s %s" % (str(self._meta.verbose_name), self.pk)
 
     def get_discount_value(self, basket_lines):
-        total_price = sum(l.total_price for l in basket_lines if l.type != 4)
+        total_price = sum(line.total_price for line in basket_lines if line.type != 4)
         p_discount = 0
         f_discount = 0
         if self.percentage_discount:

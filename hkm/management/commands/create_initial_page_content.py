@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.core.management.base import BaseCommand
 
 from hkm.models.models import Collection, PageContent, PrintProduct, Record, User

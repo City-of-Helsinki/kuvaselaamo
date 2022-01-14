@@ -1,12 +1,8 @@
-from django import forms
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
-from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-from django.template import loader, RequestContext
-from django.urls import reverse
-from django.utils.html import format_html
+from django.template import loader
 from parler.admin import TranslatableAdmin
 
 from hkm.forms import ShowcaseForm
@@ -31,7 +27,7 @@ class CampaignAdmin(TranslatableAdmin):
 
     def generate(self, request, campaign_id, *args, **kwargs):
         campaign = Campaign.objects.get(pk=campaign_id)
-        for i in range(0, int(request.POST.get("amount", 0))):
+        for _i in range(0, int(request.POST.get("amount", 0))):
             code = CampaignCode(campaign=campaign)
             code.generate_code(
                 length=int(request.POST.get("length")),

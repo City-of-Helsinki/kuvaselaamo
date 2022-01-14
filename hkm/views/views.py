@@ -889,7 +889,7 @@ class SignUpView(BaseView):
 class LanguageView(RedirectView):
     def get(self, request, *args, **kwargs):
         lang = request.GET.get("lang", "fi")
-        if not lang in ("fi", "en", "sv"):
+        if lang not in ("fi", "en", "sv"):
             lang = "fi"
         if request.user.is_authenticated():
             profile = request.user.profile

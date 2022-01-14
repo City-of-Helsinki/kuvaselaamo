@@ -40,7 +40,8 @@ def send_feedback_notification(feedback_id, force=False):
                 LOG.error("send_mail returned 0 sent messages")
         else:
             LOG.debug(
-                'Notification about feedback is already sent. Not sending again. User "force" flag to re-send notification',
+                "Notification about feedback is already sent. "
+                'Not sending again. User "force" flag to re-send notification',
                 extra={"data": {"feedback_id": feedback_id}},
             )
         return False

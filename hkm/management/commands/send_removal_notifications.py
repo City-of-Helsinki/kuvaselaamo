@@ -1,5 +1,4 @@
 from datetime import timedelta
-from smtplib import SMTPException
 
 from anymail.exceptions import AnymailRequestsAPIError
 from django.conf import settings
@@ -15,7 +14,7 @@ NOTIFICATION_MESSAGE = """Hei! Et ole kirjautunut Helsinkikuvia.fi -palveluun pi
 
 Jos haluat jatkaa palvelun käyttöä ja säilyttää tietosi, käy kirjautumassa osoitteessa https://helsinkikuvia.fi.
 
-Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa"""
+Helsinkikuvia.fi – helsinkiläisten kuva-aarre verkossa"""  # noqa: E501
 
 
 class Command(BaseCommand):

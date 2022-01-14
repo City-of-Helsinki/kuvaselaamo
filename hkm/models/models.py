@@ -1,6 +1,3 @@
-import datetime
-import hashlib
-import hmac
 import json
 import logging
 
@@ -11,12 +8,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
@@ -497,8 +492,8 @@ class ProductOrder(BaseModel):
         return super().save(*args, **kwargs)
 
     @classmethod
-    def delete_old_data(self, date):
-        return self.objects.filter(user__isnull=True, modified__lte=date).delete()
+    def delete_old_data(cls, date):
+        return cls.objects.filter(user__isnull=True, modified__lte=date).delete()
 
     def __unicode__(self):
         return self.order_hash
@@ -524,8 +519,8 @@ class Feedback(BaseModel):
     )
 
     @classmethod
-    def delete_old_data(self, date):
-        return self.objects.filter(user__isnull=True, modified__lte=date).delete()
+    def delete_old_data(cls, date):
+        return cls.objects.filter(user__isnull=True, modified__lte=date).delete()
 
 
 def get_tmp_upload_path(instance, filename):
@@ -541,8 +536,8 @@ class TmpImage(BaseModel):
     )
 
     @classmethod
-    def delete_old_data(self, date):
-        return self.objects.filter(modified__lte=date, creator__isnull=True).delete()
+    def delete_old_data(cls, date):
+        return cls.objects.filter(modified__lte=date, creator__isnull=True).delete()
 
     def __unicode__(self):
         return self.record_title

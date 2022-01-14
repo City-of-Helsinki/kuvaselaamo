@@ -64,7 +64,7 @@ class FinnaClient(object):
                 return None
 
         result_data = r.json()
-        if not "status" in result_data or result_data["status"] != "OK":
+        if "status" not in result_data or result_data["status"] != "OK":
             LOG.error(
                 "Finna query was not succesfull",
                 extra={"data": {"result_data": repr(result_data)}},
@@ -152,7 +152,7 @@ class FinnaClient(object):
                 return None
 
         result_data = r.json()
-        if not "status" in result_data or result_data["status"] != "OK":
+        if "status" not in result_data or result_data["status"] != "OK":
             LOG.error(
                 "Finna query was not succesfull",
                 extra={"data": {"result_data": repr(result_data)}},
@@ -230,7 +230,7 @@ class FinnaClient(object):
                 return None
 
         result_data = r.json()
-        if not "status" in result_data or result_data["status"] != "OK":
+        if "status" not in result_data or result_data["status"] != "OK":
             LOG.error(
                 "Finna query was not succesfull",
                 extra={"data": {"result_data": repr(result_data)}},
