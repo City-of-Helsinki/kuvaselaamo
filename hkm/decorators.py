@@ -10,4 +10,5 @@ def restrict_for_museum(func):
             raise Http404()
 
         return func(request, *args, **kwargs)
+
     return view

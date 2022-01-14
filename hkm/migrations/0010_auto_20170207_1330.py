@@ -8,38 +8,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0009_productorder_crop_image_url'),
+        ("hkm", "0009_productorder_crop_image_url"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_height',
-            field=models.FloatField(blank=True, null=True, verbose_name='Crop height'),
+            model_name="productorder",
+            name="crop_height",
+            field=models.FloatField(blank=True, null=True, verbose_name="Crop height"),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_width',
-            field=models.FloatField(blank=True, null=True, verbose_name='Crop width'),
+            model_name="productorder",
+            name="crop_width",
+            field=models.FloatField(blank=True, null=True, verbose_name="Crop width"),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_x',
-            field=models.FloatField(blank=True, null=True, verbose_name='Crop x coordinate from left'),
+            model_name="productorder",
+            name="crop_x",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Crop x coordinate from left"
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_y',
-            field=models.FloatField(blank=True, null=True, verbose_name='Crop y coordinate from top'),
+            model_name="productorder",
+            name="crop_y",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Crop y coordinate from top"
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='original_height',
-            field=models.FloatField(blank=True, null=True, verbose_name='Original image height'),
+            model_name="productorder",
+            name="original_height",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Original image height"
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='original_width',
-            field=models.FloatField(blank=True, null=True, verbose_name='Original image width'),
+            model_name="productorder",
+            name="original_width",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Original image width"
+            ),
         ),
     ]

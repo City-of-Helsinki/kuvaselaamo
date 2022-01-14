@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0040_remove_obsolete_image_fields_from_record'),
+        ("hkm", "0040_remove_obsolete_image_fields_from_record"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='showcase',
-            name='albums',
-            field=models.ManyToManyField(to='hkm.Collection', verbose_name='Albums'),
+            model_name="showcase",
+            name="albums",
+            field=models.ManyToManyField(to="hkm.Collection", verbose_name="Albums"),
         ),
     ]

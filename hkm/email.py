@@ -16,14 +16,17 @@ def send_feedback_notification(feedback_id, force=False):
     try:
         feedback = Feedback.objects.get(id=feedback_id)
     except Feedback.DoesNotExist:
-        LOG.error('Feedback does not exists', extra={
-                  'data': {'feedback_id': feedback_id}})
+        LOG.error(
+            "Feedback does not exists", extra={"data": {"feedback_id": feedback_id}}
+        )
         return False
     else:
         if not feedback.is_notification_sent or force:
-            title = _('Kuvaselaamopalaute')
+            title = _("Kuvaselaamopalaute")
             message = render_to_string(
-                'hkm/emails/feedback.txt', {'feedback': feedback, 'MY_DOMAIN': settings.HKM_MY_DOMAIN})
+                "hkm/emails/feedback.txt",
+                {"feedback": feedback, "MY_DOMAIN": settings.HKM_MY_DOMAIN},
+            )
             count_sent_message = send_mail(
                 title,
                 message,
@@ -36,10 +39,10 @@ def send_feedback_notification(feedback_id, force=False):
                 feedback.save()
                 return True
             else:
-                LOG.error('send_mail returned 0 sent messages')
+                LOG.error("send_mail returned 0 sent messages")
         else:
-            LOG.debug('Notification about feedback is already sent. Not sending again. User "force" flag to re-send notification',
-                      extra={'data': {'feedback_id': feedback_id}})
+            LOG.debug(
+                'Notification about feedback is already sent. Not sending again. User "force" flag to re-send notification',
+                extra={"data": {"feedback_id": feedback_id}},
+            )
         return False
-
-

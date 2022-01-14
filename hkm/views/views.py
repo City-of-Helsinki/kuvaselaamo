@@ -1,30 +1,30 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import io
-import logging
-
 import json
+import logging
 import math
+from urllib.parse import urlencode
+
 from django import http
 from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.core.cache import caches
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render_to_response, render
+from django.shortcuts import redirect, render, render_to_response
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
-from django.core.cache import caches
 from unidecode import unidecode
-from urllib.parse import urlencode
 
-from hkm import forms, image_utils, email
-import copy
+from hkm import email, forms, image_utils
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from hkm.models.models import Collection, Record, TmpImage, PageContent, Showcase
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.views import PasswordResetConfirmView
+from hkm.models.models import Collection, PageContent, Record, Showcase, TmpImage
 
 MAX_RECORDS_PER_FINNA_QUERY = 200
 
@@ -756,9 +756,7 @@ class SearchRecordDetailView(SearchView):
     use_detailed_query = True
 
     def get(self, request, *args, **kwargs):
-        return super().get(
-            request, record=True, *args, **kwargs
-        )
+        return super().get(request, record=True, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get("action", None)
@@ -970,9 +968,7 @@ class AjaxCropRecordView(View):
                 self.record["full_res_url"] = FINNA.get_full_res_image_url(
                     self.record["id"]
                 )
-                return super().dispatch(
-                    request, *args, **kwargs
-                )
+                return super().dispatch(request, *args, **kwargs)
             else:
                 LOG.error("Could not get record data")
         return http.HttpResponseBadRequest()

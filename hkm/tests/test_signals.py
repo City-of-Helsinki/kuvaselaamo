@@ -1,14 +1,19 @@
+from datetime import datetime, timedelta
+
 import pytest
 from django.contrib.auth import signals
-from .factories import UserFactory
 from django.test.client import RequestFactory
+
 from hkm.models.models import UserProfile
-from datetime import datetime, timedelta
+
+from .factories import UserFactory
 
 
 @pytest.mark.django_db
 def test_that_login_clears_removal_notification_timestamp():
-    user = UserFactory(profile__removal_notification_sent=datetime.today() - timedelta(days=1))
+    user = UserFactory(
+        profile__removal_notification_sent=datetime.today() - timedelta(days=1)
+    )
 
     assert UserProfile.objects.first().removal_notification_sent
 

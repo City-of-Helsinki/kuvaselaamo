@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0029_checkout_status_flags'),
+        ("hkm", "0029_checkout_status_flags"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productorderdiscount',
-            name='discounted_value',
+            model_name="productorderdiscount",
+            name="discounted_value",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=6),
             preserve_default=False,
         ),

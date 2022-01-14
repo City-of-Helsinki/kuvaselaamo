@@ -8,36 +8,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0003_productorder_product_name'),
+        ("hkm", "0003_productorder_product_name"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='productorder',
-            name='crop_image_height',
+            model_name="productorder",
+            name="crop_image_height",
         ),
         migrations.RemoveField(
-            model_name='productorder',
-            name='crop_image_width',
+            model_name="productorder",
+            name="crop_image_width",
         ),
         migrations.AddField(
-            model_name='productorder',
-            name='original_height',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Original image height'),
+            model_name="productorder",
+            name="original_height",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Original image height"
+            ),
         ),
         migrations.AddField(
-            model_name='productorder',
-            name='original_width',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Original image width'),
+            model_name="productorder",
+            name="original_width",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Original image width"
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_x',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Crop x coordinate from left'),
+            model_name="productorder",
+            name="crop_x",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Crop x coordinate from left"
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='crop_y',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Crop y coordinate from top'),
+            model_name="productorder",
+            name="crop_y",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Crop y coordinate from top"
+            ),
         ),
     ]

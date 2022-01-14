@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from random import randrange
 from decimal import Decimal
+from random import randrange
+from urllib.parse import urlencode
 
 from django import template
 from django.template.defaultfilters import floatformat
@@ -10,8 +11,6 @@ from django.utils import formats
 from django.utils.encoding import force_text
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from urllib.parse import urlencode
-
 from hkm.utils import encoded_dict
 
 LOG = logging.getLogger(__name__)
@@ -34,17 +33,17 @@ def record_detail(record):
     array_fields = {}
     translated = []
 
-    photographer = record.get('rawData').get('photographer_str_mv', [])
-    format = record.get('rawData').get('format', [])
-    measures = record.get('rawData').get('measurements', [])
+    photographer = record.get("rawData").get("photographer_str_mv", [])
+    format = record.get("rawData").get("format", [])
+    measures = record.get("rawData").get("measurements", [])
 
     for data in format:
         if isinstance(data, dict):
-            translated.append(data.get('translated'))
+            translated.append(data.get("translated"))
 
-    array_fields['photographer'] = ", ".join(photographer) if photographer else ""
-    array_fields['image_types'] = ', '.join(translated) if translated else ""
-    array_fields['measures'] = ', '.join(measures) if measures else ""
+    array_fields["photographer"] = ", ".join(photographer) if photographer else ""
+    array_fields["image_types"] = ", ".join(translated) if translated else ""
+    array_fields["measures"] = ", ".join(measures) if measures else ""
     return array_fields
 
 
@@ -55,7 +54,7 @@ def display_images(collection):
     image_urls = []
 
     if record_count == 0:
-        image_urls.append('/static/hkm/img/collection_default_image.png')
+        image_urls.append("/static/hkm/img/collection_default_image.png")
     elif record_count < 3:
         image_urls.append(records[0].get_preview_image_absolute_url())
     else:
@@ -78,7 +77,7 @@ def front_page_url(collection):
     record_count = collection.records.count() if collection else 0
 
     if not record_count:
-        img_url = '/static/hkm/img/front_page_default_image.jpg'
+        img_url = "/static/hkm/img/front_page_default_image.jpg"
     else:
         records = collection.records.all()
         random_index = randrange(record_count)
@@ -89,7 +88,7 @@ def front_page_url(collection):
 
 @register.filter
 def showcase_collections(showcase):
-    albums = showcase.albums.select_related('owner').all().order_by('created')
+    albums = showcase.albums.select_related("owner").all().order_by("created")
     return albums
 
 
@@ -109,8 +108,8 @@ def search_keywords(url_params):
             keywords.append({"value": value, "facet_type": key})
 
     # Manually check date_from and date_to to combine them into one keyword
-    date_from = url_params.get('date_from', '')
-    date_to = url_params.get('date_to', '')
+    date_from = url_params.get("date_from", "")
+    date_to = url_params.get("date_to", "")
 
     if date_from or date_to:
         combined = "%s - %s" % (date_from, date_to)
@@ -129,14 +128,14 @@ def return_link(url_params):
 
     encoded_cleaned_params = encoded_dict(cleaned_params)
     encoded_params = urlencode(encoded_cleaned_params, doseq=True)
-    return '?%s' % encoded_params if encoded_params else ''
+    return "?%s" % encoded_params if encoded_params else ""
 
 
 @register.filter()
 def record_index(record, search_result):
-    records_in_sr = search_result.get('records', [])
+    records_in_sr = search_result.get("records", [])
 
-    record_in_sr = next((x for x in records_in_sr if x['id'] == record.get('id')), None)
+    record_in_sr = next((x for x in records_in_sr if x["id"] == record.get("id")), None)
 
     index = records_in_sr.index(record_in_sr) + 1
-    return "%s / %s" % (index, search_result.get('resultCount'))
+    return "%s / %s" % (index, search_result.get("resultCount"))

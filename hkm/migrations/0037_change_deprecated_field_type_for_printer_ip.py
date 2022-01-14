@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0036_campaign_user_group'),
+        ("hkm", "0036_campaign_user_group"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userprofile',
-            name='printer_ip',
-            field=models.GenericIPAddressField(blank=True, null=True, verbose_name='Museum printer IP'),
+            model_name="userprofile",
+            name="printer_ip",
+            field=models.GenericIPAddressField(
+                blank=True, null=True, verbose_name="Museum printer IP"
+            ),
         ),
     ]

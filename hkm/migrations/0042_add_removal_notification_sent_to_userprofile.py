@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0041_update_showcase_albums_description'),
+        ("hkm", "0041_update_showcase_albums_description"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='removal_notification_sent',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Removal notification sent'),
+            model_name="userprofile",
+            name="removal_notification_sent",
+            field=models.DateTimeField(
+                blank=True, null=True, verbose_name="Removal notification sent"
+            ),
         ),
     ]

@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0033_add_product_order_collection_hash'),
+        ("hkm", "0033_add_product_order_collection_hash"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productorder',
-            name='postal_code',
-            field=models.CharField(null=True, verbose_name='Postal code', max_length=64),
+            model_name="productorder",
+            name="postal_code",
+            field=models.CharField(
+                null=True, verbose_name="Postal code", max_length=64
+            ),
         ),
     ]

@@ -8,23 +8,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0023_museum_order'),
+        ("hkm", "0023_museum_order"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='albums',
-            field=models.ManyToManyField(blank=True, help_text='List of albums for browsing if user is museum', null=True, to='hkm.Collection'),
+            model_name="userprofile",
+            name="albums",
+            field=models.ManyToManyField(
+                blank=True,
+                help_text="List of albums for browsing if user is museum",
+                null=True,
+                to="hkm.Collection",
+            ),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='is_museum',
-            field=models.BooleanField(default=False, verbose_name='Is museum'),
+            model_name="userprofile",
+            name="is_museum",
+            field=models.BooleanField(default=False, verbose_name="Is museum"),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='printer_ip',
-            field=models.IPAddressField(blank=True, null=True, verbose_name='Museum printer IP'),
+            model_name="userprofile",
+            name="printer_ip",
+            field=models.IPAddressField(
+                blank=True, null=True, verbose_name="Museum printer IP"
+            ),
         ),
     ]

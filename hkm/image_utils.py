@@ -3,8 +3,8 @@ import io
 import logging
 
 import requests
-from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
 
 from hkm.models.models import TmpImage
 
@@ -34,11 +34,11 @@ def get_cropped_full_res_file(title, order_line):
     cropped_image = Image.open(io.BytesIO(r.content))
     crop_io = io.BytesIO()
     cropped_image.save(crop_io, format=cropped_image.format)
-    filename = '%s.%s' % (title, cropped_image.format.lower())
-    LOG.debug('Cropped image', extra={
-              'data': {'size': repr(cropped_image.size)}})
-    crop_file = InMemoryUploadedFile(crop_io, None, filename, cropped_image.format, None, None)
-    tmp_image = TmpImage(record_id=order_line.record_finna_id,
-                         edited_image=crop_file)
+    filename = "%s.%s" % (title, cropped_image.format.lower())
+    LOG.debug("Cropped image", extra={"data": {"size": repr(cropped_image.size)}})
+    crop_file = InMemoryUploadedFile(
+        crop_io, None, filename, cropped_image.format, None, None
+    )
+    tmp_image = TmpImage(record_id=order_line.record_finna_id, edited_image=crop_file)
     tmp_image.save()
     return tmp_image

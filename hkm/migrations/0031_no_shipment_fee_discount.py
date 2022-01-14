@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0030_discount_value'),
+        ("hkm", "0030_discount_value"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='free_shipping',
-            field=models.BooleanField(default=False, verbose_name='Free shipping'),
+            model_name="campaign",
+            name="free_shipping",
+            field=models.BooleanField(default=False, verbose_name="Free shipping"),
         ),
     ]

@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0021_page_ref'),
+        ("hkm", "0021_page_ref"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='printproduct',
-            name='is_museum_only',
-            field=models.BooleanField(default=False, verbose_name='Museum purchase only'),
+            model_name="printproduct",
+            name="is_museum_only",
+            field=models.BooleanField(
+                default=False, verbose_name="Museum purchase only"
+            ),
         ),
     ]

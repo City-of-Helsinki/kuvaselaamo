@@ -2,6 +2,7 @@
 
 import logging
 import os
+
 import environ
 
 checkout_dir = environ.Path(__file__) - 2
@@ -10,18 +11,18 @@ env_file = checkout_dir(".env")
 
 env = environ.Env(
     DEBUG=(bool, True),
-    SECRET_KEY=(str, ''),
+    SECRET_KEY=(str, ""),
     ALLOWED_HOSTS=(list, []),
     DATABASE_URL=(str, "postgres://kuvaselaamo:kuvaselaamo@localhost/kuvaselaamo"),
-    EMAIL_BACKEND=(str, 'django.core.mail.backends.console.EmailBackend'),
+    EMAIL_BACKEND=(str, "django.core.mail.backends.console.EmailBackend"),
     MAIL_MAILGUN_KEY=(str, ""),
     MAIL_MAILGUN_DOMAIN=(str, ""),
     MAIL_MAILGUN_API=(str, ""),
-    HKM_DEFAULT_FROM_EMAIL=(str, 'no-reply@hel.fi'),
-    HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ['dummy.address@hel.ninja']),
+    HKM_DEFAULT_FROM_EMAIL=(str, "no-reply@hel.fi"),
+    HKM_FEEDBACK_NOTIFICATION_EMAILS=(list, ["dummy.address@hel.ninja"]),
     HKM_POSTAL_FEES=(float, 0.0),
-    HKM_MY_DOMAIN=(str, 'http://localhost:8080'),
-    LOG_LEVEL=(str, 'ERROR'),
+    HKM_MY_DOMAIN=(str, "http://localhost:8080"),
+    LOG_LEVEL=(str, "ERROR"),
     DEFAULT_FILE_STORAGE=(str, "django.core.files.storage.FileSystemStorage"),
     GS_BUCKET_NAME=(str, ""),
     AZURE_ACCOUNT_NAME=(str, ""),
@@ -35,10 +36,10 @@ env = environ.Env(
 if os.path.exists(env_file):
     env.read_env(env_file)
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool("DEBUG")
 
-ENABLE_ANALYTICS = env.bool('ENABLE_ANALYTICS')
-ENABLE_FEEDBACK_CONGESTION_MSG = env.bool('ENABLE_FEEDBACK_CONGESTION_MSG')
+ENABLE_ANALYTICS = env.bool("ENABLE_ANALYTICS")
+ENABLE_FEEDBACK_CONGESTION_MSG = env.bool("ENABLE_FEEDBACK_CONGESTION_MSG")
 
 SECRET_KEY = env.str("SECRET_KEY")
 if DEBUG and not SECRET_KEY:
@@ -46,7 +47,7 @@ if DEBUG and not SECRET_KEY:
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-EMAIL_BACKEND = env.str('EMAIL_BACKEND')
+EMAIL_BACKEND = env.str("EMAIL_BACKEND")
 if env("MAIL_MAILGUN_KEY"):
     ANYMAIL = {
         "MAILGUN_API_KEY": env("MAIL_MAILGUN_KEY"),
@@ -65,15 +66,15 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 15
 
 MANAGERS = ADMINS
 
-INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ("127.0.0.1",)
 
 DATABASES = {
-    'default': env.db(),
+    "default": env.db(),
 }
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     }
 }
 
@@ -82,32 +83,28 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SITE_ID = 1
 
 USE_TZ = True
-TIME_ZONE = 'Europe/Helsinki'
+TIME_ZONE = "Europe/Helsinki"
 
-LANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = "fi"
 
 LANGUAGES = (
-    ('fi', 'FI'),
-    ('en', 'EN'),
-    ('sv', 'SV'),
+    ("fi", "FI"),
+    ("en", "EN"),
+    ("sv", "SV"),
 )
 
-LOCALE_PATHS = (
-    os.path.join(BASEDIR, 'locale'),
-)
+LOCALE_PATHS = (os.path.join(BASEDIR, "locale"),)
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"
 
-STATICFILES_DIRS = (
-    os.path.join(BASEDIR, 'static'),
-)
+STATICFILES_DIRS = (os.path.join(BASEDIR, "static"),)
 
-STATIC_ROOT = os.path.join(BASEDIR, '..', 'static')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASEDIR, "..", "static")
+STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASEDIR, '..', 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASEDIR, "..", "media")
+MEDIA_URL = "/media/"
 
 # For staging env, we use Google Cloud Storage
 DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
@@ -127,160 +124,153 @@ elif DEFAULT_FILE_STORAGE == "storages.backends.azure_storage.AzureStorage":
     AZURE_CONTAINER = env("AZURE_BUCKET_NAME")
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.sites.middleware.CurrentSiteMiddleware',
-    'hkm.middleware.LanguageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.sites.middleware.CurrentSiteMiddleware",
+    "hkm.middleware.LanguageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 )
 
-ROOT_URLCONF = 'kuvaselaamo.urls'
+ROOT_URLCONF = "kuvaselaamo.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASEDIR, 'templates')],
-        'OPTIONS': {
-            'loaders': (
-                'apptemplates.Loader',
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-                'django.template.loaders.eggs.Loader',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASEDIR, "templates")],
+        "OPTIONS": {
+            "loaders": (
+                "apptemplates.Loader",
+                "django.template.loaders.filesystem.Loader",
+                "django.template.loaders.app_directories.Loader",
+                "django.template.loaders.eggs.Loader",
             ),
-            'context_processors': (
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
-                'kuvaselaamo.context_processors.global_settings',
+            "context_processors": (
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
+                "kuvaselaamo.context_processors.global_settings",
             ),
-        }
+        },
     },
 ]
 
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-    'djangobower.finders.BowerFinder',
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+    "djangobower.finders.BowerFinder",
 )
 
 INSTALLED_APPS = (
-    'hkm',
-    'widget_tweaks',
-
-    'phonenumber_field',
-
-    'compressor',
-    'parler',
-    'djangobower',
-
-    'django.contrib.sites',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.staticfiles',
-
-    'django.contrib.admin.apps.SimpleAdminConfig',
-
-    'anymail',
-
-    'storages'
+    "hkm",
+    "widget_tweaks",
+    "phonenumber_field",
+    "compressor",
+    "parler",
+    "djangobower",
+    "django.contrib.sites",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.staticfiles",
+    "django.contrib.admin.apps.SimpleAdminConfig",
+    "anymail",
+    "storages",
 )
 
 # Bower
-BOWER_COMPONENTS_ROOT = os.path.join(BASEDIR, '..', 'components')
+BOWER_COMPONENTS_ROOT = os.path.join(BASEDIR, "..", "components")
 
-BOWER_INSTALLED_APPS = (
-    'ckeditor#4.7.1',
-)
+BOWER_INSTALLED_APPS = ("ckeditor#4.7.1",)
 
 # Parler
-PARLER_DEFAULT_LANGUAGE_CODE = 'fi'
+PARLER_DEFAULT_LANGUAGE_CODE = "fi"
 
 PARLER_LANGUAGES = {
     1: (
-        {'code': 'fi', },
-        {'code': 'en', },
-        {'code': 'sv', },
+        {
+            "code": "fi",
+        },
+        {
+            "code": "en",
+        },
+        {
+            "code": "sv",
+        },
     ),
-    'default': {
-        'fallback': 'fi',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
-        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks too.
-    }
+    "default": {
+        "fallback": "fi",  # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        "hide_untranslated": False,  # the default; let .active_translations() return fallbacks too.
+    },
 }
 
 # Compress
 COMPRESS_HTML = False
-COMPRESS_PARSER = 'compressor.parser.HtmlParser'
+COMPRESS_PARSER = "compressor.parser.HtmlParser"
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
+    "compressor.filters.css_default.CssAbsoluteFilter",
     # 'hutils.compressor_filters.ScssFilter',
 ]
 
 # Workaround for pyScss problems
 # https://github.com/Kronuz/pyScss/issues/70
-logging.getLogger('scss').addHandler(logging.StreamHandler())
+logging.getLogger("scss").addHandler(logging.StreamHandler())
 
 # Django
 
-PHONENUMBER_DB_FORMAT = 'NATIONAL'
-PHONENUMBER_DEFAULT_REGION = 'FI'
+PHONENUMBER_DB_FORMAT = "NATIONAL"
+PHONENUMBER_DEFAULT_REGION = "FI"
 
-HKM_MY_DOMAIN = env.str('HKM_MY_DOMAIN')
-HKM_FEEDBACK_NOTIFICATION_EMAILS = env.list('HKM_FEEDBACK_NOTIFICATION_EMAILS')
-DEFAULT_FROM_EMAIL = env.str('HKM_DEFAULT_FROM_EMAIL')
-HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, 'download')
+HKM_MY_DOMAIN = env.str("HKM_MY_DOMAIN")
+HKM_FEEDBACK_NOTIFICATION_EMAILS = env.list("HKM_FEEDBACK_NOTIFICATION_EMAILS")
+DEFAULT_FROM_EMAIL = env.str("HKM_DEFAULT_FROM_EMAIL")
+HKM_CROPPED_IMAGES_DOWNLOAD_PATH = os.path.join(MEDIA_ROOT, "download")
 
 # Pricing
 
-HKM_POSTAL_FEES = env.float('HKM_POSTAL_FEES')
+HKM_POSTAL_FEES = env.float("HKM_POSTAL_FEES")
 
-MUSEUM_GROUP = 'museum'
+MUSEUM_GROUP = "museum"
 
 WSGI_APPLICATION = "kuvaselaamo.wsgi.application"
 
-LOG_LEVEL = env('LOG_LEVEL')
+LOG_LEVEL = env("LOG_LEVEL")
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    'filters': {
-        'extra_data_filter': {
-            '()': 'hkm.log_filters.ExtraDataFilter'
-        },
+    "filters": {
+        "extra_data_filter": {"()": "hkm.log_filters.ExtraDataFilter"},
     },
-    'formatters': {
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s %(data)s',
+    "formatters": {
+        "simple": {
+            "format": "%(levelname)s %(asctime)s %(module)s: %(message)s %(data)s",
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
             "filters": ["extra_data_filter"],
-            "formatter": "simple"
+            "formatter": "simple",
         }
     },
     "loggers": {
-        'hkm.auditlog_signals': {
+        "hkm.auditlog_signals": {
             "handlers": ["console"],
             "level": "INFO",
-            "propagate": False
+            "propagate": False,
         },
-        '': {
-            "handlers": ["console"],
-            "level": LOG_LEVEL
-        },
+        "": {"handlers": ["console"], "level": LOG_LEVEL},
     },
 }
 
@@ -305,4 +295,4 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-PASSWORD_RESET_TIMEOUT_DAYS = env('PASSWORD_RESET_TIMEOUT_DAYS')
+PASSWORD_RESET_TIMEOUT_DAYS = env("PASSWORD_RESET_TIMEOUT_DAYS")

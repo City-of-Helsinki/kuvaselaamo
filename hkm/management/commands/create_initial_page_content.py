@@ -1,10 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from hkm.models.models import PageContent
-from hkm.models.models import Collection
-from hkm.models.models import Record
-from hkm.models.models import User
-from hkm.models.models import PrintProduct
+from hkm.models.models import Collection, PageContent, PrintProduct, Record, User
 
 pages = [
     {

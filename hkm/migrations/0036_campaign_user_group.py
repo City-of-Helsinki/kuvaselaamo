@@ -8,13 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0035_auto_20181212_1435'),
+        ("hkm", "0035_auto_20181212_1435"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='user_group',
-            field=models.CharField(choices=[(b'ALL', 'Kaikki'), (b'MUSEUM', 'Kioskik\xe4ytt\xe4j\xe4t'), (b'NORMAL', 'Normaalik\xe4ytt\xe4j\xe4t')], default=b'ALL', help_text='K\xe4ytt\xe4j\xe4ryhm\xe4, jolle tarjous on voimassa', max_length=20, verbose_name='K\xe4ytt\xe4j\xe4ryhm\xe4'),
+            model_name="campaign",
+            name="user_group",
+            field=models.CharField(
+                choices=[
+                    (b"ALL", "Kaikki"),
+                    (b"MUSEUM", "Kioskik\xe4ytt\xe4j\xe4t"),
+                    (b"NORMAL", "Normaalik\xe4ytt\xe4j\xe4t"),
+                ],
+                default=b"ALL",
+                help_text="K\xe4ytt\xe4j\xe4ryhm\xe4, jolle tarjous on voimassa",
+                max_length=20,
+                verbose_name="K\xe4ytt\xe4j\xe4ryhm\xe4",
+            ),
         ),
     ]

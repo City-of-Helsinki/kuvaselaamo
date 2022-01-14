@@ -8,13 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0031_no_shipment_fee_discount'),
+        ("hkm", "0031_no_shipment_fee_discount"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='campaigncode',
-            name='use_type',
-            field=models.CharField(choices=[(b'SINGLE_USE', 'Kertak\xe4ytt\xf6inen'), (b'MULTI_USE', 'Monik\xe4ytt\xf6inen')], db_index=True, default=b'SINGLE_USE', max_length=20, verbose_name='K\xe4ytt\xf6'),
+            model_name="campaigncode",
+            name="use_type",
+            field=models.CharField(
+                choices=[
+                    (b"SINGLE_USE", "Kertak\xe4ytt\xf6inen"),
+                    (b"MULTI_USE", "Monik\xe4ytt\xf6inen"),
+                ],
+                db_index=True,
+                default=b"SINGLE_USE",
+                max_length=20,
+                verbose_name="K\xe4ytt\xf6",
+            ),
         ),
     ]

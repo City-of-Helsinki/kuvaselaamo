@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
-from django.core.management.base import BaseCommand
-
 import random
 import string
+
+from django.contrib.auth import get_user_model
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -12,9 +12,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "-u", "--username", type=str, help="Username", default="kuva-admin"
         )
-        parser.add_argument(
-            "-p", "--password", type=str, help="Password", default=""
-        )
+        parser.add_argument("-p", "--password", type=str, help="Password", default="")
         parser.add_argument(
             "-e", "--email", type=str, help="Email", default="kuva-admin@hel.ninja"
         )
@@ -24,13 +22,23 @@ class Command(BaseCommand):
             password = kwargs["password"]
             if not password:
                 password = get_user_model().objects.make_random_password(20)
-                self.stdout.write(self.style.WARNING("Generated admin password " + password))
-                self.stdout.write(self.style.WARNING("You should probably go and change it."))
+                self.stdout.write(
+                    self.style.WARNING("Generated admin password " + password)
+                )
+                self.stdout.write(
+                    self.style.WARNING("You should probably go and change it.")
+                )
 
             get_user_model().objects.create_superuser(
                 kwargs["username"], kwargs["email"], password
             )
 
-            self.stdout.write(self.style.SUCCESS("Created admin user " + kwargs["username"]))
+            self.stdout.write(
+                self.style.SUCCESS("Created admin user " + kwargs["username"])
+            )
         else:
-            self.stdout.write("Admin user " + kwargs["username"] + " already exists, no need to create.")
+            self.stdout.write(
+                "Admin user "
+                + kwargs["username"]
+                + " already exists, no need to create."
+            )

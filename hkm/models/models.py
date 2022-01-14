@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import hashlib
+import hmac
 import json
 import logging
-import hmac
-import hashlib
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.signals import user_logged_in
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.signals import user_logged_in
-
 from django.core.cache import caches
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail

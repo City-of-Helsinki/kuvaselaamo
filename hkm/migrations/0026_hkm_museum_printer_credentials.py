@@ -8,18 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0025_userprofile_printer_presets'),
+        ("hkm", "0025_userprofile_printer_presets"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='printer_password',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Printer password'),
+            model_name="userprofile",
+            name="printer_password",
+            field=models.CharField(
+                blank=True, max_length=255, null=True, verbose_name="Printer password"
+            ),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='printer_username',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Printer username'),
+            model_name="userprofile",
+            name="printer_username",
+            field=models.CharField(
+                blank=True, max_length=255, null=True, verbose_name="Printer username"
+            ),
         ),
     ]

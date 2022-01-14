@@ -8,13 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0032_multiusage_codes'),
+        ("hkm", "0032_multiusage_codes"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productordercollection',
-            name='order_hash',
-            field=models.CharField(blank=True, max_length=1024, null=True, unique=True, verbose_name='Randomized order collection identifier phrase'),
+            model_name="productordercollection",
+            name="order_hash",
+            field=models.CharField(
+                blank=True,
+                max_length=1024,
+                null=True,
+                unique=True,
+                verbose_name="Randomized order collection identifier phrase",
+            ),
         ),
     ]

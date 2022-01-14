@@ -5,7 +5,6 @@ import logging
 from django.conf import settings
 from django.utils.translation import LANGUAGE_SESSION_KEY
 
-
 LOG = logging.getLogger(__name__)
 
 

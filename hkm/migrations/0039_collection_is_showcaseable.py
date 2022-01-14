@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0038_showcase'),
+        ("hkm", "0038_showcase"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='collection',
-            name='is_showcaseable',
-            field=models.BooleanField(db_index=True, default=False, verbose_name='Use in Showcases'),
+            model_name="collection",
+            name="is_showcaseable",
+            field=models.BooleanField(
+                db_index=True, default=False, verbose_name="Use in Showcases"
+            ),
         ),
     ]

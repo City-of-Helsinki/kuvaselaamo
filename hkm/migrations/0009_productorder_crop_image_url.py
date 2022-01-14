@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0008_productorder_form_phase'),
+        ("hkm", "0008_productorder_form_phase"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productorder',
-            name='crop_image_url',
-            field=models.CharField(blank=True, max_length=2048, null=True, verbose_name='Cropped Image URL'),
+            model_name="productorder",
+            name="crop_image_url",
+            field=models.CharField(
+                blank=True, max_length=2048, null=True, verbose_name="Cropped Image URL"
+            ),
         ),
     ]

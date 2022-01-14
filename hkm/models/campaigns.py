@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
+import datetime
+import random
 from decimal import Decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
 from parler.managers import TranslatableQuerySet
 from parler.models import TranslatableModel, TranslatedFields
-
-import datetime
-import random
 
 CAMPAIGN_CODE_KEYSPACE = "acdefghkmnpqrstvwx123456789"
 
@@ -27,20 +25,14 @@ class CodeUsage(object):
     SINGLE_USE = "SINGLE_USE"
     MULTI_USE = "MULTI_USE"
 
-    choices = (
-        (SINGLE_USE, ("Kertakäyttöinen")),
-        (MULTI_USE, ("Monikäyttöinen"))
-    )
+    choices = ((SINGLE_USE, ("Kertakäyttöinen")), (MULTI_USE, ("Monikäyttöinen")))
 
 
 class CampaignStatus(object):
     DISABLED = "DISABLED"
     ENABLED = "ENABLED"
 
-    choices = (
-        (DISABLED, ("Ei käytössä")),
-        (ENABLED, ("Aktiivinen"))
-    )
+    choices = ((DISABLED, ("Ei käytössä")), (ENABLED, ("Aktiivinen")))
 
 
 class CampaignUserGroup(object):
@@ -51,7 +43,7 @@ class CampaignUserGroup(object):
     choices = (
         (ALL, ("Kaikki")),
         (MUSEUM, ("Kioskikäyttäjät")),
-        (NORMAL, ("Normaalikäyttäjät"))
+        (NORMAL, ("Normaalikäyttäjät")),
     )
 
 
@@ -71,7 +63,9 @@ class _UsageMixin(object):
                 return False
             return self.campaign_usage.filter(order__user=user).exists()
         # because this mixin is inherited by Campaign AND Code check that SINGLE_USE applies only for Codes
-        elif self.usage_type == CampaignUsageType.SINGLE_USE and not issubclass(type(self), Campaign):
+        elif self.usage_type == CampaignUsageType.SINGLE_USE and not issubclass(
+            type(self), Campaign
+        ):
             return self.campaign_usage.exists()
         else:
             return False
@@ -80,61 +74,54 @@ class _UsageMixin(object):
 class CampaignQuerySet(TranslatableQuerySet):
     def for_user_group(self, is_museum_user=False):
         if is_museum_user:
-            return self.filter(user_group__in=[CampaignUserGroup.MUSEUM, CampaignUserGroup.ALL])
+            return self.filter(
+                user_group__in=[CampaignUserGroup.MUSEUM, CampaignUserGroup.ALL]
+            )
         else:
-            return self.filter(user_group__in=[CampaignUserGroup.NORMAL, CampaignUserGroup.ALL])
+            return self.filter(
+                user_group__in=[CampaignUserGroup.NORMAL, CampaignUserGroup.ALL]
+            )
 
 
 class Campaign(TranslatableModel, _UsageMixin):
-    identifier = models.CharField(
-        max_length=64,
-        null=True,
-        blank=True,
-        db_index=True
-    )
+    identifier = models.CharField(max_length=64, null=True, blank=True, db_index=True)
     status = models.CharField(
         default=CampaignStatus.ENABLED,
         verbose_name=_("Tila"),
         db_index=True,
         max_length=20,
-        choices=CampaignStatus.choices
+        choices=CampaignStatus.choices,
     )
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now_add=True)
 
     usable_from = models.DateField(
-        null=True,
-        blank=True,
-        verbose_name=_('Alkupäivämäärä')
+        null=True, blank=True, verbose_name=_("Alkupäivämäärä")
     )
     usable_to = models.DateField(
-        null=True,
-        blank=True,
-        verbose_name=_('Loppupäivämäärä')
+        null=True, blank=True, verbose_name=_("Loppupäivämäärä")
     )
     usage_type = models.CharField(
         default=CampaignUsageType.SINGLE_USE,
         max_length=20,
         verbose_name=_("Tyyppi"),
-        choices=CampaignUsageType.choices
+        choices=CampaignUsageType.choices,
     )
     user_group = models.CharField(
         default=CampaignUserGroup.ALL,
         verbose_name=_("Käyttäjäryhmä"),
         max_length=20,
         choices=CampaignUserGroup.choices,
-        help_text="Käyttäjäryhmä, jolle tarjous on voimassa"
+        help_text="Käyttäjäryhmä, jolle tarjous on voimassa",
     )
     module = models.CharField(
-        max_length=128,
-        blank=True,
-        verbose_name=_("Kampanjamoduuli")
+        max_length=128, blank=True, verbose_name=_("Kampanjamoduuli")
     )
     mutex_group = models.CharField(
         max_length=32,
         blank=True,
         verbose_name=_("Yhteiskäyttöestoryhmä"),
-        help_text="Mikäli asetettu, useampaa saman ryhmän kampanjaa ei voi käyttää yhdessä tilauksessa"
+        help_text="Mikäli asetettu, useampaa saman ryhmän kampanjaa ei voi käyttää yhdessä tilauksessa",
     )
 
     percentage_discount = models.DecimalField(
@@ -151,13 +138,9 @@ class Campaign(TranslatableModel, _UsageMixin):
         null=True,
         blank=True,
     )
-    free_shipping = models.BooleanField(default=False, verbose_name=_('Free shipping'))
+    free_shipping = models.BooleanField(default=False, verbose_name=_("Free shipping"))
     translations = TranslatedFields(
-        name=models.CharField(
-            max_length=256,
-            blank=True,
-            verbose_name=_("Nimi")
-        )
+        name=models.CharField(max_length=256, blank=True, verbose_name=_("Nimi"))
     )
 
     objects = CampaignQuerySet.as_manager()
@@ -185,7 +168,9 @@ class Campaign(TranslatableModel, _UsageMixin):
 
 
 class CampaignCode(models.Model, _UsageMixin):
-    campaign = models.ForeignKey(Campaign, related_name="campaign_codes", verbose_name=("Kampanja"))
+    campaign = models.ForeignKey(
+        Campaign, related_name="campaign_codes", verbose_name=("Kampanja")
+    )
     code = models.CharField(max_length=40, db_index=True)
     created_on = models.DateTimeField(auto_now_add=True)
     use_type = models.CharField(
@@ -193,14 +178,14 @@ class CampaignCode(models.Model, _UsageMixin):
         default=CodeUsage.SINGLE_USE,
         verbose_name=_("Käyttö"),
         db_index=True,
-        choices=CodeUsage.choices
+        choices=CodeUsage.choices,
     )
     status = models.CharField(
         max_length=20,
         default=CampaignStatus.ENABLED,
         verbose_name=_("Tila"),
         db_index=True,
-        choices=CampaignStatus.choices
+        choices=CampaignStatus.choices,
     )
 
     class Meta:
@@ -209,9 +194,12 @@ class CampaignCode(models.Model, _UsageMixin):
 
     def generate_code(self, length=10, prefix="", unique=True):
         while True:
-            self.code = prefix + "".join(
-                random.choice(CAMPAIGN_CODE_KEYSPACE) for x in range(length)
-            ).upper()
+            self.code = (
+                prefix
+                + "".join(
+                    random.choice(CAMPAIGN_CODE_KEYSPACE) for x in range(length)
+                ).upper()
+            )
             if unique and CampaignCode.objects.filter(code=self.code).exists():
                 continue
             break

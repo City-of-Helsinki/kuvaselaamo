@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0011_auto_20170208_0908'),
+        ("hkm", "0011_auto_20170208_0908"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productorder',
-            name='amount',
-            field=models.PositiveIntegerField(default=1, verbose_name='Amount'),
+            model_name="productorder",
+            name="amount",
+            field=models.PositiveIntegerField(default=1, verbose_name="Amount"),
         ),
     ]

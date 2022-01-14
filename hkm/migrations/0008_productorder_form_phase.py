@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0007_productorder_order_hash'),
+        ("hkm", "0007_productorder_order_hash"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productorder',
-            name='form_phase',
-            field=models.IntegerField(default=1, verbose_name='Order form phase'),
+            model_name="productorder",
+            name="form_phase",
+            field=models.IntegerField(default=1, verbose_name="Order form phase"),
         ),
     ]

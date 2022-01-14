@@ -10,53 +10,110 @@ import parler.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0019_productorder_total_price_with_postage'),
+        ("hkm", "0019_productorder_total_price_with_postage"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PageContent',
+            name="PageContent",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
-                ('modified', models.DateTimeField(auto_now=True, verbose_name='Modified')),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('identifier', models.CharField(max_length=255, unique=True, verbose_name='Identifier')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created"),
+                ),
+                (
+                    "modified",
+                    models.DateTimeField(auto_now=True, verbose_name="Modified"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Name")),
+                (
+                    "identifier",
+                    models.CharField(
+                        max_length=255, unique=True, verbose_name="Identifier"
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
             bases=(parler.models.TranslatableModelMixin, models.Model),
         ),
         migrations.CreateModel(
-            name='PageContentTranslation',
+            name="PageContentTranslation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('language_code', models.CharField(db_index=True, max_length=15, verbose_name='Language')),
-                ('title', models.CharField(max_length=255, verbose_name='Title')),
-                ('content', models.TextField(verbose_name='Content')),
-                ('master', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='translations', to='hkm.PageContent')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "language_code",
+                    models.CharField(
+                        db_index=True, max_length=15, verbose_name="Language"
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, verbose_name="Title")),
+                ("content", models.TextField(verbose_name="Content")),
+                (
+                    "master",
+                    models.ForeignKey(
+                        editable=False,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="translations",
+                        to="hkm.PageContent",
+                    ),
+                ),
             ],
             options={
-                'managed': True,
-                'db_table': 'hkm_pagecontent_translation',
-                'db_tablespace': '',
-                'default_permissions': (),
-                'verbose_name': 'page content Translation',
+                "managed": True,
+                "db_table": "hkm_pagecontent_translation",
+                "db_tablespace": "",
+                "default_permissions": (),
+                "verbose_name": "page content Translation",
             },
         ),
         migrations.AlterField(
-            model_name='printproduct',
-            name='name',
-            field=models.CharField(choices=[(b'api-poster-gloss-30x40', 'api-poster-gloss-30x40'), (b'api-poster-gloss-40x30', 'api-poster-gloss-40x30'), (b'api-poster-50x70', 'api-poster-50x70'), (b'api-poster-70x50', 'api-poster-70x50'), (b'api-poster-gloss-A4-horizontal', 'api-poster-gloss-A4-horizontal'), (b'api-poster-gloss-A4', 'api-poster-gloss-A4')], max_length=255, verbose_name='Name'),
+            model_name="printproduct",
+            name="name",
+            field=models.CharField(
+                choices=[
+                    (b"api-poster-gloss-30x40", "api-poster-gloss-30x40"),
+                    (b"api-poster-gloss-40x30", "api-poster-gloss-40x30"),
+                    (b"api-poster-50x70", "api-poster-50x70"),
+                    (b"api-poster-70x50", "api-poster-70x50"),
+                    (
+                        b"api-poster-gloss-A4-horizontal",
+                        "api-poster-gloss-A4-horizontal",
+                    ),
+                    (b"api-poster-gloss-A4", "api-poster-gloss-A4"),
+                ],
+                max_length=255,
+                verbose_name="Name",
+            ),
         ),
         migrations.AlterField(
-            model_name='productorder',
-            name='postal_fees',
-            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='Postal fees'),
+            model_name="productorder",
+            name="postal_fees",
+            field=models.DecimalField(
+                decimal_places=2, default=0.0, max_digits=10, verbose_name="Postal fees"
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='pagecontenttranslation',
-            unique_together=set([('language_code', 'master')]),
+            name="pagecontenttranslation",
+            unique_together=set([("language_code", "master")]),
         ),
     ]

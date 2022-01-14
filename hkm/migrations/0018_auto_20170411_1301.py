@@ -8,18 +8,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0017_auto_20170228_1257'),
+        ("hkm", "0017_auto_20170228_1257"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productorder',
-            name='postal_fees',
-            field=models.DecimalField(decimal_places=2, default=6.95, max_digits=10, verbose_name='Postal fees'),
+            model_name="productorder",
+            name="postal_fees",
+            field=models.DecimalField(
+                decimal_places=2,
+                default=6.95,
+                max_digits=10,
+                verbose_name="Postal fees",
+            ),
         ),
         migrations.AlterField(
-            model_name='printproduct',
-            name='name',
-            field=models.CharField(choices=[(b'api-poster-30x40', 'api-poster-30x40'), (b'api-poster-40x30', 'api-poster-40x30'), (b'api-poster-50x70', 'api-poster-50x70'), (b'api-poster-70x50', 'api-poster-70x50'), (b'api-poster-a4', 'api-poster-a4'), (b'api-poster-a4-horizontal', 'api-poster-a4-horizontal')], max_length=255, verbose_name='Name'),
+            model_name="printproduct",
+            name="name",
+            field=models.CharField(
+                choices=[
+                    (b"api-poster-30x40", "api-poster-30x40"),
+                    (b"api-poster-40x30", "api-poster-40x30"),
+                    (b"api-poster-50x70", "api-poster-50x70"),
+                    (b"api-poster-70x50", "api-poster-70x50"),
+                    (b"api-poster-a4", "api-poster-a4"),
+                    (b"api-poster-a4-horizontal", "api-poster-a4-horizontal"),
+                ],
+                max_length=255,
+                verbose_name="Name",
+            ),
         ),
     ]

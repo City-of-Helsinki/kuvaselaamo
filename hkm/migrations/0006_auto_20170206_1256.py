@@ -9,13 +9,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0005_productorder_product_type'),
+        ("hkm", "0005_productorder_product_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productorder',
-            name='product_type',
-            field=models.ForeignKey(blank=True, default=1, on_delete=django.db.models.deletion.CASCADE, to='hkm.PrintProduct', verbose_name='Product type'),
+            model_name="productorder",
+            name="product_type",
+            field=models.ForeignKey(
+                blank=True,
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="hkm.PrintProduct",
+                verbose_name="Product type",
+            ),
         ),
     ]

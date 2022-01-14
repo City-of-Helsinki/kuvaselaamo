@@ -8,18 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0013_auto_20170208_1222'),
+        ("hkm", "0013_auto_20170208_1222"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productorder',
-            name='fullimg_original_height',
-            field=models.FloatField(blank=True, null=True, verbose_name='Full res original image height'),
+            model_name="productorder",
+            name="fullimg_original_height",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Full res original image height"
+            ),
         ),
         migrations.AddField(
-            model_name='productorder',
-            name='fullimg_original_width',
-            field=models.FloatField(blank=True, null=True, verbose_name='Full res original image width'),
+            model_name="productorder",
+            name="fullimg_original_width",
+            field=models.FloatField(
+                blank=True, null=True, verbose_name="Full res original image width"
+            ),
         ),
     ]

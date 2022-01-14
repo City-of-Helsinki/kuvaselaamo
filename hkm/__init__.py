@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
 
 
-default_app_config = 'hkm.apps.DefaultConfig'
-
-
+default_app_config = "hkm.apps.DefaultConfig"

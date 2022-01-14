@@ -8,23 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hkm', '0028_order_discount_lines'),
+        ("hkm", "0028_order_discount_lines"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productordercollection',
-            name='is_checkout_successful',
-            field=models.NullBooleanField(verbose_name='Checkout successful'),
+            model_name="productordercollection",
+            name="is_checkout_successful",
+            field=models.NullBooleanField(verbose_name="Checkout successful"),
         ),
         migrations.AddField(
-            model_name='productordercollection',
-            name='is_payment_successful',
-            field=models.NullBooleanField(verbose_name='Payment successful'),
+            model_name="productordercollection",
+            name="is_payment_successful",
+            field=models.NullBooleanField(verbose_name="Payment successful"),
         ),
         migrations.AddField(
-            model_name='productordercollection',
-            name='is_order_successful',
-            field=models.NullBooleanField(verbose_name='Order successful'),
+            model_name="productordercollection",
+            name="is_order_successful",
+            field=models.NullBooleanField(verbose_name="Order successful"),
         ),
     ]
