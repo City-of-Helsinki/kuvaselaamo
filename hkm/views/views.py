@@ -66,7 +66,7 @@ class BaseView(TemplateView):
         encoded_params = urlencode(params)
         url = reverse(self.url_name)
         if encoded_params:
-            url = "{}?{}".format(url, encoded_params)
+            url = f"{url}?{encoded_params}"
         return url
 
     def handle_invalid_post_action(self, request, *args, **kwargs):
@@ -142,7 +142,7 @@ class BaseView(TemplateView):
         language = self.request.session.get(
             LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
         )
-        template = "registration/password_reset_email_%s.html" % language
+        template = f"registration/password_reset_email_{language}.html"
 
         if form.is_valid():
             form.save(
@@ -308,7 +308,7 @@ class CollectionDetailView(BaseView):
     def get_url(self):
         url = reverse(self.url_name, kwargs={"collection_id": self.collection.id})
         if self.collection_record:
-            url += "?rid=%s" % str(self.collection_record.id)
+            url += f"?rid={self.collection_record.id}"
         return url
 
     def setup(self, request, *args, **kwargs):
@@ -713,7 +713,7 @@ class SearchView(BaseView):
                 self.url_params["date_from"] if self.url_params["date_from"] else "*"
             )
             date_to = self.url_params["date_to"] if self.url_params["date_to"] else "*"
-            facets["search_daterange_mv"] = "[%s TO %s]" % (date_from, date_to)
+            facets["search_daterange_mv"] = f"[{date_from} TO {date_to}]"
         return facets
 
     def get_facet_result(self, search_term, date_from=None, date_to=None):
@@ -793,10 +793,7 @@ class SearchRecordDetailView(SearchView):
         record.save()
 
         url = reverse("hkm_search_record")
-        url += "?search=%s&page=%d" % (
-            self.url_params["search"],
-            self.url_params["page"],
-        )
+        url += f"?search={self.url_params['search']}&page={self.url_params['page']:d}"
         return redirect(url)
 
     def get_context_data(self, **kwargs):
@@ -993,7 +990,7 @@ class AjaxCropRecordView(View):
         crop_io = io.BytesIO()
         cropped_image.save(crop_io, format=full_res_image.format)
         crop_io.seek(0)
-        filename = "%s.%s" % (self.record["title"], full_res_image.format.lower())
+        filename = f"{self.record['title']}.{full_res_image.format.lower()}"
         LOG.debug("Cropped image", extra={"data": {"size": repr(cropped_image.size)}})
 
         return InMemoryUploadedFile(
@@ -1014,7 +1011,7 @@ class AjaxCropRecordView(View):
         crop_io = io.BytesIO()
         cropped_image.save(crop_io, format=full_res_image.format)
         crop_io.seek(0)
-        filename = "%s.%s" % (self.record["title"], full_res_image.format.lower())
+        filename = f"{self.record['title']}.{full_res_image.format.lower()}"
         LOG.debug("Cropped image", extra={"data": {"size": repr(cropped_image.size)}})
         return InMemoryUploadedFile(
             crop_io, None, filename, full_res_image.format, None, None
@@ -1180,7 +1177,7 @@ class LegacyRecordDetailView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         base_url = reverse("hkm_search_record")
         query_string = urlencode({"image_id": kwargs["finna_id"]})
-        url = "{}?{}".format(base_url, query_string)
+        url = f"{base_url}?{query_string}"
 
         return url
 

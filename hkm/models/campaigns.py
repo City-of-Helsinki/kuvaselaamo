@@ -148,11 +148,11 @@ class Campaign(TranslatableModel, _UsageMixin):
         verbose_name = _("kampanja")
         verbose_name_plural = _("kampanjat")
 
-    def __unicode__(self):
+    def __str__(self):
         try:
-            return str(self.name)
+            return self.name
         except:
-            return "%s %s" % (str(self._meta.verbose_name), self.pk)
+            return f"{self._meta.verbose_name} {self.pk}"
 
     def get_discount_value(self, basket_lines):
         total_price = sum(line.total_price for line in basket_lines if line.type != 4)
@@ -208,5 +208,5 @@ class CampaignCode(models.Model, _UsageMixin):
             self.generate_code()
         return super().save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.code

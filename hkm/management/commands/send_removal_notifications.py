@@ -41,9 +41,8 @@ class Command(BaseCommand):
             return
 
         self.stdout.write(
-            "Starting to send notifications to users whose accounts are about to be removed. Sending "
-            "notifications to users whose last login date is older than %d days."
-            % days_until_notification
+            f"Starting to send notifications to users whose accounts are about to be removed. Sending notifications "
+            f"to users whose last login date is older than {days_until_notification} days."
         )
 
         counted_date = timezone.now() - timedelta(days=days_until_notification)
@@ -70,15 +69,12 @@ class Command(BaseCommand):
                 ok += 1
             except AnymailRequestsAPIError as e:
                 if e.status_code == 400:
+                    error_text = e.response.text if e.response is not None else "N/A"
                     self.stdout.write(
                         self.style.ERROR(
-                            "Email server responded with 400 error with response (%s). Interpreting this so that the "
-                            "email address (%s) is probably invalid. This user is marked as having been sent the "
-                            "notification."
-                            % (
-                                e.response.text if e.response is not None else "N/A",
-                                user.email,
-                            )
+                            f"Email server responded with 400 error with response ({error_text}). Interpreting this "
+                            f"so that the email address ({user.email}) is probably invalid. This user is marked as "
+                            f"having been sent the notification."
                         )
                     )
                     skipped += 1
@@ -90,7 +86,7 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                "Removal notification sending finished, %d notifications sent, skipped %d."
-                % (ok, skipped)
+                f"Removal notification sending finished, {ok} notifications sent, "
+                f"skipped {skipped}."
             )
         )

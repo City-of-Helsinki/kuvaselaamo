@@ -48,9 +48,9 @@ class Command(BaseCommand):
 
         grace_period_length_days = days_until_removal - days_until_notification
         self.stdout.write(
-            "Old data cleaning started! Removing data older than %s days. Waiting for %s days after "
-            "notification has been sent before removing old User data."
-            % (days_until_removal, grace_period_length_days)
+            f"Old data cleaning started! Removing data older than {days_until_removal} "
+            f"days. Waiting for {grace_period_length_days} days after "
+            f"notification has been sent before removing old User data."
         )
 
         counted_date = timezone.now() - timedelta(days=days_until_removal)
@@ -73,8 +73,8 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                "Old data cleaning finished! Removed %s user-related object(s), %s temp("
-                "s), %s feedback(s), %s order(s)"
-                % (users[0], temps[0], feedbacks[0], orders[0])
+                f"Old data cleaning finished! Removed {users[0]} user-related "
+                f"object(s), {temps[0]} temp(s), {feedbacks[0]} feedback(s), "
+                f"{orders[0]} order(s)"
             )
         )

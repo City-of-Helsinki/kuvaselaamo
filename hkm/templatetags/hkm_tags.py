@@ -110,7 +110,7 @@ def search_keywords(url_params):
     date_to = url_params.get("date_to", "")
 
     if date_from or date_to:
-        combined = "%s - %s" % (date_from, date_to)
+        combined = f"{date_from} - {date_to}"
         keywords.append({"value": combined, "facet_type": "date_range"})
 
     return keywords
@@ -126,7 +126,7 @@ def return_link(url_params):
 
     encoded_cleaned_params = encoded_dict(cleaned_params)
     encoded_params = urlencode(encoded_cleaned_params, doseq=True)
-    return "?%s" % encoded_params if encoded_params else ""
+    return f"?{encoded_params}" if encoded_params else ""
 
 
 @register.filter()
@@ -136,4 +136,4 @@ def record_index(record, search_result):
     record_in_sr = next((x for x in records_in_sr if x["id"] == record.get("id")), None)
 
     index = records_in_sr.index(record_in_sr) + 1
-    return "%s / %s" % (index, search_result.get("resultCount"))
+    return f"{index} / {search_result.get('resultCount')}"

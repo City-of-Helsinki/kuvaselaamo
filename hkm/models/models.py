@@ -100,7 +100,7 @@ class UserProfile(BaseModel):
         verbose_name=_("Removal notification sent"), blank=True, null=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     @property
@@ -175,7 +175,7 @@ class Collection(BaseModel):
             self.is_public = True
         return super().save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_next_record(self, record):
@@ -192,12 +192,10 @@ class Collection(BaseModel):
 
 
 def get_collection_upload_path(instance, filename):
-    return "%(username)s/%(collection_title)s_%(collection_id)d/%(filename)s" % {
-        "username": instance.collection.owner.username,
-        "collection_title": instance.collection.title,
-        "collection_id": instance.collection.id,
-        "filename": filename,
-    }
+    username = instance.collection.owner.username
+    collection_title = instance.collection.title
+    collection_id = instance.collection.id
+    return f"{username}/{collection_title}_{collection_id:d}/{filename}"
 
 
 class Record(OrderedModel, BaseModel):
@@ -217,7 +215,7 @@ class Record(OrderedModel, BaseModel):
         pass
 
     def get_details(self):
-        cache_key = "%s-details" % self.record_id
+        cache_key = f"{self.record_id}-details"
         data = DEFAULT_CACHE.get(cache_key, None)
         if data is None:
             finna_results = FINNA.get_record(self.record_id)
@@ -266,7 +264,7 @@ class Showcase(BaseModel):
         verbose_name=_("Show on Home page"), default=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -280,7 +278,7 @@ class Product(BaseModel):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -495,7 +493,7 @@ class ProductOrder(BaseModel):
     def delete_old_data(cls, date):
         return cls.objects.filter(user__isnull=True, modified__lte=date).delete()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.order_hash
 
 
@@ -524,7 +522,7 @@ class Feedback(BaseModel):
 
 
 def get_tmp_upload_path(instance, filename):
-    return "tmp/%s" % filename
+    return f"tmp/{filename}"
 
 
 class TmpImage(BaseModel):
@@ -539,7 +537,7 @@ class TmpImage(BaseModel):
     def delete_old_data(cls, date):
         return cls.objects.filter(modified__lte=date, creator__isnull=True).delete()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.record_title
 
 
@@ -556,7 +554,7 @@ class PageContent(BaseModel, TranslatableModel):
         content=models.TextField(verbose_name=_("Content")),
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -599,8 +597,8 @@ class ProductOrderCollection(models.Model):
         unique=True,
     )
 
-    def __unicode__(self):
-        return "%s - order" % self.orderer_name
+    def __str__(self):
+        return f"{self.orderer_name} - order"
 
     def save(self, *args, **kwargs):
         if not self.order_hash:

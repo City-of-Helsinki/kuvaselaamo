@@ -33,7 +33,7 @@ def get_cropped_full_res_file(title, order_line):
     cropped_image = Image.open(io.BytesIO(r.content))
     crop_io = io.BytesIO()
     cropped_image.save(crop_io, format=cropped_image.format)
-    filename = "%s.%s" % (title, cropped_image.format.lower())
+    filename = f"{title}.{cropped_image.format.lower()}"
     LOG.debug("Cropped image", extra={"data": {"size": repr(cropped_image.size)}})
     crop_file = InMemoryUploadedFile(
         crop_io, None, filename, cropped_image.format, None, None

@@ -39,10 +39,9 @@ class FinnaClient(object):
             ],
         }
         if date_from or date_to:
-            payload["filter[]"].append(
-                'search_daterange_mv:"[%s TO %s]"'
-                % (date_from if date_from else "*", date_to if date_to else "*")
-            )
+            f = date_from if date_from else "*"
+            t = date_to if date_to else "*"
+            payload["filter[]"].append(f'search_daterange_mv:"[{f} TO {t}]"')
             payload["search_daterange_mv_type"] = "within"
 
         try:
@@ -100,9 +99,7 @@ class FinnaClient(object):
             for facet_type, facet_values in facets.items():
                 if facet_type == "search_daterange_mv":
                     # Value needs to be inside double quotes, insert value manually to make sure its correct.
-                    payload["filter[]"].append(
-                        'search_daterange_mv:"%s"' % facet_values
-                    )
+                    payload["filter[]"].append(f'search_daterange_mv:"{facet_values}"')
                     payload["search_daterange_mv_type"] = "within"
                 else:
                     for facet_value in facet_values:
@@ -243,10 +240,10 @@ class FinnaClient(object):
         return result_data
 
     def get_image_url(self, record_id):
-        return "https://finna.fi/Cover/Show?id=%s&fullres=1&index=0" % record_id
+        return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
     def get_full_res_image_url(self, record_id):
-        return "https://finna.fi/Cover/Show?id=%s&size=master&index=0" % record_id
+        return f"https://finna.fi/Cover/Show?id={record_id}&size=master&index=0"
 
     def download_image(self, record_id):
         r = requests.get(self.get_full_res_image_url(record_id), stream=True)
