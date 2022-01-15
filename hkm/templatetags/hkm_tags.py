@@ -9,7 +9,6 @@ from django.utils import formats
 from django.utils.encoding import force_text
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
-from hkm.utils import encoded_dict
 
 LOG = logging.getLogger(__name__)
 
@@ -124,8 +123,7 @@ def return_link(url_params):
         if value:
             cleaned_params[key] = value
 
-    encoded_cleaned_params = encoded_dict(cleaned_params)
-    encoded_params = urlencode(encoded_cleaned_params, doseq=True)
+    encoded_params = urlencode(cleaned_params, doseq=True)
     return f"?{encoded_params}" if encoded_params else ""
 
 
