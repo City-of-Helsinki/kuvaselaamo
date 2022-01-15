@@ -796,24 +796,3 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS("Initializing page contents (if necessary) - Done")
         )
-
-        self.stdout.write("Initializing print products (if necessary)")
-
-        if PrintProduct.objects.count() == 0:
-            self.stdout.write("Initializing first print product")
-            print_product = PrintProduct.objects.create(
-                name=PrintProduct.PRODUCT_LAYOUTS_LIST[0][0],
-                width="12",
-                height="21",
-                paper_quality="Great",
-                is_museum_only=False,
-            )
-            print_product.save()
-
-            self.stdout.write(
-                self.style.SUCCESS("Initializing first print product - Done")
-            )
-
-        self.stdout.write(
-            self.style.SUCCESS("Initializing print products (if necessary) - Done")
-        )
