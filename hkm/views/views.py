@@ -420,7 +420,9 @@ class CollectionDetailView(BaseView):
             context["record_web_url"] = FINNA.get_image_url(
                 self.collection_record.record_id
             )
-
+            context["record_full_res_url"] = FINNA.get_full_res_image_url(
+                self.collection_record.record_id
+            )
             context["record"] = self.collection_record.get_details()
 
             # Also check if record is in user's favorite collection
@@ -800,7 +802,7 @@ class SearchRecordDetailView(SearchView):
         context = super().get_context_data(**kwargs)
         if self.record:
             record = self.record
-            record["full_res_url"] = FINNA.get_full_res_image_url(record["id"])
+            context["record_full_res_url"] = FINNA.get_full_res_image_url(record["id"])
             related_collections_ids = Record.objects.filter(
                 record_id=record["id"]
             ).values_list("collection", flat=True)
@@ -927,9 +929,6 @@ class AjaxCropRecordView(View):
             record_data = FINNA.get_record(self.record_id)
             if record_data:
                 self.record = record_data["records"][0]
-                self.record["full_res_url"] = FINNA.get_full_res_image_url(
-                    self.record["id"]
-                )
                 return super().dispatch(request, *args, **kwargs)
             else:
                 LOG.error("Could not get record data")
