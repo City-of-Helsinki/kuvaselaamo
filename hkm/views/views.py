@@ -942,7 +942,7 @@ class AjaxCropRecordView(View):
     def _get_cropped_full_res_file(self):
         try:
             full_res_image = FINNA.download_image(self.record["id"])
-        except:
+        except Exception:
             return None
         cropped_image = image_utils.crop(
             full_res_image,

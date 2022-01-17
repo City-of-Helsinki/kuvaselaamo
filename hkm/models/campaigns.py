@@ -149,10 +149,9 @@ class Campaign(TranslatableModel, _UsageMixin):
         verbose_name_plural = _("kampanjat")
 
     def __str__(self):
-        try:
-            return self.name
-        except:
-            return f"{self._meta.verbose_name} {self.pk}"
+        return self.safe_translation_getter(
+            "name", default=f"{self._meta.verbose_name} {self.pk}", any_language=False
+        )
 
     def get_discount_value(self, basket_lines):
         total_price = sum(line.total_price for line in basket_lines if line.type != 4)
