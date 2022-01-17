@@ -160,12 +160,11 @@ def test_no_notifications(day_newer_than_notification_date, mailoutbox):
         _assert_email_sent(mailoutbox, [])
 
 
-# This test works but only if run as a single test. There's some funny business going on with @patch,
-# so this is skipped. Maybe in the future when we get a more current Python version, @patch will start
-# working as expected.
-@pytest.mark.skip
 @pytest.mark.django_db
-@patch("django.core.mail.send_mail", side_effect=[DEFAULT, Exception("ka-boom")])
+@patch(
+    "hkm.management.commands.send_removal_notifications.send_mail",
+    side_effect=[DEFAULT, Exception("ka-boom")],
+)
 def test_error_during_email_sending(send_mail, day_older_than_notification_date):
     now = timezone.now()
     with freeze_time(now):
@@ -194,7 +193,7 @@ def test_error_during_email_sending(send_mail, day_older_than_notification_date)
 
 @pytest.mark.django_db
 @patch(
-    "django.core.mail.send_mail",
+    "hkm.management.commands.send_removal_notifications.send_mail",
     side_effect=[DEFAULT, AnymailRequestsAPIError("ka-boom", status_code=400), DEFAULT],
 )
 def test_invalid_email_error_during_email_sending(
