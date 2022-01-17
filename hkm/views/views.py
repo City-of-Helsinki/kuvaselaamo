@@ -845,39 +845,6 @@ class SearchRecordDetailView(SearchView):
         return context_forms
 
 
-# This is needed for CreateOrderView
-class BaseFinnaRecordDetailView(BaseView):
-    record_finna_id = None
-    record = None
-
-    def get_url(self):
-        return reverse(self.url_name, kwargs={"finna_id": self.record_finna_id})
-
-    def setup(self, request, *args, **kwargs):
-        self.record_finna_id = kwargs.get("finna_id", None)
-        if self.record_finna_id:
-            record_data = FINNA.get_record(self.record_finna_id)
-            if record_data and "records" in record_data:
-                self.record = record_data["records"][0]
-                self.record["full_res_url"] = FINNA.get_full_res_image_url(
-                    self.record["id"]
-                )
-        return True
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["record"] = self.record
-
-        if self.request.user.is_authenticated():
-            context["my_collections"] = Collection.objects.filter(
-                owner=self.request.user
-            ).order_by("title")
-        else:
-            context["my_collections"] = Collection.objects.none()
-
-        return context
-
-
 class SignUpView(BaseView):
     template_name = "hkm/views/signup.html"
     url_name = "hkm_signup"
