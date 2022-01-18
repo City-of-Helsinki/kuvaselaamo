@@ -65,7 +65,7 @@ class FinnaClient(object):
         result_data = r.json()
         if "status" not in result_data or result_data["status"] != "OK":
             LOG.error(
-                "Finna query was not succesfull",
+                "Finna query was not successful",
                 extra={"data": {"result_data": repr(result_data)}},
             )
             return None
@@ -129,36 +129,10 @@ class FinnaClient(object):
                 "rawData",
             ]
 
-        try:
-            r = requests.get(url, params=payload, timeout=self.timeout)
-        except requests.exceptions.RequestException:
-            LOG.error("Failed to communicate with Finna API", exc_info=True)
-            return None
-        else:
-            try:
-                r.raise_for_status()
-                # raise requests.exceptions.HTTPError()
-            except requests.exceptions.HTTPError:
-                LOG.error(
-                    "Failed to communicate with Finna API",
-                    exc_info=True,
-                    extra={
-                        "data": {"status_code": r.status_code, "response": repr(r.text)}
-                    },
-                )
-                return None
-
-        result_data = r.json()
-        if "status" not in result_data or result_data["status"] != "OK":
-            LOG.error(
-                "Finna query was not succesfull",
-                extra={"data": {"result_data": repr(result_data)}},
-            )
+        result_data = self._get_finna_result(url, payload)
+        if not result_data:
             return None
 
-        LOG.debug(
-            "Got result from Finna", extra={"data": {"result_data": repr(result_data)}}
-        )
         if limit > 0:
             pages = int(math.ceil(result_data["resultCount"] / float(limit)))
         else:
@@ -178,7 +152,7 @@ class FinnaClient(object):
 
     def get_record(self, record_id):
         if record_id is None:
-            LOG.warn("Record id was None, cannot call Finna")
+            LOG.warning("Record id was None, cannot call Finna")
             return None
 
         url = FinnaClient.API_ENDPOINT + "record"
@@ -207,29 +181,37 @@ class FinnaClient(object):
                 "rawData",
             ],
         }
+
+        result_data = self._get_finna_result(url, payload)
+
+        return result_data
+
+    def _get_finna_result(self, url, payload):
         try:
-            r = requests.get(url, params=payload, timeout=self.timeout)
+            response = requests.get(url, params=payload, timeout=self.timeout)
         except requests.exceptions.RequestException:
             LOG.error("Failed to communicate with Finna API", exc_info=True)
             return None
         else:
             try:
-                r.raise_for_status()
-                # raise requests.exceptions.HTTPError()
+                response.raise_for_status()
             except requests.exceptions.HTTPError:
                 LOG.error(
                     "Failed to communicate with Finna API",
                     exc_info=True,
                     extra={
-                        "data": {"status_code": r.status_code, "response": repr(r.text)}
+                        "data": {
+                            "status_code": response.status_code,
+                            "response": repr(response.text),
+                        }
                     },
                 )
                 return None
 
-        result_data = r.json()
+        result_data = response.json()
         if "status" not in result_data or result_data["status"] != "OK":
             LOG.error(
-                "Finna query was not succesfull",
+                "Finna query was not successful",
                 extra={"data": {"result_data": repr(result_data)}},
             )
             return None
@@ -237,6 +219,7 @@ class FinnaClient(object):
         LOG.debug(
             "Got result from Finna", extra={"data": {"result_data": repr(result_data)}}
         )
+
         return result_data
 
     def get_image_url(self, record_id):
@@ -246,17 +229,17 @@ class FinnaClient(object):
         return f"https://finna.fi/Cover/Show?id={record_id}&size=master&index=0"
 
     def download_image(self, record_id):
-        r = requests.get(self.get_full_res_image_url(record_id), stream=True)
+        response = requests.get(self.get_full_res_image_url(record_id), stream=True)
         try:
-            r.raise_for_status()
-        except requests.exceptions.RequestException:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
             LOG.error(
                 "Could not download a full res url",
                 extra={"data": {"record_id": record_id}},
             )
-        else:
-            return Image.open(io.BytesIO(r.content))
-        return None
+            return None
+
+        return Image.open(io.BytesIO(response.content))
 
 
 DEFAULT_CLIENT = FinnaClient()

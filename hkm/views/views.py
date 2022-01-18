@@ -239,16 +239,13 @@ def tag_favorites_if_necessary(request, records_to_tag):
     """Fetch the currently authenticated user's favorite records and tag
     them in the given record list."""
     if request.user.is_authenticated():
-        try:
-            favorite_records = Record.objects.filter(
-                collection__owner=request.user,
-                collection__collection_type=Collection.TYPE_FAVORITE,
-            ).values_list("record_id", flat=True)
+        favorite_records = Record.objects.filter(
+            collection__owner=request.user,
+            collection__collection_type=Collection.TYPE_FAVORITE,
+        ).values_list("record_id", flat=True)
 
-            for record in records_to_tag:
-                record.is_favorite = record.record_id in favorite_records
-        except Record.DoesNotExist:
-            pass
+        for record in records_to_tag:
+            record.is_favorite = record.record_id in favorite_records
 
 
 def get_records_with_finna_data(request, collection):
@@ -532,47 +529,29 @@ class SearchView(BaseView):
             },
         )
 
+        show_single_record = kwargs.get("record", False)
         url_params = request.session.get("url_params", {})
-
-        session_facet_result = request.session.get("facet_result", None)
-
-        if not session_facet_result:
-            self.facet_result = self.get_facet_result(self.url_params["search"])
-            # date_from & date_to require full list of dates
-            self.all_dates = self.facet_result.get("facets", {}).get(
-                "main_date_str", []
-            )
-        # If search term or year to year changed => fetch facets again
-        elif self.__url_params_changed(url_params, ["search", "date_from", "date_to"]):
-            self.facet_result = self.get_facet_result(
-                self.url_params["search"],
-                self.url_params["date_from"],
-                self.url_params["date_to"],
-            )
-            self.all_dates = request.session.get("all_dates")
-        else:
-            self.facet_result = request.session.get("facet_result")
-            self.all_dates = request.session.get("all_dates")
-
-        facets = self.__form_facet_object()
-
         load_all_pages = bool(int(request.GET.get("loadallpages", 1)))
 
-        session_search_result = copy.deepcopy(request.session.get("search_result", {}))
+        # If we don't hit any checks below this point search_results end up being empty
+        self.search_result = copy.deepcopy(request.session.get("search_result", {}))
+
+        self.all_dates = request.session.get("all_dates")
+
+        self._handle_facet_result(url_params)
+        facets = self._form_facet_object()
+
         records = (
             []
-            if self.__url_params_changed(
+            if self._url_params_changed(
                 url_params, ["search", "author", "date", "date_from", "date_to"]
             )
-            else session_search_result.get("records", [])
+            else self.search_result.get("records", [])
         )
 
-        # If we don't hit any checks below this point search_results end up being empty
-        self.search_result = session_search_result
-
         # This if statement is true when user makes search with new term or parameters in list view
-        if load_all_pages and not kwargs.get("record"):
-            if self.__url_params_changed(
+        if load_all_pages and not show_single_record:
+            if self._url_params_changed(
                 url_params, ["search", "author", "date", "date_from", "date_to"]
             ):
                 results = self.get_search_result(
@@ -585,107 +564,126 @@ class SearchView(BaseView):
                     self.search_result = results
                     records += results.get("records", [])
                 if records:
-                    # its all one big page of records. So set page number as first page
+                    # It's all one big page of records. So set page number as first page
                     self.search_result["records"] = records
                     # Reset search_result session to make sure there is no wrong values stored
                     request.session["search_result"] = None
-        else:
-            # If record exist we are in "single image view"
-            if kwargs.get("record"):
-                # Check if user came from list view or from direct link
-                finna_id = request.GET.get("image_id")
-                LOG.debug(
-                    "Displaying image details", extra={"data": {"finna_id": finna_id}}
-                )
-                # Check if record is found in session, if not, get it from finna
-                records = session_search_result.get("records", [])
-                record = next((x for x in records if x["id"] == finna_id), None)
-                if not record:
-                    result = FINNA.get_record(finna_id)
-                    if result and result.get("resultCount", 0) == 0:
-                        # If image was not found we want to show different 404 page
-                        context = self.get_context_data(**kwargs)
-                        return render(
-                            request, "hkm/views/404_image.html", context, status=404
-                        )
-                    self.search_result = result
-                    self.single_image = True
-                    self.record = result.get("records")[0] if result else None
-                # If user came from list view, get selected image from session
-                else:
-                    # Save previous - selected - next records to corresponding variables
-                    record_index = records.index(record)
-                    if record_index > 0:
-                        self.previous_record = records[record_index - 1]
-                    if record_index < len(records) - 1:
-                        self.next_record = records[record_index + 1]
-
-                    # Use deepcopy for now, otherwise when setting self.search_result session gets overwritten as well
-                    self.record = copy.deepcopy(record)
-                    self.search_result = copy.deepcopy(session_search_result)
-
-                    # Take search parameters from session.
-                    # This is required for "Back to search results" link to work
-                    self.url_params = request.session.get("url_params", {})
-                    self.all_dates = request.session.get("all_dates")
-
-            # This else statement is executed when "Load more" is pressed
-            else:
-                results = self.get_search_result(
-                    self.url_params["search"],
-                    self.url_params["page"],
-                    self.page_size,
-                    facets,
-                )
-                self.search_result = results
-
-        if self.search_result:
-            favorite_records = None
-            if request.user.is_authenticated():
-                # Fetch all favorite records once
-                try:
-                    favorite_records = Record.objects.filter(
-                        collection__owner=request.user,
-                        collection__collection_type=Collection.TYPE_FAVORITE,
-                    ).values_list("record_id", flat=True)
-                    if self.record:
-                        self.record["is_favorite"] = (
-                            self.record["id"] in favorite_records
-                        )
-                except Record.DoesNotExist:
-                    pass
-
-            if (
-                not self.search_result.get("resultCount") == 0
-                and "records" in self.search_result
-                and not kwargs.get("record")
-            ):
-                # Check also if this record is one of user's favorites
-                for record in self.search_result["records"]:
-                    if favorite_records is not None:
-                        record["is_favorite"] = record["id"] in favorite_records
-
-                # If user is loading more pictures add them to session.
-                # Check for page changed, this will prevent session duplicating itself
-                # endlessly if search button is pressed over and over again.
-                # Otherwise set session to equal self.search_result.
-                if request.session.get("search_result") and self.__url_params_changed(
-                    url_params, ["page"]
-                ):
-                    request.session["search_result"]["records"].extend(
-                        self.search_result.get("records")
+        # If record exist we are in "single image view"
+        elif show_single_record:
+            # Check if user came from list view or from direct link
+            finna_id = request.GET.get("image_id")
+            LOG.debug(
+                "Displaying image details", extra={"data": {"finna_id": finna_id}}
+            )
+            # Check if record is found in session, if not, get it from finna
+            records = self.search_result.get("records", [])
+            record = next((x for x in records if x["id"] == finna_id), None)
+            if not record:
+                result = FINNA.get_record(finna_id)
+                if result and result.get("resultCount", 0) == 0:
+                    # If image was not found we want to show different 404 page
+                    context = self.get_context_data(**kwargs)
+                    return render(
+                        request, "hkm/views/404_image.html", context, status=404
                     )
-                else:
-                    request.session["search_result"] = self.search_result
-                request.session["facet_result"] = self.facet_result
-                request.session["all_dates"] = self.all_dates
-                request.session["url_params"] = self.url_params
-            elif "records" not in self.search_result:
-                # No more records available for the next page
-                if self.request.is_ajax():
-                    return http.HttpResponseBadRequest()
+                self.search_result = result
+                self.single_image = True
+                self.record = result.get("records")[0] if result else None
+            # If user came from list view, get selected image from session
+            else:
+                # Save previous - selected - next records to corresponding variables
+                record_index = records.index(record)
+                has_previous = record_index > 0
+                has_next = record_index < len(records) - 1
+                self.previous_record = (
+                    records[record_index - 1] if has_previous else None
+                )
+                self.next_record = records[record_index + 1] if has_next else None
 
-    def __url_params_changed(self, url_params, selected_fields):
+                # Use deepcopy for now
+                self.record = copy.deepcopy(record)
+
+                # Take search parameters from session.
+                # This is required for "Back to search results" link to work
+                self.url_params = request.session.get("url_params", {})
+                self.all_dates = request.session.get("all_dates")
+
+        # This else statement is executed when "Load more" is pressed
+        else:
+            results = self.get_search_result(
+                self.url_params["search"],
+                self.url_params["page"],
+                self.page_size,
+                facets,
+            )
+            self.search_result = results
+
+        self._mark_favorites(show_single_record)
+        self._cache_search_results(url_params, show_single_record)
+
+        if (
+            self.search_result
+            and "records" not in self.search_result
+            and self.request.is_ajax()
+        ):
+            # No more records available for the next page
+            return http.HttpResponseBadRequest()
+
+    def _mark_favorites(self, show_single_record):
+        """Handle favorite when showing single or multiple search results."""
+        if not self.search_result or not self.request.user.is_authenticated():
+            return None
+
+        favorite_records = Record.objects.filter(
+            collection__owner=self.request.user,
+            collection__collection_type=Collection.TYPE_FAVORITE,
+        )
+
+        # Showing a single record
+        if self.record:
+            self.record["is_favorite"] = favorite_records.filter(
+                record_id=self.record["id"]
+            ).exists()
+
+        # Listing multiple records
+        if (
+            not show_single_record
+            and favorite_records.exists()
+            and not self.search_result.get("resultCount") == 0
+            and "records" in self.search_result
+        ):
+            record_ids = [record["id"] for record in self.search_result["records"]]
+            favorite_record_ids = favorite_records.filter(
+                record_id__in=record_ids
+            ).values_list("record_id", flat=True)
+
+            for record in self.search_result["records"]:
+                record["is_favorite"] = record["id"] in favorite_record_ids
+
+    def _cache_search_results(self, url_params, show_single_record: bool):
+        if (
+            self.search_result
+            and not self.search_result.get("resultCount") == 0
+            and "records" in self.search_result
+            and not show_single_record
+        ):
+            # If user is loading more pictures add them to session.
+            # Check for page changed, this will prevent session duplicating itself
+            # endlessly if search button is pressed over and over again.
+            # Otherwise, set session to equal self.search_result.
+            if self.request.session.get("search_result") and self._url_params_changed(
+                url_params, ["page"]
+            ):
+                self.request.session["search_result"]["records"].extend(
+                    self.search_result.get("records")
+                )
+            else:
+                self.request.session["search_result"] = self.search_result
+            self.request.session["facet_result"] = self.facet_result
+            self.request.session["all_dates"] = self.all_dates
+            self.request.session["url_params"] = self.url_params
+
+    def _url_params_changed(self, url_params, selected_fields):
         is_changed = {
             "search": self.url_params["search"] != url_params.get("search", ""),
             "page": self.url_params["page"] != url_params.get("page", ""),
@@ -704,7 +702,24 @@ class SearchView(BaseView):
 
         return re_fetch
 
-    def __form_facet_object(self):
+    def _handle_facet_result(self, url_params):
+        self.facet_result = self.request.session.get("facet_result", None)
+
+        if not self.facet_result:
+            self.facet_result = self.get_facet_result(self.url_params["search"])
+            # date_from & date_to require full list of dates
+            self.all_dates = self.facet_result.get("facets", {}).get(
+                "main_date_str", []
+            )
+        # If search term or year to year changed => fetch facets again
+        elif self._url_params_changed(url_params, ["search", "date_from", "date_to"]):
+            self.facet_result = self.get_facet_result(
+                self.url_params["search"],
+                self.url_params["date_from"],
+                self.url_params["date_to"],
+            )
+
+    def _form_facet_object(self):
         facets = {}
         if self.url_params["author"]:
             facets["author_facet"] = self.url_params["author"]
