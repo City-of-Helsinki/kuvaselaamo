@@ -110,13 +110,13 @@ class UserProfile(BaseModel):
 
 class CollectionQuerySet(models.QuerySet):
     def user_can_edit(self, user):
-        if user.is_authenticated():
+        if user.is_authenticated:
             return self.filter(owner=user)
         return self.none()
 
     def user_can_view(self, user):
         is_public = models.Q(is_public=True)
-        if user.is_authenticated():
+        if user.is_authenticated:
             is_own = models.Q(owner=user)
             return self.filter(is_own | is_public)
         return self.filter(is_public)
@@ -308,7 +308,7 @@ class PrintProduct(Product):
 
 class ProductOrderQuerySet(models.QuerySet):
     def for_user(self, user, session_orderid):
-        if user.is_authenticated():
+        if user.is_authenticated:
             return self.filter(
                 models.Q(user=user) | models.Q(order_hash=session_orderid)
             )

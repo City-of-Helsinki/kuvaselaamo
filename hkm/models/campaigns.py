@@ -58,7 +58,7 @@ class _UsageMixin(object):
 
     def is_used(self, user=None):
         if user and self.usage_type == CampaignUsageType.SINGLE_USE_PER_USER:
-            if user.is_anonymous():  # No way to know whether it's used or not
+            if user.is_anonymous:  # No way to know whether it's used or not
                 return False
             return self.campaign_usage.filter(order__user=user).exists()
         # because this mixin is inherited by Campaign AND Code check that SINGLE_USE applies only for Codes

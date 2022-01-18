@@ -160,7 +160,7 @@ class InfoView(BaseView):
 
     def get_empty_forms(self, request):
         context_forms = super().get_empty_forms(request)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user = request.user
         else:
             user = None
@@ -176,7 +176,7 @@ class InfoView(BaseView):
         return super().post(request, *args, **kwargs)
 
     def handle_feedback(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user = request.user
         else:
             user = None
@@ -213,7 +213,7 @@ class PublicCollectionsView(BaseCollectionListView):
     url_name = "hkm_public_collections"
 
     def get_collection_qs(self, request, *args, **kwargs):
-        if request.user.is_authenticated() and request.user.profile.is_museum:
+        if request.user.is_authenticated and request.user.profile.is_museum:
             return request.user.profile.albums.all()
         return Collection.objects.filter(is_public=True, is_featured=False).order_by(
             "created"
@@ -238,7 +238,7 @@ class MyCollectionsView(BaseCollectionListView):
 def tag_favorites_if_necessary(request, records_to_tag):
     """Fetch the currently authenticated user's favorite records and tag
     them in the given record list."""
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         favorite_records = Record.objects.filter(
             collection__owner=request.user,
             collection__collection_type=Collection.TYPE_FAVORITE,
@@ -336,7 +336,7 @@ class CollectionDetailView(BaseView):
             tag_favorites_if_necessary(request, self.collections_records_to_display)
 
         self.permissions = {
-            "can_edit": self.request.user.is_authenticated()
+            "can_edit": self.request.user.is_authenticated
             and (
                 self.request.user == self.collection.owner
                 or self.request.user.profile.is_admin
@@ -347,7 +347,7 @@ class CollectionDetailView(BaseView):
 
     def get_empty_forms(self, request):
         context_forms = super().get_empty_forms(request)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user = request.user
             context_forms["collection_form"] = forms.CollectionForm(
                 prefix="collection-form", instance=self.collection, user=user
@@ -423,7 +423,7 @@ class CollectionDetailView(BaseView):
             context["record"] = self.collection_record.get_details()
 
             # Also check if record is in user's favorite collection
-            if self.request.user.is_authenticated():
+            if self.request.user.is_authenticated:
                 try:
                     favorites_collection = Collection.objects.get(
                         owner=self.request.user,
@@ -446,7 +446,7 @@ class CollectionDetailView(BaseView):
             )
             context["related_collections"] = related_collections
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context["my_collections"] = Collection.objects.filter(
                 owner=self.request.user
             ).order_by("title")
@@ -631,7 +631,7 @@ class SearchView(BaseView):
 
     def _mark_favorites(self, show_single_record):
         """Handle favorite when showing single or multiple search results."""
-        if not self.search_result or not self.request.user.is_authenticated():
+        if not self.search_result or not self.request.user.is_authenticated:
             return None
 
         favorite_records = Record.objects.filter(
@@ -775,7 +775,7 @@ class SearchRecordDetailView(SearchView):
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get("action", None)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             if action == "add-to-collection":
                 return self.handle_add_to_collection(request, *args, **kwargs)
         return super().post(request, *args, **kwargs)
@@ -835,7 +835,7 @@ class SearchRecordDetailView(SearchView):
             context["single_image"] = self.single_image
             LOG.debug("record id", extra={"data": {"finnaid": record["id"]}})
             context["record_web_url"] = FINNA.get_image_url(record["id"])
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context["my_collections"] = Collection.objects.filter(
                 owner=self.request.user
             ).order_by("title")
@@ -852,7 +852,7 @@ class SearchRecordDetailView(SearchView):
 
     def get_empty_forms(self, request):
         context_forms = super().get_empty_forms(request)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user = request.user
         else:
             user = None
@@ -872,7 +872,7 @@ class LanguageView(RedirectView):
         lang = request.GET.get("lang", "fi")
         if lang not in ("fi", "en", "sv"):
             lang = "fi"
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             profile = request.user.profile
             profile.language = lang
             profile.save()
@@ -1012,7 +1012,7 @@ class AjaxCropRecordView(View):
         file_name = unidecode(crop_file.name.encode("utf-8").decode("utf-8"))
         tmp_image.edited_image.save(file_name, crop_file)
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             tmp_image.creator = request.user
 
         tmp_image.save()
@@ -1022,7 +1022,7 @@ class AjaxCropRecordView(View):
 
 class AjaxAddToCollection(View):
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             action = request.POST["action"]
             if action == "add":
                 return self.handle_add_to_collection(request, *args, **kwargs)
@@ -1123,7 +1123,7 @@ class RecordFeedbackView(View):
 
     def handle_feedback(self, request, *args, **kwargs):
         response_data = {}
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user = request.user
         else:
             user = None

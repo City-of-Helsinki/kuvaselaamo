@@ -22,7 +22,7 @@ class CollectionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")
         super().__init__(*args, **kwargs)
-        if not self.user.is_authenticated() or not self.user.profile.is_admin:
+        if not self.user.is_authenticated or not self.user.profile.is_admin:
             del self.fields["show_in_landing_page"]
             del self.fields["is_featured"]
 
