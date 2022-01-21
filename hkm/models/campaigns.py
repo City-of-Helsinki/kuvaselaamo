@@ -170,7 +170,7 @@ class CampaignCode(models.Model, _UsageMixin):
         Campaign,
         on_delete=models.CASCADE,
         related_name="campaign_codes",
-        verbose_name=("Kampanja"),
+        verbose_name=_("Kampanja"),
     )
     code = models.CharField(max_length=40, db_index=True)
     created_on = models.DateTimeField(auto_now_add=True)
