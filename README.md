@@ -121,3 +121,22 @@ Production: https://helsinkikuvia.fi
 Project is using [GitHub Actions](https://github.com/City-of-Helsinki/kuvaselaamo/actions)
 for automated builds and deployment into the test environment.
 The test environment is built automatically from the `develop` branch.
+
+
+## Code format
+
+This project uses
+[`black`](https://github.com/ambv/black),
+[`flake8`](https://gitlab.com/pycqa/flake8) and
+[`isort`](https://github.com/timothycrosley/isort)
+for code formatting and quality checking. Project follows the basic
+black config, without any modifications.
+
+Basic `black` commands:
+
+* To let `black` do its magic: `black .`
+* To see which files `black` would change: `black --check .`
+
+[`pre-commit`](https://pre-commit.com/) can be used to install and
+run all the formatting tools as git hooks automatically before a
+commit.
