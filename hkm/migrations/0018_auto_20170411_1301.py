@@ -26,12 +26,12 @@ class Migration(migrations.Migration):
             name="name",
             field=models.CharField(
                 choices=[
-                    (b"api-poster-30x40", "api-poster-30x40"),
-                    (b"api-poster-40x30", "api-poster-40x30"),
-                    (b"api-poster-50x70", "api-poster-50x70"),
-                    (b"api-poster-70x50", "api-poster-70x50"),
-                    (b"api-poster-a4", "api-poster-a4"),
-                    (b"api-poster-a4-horizontal", "api-poster-a4-horizontal"),
+                    ("api-poster-30x40", "api-poster-30x40"),
+                    ("api-poster-40x30", "api-poster-40x30"),
+                    ("api-poster-50x70", "api-poster-50x70"),
+                    ("api-poster-70x50", "api-poster-70x50"),
+                    ("api-poster-a4", "api-poster-a4"),
+                    ("api-poster-a4-horizontal", "api-poster-a4-horizontal"),
                 ],
                 max_length=255,
                 verbose_name="Name",

@@ -16,13 +16,13 @@ class Migration(migrations.Migration):
             name="use_type",
             field=models.CharField(
                 choices=[
-                    (b"SINGLE_USE", "Kertak\xe4ytt\xf6inen"),
-                    (b"MULTI_USE", "Monik\xe4ytt\xf6inen"),
+                    ("SINGLE_USE", "Kertakäyttöinen"),
+                    ("MULTI_USE", "Monikäyttöinen"),
                 ],
                 db_index=True,
-                default=b"SINGLE_USE",
+                default="SINGLE_USE",
                 max_length=20,
-                verbose_name="K\xe4ytt\xf6",
+                verbose_name="Käyttö",
             ),
         ),
     ]

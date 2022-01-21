@@ -61,8 +61,8 @@ class Migration(migrations.Migration):
                 (
                     "collection_type",
                     models.CharField(
-                        choices=[(b"normal", "Normal"), (b"favorite", "Favorite")],
-                        default=b"normal",
+                        choices=[("normal", "Normal"), ("favorite", "Favorite")],
+                        default="normal",
                         max_length=255,
                         verbose_name="Type",
                     ),
@@ -519,11 +519,11 @@ class Migration(migrations.Migration):
                     "language",
                     models.CharField(
                         choices=[
-                            (b"fi", "Finnish"),
-                            (b"en", "English"),
-                            (b"sv", "Swedish"),
+                            ("fi", "Finnish"),
+                            ("en", "English"),
+                            ("sv", "Swedish"),
                         ],
-                        default=b"fi",
+                        default="fi",
                         max_length=4,
                         verbose_name="Language",
                     ),

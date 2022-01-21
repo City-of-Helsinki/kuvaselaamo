@@ -36,11 +36,11 @@ class Migration(migrations.Migration):
                     "status",
                     models.CharField(
                         choices=[
-                            (b"DISABLED", "Ei k\xe4yt\xf6ss\xe4"),
-                            (b"ENABLED", "Aktiivinen"),
+                            ("DISABLED", "Ei käytössä"),
+                            ("ENABLED", "Aktiivinen"),
                         ],
                         db_index=True,
-                        default=b"ENABLED",
+                        default="ENABLED",
                         max_length=20,
                         verbose_name="Tila",
                     ),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                     models.DateField(
                         blank=True,
                         null=True,
-                        verbose_name="Alkup\xe4iv\xe4m\xe4\xe4r\xe4",
+                        verbose_name="Alkupäivämäärä",
                     ),
                 ),
                 (
@@ -60,17 +60,17 @@ class Migration(migrations.Migration):
                     models.DateField(
                         blank=True,
                         null=True,
-                        verbose_name="Loppup\xe4iv\xe4m\xe4\xe4r\xe4",
+                        verbose_name="Loppupäivämäärä",
                     ),
                 ),
                 (
                     "usage_type",
                     models.CharField(
                         choices=[
-                            (b"SINGLE_USE", "Kertak\xe4ytt\xf6inen"),
-                            (b"CODELESS", "Kooditon"),
+                            ("SINGLE_USE", "Kertakäyttöinen"),
+                            ("CODELESS", "Kooditon"),
                         ],
-                        default=b"SINGLE_USE",
+                        default="SINGLE_USE",
                         max_length=20,
                         verbose_name="Tyyppi",
                     ),
@@ -85,9 +85,9 @@ class Migration(migrations.Migration):
                     "mutex_group",
                     models.CharField(
                         blank=True,
-                        help_text="Mik\xe4li asetettu, useampaa saman ryhm\xe4n kampanjaa ei voi k\xe4ytt\xe4\xe4 yhdess\xe4 tilauksessa",
+                        help_text="Mikäli asetettu, useampaa saman ryhmän kampanjaa ei voi käyttää yhdessä tilauksessa",
                         max_length=32,
-                        verbose_name="Yhteisk\xe4ytt\xf6estoryhm\xe4",
+                        verbose_name="Yhteiskäyttöestoryhmä",
                     ),
                 ),
                 (
@@ -139,11 +139,11 @@ class Migration(migrations.Migration):
                     "status",
                     models.CharField(
                         choices=[
-                            (b"DISABLED", "Ei k\xe4yt\xf6ss\xe4"),
-                            (b"ENABLED", "Aktiivinen"),
+                            ("DISABLED", "Ei käytössä"),
+                            ("ENABLED", "Aktiivinen"),
                         ],
                         db_index=True,
-                        default=b"ENABLED",
+                        default="ENABLED",
                         max_length=20,
                         verbose_name="Tila",
                     ),

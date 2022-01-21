@@ -90,15 +90,15 @@ class Migration(migrations.Migration):
             name="name",
             field=models.CharField(
                 choices=[
-                    (b"api-poster-gloss-30x40", "api-poster-gloss-30x40"),
-                    (b"api-poster-gloss-40x30", "api-poster-gloss-40x30"),
-                    (b"api-poster-50x70", "api-poster-50x70"),
-                    (b"api-poster-70x50", "api-poster-70x50"),
+                    ("api-poster-gloss-30x40", "api-poster-gloss-30x40"),
+                    ("api-poster-gloss-40x30", "api-poster-gloss-40x30"),
+                    ("api-poster-50x70", "api-poster-50x70"),
+                    ("api-poster-70x50", "api-poster-70x50"),
                     (
-                        b"api-poster-gloss-A4-horizontal",
+                        "api-poster-gloss-A4-horizontal",
                         "api-poster-gloss-A4-horizontal",
                     ),
-                    (b"api-poster-gloss-A4", "api-poster-gloss-A4"),
+                    ("api-poster-gloss-A4", "api-poster-gloss-A4"),
                 ],
                 max_length=255,
                 verbose_name="Name",
