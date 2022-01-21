@@ -55,7 +55,9 @@ class UserProfile(BaseModel):
         (LANG_SV, _("Swedish")),
     )
 
-    user = models.OneToOneField(User, verbose_name=_("User"), related_name="profile")
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, verbose_name=_("User"), related_name="profile"
+    )
     is_admin = models.BooleanField(verbose_name=_("Is admin"), default=False)
     language = models.CharField(
         verbose_name=_("Language"),
@@ -131,7 +133,7 @@ class Collection(BaseModel):
         (TYPE_FAVORITE, _("Favorite")),
     )
 
-    owner = models.ForeignKey(User, verbose_name=_("Owner"))
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Owner"))
     title = models.CharField(verbose_name=_("Title"), max_length=255)
     description = models.TextField(verbose_name=_("Description"), null=True, blank=True)
     is_public = models.BooleanField(verbose_name=_("Public"), default=False)
@@ -201,9 +203,14 @@ def get_collection_upload_path(instance, filename):
 class Record(OrderedModel, BaseModel):
     order_with_respect_to = "collection"
 
-    creator = models.ForeignKey(User, verbose_name=_("Creator"))
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name=_("Creator")
+    )
     collection = models.ForeignKey(
-        Collection, verbose_name=_("Collection"), related_name="records"
+        Collection,
+        on_delete=models.CASCADE,
+        verbose_name=_("Collection"),
+        related_name="records",
     )
     record_id = models.CharField(verbose_name=_("Finna record ID"), max_length=1024)
 
@@ -320,7 +327,9 @@ class ProductOrder(BaseModel):
 
     # Anonymous users can order aswell, so we need contact and shipping information directly
     # to order model. Orders are associated to anynymous users via session
-    user = models.ForeignKey(User, verbose_name=_("User"), null=True, blank=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name=_("User"), null=True, blank=True
+    )
     session = models.CharField(verbose_name=_("Session"), max_length=255)
     first_name = models.CharField(
         verbose_name=_("First name"), max_length=255, null=True, blank=False
@@ -390,7 +399,13 @@ class ProductOrder(BaseModel):
     )
     # If this order is made from Record in collection, the Record is saved for
     # statistics purposes
-    record = models.ForeignKey(Record, verbose_name=_("Record"), null=True, blank=True)
+    record = models.ForeignKey(
+        Record,
+        on_delete=models.CASCADE,
+        verbose_name=_("Record"),
+        null=True,
+        blank=True,
+    )
 
     form_phase = models.IntegerField(verbose_name=_("Order form phase"), default=1)
     order_hash = models.CharField(
@@ -401,7 +416,11 @@ class ProductOrder(BaseModel):
         unique=True,
     )
     product_type = models.ForeignKey(
-        PrintProduct, verbose_name=_("Product type"), null=True, blank=True
+        PrintProduct,
+        on_delete=models.CASCADE,
+        verbose_name=_("Product type"),
+        null=True,
+        blank=True,
     )
     product_name = models.CharField(
         verbose_name=_("Product Name"), max_length=1024, null=True, blank=True
@@ -479,7 +498,11 @@ class ProductOrder(BaseModel):
 
     # A product order may belong to a collection of orders (multiple prints ordered at once)
     order = models.ForeignKey(
-        "ProductOrderCollection", blank=True, null=True, related_name="product_orders"
+        "ProductOrderCollection",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="product_orders",
     )
 
     objects = ProductOrderQuerySet.as_manager()
@@ -498,7 +521,9 @@ class ProductOrder(BaseModel):
 
 
 class Feedback(BaseModel):
-    user = models.ForeignKey(User, verbose_name=_("User"), null=True, blank=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name=_("User"), null=True, blank=True
+    )
     record_id = models.CharField(
         verbose_name=_("Finna record ID"), max_length=1024, null=True, blank=True
     )
@@ -526,7 +551,9 @@ def get_tmp_upload_path(instance, filename):
 
 
 class TmpImage(BaseModel):
-    creator = models.ForeignKey(User, verbose_name=_("Creator"), blank=True, null=True)
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name=_("Creator"), blank=True, null=True
+    )
     record_id = models.CharField(verbose_name=_("Finna record ID"), max_length=1024)
     record_title = models.CharField(verbose_name=_("Title"), max_length=1024)
     edited_image = models.ImageField(
@@ -560,8 +587,8 @@ class PageContent(BaseModel, TranslatableModel):
 
 class ProductOrderDiscount(models.Model):
     # A log of used discounts
-    campaign = models.ForeignKey(Campaign)
-    order = models.ForeignKey("ProductOrderCollection")
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    order = models.ForeignKey("ProductOrderCollection", on_delete=models.CASCADE)
     code_used = models.CharField(
         max_length=255, verbose_name=_("Used discount code"), null=True
     )
