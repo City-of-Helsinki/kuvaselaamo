@@ -121,7 +121,7 @@ elif DEFAULT_FILE_STORAGE == "storages.backends.azure_storage.AzureStorage":
     AZURE_ACCOUNT_KEY = env("AZURE_BUCKET_CREDENTIALS")
     AZURE_CONTAINER = env("AZURE_BUCKET_NAME")
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

@@ -1,12 +1,13 @@
 import logging
 
 from django.conf import settings
+from django.utils.deprecation import MiddlewareMixin
 from django.utils.translation import LANGUAGE_SESSION_KEY
 
 LOG = logging.getLogger(__name__)
 
 
-class LanguageMiddleware(object):
+class LanguageMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if LANGUAGE_SESSION_KEY not in request.session:
             if request.user.is_authenticated:
