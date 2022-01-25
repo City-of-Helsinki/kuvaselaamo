@@ -95,7 +95,6 @@ class UserProfile(BaseModel):
         "Collection",
         help_text="List of albums for browsing if user is museum",
         blank=True,
-        null=True,
     )
 
     removal_notification_sent = models.DateTimeField(
