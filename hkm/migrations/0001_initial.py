@@ -387,7 +387,12 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("order", models.PositiveIntegerField(db_index=True, editable=False)),
+                (
+                    "order",
+                    models.PositiveIntegerField(
+                        db_index=True, editable=False, verbose_name="order"
+                    ),
+                ),
                 (
                     "created",
                     models.DateTimeField(auto_now_add=True, verbose_name="Created"),
