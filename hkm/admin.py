@@ -1,8 +1,8 @@
-from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
 from django.http import JsonResponse
 from django.template import loader
+from django.urls import re_path
 from parler.admin import TranslatableAdmin
 
 from hkm.forms import ShowcaseForm
@@ -17,7 +17,7 @@ class CampaignAdmin(TranslatableAdmin):
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
-            url(
+            re_path(
                 r"^(?P<campaign_id>.+)/generate/$",
                 self.admin_site.admin_view(self.generate),
                 name="generate-campaign-codes",

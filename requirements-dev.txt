@@ -16,7 +16,7 @@ certifi==2021.10.8
     # via
     #   -c requirements.txt
     #   requests
-chardet==3.0.4
+charset-normalizer==2.0.10
     # via
     #   -c requirements.txt
     #   requests
@@ -24,7 +24,7 @@ click==8.0.3
     # via
     #   black
     #   pip-tools
-coverage[toml]==6.2
+coverage[toml]==6.3
     # via pytest-cov
 decorator==5.1.1
     # via ipython
@@ -47,7 +47,7 @@ flake8-print==4.0.0
     # via -r requirements-dev.in
 freezegun==1.1.0
     # via -r requirements-dev.in
-idna==2.5
+idna==3.3
     # via
     #   -c requirements.txt
     #   requests
@@ -60,7 +60,7 @@ importlib-metadata==4.2.0
     #   pytest
 iniconfig==1.1.1
     # via pytest
-ipython==7.31.0
+ipython==7.31.1
     # via -r requirements-dev.in
 isort==5.10.1
     # via -r requirements-dev.in
@@ -106,7 +106,7 @@ pyflakes==2.4.0
     # via flake8
 pygments==2.11.2
     # via ipython
-pyparsing==3.0.6
+pyparsing==3.0.7
     # via packaging
 pytest==6.2.5
     # via
@@ -121,7 +121,7 @@ python-dateutil==2.8.2
     # via
     #   faker
     #   freezegun
-requests==2.25.0
+requests==2.27.1
     # via
     #   -c requirements.txt
     #   responses
@@ -146,14 +146,14 @@ traitlets==5.1.1
     # via
     #   ipython
     #   matplotlib-inline
-typed-ast==1.5.1
+typed-ast==1.5.2
     # via black
 typing-extensions==4.0.1
     # via
     #   black
     #   faker
     #   importlib-metadata
-urllib3==1.26.4
+urllib3==1.26.8
     # via
     #   -c requirements.txt
     #   requests

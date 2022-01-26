@@ -71,7 +71,8 @@ class FinnaClient(object):
             return None
 
         LOG.debug(
-            "Got result from Finna", extra={"data": {"result_data": repr(result_data)}}
+            "Got facet result from Finna",
+            extra={"data": {"result_data": repr(result_data)}},
         )
         return result_data
 
@@ -130,6 +131,12 @@ class FinnaClient(object):
             ]
 
         result_data = self._get_finna_result(url, payload)
+
+        LOG.debug(
+            "Got search result from Finna",
+            extra={"data": {"result_data": repr(result_data)}},
+        )
+
         if not result_data:
             return None
 
@@ -184,6 +191,11 @@ class FinnaClient(object):
 
         result_data = self._get_finna_result(url, payload)
 
+        LOG.debug(
+            "Got record result from Finna",
+            extra={"data": {"result_data": repr(result_data)}},
+        )
+
         return result_data
 
     def _get_finna_result(self, url, payload):
@@ -215,10 +227,6 @@ class FinnaClient(object):
                 extra={"data": {"result_data": repr(result_data)}},
             )
             return None
-
-        LOG.debug(
-            "Got result from Finna", extra={"data": {"result_data": repr(result_data)}}
-        )
 
         return result_data
 

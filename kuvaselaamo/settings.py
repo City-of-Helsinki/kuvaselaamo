@@ -1,4 +1,3 @@
-import logging
 import os
 
 import environ
@@ -81,6 +80,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SITE_ID = 1
 
 USE_TZ = True
+USE_I18N = True
+USE_L10N = True
 TIME_ZONE = "Europe/Helsinki"
 
 LANGUAGE_CODE = "fi"
@@ -144,7 +145,6 @@ TEMPLATES = [
                 "apptemplates.Loader",
                 "django.template.loaders.filesystem.Loader",
                 "django.template.loaders.app_directories.Loader",
-                "django.template.loaders.eggs.Loader",
             ),
             "context_processors": (
                 "django.contrib.auth.context_processors.auth",
@@ -164,7 +164,6 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "compressor.finders.CompressorFinder",
-    "djangobower.finders.BowerFinder",
 )
 
 INSTALLED_APPS = (
@@ -173,7 +172,6 @@ INSTALLED_APPS = (
     "phonenumber_field",
     "compressor",
     "parler",
-    "djangobower",
     "django.contrib.sites",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -183,11 +181,6 @@ INSTALLED_APPS = (
     "anymail",
     "storages",
 )
-
-# Bower
-BOWER_COMPONENTS_ROOT = os.path.join(BASEDIR, "..", "components")
-
-BOWER_INSTALLED_APPS = ("ckeditor#4.7.1",)
 
 # Parler
 PARLER_DEFAULT_LANGUAGE_CODE = "fi"
@@ -215,14 +208,6 @@ COMPRESS_HTML = False
 COMPRESS_PARSER = "compressor.parser.HtmlParser"
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    # 'hutils.compressor_filters.ScssFilter',
-]
-
-# Workaround for pyScss problems
-# https://github.com/Kronuz/pyScss/issues/70
-logging.getLogger("scss").addHandler(logging.StreamHandler())
 
 # Django
 

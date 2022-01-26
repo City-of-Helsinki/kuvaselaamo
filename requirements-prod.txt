@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements-prod.in
 #
-adal==1.2.5
+adal==1.2.7
     # via
     #   azure-datalake-store
     #   msrestazure
@@ -14,7 +14,7 @@ azure-applicationinsights==0.1.0
     # via azure
 azure-batch==4.1.3
     # via azure
-azure-common==1.1.26
+azure-common==1.1.27
     # via
     #   azure-applicationinsights
     #   azure-batch
@@ -95,7 +95,7 @@ azure-cosmosdb-nspkg==2.0.2
     # via azure-cosmosdb-table
 azure-cosmosdb-table==1.0.6
     # via azure
-azure-datalake-store==0.0.51
+azure-datalake-store==0.0.52
     # via azure
 azure-eventgrid==1.3.0
     # via azure
@@ -103,7 +103,7 @@ azure-graphrbac==0.40.0
     # via azure
 azure-keyvault==1.1.0
     # via azure
-azure-loganalytics==0.1.0
+azure-loganalytics==0.1.1
     # via azure
 azure-mgmt==4.0.0
     # via azure
@@ -183,7 +183,7 @@ azure-mgmt-maps==0.1.0
     # via azure-mgmt
 azure-mgmt-marketplaceordering==0.1.0
     # via azure-mgmt
-azure-mgmt-media==1.0.0
+azure-mgmt-media==1.0.1
     # via azure-mgmt
 azure-mgmt-monitor==0.5.2
     # via azure-mgmt
@@ -285,7 +285,6 @@ azure-nspkg==3.0.2
     #   azure-cosmosdb-nspkg
     #   azure-graphrbac
     #   azure-keyvault
-    #   azure-loganalytics
     #   azure-mgmt-nspkg
     #   azure-servicebus
     #   azure-servicefabric
@@ -310,32 +309,32 @@ azure-storage-file==1.4.0
     # via azure
 azure-storage-queue==1.4.0
     # via azure
-cachetools==3.1.1
+cachetools==4.2.4
     # via google-auth
 certifi==2021.10.8
     # via
     #   -c requirements.txt
     #   msrest
     #   requests
-cffi==1.14.4
+cffi==1.15.0
     # via
     #   azure-datalake-store
     #   cryptography
-chardet==3.0.4
+charset-normalizer==2.0.10
     # via
     #   -c requirements.txt
     #   requests
-cryptography==3.3.2
+cryptography==36.0.1
     # via
     #   adal
     #   azure-cosmosdb-table
     #   azure-keyvault
     #   azure-storage-common
-google-api-core==1.25.1
+google-api-core==1.31.5
     # via
     #   google-cloud-core
     #   google-cloud-storage
-google-auth==1.24.0
+google-auth==1.35.0
     # via google-api-core
 google-cloud-core==0.28.1
     # via google-cloud-storage
@@ -343,15 +342,15 @@ google-cloud-storage==1.12.1
     # via -r requirements-prod.in
 google-resumable-media==0.4.1
     # via google-cloud-storage
-googleapis-common-protos==1.52.0
+googleapis-common-protos==1.54.0
     # via google-api-core
-idna==2.5
+idna==3.3
     # via
     #   -c requirements.txt
     #   requests
-isodate==0.6.0
+isodate==0.6.1
     # via msrest
-msrest==0.6.19
+msrest==0.6.21
     # via
     #   azure-applicationinsights
     #   azure-eventgrid
@@ -443,9 +442,11 @@ msrestazure==0.6.4
     #   azure-mgmt-subscription
     #   azure-mgmt-trafficmanager
     #   azure-mgmt-web
-oauthlib==3.1.0
+oauthlib==3.1.1
     # via requests-oauthlib
-protobuf==3.14.0
+packaging==21.3
+    # via google-api-core
+protobuf==3.19.3
     # via
     #   google-api-core
     #   googleapis-common-protos
@@ -455,11 +456,13 @@ pyasn1==0.4.8
     #   rsa
 pyasn1-modules==0.2.8
     # via google-auth
-pycparser==2.20
+pycparser==2.21
     # via cffi
-pyjwt==1.7.1
+pyjwt==2.3.0
     # via adal
-python-dateutil==2.8.1
+pyparsing==3.0.7
+    # via packaging
+python-dateutil==2.8.2
     # via
     #   adal
     #   azure-cosmosdb-table
@@ -469,7 +472,7 @@ pytz==2021.3
     # via
     #   -c requirements.txt
     #   google-api-core
-requests==2.25.0
+requests==2.27.1
     # via
     #   -c requirements.txt
     #   adal
@@ -485,24 +488,22 @@ requests==2.25.0
     #   requests-oauthlib
 requests-oauthlib==1.3.0
     # via msrest
-rsa==4.5
+rsa==4.8
     # via google-auth
 six==1.16.0
     # via
     #   -c requirements.txt
-    #   cryptography
     #   google-api-core
     #   google-auth
     #   google-resumable-media
     #   isodate
     #   msrestazure
-    #   protobuf
     #   python-dateutil
-urllib3==1.26.4
+urllib3==1.26.8
     # via
     #   -c requirements.txt
     #   requests
-uwsgi==2.0.18
+uwsgi==2.0.20
     # via -r requirements-prod.in
 
 # The following packages are considered to be unsafe in a requirements file:
