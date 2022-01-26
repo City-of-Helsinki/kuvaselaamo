@@ -43,18 +43,6 @@ class BaseView(TemplateView):
     url_name = None
     permissions = {}
 
-    def dispatch(self, request, *args, **kwargs):
-        result = self.setup(request, *args, **kwargs)
-        if result:
-            if isinstance(result, http.HttpResponse):
-                return result
-            else:
-                return super().dispatch(request, *args, **kwargs)
-        return http.HttpResponseBadRequest()
-
-    def setup(self, request, *args, **kwargs):
-        return True
-
     def get_url(self):
         if not self.url_name:
             raise Exception("Subview must define url_name or overwrire get_url method")
@@ -196,8 +184,8 @@ class BaseCollectionListView(BaseView):
     collection_qs = Collection.objects.none()
 
     def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
         self.collection_qs = self.get_collection_qs(request, *args, **kwargs)
-        return True
 
     def get_collection_qs(self, request, *args, **kwargs):
         raise NotImplementedError("Subclasses must implement this method")
@@ -309,6 +297,8 @@ class CollectionDetailView(BaseView):
         return url
 
     def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
         collection_id = kwargs["collection_id"]
         try:
             self.collection = Collection.objects.user_can_view(request.user).get(
@@ -342,8 +332,6 @@ class CollectionDetailView(BaseView):
                 or self.request.user.profile.is_admin
             ),
         }
-
-        return True
 
     def get_empty_forms(self, request):
         context_forms = super().get_empty_forms(request)
@@ -506,6 +494,8 @@ class SearchView(BaseView):
             return self.template_name
 
     def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
         # Session expires after browser is closed
         request.session.set_expiry(0)
         self.url_params = {
@@ -516,7 +506,6 @@ class SearchView(BaseView):
             "author": [a for a in request.GET.getlist("author", None) if a],
             "date": [d for d in request.GET.getlist("date", None) if d],
         }
-        return True
 
     def handle_search(self, request, *args, **kwargs):
         LOG.debug(
