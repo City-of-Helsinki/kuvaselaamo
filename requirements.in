@@ -1,13 +1,13 @@
 Pillow
-django<3.2
+django
 django-apptemplates
 django-compressor
 django-environ
 django-ordered-model
 django-phonenumber-field
-django-widget-tweaks==1.4.9  # 1.4.12 is latest, upgrade when Django 3.2
+django-widget-tweaks
 phonenumberslite
-psycopg2<2.9  # Latest is 2.9.3, upgrade when django >3
+psycopg2
 requests
 django-parler
 django-anymail
