@@ -1,15 +1,17 @@
 Pillow
-django<2.2
+django<3.0
 django-apptemplates
-django-compressor==2.4.1  # 3.1 is latest, upgrade when Officially support for Python 3.9 and 3.10 as well as Django 3.1, 3.2 and 4.0
+django-compressor==2.4.1  # 3.1 is latest, , upgrade when Django 3.1
 django-environ
-django-ordered-model==3.1.1  # 3.5 is latest
-django-phonenumber-field==4.0.0  # 6.0.0 is latest
-django-widget-tweaks==1.4.12  # 1.4.12 is latest
+django-ordered-model
+django-phonenumber-field==5.1.0  # 6.0.0 is latest, upgrade when Django 3.1
+django-widget-tweaks==1.4.9  # 1.4.12 is latest, upgrade when Django 3.2
 phonenumberslite
 psycopg2<2.9  # Latest is 2.9.3, upgrade when django >3
 requests
-django-parler<2.2  # Latest is 2.3
-django-anymail  # 8.5 is latest
-django-storages==1.6.6  # 1.12.3 is latest
+django-parler
+django-anymail
+django-storages
 Unidecode
+google-cloud-storage
+azure-storage-blob
