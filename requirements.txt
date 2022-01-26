@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+asgiref==3.5.0
+    # via django
 azure-core==1.21.1
     # via azure-storage-blob
 azure-storage-blob==12.9.0
@@ -20,7 +22,7 @@ charset-normalizer==2.0.10
     # via requests
 cryptography==36.0.1
     # via azure-storage-blob
-django==2.2.26
+django==3.0.14
     # via
     #   -r requirements.in
     #   django-anymail
@@ -121,6 +123,8 @@ six==1.16.0
     #   isodate
 sqlparse==0.4.2
     # via django
+typing-extensions==4.0.1
+    # via asgiref
 unidecode==1.3.2
     # via -r requirements.in
 urllib3==1.26.8
