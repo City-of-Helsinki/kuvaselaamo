@@ -10,6 +10,7 @@ from hkm.tests.mock_finna_responses import (
     RECORD_RESPONSE,
     SEARCH_RESPONSE,
 )
+from hkm.views.views import handler404, handler500
 
 
 def mock_all_the_responses(mocked_responses, should_fire_all=False):
@@ -122,3 +123,23 @@ def test_legacy_record_detail_view(client, mocked_responses):
 
     assert response.status_code == 301
     assert response.url == f"{expected_url}?{expected_query}"
+
+
+def test_handler404(rf):
+    request = rf.get("/search/")
+    request.session = {}
+
+    response = handler404(request, exception=None)
+
+    assert response.status_code == 404
+    assert "404 - Sivua ei löydy" in response.content.decode("utf-8")
+
+
+def test_handler500(rf):
+    request = rf.get("/search/")
+    request.session = {}
+
+    response = handler500(request)
+
+    assert response.status_code == 500
+    assert "500 - Palvelinvirhe" in response.content.decode("utf-8")

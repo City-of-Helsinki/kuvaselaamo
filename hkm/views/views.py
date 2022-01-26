@@ -13,7 +13,9 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.core.cache import caches
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.shortcuts import redirect, render, render_to_response
+from django.http import HttpResponseNotFound, HttpResponseServerError
+from django.shortcuts import redirect, render
+from django.template import loader
 from django.urls import reverse
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.translation import ugettext as _
@@ -1185,9 +1187,11 @@ def handler404(request, exception):
     context["language"] = request.session.get(
         LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
     )
-    response = render_to_response("hkm/views/404.html", context)
-    response.status_code = 404
-    return response
+
+    template = loader.get_template("hkm/views/404.html")
+    body = template.render(context, request)
+
+    return HttpResponseNotFound(body)
 
 
 def handler500(request):
@@ -1195,6 +1199,7 @@ def handler500(request):
     context["language"] = request.session.get(
         LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
     )
-    response = render_to_response("hkm/views/500.html", context)
-    response.status_code = 500
-    return response
+
+    template = loader.get_template("hkm/views/500.html")
+
+    return HttpResponseServerError(template.render(context))
