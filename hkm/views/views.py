@@ -17,8 +17,8 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import redirect, render
 from django.template import loader
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.utils.translation import LANGUAGE_SESSION_KEY
-from django.utils.translation import ugettext as _
 from django.views.generic import RedirectView, TemplateView, View
 from unidecode import unidecode
 

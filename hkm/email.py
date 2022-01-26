@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from hkm.models.models import Feedback
 
