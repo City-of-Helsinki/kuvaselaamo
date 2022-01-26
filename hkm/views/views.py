@@ -1191,7 +1191,7 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
 # ERROR HANDLERS
 
 
-def handler404(request):
+def handler404(request, exception):
     context = {}
     context["language"] = request.session.get(
         LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
