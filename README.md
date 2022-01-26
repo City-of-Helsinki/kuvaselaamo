@@ -38,7 +38,7 @@ This chapter contains the application's old documentation. Docker usage is prefe
 
 ### Setup:
 
-- Create python 3.7 virtual envinronment and activate it
+- Create python 3.9 virtual envinronment and activate it
 
 ```
 virtualenv venv
