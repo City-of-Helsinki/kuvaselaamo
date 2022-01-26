@@ -34,10 +34,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Python 2.7
+      - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
-          python-version: '2.7'
+          python-version: 3.7
 
       - name: Cache pip packages
         uses: actions/cache@v2
@@ -50,9 +50,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt -r requirements-dev.txt codecov
+        run: pip install -r requirements.txt -r requirements-dev.txt codecov
+
       - name: Run tests
         run: pytest -ra -vv --cov=.
         env:
