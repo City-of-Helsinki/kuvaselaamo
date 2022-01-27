@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from django.contrib.auth import signals
@@ -12,7 +12,8 @@ from .factories import UserFactory
 @pytest.mark.django_db
 def test_that_login_clears_removal_notification_timestamp():
     user = UserFactory(
-        profile__removal_notification_sent=datetime.today() - timedelta(days=1)
+        profile__removal_notification_sent=datetime.now(timezone.utc)
+        - timedelta(days=1)
     )
 
     assert UserProfile.objects.first().removal_notification_sent
