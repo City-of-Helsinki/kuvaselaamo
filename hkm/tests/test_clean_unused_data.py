@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from django.core.management import call_command
@@ -31,48 +31,48 @@ CUSTOM_DAYS_UNTIL_NOTIFICATION = 5
 
 @pytest.fixture
 def day_older_than_removal_date():
-    return datetime.today() - timedelta(days=DEFAULT_DAYS_UNTIL_REMOVAL + 1)
+    return datetime.now(timezone.utc) - timedelta(days=DEFAULT_DAYS_UNTIL_REMOVAL + 1)
 
 
 @pytest.fixture
 def day_newer_than_removal_date():
-    return datetime.today() - timedelta(days=DEFAULT_DAYS_UNTIL_REMOVAL - 1)
+    return datetime.now(timezone.utc) - timedelta(days=DEFAULT_DAYS_UNTIL_REMOVAL - 1)
 
 
 @pytest.fixture
 def day_within_grace_period():
-    return datetime.today() - timedelta(
+    return datetime.now(timezone.utc) - timedelta(
         days=DEFAULT_DAYS_UNTIL_REMOVAL - DEFAULT_DAYS_UNTIL_NOTIFICATION - 1
     )
 
 
 @pytest.fixture
 def day_outside_grace_period():
-    return datetime.today() - timedelta(
+    return datetime.now(timezone.utc) - timedelta(
         days=DEFAULT_DAYS_UNTIL_REMOVAL - DEFAULT_DAYS_UNTIL_NOTIFICATION + 1
     )
 
 
 @pytest.fixture
 def day_older_than_custom_removal_date():
-    return datetime.today() - timedelta(days=CUSTOM_DAYS_UNTIL_REMOVAL + 1)
+    return datetime.now(timezone.utc) - timedelta(days=CUSTOM_DAYS_UNTIL_REMOVAL + 1)
 
 
 @pytest.fixture
 def day_newer_than_custom_removal_date():
-    return datetime.today() - timedelta(days=CUSTOM_DAYS_UNTIL_REMOVAL - 1)
+    return datetime.now(timezone.utc) - timedelta(days=CUSTOM_DAYS_UNTIL_REMOVAL - 1)
 
 
 @pytest.fixture
 def day_within_custom_grace_period():
-    return datetime.today() - timedelta(
+    return datetime.now(timezone.utc) - timedelta(
         days=CUSTOM_DAYS_UNTIL_REMOVAL - CUSTOM_DAYS_UNTIL_NOTIFICATION - 1
     )
 
 
 @pytest.fixture
 def day_outside_custom_grace_period():
-    return datetime.today() - timedelta(
+    return datetime.now(timezone.utc) - timedelta(
         days=CUSTOM_DAYS_UNTIL_REMOVAL - CUSTOM_DAYS_UNTIL_NOTIFICATION + 1
     )
 
