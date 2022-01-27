@@ -1,4 +1,6 @@
-FROM helsinkitest/python:2.7-slim as appbase
+# ==============================
+FROM helsinkitest/python:3.9-slim as appbase
+# ==============================
 
 ENV PYTHONUNBUFFERED 1
 
@@ -10,8 +12,8 @@ COPY --chown=appuser:appuser requirements*.txt /app/
 RUN apt-install.sh \
     build-essential \
     libpq-dev \
-    && pip install --no-cache-dir \
-    -r /app/requirements.txt \
+    && pip install -U pip \
+    && pip install --no-cache-dir -r /app/requirements.txt \
     && apt-cleanup.sh \
     build-essential \
     pkg-config

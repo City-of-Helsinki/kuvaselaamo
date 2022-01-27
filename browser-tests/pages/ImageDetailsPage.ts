@@ -3,8 +3,8 @@ import { Selector, t, ClientFunction } from "testcafe";
 class ImageDetailsPage {
   mainImage = Selector(".image-viewer__image");
   title = Selector("h1").nth(8);
-  creator = this.recordMeta("Tekijä");
-  time = this.recordMeta("Ajankohta");
+  creator = this.recordMeta("Creator");
+  time = this.recordMeta("Date");
   feedbackForm = Selector("form#feedback-form");
 
   async hasMainImage() {

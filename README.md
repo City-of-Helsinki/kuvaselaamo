@@ -38,7 +38,7 @@ This chapter contains the application's old documentation. Docker usage is prefe
 
 ### Setup:
 
-- Create python 2.7 virtual envinronment and activate it
+- Create python 3.9 virtual envinronment and activate it
 
 ```
 virtualenv venv
@@ -98,13 +98,7 @@ as expected, commit the changes.
 
 2. PublicCollectionsView displays A) Collections with is_featured==True and B) Collections with is_public==True
 
-3. Order views need PrintProduct objects (user selects the product they want from a list of PrintProduct objects). 
-- Product names are determined in models.py (PRODUCT_LAYOUTS_LIST). These must match those configured in printing provider's API.
-- Product dimensions are in millimeters (A4 horizontal 297x210 etc.)
-- Paper quality can be anything (redundant, i.e. application is indifferent to its value). 
-- Helsinki determines prices per product.
-
-4. Delicate information such as API keys are stored in a separate local_settings file, not committed to this repository.
+3. Delicate information such as API keys are stored in a separate local_settings file, not committed to this repository.
 
 ## Issue tracking
 
@@ -127,3 +121,22 @@ Production: https://helsinkikuvia.fi
 Project is using [GitHub Actions](https://github.com/City-of-Helsinki/kuvaselaamo/actions)
 for automated builds and deployment into the test environment.
 The test environment is built automatically from the `develop` branch.
+
+
+## Code format
+
+This project uses
+[`black`](https://github.com/ambv/black),
+[`flake8`](https://gitlab.com/pycqa/flake8) and
+[`isort`](https://github.com/timothycrosley/isort)
+for code formatting and quality checking. Project follows the basic
+black config, without any modifications.
+
+Basic `black` commands:
+
+* To let `black` do its magic: `black .`
+* To see which files `black` would change: `black --check .`
+
+[`pre-commit`](https://pre-commit.com/) can be used to install and
+run all the formatting tools as git hooks automatically before a
+commit.

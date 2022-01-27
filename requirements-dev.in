@@ -1,14 +1,16 @@
 -c requirements.txt
 
-autopep8
+black
+factory-boy
 flake8
+flake8-bugbear
+flake8-print
+freezegun
+ipython
 isort
-pep8
+pep8-naming
+pip-tools
 pytest
 pytest-cov
 pytest-django
-freezegun
-coverage
-factory-boy
-mock
-funcsigs
+responses

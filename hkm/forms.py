@@ -1,42 +1,51 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 from hkm.models.campaigns import CampaignCode
-from hkm.models.models import Collection, Feedback, ProductOrder, ProductOrderCollection, Showcase
+from hkm.models.models import (
+    Collection,
+    Feedback,
+    ProductOrder,
+    ProductOrderCollection,
+    Showcase,
+)
 
 LOG = logging.getLogger(__name__)
 
 
 class CollectionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(CollectionForm, self).__init__(*args, **kwargs)
-        if not self.user.is_authenticated() or not self.user.profile.is_admin:
-            del self.fields['show_in_landing_page']
-            del self.fields['is_featured']
+        self.user = kwargs.pop("user")
+        super().__init__(*args, **kwargs)
+        if not self.user.is_authenticated or not self.user.profile.is_admin:
+            del self.fields["show_in_landing_page"]
+            del self.fields["is_featured"]
 
     class Meta:
         model = Collection
-        fields = ['title', 'description', 'is_public',
-                  'show_in_landing_page', 'is_featured']
+        fields = [
+            "title",
+            "description",
+            "is_public",
+            "show_in_landing_page",
+            "is_featured",
+        ]
 
 
 class FeedbackForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        return super(FeedbackForm, self).__init__(*args, **kwargs)
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
-        commit = kwargs.get('commit', True)
-        kwargs['commit'] = False
-        feedback = super(FeedbackForm, self).save(*args, **kwargs)
+        commit = kwargs.get("commit", True)
+        kwargs["commit"] = False
+        feedback = super().save(*args, **kwargs)
         feedback.user = self.user
         if commit:
             feedback.save()
@@ -44,41 +53,51 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = ['content', 'full_name', 'email']
+        fields = ["content", "full_name", "email"]
 
 
 class OrderProductForm(forms.ModelForm):
     class Meta:
         model = ProductOrder
-        fields = ['amount']
+        fields = ["amount"]
 
 
 class OrderContactInformationForm(forms.ModelForm):
     class Meta:
         model = ProductOrder
-        fields = ['first_name', 'last_name', 'email',
-                  'phone', 'street_address', 'postal_code', 'city']
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "phone",
+            "street_address",
+            "postal_code",
+            "city",
+        ]
 
 
 class RegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-        self.fields['email'].required = True
+        self.fields["email"].required = True
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ["username", "email"]
 
 
 class ProductOrderCollectionForm(forms.ModelForm):
-    action = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'checkout'}))
-    orderer_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}),
-                                   label=_(u"Orderer's name"))
+    action = forms.CharField(widget=forms.HiddenInput(attrs={"value": "checkout"}))
+    orderer_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+        label=_("Orderer's name"),
+    )
 
     class Meta:
         model = ProductOrderCollection
-        fields = ['orderer_name']
+        fields = ["orderer_name"]
 
 
 class GenerateCampaignCodesActionForm(forms.Form):
@@ -95,7 +114,7 @@ class GenerateCampaignCodesActionForm(forms.Form):
     )
 
     def form_action(self, campaign):
-        for i in range(0, self.cleaned_data["amount"]):
+        for _i in range(0, self.cleaned_data["amount"]):
             code = CampaignCode(campaign=campaign)
             code.generate_code(
                 length=self.cleaned_data["code_length"],
@@ -117,12 +136,12 @@ class GenerateCampaignCodesActionForm(forms.Form):
 class ShowcaseForm(forms.ModelForm):
     class Meta:
         model = Showcase
-        fields = ['title', 'albums', 'show_on_home_page']
+        fields = ["title", "albums", "show_on_home_page"]
 
     def clean(self):
-        albums = self.cleaned_data.get('albums')
+        albums = self.cleaned_data.get("albums")
 
         if albums:
             if albums.count() > 3:
-                raise ValidationError(_(u'Max amount of albums is three'))
+                raise ValidationError(_("Max amount of albums is three"))
         return self.cleaned_data

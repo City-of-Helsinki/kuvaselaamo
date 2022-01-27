@@ -1,60 +1,58 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+# flake8: noqa
 from django.core.management.base import BaseCommand
 
-from hkm.models.models import PageContent
-from hkm.models.models import Collection
-from hkm.models.models import Record
-from hkm.models.models import User
-from hkm.models.models import PrintProduct
+from hkm.models.models import Collection, PageContent, PrintProduct, Record, User
 
-pages = [{
-    "name": u"About",
-    "identifier": u"hkm_siteinfo_about",
-    "texts": [
-        {
-            "language": u"fi",
-            "title": u"Tietoa palvelusta",
-            "content": u"""
+pages = [
+    {
+        "name": "About",
+        "identifier": "hkm_siteinfo_about",
+        "texts": [
+            {
+                "language": "fi",
+                "title": "Tietoa palvelusta",
+                "content": """
                 <p>Helsinkikuvia.fi-palvelu tarjoaa Helsinki-aiheisia valokuvia Helsingin kaupunginmuseon kokoelmista. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painokelpoisina tai pienempinä, verkkoon sopivina kuvina.</p>
                 <p>Kuvat on julkaistu CC BY 4.0 -lisenssillä. Se merkitsee, että kuvia voi käyttää haluamallaan tavalla maksutta, kunhan mainitsee kuvan yhteydessä kuvaajan nimen ja Helsingin kaupunginmuseon. Lisenssi sallii myös kuvien kaupallisen käytön, jos lainsäädäntö ei sitä estä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta.</p>
                 <p>Helsinkikuvia.fi-palvelussa voi hakea kuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan.</p>
                 <p>Helsinkikuvia.fi-palvelussa on julkaistu Helsingin kaupunginmuseon valokuvakokoelman kaikki digitoidut kuvat, tällä hetkellä noin 65 000 kuvaa. Lisää tulee saataville sitä mukaa kuin kuvien digitointi etenee. Jos kaipaat kuvaa, jota ei löydy Helsinkikuvia.fi-palvelusta, ota yhteys Helsingin kaupunginmuseon Kuvaselaamoon.</p>
                 <p>Helsinkikuvia.fi-palvelun kuvat ovat saatavilla myös kansallisessa Finna-palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten rakennusten historiasta.</p>
-            """
-        }, {
-            "language": u"en",
-            "title": u"Information about the service",
-            "content": u"""
+            """,
+            },
+            {
+                "language": "en",
+                "title": "Information about the service",
+                "content": """
                     <p>Helsinkiphotos.fi is an image service that provides a user-friendly way to access the Helsinki City Museum’s vast collection of photographs. At Helsinkiphotos.fi, anyone can browse, search and download detailed, high resolution photographs suitable for print materials or lower resolution images more suitable for web and social media use.</p>
                     <p>The photographs in the service are published under Creative Commons BY 4.0 license. In brief, CC BY means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph, in this case Helsinki City Museum and the photographer. The photographs may be used commercially, with certain restrictions. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
                     <p>The Helsinkiphotos.fi service also allows users to conduct Finnish-language searches, browse curated photo albums or create their own albums by logging into the service.</p>
                     <p>Currently, the service has approximately 65,000 digitized photographs. More images are being digitized and added to the system constantly. If you need a digital image that is not currently found in the Helsinkiphotos.fi service, please contact the museum’s Picture Browsery.</p>
                     <p>The photographs of the Helsinki City Museum collection are still available in the national Finna service at hkm.finna.fi. In addition to photographs, you can also browse other material related to Helsinki in Finna, everything from plastic bags to hairdryers and bus tickets to works of art. You can also search the history of the buildings of Helsinki.</p>
-            """
-        }, {
-            "language": u"sv",
-            "title": u"Information om tjänsten",
-            "content": u"""
+            """,
+            },
+            {
+                "language": "sv",
+                "title": "Information om tjänsten",
+                "content": """
                     <p>Helsingfors stadsmuseums foton från olika tidsperioder med Helsingfors som tema kan användas fritt i och med att tjänsten Helsingforsbilder.fi öppnas. Bland fotona finns bland annat alla Signe Branders älskade bilder på Helsingfors för hundra år sedan samt Simo och Eeva Ristas omfattande och betydelsefulla samling om en föränderlig stad på 1970-talet.</p>
                     <p>Museet har bilder ända från 1840-talet, så det är till exempel möjligt att gå igenom spårvagnarnas historia i bilder ända från 1800-talet till 2000-talet. Nu presenteras cirka 65 000 bilder för allmänheten, och fler blir tillgängliga i och med att digitaliseringen framskrider. Endast en bråkdel av bilderna i museets samlingar är digitaliserade.</p>
                     <p>Museet lämnar ut bilderna med CC BY 4.0 licens. Man kan ladda ner bilder och använda dem fritt och utan avgift på nätet och i olika applikationer, och även till exempel i böcker, presentartiklar eller tryckta på tapet, bara man anger fotografens namn och Helsingfors stadsmuseum i samband med bilden. Licensen tillåter kommersiell användning av bilderna om lagstiftningen inte hindrar detta. Till exempel är det förbjudet att använda bilder på personer i marknadsföring och reklam utan tillåtelse av personer som är med på bilden.</p>
                     <p>Tjänsten omfattar i praktiken alla bilder som stadsmuseet har digitaliserat, dvs. omvandlat till digital form. Om du behöver en digital version av en bild som inte har digitaliserats, kan du beställa den via stadsmuseets Bildapotek. För digitaliseringar uppbärs en avgift enligt museets prislista. Den bild som du beställt publiceras oftast med en liten fördröjning i tjänsten Helsingforsbilder.fi och är efter det tillgänglig för alla.</p>
                     <p>Helsingfors stadsmuseums bilder finns fortfarande också i den nationella tjänsten Finna på adressen hkm.finna.fi. Utöver bilder kan man i Finna även bekanta sig med annat material med Helsingfors som tema, från plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan också söka information om byggnadernas historia i Helsingfors.</p>
-            """
-        }
-    ]
-}, {
-    "name": u"QA",
-    "identifier": u"hkm_siteinfo_QA",
-    "texts": [
+            """,
+            },
+        ],
+    },
+    {
+        "name": "QA",
+        "identifier": "hkm_siteinfo_QA",
+        "texts": [
             {
                 "language": "fi",
-                "title": u"Kysymyksiä ja vastauksia",
-                "content": u"""
+                "title": "Kysymyksiä ja vastauksia",
+                "content": """
                     <h1 class="section-title">Helsinkikuvia.fi-palvelun käyttäminen</h1>
-                
+
                     <p class="question">Mitä Helsinkikuvia.fi-palvelussa voi tehdä?</p>
                     <p>Helsinkikuvia.fi-palvelussa voi hakea valokuvia erilaisilla hakusanoilla, selata museon luomia kuva-albumeita eri aiheista tai luoda omia albumeita ja lisätä niihin suosikkikuviaan. Valokuvia voi ladata omalle laitteelleen korkearesoluutioisina eli painolaatuisina tai pienempinä, verkkolaatuisina kuvina.</p>
                     <p class="question">Mitä kuvia palvelussa on?</p>
@@ -67,9 +65,9 @@ pages = [{
                     <p>Korkearesoluutioinen kuva on sellainen, jota voi käyttää laadukkaassa painotuotteessa, esimerkiksi julisteessa. Pienempiresoluutioisia eli verkkolaatuisia kuvia voi käyttää esimerkiksi verkkosivuilla tai sosiaalisessa mediassa.</p>
                     <p class="question">Miten voin tilata kuvatuotteen?</p>
                     <p>Voit tilata kuvatuotteen Kuvaselaamon sivuilta löytävällä <a href="https://www.helsinginkaupunginmuseo.fi/kuvia-esineita-helsinkia/kuva-arkisto/" target="_blank">verkkolomakkeella</a>. Kuvien toimitusaika on noin viikko.</p>
-                
+
                     <h1 class="section-title">Valokuvien käyttö</h1>
-                
+
                     <p class="question">Paljonko kuvan lataaminen tai käyttö maksaa?</p>
                     <p>Valokuvien lataaminen ja käyttö eivät maksa mitään.</p>
                     <p class="question">Mitä kaikkea palvelusta löytyvillä valokuvilla voi tehdä?</p>
@@ -82,9 +80,9 @@ pages = [{
                     <p>Kyllä. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Lisäksi on mainittava Helsingin kaupunginmuseo ja kuvaajan nimi.</p>
                     <p class="question">Mitä tarkoittaa, että kuvat on julkaistu lisenssillä CC BY 4.0?</p>
                     <p>Helsingin kaupunginmuseon julkaisemat kuvat Helsinkikuvia.fi-palvelussa on lisensoitu 'Creative Commons Nimeä 4.0 Kansainvälinen' eli CC BY 4.0 -lisenssillä. Lyhyesti ilmaistuna se tarkoittaa, että kuvia voi käyttää ja muunnella missä tarkoituksessa tahansa, kunhan mainitsee kuvalähteen. Lisenssi ei poista käyttäjän vastuuta. Esimerkiksi henkilön oikeus määrätä nimensä, kuvansa tai henkilönsä muun tunnistettavan osan kaupallisesta käytöstä, yksityisyyden suojaa koskevat oikeudet tai moraaliset oikeudet voivat rajoittaa aineiston käyttöä.</p>
-                
+
                     <h1 class="section-title">Kaipaan lisätietoa tai lisää kuvia</h1>
-                
+
                     <p class="question">Mistä saan lisätietoa kuvista, tietystä aineistosta tai Helsingin historiasta?</p>
                     <p>Voit ottaa yhteyttä Helsingin kaupunginmuseon Kuvaselaamoon. Jos haluat tutkia tiettyä aineistoa tai tarvitset muita kuva-arkistopalveluja, käyntiaika ja aineistot on varattava etukäteen.</p>
                     <p class="question">Mitä teen, jos en löydä sopivaa kuvaa Helsinkikuvia.fi-palvelusta?  Jos Helsinkikuvia.fi-palvelussa ei kerran ole kaikkia kuvianne, miten niitä muita pääsee tutkimaan?</p>
@@ -97,14 +95,14 @@ pages = [{
                     <p>Kaupunginmuseon kokoelmissa on lähes miljoona valokuvaa Helsingistä ja helsinkiläisten arjesta 1840-luvulta nykypäivään. Kokoelmiin tulee uusia kuvia pääsääntöisesti lahjoituksina ja museon omien tai museon palkkaamien kuvaajien kuvaamina. Valokuvakokoelman kartuttamisen aloitti kaupunginmuseon edeltäjä, Helsingin muinaismuistolautakunta, vuonna 1906. Helsinki-kuvistaan tunnettu Signe Brander palkattiin tallentamaan muuttuvaa kaupunkia vuonna 1907. Branderin ottamat kuvat muodostavat kaupunginmuseon valokuvakokoelmien perustan.</p>
                     <p class="question">Onko kuvianne edelleen Finna-palvelussa? Onko Finnassa samat kuvat kuin Helsinkikuvia.fi-palvelussa?</p>
                     <p>Helsingin kaupunginmuseon valokuvat ovat edelleen myös kansallisessa Finna-palvelussa osoitteessa hkm.finna.fi. Valokuvien lisäksi Finnassa voi tutkia muutakin Helsinki-aiheista aineistoa muovipusseista hiustenkuivaajiin ja matkalipuista taideteoksiin. Sieltä voi myös hakea tietoa helsinkiläisten rakennusten historiasta.</p>
-                """
+                """,
             },
-        {
+            {
                 "language": "en",
-                "title": u"Questions and answers",
-                "content": u"""
+                "title": "Questions and answers",
+                "content": """
                     <h1 class="section-title">The use of Helsinkiphotos.fi service</h1>
-                
+
                     <p class="question">What can I do in the Helsinkiphotos.fi service?</p>
                     <p>In the Helsinkiphotos.fi service, you can search for photographs with different search words, browse albums created by the museum or create albums of your own. You can download images on your own device in high resolution, or as smaller versions that are more convenient to use online.</p>
                     <p class="question">What kind of photographs can I find in the service?</p>
@@ -117,9 +115,9 @@ pages = [{
                     <p>A high resolution image can be used in high-quality print products, such as posters. Smaller resolution images are more convenient for online use.</p>
                     <p class="question">How do I order picture prints?</p>
                     <p>You can order picture prints using <a href="https://www.helsinginkaupunginmuseo.fi/en/pictures-objects-helsinki/picture-browsery/" target="_blank">the online form</a> found on City Museum’s website. The delivery time is about a week.</p>
-                
+
                     <h1 class="section-title">Using the photographs</h1>
-                
+
                     <p class="question">How much does it cost to download or use the images?</p>
                     <p>Downloading and using the images is free.</p>
                     <p class="question">What can I do with the photographs I find from the service?</p>
@@ -132,9 +130,9 @@ pages = [{
                     <p>Yes. For instance, it is prohibited to use portraits or other identity-depicting images in marketing and/or advertising without the person’s consent. In addition, you must always credit Helsinki City Museum and the photographer.</p>
                     <p class="question">What does it mean that the photographs have been published with a Creative Commons BY 4.0 license?</p>
                     <p>What does it mean that the photographs have been published with a Creative Commons BY 4.0 license? Answer</p>
-                
+
                     <h1 class="section-title">I need more information or more photographs</h1>
-                
+
                     <p class="question">Where can I get more information about the photographs or the history of Helsinki?</p>
                     <p>You can contact Helsinki City Museum’s Picture Browsery. If you would like to look at specific material or you need other photo archive services, you must book an appointment and reserve the material in advance.</p>
                     <p class="question">What should I do if I cannot find the appropriate photograph from the Helsinkiphotos.fi service? If the Helsinkiphotos.fi service does not have all your photographs, how can I study the rest?</p>
@@ -147,13 +145,14 @@ pages = [{
                     <p>The City Museum’s collection has almost one million photographs of Helsinki and the everyday life of its inhabitants from the 1840s until today. New photographs are added to the collection mainly as donations or are taken by photographers commissioned by the museum. The City Museum’s predecessor, the Helsinki Board of Antiquities, began accumulating the collection in 1906. Signe Brander, known for her Helsinki photography, was commissioned to record the changing city in 1907. Brander’s photographs are the foundation of the City Museum’s photography collections.</p>
                     <p class="question">Is the Finna service still in use? Can I still find images from Helsinki City Museum in Finna?</p>
                     <p>The photographs of Helsinki City Museum collection are still available in the national Finna service at hkm.finna.fi. In addition to photographs, you can browse the museum’s object collections, from plastic bags to hairdryers and works of art. In Finna you can also find information about the buildings of Helsinki.</p>
-                """
-                }, {
+                """,
+            },
+            {
                 "language": "sv",
-                "title": u"Frågor och svar",
-                "content": u"""            
+                "title": "Frågor och svar",
+                "content": """
                     <h1 class="section-title">Användning av tjänsten Helsingforsbilder.fi</h1>
-                    
+
                     <p class="question">Vad kan man göra i tjänsten Helsingforsbilder.fi?</p>
                     <p>I tjänsten Helsingforsbilder.fi kan man söka efter foton med olika sökord, bläddra i museets album med olika teman eller skapa egna album och lägga till sina egna favoritbilder i dem. Man kan också ladda ned bilder till sin egen enhet. Bilderna är tillgängliga både som högupplösta och som mindre versioner, vilket gör att de kan användas såväl i trycksaker som på webben.</p>
                     <p class="question">Vilka bilder finns i tjänsten?</p>
@@ -166,9 +165,9 @@ pages = [{
                     <p>En högupplöst bild kan användas i högklassiga trycksaker, t.ex. på affischer. Bilder med lägre upplösning lämpar sig för att användas t.ex. på webbplatser eller i sociala medier.</p>
                     <p class="question">Hur beställer jag en bildprodukt?</p>
                     <p>Du kan beställa en bildprodukt med hjälp av <a href="https://www.helsinginkaupunginmuseo.fi/sv/bilder-foremal-helsingfors/fotoapoteket/" target="_blank">formuläret</a> som finns på stadsmuseets hemsida under rubriken Bildapoteket. Leveranstiden för bilderna är ca en vecka.</p>
-                    
+
                     <h1 class="section-title">Användning av fotografier</h1>
-                    
+
                     <p class="question">Vad kostar det att ladda ned eller använda en bild?</p>
                     <p>Att ladda ned och använda bilder kostar ingenting.</p>
                     <p class="question">Vad kan man göra med bilderna i tjänsten?</p>
@@ -181,9 +180,9 @@ pages = [{
                     <p>Ja. Det är förbjudet att t.ex. använda bilder på personer i marknadsföring eller reklam utan att ha fått tillåtelse av personerna i fråga. Man ska också nämna Helsingfors stadsmuseum och fotografens namn.</p>
                     <p class="question">Vad betyder att bilderna har publicerats med licensen CC BY 4.0?</p>
                     <p>Helsingfors stadsmuseums bilder i tjänsten Helsingforsbilder.fi är licensierade med licensen 'Creative Commons Erkännande 4.0 Internationellt', dvs. CC BY 4.0 . Kort sagt betyder det att man fritt kan använda och bearbeta bilderna, bara man anger källan. Licensen befriar inte användaren från ansvar. Till exempel personens rätt att bestämma om kommersiellt bruk av hans eller hennes namn, bild eller andra identifierbara uppgifter, rättigheter som gäller integritetsskydd samt moraliska rättigheter kan begränsa användningen av materialet.</p>
-                    
+
                     <h1 class="section-title">Jag behöver mer information eller fler bilder</h1>
-                    
+
                     <p class="question">Var får jag mer information om bilderna, ett visst material eller Helsingfors historia?</p>
                     <p>Du kan kontakta Helsingfors stadsmuseums Bildapotek. Om du letar efter specifikt material eller behöver andra bildarkivstjänster måste du boka en besökstid och beställa materialet på förhand.</p>
                     <p class="question">Vad gör jag om jag inte hittar en lämplig bild i tjänsten Helsingforsbilder.fi? Hur får man tillgång till de bilder som ni inte har publicerat i tjänsten?</p>
@@ -196,48 +195,51 @@ pages = [{
                     <p>Stadsmuseets samlingar innehåller nästan en miljon bilder av Helsingfors och helsingforsarnas vardag från 1840-talet till i dag. Museet får nya bilder till sina samlingar i regel som donationer, men nya bilder tas även av museets egna fotografer och frilansfotografer. Fotosamlingen påbörjades av stadsmuseets föregångare, Helsingfors fornminnesnämnd, år 1906. Signe Brander, som var känd för sina bilder från Helsingfors, anställdes år 1907 för att föreviga den föränderliga staden. Branders bilder utgör grunden för stadsmuseets fotosamlingar.</p>
                     <p class="question">Finns era bilder fortfarande i tjänsten Finna? Finns samma bilder både i Finna och på Helsingforsbilder.fi?</p>
                     <p>Helsingfors stadsmuseums bilder finns fortfarande också i den nationella tjänsten Finna på adressen hkm.finna.fi. Utöver bilder kan man i Finna även bekanta sig med annat material med Helsingfors som tema, från plastpåsar till hårtorkar och från resebiljetter till konstverk. Man kan också söka information om byggnadernas historia i Helsingfors.</p>
-                """
-                }
-    ]
-}, {
-    "name": u"Terms",
-    "identifier": u"hkm_siteinfo_terms",
-    "texts": [
+                """,
+            },
+        ],
+    },
+    {
+        "name": "Terms",
+        "identifier": "hkm_siteinfo_terms",
+        "texts": [
             {
                 "language": "fi",
-                "title": u"Käyttöehdot",
-                "content": u"""
+                "title": "Käyttöehdot",
+                "content": """
                     <p>Aineistojen käyttöä koskevat seuraavat ehdot:</p>
                     <p><strong>Kuvat:</strong> Kuvat on lisensoitu Creative Commons CC BY 4.0 -lisenssillä. Jos haluat julkaista kuvan tai käyttää kuvaa julkisessa yhteydessä, noudata kuvan yhteydessä ilmoitettuja käyttöehtoja ja lisenssiä. Jos käytät kuvaa julkisesti, kuvaajan nimi (jos tiedossa) ja Helsingin kaupunginmuseo on mainittava. Kuvan käyttäjällä on vastuu tekijänoikeuksien ja yksityisyyden suojan kunnioittamisesta. Esimerkiksi henkilökuvien käyttö markkinoinnissa ja/tai mainonnassa on kielletty ilman kuvassa olevan henkilön suostumusta. Ota yhteys Helsingin kaupunginmuseoon, jos tieto kuvan käyttöoikeuksista puuttuu tai olet epävarma oikeudestasi käyttää kuvaa.</p>
                     <p><strong>Kuvailutiedot:</strong> Hakutulosten yhteydessä esitettäviä kuvailutietoja voi pääsääntöisesti käyttää vapaasti. Poikkeuksen muodostavat kuvailutietoihin sisältyvät henkilönimet, joiden julkaisemisessa käyttäjällä on vastuu yksityisyyden suojan kunnioittamisessa.</p>
-                """
+                """,
             },
-        {
+            {
                 "language": "en",
-                "title": u"Terms of use",
-                "content": u"""
+                "title": "Terms of use",
+                "content": """
                     <p>The following terms and conditions apply to the use of material</p>
                     <p><strong>Images:</strong> The photographs published by Helsinki City Museum in the Helsinkiphotos.fi service have been licensed with the “Creative Commons Attribution 4.0 International” or CC BY 4.0 license. In brief, it means that you may use and edit the photographs for any purpose as long as you credit the source of the photograph. The license does not remove the user’s responsibility. For instance, a person’s right to decide on the commercial use of their name, photograph or other identifiable part of their identity, privacy protection rights and moral rights may limit the use of the material.</p>
                     <p><strong>Metadata:</strong> The metadata and descriptions presented with the search results are as a rule freely available, with the the exception of personal information such as names. For instance, a person’s right to decide on the commercial use of their name or other identifiable part of their identity and privacy protection rights may limit the use of the material.</p>
-                """
-                }, {
+                """,
+            },
+            {
                 "language": "sv",
-                "title": u"Användningsvillkor",
-                "content": u"""
+                "title": "Användningsvillkor",
+                "content": """
                     <p>För användningen av materialet gäller följande villkor:</p>
                     <p><strong>Bilder:</strong> Bilderna är licensierade med licensen Creative Commons Attribution 4.0 Internationell (CC BY 4.0). Om du vill publicera en bild eller använda bilden i offentligheten måste du följa de användningsvillkor som anges. Om du använder en bild offentligt, bör du nämna upphovsman och källa. Licensen ger eller ger dig inte alla de nödvändiga villkoren för ditt tänkta användande av verket. Till exempel, andra rättigheter som publicitet, integritetslagstiftning, eller ideella rättigheter kan begränsa hur du kan använda verket. Om informationen om användningsrättigheter saknas eller om du är osäker på om du har rätt att använda en bild, ska du kontakta Helsingfors stadsmusem.</p>
                     <p><strong>Metadata:</strong> I regel kan metadata i anknytning till sökresultat användas fritt. Andra rättigheter som publicitet eller integritetslagstiftning kan begränsa hur du kan använda metadatan.</p>
-                """
-                }
-    ]
-}, {
-    "name": u"Privacy",
-    "identifier": u"hkm_siteinfo_privacy",
-    "texts": [
+                """,
+            },
+        ],
+    },
+    {
+        "name": "Privacy",
+        "identifier": "hkm_siteinfo_privacy",
+        "texts": [
             {
                 "language": "fi",
-                "title": u"Asiakastietojen käsittely palvelussa Helsinkikuvia.fi",
-                "content": u"""
+                "title": "Asiakastietojen käsittely palvelussa Helsinkikuvia.fi",
+                "content": """
                     <p class="privacy-bigtitle">Tietosuoja</p>
                     <p class="privacy-bigtitle">Helsinkikuvia.fi-asiakasrekisterin seloste</p>
                     <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Kaupunginmuseon%20kuvapalvelurekisteri%20(Helsinkikuvia.fi).pdf">Linkki palvelun rekisteriselosteeseen</a></p>
@@ -248,12 +250,12 @@ pages = [{
                     <p>00170 HELSINKI</p>
                     <p>puh. 09 3103 6497</p>
                     <p>kuvakokoelmat@hel.fi</p>
-                """
+                """,
             },
-        {
+            {
                 "language": "en",
-                "title": u"Handling customer data in Helsinkiphotos.fi",
-                "content": u"""
+                "title": "Handling customer data in Helsinkiphotos.fi",
+                "content": """
                     <p class="privacy-bigtitle">Privacy and register details</p>
                     <p class="privacy-bigtitle">Description of the client register data file for Helsinkiphotos.fi service</p>
                     <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/City%20Museum%20image%20service%20data%20file%20(Helsinkiphotos.fi).pdf">Link to client register data file</a></p>
@@ -264,12 +266,12 @@ pages = [{
                     <p>00099 CITY OF HELSINKI</p>
                     <p>tel. 09 3103 6497</p>
                     <p>kuvakokoelmat@hel.fi</p>
-                """
-        },
-        {
+                """,
+            },
+            {
                 "language": "sv",
-                "title": u"Hantering av kunduppgifter i Helsingforsbilder.fi",
-                "content": u"""
+                "title": "Hantering av kunduppgifter i Helsingforsbilder.fi",
+                "content": """
                     <p class="privacy-bigtitle">Dataskydd</p>
                     <p class="privacy-bigtitle">Registerbeskrivning f&ouml;r Helsingforsbilder.fi-tj&auml;nstens kundregister</p>
                     <p class="privacy-smalltitle"><a href="https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Stadsmuseets%20bildtj%C3%A4nstregister%20(Helsinkikuvia.fi).pdf">L&auml;nken till registerbeskrivning</a></p>
@@ -280,18 +282,18 @@ pages = [{
                     <p>00999 HELSINGFORS STAD</p>
                     <p>+358 9 3103 6497</p>
                     <p>kuvakokoelmat@hel.fi</p>
-                """
-        }
-    ]
-},
+                """,
+            },
+        ],
+    },
     {
-    "name": u"Saavutettavuusseloste",
-    "identifier": u"hkm_siteinfo_accessibility",
-    "texts": [
-        {
-            "language": "fi",
-            "title": u"Saavutettavuusseloste",
-            "content": u"""
+        "name": "Saavutettavuusseloste",
+        "identifier": "hkm_siteinfo_accessibility",
+        "texts": [
+            {
+                "language": "fi",
+                "title": "Saavutettavuusseloste",
+                "content": """
                     <h1>Saavutettavuusseloste</h1>
 
                     <p>Tämä saavutettavuusseloste koskee Helsingin kaupungin "Helsinkikuvia"-verkkosivustoa. Sivuston osoite on https://www.helsinkikuvia.fi.</p>
@@ -438,12 +440,12 @@ pages = [{
                     <p>Tämän selosteen on hyväksynyt 4.9.2020</p>
 
                     <p>Kulttuurin ja Vapaa-aja toimiala Helsingin kaupunki</p>
-                """
-        },
-        {
-            "language": "sv",
-            "title": u"Tillgänglighetsutlåtande",
-            "content": u"""
+                """,
+            },
+            {
+                "language": "sv",
+                "title": "Tillgänglighetsutlåtande",
+                "content": """
                     <h1>Tillg&auml;nglighetsutl&aring;tande</h1>
 
                     <p>Detta tillg&auml;nglighetsutl&aring;tande g&auml;ller Helsingfors stads webbplats &rdquo;Helsinkikuvia&rdquo;. Webbplatsens adress &auml;r http://www.helsinkikuvia.fi</p>
@@ -594,12 +596,12 @@ pages = [{
                     <p>Helsingfors stad</p>
 
                     <p>&nbsp;</p>
-                """
-        },
-        {
-            "language": "en",
-            "title": u"Accessibility statement",
-            "content": u"""
+                """,
+            },
+            {
+                "language": "en",
+                "title": "Accessibility statement",
+                "content": """
                 <h1>Accessibility statement</h1>
 
                 <p>This accessibility statement applies to the website &rdquo;Helsinkikuvia&rdquo; of the City of Helsinki. The site address is http://www.helsinkikuvia.fi</p>
@@ -744,10 +746,10 @@ pages = [{
 
                 <p>Culture and Leisure Division<br />
                 City of Helsinki</p>
-                """
-        }
-    ]
-}
+                """,
+            },
+        ],
+    },
 ]
 
 
@@ -757,36 +759,40 @@ class Command(BaseCommand):
             self.stdout.write("Initializing first Collection and Record")
             admin = User.objects.filter(is_superuser=True).first()
 
-            collection = Collection.objects.create(owner=admin, title="Oletuskokoelma", description="",
-                                                   is_public=True, is_featured=True, show_in_landing_page=True)
+            collection = Collection.objects.create(
+                owner=admin,
+                title="Oletuskokoelma",
+                description="",
+                is_public=True,
+                is_featured=True,
+                show_in_landing_page=True,
+            )
             collection.save()
 
-            record = Record.objects.create(creator=admin, collection=collection, record_id="hkm.HKMS000005:000000eg")
+            record = Record.objects.create(
+                creator=admin,
+                collection=collection,
+                record_id="hkm.HKMS000005:000000eg",
+            )
             record.save()
 
-            self.stdout.write(self.style.SUCCESS("Initializing first Collection and Record - Done"))
+            self.stdout.write(
+                self.style.SUCCESS("Initializing first Collection and Record - Done")
+            )
 
         self.stdout.write("Initializing page contents (if necessary)")
 
         for page in pages:
             if PageContent.objects.filter(identifier=page["identifier"]).count() == 0:
-                page_content = PageContent.objects.create(name=page["name"], identifier=page["identifier"])
+                page_content = PageContent.objects.create(
+                    name=page["name"], identifier=page["identifier"]
+                )
                 for text in page["texts"]:
                     page_content.set_current_language(text["language"])
                     page_content.title = text["title"]
                     page_content.content = text["content"]
                     page_content.save()
 
-        self.stdout.write(self.style.SUCCESS("Initializing page contents (if necessary) - Done"))
-
-        self.stdout.write("Initializing print products (if necessary)")
-
-        if PrintProduct.objects.count() == 0:
-            self.stdout.write("Initializing first print product")
-            print_product = PrintProduct.objects.create(name=PrintProduct.PRODUCT_LAYOUTS_LIST[0][0], width="12",
-                                                        height="21", paper_quality="Great", is_museum_only=False)
-            print_product.save()
-
-            self.stdout.write(self.style.SUCCESS("Initializing first print product - Done"))
-
-        self.stdout.write(self.style.SUCCESS("Initializing print products (if necessary) - Done"))
+        self.stdout.write(
+            self.style.SUCCESS("Initializing page contents (if necessary) - Done")
+        )

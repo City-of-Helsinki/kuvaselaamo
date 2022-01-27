@@ -1,6 +1,15 @@
 import factory
 from django.db.models.signals import post_save
-from hkm.models.models import Feedback, TmpImage, ProductOrder, User, Collection, Record, UserProfile
+
+from hkm.models.models import (
+    Collection,
+    Feedback,
+    ProductOrder,
+    Record,
+    TmpImage,
+    User,
+    UserProfile,
+)
 
 
 class FeedbackFactory(factory.django.DjangoModelFactory):
@@ -20,7 +29,7 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
 
 @factory.django.mute_signals(post_save)
 class UserProfileFactory(factory.django.DjangoModelFactory):
-    user = factory.SubFactory('hkm.tests.factories.UserFactory', profile=None)
+    user = factory.SubFactory("hkm.tests.factories.UserFactory", profile=None)
 
     class Meta:
         model = UserProfile
@@ -28,9 +37,9 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
 
 @factory.django.mute_signals(post_save)
 class UserFactory(factory.django.DjangoModelFactory):
-    username = factory.Faker('email')
+    username = factory.Faker("email")
     email = factory.LazyAttribute(lambda user: user.username)
-    profile = factory.RelatedFactory(UserProfileFactory, factory_related_name='user')
+    profile = factory.RelatedFactory(UserProfileFactory, factory_related_name="user")
 
     class Meta:
         model = User
