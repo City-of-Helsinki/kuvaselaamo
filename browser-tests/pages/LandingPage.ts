@@ -2,7 +2,7 @@ import { Selector, t } from "testcafe";
 
 class LandingPage {
   title = Selector("h1").withText(
-    "Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!"
+    "Welcome to the treasure trove of Helsinki-themed pictures"
   );
   searchInput = Selector("input#search");
 
