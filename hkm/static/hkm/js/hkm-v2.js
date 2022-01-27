@@ -310,18 +310,6 @@ palikka
     }
   });
 
-  $("#popover-buy").popover({
-    html: true,
-    toggle: 'popover',
-    container: '.actions',
-    placement: 'top',
-    trigger: 'click',
-    html: true,
-    content: function() {
-      return $('#popover-buy-content').html();
-    }
-  });
-
   // scroll down to detail section when info button clicked
   $("#actions-info").click(function(){
     $("html, body").animate({
@@ -519,181 +507,10 @@ palikka
 
   $(document).ready(function() {
 
-    // if order preview image found in document, initialize a cropper
-    var orderPreviewImage = document.getElementById('order-preview__image');
-    if (orderPreviewImage) {
-
-      function productSettingsExistInForm () {
-        if ($crop_x.val() === "None" || $crop_x.val() === "") return false;
-        if ($crop_y.val() === "None" || $crop_y.val() === "") return false;
-        if ($crop_width.val() === "None" || $crop_width.val() === "") return false;
-        if ($crop_height.val() === "None" || $crop_height.val() === "") return false;
-        return true;
-      }
-
-      function setCropCoordinatesToFormFields () {
-        var imageData = cropper.getImageData();
-        var boxData = cropper.getCropBoxData();
-        $crop_x.val(boxData.left);
-        $crop_y.val(boxData.top);
-        $crop_width.val(boxData.width);
-        $crop_height.val(boxData.height);
-        $original_width.val(imageData.width);
-        $original_height.val(imageData.height);
-      }
-
-      function calculateNewPrice () {
-        var amount = $('input[id="id_order-product-form-amount"]').val();
-        var unitPrice = $('input[name=product]:checked').attr('data-price');
-        var newPrice = parseFloat(unitPrice) * parseInt(amount);
-        $('#price-indicator').text(typeof newPrice !== 'number' || isNaN(newPrice) ? '?' : newPrice.toFixed(2));
-        console.log('calculate new price for UI');
-      }
-
-      function isEmpty(obj) {
-        for (var key in obj) {
-          if (obj.hasOwnProperty(key)) return false;
-        }
-        return true;
-      }
-
-      function calculatePPI () {
-        var $ppiIndicator = $('#ppi-indicator');
-        var fullX = $ppiIndicator.attr('data-full-x');
-        var fullY = $ppiIndicator.attr('data-full-y');
-        $inputChecked = $('input[name=product]:checked');
-        var xInches = parseInt($inputChecked.attr('data-xsize')) / 25.4; // mm to in
-        var yInches = parseInt($inputChecked.attr('data-ysize')) / 25.4;
-
-        var imageArea = cropper.getImageData();
-        console.log(imageArea)
-        var cropArea = cropper.getCropBoxData();
-        console.log(cropArea)
-        var widthMultiplier = parseFloat(fullX) / imageArea.width;
-        var heightMultiplier = parseFloat(fullY) / imageArea.height;
-
-        var finalWidth = cropArea.width * widthMultiplier;
-        var finalHeight = cropArea.height * heightMultiplier;
-
-        var $PPIBox = $('#ppi-box');
-        var PPI = Math.sqrt(Math.pow(finalWidth, 2) + Math.pow(finalHeight, 2)) /
-          Math.sqrt(Math.pow(xInches, 2) + Math.pow(yInches, 2));
-
-        var language = $ppiIndicator.attr('data-language');
-        var PPI_OK = 'OK'
-        var PPI_NOT_OK = {
-          'fi': 'Liian alhainen. Rajaa alue suuremmaksi!',
-          'en': 'Too low. Increase the crop area!',
-          'sv': 'För låg. Öka storleken på den beskärda bilden!'
-        }
-
-        if (isNaN(PPI)) {
-          $('#ppi-indicator').text('?');
-        } else {
-          if (PPI < 120) {
-            if (!$PPIBox.hasClass('alert-danger')) $PPIBox.addClass('alert-danger');
-
-            if (language && PPI_NOT_OK.hasOwnProperty(language)) $ppiIndicator.text(PPI_NOT_OK[language]);
-            else $('#ppi-indicator').text(PPI_NOT_OK['fi']);
-
-          }
-          if (PPI >= 120) {
-            if ($PPIBox.hasClass('alert-danger')) $PPIBox.removeClass('alert-danger');
-            $ppiIndicator.text(PPI_OK);
-          }
-        }
-
-      }
-      var $crop_x = $("input[name='crop_x']");
-      var $crop_y = $("input[name='crop_y']");
-      var $crop_width = $("input[name='crop_width']");
-      var $crop_height = $("input[name='crop_height']");
-      var $original_width = $("input[name='original_width']");
-      var $original_height = $("input[name='original_height']");
-      var $inputChecked = $('input[name=product]:checked');
-
-      url = orderPreviewImage.getAttribute('data-img-url');
-      image = orderPreviewImage;
-      image.src=url;
-      var aspectLandscape = 1.414;
-      var aspectPortrait = 0.707;
-
-
-      var savedAspectRatio = $inputChecked.attr('data-xsize') / $inputChecked.attr('data-ysize');
-      options.aspectRatio = savedAspectRatio ? savedAspectRatio: aspectLandscape;
-      cropperInit();
-
-
-      // whenever print product type is reselected, change form values and show in UI
-      $('.ordertype').click(function() {
-          console.log(this);
-          options.aspectRatio = this.getAttribute('data-xsize') / this.getAttribute('data-ysize');
-          console.log('aspect ratio changed');
-          // Restart
-          cropper.destroy();
-          cropper = new Cropper(image, options);
-
-          calculateNewPrice();
-          calculatePPI();
-          //setCropCoordinatesToFormFields();
-      });
-
-      // why not work LöL
-      var amountField = document.querySelector('#id_order-product-form-amount');
-      amountField.addEventListener('input', function() {
-        calculateNewPrice();
-      });
-
-     $(document).on('cropmove', function (e) {
-        console.log('cropping');
-        setCropCoordinatesToFormFields();
-        calculatePPI();
-        /* Prevent to start cropping, moving, etc if necessary
-        if (e.action === 'crop') {
-          e.preventDefault();
-        }  */
-      });
-
-      window.onresize = function () {
-        console.log('canvas area resizing...');
-        var imageData = cropper.getImageData();
-        var boxData = cropper.getCropBoxData();
-        setCropCoordinatesToFormFields();
-        /* Prevent to start cropping, moving, etc if necessary
-        if (e.action === 'crop') {
-          e.preventDefault();
-        } */
-      };
-
-      // need to wait until cropper is completely built to calculate PPI value and set cropper coordinates
-      // to match order specs
-      $(document).on('ready', function(e) {
-
-        if (productSettingsExistInForm()) {
-          console.log('settings exist');
-          cropper.setCropBoxData({
-            left: parseInt($crop_x.val()),
-            top: parseInt($crop_y.val()),
-            width: parseInt($crop_width.val()),
-            height: parseInt($crop_height.val())
-          });
-          setCropCoordinatesToFormFields();
-        }
-        if (!productSettingsExistInForm()) {
-          console.log('settings dont exist');
-          setCropCoordinatesToFormFields();
-        }
-
-        calculatePPI();
-      });
-
-    }
-
     // Initialize tooltips
     $('[data-toggle="tooltip"]').tooltip({
       container: 'body'
     });
-
 
   });
 
@@ -805,7 +622,6 @@ palikka
   $title = $('.banner__title');
   $description = $('.banner__description');
   $collectionForm = $('.banner__form');
-  $buyButton = $('.grid__item--buy')
 
   $removeItem.on('click', function() {
     var confirmRemove = confirm($(this).attr('data-confirm'));
@@ -826,7 +642,6 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
-    $buyButton.toggle();
   });
 
   $editBtn.on('click', function() {
@@ -834,7 +649,6 @@ palikka
     $description.toggle();
     $collectionForm.toggle();
     $removeItem.toggle();
-    $buyButton.toggle();
   });
 
 })
