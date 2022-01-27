@@ -3,21 +3,21 @@
 <nav class="navigation">
   <div class="navigation-header">
     <a class="navigation-brand" href="{% url 'hkm_home' %}">
-      {% if language == 'fi' %}
+      {% if LANGUAGE_CODE == 'fi' %}
       <img
         alt="Helsinkikuvia.fi logo"
         src="/static/hkm/svg/Kuvia_fi.svg"
         class="navigation__logo"
       />
 
-      {% elif language == 'en' %}
+      {% elif LANGUAGE_CODE == 'en' %}
       <img
         alt="Helsinkikuvia.fi logo"
         src="/static/hkm/svg/Kuvia_en.svg"
         class="navigation__logo"
       />
 
-      {% elif language == 'sv' %}
+      {% elif LANGUAGE_CODE == 'sv' %}
       <img
         alt="Helsinkikuvia.fi Logotyp"
         src="/static/hkm/svg/Kuvia_sv.svg"
@@ -45,7 +45,7 @@
 
   <div id="navigation-toggle" class="navigation-links collapse navbar-collapse">
     <ul class="nav navbar-nav">
-      {% if language == 'fi' %}
+      {% if LANGUAGE_CODE == 'fi' %}
       <div class="list-item_lang-wrapper">
         <li>
           <a
@@ -67,7 +67,7 @@
         </li>
       </div>
 
-      {% elif language == 'en' %}
+      {% elif LANGUAGE_CODE == 'en' %}
       <div class="list-item_lang-wrapper">
         <li>
           <a
@@ -89,7 +89,7 @@
         </li>
       </div>
 
-      {% elif language == 'sv' %}
+      {% elif LANGUAGE_CODE == 'sv' %}
       <div class="list-item_lang-wrapper">
         <li>
           <a

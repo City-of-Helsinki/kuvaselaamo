@@ -17,8 +17,8 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import redirect, render
 from django.template import loader
 from django.urls import reverse
+from django.utils import translation
 from django.utils.translation import gettext as _
-from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.views.generic import RedirectView, TemplateView, View
 from unidecode import unidecode
 
@@ -82,9 +82,6 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["language"] = self.request.session.get(
-            LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
-        )
         context["my_domain_url"] = settings.HKM_MY_DOMAIN
         context["current_url"] = self.get_url()
         return context
@@ -129,9 +126,7 @@ class BaseView(TemplateView):
 
     def handle_password_reset(self, request, *args, **kwargs):
         form = PasswordResetForm(request.POST)
-        language = self.request.session.get(
-            LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
-        )
+        language = translation.get_language()
         template = f"registration/password_reset_email_{language}.html"
 
         if form.is_valid():
@@ -867,9 +862,21 @@ class LanguageView(RedirectView):
             profile = request.user.profile
             profile.language = lang
             profile.save()
-        request.session[LANGUAGE_SESSION_KEY] = lang
-        self.request.session["seen_welcome_modal"] = False
-        return super().get(request, *args, **kwargs)
+
+        response = super().get(request, *args, **kwargs)
+
+        response.set_cookie(
+            settings.LANGUAGE_COOKIE_NAME,
+            lang,
+            max_age=settings.LANGUAGE_COOKIE_AGE,
+            path=settings.LANGUAGE_COOKIE_PATH,
+            domain=settings.LANGUAGE_COOKIE_DOMAIN,
+            secure=settings.LANGUAGE_COOKIE_SECURE,
+            httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
+            samesite=settings.LANGUAGE_COOKIE_SAMESITE,
+        )
+
+        return response
 
     def get_redirect_url(self, *args, **kwargs):
         return self.request.GET.get("next", "/")
@@ -1183,23 +1190,13 @@ class PasswordResetConfirmViewNew(PasswordResetConfirmView, HomeView):
 
 
 def handler404(request, exception):
-    context = {}
-    context["language"] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
-    )
-
     template = loader.get_template("hkm/views/404.html")
-    body = template.render(context, request)
+    body = template.render({}, request)
 
     return HttpResponseNotFound(body)
 
 
 def handler500(request):
-    context = {}
-    context["language"] = request.session.get(
-        LANGUAGE_SESSION_KEY, settings.LANGUAGE_CODE
-    )
-
     template = loader.get_template("hkm/views/500.html")
 
-    return HttpResponseServerError(template.render(context))
+    return HttpResponseServerError(template.render({}))
