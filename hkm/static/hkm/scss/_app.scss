@@ -164,57 +164,11 @@ span.no-postal-fee {
     max-width: 100%;
 }
 
-.order-step {
-  position: relative;
-  width: 33%;
-  font-size: 80%;
-}
-
-.order-step-current {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.order-steps {
-  position: relative;
-  width: 100%;
-  padding-bottom: 20px;
-  padding-left: 0;
-}
-
-.order-steps-table {
-  border: 0;
-  margin: 0;
-  width: 100%;
-  font: bold 18px $font-brownlight;
-
-}
-
-
-.order-steps-banner {
-  margin-top: 30px;
-}
-
-.order-payform-banner {
-  width: 690px;
-  height: auto;
-  max-width: 100%;
-}
-
-#ppi-indicator {
-  font-weight: bold;
-}
-
-#price-indicator {
-  font-weight: bold;
-}
-
 .brand-img {
   height: 60px;
   width: 100%;
   margin-bottom: 20px;
 }
-
 
 
 .public-collections-padding {
@@ -1121,53 +1075,6 @@ span.no-postal-fee {
   }
 }
 
-#order-preview__image {
-  height: auto;
-  width: 100%;
-  padding: 0;
-}
-
-.order-options {
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-
-  .well {
-    height: 70px;
-  }
-}
-
-.ordertype {
-  white-space: nowrap;
-}
-
-.order-product__name {
-}
-
-.order-meta__title {
-  margin-top: 0;
-  margin-bottom: 40px;
-  font-family: 'goviniusbold';
-  color: $color-silvertree;
-}
-
-.order-preview__title {
-  margin-top: 0;
-  margin-bottom: 40px;
-  font: 48px $font-signe;
-  color: $color-hkm-blue;
-}
-
-.order-meta__title-small {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font: 24px $font-signe;
-}
-
-.order-meta__paragraph {
-  font: bold 18px $font-brownlight;
-}
-
 /* Grid */
 .grid {
   overflow: hidden;
@@ -1185,12 +1092,6 @@ span.no-postal-fee {
   overflow: hidden;
   position: relative;
   min-height: 200px;
-
-  &:hover {
-    .grid__item--buy {
-      opacity: 1;
-    }
-  }
 }
 .grid__item--featured {
   height: 0px;
@@ -1318,36 +1219,6 @@ div.grid__fav.active {
 }
 .grid__fav.active, div.grid__fav {
   color: $color-hkm-orange;
-}
-
-// Buy button on grid
-.grid__item--buy {
-  position: absolute;
-  top: 4%;
-  right: 4%;
-  display: block;
-  width: 36px;
-  height: 36px;
-  background-color: $color-hkm-green;
-  padding: 8px;
-  border-radius: 40px;
-  box-shadow: 0 0 0 4px rgba($color-white, 0.2);
-  opacity: 0;
-  z-index: 100;
-  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  svg {
-    fill: darken($color-hkm-green, 25%);
-  }
-
-  &:hover {
-    background-color: darken($color-hkm-green, 4%);
-    box-shadow: 0 0 0 700px rgba($color-white, 0.2);
-
-    svg {
-      fill: darken($color-hkm-green, 28%);
-    }
-  }
 }
 
 .grid.flex-images {
