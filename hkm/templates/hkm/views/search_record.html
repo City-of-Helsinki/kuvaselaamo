@@ -60,6 +60,6 @@
 {% endblock %}
 {% block extra_js %}
 <script>
-  localStorage.setItem("last_record_browsed", "{{ search_term }}_{{ record.index }}");
+  localStorage.setItem("last_record_browsed", "{{ search_term|slugify }}_{{ record.id|slugify }}");
 </script>
 {% endblock %}

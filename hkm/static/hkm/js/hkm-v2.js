@@ -238,38 +238,13 @@ palikka
   function ajaxGetPageImages(page) {
     $.get({
       url: '',
-      data: 'loadallpages=0&page=' + page,
-      success: function(data) {
-        var re = /([^&=]+)=([^&]*)/g, m;
-        while (m = re.exec(queryString)) {
-          queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-        }
-        queryParameters['page'] = page;
-
-        window.history.replaceState("", "", "?"+$.param(queryParameters));
-        $container.append(data);
-        $container.imagesLoaded().progress(onProgress);
-        imageCount = $container.find('img').length;
-        loadedImageCount = 0;
-        fetchingMoreImages = false;
-        loadMoreButton.find('.icon-spinner').remove();
-        loadMoreButton.data({'current-page': page})
-      }
+      data: 'loadallpages=0&page=' + page
     })
-    .fail(function() {
-      loadMoreButton.addClass('disabled').find('.icon-spinner').remove();
-      var buttonText = loadMoreButton.text();
+    .done(function(data) {
+      var re = /([^&=]+)=([^&]*)/g, m;
 
-      if (buttonText === "Lataa lisää") {
-        loadMoreButton.text('Ei tuloksia');
-      }
-
-      else if (buttonText === "Load more") {
-        loadMoreButton.text('No more results');
-      }
-
-      else {
-        loadMoreButton.text('Inga fler resultat');
+      while (m = re.exec(queryString)) {
+        queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
       }
       queryParameters['page'] = page;
 
