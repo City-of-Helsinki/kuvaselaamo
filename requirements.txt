@@ -75,7 +75,7 @@ isodate==0.6.1
     # via msrest
 msrest==0.6.21
     # via azure-storage-blob
-oauthlib==3.1.1
+oauthlib==3.2.1
     # via requests-oauthlib
 phonenumberslite==8.12.41
     # via -r requirements.in
