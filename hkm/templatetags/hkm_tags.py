@@ -3,6 +3,7 @@ from random import randrange
 from urllib.parse import urlencode
 
 from django import template
+from django.utils.safestring import mark_safe
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 
@@ -14,6 +15,31 @@ register = template.Library()
 @register.simple_tag
 def finna_image(img_id):
     return finna_default_image_url(img_id)
+
+
+@register.filter
+def truncate_description(value):
+    result = trim_prefix(value, ["sisällön kuvaus: "])
+    return trim_suffix(result, ["mustavalkoinen", "värillinen"])
+
+
+@register.filter
+def truncate_era(value):
+    return trim_prefix(value, ["kuvausaika: "])
+
+
+@register.filter
+def truncate_geographic(value):
+    return trim_prefix(value, ["Pohjoismaat, Suomi, Uusimaa, "])
+
+
+@register.filter(is_safe=True)
+def decorate_license(value):
+    license_links = {"CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/deed.fi"}
+
+    if license_link := license_links.get(value):
+        return mark_safe(f"<a href='{license_link}' target='_blank'>{value}</a>")
+    return value
 
 
 @register.filter
@@ -125,3 +151,19 @@ def record_index(record, search_result):
 
     index = records_in_sr.index(record_in_sr) + 1
     return f"{index} / {search_result.get('resultCount')}"
+
+
+def trim_suffix(target, suffixes):
+    result = target
+    for suffix in suffixes:
+        if result.endswith(suffix):
+            result = result.split(suffix, 1)[0]
+    return result
+
+
+def trim_prefix(target, prefixes):
+    result = target
+    for prefix in prefixes:
+        if result.startswith(prefix):
+            result = result.split(prefix, 1)[1]
+    return result
