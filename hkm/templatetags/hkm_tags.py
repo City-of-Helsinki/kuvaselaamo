@@ -21,7 +21,7 @@ def finna_image(img_id):
 def truncate_description(value):
     result = value.removeprefix("sisällön kuvaus: ")
     result = result.removesuffix("mustavalkoinen")
-    result = result.removesuffix("värillinen") 
+    result = result.removesuffix("värillinen")
     return result
 
 
@@ -32,7 +32,6 @@ def truncate_era(value):
 
 @register.filter
 def truncate_geographic(value):
-    #return value
     return value.removeprefix("Pohjoismaat, Suomi, Uusimaa, ")
 
 
@@ -154,4 +153,3 @@ def record_index(record, search_result):
 
     index = records_in_sr.index(record_in_sr) + 1
     return f"{index} / {search_result.get('resultCount')}"
-
