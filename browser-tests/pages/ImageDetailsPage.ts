@@ -3,7 +3,7 @@ import { Selector, t, ClientFunction } from "testcafe";
 class ImageDetailsPage {
   mainImage = Selector(".image-viewer__image");
   title = Selector("h1").nth(8);
-  creator = this.recordMeta("Creator");
+  creator = this.recordMeta("Photographer");
   time = this.recordMeta("Date taken");
   feedbackForm = Selector("form#feedback-form");
 
