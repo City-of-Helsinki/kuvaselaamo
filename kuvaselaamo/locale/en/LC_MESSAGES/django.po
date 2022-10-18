@@ -418,11 +418,14 @@ msgstr "Show details"
 msgid "Download picture"
 msgstr "Download picture"
 
+msgid "License:"
+msgstr "License:"
+
 msgid "Photographer:"
-msgstr "Creator:"
+msgstr "Photographer:"
 
 msgid "Image pick-up year:"
-msgstr "Date:"
+msgstr "Date taken:"
 
 msgid "Address:"
 msgstr "Address:"
@@ -431,7 +434,7 @@ msgid "Image type:"
 msgstr "Image type:"
 
 msgid "Image ID:"
-msgstr "Image ID:"
+msgstr "Identifier:"
 
 msgid "Measurements:"
 msgstr "Measurements:"

@@ -3,6 +3,7 @@ from random import randrange
 from urllib.parse import urlencode
 
 from django import template
+from django.utils.safestring import mark_safe
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 
@@ -14,6 +15,34 @@ register = template.Library()
 @register.simple_tag
 def finna_image(img_id):
     return finna_default_image_url(img_id)
+
+
+@register.filter
+def truncate_description(value):
+    result = value.removeprefix("sisällön kuvaus: ")
+    result = result.removesuffix("mustavalkoinen")
+    result = result.removesuffix("värillinen")
+    return result
+
+
+@register.filter
+def truncate_era(value):
+    result = value.removeprefix("kuvausaika: ")
+    return result.removeprefix("kuvausaika ")
+
+
+@register.filter
+def truncate_geographic(value):
+    return value.removeprefix("Pohjoismaat, Suomi, Uusimaa, ")
+
+
+@register.filter(is_safe=True)
+def decorate_license(value):
+    license_links = {"CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/deed.fi"}
+
+    if license_link := license_links.get(value):
+        return mark_safe(f"<a href='{license_link}' target='_blank'>{value}</a>")
+    return value
 
 
 @register.filter

@@ -410,11 +410,14 @@ msgstr "Näytä tarkat tiedot"
 msgid "Download picture"
 msgstr "Lataa kuva"
 
+msgid "License:"
+msgstr "Lisenssi:"
+
 msgid "Photographer:"
-msgstr "Tekijä:"
+msgstr "Valokuvaaja:"
 
 msgid "Image pick-up year:"
-msgstr "Ajankohta:"
+msgstr "Kuvausaika:"
 
 msgid "Address:"
 msgstr "Osoite:"
@@ -423,7 +426,7 @@ msgid "Image type:"
 msgstr "Kuvatyyppi:"
 
 msgid "Image ID:"
-msgstr "Kuvan tunniste:"
+msgstr "Tunniste:"
 
 msgid "Measurements:"
 msgstr "Mitat:"

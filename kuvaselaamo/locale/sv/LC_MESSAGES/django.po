@@ -415,11 +415,14 @@ msgstr "Visa detaljer"
 msgid "Download picture"
 msgstr "Ladda ner"
 
+msgid "License:"
+msgstr "Licens:"
+
 msgid "Photographer:"
-msgstr "Upphovsman:"
+msgstr "Fotograf:"
 
 msgid "Image pick-up year:"
-msgstr "Tidpunkt:"
+msgstr "Fotograferingsdatum:"
 
 msgid "Address:"
 msgstr "Adress:"
@@ -428,7 +431,7 @@ msgid "Image type:"
 msgstr "Bildtyp:"
 
 msgid "Image ID:"
-msgstr "Bildens ID:"
+msgstr "Kod:"
 
 msgid "Measurements:"
 msgstr "Mått:"
