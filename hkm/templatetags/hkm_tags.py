@@ -27,7 +27,8 @@ def truncate_description(value):
 
 @register.filter
 def truncate_era(value):
-    return value.removeprefix("kuvausaika ")
+    result = value.removeprefix("kuvausaika: ")
+    return result.removeprefix("kuvausaika ")
 
 
 @register.filter
