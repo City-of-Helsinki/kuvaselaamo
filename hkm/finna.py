@@ -128,6 +128,7 @@ class FinnaClient(object):
                 "title",
                 "year",
                 "rawData",
+                "imagesExtended",
             ]
 
         result_data = self._get_finna_result(url, payload)
@@ -186,6 +187,7 @@ class FinnaClient(object):
                 "title",
                 "year",
                 "rawData",
+                "imagesExtended",
             ],
         }
 
@@ -233,17 +235,32 @@ class FinnaClient(object):
     def get_image_url(self, record_id):
         return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
-    def get_full_res_image_url(self, record_id):
-        return f"https://finna.fi/Cover/Show?id={record_id}&size=master&index=0"
+    def get_full_res_image_url(self, record):
 
-    def download_image(self, record_id):
-        response = requests.get(self.get_full_res_image_url(record_id), stream=True)
+        if images_extended := record.get("imagesExtended"):
+            # attempt to find original photo urls
+            for image_extended in images_extended:
+                if urls := image_extended.get("urls"):
+                    if original := urls.get("original"):
+                        return original
+
+            # attempt to find large photo urls if orginal photo not found
+            for image_extended in images_extended:
+                if urls := image_extended.get("urls"):
+                    if large := urls.get("large"):
+                        return large
+
+        # fallback previous default implementation if extended image properties not found.
+        return f"https://finna.fi/Cover/Show?id={record['id']}&size=master&index=0"
+
+    def download_image(self, record):
+        response = requests.get(self.get_full_res_image_url(record), stream=True)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError:
             LOG.error(
                 "Could not download a full res url",
-                extra={"data": {"record_id": record_id}},
+                extra={"data": {"record_id": record["id"]}},
             )
             return None
 
