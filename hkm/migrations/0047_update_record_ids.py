@@ -75,7 +75,7 @@ def replace_record_id(item, id_map):
     if id_replacement:
         logger.info(f"Replacing id '{item.record_id}' -> '{id_replacement}'.")
         item.record_id = id_replacement
-        item.save()
+        item.save(update_fields=["record_id"])
         return True
     else:
         logger.info(f"No id replacement for '{item.record_id}'.")
