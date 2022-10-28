@@ -137,8 +137,19 @@
         {% if not user.profile.is_museum %}
         <div class="row">
           <div class="col-md-offset-2 col-md-8">
-            <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
-            <p class="feedback-disabled">{% trans 'Feedback disabled' %}</p>
+            <form method="POST" id="feedback-form">
+              <h2 class="record-meta__feedback">{% trans 'Image feedback' %}</h2>
+              {% csrf_token %}
+              {% include 'hkm/snippets/form_fields.html' with form=feedback_form %}
+              <input type="hidden" name="action" value="feedback" />
+              <input type="hidden" name="hkm_id" value="{{ hkm_id }}" />
+              <p class="feedback-message success hidden" id="fb-success">{% trans 'Feedback success' %}</p>
+              <p class="feedback-message error hidden" id="fb-error">{% trans 'Feedback error' %}</p>
+              <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+              {% if ENABLE_FEEDBACK_CONGESTION_MSG %}
+                <p class="feedback-congested-message">{% trans 'Feedback temp' %}</p>
+              {% endif %}
+            </form>
           </div>
         </div>
         {% endif %}
