@@ -802,8 +802,7 @@ class SearchRecordDetailView(SearchView):
         context = super().get_context_data(**kwargs)
         if self.record:
             record = self.record
-            details = record.get_details()
-            context["record_full_res_url"] = FINNA.get_full_res_image_url(details)
+            context["record_full_res_url"] = FINNA.get_full_res_image_url(record)
             related_collections_ids = Record.objects.filter(
                 record_id=record["id"]
             ).values_list("collection", flat=True)
