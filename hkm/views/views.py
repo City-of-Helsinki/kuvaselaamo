@@ -402,11 +402,10 @@ class CollectionDetailView(BaseView):
             context["record_web_url"] = FINNA.get_image_url(
                 self.collection_record.record_id
             )
-            context["record_full_res_url"] = FINNA.get_full_res_image_url(
-                self.collection_record.record_id
-            )
             context["record"] = self.collection_record.get_details()
-
+            context["record_full_res_url"] = FINNA.get_full_res_image_url(
+                context["record"]
+            )
             # Also check if record is in user's favorite collection
             if self.request.user.is_authenticated:
                 try:
@@ -803,7 +802,8 @@ class SearchRecordDetailView(SearchView):
         context = super().get_context_data(**kwargs)
         if self.record:
             record = self.record
-            context["record_full_res_url"] = FINNA.get_full_res_image_url(record["id"])
+            details = record.get_details()
+            context["record_full_res_url"] = FINNA.get_full_res_image_url(details)
             related_collections_ids = Record.objects.filter(
                 record_id=record["id"]
             ).values_list("collection", flat=True)
@@ -954,7 +954,7 @@ class AjaxCropRecordView(View):
 
     def _get_cropped_full_res_file(self):
         try:
-            full_res_image = FINNA.download_image(self.record["id"])
+            full_res_image = FINNA.download_image(self.record)
         except Exception:
             return None
         cropped_image = image_utils.crop(
@@ -977,7 +977,7 @@ class AjaxCropRecordView(View):
         )
 
     def _get_cropped_preview_file(self):
-        full_res_image = FINNA.download_image(self.record["id"])
+        full_res_image = FINNA.download_image(self.record)
         cropped_image = image_utils.crop(
             full_res_image,
             self.crop_x,
