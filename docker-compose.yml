@@ -27,6 +27,7 @@ services:
             - django-media-volume:/var/media/
         ports:
             - "8080:8080"
+            - "3001:3001"
         depends_on:
             - postgres
         container_name: kuvaselaamo-backend

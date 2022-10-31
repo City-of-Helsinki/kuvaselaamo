@@ -1,6 +1,7 @@
 import io
 import logging
 import math
+import urllib.parse
 
 import requests
 from PIL import Image
@@ -10,6 +11,7 @@ LOG = logging.getLogger(__name__)
 
 class FinnaClient(object):
     API_ENDPOINT = "https://api.finna.fi/v1/"
+    DOWNLOAD_ENDPOINT = "https://finna.fi/"
     timeout = 10
 
     organisation = None
@@ -236,19 +238,21 @@ class FinnaClient(object):
         return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
     def get_full_res_image_url(self, record):
+        # attempt to find high resolution original photo url
+        if high_resolution_original := self.get_labeled_high_resolution_url(record, "original"):
+            return high_resolution_original
 
-        if images_extended := record.get("imagesExtended"):
-            # attempt to find original photo urls
-            for image_extended in images_extended:
-                if urls := image_extended.get("urls"):
-                    if original := urls.get("original"):
-                        return original
+        # attempt to find high resolution master photo url
+        if high_resolution_master := self.get_labeled_high_resolution_url(record, "master"):
+            return high_resolution_master
 
-            # attempt to find large photo urls if orginal photo not found
-            for image_extended in images_extended:
-                if urls := image_extended.get("urls"):
-                    if large := urls.get("large"):
-                        return large
+        # attempt to find original photo urls
+        if original := self.get_labeled_image_url(record, "original"):
+            return original
+
+        # attempt to find large photo urls
+        if large := self.get_labeled_image_url(record, "large"):
+            return large
 
         # fallback previous default implementation if extended image properties not found.
         return f"https://finna.fi/Cover/Show?id={record['id']}&size=master&index=0"
@@ -265,6 +269,40 @@ class FinnaClient(object):
             return None
 
         return Image.open(io.BytesIO(response.content))
+
+    def get_labeled_image_url(self, record, label):
+        images_extended = record.get("imagesExtended")
+        if not images_extended:
+            return None
+
+        for image_extended in images_extended:
+            if urls := image_extended.get("urls"):
+                if original := urls.get(label):
+                    if urllib.parse.urlparse(original).netloc:
+                        return original
+                    return urllib.parse.urljoin(FinnaClient.DOWNLOAD_ENDPOINT, original)
+
+    def get_labeled_high_resolution_url(self, record, label):
+        images_extended = record.get("imagesExtended")
+        if not images_extended:
+            return None
+
+        for image_extended in images_extended:
+            high_resolution = image_extended.get("highResolution")
+            if not high_resolution:
+                continue
+
+            items = high_resolution.get(label)
+            if not items:
+                continue
+
+            for item in items:
+                params = item.get("params")
+                if not params:
+                    continue
+                return f"{FinnaClient.DOWNLOAD_ENDPOINT}record/DownloadFile?{urllib.parse.urlencode(params)}"
+
+        return None
 
 
 DEFAULT_CLIENT = FinnaClient()
