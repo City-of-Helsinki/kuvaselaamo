@@ -239,22 +239,22 @@ class FinnaClient(object):
 
     def get_full_res_image_url(self, record):
         # attempt to find high resolution original photo url
-        if high_resolution_original := self.get_labeled_high_resolution_url(record, "original"):
-            return high_resolution_original
+        if high_res_orig := self.get_labeled_high_res_url(record, "original"):
+            return high_res_orig
 
         # attempt to find high resolution master photo url
-        if high_resolution_master := self.get_labeled_high_resolution_url(record, "master"):
-            return high_resolution_master
+        if high_res_master := self.get_labeled_high_res_url(record, "master"):
+            return high_res_master
 
         # attempt to find original photo urls
         if original := self.get_labeled_image_url(record, "original"):
             return original
 
-        # attempt to find large photo urls
-        if large := self.get_labeled_image_url(record, "large"):
-            return large
+        # attempt to find master photo urls
+        if master := self.get_labeled_image_url(record, "master"):
+            return master
 
-        # fallback previous default implementation if extended image properties not found.
+        # fallback to previous default implementation if extended image properties not found.
         return f"https://finna.fi/Cover/Show?id={record['id']}&size=master&index=0"
 
     def download_image(self, record):
@@ -282,7 +282,7 @@ class FinnaClient(object):
                         return original
                     return urllib.parse.urljoin(FinnaClient.DOWNLOAD_ENDPOINT, original)
 
-    def get_labeled_high_resolution_url(self, record, label):
+    def get_labeled_high_res_url(self, record, label):
         images_extended = record.get("imagesExtended")
         if not images_extended:
             return None
