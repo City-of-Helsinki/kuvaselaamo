@@ -10,7 +10,7 @@ services:
         ports:
             - 5435:5432
         volumes:
-          - pgdata:/var/lib/postgresql/data
+            - pgdata:/var/lib/postgresql/data
         container_name: kuvaselaamo-db
 
     django:
@@ -27,15 +27,14 @@ services:
             - django-media-volume:/var/media/
         ports:
             - "8080:8080"
-            - "3001:3001"
         depends_on:
             - postgres
         container_name: kuvaselaamo-backend
 
 volumes:
-        pgdata:
-            driver: local
-        django-media-volume:
+    pgdata:
+        driver: local
+    django-media-volume:
 
 
 networks:
