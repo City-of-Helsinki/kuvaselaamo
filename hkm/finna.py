@@ -271,8 +271,7 @@ class FinnaClient(object):
         return Image.open(io.BytesIO(response.content))
 
     def get_labeled_image_url(self, record, label):
-        images_extended = record.get("imagesExtended")
-        if not images_extended:
+        if not (images_extended := record.get("imagesExtended")):
             return None
 
         for image_extended in images_extended:
@@ -283,22 +282,18 @@ class FinnaClient(object):
                     return urllib.parse.urljoin(FinnaClient.DOWNLOAD_ENDPOINT, original)
 
     def get_labeled_high_res_url(self, record, label):
-        images_extended = record.get("imagesExtended")
-        if not images_extended:
+        if not (images_extended := record.get("imagesExtended")):
             return None
 
         for image_extended in images_extended:
-            high_resolution = image_extended.get("highResolution")
-            if not high_resolution:
+            if not (high_resolution := image_extended.get("highResolution")):
                 continue
 
-            items = high_resolution.get(label)
-            if not items:
+            if not (items := high_resolution.get(label)):
                 continue
 
             for item in items:
-                params = item.get("params")
-                if not params:
+                if not (params := item.get("params")):
                     continue
                 return f"{FinnaClient.DOWNLOAD_ENDPOINT}record/DownloadFile?{urllib.parse.urlencode(params)}"
 
