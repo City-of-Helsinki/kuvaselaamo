@@ -33,7 +33,7 @@ def truncate_era(value):
 
 @register.filter
 def truncate_geographic(value):
-    return value.removeprefix("Pohjoismaat, Suomi, Uusimaa, ")
+    return value.replace("Pohjoismaat, Suomi, Uusimaa, ", "")
 
 
 @register.filter(is_safe=True)

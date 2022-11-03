@@ -238,7 +238,7 @@ class Record(OrderedModel, BaseModel):
     def get_full_res_image_absolute_url(self):
         record_data = self.get_details()
         if record_data:
-            return FINNA.get_full_res_image_url(record_data["id"])
+            return FINNA.get_full_res_image_url(record_data)
         else:
             LOG.debug("Could not get image from Finna API")
 

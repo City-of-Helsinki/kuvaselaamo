@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+
+# [3.1.0] 2022-02-10
+
+### Added
+ - Implements management command to to retrieve id mapping information to a json file and a migration to use the mapping file to update the record ids in the database. Migration needed due to change in the source system and Finna id's.
+ - Adds previously removed feedback functionality.
+ - Implement minor updates to photo details layout.
+ - Replace google analytics with matomo.
+
+### Fixed
+ - Fix full resolution image downloads.
+
+# [3.0.0] 2022-02-10
+
+### Fixed
+ - Remove leftover JavaScript and CSS related to the already removed buying, ordering and checkout features.
+ - Fix JavaScript "load more" functionality
+ - Fix browse to last viewed picture in search results
+ - Fix changing language removed non-ascii letters from the search terms
+
+# [2.9.0] 2022-01-10
+
+### Changed
+
+ - Increased the memory limit by @nikomakela in #253
+ - Removed all the buying, ordering and checkout features by @nikomakela in #252
+ - Added the missing accessibility statement code to version control by @nikomakela in #255
+ - Update the privacy statement by @nikomakela in #254
+
 # [2.8.1] 2021-12-02
 
 ### Fixed
