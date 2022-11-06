@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+# [3.1.1] 2022-11-06
 
-# [3.1.0] 2022-02-10
+### Fixed
+ - Lowered MAX_RECORDS_PER_FINNA_QUERY from 200 to 150 to avoid a 414 reply from Finna in case
+ of a too long request.
+
+# [3.1.0] 2022-11-04
 
 ### Added
  - Implements management command to to retrieve id mapping information to a json file and a migration to use the mapping file to update the record ids in the database. Migration needed due to change in the source system and Finna id's.

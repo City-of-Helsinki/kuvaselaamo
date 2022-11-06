@@ -26,7 +26,7 @@ from hkm import email, forms, image_utils
 from hkm.finna import DEFAULT_CLIENT as FINNA
 from hkm.models.models import Collection, PageContent, Record, Showcase, TmpImage
 
-MAX_RECORDS_PER_FINNA_QUERY = 200
+MAX_RECORDS_PER_FINNA_QUERY = 150
 
 LOG = logging.getLogger(__name__)
 
