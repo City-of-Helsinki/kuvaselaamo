@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-# [3.1.1] 2022-11-06
+# [3.1.1] 2022-11-08
 
 ### Fixed
  - Lowered MAX_RECORDS_PER_FINNA_QUERY from 200 to 150 to avoid a 414 reply from Finna in case
