@@ -40,3 +40,5 @@ browser-tests/.env
 .vscode/
 
 .env
+
+report/
