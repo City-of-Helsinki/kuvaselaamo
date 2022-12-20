@@ -36,9 +36,8 @@ docker-compose.env.yaml
 media/*
 static/*
 browser-tests/.env
+report/
 
 .vscode/
 
 .env
-
-report/
