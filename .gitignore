@@ -41,3 +41,5 @@ report/
 .vscode/
 
 .env
+
+report/
