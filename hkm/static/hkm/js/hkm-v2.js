@@ -421,11 +421,13 @@ palikka
         $('#id_feedback-form-full_name').val('');
         $('#id_feedback-form-email').val('');
         // Uncover success message
-        $("#fb-success").removeClass("hidden")
+        $("#fb-success").removeClass("hidden");
+        $("#fb-error").addClass("hidden");
       }
     }).fail(function() {
       // Uncover error message
-      $("#fb-error").removeClass("hidden")
+      $("#fb-error").removeClass("hidden");
+      $("#fb-success").addClass("hidden");
     })
   })
 

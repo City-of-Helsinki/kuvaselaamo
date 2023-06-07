@@ -2,11 +2,7 @@
 
 <form method="POST" >
   {% if login_form.non_field_errors %}
-    <ul>
-      {% for error in login_form.non_field_errors %}
-       <li>{{ error }}<li>
-      {% endfor %}
-    </ul>
+    {{ login_form.non_field_errors.as_ul }}
   {% endif %}
   {% csrf_token %}
   {% include 'hkm/snippets/form_fields.html' with form=login_form %}
