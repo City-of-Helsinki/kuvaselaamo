@@ -258,6 +258,9 @@ def get_records_with_finna_data(request, collection):
                 record.finna_entry = finna_entries_by_id[record.record_id]
                 records_with_finna_data.append(record)
 
+                cache_key = f"{record.record_id}-details"
+                DEFAULT_CACHE.set(cache_key, record.finna_entry, 60 * 15)
+
     return records_with_finna_data
 
 
