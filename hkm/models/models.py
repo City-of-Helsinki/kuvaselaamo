@@ -253,6 +253,12 @@ class Record(OrderedModel, BaseModel):
         LOG.debug("Got web image absolute url", extra={"data": {"url": url}})
         return url
 
+    def get_thumbnail_image_absolute_url(self):
+        record_data = self.get_details()
+        if record_data:
+            return FINNA.get_thumbnail_image_url(record_data)
+        else:
+            LOG.debug("Could not get image from Finna API")
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, *args, **kwargs):
