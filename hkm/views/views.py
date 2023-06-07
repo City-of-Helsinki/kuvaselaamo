@@ -409,6 +409,9 @@ class CollectionDetailView(BaseView):
             context["record_full_res_url"] = FINNA.get_full_res_image_url(
                 context["record"]
             )
+            context["record_original_url"] = FINNA.get_original_image_url(
+                context["record"]
+            )
             # Also check if record is in user's favorite collection
             if self.request.user.is_authenticated:
                 try:
@@ -806,6 +809,8 @@ class SearchRecordDetailView(SearchView):
         if self.record:
             record = self.record
             context["record_full_res_url"] = FINNA.get_full_res_image_url(record)
+            context["record_original_url"] = FINNA.get_original_image_url(record)
+
             related_collections_ids = Record.objects.filter(
                 record_id=record["id"]
             ).values_list("collection", flat=True)
