@@ -260,6 +260,7 @@ class Record(OrderedModel, BaseModel):
         else:
             LOG.debug("Could not get image from Finna API")
 
+
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, *args, **kwargs):
     if created:

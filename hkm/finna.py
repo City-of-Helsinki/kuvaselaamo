@@ -237,15 +237,19 @@ class FinnaClient(object):
 
     def get_thumbnail_image_url(self, record):
         if identifier := self.get_identifier(record):
-            return FinnaClient.IMAGE_REPO_ENDPOINT.format(identifier=identifier, size="medium")
+            return FinnaClient.IMAGE_REPO_ENDPOINT.format(
+                identifier=identifier, size="medium"
+            )
         return None
 
     def get_image_url(self, record_id):
         return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
-    def get_full_res_image_url(self, record):        
+    def get_full_res_image_url(self, record):
         if identifier := self.get_identifier(record):
-            return FinnaClient.IMAGE_REPO_ENDPOINT.format(identifier=identifier, size="extra_extra_large")
+            return FinnaClient.IMAGE_REPO_ENDPOINT.format(
+                identifier=identifier, size="extra_extra_large"
+            )
         return None
 
     def get_original_image_url(self, record):
