@@ -2,8 +2,8 @@
   "name": "hkm",
   "version": "0.0.1",
   "scripts": {
-    "browser-test": "testcafe \"chrome --lang=fi-FI --window-size='1920,1080'\" browser-tests/enable-dotenv.js browser-tests/ --live",
-    "browser-test:ci": "testcafe \"chrome:headless --lang=en-US --disable-gpu --window-size='1920,1080'\" --screenshots path=report takeOnFails=true --video report browser-tests/"
+    "browser-test": "testcafe \"chrome --window-size='1920,1080'\" browser-tests/enable-dotenv.js browser-tests/ --live",
+    "browser-test:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1920,1080'\" --screenshots path=report takeOnFails=true --video report browser-tests/"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
