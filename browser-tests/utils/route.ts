@@ -1,7 +1,7 @@
 import settings from "./settings";
 
 export function getRoute(path: string) {
-  return `${settings.baseUrl}${path}`;
+  return `${settings.baseUrl}/language/?lang=en&next=${path}`;
 }
 
 export function getImageRoute(imageId: string) {

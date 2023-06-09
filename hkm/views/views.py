@@ -258,6 +258,9 @@ def get_records_with_finna_data(request, collection):
                 record.finna_entry = finna_entries_by_id[record.record_id]
                 records_with_finna_data.append(record)
 
+                cache_key = f"{record.record_id}-details"
+                DEFAULT_CACHE.set(cache_key, record.finna_entry, 60 * 15)
+
     return records_with_finna_data
 
 
@@ -404,6 +407,9 @@ class CollectionDetailView(BaseView):
             )
             context["record"] = self.collection_record.get_details()
             context["record_full_res_url"] = FINNA.get_full_res_image_url(
+                context["record"]
+            )
+            context["record_original_url"] = FINNA.get_original_image_url(
                 context["record"]
             )
             # Also check if record is in user's favorite collection
@@ -803,6 +809,8 @@ class SearchRecordDetailView(SearchView):
         if self.record:
             record = self.record
             context["record_full_res_url"] = FINNA.get_full_res_image_url(record)
+            context["record_original_url"] = FINNA.get_original_image_url(record)
+
             related_collections_ids = Record.objects.filter(
                 record_id=record["id"]
             ).values_list("collection", flat=True)

@@ -78,11 +78,11 @@ def display_images(collection):
     if record_count == 0:
         image_urls.append("/static/hkm/img/collection_default_image.png")
     elif record_count < 3:
-        image_urls.append(records[0].get_preview_image_absolute_url())
+        image_urls.append(records[0].get_thumbnail_image_absolute_url())
     else:
         image_urls = []
         for record in records[:3]:
-            image_urls.append(record.get_preview_image_absolute_url())
+            image_urls.append(record.get_thumbnail_image_absolute_url())
         return image_urls
     return image_urls
 
