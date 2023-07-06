@@ -1,0 +1,11 @@
+{
+  "bootstrap-sha": "65d1dfe48f751fa5bb672a1bff8ac2c64cc77031",
+  "sequential-calls": true,
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "package-name": "kuvaselaamo"
+    }
+  },
+  "plugins": ["sentence-case"]
+}
