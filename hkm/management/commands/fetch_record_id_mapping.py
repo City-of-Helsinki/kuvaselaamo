@@ -5,7 +5,7 @@ import xml.dom.minidom
 import requests
 from django.core.management.base import BaseCommand
 
-OAIHANDLER_URL = "http://museoliittorepox.vserver.fi:8080/repox/OAIHandler"
+OAIHANDLER_URL = "https://museoliittorepox.vserver.fi/repox/OAIHandler"
 INIT_CALL_PARAMS = "?verb=ListRecords&set=finna_hkm_tuotanto&metadataPrefix=lido"
 FOLLOW_UP_CALL_PARAMS = "?verb=ListRecords&resumptionToken="
 

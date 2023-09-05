@@ -10,7 +10,7 @@ LOG = logging.getLogger(__name__)
 
 
 class FinnaClient(object):
-    IMAGE_REPO_ENDPOINT = "http://museoliittorepox.vserver.fi:8080/mpthumbnailhelper/download?id={identifier}&size={size}&key=T3st1"  # noqa: E501
+    IMAGE_REPO_ENDPOINT = "https://museoliittorepox.vserver.fi/mpthumbnailhelper/download?id={identifier}&size={size}&key=T3st1"  # noqa: E501
     API_ENDPOINT = "https://api.finna.fi/v1/"
     DOWNLOAD_ENDPOINT = "https://finna.fi/"
     timeout = 10
