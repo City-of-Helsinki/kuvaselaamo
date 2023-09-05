@@ -203,6 +203,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.1.4](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.3...kuvaselaamo-v3.1.4) (2023-09-05)
+
+
+### Bug Fixes
+
+* Force ci browser tests locale to en-US ([d27ae7f](https://github.com/City-of-Helsinki/kuvaselaamo/commit/d27ae7f047b865ef8ba60b1e189b2814d3039c2c))
+* Force test language using app feature ([c71f1cd](https://github.com/City-of-Helsinki/kuvaselaamo/commit/c71f1cd6960d78917fe5be49cea01d72eec05e03))
+* Populate photo details cache ([146eac0](https://github.com/City-of-Helsinki/kuvaselaamo/commit/146eac0ba411c4e00610c1baa71162941351bf29))
+* Release-please configurations HEL-341 ([533f7e9](https://github.com/City-of-Helsinki/kuvaselaamo/commit/533f7e9b7b0fadf7574daf77f391aff761b4d4b3))
+* Use original photo for downloads only ([9441093](https://github.com/City-of-Helsinki/kuvaselaamo/commit/9441093a7ddbfa185c77c23aa59740da308d17dd))
+* Use thumbnail images in photo lists ([c51c8e7](https://github.com/City-of-Helsinki/kuvaselaamo/commit/c51c8e715fe516269d0623146b0bd08fb36e0a6a))
+
 ## [2.0.1] - 2020-12-09
 
 ### Fixed
