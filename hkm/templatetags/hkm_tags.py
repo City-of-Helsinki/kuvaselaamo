@@ -16,10 +16,12 @@ register = template.Library()
 def finna_image(img_id):
     return finna_default_image_url(img_id)
 
+
 @register.simple_tag
 def finna_thumbnail(record):
     return FINNA.get_thumbnail_image_url(record)
-    
+
+
 @register.filter
 def truncate_description(value):
     result = value.removeprefix("sisällön kuvaus: ")
