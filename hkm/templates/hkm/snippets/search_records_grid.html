@@ -5,7 +5,7 @@
 {% for record in search_result.records %}
   <div class="grid__item item" data-w="" data-h="" name="{{ search_term|slugify }}_{{ record.id|slugify }}">
     <a href="{% url 'hkm_search_record' %}?image_id={{ record.id }}">
-      <img class="flex-img" src="{% finna_image record.id %}" alt="{{ record.title }}"></img>
+      <img class="flex-img" src="{% finna_thumbnail record %}" alt="{{ record.title }}"></img>
     </a>
     <div class="grid__meta">
       <span class="grid__meta--title">{{ record.title }}</span>
