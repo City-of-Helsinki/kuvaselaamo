@@ -697,7 +697,7 @@ class SearchView(BaseView):
         self.facet_result = self.request.session.get("facet_result", None)
 
         if not self.facet_result:
-            self.facet_result = self.get_facet_result(self.url_params["search"])
+            self.facet_result = self.get_facet_result(self.url_params["search"]) or {}
             # date_from & date_to require full list of dates
             self.all_dates = self.facet_result.get("facets", {}).get(
                 "main_date_str", []
