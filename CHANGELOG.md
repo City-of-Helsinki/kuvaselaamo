@@ -203,6 +203,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.1.5](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.4...kuvaselaamo-v3.1.5) (2023-10-10)
+
+
+### Bug Fixes
+
+* Load more bug fix ([79e185f](https://github.com/City-of-Helsinki/kuvaselaamo/commit/79e185f60d87cdf724914614378d394b42ed79bf))
+* Too small image in preview ([011f897](https://github.com/City-of-Helsinki/kuvaselaamo/commit/011f8970b779f5fa9076d4c8e2bf79dd773e82bd))
+* Use smaller thumbnails ([c198ebe](https://github.com/City-of-Helsinki/kuvaselaamo/commit/c198ebe2875867f37b891449d6aa48d7caf2be53))
+
 ## [3.1.4](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.3...kuvaselaamo-v3.1.4) (2023-09-05)
 
 
