@@ -718,3 +718,52 @@ msgstr "Your favorite pictures are collected here"
 
 msgid "Password alphabetic"
 msgstr "Password contains only letters"
+
+msgid "Helsinki photos uses cookies"
+msgstr "Helsinki photos uses cookies"
+
+msgid "Read more"
+msgstr "Read more"
+
+msgid "This website uses required cookies"
+msgstr "This website uses required cookies to ensure the basic functionality and performance. In addition, we use targeting cookies to improve the user experience, perform analytics and display personalised content."
+
+msgid "Cookie settings"
+msgstr "Cookie settings"
+
+msgid "About the cookies used on the website"
+msgstr "About the cookies used on the website"
+
+msgid "The cookies used on the website"
+msgstr "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies."
+
+msgid "Matomo (optional)"
+msgstr "Matomo (optional)"
+
+msgid "Matomo description"
+msgstr "Matomo Analytics software is being used to follow and improve the website to better attend to user's needs."
+
+msgid "Cookie name"
+msgstr "Name"
+
+msgid "Cookie set by"
+msgstr "Cookie set by"
+
+msgid "Purpose of use"
+msgstr "Purpose of use"
+
+msgid "Period of validity"
+msgstr "Period of validity"
+
+msgid "A cookie of the Matomo statistics system"
+msgstr "A cookie of the Matomo statistics system"
+
+msgid "Cookie days"
+msgstr "days"
+
+msgid "Accept optional cookies"
+msgstr "Accept optional cookies"
+
+msgid "Reject cookies"
+msgstr "Reject"
+

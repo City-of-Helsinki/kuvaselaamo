@@ -176,6 +176,7 @@
       document.querySelector('#meta-url').setAttribute('content', location.href)
     </script>
     <script src="/static/hkm/js/jquery.js"></script>
+    <script src="/static/hkm/js/jquery.cookie.js"></script>
     <script src="/static/hkm/js/jquery.csrf.js"></script>
     <script src="/static/hkm/js/velocity.js"></script>
     <script src="/static/hkm/js/hammer.js"></script>
@@ -187,9 +188,9 @@
     <script src="/static/hkm/js/leaflet.js"></script>
     <script src="/static/hkm/js/clipboard.js"></script>
     <script src="/static/hkm/js/hkm-v2.js"></script>
-    <script src="/static/hkm/js/cookie-consent.js"></script>
+    <script src="/static/hkm/js/cookie_consent.js"></script>
 
-    {% if ENABLE_ANALYTICS %}
+      {% if ENABLE_ANALYTICS %}
       <!-- Matomo -->
       <script>  var _paq = window._paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -203,7 +204,7 @@
           g.async=true; g.src=u+'piwik.min.js'; s.parentNode.insertBefore(g,s);
         })();
       </script><!-- End Matomo Code -->
-    {% endif %}
+      {% endif %}
   {% endblock %}
   {% block extra_js %}
   {% endblock %}
