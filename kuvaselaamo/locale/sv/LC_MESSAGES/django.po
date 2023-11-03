@@ -756,8 +756,8 @@ msgstr "Kaka för statistiksystemet Matomo"
 msgid "Cookie days"
 msgstr "dagar"
 
-msgid "Accept optional cookies"
-msgstr "Acceptera valda kakor"
+msgid "Accept all cookies"
+msgstr "Acceptera alla cookies"
 
-msgid "Reject cookies"
-msgstr "Reject"
+msgid "Accept essential cookies"
+msgstr "Acceptera endast nödvändiga cookies"

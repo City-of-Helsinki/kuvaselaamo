@@ -749,8 +749,8 @@ msgstr "Matomo-tilastointijärjestelmän eväste"
 msgid "Cookie days"
 msgstr "päivää"
 
-msgid "Accept optional cookies"
+msgid "Accept all cookies"
 msgstr "Hyväksy valitut evästeet"
 
-msgid "Reject cookies"
-msgstr "Hylkää evästeet"
+msgid "Accept essential cookies"
+msgstr "Hyväksy vain välttämättömät evästeet"

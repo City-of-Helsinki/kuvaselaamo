@@ -761,9 +761,9 @@ msgstr "A cookie of the Matomo statistics system"
 msgid "Cookie days"
 msgstr "days"
 
-msgid "Accept optional cookies"
-msgstr "Accept optional cookies"
+msgid "Accept all cookies"
+msgstr "Accept all cookies"
 
-msgid "Reject cookies"
-msgstr "Reject"
+msgid "Accept essential cookies"
+msgstr "Accept only essential cookies"
 
