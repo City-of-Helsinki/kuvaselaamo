@@ -3,44 +3,61 @@
     var cookie = $.cookie(cookieName)
     var _paq = window._paq = window._paq || [];
 
+    const $cookieConsentContainer =  $("#cookie-consent"), 
+    $readMoreBtn = $("#cookie-consent__readmore-btn"),
+    $cookieContents = $("#cookie-consent__content"),
+    $acceptBtn = $("#consent_accept"),
+    $rejectBtn = $("#consent_reject");
+
+    // if rejected
+    if(cookie && cookie === 0) {
+        _paq.push(['forgetCookieConsentGiven']);
+        _paq.push(['requireCookieConsent']);
+    }
+
+    // if accepted
+    if(cookie && cookie === 1) {
+        _paq.push(['setCookieConsentGiven']);
+    }
+
     if(!cookie && _paq) {
         _paq.push(['requireCookieConsent']);
 
-        $("#cookie-consent").fadeIn();
-        $( "#cookie-consent" ).animate({ "bottom": "0" }, "slow" );
+        $cookieConsentContainer.fadeIn();
+        $cookieConsentContainer.animate({ "bottom": "0" }, "slow" );
 
-        $("#cookie-consent__readmore-btn").on('click', function (e) {
-            $("#cookie-consent__readmore-btn" ).hide();
-            $("#cookie-consent__content" ).show();
+        $readMoreBtn.on('click', function (e) {
+            $readMoreBtn.hide();
+            $cookieContents.show();
         });
 
-        $("#cookie-consent").on('click', function (e) {
-            $("#cookie-consent__readmore-btn" ).hide();
-            $("#cookie-consent__content" ).show();
+        $cookieConsentContainer.on('click', function (e) {
+            $readMoreBtn.hide();
+            $cookieContents.show();
         });
     }
 
-    $("#consent_accept").on('click', function (e) {
+    $acceptBtn.on('click', function (e) {
         if(_paq) {
             _paq.push(['setCookieConsentGiven']);
             $.cookie(cookieName, 1, { expires : 393 });
-            $("#cookie-consent").fadeOut();
+            $cookieConsentContainer.fadeOut();
         }
     });
         
-    $("#consent_reject").on('click', function (e) {
+    $rejectBtn.on('click', function (e) {
         if(_paq) {
             _paq.push(['forgetCookieConsentGiven']);
             $.cookie(cookieName, 0, { expires : 393 });
-            $("#cookie-consent").fadeOut();
+            $cookieConsentContainer.fadeOut();
         }
     });
 
     // click outside to collapse cookie consent
     $(document).on('click', function (e) {
         if ($(e.target).closest("#cookie-consent").length === 0) {
-            $("#cookie-consent__content").hide();
-            $("#cookie-consent__readmore-btn" ).show();
+            $cookieContents.hide();
+            $readMoreBtn.show();
         }
     });
 })(jQuery);

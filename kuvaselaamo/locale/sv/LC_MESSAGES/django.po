@@ -715,49 +715,49 @@ msgid "Password alphabetic"
 msgstr "Lösenordet innehåller endast bokstäver"
 
 msgid "Helsinki photos uses cookies"
-msgstr "Helsinki photos uses cookies"
+msgstr "Helsinki bilder använder kakor"
 
 msgid "Read more"
-msgstr "Read more"
+msgstr "Läs mer"
 
 msgid "This website uses required cookies"
-msgstr "This website uses required cookies to ensure the basic functionality and performance. In addition, we use targeting cookies to improve the user experience, perform analytics and display personalised content."
+msgstr "Denna webbplats använder obligatoriska kakor för att säkerställa de grundläggande funktionerna och prestandan. Dessutom använder vi inriktningskakor för en bättre användarupplevelse, analytik och individualiserat innehåll."
 
 msgid "Cookie settings"
-msgstr "Cookie settings"
+msgstr "Kakinställningar"
 
 msgid "About the cookies used on the website"
-msgstr "About the cookies used on the website"
+msgstr "Information om kakor som används på webbplatsen"
 
 msgid "The cookies used on the website"
-msgstr "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies."
+msgstr "Kakorna som används på webbplatsen har klassificerats enligt användningsändamål. Du kan läsa om de olika klasserna och acceptera eller förbjuda användningen av kakor."
 
 msgid "Matomo (optional)"
-msgstr "Matomo (optional)"
+msgstr "Matomo"
 
 msgid "Matomo description"
-msgstr "Matomo Analytics software is being used to follow and improve the website to better attend to user's needs."
+msgstr "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov."
 
 msgid "Cookie name"
-msgstr "Name"
+msgstr "Namn"
 
 msgid "Cookie set by"
-msgstr "Cookie set by"
+msgstr "Den som lagrat kakan"
 
 msgid "Purpose of use"
-msgstr "Purpose of use"
+msgstr "Användning"
 
 msgid "Period of validity"
-msgstr "Period of validity"
+msgstr "Giltighetstid"
 
 msgid "A cookie of the Matomo statistics system"
-msgstr "A cookie of the Matomo statistics system"
+msgstr "Kaka för statistiksystemet Matomo"
 
 msgid "Cookie days"
-msgstr "days"
+msgstr "dagar"
 
 msgid "Accept optional cookies"
-msgstr "Accept optional cookies"
+msgstr "Acceptera valda kakor"
 
 msgid "Reject cookies"
 msgstr "Reject"

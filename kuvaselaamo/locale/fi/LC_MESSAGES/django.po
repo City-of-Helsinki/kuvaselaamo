@@ -711,46 +711,46 @@ msgid "Helsinki photos uses cookies"
 msgstr "Helsinki kuvia käyttää evästeitä"
 
 msgid "Read more"
-msgstr "Read more"
+msgstr "Lue lisää"
 
 msgid "This website uses required cookies"
-msgstr "This website uses required cookies to ensure the basic functionality and performance. In addition, we use targeting cookies to improve the user experience, perform analytics and display personalised content."
+msgstr "Tämä sivusto käyttää välttämättömiä evästeitä sivun perustoimintojen ja suorituskyvyn varmistamiseksi. Lisäksi käytämme kohdennusevästeitä käyttäjäkokemuksen parantamiseksi, analytiikkaan ja yksilöidyn sisällön näyttämiseen."
 
 msgid "Cookie settings"
-msgstr "Cookie settings"
+msgstr "Evästeasetukset"
 
 msgid "About the cookies used on the website"
-msgstr "About the cookies used on the website"
+msgstr "Tietoa sivustolla käytetyistä evästeistä"
 
 msgid "The cookies used on the website"
-msgstr "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies."
+msgstr "Sivustolla käytetyt evästeet on luokiteltu käyttötarkoituksen mukaan. Alla voit lukea eri luokista ja sallia tai kieltää evästeiden käytön."
 
 msgid "Matomo (optional)"
-msgstr "Matomo (optional)"
+msgstr "Matomo"
 
 msgid "Matomo description"
-msgstr "Matomo Analytics software is being used to follow and improve the website to better attend to user's needs."
+msgstr "Matomo-analytiikkaohjelmistolla seurataan ja kehitetään verkkosivustoa käyttäjien tarpeita vastaavaksi."
 
 msgid "Cookie name"
-msgstr "Name"
+msgstr "Nimi"
 
 msgid "Cookie set by"
-msgstr "Cookie set by"
+msgstr "Evästeen asettaja"
 
 msgid "Purpose of use"
-msgstr "Purpose of use"
+msgstr "Käyttötarkoitus"
 
-msgid "Period of validity"
+msgid "Voimassaoloaika"
 msgstr "Period of validity"
 
 msgid "A cookie of the Matomo statistics system"
-msgstr "A cookie of the Matomo statistics system"
+msgstr "Matomo-tilastointijärjestelmän eväste"
 
 msgid "Cookie days"
-msgstr "days"
+msgstr "päivää"
 
 msgid "Accept optional cookies"
-msgstr "Accept optional cookies"
+msgstr "Hyväksy valitut evästeet"
 
 msgid "Reject cookies"
-msgstr "Reject"
+msgstr "Hylkää evästeet"

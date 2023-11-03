@@ -738,7 +738,7 @@ msgid "The cookies used on the website"
 msgstr "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies."
 
 msgid "Matomo (optional)"
-msgstr "Matomo (optional)"
+msgstr "Matomo"
 
 msgid "Matomo description"
 msgstr "Matomo Analytics software is being used to follow and improve the website to better attend to user's needs."
