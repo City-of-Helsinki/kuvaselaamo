@@ -7,7 +7,8 @@
     $readMoreBtn = $("#cookie-consent__readmore-btn"),
     $cookieContents = $("#cookie-consent__content"),
     $acceptBtn = $("#consent_accept"),
-    $rejectBtn = $("#consent_reject");
+    $rejectBtn = $("#consent_reject"),
+    $consentLink = $("#cookie-consent-link");
 
     // if rejected
     if(cookie && cookie === 0) {
@@ -51,6 +52,15 @@
             $.cookie(cookieName, 0, { expires : 393 });
             $cookieConsentContainer.fadeOut();
         }
+    });
+
+    // click cookie consent footer navi link to force open
+    $consentLink.on('click', function (e) {
+        e.preventDefault()
+        $cookieConsentContainer.fadeIn();
+        $cookieConsentContainer.animate({ "bottom": "0" }, "slow" );
+        $cookieContents.show();
+        $readMoreBtn.hide();
     });
 
     // click outside to collapse cookie consent

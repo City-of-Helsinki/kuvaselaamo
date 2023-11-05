@@ -754,3 +754,7 @@ msgstr "Hyväksy valitut evästeet"
 
 msgid "Accept essential cookies"
 msgstr "Hyväksy vain välttämättömät evästeet"
+
+msgid "Cookie consent link"
+msgstr "Evasteasetukset"
+

@@ -761,3 +761,6 @@ msgstr "Acceptera alla cookies"
 
 msgid "Accept essential cookies"
 msgstr "Acceptera endast nödvändiga cookies"
+
+msgid "Cookie consent link"
+msgstr "Cookie installningar"
