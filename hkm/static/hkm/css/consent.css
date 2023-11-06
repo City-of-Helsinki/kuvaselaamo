@@ -85,6 +85,10 @@
   gap: 8px;
 }
 
+.cookie-consent-table-container {
+  overflow-x: auto;
+}
+
 #consent-table {
   border-collapse: collapse;
   width: 100%;

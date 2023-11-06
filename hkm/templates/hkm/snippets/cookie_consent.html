@@ -21,22 +21,24 @@
                 <div class="cookie-consent__more-content__section">
                     <span>{% trans 'Matomo (optional)' %}</span>
                     <p>{% trans 'Matomo description' %}</p>
-                    <table id="consent-table">
-                        <thead>
-                            <th>{% trans 'Cookie name' %}</th>
-                            <th>{% trans 'Cookie set by' %}</th>
-                            <th>{% trans 'Purpose of use' %}</th>
-                            <th>{% trans 'Period of validity' %}</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>_pk*</td>
-                                <td>digia.fi</td>
-                                <td>{% trans 'A cookie of the Matomo statistics system' %}</td>
-                                <td>393 {% trans 'Cookie days' %}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="cookie-consent-table-container">
+                        <table id="consent-table">
+                            <thead>
+                                <th>{% trans 'Cookie name' %}</th>
+                                <th>{% trans 'Cookie set by' %}</th>
+                                <th>{% trans 'Purpose of use' %}</th>
+                                <th>{% trans 'Period of validity' %}</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>_pk*</td>
+                                    <td>digia.fi</td>
+                                    <td>{% trans 'A cookie of the Matomo statistics system' %}</td>
+                                    <td>393 {% trans 'Cookie days' %}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div id="cookie-consent__actions">
