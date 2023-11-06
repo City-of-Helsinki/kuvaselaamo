@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<div id="cookie-consent">
+    <div id="cookie-consent__container">
+        <div id="cookie-consent__title-container">
+            <div id="cookie-consent__title">{% trans 'Helsinki photos uses cookies' %}</div>
+            <button type="button" id="cookie-consent__readmore-btn" class="cookie-consent__accordion-btn">
+                <span>{% trans 'Read more' %}</span>
+                <svg class="" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="angle-up" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 11.5L17 16.5L18.5 15L12 8.5L5.5 15L7 16.5L12 11.5Z" fill="currentColor"></path></svg>
+            </button>
+        </div>
+        <div id="cookie-consent__content">
+            <div id="cookie-consent__description">
+                {% trans 'This website uses required cookies' %}
+            </div>
+            <div id="cookie-consent__more-content__container">
+                <div id="cookie-consent__more-content__title">{% trans 'Cookie settings' %}</div>
+                <div class="cookie-consent__more-content__section">
+                    <p>{% trans 'The cookies used on the website'%}</p>
+                </div>
+                <div class="cookie-consent__more-content__section">
+                    <span>{% trans 'Matomo (optional)' %}</span>
+                    <p>{% trans 'Matomo description' %}</p>
+                    <table id="consent-table">
+                        <thead>
+                            <th>{% trans 'Cookie name' %}</th>
+                            <th>{% trans 'Cookie set by' %}</th>
+                            <th>{% trans 'Purpose of use' %}</th>
+                            <th>{% trans 'Period of validity' %}</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_pk*</td>
+                                <td>digia.fi</td>
+                                <td>{% trans 'A cookie of the Matomo statistics system' %}</td>
+                                <td>393 {% trans 'Cookie days' %}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="cookie-consent__actions">
+                <button aria-label="{% trans 'Zoom in' %}" id="consent_accept" class="hkm-button hkm-button__filled" type="submit">{% trans 'Accept all cookies' %}</button>
+                <button id="consent_reject" class="hkm-button hkm-button__outlined" type="submit">{% trans 'Accept essential cookies' %}</button>
+            </div>
+        </div>
+       
+    </div>
+</div>

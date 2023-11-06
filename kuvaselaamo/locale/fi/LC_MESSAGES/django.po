@@ -706,3 +706,52 @@ msgstr "Suosikkikuvasi on kerätty tänne"
 
 msgid "Password alphabetic"
 msgstr "Salasana sisältää pelkkiä kirjaimia"
+
+msgid "Helsinki photos uses cookies"
+msgstr "Helsinkikuvia käyttää evästeitä"
+
+msgid "Read more"
+msgstr "Lue lisää"
+
+msgid "This website uses required cookies"
+msgstr "Tämä sivusto käyttää välttämättömiä evästeitä sivun perustoimintojen ja suorituskyvyn varmistamiseksi. Lisäksi käytämme kohdennusevästeitä käyttäjäkokemuksen parantamiseksi, analytiikkaan ja yksilöidyn sisällön näyttämiseen."
+
+msgid "Cookie settings"
+msgstr "Evästeasetukset"
+
+msgid "The cookies used on the website"
+msgstr "Sivustolla käytetyt evästeet on luokiteltu käyttötarkoituksen mukaan. Alla voit lukea eri luokista ja sallia tai kieltää evästeiden käytön."
+
+msgid "Matomo (optional)"
+msgstr "Matomo"
+
+msgid "Matomo description"
+msgstr "Matomo-analytiikkaohjelmistolla seurataan ja kehitetään verkkosivustoa käyttäjien tarpeita vastaavaksi."
+
+msgid "Cookie name"
+msgstr "Nimi"
+
+msgid "Cookie set by"
+msgstr "Evästeen asettaja"
+
+msgid "Purpose of use"
+msgstr "Käyttötarkoitus"
+
+msgid "Voimassaoloaika"
+msgstr "Period of validity"
+
+msgid "A cookie of the Matomo statistics system"
+msgstr "Matomo-tilastointijärjestelmän eväste"
+
+msgid "Cookie days"
+msgstr "päivää"
+
+msgid "Accept all cookies"
+msgstr "Hyväksy valitut evästeet"
+
+msgid "Accept essential cookies"
+msgstr "Hyväksy vain välttämättömät evästeet"
+
+msgid "Cookie consent link"
+msgstr "Evasteasetukset"
+

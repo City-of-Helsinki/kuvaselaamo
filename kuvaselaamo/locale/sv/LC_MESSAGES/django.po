@@ -713,3 +713,51 @@ msgstr "Dina favoritbilder finns samlade här"
 #| msgid "Password restrictions"
 msgid "Password alphabetic"
 msgstr "Lösenordet innehåller endast bokstäver"
+
+msgid "Helsinki photos uses cookies"
+msgstr "Helsingforsbilder använder kakor"
+
+msgid "Read more"
+msgstr "Läs mer"
+
+msgid "This website uses required cookies"
+msgstr "Denna webbplats använder obligatoriska kakor för att säkerställa de grundläggande funktionerna och prestandan. Dessutom använder vi inriktningskakor för en bättre användarupplevelse, analytik och individualiserat innehåll."
+
+msgid "Cookie settings"
+msgstr "Kakinställningar"
+
+msgid "The cookies used on the website"
+msgstr "Kakorna som används på webbplatsen har klassificerats enligt användningsändamål. Du kan läsa om de olika klasserna och acceptera eller förbjuda användningen av kakor."
+
+msgid "Matomo (optional)"
+msgstr "Matomo"
+
+msgid "Matomo description"
+msgstr "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov."
+
+msgid "Cookie name"
+msgstr "Namn"
+
+msgid "Cookie set by"
+msgstr "Den som lagrat kakan"
+
+msgid "Purpose of use"
+msgstr "Användning"
+
+msgid "Period of validity"
+msgstr "Giltighetstid"
+
+msgid "A cookie of the Matomo statistics system"
+msgstr "Kaka för statistiksystemet Matomo"
+
+msgid "Cookie days"
+msgstr "dagar"
+
+msgid "Accept all cookies"
+msgstr "Acceptera alla cookies"
+
+msgid "Accept essential cookies"
+msgstr "Acceptera endast nödvändiga cookies"
+
+msgid "Cookie consent link"
+msgstr "Cookie installningar"
