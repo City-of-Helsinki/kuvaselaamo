@@ -715,7 +715,7 @@ msgid "Password alphabetic"
 msgstr "Lösenordet innehåller endast bokstäver"
 
 msgid "Helsinki photos uses cookies"
-msgstr "Helsinki bilder använder kakor"
+msgstr "Helsingforsbilder använder kakor"
 
 msgid "Read more"
 msgstr "Läs mer"
@@ -725,9 +725,6 @@ msgstr "Denna webbplats använder obligatoriska kakor för att säkerställa de 
 
 msgid "Cookie settings"
 msgstr "Kakinställningar"
-
-msgid "About the cookies used on the website"
-msgstr "Information om kakor som används på webbplatsen"
 
 msgid "The cookies used on the website"
 msgstr "Kakorna som används på webbplatsen har klassificerats enligt användningsändamål. Du kan läsa om de olika klasserna och acceptera eller förbjuda användningen av kakor."

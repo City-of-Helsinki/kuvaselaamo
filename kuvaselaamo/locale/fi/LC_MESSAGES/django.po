@@ -708,7 +708,7 @@ msgid "Password alphabetic"
 msgstr "Salasana sisältää pelkkiä kirjaimia"
 
 msgid "Helsinki photos uses cookies"
-msgstr "Helsinki kuvia käyttää evästeitä"
+msgstr "Helsinkikuvia käyttää evästeitä"
 
 msgid "Read more"
 msgstr "Lue lisää"
@@ -718,9 +718,6 @@ msgstr "Tämä sivusto käyttää välttämättömiä evästeitä sivun perustoi
 
 msgid "Cookie settings"
 msgstr "Evästeasetukset"
-
-msgid "About the cookies used on the website"
-msgstr "Tietoa sivustolla käytetyistä evästeistä"
 
 msgid "The cookies used on the website"
 msgstr "Sivustolla käytetyt evästeet on luokiteltu käyttötarkoituksen mukaan. Alla voit lukea eri luokista ja sallia tai kieltää evästeiden käytön."

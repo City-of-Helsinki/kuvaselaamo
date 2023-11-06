@@ -720,7 +720,7 @@ msgid "Password alphabetic"
 msgstr "Password contains only letters"
 
 msgid "Helsinki photos uses cookies"
-msgstr "Helsinki photos uses cookies"
+msgstr "Helsinkiphotos uses cookies"
 
 msgid "Read more"
 msgstr "Read more"
@@ -730,9 +730,6 @@ msgstr "This website uses required cookies to ensure the basic functionality and
 
 msgid "Cookie settings"
 msgstr "Cookie settings"
-
-msgid "About the cookies used on the website"
-msgstr "About the cookies used on the website"
 
 msgid "The cookies used on the website"
 msgstr "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies."
