@@ -7,6 +7,7 @@
   border-top: 8px solid #0000bf;
   max-height: 80vh;
   z-index: 2;
+  overflow: auto;
 }
 
 #cookie-consent__container {
