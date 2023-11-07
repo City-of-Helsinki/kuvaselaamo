@@ -31,12 +31,12 @@
             $readMoreBtn.hide();
             $cookieContents.show();
         });
-
-        $cookieConsentContainer.on('click', function (e) {
-            $readMoreBtn.hide();
-            $cookieContents.show();
-        });
     }
+
+    $cookieConsentContainer.on('click', function (e) {
+        $readMoreBtn.hide();
+        $cookieContents.show();
+    });
 
     $acceptBtn.on('click', function (e) {
         if(_paq) {
