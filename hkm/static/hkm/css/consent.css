@@ -7,6 +7,7 @@
   border-top: 8px solid #0000bf;
   max-height: 80vh;
   z-index: 2;
+  overflow: auto;
 }
 
 #cookie-consent__container {
@@ -82,6 +83,10 @@
   display: flex;
   padding: 0.75rem 0;
   gap: 8px;
+}
+
+.cookie-consent-table-container {
+  overflow-x: auto;
 }
 
 #consent-table {
