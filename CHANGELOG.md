@@ -203,6 +203,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.2.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.5...kuvaselaamo-v3.2.0) (2023-11-09)
+
+
+### Features
+
+* Cookie consent started ([ea88f82](https://github.com/City-of-Helsinki/kuvaselaamo/commit/ea88f82208163ddd235c10b0b1f7f64cdda1a3f9))
+
+
+### Bug Fixes
+
+* Click event1 ([8b6cb91](https://github.com/City-of-Helsinki/kuvaselaamo/commit/8b6cb91ba5e8e914daacc036e53b4e380b24dd4c))
+* Cookie consent footer navi link ([cba8a80](https://github.com/City-of-Helsinki/kuvaselaamo/commit/cba8a8054620c270cbd4b696ecefc5da830b2831))
+* Cookie consent implementation ([ad7b383](https://github.com/City-of-Helsinki/kuvaselaamo/commit/ad7b3835d7965d104b281c08e470566645a65e70))
+* Mobile view scroll auto ([c6e7927](https://github.com/City-of-Helsinki/kuvaselaamo/commit/c6e7927c2f8add9fd3f15e9c684aa783314cc2af))
+* Refactoring and updating the translations ([d81018e](https://github.com/City-of-Helsinki/kuvaselaamo/commit/d81018eaa34a8cfcb02824fd13427dada8ae4e4e))
+* Remove paddings from cookie consent ([92a9992](https://github.com/City-of-Helsinki/kuvaselaamo/commit/92a9992816e368efd1b33c5164d264fc82a05410))
+* Table overflow ([14c87e1](https://github.com/City-of-Helsinki/kuvaselaamo/commit/14c87e1c214bae9f91558c8f27a2ba3b395122e6))
+* Translations ([6e3fd17](https://github.com/City-of-Helsinki/kuvaselaamo/commit/6e3fd17fd634587a483173cf873ce387c041b3c6))
+* Translations changes ([92a8d33](https://github.com/City-of-Helsinki/kuvaselaamo/commit/92a8d33a7aaec08fc3848a47bed99075a90cf4f3))
+* Typo consent js ([30387b1](https://github.com/City-of-Helsinki/kuvaselaamo/commit/30387b16f587c61606c2715bafed9f2e8c18405e))
+
 ## [3.1.5](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.4...kuvaselaamo-v3.1.5) (2023-10-10)
 
 
