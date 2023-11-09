@@ -71,10 +71,6 @@
   padding-bottom: 0.75rem;
 }
 
-.cookie-consent__more-content__section {
-  padding: 0.75rem;
-}
-
 .cookie-consent__more-content__section p {
   padding: 0.75rem 0;
 }
@@ -103,9 +99,9 @@ th {
 }
 
 #consent-table th {
-    background-color: black;
-    color: white;
-  }
+  background-color: black;
+  color: white;
+}
 
 #consent-table tr:nth-child(even) {
   background-color: #dddddd;
