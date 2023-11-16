@@ -7306,16 +7306,6 @@ div.grid__fav.active {
   font-size: 15px;
   font-size: 14px; }
 
-.popover-list__item--container {
-  display: flex;
-}
-
-.popover-list__item--container img {
-  height: 24px;
-  width: 24px;
-  margin: 8px;
-}
-
 .popover-list__item {
   border-bottom: solid 1px #ffdbab;
   list-style-type: none;

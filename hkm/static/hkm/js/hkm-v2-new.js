@@ -331,7 +331,7 @@ palikka
       sharerParams = '?url=' + href;
     } else if($(this).hasClass('share-pin')) {
       sharerBaseUrl = 'http://pinterest.com/pin/create/button/';
-      windowTitle = 'Pinterest';
+      windowTitle = 'Pinterest -';
       sharerParams = '?url=' + href + '&media=' + imageUrl + '&description=' + title;
     }
     openWindow(window, sharerBaseUrl + sharerParams, windowTitle);
