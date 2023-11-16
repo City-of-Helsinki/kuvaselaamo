@@ -7310,6 +7310,10 @@ div.grid__fav.active {
   display: flex;
 }
 
+.popover-list__item--container:hover {
+  cursor: pointer;
+}
+
 .popover-list__item--container img {
   height: 24px;
   width: 24px;
