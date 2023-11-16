@@ -291,11 +291,96 @@ palikka
     container: '.actions',
     placement: 'top',
     trigger: 'click',
-    html: true,
     content: function() {
       return $('#popover-share-content').html();
     }
   });
+  
+  $("#popover-share").click(function(evt) {
+    evt.stopPropagation();
+  });
+
+  $('html').click(function() {
+      $('#popover-share').popover('hide');
+  });
+
+  $("#popover-cart").click(function(evt) {
+    evt.stopPropagation();
+  });
+
+  $('html').click(function() {
+      $('#popover-cart').popover('hide');
+  });
+
+  $('body').on('click', 'a.share-item', function(e) {
+    e.preventDefault();
+    var href = window.location.href;
+    var title = encodeURIComponent($('.record-meta__title').text());
+    var imageUrl = encodeURIComponent($('#zoomable-image').attr('src'));
+    var windowTitle = '';
+    var sharerBaseUrl = '';
+    var sharerParams = '';
+
+    if($(this).hasClass('share-fb')) {
+      sharerBaseUrl = 'https://www.facebook.com/sharer/sharer.php';
+      windowTitle = 'Facebook - ' + title;
+      sharerParams = '?u=' + href + '&p[images][0]=' + imageUrl;
+    } else if($(this).hasClass('share-tw')) {
+      sharerBaseUrl = 'https://twitter.com/share';
+      windowTitle = 'Twitter - ' + title;
+      sharerParams = '?url=' + href;
+    } else if($(this).hasClass('share-pin')) {
+      sharerBaseUrl = 'http://pinterest.com/pin/create/button/';
+      windowTitle = 'Pinterest -';
+      sharerParams = '?url=' + href + '&media=' + imageUrl + '&description=' + title;
+    }
+    openWindow(window, sharerBaseUrl + sharerParams, windowTitle);
+  });
+
+  // share social opener
+
+  // https://github.com/nygardk/react-share/blob/29fa4b957e0ebc7e089207cbc5b07c373c6fb4e0/src/ShareButton.tsx#L11
+  function getBoxPositionOnWindowCenter(window, height, width) {
+    return {
+      left:
+      window.outerWidth / 2 +
+      (window.screenX || window.screenLeft || 0) -
+      width / 2,
+      top:
+        window.outerHeight / 2 +
+        (window.screenY || window.screenTop || 0) -
+        height / 2,
+    }
+  };
+
+  function openWindow(window, href, name) {
+    const height = 400;
+    const width = 550;
+    const { left, top } = getBoxPositionOnWindowCenter(window, width, height);
+    // https://github.com/nygardk/react-share/blob/29fa4b957e0ebc7e089207cbc5b07c373c6fb4e0/src/ShareButton.tsx#L26
+    const config = {
+      centerscreen: 'yes',
+      chrome: 'yes',
+      directories: 'no',
+      height,
+      left,
+      location: 'no',
+      menubar: 'no',
+      resizable: 'no',
+      scrollbars: 'yes',
+      status: 'no',
+      toolbar: 'no',
+      top,
+      width,
+    };
+    // A comma separated list of key value pairs without whitespace.
+    // E.g. height=400,width=400
+    const windowFeatures = Object.entries(config)
+      .map(([key, value]) => `${key}=${value}`)
+      .join(',');
+  
+    window.open(href, name, windowFeatures);
+  }
 
   // scroll down to detail section when info button clicked
   $("#actions-info").click(function(){
