@@ -314,28 +314,27 @@ palikka
 
   $('body').on('click', 'a.share-item', function(e) {
     e.preventDefault();
-    var href = window.location.href
-    var windowTitle = ''
-    var sharerBaseUrl = ''
-    var sharerParams = ''
+    var href = window.location.href;
+    var title = encodeURIComponent($('.record-meta__title').text());
+    var imageUrl = encodeURIComponent($('#zoomable-image').attr('src'));
+    var windowTitle = '';
+    var sharerBaseUrl = '';
+    var sharerParams = '';
+
     if($(this).hasClass('share-fb')) {
-      sharerBaseUrl = 'https://www.facebook.com/sharer/sharer.php'
-      windowTitle = 'Facebook'
-      sharerParams = '?u=' + href
-    } else if($(this).hasClass('share-inst')) {
-       sharerBaseUrl = 'https://www.instagram.com/'
-      windowTitle = 'Instagram'
-      sharerParams = '?url=' + href
+      sharerBaseUrl = 'https://www.facebook.com/sharer/sharer.php';
+      windowTitle = 'Facebook - ' + title;
+      sharerParams = '?u=' + href + '&p[images][0]=' + imageUrl;
     } else if($(this).hasClass('share-tw')) {
-      sharerBaseUrl = 'https://twitter.com/share'
-      windowTitle = 'Twitter'
-      sharerParams = '?url=' + href
+      sharerBaseUrl = 'https://twitter.com/share';
+      windowTitle = 'Twitter - ' + title;
+      sharerParams = '?url=' + href;
     } else if($(this).hasClass('share-pin')) {
-      sharerBaseUrl = 'http://pinterest.com/pin/create/button/'
-      windowTitle = 'Pinterest'
-      sharerParams = '?url=' + href
+      sharerBaseUrl = 'http://pinterest.com/pin/create/button/';
+      windowTitle = 'Pinterest';
+      sharerParams = '?url=' + href + '&media=' + imageUrl + '&description=' + title;
     }
-    openWindow(window, sharerBaseUrl + sharerParams, windowTitle)
+    openWindow(window, sharerBaseUrl + sharerParams, windowTitle);
   });
 
   // share social opener
