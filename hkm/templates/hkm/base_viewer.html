@@ -53,6 +53,13 @@
             </i>
           </button>
         {% endif %}
+        <button class="has-popover actions__btn actions__btn--right" id="popover-share" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Share' %}">
+          <i class="actions__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-share"></use>
+            </svg>
+          </i>
+        </button>
         <button class="actions__btn actions__btn--right" id="actions-info" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Show details' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
@@ -60,7 +67,7 @@
             </svg>
           </i>
         </button>
-        <button class="has-popover actions__btn actions__btn--right" id="popover-cart" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Download picture' %}">
+        <button class="has-popover actions__btn actions__btn--middle" id="popover-cart" data-toggle="tooltip" data-placement="top" tooltip-title="{% trans 'Download picture' %}">
           <i class="actions__icon">
             <svg class="svg-icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-download"></use>
