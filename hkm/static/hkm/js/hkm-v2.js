@@ -332,8 +332,7 @@ palikka
     } else if($(this).hasClass('share-pin')) {
       sharerBaseUrl = 'http://pinterest.com/pin/create/button/';
       windowTitle = 'Pinterest -';
-      sharerParams = '?url=' + href;
-      // sharerParams = '?url=' + href + '&media=' + imageUrl + '&description=' + title;
+      sharerParams = '?url=' + href + '&media=' + imageUrl + '&description=' + title;
     }
     openWindow(window, sharerBaseUrl + sharerParams, windowTitle);
   });
