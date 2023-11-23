@@ -327,7 +327,7 @@ palikka
       sharerParams = '?u=' + href + '&p[images][0]=' + imageUrl;
     } else if($(this).hasClass('share-tw')) {
       sharerBaseUrl = 'https://twitter.com/share';
-      windowTitle = 'Twitter - ' + title;
+      windowTitle = 'X - ' + title;
       sharerParams = '?url=' + href;
     } else if($(this).hasClass('share-pin')) {
       sharerBaseUrl = 'http://pinterest.com/pin/create/button/';
