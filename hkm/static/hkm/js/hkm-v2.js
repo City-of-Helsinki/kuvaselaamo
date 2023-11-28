@@ -278,7 +278,10 @@ palikka
     });
 
     const xShare = $("a.share-x");
-    xShare.attr("href", "https://x.com/share?text=" + window.location.href);
+    xShare.attr(
+      "href",
+      "https://x.com/share?text=" + encodeURIComponent(window.location.href)
+    );
 
     $("#popover-share").popover({
       html: true,
