@@ -281,7 +281,7 @@ palikka
     const xShare = $("a.share-x");
     xShare.attr(
       "href",
-      "https://x.com/intent/tweet??text=" +
+      "https://x.com/intent/tweet?text=" +
         encodeURIComponent(window.location.href)
     );
 
