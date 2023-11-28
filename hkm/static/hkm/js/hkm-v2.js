@@ -277,6 +277,9 @@ palikka
       },
     });
 
+    const xShare = $("a.share-x");
+    xShare.attr("href", "https://x.com/share?text=" + window.location.href);
+
     $("#popover-share").popover({
       html: true,
       toggle: "popover",
@@ -317,10 +320,6 @@ palikka
         sharerBaseUrl = "https://www.facebook.com/sharer/sharer.php";
         windowTitle = "Facebook - " + title;
         sharerParams = "?u=" + href + "&p[images][0]=" + imageUrl;
-      } else if ($(this).hasClass("share-tw")) {
-        sharerBaseUrl = "https://x.com/share";
-        windowTitle = "X - " + title;
-        sharerParams = "?url=" + href;
       } else if ($(this).hasClass("share-pin")) {
         sharerBaseUrl = "http://pinterest.com/pin/create/button/";
         windowTitle = "Pinterest -";
