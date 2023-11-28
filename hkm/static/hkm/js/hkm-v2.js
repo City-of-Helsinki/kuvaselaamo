@@ -297,10 +297,12 @@ palikka
       "https://www.facebook.com/sharer/sharer.php" + sharerParams
     );
 
-    /* sharerBaseUrl = "http://pinterest.com/pin/create/button/";
-    windowTitle = "Pinterest -";
-    sharerParams =
-      "?url=" + href + "&media=" + imageUrl + "&description=" + title; */
+    /* 
+      sharerBaseUrl = "http://pinterest.com/pin/create/button/";
+      windowTitle = "Pinterest -";
+      sharerParams =
+      "?url=" + href + "&media=" + imageUrl + "&description=" + title; 
+    */
 
     $("#popover-share").popover({
       html: true,
