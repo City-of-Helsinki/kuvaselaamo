@@ -307,8 +307,8 @@ palikka
     $("body").on("click", "a.share-item", function (e) {
       e.preventDefault();
       var href = window.location.href;
-      var title = encodeURIComponent($(".record-meta__title").text());
-      var imageUrl = encodeURIComponent($("#zoomable-image").attr("src"));
+      var title = $(".record-meta__title").text();
+      var imageUrl = $("#zoomable-image").attr("src");
       var windowTitle = "";
       var sharerBaseUrl = "";
       var sharerParams = "";
@@ -318,7 +318,7 @@ palikka
         windowTitle = "Facebook - " + title;
         sharerParams = "?u=" + href + "&p[images][0]=" + imageUrl;
       } else if ($(this).hasClass("share-tw")) {
-        sharerBaseUrl = "https://twitter.com/share";
+        sharerBaseUrl = "https://x.com/share";
         windowTitle = "X - " + title;
         sharerParams = "?url=" + href;
       } else if ($(this).hasClass("share-pin")) {
