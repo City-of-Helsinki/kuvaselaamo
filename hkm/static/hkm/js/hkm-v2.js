@@ -277,11 +277,30 @@ palikka
       },
     });
 
+    const href = window.location.href;
     const xShare = $("a.share-x");
     xShare.attr(
       "href",
-      "https://x.com/share?text=" + encodeURIComponent(window.location.href)
+      "https://x.com/intent/tweet??text=" +
+        encodeURIComponent(window.location.href)
     );
+
+    const fbShare = $("a.share-fb");
+    var imageUrl = $("#zoomable-image").attr("src");
+    sharerParams =
+      "?u=" +
+      encodeURIComponent(href) +
+      "&p[images][0]=" +
+      encodeURIComponent(imageUrl);
+    fbShare.attr(
+      "href",
+      "https://www.facebook.com/sharer/sharer.php" + sharerParams
+    );
+
+    /* sharerBaseUrl = "http://pinterest.com/pin/create/button/";
+    windowTitle = "Pinterest -";
+    sharerParams =
+      "?url=" + href + "&media=" + imageUrl + "&description=" + title; */
 
     $("#popover-share").popover({
       html: true,
@@ -309,30 +328,6 @@ palikka
     $("html").click(function () {
       $("#popover-cart").popover("hide");
     });
-
-    $("body").on("click", "a.share-item", function (e) {
-      e.preventDefault();
-      var href = window.location.href;
-      var title = $(".record-meta__title").text();
-      var imageUrl = $("#zoomable-image").attr("src");
-      var windowTitle = "";
-      var sharerBaseUrl = "";
-      var sharerParams = "";
-
-      if ($(this).hasClass("share-fb")) {
-        sharerBaseUrl = "https://www.facebook.com/sharer/sharer.php";
-        windowTitle = "Facebook - " + title;
-        sharerParams = "?u=" + href + "&p[images][0]=" + imageUrl;
-      } else if ($(this).hasClass("share-pin")) {
-        sharerBaseUrl = "http://pinterest.com/pin/create/button/";
-        windowTitle = "Pinterest -";
-        sharerParams =
-          "?url=" + href + "&media=" + imageUrl + "&description=" + title;
-      }
-      openWindow(window, sharerBaseUrl + sharerParams, windowTitle);
-    });
-
-    // share social opener
 
     // https://github.com/nygardk/react-share/blob/29fa4b957e0ebc7e089207cbc5b07c373c6fb4e0/src/ShareButton.tsx#L11
     function getBoxPositionOnWindowCenter(window, height, width) {

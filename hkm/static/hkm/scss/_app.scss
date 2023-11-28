@@ -1778,15 +1778,13 @@ div.grid__fav {
   list-style-type: none;
   white-space: nowrap;
 }
-.popover-list__item--container {
-  display: flex;
-}
 .popover-list__item--container img {
   height: 24px;
   width: 24px;
-  margin: 4px 0 4px 4px;
 }
 .popover-list__item--container a {
+  display: flex;
+  align-items: center;
   width: 100%;
 }
 .popover-list__item:nth-child(3) {
