@@ -203,6 +203,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.3.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.2.0...kuvaselaamo-v3.3.0) (2023-11-29)
+
+
+### Features
+
+* Social media sharing button started ([ac56e2e](https://github.com/City-of-Helsinki/kuvaselaamo/commit/ac56e2e13088c83ffe1ccc1157122d47caff2a1c))
+
+
+### Bug Fixes
+
+* Add icons ([2dc39dd](https://github.com/City-of-Helsinki/kuvaselaamo/commit/2dc39dd1513b436909a28c63eb1f4e4742770d75))
+* Css ([7517594](https://github.com/City-of-Helsinki/kuvaselaamo/commit/75175947540a2cc560c6921f72a55cc2a1b89349))
+* Css ([61d7b21](https://github.com/City-of-Helsinki/kuvaselaamo/commit/61d7b21a0276df53cef626c776871e6ca119630b))
+* Css ([487702b](https://github.com/City-of-Helsinki/kuvaselaamo/commit/487702bb3c84ae1bdf338942555c850d372be2cd))
+* Domain back to twitter ([217ee47](https://github.com/City-of-Helsinki/kuvaselaamo/commit/217ee47da9c55e2a1ca1620a6c8eb67355e5b1c8))
+* Encoding ([63752df](https://github.com/City-of-Helsinki/kuvaselaamo/commit/63752df8e5e0725b232c0e38a4832253fbdbdf9b))
+* Encoding issues ([07f39e2](https://github.com/City-of-Helsinki/kuvaselaamo/commit/07f39e225ffeef0d1d0e8fb0958dcb23d50a2254))
+* Icon class ([f8d1eea](https://github.com/City-of-Helsinki/kuvaselaamo/commit/f8d1eea56553f3d4b52466153229c490b044cdea))
+* Js file replace ([d03ccd0](https://github.com/City-of-Helsinki/kuvaselaamo/commit/d03ccd0c38d3b1131f7f638c59ca48dafd7b9af7))
+* Link width ([506804b](https://github.com/City-of-Helsinki/kuvaselaamo/commit/506804bfd725ffe6bd4823931a2492a51144f33e))
+* Pinterest check description ([ad61e98](https://github.com/City-of-Helsinki/kuvaselaamo/commit/ad61e98e2857257684605b31e34db9cd94ebfc4a))
+* Pinterest description ([435985e](https://github.com/City-of-Helsinki/kuvaselaamo/commit/435985eb886c0e8ca4e8ddb3d328df51f89cf1df))
+* Pinterest test ([4b28ed7](https://github.com/City-of-Helsinki/kuvaselaamo/commit/4b28ed7c49963515d8dd58ee8e5731eeed34be9a))
+* Possible twitter card fix ([b838497](https://github.com/City-of-Helsinki/kuvaselaamo/commit/b838497fc6c2fc6e13a33aecfc1f99aeacde8920))
+* Possible twitter fix ([f80ec63](https://github.com/City-of-Helsinki/kuvaselaamo/commit/f80ec63142041abe596af8b8d7fbfebffaa284b6))
+* Refactoring matomo logic ([0b55961](https://github.com/City-of-Helsinki/kuvaselaamo/commit/0b55961bf7f6878a515a1d006b89f8371678fe77))
+* Remove twitter logo ([22013de](https://github.com/City-of-Helsinki/kuvaselaamo/commit/22013de4dfc9a8c3172c1e68e9d6e93b44ff863d))
+* Sharers new tab ([bae6c24](https://github.com/City-of-Helsinki/kuvaselaamo/commit/bae6c24921f88b6232efc31c6da3886c97be2034))
+* Test fix for share ([49cf3bd](https://github.com/City-of-Helsinki/kuvaselaamo/commit/49cf3bd16261f6aa1f0da709c396132b9729c2e9))
+* Try to update styles and js ([27273a0](https://github.com/City-of-Helsinki/kuvaselaamo/commit/27273a02b92f347e1d5568681772b77054dd78d7))
+* Twitter card possible fix ([65c79eb](https://github.com/City-of-Helsinki/kuvaselaamo/commit/65c79ebdee41a365d1fd3e6551cd2c11ef55669b))
+* Twitter image to the single details page ([5ae1daa](https://github.com/City-of-Helsinki/kuvaselaamo/commit/5ae1daad67d27e56580a440f3345a33975ab956d))
+* Twitter to X ([c13266e](https://github.com/City-of-Helsinki/kuvaselaamo/commit/c13266e066c63f6fb960b16d35f3cae70fa18673))
+* Typo ([5b361d0](https://github.com/City-of-Helsinki/kuvaselaamo/commit/5b361d04a085b733149ddd7b1aad3fb3309e6f4e))
+* X share ([444d62d](https://github.com/City-of-Helsinki/kuvaselaamo/commit/444d62d6abea29c0ab762643a8563330f92c7c9c))
+
 ## [3.2.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.1.5...kuvaselaamo-v3.2.0) (2023-11-09)
 
 
