@@ -6,7 +6,7 @@
   background-color: white;
   border-top: 8px solid #0000bf;
   max-height: 80vh;
-  z-index: 2;
+  z-index: 10000;
   overflow: auto;
 }
 

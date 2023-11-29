@@ -6,6 +6,15 @@
 <title>{% trans 'Image view' %}</title>
 {% endblock %}
 
+{% block image_meta_tags %}
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="{{ record_full_res_url}}">
+  <meta property="twitter:title" content="{{ record.title }}" />
+  <meta property="twitter:description" content="{{ record.rawData.description|truncate_description }}" />
+  <meta property="twitter:image" content="{{ record_full_res_url }}" />
+  
+{% endblock %}
+
 {% block viewer_arrows %}
 
 {% if search_result %}
@@ -56,6 +65,7 @@
 {% block hidden %}
 {% if record %}
 {% include 'hkm/snippets/popover_cart.html' with full_res_image_url=record_original_url web_image_url=record.id|finna_default_image_url finna_id=record.id cropped_web_image_url=record_web_url finna_id=record.id%}
+{% include 'hkm/snippets/popover_share.html'%}
 {% endif %}
 {% endblock %}
 {% block extra_js %}
