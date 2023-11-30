@@ -203,6 +203,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.3.1](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.0...kuvaselaamo-v3.3.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* Fix the path to popover share ([714a8e0](https://github.com/City-of-Helsinki/kuvaselaamo/commit/714a8e07da7b2022366a3e0bebdd9b1ecc8ca51c))
+
 ## [3.3.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.2.0...kuvaselaamo-v3.3.0) (2023-11-29)
 
 
