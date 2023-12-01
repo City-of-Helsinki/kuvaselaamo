@@ -26,8 +26,6 @@
     _paq.push(["rememberCookieConsentGiven"]);
   }
 
-  console.log(_paq)
-
   if (!cookie) {
     $cookieConsentContainer.fadeIn();
     $cookieConsentContainer.animate({ bottom: "0" }, "slow");
