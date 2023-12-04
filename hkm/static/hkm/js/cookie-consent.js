@@ -15,13 +15,13 @@
   _paq.push(["requireConsent"]);
 
   // if rejected
-  if (cookie && cookie === 0) {
+  if (cookie && cookie === "0") {
     _paq.push(["forgetCookieConsentGiven"]);
     _paq.push(["forgetConsentGiven"]);
   }
 
   // if accepted
-  if (cookie && cookie === 1) {
+  if (cookie && cookie === "1") {
     _paq.push(["rememberConsentGiven"]);
     _paq.push(["rememberCookieConsentGiven"]);
   }
@@ -45,7 +45,7 @@
     if (_paq) {
       _paq.push(["rememberConsentGiven"]);
       _paq.push(["rememberCookieConsentGiven"]);
-      $.cookie(cookieName, 1, { expires: 393 });
+      $.cookie(cookieName, "1", { expires: 393 });
       $cookieConsentContainer.fadeOut();
     }
   });
@@ -54,7 +54,7 @@
     if (_paq) {
       _paq.push(["forgetConsentGiven"]);
       _paq.push(["forgetCookieConsentGiven"]);
-      $.cookie(cookieName, 0, { expires: 393 });
+      $.cookie(cookieName, "0", { expires: 393 });
       $cookieConsentContainer.fadeOut();
     }
   });
