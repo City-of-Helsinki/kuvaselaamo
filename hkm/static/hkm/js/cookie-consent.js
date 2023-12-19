@@ -10,20 +10,9 @@
     $rejectBtn = $("#consent_reject"),
     $consentLink = $("#cookie-consent-link");
 
-  // always require on load
-  _paq.push(["requireCookieConsent"]);
-  _paq.push(["requireConsent"]);
-
-  // if rejected
-  if (cookie && cookie === "0") {
-    _paq.push(["forgetCookieConsentGiven"]);
-    _paq.push(["forgetConsentGiven"]);
-  }
-
   // if accepted
   if (cookie && cookie === "1") {
-    _paq.push(["rememberConsentGiven"]);
-    _paq.push(["rememberCookieConsentGiven"]);
+    _paq.push(['setCookieConsentGiven']);
   }
 
   if (!cookie) {
@@ -43,18 +32,16 @@
 
   $acceptBtn.on("click", function (e) {
     if (_paq) {
-      _paq.push(["rememberConsentGiven"]);
-      _paq.push(["rememberCookieConsentGiven"]);
-      $.cookie(cookieName, "1", { expires: 393 });
+      _paq.push(['setCookieConsentGiven']);
+      $.cookie(cookieName, "1", { expires: 393, path: '/' });
       $cookieConsentContainer.fadeOut();
     }
   });
 
   $rejectBtn.on("click", function (e) {
     if (_paq) {
-      _paq.push(["forgetConsentGiven"]);
-      _paq.push(["forgetCookieConsentGiven"]);
-      $.cookie(cookieName, "0", { expires: 393 });
+      _paq.push(['forgetCookieConsentGiven']);
+      $.cookie(cookieName, "0", { expires: 393, path: '/' });
       $cookieConsentContainer.fadeOut();
     }
   });
