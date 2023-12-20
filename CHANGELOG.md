@@ -203,6 +203,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.3.3](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.2...kuvaselaamo-v3.3.3) (2023-12-20)
+
+
+### Bug Fixes
+
+* Matomo cookieless tracking ([10bba60](https://github.com/City-of-Helsinki/kuvaselaamo/commit/10bba6077ed21dadf4eb39cd5f9c07b2004011cb))
+
 ## [3.3.2](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.1...kuvaselaamo-v3.3.2) (2023-12-04)
 
 
