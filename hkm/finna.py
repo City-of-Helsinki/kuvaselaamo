@@ -241,7 +241,7 @@ class FinnaClient(object):
         return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
     def get_full_res_image_url(self, record):
-        return self.get_original_image_url(record)
+        return self.get_labeled_image_url(record, "large")
 
     def get_original_image_url(self, record):
         # attempt to find high resolution original photo url
