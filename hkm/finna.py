@@ -10,7 +10,6 @@ LOG = logging.getLogger(__name__)
 
 
 class FinnaClient(object):
-    IMAGE_REPO_ENDPOINT = "https://museoliittorepox.vserver.fi/mpthumbnailhelper/download?id={identifier}&size={size}&key=T3st1"  # noqa: E501
     API_ENDPOINT = "https://api.finna.fi/v1/"
     DOWNLOAD_ENDPOINT = "https://finna.fi/"
     timeout = 10
@@ -236,21 +235,13 @@ class FinnaClient(object):
         return result_data
 
     def get_thumbnail_image_url(self, record):
-        if identifier := self.get_identifier(record):
-            return FinnaClient.IMAGE_REPO_ENDPOINT.format(
-                identifier=identifier, size="medium"
-            )
-        return None
+        return self.get_labeled_image_url(record, "small")
 
     def get_image_url(self, record_id):
         return f"https://finna.fi/Cover/Show?id={record_id}&fullres=1&index=0"
 
     def get_full_res_image_url(self, record):
-        if identifier := self.get_identifier(record):
-            return FinnaClient.IMAGE_REPO_ENDPOINT.format(
-                identifier=identifier, size="extra_extra_large"
-            )
-        return None
+        return self.get_original_image_url(record)
 
     def get_original_image_url(self, record):
         # attempt to find high resolution original photo url
