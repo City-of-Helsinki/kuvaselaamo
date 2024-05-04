@@ -626,7 +626,7 @@ msgid "Welcome title"
 msgstr "Tervetuloa Helsinki-aiheisten valokuvien aarreaittaan!"
 
 msgid "Welcome text"
-msgstr "Yli 65 000 kuvaa käytössäsi ilmaiseksi!"
+msgstr "Yli 70 000 kuvaa käytössäsi ilmaiseksi!"
 
 msgid "Search description"
 msgstr ""

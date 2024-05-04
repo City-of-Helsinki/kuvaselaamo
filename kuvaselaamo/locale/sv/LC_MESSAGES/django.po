@@ -631,7 +631,7 @@ msgid "Welcome title"
 msgstr "Välkommen till Helsingforsbildernas skattkammare!"
 
 msgid "Welcome text"
-msgstr "Över 65 000 bilder gratis!"
+msgstr "Över 70 000 bilder gratis!"
 
 msgid "Search description"
 msgstr "Sök i museets arkiv med valfria sökord, t.ex. plats eller årtal:"

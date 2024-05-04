@@ -638,7 +638,7 @@ msgid "Welcome title"
 msgstr "Welcome to the treasure trove of Helsinki-themed pictures"
 
 msgid "Welcome text"
-msgstr "Over 65 000 pictures available for free use!"
+msgstr "Over 70 000 pictures available for free use!"
 
 msgid "Search description"
 msgstr ""
