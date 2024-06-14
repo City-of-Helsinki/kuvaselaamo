@@ -203,6 +203,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.3.7](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.6...kuvaselaamo-v3.3.7) (2024-06-14)
+
+
+### Bug Fixes
+
+* Date filters in search ([561ec41](https://github.com/City-of-Helsinki/kuvaselaamo/commit/561ec41caa6f2225a5be2cfd0e0761f80d01dc81))
+* Date filters in search ([704753c](https://github.com/City-of-Helsinki/kuvaselaamo/commit/704753cbfc9a9fdfb99dae691909e917adeb8b7d))
+
 ## [3.3.6](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.5...kuvaselaamo-v3.3.6) (2024-05-07)
 
 
