@@ -203,6 +203,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.4.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.7...kuvaselaamo-v3.4.0) (2024-06-19)
+
+
+### Features
+
+* Improve django admin site views ([37dd52e](https://github.com/City-of-Helsinki/kuvaselaamo/commit/37dd52ee5c6caaddf4dee55efd1e457d09aa3062))
+
+
+### Bug Fixes
+
+* Collection admin search ([1225d1f](https://github.com/City-of-Helsinki/kuvaselaamo/commit/1225d1f76de7d9cbba9e15b3d50401ed206b5044))
+
 ## [3.3.7](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.6...kuvaselaamo-v3.3.7) (2024-06-14)
 
 
