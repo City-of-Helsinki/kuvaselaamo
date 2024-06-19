@@ -114,7 +114,10 @@ class CollectionAdmin(admin.ModelAdmin):
         "collection_type",
     )
     list_filter = ("is_public", "is_featured", "is_showcaseable", "collection_type")
-    search_fields = ("owner",)
+    search_fields = (
+        "title",
+        "owner__username",
+    )
     autocomplete_fields = ("owner",)
 
 
