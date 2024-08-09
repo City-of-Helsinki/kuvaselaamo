@@ -1,69 +1,86 @@
-# ==============================
-FROM helsinkitest/python:3.9-slim as appbase
-# ==============================
+# ==========================================================
+# NOTE:
+#     Using latest tag to get Python 3.9 security updates,
+#     consciously disregarding SonarCloud issue docker:S6596
+#     "Specific version tag for image should be used".
+# ==========================================================
+FROM registry.access.redhat.com/ubi9/python-39 AS appbase
+# ==========================================================
+
+# Setting file ownership to root:root and running the container
+# as appuser:appuser, so that the files' permissions can't be
+# changed afterwards as appuser (using file ownership).
+#
+# See SonarCloud issue docker:S6504 ("Allowing non-root users
+# to modify resources copied to an image is security-sensitive"):
+# https://rules.sonarsource.com/docker/RSPEC-6504/
 
 ENV PYTHONUNBUFFERED 1
 
+USER root
 WORKDIR /app
-RUN mkdir /entrypoint
+RUN mkdir /entrypoint \
+    # Mark the app directory as safe to get rid of git's
+    # "fatal: detected dubious ownership in repository at '/app'" warning
+    # when spinning up the container
+    && git config --system --add safe.directory /app \
+    # Create appuser group and user for running the app as non-root
+    && groupadd --system appuser \
+    && useradd --system --gid appuser --create-home appuser
 
-COPY --chown=appuser:appuser requirements*.txt /app/
+COPY --chown=root:root requirements.txt /app/requirements.txt
 
-RUN apt-install.sh \
-    build-essential \
-    libpq-dev \
+RUN dnf update -y \
+    && dnf install -y nc postgresql-devel \
     && pip install -U pip \
     && pip install --no-cache-dir -r /app/requirements.txt \
-    && apt-cleanup.sh \
-    build-essential \
-    pkg-config
+    && dnf clean all
 
-COPY --chown=appuser:appuser docker-entrypoint.sh /entrypoint/docker-entrypoint.sh
+COPY --chown=root:root docker-entrypoint.sh /entrypoint/docker-entrypoint.sh
 ENTRYPOINT ["/entrypoint/docker-entrypoint.sh"]
 
 # ==============================
-FROM appbase as staticbuilder
+FROM appbase AS staticbuilder
 # ==============================
 
 ENV VAR_ROOT /app
-COPY --chown=appuser:appuser . /app
+COPY --chown=root:root . /app
 RUN python manage.py collectstatic --noinput
 
 # ==============================
-FROM appbase as development
+FROM appbase AS development
 # ==============================
 
-COPY --chown=appuser:appuser requirements-dev.txt /app/requirements-dev.txt
-RUN pip install --no-cache-dir \
-    -r /app/requirements-dev.txt \
+COPY --chown=root:root requirements-dev.txt /app/requirements-dev.txt
+RUN pip install --no-cache-dir -r /app/requirements-dev.txt \
     && pip install --no-cache-dir pip-tools
 
 ENV DEV_SERVER=1
 
-COPY --chown=appuser:appuser . /app/
+# Copy all files not ignored by .dockerignore to container
+# and make them readable & executable by everyone
+COPY --chown=root:root . /app/
+RUN chmod -R ugo=rX /app/
 
-USER appuser
+USER appuser:appuser
 
 EXPOSE 8080/tcp
 
 # ==============================
-FROM appbase as production
+FROM appbase AS production
 # ==============================
 
-COPY --from=staticbuilder --chown=appuser:appuser /app/static /app/static
+COPY --from=staticbuilder --chown=root:root /app/static /app/static
 
-COPY --chown=appuser:appuser requirements-prod.txt /app/requirements-prod.txt
-RUN apt-install.sh \
-    build-essential \
-    libpq-dev \
-    && pip install --no-cache-dir \
-    -r /app/requirements-prod.txt \
-    && apt-cleanup.sh \
-    build-essential \
-    pkg-config
+COPY --chown=root:root requirements-prod.txt /app/requirements-prod.txt
+RUN pip install --no-cache-dir -r /app/requirements-prod.txt \
+    && dnf clean all
 
-COPY --chown=appuser:appuser . /app/
+# Copy all files not ignored by .dockerignore to container
+# and make them readable & executable by everyone
+COPY --chown=root:root . /app/
+RUN chmod -R ugo=rX /app/
 
-USER appuser
+USER appuser:appuser
 
 EXPOSE 8080/tcp

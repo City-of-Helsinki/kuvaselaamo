@@ -5,7 +5,12 @@ set -e
 echo "docker-entrypoint.sh here ..."
 
 if [ -z "$SKIP_DATABASE_CHECK" -o "$SKIP_DATABASE_CHECK" = "0" ]; then
-    wait-for-it.sh "${DATABASE_HOST}:${DATABASE_PORT-5432}"
+    until nc -z -v -w30 "${DATABASE_HOST}" "${DATABASE_PORT-5432}"
+    do
+        echo "Waiting for postgres database connection..."
+        sleep 1
+    done
+    echo "Database is up!"
 fi
 
 

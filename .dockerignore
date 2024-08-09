@@ -1,0 +1,42 @@
+# Exclude all
+*
+
+# Except the following:
+
+# Environment files
+!.env
+!.env.local
+!.env.development
+!.env.development.local
+!.env.test
+!.env.test.local
+
+# Subdirectories
+!.prod
+!browser-tests
+!hkm
+!kuvaselaamo
+
+# Frontend package configuration
+!package.json
+!package-lock.json
+
+# Backend package configuration
+!requirements.in
+!requirements.txt
+!requirements-dev.in
+!requirements-dev.txt
+!requirements-prod.in
+!requirements-prod.txt
+
+# Docker entrypoint (needed to run the container)
+!docker-entrypoint.sh
+
+# Management script (needed to run at least the "collectstatic" command)
+!manage.py
+
+# Miscellaneous
+!.coveragerc
+!gulpfile.js
+!k6LoadTests.js
+!setup.cfg
