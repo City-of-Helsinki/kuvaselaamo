@@ -1,6 +1,6 @@
 services:
     postgres:
-        image: helsinkitest/postgis:9.6-2.5-alpine
+        image: public.ecr.aws/docker/library/postgres:13.13-alpine
         restart: on-failure
         environment:
             POSTGRES_USER: kuvaselaamo
