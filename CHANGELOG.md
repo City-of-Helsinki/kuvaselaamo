@@ -203,6 +203,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.5.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.4.0...kuvaselaamo-v3.5.0) (2024-08-14)
+
+
+### Features
+
+* **docker:** Use red hat ubi9 python image, add .dockerignore file ([4fb94a4](https://github.com/City-of-Helsinki/kuvaselaamo/commit/4fb94a4ab8716ecfb86d11b7f9c0345139a1248b))
+* Upgrade postgres to v13.13 in docker-compose.yml ([e6d7e62](https://github.com/City-of-Helsinki/kuvaselaamo/commit/e6d7e628b522168d85f04695e61ffb3231f218f9))
+
 ## [3.4.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.3.7...kuvaselaamo-v3.4.0) (2024-06-19)
 
 
