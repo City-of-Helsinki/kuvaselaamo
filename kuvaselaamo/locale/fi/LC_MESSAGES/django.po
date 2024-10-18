@@ -413,6 +413,18 @@ msgstr "Lataa kuva"
 msgid "License:"
 msgstr "Lisenssi:"
 
+msgid "CC BY 4.0 label"
+msgstr "Deed - Public Domain - nimeä 4.0 kansainvälinen - Creative Commons"
+
+msgid "CC BY 4.0 link"
+msgstr "https://creativecommons.org/licenses/by/4.0/deed.fi"
+
+msgid "PDM label"
+msgstr "Deed - Public Domain - merkintä 1.0 Yleismaailmallinen - Creative Commons"
+
+msgid "PDM link"
+msgstr "https://creativecommons.org/publicdomain/mark/1.0/deed.fi"
+
 msgid "Photographer:"
 msgstr "Valokuvaaja:"
 
