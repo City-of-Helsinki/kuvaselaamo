@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 
 from django import template
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext as _
 
 from hkm.finna import DEFAULT_CLIENT as FINNA
 
@@ -43,10 +44,15 @@ def truncate_geographic(value):
 
 @register.filter(is_safe=True)
 def decorate_license(value):
-    license_links = {"CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/deed.fi"}
+    license_mapping = {
+        "CC BY 4.0": {"url": _("CC BY 4.0 link"), "label": _("CC BY 4.0 label")},
+        "PDM": {"url": _("PDM link"), "label": _("PDM label")},
+    }
 
-    if license_link := license_links.get(value):
-        return mark_safe(f"<a href='{license_link}' target='_blank'>{value}</a>")
+    if value in license_mapping:
+        return mark_safe(
+            f"<a href='{license_mapping[value]['url']}' target='_blank'>{license_mapping[value]['label']}</a>"
+        )
     return value
 
 
