@@ -203,6 +203,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Image details view is now located at `/search/details` so that any old links from search engines or
   other places will get a `404 Not found` from `/search/record`.
 
+## [3.6.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.5.0...kuvaselaamo-v3.6.0) (2024-10-22)
+
+
+### Features
+
+* Translated license links ([3738c08](https://github.com/City-of-Helsinki/kuvaselaamo/commit/3738c082e89eba6ba37d41b1a0dabdd78e657e5a))
+* Translated license links ([ebe32c8](https://github.com/City-of-Helsinki/kuvaselaamo/commit/ebe32c893c4a7d81c590f1f3d88ab7590920ddff))
+
+
+### Bug Fixes
+
+* Formatting ([fd884f2](https://github.com/City-of-Helsinki/kuvaselaamo/commit/fd884f2d9423b9227dddd2137554618db5927029))
+* Link labels short translations ([7da0413](https://github.com/City-of-Helsinki/kuvaselaamo/commit/7da04131c59d21055204863510333f03a76a812b))
+* Translations label ([e78fa93](https://github.com/City-of-Helsinki/kuvaselaamo/commit/e78fa939c0d8c237bee2b5e2753a4fb1fbc93df7))
+* Translations label ([53be4ca](https://github.com/City-of-Helsinki/kuvaselaamo/commit/53be4caa53be019d38ee4f3fd721affa5ed7d068))
+
 ## [3.5.0](https://github.com/City-of-Helsinki/kuvaselaamo/compare/kuvaselaamo-v3.4.0...kuvaselaamo-v3.5.0) (2024-08-14)
 
 
