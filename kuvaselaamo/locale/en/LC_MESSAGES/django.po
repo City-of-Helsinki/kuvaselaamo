@@ -424,9 +424,6 @@ msgstr "License:"
 msgid "CC BY 4.0 link"
 msgstr "https://creativecommons.org/licenses/by/4.0/deed.en"
 
-msgid "PDM label"
-msgstr "Deed - Public Domain Mark 1.0 Universal - Creative Commons"
-
 msgid "PDM link"
 msgstr "https://creativecommons.org/publicdomain/mark/1.0/deed.en"
 

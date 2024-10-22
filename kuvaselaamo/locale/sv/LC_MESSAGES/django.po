@@ -421,9 +421,6 @@ msgstr "Licens:"
 msgid "CC BY 4.0 link"
 msgstr "https://creativecommons.org/licenses/by/4.0/deed.sv"
 
-msgid "PDM label"
-msgstr "Sammanfattning - Public domain-märke 1.0 universell - Creative Commons"
-
 msgid "PDM link"
 msgstr "https://creativecommons.org/publicdomain/mark/1.0/deed.sv"
 
