@@ -45,8 +45,8 @@ def truncate_geographic(value):
 @register.filter(is_safe=True)
 def decorate_license(value):
     license_mapping = {
-        "CC BY 4.0": {"url": _("CC BY 4.0 link"), "label": _("CC BY 4.0 label")},
-        "PDM": {"url": _("PDM link"), "label": _("PDM label")},
+        "CC BY 4.0": {"url": _("CC BY 4.0 link"), "label": "CC BY 4.0"},
+        "PDM": {"url": _("PDM link"), "label": "Public Domain"},
     }
 
     if value in license_mapping:
