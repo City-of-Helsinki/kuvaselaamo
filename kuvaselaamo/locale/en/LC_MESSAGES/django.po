@@ -421,9 +421,6 @@ msgstr "Download picture"
 msgid "License:"
 msgstr "License:"
 
-msgid "CC BY 4.0 label"
-msgstr "Deed - Attribution 4.0 International - Creative Commons"
-
 msgid "CC BY 4.0 link"
 msgstr "https://creativecommons.org/licenses/by/4.0/deed.en"
 

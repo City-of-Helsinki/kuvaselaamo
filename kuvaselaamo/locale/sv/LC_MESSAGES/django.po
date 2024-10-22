@@ -418,9 +418,6 @@ msgstr "Ladda ner"
 msgid "License:"
 msgstr "Licens:"
 
-msgid "CC BY 4.0 label"
-msgstr "Sammanfattning - Erkännande 4.0 Internationell - Creative Commons"
-
 msgid "CC BY 4.0 link"
 msgstr "https://creativecommons.org/licenses/by/4.0/deed.sv"
 
