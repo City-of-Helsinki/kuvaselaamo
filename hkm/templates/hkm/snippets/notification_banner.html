@@ -1,0 +1,21 @@
+<div id="notification-banner" style="background-color: #FFEB3B; color: #000; padding: 1em; text-align: center; font-weight: bold; position: relative;">
+    <span id="close-banner" style="position: absolute; right: 1em; top: 0.5em; cursor: pointer; font-weight: normal;">✖</span>
+    {% if LANGUAGE_CODE == 'fi' %}
+      Helsinkikuvia.fi-palvelu suljetaan joulukuussa 2025. Löydät kaikki Helsingin kaupunginmuseon digitaaliset valokuvat ja paljon muuta osoitteesta <a href="https://hkm.finna.fi/?lng=fi">hkm.finna.fi</a>. 
+    {% elif LANGUAGE_CODE == 'sv' %}
+      Tjänsten Helsingforsbilder.fi kommer att stängas i december 2025. Du hittar alla digitala fotografier från Helsingfors stadsmuseum och mycket mer på <a href="https://hkm.finna.fi/?lng=sv">hkm.finna.fi</a>.
+    {% elif LANGUAGE_CODE == 'en' %}
+      The Helsinkiphotos.fi service will be closed in December 2025. You can find all the digital photos from the Helsinki City Museum and much more at <a href="https://hkm.finna.fi/?lng=en-gb">hkm.finna.fi</a>. 
+    {% else %}
+      The Helsinkiphotos.fi service will be closed in December 2025. You can find all the digital photos from the Helsinki City Museum and much more at <a href="https://hkm.finna.fi/?lng=en-gb">hkm.finna.fi</a>. 
+    {% endif %}
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const closeBtn = document.getElementById('close-banner');
+      const banner = document.getElementById('notification-banner');
+      closeBtn.addEventListener('click', function () {
+        banner.style.display = 'none';
+      });
+    });
+  </script>

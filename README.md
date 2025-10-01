@@ -4,11 +4,13 @@
 
 ## Summary
 
-Kuvaselaamo is an application for browsing the image archive of Finna service (https://finna.fi). The application also
-provides functionalities for arranging images into collections which can be created either by staff members or by
-users who have created an account for themselves. The images may be ordered as physical prints by the users for a fee.
+Kuvaselaamo was an application for browsing the image archive of Finna service (https://finna.fi). The application also
+provided functionalities for arranging images into collections which could be created either by staff members or by
+users who had created an account for themselves. Users were able to order physical prints of images for a fee.
 
-The current implementation is Helsinkikuvia.fi service which is maintained by Helsinki City Museum.
+The last implementation was Helsinkikuvia.fi service which was maintained by Helsinki City Museum.
+
+Kuvaselaamo was retired in December 2025 and its successor is [Finna](https://hkm.finna.fi/). This repository is now archived for historical reasons.
 
 ## Development with [Docker](https://docs.docker.com/)
 
