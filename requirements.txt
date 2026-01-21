@@ -81,7 +81,7 @@ phonenumberslite==8.12.41
     # via -r requirements.in
 pillow==9.0.0
     # via -r requirements.in
-protobuf==3.19.3
+protobuf==3.19.5
     # via
     #   google-api-core
     #   google-cloud-storage
